@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import semver from 'semver'
 
-const TARGET_DIR = path.join(__dirname, 'flat-config')
+const TARGET_DIR = path.join(import.meta.dirname, 'flat-config')
 const ESLINT = path.join(TARGET_DIR, 'node_modules', '.bin', 'eslint')
 
 let eslintNodeVersion = ''

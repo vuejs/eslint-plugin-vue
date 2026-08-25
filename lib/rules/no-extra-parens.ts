@@ -2,11 +2,11 @@
  * @author Yosuke Ota
  */
 import { isParenthesized } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import { wrapStylisticOrCoreRule } from '../utils/index.js'
 import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
 
 // eslint-disable-next-line internal/no-invalid-meta
-export default utils.wrapStylisticOrCoreRule('no-extra-parens', {
+export default wrapStylisticOrCoreRule('no-extra-parens', {
   skipDynamicArguments: true,
   applyDocument: true,
   create: createForVueSyntax

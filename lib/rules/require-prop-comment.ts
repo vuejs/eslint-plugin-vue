@@ -3,7 +3,12 @@
  * See LICENSE file in root directory for full license.
  */
 import type { ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import {
+  compositingVisitors,
+  defineScriptSetupVisitor,
+  defineVueVisitor,
+  getComponentPropsFromOptions
+} from '../utils/index.js'
 import { isBlockComment, isJSDocComment } from '../utils/comments.ts'
 
 export default {
@@ -96,15 +101,15 @@ export default {
       }
     }
 
-    return utils.compositingVisitors(
-      utils.defineScriptSetupVisitor(context, {
+    return compositingVisitors(
+      defineScriptSetupVisitor(context, {
         onDefinePropsEnter(_node, props) {
           verifyProps(props)
         }
       }),
-      utils.defineVueVisitor(context, {
+      defineVueVisitor(context, {
         onVueObjectEnter(node) {
-          verifyProps(utils.getComponentPropsFromOptions(node))
+          verifyProps(getComponentPropsFromOptions(node))
         }
       })
     )

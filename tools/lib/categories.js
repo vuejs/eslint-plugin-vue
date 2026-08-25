@@ -3,9 +3,8 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
-const rules = require('./rules')
+import rules from './rules.js'
 
 const categoryTitles = {
   base: {
@@ -79,7 +78,7 @@ const getPresetNames = (presetIds) => [
   )
 ]
 
-module.exports = {
+export default {
   getPresetNames,
   categories: categoryIds
     .map((categoryId) => ({

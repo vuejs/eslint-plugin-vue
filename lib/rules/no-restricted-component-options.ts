@@ -2,7 +2,12 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import {
+  getStaticPropertyName,
+  compositingVisitors,
+  defineVueVisitor,
+  defineScriptSetupVisitor
+} from '../utils/index.js'
 import { toRegExp } from '../utils/regexp.ts'
 
 interface ParsedOption {
@@ -65,7 +70,7 @@ function parseOption(
         if (node.type !== 'Property') {
           return null
         }
-        const name = utils.getStaticPropertyName(node)
+        const name = getStaticPropertyName(node)
         if (!name || !step.test(name)) {
           return null
         }
@@ -141,15 +146,15 @@ export default {
     }
     const options: ParsedOption[] = context.options.map(parseOption)
 
-    return utils.compositingVisitors(
-      utils.defineVueVisitor(context, {
+    return compositingVisitors(
+      defineVueVisitor(context, {
         onVueObjectEnter(node) {
           for (const option of options) {
             verify(node, option.test, option.message)
           }
         }
       }),
-      utils.defineScriptSetupVisitor(context, {
+      defineScriptSetupVisitor(context, {
         onDefineOptionsEnter(node) {
           if (node.arguments.length === 0) return
           const define = node.arguments[0]

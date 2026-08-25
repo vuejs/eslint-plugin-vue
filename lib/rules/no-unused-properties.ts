@@ -4,8 +4,20 @@
  */
 import type { GroupName, VueObjectData } from '../utils/index.js'
 import type { IPropertyReferences } from '../utils/property-references.js'
-import utils from '../utils/index.js'
-import eslintUtils from '@eslint-community/eslint-utils'
+import {
+  findVariableByIdentifier,
+  getStaticPropertyName,
+  isProperty,
+  compositingVisitors,
+  defineScriptSetupVisitor,
+  defineVueVisitor,
+  getStringLiteralValue,
+  iterateProperties,
+  iterateWatchHandlerValues,
+  isThis,
+  defineTemplateBodyVisitor
+} from '../utils/index.js'
+import { isCommentToken } from '@eslint-community/eslint-utils'
 import { isJSDocComment } from '../utils/comments.ts'
 import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
 import {
@@ -68,7 +80,7 @@ const PROPERTY_LABEL = {
 }
 
 function findExpression(context: RuleContext, id: Identifier): Expression {
-  const variable = utils.findVariableByIdentifier(context, id)
+  const variable = findVariableByIdentifier(context, id)
   if (!variable) {
     return id
   }
@@ -86,6 +98,21 @@ function findExpression(context: RuleContext, id: Identifier): Expression {
     }
   }
   return id
+}
+
+function getParentProperty(node: Expression): Property | null {
+  if (
+    !node.parent ||
+    node.parent.type !== 'Property' ||
+    node.parent.value !== node
+  ) {
+    return null
+  }
+  const property = node.parent
+  if (!isProperty(property)) {
+    return null
+  }
+  return property
 }
 
 /**
@@ -148,7 +175,7 @@ function findJSDocComment(
     tokenBefore = sourceCode.getTokenBefore(currentNode, {
       includeComments: true
     })
-    if (!tokenBefore || !eslintUtils.isCommentToken(tokenBefore)) {
+    if (!tokenBefore || !isCommentToken(tokenBefore)) {
       return null
     }
     if (tokenBefore.type === 'Line') {
@@ -191,7 +218,6 @@ export default {
                 GROUP_INJECT
               ]
             },
-            additionalItems: false,
             uniqueItems: true
           },
           deepData: { type: 'boolean' },
@@ -201,7 +227,6 @@ export default {
             items: {
               enum: [UNREFERENCED_UNKNOWN_MEMBER, UNREFERENCED_RETURN]
             },
-            additionalItems: false,
             uniqueItems: true
           }
         },
@@ -268,7 +293,7 @@ export default {
           if (prop.type !== 'Property') {
             continue
           }
-          const name = utils.getStaticPropertyName(prop)
+          const name = getStaticPropertyName(prop)
           if (name == null) {
             continue
           }
@@ -378,23 +403,8 @@ export default {
       }
     }
 
-    function getParentProperty(node: Expression): Property | null {
-      if (
-        !node.parent ||
-        node.parent.type !== 'Property' ||
-        node.parent.value !== node
-      ) {
-        return null
-      }
-      const property = node.parent
-      if (!utils.isProperty(property)) {
-        return null
-      }
-      return property
-    }
-
-    const scriptVisitor = utils.compositingVisitors(
-      utils.defineScriptSetupVisitor(context, {
+    const scriptVisitor = compositingVisitors(
+      defineScriptSetupVisitor(context, {
         onDefinePropsEnter(node, props) {
           if (!groups.has('props')) {
             return
@@ -478,7 +488,7 @@ export default {
           })
         }
       }),
-      utils.defineVueVisitor(context, {
+      defineVueVisitor(context, {
         CallExpression(node: CallExpression, vueData: VueObjectData) {
           if (node.callee.type !== 'Identifier') return
           let groupName: 'methods' | 'computed' | null = null
@@ -503,7 +513,7 @@ export default {
               const name =
                 prop.type === 'SpreadElement'
                   ? null
-                  : utils.getStaticPropertyName(prop)
+                  : getStaticPropertyName(prop)
               if (name) {
                 container.properties.push({
                   type: 'array',
@@ -524,7 +534,7 @@ export default {
               ) {
                 continue
               }
-              const name = utils.getStringLiteralValue(element)
+              const name = getStringLiteralValue(element)
               if (name) {
                 container.properties.push({
                   type: 'array',
@@ -540,7 +550,7 @@ export default {
         onVueObjectEnter(node, vueNode) {
           const container = getVueComponentPropertiesContainer(vueNode.node)
 
-          const watchersAndExposes = utils.iterateProperties(
+          const watchersAndExposes = iterateProperties(
             node,
             new Set([GROUP_WATCHER, GROUP_EXPOSE])
           )
@@ -559,7 +569,7 @@ export default {
               if (watcher.type === 'object') {
                 const property = watcher.property
                 if (property.kind === 'init') {
-                  for (const handlerValueNode of utils.iterateWatchHandlerValues(
+                  for (const handlerValueNode of iterateWatchHandlerValues(
                     property
                   )) {
                     container.propertyReferences.push(
@@ -581,7 +591,7 @@ export default {
             }
           }
 
-          container.properties.push(...utils.iterateProperties(node, groups))
+          container.properties.push(...iterateProperties(node, groups))
         },
 
         'ObjectExpression > Property > :function[params.length>0]'(
@@ -595,7 +605,7 @@ export default {
             return
           }
           if (property.parent === vueData.node) {
-            if (utils.getStaticPropertyName(property) !== 'data') {
+            if (getStaticPropertyName(property) !== 'data') {
               return
             }
             // check { data: (vm) => vm.prop }
@@ -605,7 +615,7 @@ export default {
               return
             }
             if (parentProperty.parent === vueData.node) {
-              if (utils.getStaticPropertyName(parentProperty) !== 'computed') {
+              if (getStaticPropertyName(parentProperty) !== 'computed') {
                 return
               }
               // check { computed: { foo: (vm) => vm.prop } }
@@ -618,9 +628,8 @@ export default {
               }
               if (parentParentProperty.parent === vueData.node) {
                 if (
-                  utils.getStaticPropertyName(parentParentProperty) !==
-                    'computed' ||
-                  utils.getStaticPropertyName(property) !== 'get'
+                  getStaticPropertyName(parentParentProperty) !== 'computed' ||
+                  getStaticPropertyName(property) !== 'get'
                 ) {
                   return
                 }
@@ -664,7 +673,7 @@ export default {
           node: ThisExpression | Identifier,
           vueData: VueObjectData
         ) {
-          if (!utils.isThis(node, context)) {
+          if (!isThis(node, context)) {
             return
           }
           const container = getVueComponentPropertiesContainer(vueData.node)
@@ -725,10 +734,6 @@ export default {
       }
     }
 
-    return utils.defineTemplateBodyVisitor(
-      context,
-      templateVisitor,
-      scriptVisitor
-    )
+    return defineTemplateBodyVisitor(context, templateVisitor, scriptVisitor)
   }
 }

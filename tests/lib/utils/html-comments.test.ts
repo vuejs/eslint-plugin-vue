@@ -9,7 +9,7 @@ import { defineVisitor } from '../../../lib/utils/html-comments'
 import vueEslintParser from 'vue-eslint-parser'
 
 const FIXTURE_ROOT = path.resolve(
-  __dirname,
+  import.meta.dirname,
   '../../fixtures/utils/html-comments'
 )
 

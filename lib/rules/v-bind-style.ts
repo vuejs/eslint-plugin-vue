@@ -3,7 +3,10 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import {
+  isVBindSameNameShorthand,
+  defineTemplateBodyVisitor
+} from '../utils/index.js'
 import { camelCase, isKebabCase } from '../utils/casing.ts'
 
 type VBindDirectiveKey = VDirectiveKey & {
@@ -112,7 +115,7 @@ export default {
       if (sameNameShorthand === 'ignore' || !isSameName(node)) return
 
       const isPreferShorthand = sameNameShorthand === 'always'
-      const isShorthand = utils.isVBindSameNameShorthand(node)
+      const isShorthand = isVBindSameNameShorthand(node)
       if (isShorthand === isPreferShorthand) {
         return
       }
@@ -140,7 +143,7 @@ export default {
       })
     }
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       "VAttribute[directive=true][key.name.name='bind'][key.argument!=null]"(
         node: VBindDirective
       ) {

@@ -3,7 +3,12 @@
  * See LICENSE file in root directory for full license.
  */
 import type { ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import {
+  compositingVisitors,
+  defineScriptSetupVisitor,
+  executeOnVue,
+  getComponentPropsFromOptions
+} from '../utils/index.js'
 import { kebabCase } from '../utils/casing.ts'
 
 const RESERVED = {
@@ -59,14 +64,14 @@ export default {
       }
     }
 
-    return utils.compositingVisitors(
-      utils.defineScriptSetupVisitor(context, {
+    return compositingVisitors(
+      defineScriptSetupVisitor(context, {
         onDefinePropsEnter(_node, props) {
           processProps(props)
         }
       }),
-      utils.executeOnVue(context, (obj) => {
-        processProps(utils.getComponentPropsFromOptions(obj))
+      executeOnVue(context, (obj) => {
+        processProps(getComponentPropsFromOptions(obj))
       })
     )
   }

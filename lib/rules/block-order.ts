@@ -3,7 +3,7 @@
  * issue https://github.com/vuejs/eslint-plugin-vue/issues/140
  */
 import type { VElementSelector } from '../utils/selector.ts'
-import utils from '../utils/index.js'
+import { isVElement, hasInvalidEOF } from '../utils/index.js'
 import { parseSelector } from '../utils/selector.ts'
 
 const DEFAULT_ORDER = Object.freeze([['script', 'template'], 'style'])
@@ -45,8 +45,7 @@ export default {
                 { type: 'array', items: { type: 'string' }, uniqueItems: true }
               ]
             },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false
@@ -95,14 +94,14 @@ export default {
 
     function getTopLevelHTMLElements() {
       if (documentFragment) {
-        return documentFragment.children.filter(utils.isVElement)
+        return documentFragment.children.filter(isVElement)
       }
       return []
     }
 
     return {
       Program(node) {
-        if (utils.hasInvalidEOF(node)) {
+        if (hasInvalidEOF(node)) {
           return
         }
         const elements = getTopLevelHTMLElements()

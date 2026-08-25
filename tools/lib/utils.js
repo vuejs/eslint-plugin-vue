@@ -1,4 +1,4 @@
-module.exports = { getPresetIds, formatItems }
+export default { getPresetIds, formatItems }
 
 const presetCategories = {
   base: null,

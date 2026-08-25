@@ -1,6 +1,6 @@
-const path = require('node:path')
-const fs = require('node:fs')
-const cp = require('node:child_process')
+import path from 'node:path'
+import fs from 'node:fs'
+import cp from 'node:child_process'
 const logger = console
 
 // main
@@ -16,12 +16,18 @@ const logger = console
     return
   }
 
-  const ruleFile = path.resolve(__dirname, `../lib/rules/${ruleName}.ts`)
+  const ruleFile = path.resolve(
+    import.meta.dirname,
+    `../lib/rules/${ruleName}.ts`
+  )
   const testFile = path.resolve(
-    __dirname,
+    import.meta.dirname,
     `../tests/lib/rules/${ruleName}.test.ts`
   )
-  const docFile = path.resolve(__dirname, `../docs/rules/${ruleName}.md`)
+  const docFile = path.resolve(
+    import.meta.dirname,
+    `../docs/rules/${ruleName}.md`
+  )
 
   fs.writeFileSync(
     ruleFile,
@@ -139,7 +145,19 @@ Nothing.
 `
   )
 
-  cp.execSync(`code "${ruleFile}"`)
-  cp.execSync(`code "${testFile}"`)
-  cp.execSync(`code "${docFile}"`)
+  const createdFiles = [ruleFile, testFile, docFile]
+
+  logger.log('Created:')
+  for (const file of createdFiles) {
+    logger.log(`  ${path.relative(process.cwd(), file)}`)
+  }
+
+  try {
+    for (const file of createdFiles) {
+      cp.execSync(`code "${file}"`, { stdio: 'ignore' })
+    }
+  } catch {
+    // The VS Code CLI (`code`) is not available.
+    // The files have already been created, so there is nothing to recover from.
+  }
 })(process.argv[2], process.argv[3])

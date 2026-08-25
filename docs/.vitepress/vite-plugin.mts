@@ -1,13 +1,12 @@
 import type { UserConfig } from 'vitepress'
 import path from 'pathe'
-import { fileURLToPath } from 'node:url'
 import esbuild from 'esbuild'
 type Plugin = Extract<
   NonNullable<NonNullable<UserConfig['vite']>['plugins']>[number],
   { name: string }
 >
 
-const libRoot = path.join(fileURLToPath(import.meta.url), '../../../lib')
+const libRoot = path.join(import.meta.dirname, '../../lib')
 export function vitePluginRequireResolve(): Plugin {
   return {
     name: 'vite-plugin-require.resolve',

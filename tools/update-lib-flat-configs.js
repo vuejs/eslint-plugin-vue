@@ -3,16 +3,17 @@
  * @copyright 2023- 唯然. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
 /*
 This script updates `lib/configs/flat/*.js` files from rule's meta data.
 */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const { ESLint } = require('eslint')
-const { categories } = require('./lib/categories')
+import fs from 'node:fs'
+import path from 'node:path'
+import * as ESLintModule from 'eslint'
+import categoriesModule1 from './lib/categories.js'
+const { ESLint } = ESLintModule
+const { categories } = categoriesModule1
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
 
@@ -113,7 +114,7 @@ export default [
 }
 
 // Update files.
-const ROOT = path.resolve(__dirname, '../lib/configs/flat/')
+const ROOT = path.resolve(import.meta.dirname, '../lib/configs/flat/')
 for (const category of categories) {
   const filePath = path.join(ROOT, `${category.categoryId}.ts`)
   const content = formatCategory(category)
@@ -132,7 +133,7 @@ for (const category of categories) {
 async function format() {
   const linter = new ESLint({ fix: true })
   const report = await linter.lintFiles([ROOT])
-  ESLint.outputFixes(report)
+  await ESLint.outputFixes(report)
 }
 
-format()
+await format()

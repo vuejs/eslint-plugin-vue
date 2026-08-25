@@ -1,4 +1,4 @@
-import utils from '../index.js'
+import { isVElement } from '../index.js'
 
 export class StyleVariablesContext {
   context: RuleContext
@@ -42,7 +42,7 @@ export function getStyleVariablesContext(
     return null
   }
   const styles = df.children.filter(
-    (e): e is VElement => utils.isVElement(e) && e.name === 'style'
+    (e): e is VElement => isVElement(e) && e.name === 'style'
   )
   if (styles.length === 0) {
     return null

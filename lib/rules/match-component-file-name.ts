@@ -2,7 +2,13 @@
  * @fileoverview Require component name property to match its file name
  * @author Rodrigo Pedra Brum <rodrigo.pedra@gmail.com>
  */
-import utils from '../utils/index.js'
+import {
+  compositingVisitors,
+  executeOnCallVueComponent,
+  executeOnVue,
+  findProperty,
+  defineScriptSetupVisitor
+} from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 import path from 'node:path'
 
@@ -36,8 +42,7 @@ export default {
             items: {
               type: 'string'
             },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           },
           shouldMatchCase: {
             type: 'boolean'
@@ -105,8 +110,8 @@ export default {
       }
     }
 
-    return utils.compositingVisitors(
-      utils.executeOnCallVueComponent(context, (node) => {
+    return compositingVisitors(
+      executeOnCallVueComponent(context, (node) => {
         if (node.arguments.length !== 2) {
           return
         }
@@ -117,8 +122,8 @@ export default {
           verifyName(argument)
         }
       }),
-      utils.executeOnVue(context, (object) => {
-        const node = utils.findProperty(object, 'name')
+      executeOnVue(context, (object) => {
+        const node = findProperty(object, 'name')
 
         componentCount++
 
@@ -126,13 +131,13 @@ export default {
         if (!canVerify(node.value)) return
         verifyName(node.value)
       }),
-      utils.defineScriptSetupVisitor(context, {
+      defineScriptSetupVisitor(context, {
         onDefineOptionsEnter(node) {
           componentCount++
           if (node.arguments.length === 0) return
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
-          const nameNode = utils.findProperty(define, 'name')
+          const nameNode = findProperty(define, 'name')
           if (!nameNode) return
           if (!canVerify(nameNode.value)) return
           verifyName(nameNode.value)

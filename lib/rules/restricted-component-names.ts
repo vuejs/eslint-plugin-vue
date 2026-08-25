@@ -2,7 +2,7 @@
  * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import htmlElements from '../utils/html-elements.json' with { type: 'json' }
 import deprecatedHtmlElements from '../utils/deprecated-html-elements.json' with { type: 'json' }
@@ -35,8 +35,7 @@ export default {
           allow: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         }
       }
@@ -53,7 +52,7 @@ export default {
       return reservedNames.has(name) || isAllowed(name)
     }
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       VElement(node) {
         const name = node.rawName
         if (isAllowedTarget(name)) {

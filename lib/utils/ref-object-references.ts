@@ -5,7 +5,7 @@
  */
 
 import type { Scope } from 'eslint'
-import utils from './index.js'
+import { iterateReferencesTraceMap, isDef } from './index.js'
 import { findVariable, ReferenceTracker } from '@eslint-community/eslint-utils'
 import { definePropertyReferenceExtractor } from './property-references.ts'
 
@@ -90,7 +90,7 @@ export function* iterateDefineRefs(
   globalScope: Scope.Scope
 ): Iterable<{ node: CallExpression; name: string }> {
   const tracker = new ReferenceTracker(globalScope)
-  const reactiveReferences = utils.iterateReferencesTraceMap(tracker, {
+  const reactiveReferences = iterateReferencesTraceMap(tracker, {
     ref: {
       [ReferenceTracker.CALL]: true
     },
@@ -178,7 +178,7 @@ function* iterateDefineReactiveVariables(
    */
   function* iterateRefMacroReferences(): Iterable<Reference> {
     yield* REF_MACROS.map((m) => globalScope.set.get(m))
-      .filter(utils.isDef)
+      .filter(isDef)
       .flatMap((v) => v.references)
     for (const ref of globalScope.through) {
       if (REF_MACROS.includes(ref.identifier.name)) {

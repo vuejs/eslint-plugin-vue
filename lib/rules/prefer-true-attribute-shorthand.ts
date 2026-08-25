@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
-import utils from '../utils/index.js'
+import { defineTemplateBodyVisitor, isCustomComponent } from '../utils/index.js'
 
 type PreferOption = 'always' | 'never'
 
@@ -129,9 +129,9 @@ export default {
       })
     }
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       VAttribute(node) {
-        if (!utils.isCustomComponent(node.parent.parent)) return
+        if (!isCustomComponent(node.parent.parent)) return
 
         const name = getAttributeName(node)
         if (name === null) return

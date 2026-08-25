@@ -2,7 +2,10 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import {
+  getStaticPropertyName,
+  findAssignmentProperty
+} from '../utils/index.js'
 import {
   extractRefObjectReferences,
   extractReactiveVariableReferences
@@ -126,7 +129,7 @@ export default {
           // e.g. `refObj.value = 42`, `refObj.value++`
           return
         }
-        const name = utils.getStaticPropertyName(node)
+        const name = getStaticPropertyName(node)
         if (name !== 'value') {
           return
         }
@@ -136,7 +139,7 @@ export default {
        * Check for `{value} = refObj`.
        */
       'ObjectPattern:exit'(node) {
-        const prop = utils.findAssignmentProperty(node, 'value')
+        const prop = findAssignmentProperty(node, 'value')
         if (!prop) {
           return
         }

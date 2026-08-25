@@ -3,7 +3,14 @@
  * See LICENSE file in root directory for full license.
  */
 import type { ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import {
+  compositingVisitors,
+  defineScriptSetupVisitor,
+  getWithDefaultsProps,
+  getPropsDestructure,
+  defineVueVisitor,
+  getComponentPropsFromOptions
+} from '../utils/index.js'
 import { toRegExp } from '../utils/regexp.ts'
 
 interface ParsedOption {
@@ -109,8 +116,8 @@ export default {
         }
       }
     }
-    return utils.compositingVisitors(
-      utils.defineScriptSetupVisitor(context, {
+    return compositingVisitors(
+      defineScriptSetupVisitor(context, {
         onDefinePropsEnter(node, props) {
           processProps(props, fixPropInOtherPlaces)
 
@@ -120,11 +127,11 @@ export default {
             replaceKeyText: string
           ) {
             const propertyNodes: (Property | AssignmentProperty)[] = []
-            const withDefault = utils.getWithDefaultsProps(node)[propName]
+            const withDefault = getWithDefaultsProps(node)[propName]
             if (withDefault) {
               propertyNodes.push(withDefault)
             }
-            const propDestructure = utils.getPropsDestructure(node)[propName]
+            const propDestructure = getPropsDestructure(node)[propName]
             if (propDestructure) {
               propertyNodes.push(propDestructure)
             }
@@ -139,9 +146,9 @@ export default {
           }
         }
       }),
-      utils.defineVueVisitor(context, {
+      defineVueVisitor(context, {
         onVueObjectEnter(node) {
-          processProps(utils.getComponentPropsFromOptions(node))
+          processProps(getComponentPropsFromOptions(node))
         }
       })
     )

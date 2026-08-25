@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 import slotAttribute from './syntaxes/slot-attribute.ts'
 
 export default {
@@ -39,6 +39,6 @@ export default {
   },
   create(context: RuleContext) {
     const templateBodyVisitor = slotAttribute.createTemplateBodyVisitor(context)
-    return utils.defineTemplateBodyVisitor(context, templateBodyVisitor)
+    return defineTemplateBodyVisitor(context, templateBodyVisitor)
   }
 }

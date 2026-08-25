@@ -14,7 +14,22 @@ import {
   isClosingBraceToken,
   isOpeningBracketToken
 } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import {
+  isScriptSetup,
+  skipChainExpression,
+  getNameParamNode,
+  getStaticPropertyName,
+  isThis,
+  defineTemplateBodyVisitor,
+  compositingVisitors,
+  defineScriptSetupVisitor,
+  getScope,
+  defineVueVisitor,
+  getComponentEmitsFromOptions,
+  getComponentPropsFromOptions,
+  findAssignmentProperty,
+  isProperty
+} from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
 
 const FIX_EMITS_AFTER_OPTIONS = new Set([
@@ -137,7 +152,7 @@ export default {
     }
 
     const programNode = context.sourceCode.ast
-    if (utils.isScriptSetup(context)) {
+    if (isScriptSetup(context)) {
       // init
       vueTemplateDefineData = {
         type: 'setup',
@@ -149,8 +164,8 @@ export default {
 
     const callVisitor = {
       CallExpression(node: CallExpression, info?: VueObjectData) {
-        const callee = utils.skipChainExpression(node.callee)
-        const nameWithLoc = utils.getNameParamNode(node)
+        const callee = skipChainExpression(node.callee)
+        const nameWithLoc = getNameParamNode(node)
         if (!nameWithLoc) {
           // cannot check
           return
@@ -163,7 +178,7 @@ export default {
 
         let emit
         if (callee.type === 'MemberExpression') {
-          const name = utils.getStaticPropertyName(callee)
+          const name = getStaticPropertyName(callee)
           if (name === 'emit' || name === '$emit') {
             emit = { name, member: callee }
           }
@@ -182,7 +197,7 @@ export default {
               vueDefineNode
             )
           } else if (emit && emit.name === 'emit') {
-            const memObject = utils.skipChainExpression(emit.member.object)
+            const memObject = skipChainExpression(emit.member.object)
             if (
               memObject.type === 'Identifier' &&
               contextReferenceIds.has(memObject)
@@ -200,8 +215,8 @@ export default {
 
         // verify $emit
         if (emit && emit.name === '$emit') {
-          const memObject = utils.skipChainExpression(emit.member.object)
-          if (utils.isThis(memObject, context)) {
+          const memObject = skipChainExpression(emit.member.object)
+          if (isThis(memObject, context)) {
             // verify this.$emit()
             verifyEmit(
               emitsDeclarations,
@@ -214,12 +229,12 @@ export default {
       }
     }
 
-    return utils.defineTemplateBodyVisitor(
+    return defineTemplateBodyVisitor(
       context,
       {
         CallExpression(node) {
-          const callee = utils.skipChainExpression(node.callee)
-          const nameWithLoc = utils.getNameParamNode(node)
+          const callee = skipChainExpression(node.callee)
+          const nameWithLoc = getNameParamNode(node)
           if (!nameWithLoc) {
             // cannot check
             return
@@ -242,8 +257,8 @@ export default {
           }
         }
       },
-      utils.compositingVisitors(
-        utils.defineScriptSetupVisitor(context, {
+      compositingVisitors(
+        defineScriptSetupVisitor(context, {
           onDefineEmitsEnter(node, emits) {
             vueEmitsDeclarations.set(programNode, emits)
 
@@ -270,7 +285,7 @@ export default {
 
             emitParamName = emitParam.name
             const variable = findVariable(
-              utils.getScope(context, emitParam),
+              getScope(context, emitParam),
               emitParam
             )
             if (!variable) {
@@ -305,17 +320,11 @@ export default {
           },
           ...callVisitor
         }),
-        utils.defineVueVisitor(context, {
+        defineVueVisitor(context, {
           onVueObjectEnter(node) {
-            vueEmitsDeclarations.set(
-              node,
-              utils.getComponentEmitsFromOptions(node)
-            )
+            vueEmitsDeclarations.set(node, getComponentEmitsFromOptions(node))
             if (shouldAllowProps) {
-              vuePropsDeclarations.set(
-                node,
-                utils.getComponentPropsFromOptions(node)
-              )
+              vuePropsDeclarations.set(node, getComponentPropsFromOptions(node))
             }
           },
           onSetupFunctionEnter(node, { node: vueNode }) {
@@ -335,10 +344,7 @@ export default {
             const contextReferenceIds = new Set<Identifier>()
             const emitReferenceIds = new Set<Identifier>()
             if (contextParam.type === 'ObjectPattern') {
-              const emitProperty = utils.findAssignmentProperty(
-                contextParam,
-                'emit'
-              )
+              const emitProperty = findAssignmentProperty(contextParam, 'emit')
               if (!emitProperty) {
                 return
               }
@@ -346,7 +352,7 @@ export default {
               // `setup(props, {emit})`
               const variable =
                 emitParam.type === 'Identifier'
-                  ? findVariable(utils.getScope(context, emitParam), emitParam)
+                  ? findVariable(getScope(context, emitParam), emitParam)
                   : null
               if (!variable) {
                 return
@@ -361,7 +367,7 @@ export default {
             } else if (contextParam.type === 'Identifier') {
               // `setup(props, context)`
               const variable = findVariable(
-                utils.getScope(context, contextParam),
+                getScope(context, contextParam),
                 contextParam
               )
               if (!variable) {
@@ -459,10 +465,10 @@ function buildSuggest(
 
   const object = define
 
-  const propertyNodes = object.properties.filter(utils.isProperty)
+  const propertyNodes = object.properties.filter(isProperty)
 
   const emitsOption = propertyNodes.find(
-    (p) => utils.getStaticPropertyName(p) === 'emits'
+    (p) => getStaticPropertyName(p) === 'emits'
   )
   if (emitsOption) {
     const sourceCode = context.sourceCode
@@ -512,7 +518,7 @@ function buildSuggest(
 
   const sourceCode = context.sourceCode
   const afterOptionNode = propertyNodes.find((p) =>
-    FIX_EMITS_AFTER_OPTIONS.has(utils.getStaticPropertyName(p) || '')
+    FIX_EMITS_AFTER_OPTIONS.has(getStaticPropertyName(p) || '')
   )
   return [
     {

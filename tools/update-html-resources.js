@@ -1,10 +1,11 @@
-'use strict'
+import fs from 'node:fs'
+import path from 'node:path'
+import { JSDOM } from 'jsdom'
+import httpGetModule from './lib/http.js'
 
-const fs = require('node:fs')
-const jsdom = require('jsdom')
-const { httpGet } = require('./lib/http')
+const { httpGet } = httpGetModule
 
-main()
+await main()
 
 async function main() {
   const [bcdJson, obsoleteHtml] = await Promise.all([
@@ -21,13 +22,23 @@ async function main() {
   // Update deprecated-html-elements.json
   // ------------------------------------------------------------------------------
   function updateDeprecatedHTMLElements() {
-    const DEPRECATED_HTML_ELEMENTS_PATH =
-      require.resolve('../lib/utils/deprecated-html-elements.json')
+    const DEPRECATED_HTML_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/deprecated-html-elements.json'
+    )
     const elements = new Set()
 
-    const domDl = jsdom.JSDOM.fragment(obsoleteHtml).querySelector(
+    // `:scope` never matches a `DocumentFragment`, so `obsoleteHtml` has to be
+    // parsed as a document rather than with `jsdom.JSDOM.fragment()`.
+    const { document } = new JSDOM(obsoleteHtml).window
+    const domDl = document.querySelector(
       ':scope [id="non-conforming-features"] ~ dl'
     )
+    if (!domDl) {
+      throw new Error(
+        'Could not find the "Non-conforming features" element list in the HTML Standard'
+      )
+    }
     for (const code of domDl.querySelectorAll(':scope dt code')) {
       const name = code.textContent.trim()
       if (name) elements.add(name)
@@ -52,11 +63,17 @@ async function main() {
   // Update html-elements.json
   // ------------------------------------------------------------------------------
   function updateHTMLElements() {
-    const HTML_ELEMENTS_PATH =
-      require.resolve('../lib/utils/html-elements.json')
+    const HTML_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/html-elements.json'
+    )
+    const DEPRECATED_HTML_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/deprecated-html-elements.json'
+    )
     const elements = new Set()
     const deprecatedHtmlElements = new Set(
-      require('../lib/utils/deprecated-html-elements.json')
+      JSON.parse(fs.readFileSync(DEPRECATED_HTML_ELEMENTS_PATH, 'utf8'))
     )
 
     for (const [name, element] of Object.entries(bcd.html.elements)) {
@@ -88,7 +105,10 @@ async function main() {
   // Update svg-elements.json
   // ------------------------------------------------------------------------------
   function updateSVGElements() {
-    const SVG_ELEMENTS_PATH = require.resolve('../lib/utils/svg-elements.json')
+    const SVG_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/svg-elements.json'
+    )
     const elements = new Set()
 
     for (const [name, element] of Object.entries(bcd.svg.elements)) {

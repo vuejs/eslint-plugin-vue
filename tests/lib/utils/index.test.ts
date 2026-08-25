@@ -1,4 +1,4 @@
-import * as espree from 'espree'
+import { parse as espreeParse } from 'espree'
 import {
   editDistance,
   getComponentPropsFromOptions,
@@ -12,7 +12,7 @@ import assert from 'node:assert'
 
 function parse<T extends Expression>(code: string): T {
   return (
-    espree.parse(code, { ecmaVersion: 2020 })
+    espreeParse(code, { ecmaVersion: 2020 })
       .body[0] as unknown as VariableDeclaration
   ).declarations[0].init as T
 }
