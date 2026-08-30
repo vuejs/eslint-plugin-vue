@@ -2,4 +2,4 @@
 "eslint-plugin-vue": patch
 ---
 
-Specify explicit `items` policies for array rule option schemas
+Specified explicit `items` policies for array rule option schemas
