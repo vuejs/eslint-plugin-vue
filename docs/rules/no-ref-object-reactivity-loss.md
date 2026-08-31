@@ -25,6 +25,7 @@ const v3 = computed(() => count.value /* ✓ GOOD */)
 const v4 = fn(count.value) /* ✗ BAD */
 const v5 = fn(count) /* ✓ GOOD */
 const v6 = computed(() => fn(count.value) /* ✓ GOOD */)
+const v7 = (() => count.value)() /* ✗ BAD */
 ```
 
 </eslint-code-block>
