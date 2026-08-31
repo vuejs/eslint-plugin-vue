@@ -23,13 +23,15 @@ This rule reports compiler macros (like `defineProps` or `defineEmits` but also 
 {
   "vue/define-macros-order": ["error", {
     "order": ["defineProps", "defineEmits"],
-    "defineExposeLast": false
+    "defineExposeLast": false,
+    "allowTypesBetweenMacros": false
   }]
 }
 ```
 
 - `order` (`string[]`) ... The order in which the macros should appear. The default is `["defineProps", "defineEmits"]`.
 - `defineExposeLast` (`boolean`) ... Force `defineExpose` at the end.
+- `allowTypesBetweenMacros` (`boolean`) ... Allow TypeScript code that is erased at compile time (e.g. `type` and `interface` declarations, `declare` statements, `import type`) between the macros. Anything that emits runtime code, such as an `enum` or a non-`declare`d `namespace`, is still reported. Default is `false`.
 
 ### `{ "order": ["defineProps", "defineEmits"] }` (default)
 
@@ -176,6 +178,38 @@ defineProps(/* ... */)
 defineEmits(/* ... */)
 defineExpose({/* ... */})
 const slots = defineSlots()
+</script>
+```
+
+</eslint-code-block>
+
+### `{ "allowTypesBetweenMacros": true }`
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowTypesBetweenMacros: true}]}">
+
+```vue
+<!-- ✓ GOOD -->
+<script setup lang="ts">
+defineProps(/* ... */)
+
+type Foo = 'bar'
+
+defineEmits(/* ... */)
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowTypesBetweenMacros: true}]}">
+
+```vue
+<!-- ✗ BAD -->
+<script setup lang="ts">
+defineProps(/* ... */)
+
+enum Foo { Bar = 'bar' }
+
+defineEmits(/* ... */)
 </script>
 ```
 
