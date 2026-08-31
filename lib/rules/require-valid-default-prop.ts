@@ -428,8 +428,8 @@ export default {
               | ComponentTypeProp =>
               ['type', 'infer-type', 'object'].includes(prop.type)
           )
-          const defaultsByWithDefaults =
-            utils.getWithDefaultsPropExpressions(node)
+          const { props: defaultsByWithDefaults } =
+            utils.getWithDefaultsPropExpressions(context, node)
           const defaultsByAssignmentPatterns =
             utils.getDefaultPropExpressionsForPropsDestructure(node)
           const propContexts = processPropDefs(

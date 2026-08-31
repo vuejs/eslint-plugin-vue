@@ -353,6 +353,97 @@ ruleTester.run('require-default-prop', rule, {
       }
     },
     {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2993
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const defaults = {
+        foo: 'foo',
+      }
+      withDefaults(defineProps<{
+        foo?: string;
+      }>(), defaults)
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2993
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { defaults } from './defaults'
+      interface Props {
+        foo?: string;
+      }
+      withDefaults(defineProps<Props>(), defaults)
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2993
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { defaults } from './defaults'
+      withDefaults(defineProps<{
+        foo?: string;
+      }>(), {
+        ...defaults,
+      })
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2993
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { makeDefaults } from './defaults'
+      withDefaults(defineProps<{
+        foo?: string;
+      }>(), makeDefaults())
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2993
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps<{
+        foo?: string;
+      }>(), {
+        foo: 'foo',
+      } as const)
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
       filename: 'test.vue',
       code: `
       <script setup>
@@ -857,6 +948,35 @@ ruleTester.run('require-default-prop', rule, {
       }>(), {
         ...defaultProps,
       })
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message: "Prop 'bar' requires default value to be set.",
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 22
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2993
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const defaults = {
+        foo: 'foo',
+      }
+      withDefaults(defineProps<{
+        foo?: string;
+        bar?: number;
+      }>(), defaults)
       </script>
       `,
       languageOptions: {
