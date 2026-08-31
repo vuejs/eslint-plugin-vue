@@ -233,6 +233,7 @@ For example:
 | [vue/next-tick-style] | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template] | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
+| [vue/no-content-outside-block] | disallow content outside of the top-level blocks | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-duplicate-class-names] | disallow duplication of class names in class attributes | :wrench: | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
@@ -448,6 +449,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-computed-properties-in-data]: ./no-computed-properties-in-data.md
 [vue/no-console]: ./no-console.md
 [vue/no-constant-condition]: ./no-constant-condition.md
+[vue/no-content-outside-block]: ./no-content-outside-block.md
 [vue/no-custom-modifiers-on-v-model]: ./no-custom-modifiers-on-v-model.md
 [vue/no-deprecated-data-object-declaration]: ./no-deprecated-data-object-declaration.md
 [vue/no-deprecated-delete-set]: ./no-deprecated-delete-set.md
