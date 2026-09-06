@@ -5,27 +5,20 @@
 ### Minor Changes
 
 - Added `defineModel` support to [`vue/require-default-prop`](https://eslint.vuejs.org/rules/require-default-prop.html) and [`vue/require-valid-default-prop`](https://eslint.vuejs.org/rules/require-valid-default-prop.html) rules ([#3032](https://github.com/vuejs/eslint-plugin-vue/pull/3032))
-
 - Added support for SFCs using `@nuxtjs/composition-api`, which is now treated the same as `vue` or `@vue/composition-api` ([#3100](https://github.com/vuejs/eslint-plugin-vue/pull/3100))
-
 - Added new [`vue/no-shadow-native-events`](https://eslint.vuejs.org/rules/no-shadow-native-events.html) rule ([#2558](https://github.com/vuejs/eslint-plugin-vue/pull/2558))
 
 ### Patch Changes
 
-- Updated resources (HTML elements) ([#3132](https://github.com/vuejs/eslint-plugin-vue/pull/3132))
-
-- Specified explicit `items` policies for array rule option schemas ([#3112](https://github.com/vuejs/eslint-plugin-vue/pull/3112))
-
 - Fixed [`vue/use-v-on-exact`](https://eslint.vuejs.org/rules/use-v-on-exact.html) to avoid reporting `@keydown.stop` when paired with an exact key-specific listener ([#3082](https://github.com/vuejs/eslint-plugin-vue/pull/3082))
-
-- Updated resources (HTML elements) ([#3133](https://github.com/vuejs/eslint-plugin-vue/pull/3133))
+- Specified explicit `items` policies for array rule option schemas ([#3112](https://github.com/vuejs/eslint-plugin-vue/pull/3112))
+- Updated resources (HTML elements) ([#3132](https://github.com/vuejs/eslint-plugin-vue/pull/3132) and [#3133](https://github.com/vuejs/eslint-plugin-vue/pull/3133))
 
 ## 10.10.0
 
 ### Minor Changes
 
 - Added support for template literals to [`vue/prefer-separate-static-class`](https://eslint.vuejs.org/rules/prefer-separate-static-class.html) ([#3097](https://github.com/vuejs/eslint-plugin-vue/pull/3097))
-
 - Added `allowLineSeparatedGroups` option to [`vue/sort-keys`](https://eslint.vuejs.org/rules/sort-keys.html) rule ([#3084](https://github.com/vuejs/eslint-plugin-vue/pull/3084))
 
 ### Patch Changes
