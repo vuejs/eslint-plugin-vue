@@ -30,6 +30,7 @@ export default [
       'vue/require-default-prop': 'error',
       'vue/require-explicit-emits': 'error',
       'vue/require-prop-types': 'error',
+      'vue/simple-expressions-in-templates': 'error',
       'vue/singleline-html-element-content-newline': 'error',
       'vue/v-bind-style': 'error',
       'vue/v-on-event-hyphenation': [

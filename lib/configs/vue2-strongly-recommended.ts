@@ -25,6 +25,7 @@ export default {
     'vue/prop-name-casing': 'warn',
     'vue/require-default-prop': 'warn',
     'vue/require-prop-types': 'warn',
+    'vue/simple-expressions-in-templates': 'warn',
     'vue/singleline-html-element-content-newline': 'warn',
     'vue/v-bind-style': 'warn',
     'vue/v-on-style': 'warn',

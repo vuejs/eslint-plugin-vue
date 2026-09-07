@@ -162,6 +162,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/require-default-prop] | require default value for props |  | :three::two::hammer: |
 | [vue/require-explicit-emits] | require `emits` option with name triggered by `$emit()` | :bulb: | :three::hammer: |
 | [vue/require-prop-types] | require type definitions in props |  | :three::two::hammer: |
+| [vue/simple-expressions-in-templates] | disallow complex template expressions |  | :three::two::warning: |
 | [vue/singleline-html-element-content-newline] | require a line break before and after the contents of a singleline element | :wrench: | :three::two::lipstick: |
 | [vue/v-bind-style] | enforce `v-bind` directive style | :wrench: | :three::two::hammer: |
 | [vue/v-on-event-hyphenation] | enforce v-on event naming style on custom components in template | :wrench: | :three::hammer: |
@@ -595,6 +596,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/return-in-computed-property]: ./return-in-computed-property.md
 [vue/return-in-emits-validator]: ./return-in-emits-validator.md
 [vue/script-indent]: ./script-indent.md
+[vue/simple-expressions-in-templates]: ./simple-expressions-in-templates.md
 [vue/singleline-html-element-content-newline]: ./singleline-html-element-content-newline.md
 [vue/slot-name-casing]: ./slot-name-casing.md
 [vue/sort-keys]: ./sort-keys.md
