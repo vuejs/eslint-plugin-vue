@@ -2522,6 +2522,40 @@ tester.run('no-unused-properties', rule, {
       </template>`,
       ...getTypeScriptFixtureTestOptions()
     },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2545
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo: string
+        // prevent accidentally using min/max instead of minlength/maxlength
+        min?: never
+        max?: never
+      }
+      defineProps<Props>()
+      </script>
+      <template>{{ foo }}</template>`,
+      languageOptions: {
+        parserOptions: {
+          parser: '@typescript-eslint/parser'
+        }
+      }
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2545
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps<{ foo: string, min?: never }>()
+      </script>
+      <template>{{ foo }}</template>`,
+      languageOptions: {
+        parserOptions: {
+          parser: '@typescript-eslint/parser'
+        }
+      }
+    },
     // used inject
     {
       filename: 'test.vue',
