@@ -517,6 +517,34 @@ ruleTester.run('no-boolean-default', rule, {
       interface Props {
         foo: boolean
       }
+      const defaults = { foo: false }
+      withDefaults(defineProps<Props>(), defaults)
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message:
+            'Boolean prop should not set a default (Vue defaults it to false).',
+          line: 6,
+          column: 31,
+          endLine: 6,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo: boolean
+      }
       withDefaults(defineProps<Props>(), {
         foo: true
       })
