@@ -35,7 +35,7 @@ const logger = console
  * @author ${authorName}
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 
 export default {
   meta: {
@@ -54,7 +54,7 @@ export default {
   create(context: RuleContext) {
     // ...
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       // ...
     })
   }
