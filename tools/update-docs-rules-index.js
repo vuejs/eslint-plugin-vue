@@ -2,14 +2,15 @@
  * @author Toru Nagashima
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
-const fs = require('node:fs')
-const path = require('node:path')
-const rules = require('./lib/rules')
-const { getPresetIds, formatItems } = require('./lib/utils')
-const removedRules = require('../lib/removed-rules')
-const { getPresetNames } = require('./lib/categories')
+import fs from 'node:fs'
+import path from 'node:path'
+import rules from './lib/rules.js'
+import docsUtils from './lib/utils.js'
+import removedRules from '../lib/removed-rules.js'
+import categories from './lib/categories.js'
+const { getPresetIds, formatItems } = docsUtils
+const { getPresetNames } = categories
 
 const VUE3_EMOJI = ':three:'
 const VUE2_EMOJI = ':two:'
@@ -261,7 +262,10 @@ const releaseLinkDefinitions = releases.map(
 )
 
 // -----------------------------------------------------------------------------
-const readmeFilePath = path.resolve(__dirname, '../docs/rules/index.md')
+const readmeFilePath = path.resolve(
+  import.meta.dirname,
+  '../docs/rules/index.md'
+)
 fs.writeFileSync(
   readmeFilePath,
   `---

@@ -4,7 +4,16 @@
  */
 import path from 'node:path'
 import { isPascalCase, kebabCase } from '../utils/casing.ts'
-import utils from '../utils/index.js'
+import {
+  isScriptSetup,
+  VUE3_BUILTIN_COMPONENT_NAMES,
+  compositingVisitors,
+  executeOnCallVueComponent,
+  executeOnVue,
+  findProperty,
+  defineScriptSetupVisitor,
+  isVueFile
+} from '../utils/index.js'
 
 export default {
   meta: {
@@ -21,8 +30,7 @@ export default {
           ignores: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false
@@ -43,14 +51,14 @@ export default {
         ignores.add(kebabCase(ignore))
       }
     }
-    let hasVue = utils.isScriptSetup(context)
+    let hasVue = isScriptSetup(context)
     let hasName = false
 
     /**
      * Returns true if the given component name is valid, otherwise false.
      * */
     function isValidComponentName(name: string) {
-      if (ignores.has(name) || utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)) {
+      if (ignores.has(name) || VUE3_BUILTIN_COMPONENT_NAMES.has(name)) {
         return true
       }
       const elements = kebabCase(name).split('-')
@@ -71,26 +79,26 @@ export default {
       }
     }
 
-    return utils.compositingVisitors(
-      utils.executeOnCallVueComponent(context, (node) => {
+    return compositingVisitors(
+      executeOnCallVueComponent(context, (node) => {
         hasVue = true
         if (node.arguments.length !== 2) return
         hasName = true
         validateName(node.arguments[0])
       }),
-      utils.executeOnVue(context, (obj) => {
+      executeOnVue(context, (obj) => {
         hasVue = true
-        const node = utils.findProperty(obj, 'name')
+        const node = findProperty(obj, 'name')
         if (!node) return
         hasName = true
         validateName(node.value)
       }),
-      utils.defineScriptSetupVisitor(context, {
+      defineScriptSetupVisitor(context, {
         onDefineOptionsEnter(node) {
           if (node.arguments.length === 0) return
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
-          const nameNode = utils.findProperty(define, 'name')
+          const nameNode = findProperty(define, 'name')
           if (!nameNode) return
           hasName = true
           validateName(nameNode.value)
@@ -102,10 +110,7 @@ export default {
           if (!hasVue && node.body.length > 0) return
           const fileName = context.filename
           const componentName = path.basename(fileName, path.extname(fileName))
-          if (
-            utils.isVueFile(fileName) &&
-            !isValidComponentName(componentName)
-          ) {
+          if (isVueFile(fileName) && !isValidComponentName(componentName)) {
             context.report({
               messageId: 'unexpected',
               data: {

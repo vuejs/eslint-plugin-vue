@@ -4,7 +4,18 @@
  */
 import type { NameWithLoc, VueObjectData } from '../utils/index.js'
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import {
+  skipChainExpression,
+  getStaticPropertyName,
+  getNameParamNode,
+  defineTemplateBodyVisitor,
+  compositingVisitors,
+  defineScriptSetupVisitor,
+  getScope,
+  defineVueVisitor,
+  skipDefaultParamValue,
+  findAssignmentProperty
+} from '../utils/index.js'
 import { getChecker } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
@@ -15,10 +26,10 @@ const DEFAULT_CASE = 'camelCase'
  * Get the callee member node from the given CallExpression
  */
 function getCalleeMemberNode(node: CallExpression) {
-  const callee = utils.skipChainExpression(node.callee)
+  const callee = skipChainExpression(node.callee)
 
   if (callee.type === 'MemberExpression') {
-    const name = utils.getStaticPropertyName(callee)
+    const name = getStaticPropertyName(callee)
     if (name) {
       return { name, member: callee }
     }
@@ -45,8 +56,7 @@ export default {
           ignores: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false
@@ -96,7 +106,7 @@ export default {
 
     const callVisitor = {
       CallExpression(node: CallExpression, info?: VueObjectData) {
-        const nameWithLoc = utils.getNameParamNode(node)
+        const nameWithLoc = getNameParamNode(node)
         if (!nameWithLoc) {
           // cannot check
           return
@@ -128,12 +138,12 @@ export default {
       }
     }
 
-    return utils.defineTemplateBodyVisitor(
+    return defineTemplateBodyVisitor(
       context,
       {
         CallExpression(node) {
           const callee = node.callee
-          const nameWithLoc = utils.getNameParamNode(node)
+          const nameWithLoc = getNameParamNode(node)
           if (!nameWithLoc) {
             // cannot check
             return
@@ -147,8 +157,8 @@ export default {
           }
         }
       },
-      utils.compositingVisitors(
-        utils.defineScriptSetupVisitor(context, {
+      compositingVisitors(
+        defineScriptSetupVisitor(context, {
           onDefineEmitsEnter(node) {
             if (
               !node.parent ||
@@ -166,7 +176,7 @@ export default {
 
             // const emit = defineEmits()
             const variable = findVariable(
-              utils.getScope(context, emitParam),
+              getScope(context, emitParam),
               emitParam
             )
             if (!variable) {
@@ -183,9 +193,9 @@ export default {
           },
           ...callVisitor
         }),
-        utils.defineVueVisitor(context, {
+        defineVueVisitor(context, {
           onSetupFunctionEnter(node, { node: vueNode }) {
-            const contextParam = utils.skipDefaultParamValue(node.params[1])
+            const contextParam = skipDefaultParamValue(node.params[1])
             if (!contextParam) {
               // no arguments
               return
@@ -200,17 +210,14 @@ export default {
             const contextReferenceIds = new Set<Identifier>()
             const emitReferenceIds = new Set<Identifier>()
             if (contextParam.type === 'ObjectPattern') {
-              const emitProperty = utils.findAssignmentProperty(
-                contextParam,
-                'emit'
-              )
+              const emitProperty = findAssignmentProperty(contextParam, 'emit')
               if (!emitProperty || emitProperty.value.type !== 'Identifier') {
                 return
               }
               const emitParam = emitProperty.value
               // `setup(props, {emit})`
               const variable = findVariable(
-                utils.getScope(context, emitParam),
+                getScope(context, emitParam),
                 emitParam
               )
               if (!variable) {
@@ -222,7 +229,7 @@ export default {
             } else {
               // `setup(props, context)`
               const variable = findVariable(
-                utils.getScope(context, contextParam),
+                getScope(context, contextParam),
                 contextParam
               )
               if (!variable) {
@@ -244,7 +251,7 @@ export default {
         }),
         {
           CallExpression(node) {
-            const nameLiteralNode = utils.getNameParamNode(node)
+            const nameLiteralNode = getNameParamNode(node)
             if (!nameLiteralNode) {
               // cannot check
               return

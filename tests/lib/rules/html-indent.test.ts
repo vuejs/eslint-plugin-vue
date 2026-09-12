@@ -10,7 +10,10 @@ import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/html-indent'
 import vueEslintParser from 'vue-eslint-parser'
 
-const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/html-indent/')
+const FIXTURE_ROOT = path.resolve(
+  import.meta.dirname,
+  '../../fixtures/html-indent/'
+)
 
 /**
  * Load test patterns from fixtures.

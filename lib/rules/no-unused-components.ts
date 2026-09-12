@@ -2,7 +2,18 @@
  * @fileoverview Report used components
  * @author Michał Sajnóg
  */
-import utils from '../utils/index.js'
+import {
+  defineTemplateBodyVisitor,
+  isHtmlElementNode,
+  isSvgElementNode,
+  isMathElementNode,
+  isHtmlWellKnownElementName,
+  isSvgWellKnownElementName,
+  isMathWellKnownElementName,
+  hasAttribute,
+  executeOnVue,
+  getRegisteredComponents
+} from '../utils/index.js'
 import {
   isPascalCase,
   isCamelCase,
@@ -46,17 +57,17 @@ export default {
     let shouldIgnoreReporting = false
     let templateLocation: Position
 
-    return utils.defineTemplateBodyVisitor(
+    return defineTemplateBodyVisitor(
       context,
       {
         VElement(node) {
           if (
-            (!utils.isHtmlElementNode(node) &&
-              !utils.isSvgElementNode(node) &&
-              !utils.isMathElementNode(node)) ||
-            utils.isHtmlWellKnownElementName(node.rawName) ||
-            utils.isSvgWellKnownElementName(node.rawName) ||
-            utils.isMathWellKnownElementName(node.rawName)
+            (!isHtmlElementNode(node) &&
+              !isSvgElementNode(node) &&
+              !isMathElementNode(node)) ||
+            isHtmlWellKnownElementName(node.rawName) ||
+            isSvgWellKnownElementName(node.rawName) ||
+            isMathWellKnownElementName(node.rawName)
           ) {
             return
           }
@@ -95,7 +106,7 @@ export default {
           if (
             node.loc.start !== templateLocation ||
             shouldIgnoreReporting ||
-            utils.hasAttribute(node, 'src')
+            hasAttribute(node, 'src')
           )
             return
 
@@ -132,8 +143,8 @@ export default {
           }
         }
       },
-      utils.executeOnVue(context, (obj) => {
-        registeredComponents = utils.getRegisteredComponents(obj)
+      executeOnVue(context, (obj) => {
+        registeredComponents = getRegisteredComponents(obj)
       })
     )
   }

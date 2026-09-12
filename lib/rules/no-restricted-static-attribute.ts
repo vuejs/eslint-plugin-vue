@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 import { toRegExp } from '../utils/regexp.ts'
 
 interface ParsedOption {
@@ -111,7 +111,7 @@ export default {
     }
     const options: ParsedOption[] = context.options.map(parseOption)
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       'VAttribute[directive=false]'(node: VAttribute) {
         for (const option of options) {
           if (option.test(node)) {

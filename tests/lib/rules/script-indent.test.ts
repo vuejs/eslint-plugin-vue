@@ -13,7 +13,10 @@ import rule from '../../../lib/rules/script-indent'
 import vueEslintParser from 'vue-eslint-parser'
 
 const nodeRequire = createRequire(import.meta.url)
-const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/script-indent/')
+const FIXTURE_ROOT = path.resolve(
+  import.meta.dirname,
+  '../../fixtures/script-indent/'
+)
 
 /**
  * Load test patterns from fixtures.

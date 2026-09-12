@@ -9,7 +9,7 @@ import { Linter } from '../../../../eslint-compat'
 import { defineScriptSetupVisitor } from '../../../../../lib/utils/index'
 
 export const FIXTURES_ROOT = path.resolve(
-  __dirname,
+  import.meta.dirname,
   '../../../../fixtures/utils/ts-utils'
 )
 

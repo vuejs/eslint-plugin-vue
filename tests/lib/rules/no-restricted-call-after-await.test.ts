@@ -419,7 +419,7 @@ tester.run('no-restricted-call-after-await', rule as RuleModule, {
       ]
     },
     {
-      filename: path.join(__dirname, '../../../test/test.vue'),
+      filename: path.join(import.meta.dirname, '../../../test/test.vue'),
       code: `
       <script>
       import { foo } from '..'

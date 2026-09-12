@@ -2,7 +2,7 @@
  * @author rzzf
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
 const EXPRESSION_TYPES: Partial<
@@ -33,8 +33,7 @@ export default {
           ignores: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false
@@ -69,7 +68,7 @@ export default {
       return false
     }
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       VElement(node: VElement) {
         upperElements.add(node)
       },

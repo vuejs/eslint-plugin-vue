@@ -4,16 +4,13 @@
 import esbuild from 'esbuild'
 import path from 'pathe'
 import fs from 'node:fs'
-import { fileURLToPath } from 'node:url'
-
-const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 build(
   path.join(
-    dirname,
+    import.meta.dirname,
     '../../../node_modules/@typescript-eslint/parser/dist/index.js'
   ),
-  path.join(dirname, './shim/@typescript-eslint/parser.mjs'),
+  path.join(import.meta.dirname, './shim/@typescript-eslint/parser.mjs'),
   [
     'node:util',
     'node:path',
@@ -26,8 +23,11 @@ build(
 )
 
 build(
-  path.join(dirname, '../../../node_modules/vue-eslint-parser/dist/index.cjs'),
-  path.join(dirname, './shim/vue-eslint-parser.mjs'),
+  path.join(
+    import.meta.dirname,
+    '../../../node_modules/vue-eslint-parser/dist/index.cjs'
+  ),
+  path.join(import.meta.dirname, './shim/vue-eslint-parser.mjs'),
   [
     'node:path',
     'node:assert',
@@ -63,7 +63,7 @@ function bundle(entryPoint: string, externals: string[]) {
     bundle: true,
     external: externals,
     write: false,
-    inject: [path.join(dirname, './src/process-shim.mjs')]
+    inject: [path.join(import.meta.dirname, './src/process-shim.mjs')]
   })
 
   return result.outputFiles[0].text

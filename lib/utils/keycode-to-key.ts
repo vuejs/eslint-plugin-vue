@@ -1,5 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
-export default {
+export const keyCodeToKey = {
   8: 'backspace',
   9: 'tab',
   13: 'enter',

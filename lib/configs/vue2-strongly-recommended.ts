@@ -3,8 +3,10 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
+import { fileURLToPath } from 'node:url'
+
 export default {
-  extends: require.resolve('./vue2-essential'),
+  extends: fileURLToPath(new URL('vue2-essential.js', import.meta.url)),
   rules: {
     'vue/attribute-hyphenation': 'warn',
     'vue/component-definition-name-casing': 'warn',

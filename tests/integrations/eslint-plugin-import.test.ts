@@ -8,7 +8,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import semver from 'semver'
 
-const PLUGIN_DIR = path.join(__dirname, 'eslint-plugin-import')
+const PLUGIN_DIR = path.join(import.meta.dirname, 'eslint-plugin-import')
 const ESLINT = path.join(PLUGIN_DIR, 'node_modules', '.bin', 'eslint')
 
 let eslintNodeVersion = ''

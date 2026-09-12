@@ -6,7 +6,9 @@ import type { Linter as ESLintLinter } from 'eslint'
 import { Linter } from '../eslint-compat'
 import parser from 'vue-eslint-parser'
 import assert from 'node:assert'
-import { rules } from '../..'
+import plugin from '../..'
+
+const { rules } = plugin
 
 const baseConfig: ESLintLinter.Config = {
   files: ['*.vue'],

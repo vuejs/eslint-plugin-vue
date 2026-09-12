@@ -4,7 +4,7 @@ import type {
   ReactiveVariableReferences,
   ReactiveVariableReference
 } from '../../../lib/utils/ref-object-references'
-import type * as eslint from 'eslint'
+import type { Linter as ESLintLinter } from 'eslint'
 import fs from 'node:fs'
 import path from 'node:path'
 import assert from 'node:assert'
@@ -16,7 +16,7 @@ import {
 } from '../../../lib/utils/ref-object-references'
 
 const FIXTURE_ROOT = path.resolve(
-  __dirname,
+  import.meta.dirname,
   '../../fixtures/utils/ref-object-references'
 )
 const REF_OBJECTS_FIXTURE_ROOT = path.resolve(FIXTURE_ROOT, 'ref-objects')
@@ -26,7 +26,7 @@ interface LoadedPattern {
   code: string
   name: string
   resultFilePath: string
-  options?: eslint.Linter.FlatConfig
+  options?: ESLintLinter.FlatConfig
 }
 
 function loadPatterns(rootDir: string): LoadedPattern[] {
@@ -38,7 +38,7 @@ function loadPatterns(rootDir: string): LoadedPattern[] {
         'result.vue',
         { languageOptions: { parser: vueESLintParser } }
       ]
-    ] satisfies [string, string, eslint.Linter.FlatConfig?][]) {
+    ] satisfies [string, string, ESLintLinter.FlatConfig?][]) {
       const sourceFilePath = path.join(rootDir, name, sourceFile)
       if (fs.existsSync(sourceFilePath)) {
         return {

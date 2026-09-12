@@ -3,19 +3,33 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import {
+  skipChainExpression,
+  getStaticPropertyName,
+  isStringLiteral,
+  getStringLiteralValue,
+  defineTemplateBodyVisitor,
+  compositingVisitors,
+  defineScriptSetupVisitor,
+  getScope,
+  executeOnVue,
+  getComponentEmitsFromOptions,
+  defineVueVisitor,
+  skipDefaultParamValue,
+  findAssignmentProperty
+} from '../utils/index.js'
 import type { ComponentEmit, ComponentUnknownEmit } from '../utils'
 import type { ReportSourceLocation } from 'eslint'
-import type * as VNODE from '../../typings/eslint-plugin-vue/util-types/node'
+import type { HasLocation } from '../../typings/eslint-plugin-vue/util-types/node'
 
 /**
  * Get the callee member node from the given CallExpression
  */
 function getCalleeMemberNode(node: CallExpression) {
-  const callee = utils.skipChainExpression(node.callee)
+  const callee = skipChainExpression(node.callee)
 
   if (callee.type === 'MemberExpression') {
-    const name = utils.getStaticPropertyName(callee)
+    const name = getStaticPropertyName(callee)
     if (name) {
       return { name, member: callee }
     }
@@ -24,7 +38,7 @@ function getCalleeMemberNode(node: CallExpression) {
 }
 
 function getReportLocation(
-  parameters: VNODE.HasLocation[],
+  parameters: HasLocation[],
   firstReportedIndex: number
 ): ReportSourceLocation | undefined {
   if (parameters.length < firstReportedIndex + 1) {
@@ -73,8 +87,8 @@ export default {
       }
 
       const eventNameArg = node.arguments[0]
-      const name = utils.isStringLiteral(eventNameArg)
-        ? utils.getStringLiteralValue(eventNameArg)
+      const name = isStringLiteral(eventNameArg)
+        ? getStringLiteralValue(eventNameArg)
         : null
 
       context.report({
@@ -87,7 +101,7 @@ export default {
 
     function verifyEmitDeclarationNode(
       emit: Exclude<ComponentEmit, ComponentUnknownEmit>,
-      parameters: VNODE.HasLocation[],
+      parameters: HasLocation[],
       firstReportedIndex = 1
     ) {
       const reportLocation = getReportLocation(parameters, firstReportedIndex)
@@ -136,11 +150,11 @@ export default {
       }
     }
 
-    return utils.defineTemplateBodyVisitor(
+    return defineTemplateBodyVisitor(
       context,
       {
         CallExpression(node) {
-          const callee = utils.skipChainExpression(node.callee)
+          const callee = skipChainExpression(node.callee)
           const setupContext = setupContexts.get(context.sourceCode.ast)
           const isEmitCall =
             callee.type === 'Identifier' &&
@@ -154,8 +168,8 @@ export default {
           }
         }
       },
-      utils.compositingVisitors(
-        utils.defineScriptSetupVisitor(context, {
+      compositingVisitors(
+        defineScriptSetupVisitor(context, {
           onDefineEmitsEnter(node, emits) {
             for (const emit of emits) {
               verifyEmitDeclaration(emit)
@@ -173,7 +187,7 @@ export default {
               return
             }
             const variable = findVariable(
-              utils.getScope(context, emitParam),
+              getScope(context, emitParam),
               emitParam
             )
             if (!variable) {
@@ -193,7 +207,7 @@ export default {
             })
           },
           CallExpression(node) {
-            const callee = utils.skipChainExpression(node.callee)
+            const callee = skipChainExpression(node.callee)
             const programNode = context.sourceCode.ast
             const setupContext = setupContexts.get(programNode)
             if (
@@ -205,14 +219,14 @@ export default {
             }
           }
         }),
-        utils.executeOnVue(context, (obj) => {
-          for (const emit of utils.getComponentEmitsFromOptions(obj)) {
+        executeOnVue(context, (obj) => {
+          for (const emit of getComponentEmitsFromOptions(obj)) {
             verifyEmitDeclaration(emit)
           }
         }),
-        utils.defineVueVisitor(context, {
+        defineVueVisitor(context, {
           onSetupFunctionEnter(node, { node: vueNode }) {
-            const contextParam = utils.skipDefaultParamValue(node.params[1])
+            const contextParam = skipDefaultParamValue(node.params[1])
             if (!contextParam) {
               return
             }
@@ -225,16 +239,13 @@ export default {
             const contextReferenceIds = new Set<Identifier>()
             const emitReferenceIds = new Set<Identifier>()
             if (contextParam.type === 'ObjectPattern') {
-              const emitProperty = utils.findAssignmentProperty(
-                contextParam,
-                'emit'
-              )
+              const emitProperty = findAssignmentProperty(contextParam, 'emit')
               if (!emitProperty || emitProperty.value.type !== 'Identifier') {
                 return
               }
               const emitParam = emitProperty.value
               const variable = findVariable(
-                utils.getScope(context, emitParam),
+                getScope(context, emitParam),
                 emitParam
               )
               if (!variable) {
@@ -245,7 +256,7 @@ export default {
               }
             } else {
               const variable = findVariable(
-                utils.getScope(context, contextParam),
+                getScope(context, contextParam),
                 contextParam
               )
               if (!variable) {
@@ -261,7 +272,7 @@ export default {
             })
           },
           CallExpression(node, { node: vueNode }) {
-            const callee = utils.skipChainExpression(node.callee)
+            const callee = skipChainExpression(node.callee)
             const setupContext = setupContexts.get(vueNode)
             if (setupContext) {
               const { contextReferenceIds, emitReferenceIds } = setupContext

@@ -7,6 +7,10 @@ export type ASTNode = ES.ESNode | V.VNode | TS.TSNode | JSX.JSXNode
 
 export type ParamNode = never // You specify the node type in JSDoc.
 
+type VDirectiveWithExpressionValue = V.VDirective & {
+  value: (V.VExpressionContainer & { expression: ES.Expression | null }) | null
+}
+
 export type VNodeListenerMap = {
   VAttribute: V.VAttribute | V.VDirective
   'VAttribute:exit': V.VAttribute | V.VDirective
@@ -28,14 +32,8 @@ export type VNodeListenerMap = {
   }
   "VAttribute[directive=true][key.name.name='cloak']": V.VDirective
   "VAttribute[directive=true][key.name.name='cloak']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='else-if']": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
-  "VAttribute[directive=true][key.name.name='else-if']:exit": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
+  "VAttribute[directive=true][key.name.name='else-if']": VDirectiveWithExpressionValue
+  "VAttribute[directive=true][key.name.name='else-if']:exit": VDirectiveWithExpressionValue
   "VAttribute[directive=true][key.name.name='else']": V.VDirective
   "VAttribute[directive=true][key.name.name='else']:exit": V.VDirective
   "VAttribute[directive=true][key.name.name='for']": V.VDirective & {
@@ -48,32 +46,14 @@ export type VNodeListenerMap = {
   }
   "VAttribute[directive=true][key.name.name='html']": V.VDirective
   "VAttribute[directive=true][key.name.name='html']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='if']": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
-  "VAttribute[directive=true][key.name.name='if']:exit": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
+  "VAttribute[directive=true][key.name.name='if']": VDirectiveWithExpressionValue
+  "VAttribute[directive=true][key.name.name='if']:exit": VDirectiveWithExpressionValue
   "VAttribute[directive=true][key.name.name='is']": V.VDirective
   "VAttribute[directive=true][key.name.name='is']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='model']": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
-  "VAttribute[directive=true][key.name.name='model']:exit": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
-  "VAttribute[directive=true][key.name.name='memo']": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
-  "VAttribute[directive=true][key.name.name='memo']:exit": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
+  "VAttribute[directive=true][key.name.name='model']": VDirectiveWithExpressionValue
+  "VAttribute[directive=true][key.name.name='model']:exit": VDirectiveWithExpressionValue
+  "VAttribute[directive=true][key.name.name='memo']": VDirectiveWithExpressionValue
+  "VAttribute[directive=true][key.name.name='memo']:exit": VDirectiveWithExpressionValue
   "VAttribute[directive=true][key.name.name='on']": V.VDirective & {
     value:
       | (V.VExpressionContainer & {
@@ -92,14 +72,8 @@ export type VNodeListenerMap = {
   "VAttribute[directive=true][key.name.name='once']:exit": V.VDirective
   "VAttribute[directive=true][key.name.name='pre']": V.VDirective
   "VAttribute[directive=true][key.name.name='pre']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='show']": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
-  "VAttribute[directive=true][key.name.name='show']:exit": V.VDirective & {
-    value:
-      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
-  }
+  "VAttribute[directive=true][key.name.name='show']": VDirectiveWithExpressionValue
+  "VAttribute[directive=true][key.name.name='show']:exit": VDirectiveWithExpressionValue
   "VAttribute[directive=true][key.name.name='slot']": V.VDirective & {
     value:
       | (V.VExpressionContainer & { expression: V.VSlotScopeExpression | null })
@@ -115,8 +89,6 @@ export type VNodeListenerMap = {
   'VAttribute[value!=null]':
     | (V.VAttribute & { value: VLiteral })
     | (V.VDirective & { value: VExpressionContainer })
-  // VDirective: V.VDirective
-  // 'VDirective:exit': V.VDirective
   VDirectiveKey: V.VDirectiveKey
   'VDirectiveKey:exit': V.VDirectiveKey
   VElement: V.VElement

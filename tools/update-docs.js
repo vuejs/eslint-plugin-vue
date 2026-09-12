@@ -3,7 +3,6 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
 /*
 This script updates the header of `docs/rules/*.md` from rule's meta data.
@@ -18,14 +17,20 @@ For example:
 ```
 */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const rules = require('./lib/rules')
-const removedRules = require('../lib/removed-rules')
-const { getPresetIds, formatItems } = require('./lib/utils')
-const { getPresetNames } = require('./lib/categories')
+import fs from 'node:fs'
+import path from 'node:path'
+import rules from './lib/rules.js'
+import removedRules from '../lib/removed-rules.js'
+import docsUtils from './lib/utils.js'
+import categories from './lib/categories.js'
 
-const ROOT = path.resolve(__dirname, '../docs/rules')
+const { getPresetIds, formatItems } = docsUtils
+const { getPresetNames } = categories
+
+const packageJson = JSON.parse(
+  fs.readFileSync(path.resolve(import.meta.dirname, '../package.json'), 'utf8')
+)
+const ROOT = path.resolve(import.meta.dirname, '../docs/rules')
 
 function pickSince(content) {
   const fileIntro = /^---\n(.*\n)+---\n*/g.exec(content)
@@ -36,7 +41,7 @@ function pickSince(content) {
     }
   }
   if (process.env.IN_VERSION_SCRIPT) {
-    return `v${require('../package.json').version}`
+    return `v${packageJson.version}`
   }
   return null
 }

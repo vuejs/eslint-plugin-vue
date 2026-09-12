@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 import { isRegExp, toRegExp, escape } from '../utils/regexp.ts'
 import { isKebabCase, pascalCase } from '../utils/casing.ts'
 
@@ -216,7 +216,7 @@ export default {
       return (attributes.cache[tagName] = new Set(result))
     }
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       VText(node: VText) {
         if (getBareString(node.value)) {
           context.report({

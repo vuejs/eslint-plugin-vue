@@ -3,7 +3,23 @@
  * See LICENSE file in root directory for full license.
  */
 import path from 'node:path'
-import utils from '../utils/index.js'
+import {
+  isHtmlWellKnownElementName,
+  isSvgWellKnownElementName,
+  isMathWellKnownElementName,
+  isBuiltInComponentName,
+  isHtmlElementNode,
+  isSvgElementNode,
+  isMathElementNode,
+  isScriptSetup,
+  defineVueVisitor,
+  findProperty,
+  isStringLiteral,
+  getStringLiteralValue,
+  executeOnVue,
+  getRegisteredComponents,
+  defineTemplateBodyVisitor
+} from '../utils/index.js'
 import {
   capitalize,
   isPascalCase,
@@ -95,7 +111,8 @@ export default {
         type: 'object',
         properties: {
           ignorePatterns: {
-            type: 'array'
+            type: 'array',
+            items: { type: 'string' }
           }
         },
         additionalProperties: false
@@ -118,10 +135,10 @@ export default {
       const kebabCaseName = kebabCase(rawName)
 
       if (
-        utils.isHtmlWellKnownElementName(rawName) ||
-        utils.isSvgWellKnownElementName(rawName) ||
-        utils.isMathWellKnownElementName(rawName) ||
-        utils.isBuiltInComponentName(kebabCaseName)
+        isHtmlWellKnownElementName(rawName) ||
+        isSvgWellKnownElementName(rawName) ||
+        isMathWellKnownElementName(rawName) ||
+        isBuiltInComponentName(kebabCaseName)
       ) {
         return false
       }
@@ -142,9 +159,9 @@ export default {
     const templateBodyVisitor: TemplateListener = {
       VElement(node) {
         if (
-          !utils.isHtmlElementNode(node) &&
-          !utils.isSvgElementNode(node) &&
-          !utils.isMathElementNode(node)
+          !isHtmlElementNode(node) &&
+          !isSvgElementNode(node) &&
+          !isMathElementNode(node)
         ) {
           return
         }
@@ -162,7 +179,7 @@ export default {
       }
     }
 
-    if (utils.isScriptSetup(context)) {
+    if (isScriptSetup(context)) {
       // For <script setup>
       const definedInSetupComponents = new DefinedInSetupComponents()
       const definedInOptionComponents = new DefinedInOptionComponents()
@@ -209,13 +226,13 @@ export default {
       const fileName = context.filename
       const selfComponentName = path.basename(fileName, path.extname(fileName))
       definedInSetupComponents.addName(selfComponentName)
-      scriptVisitor = utils.defineVueVisitor(context, {
+      scriptVisitor = defineVueVisitor(context, {
         onVueObjectEnter(node, { type }) {
           if (type !== 'export') return
-          const nameProperty = utils.findProperty(node, 'name')
+          const nameProperty = findProperty(node, 'name')
 
-          if (nameProperty && utils.isStringLiteral(nameProperty.value)) {
-            const name = utils.getStringLiteralValue(nameProperty.value)
+          if (nameProperty && isStringLiteral(nameProperty.value)) {
+            const name = getStringLiteralValue(nameProperty.value)
             if (name) {
               definedInOptionComponents.addName(name)
             }
@@ -246,15 +263,15 @@ export default {
       // For Options API
       const definedInOptionComponents = new DefinedInOptionComponents()
 
-      scriptVisitor = utils.executeOnVue(context, (obj) => {
+      scriptVisitor = executeOnVue(context, (obj) => {
         definedInOptionComponents.addName(
-          ...utils.getRegisteredComponents(obj).map(({ name }) => name)
+          ...getRegisteredComponents(obj).map(({ name }) => name)
         )
 
-        const nameProperty = utils.findProperty(obj, 'name')
+        const nameProperty = findProperty(obj, 'name')
 
-        if (nameProperty && utils.isStringLiteral(nameProperty.value)) {
-          const name = utils.getStringLiteralValue(nameProperty.value)
+        if (nameProperty && isStringLiteral(nameProperty.value)) {
+          const name = getStringLiteralValue(nameProperty.value)
           if (name) {
             definedInOptionComponents.addName(name)
           }
@@ -294,7 +311,7 @@ export default {
       }
     }
 
-    return utils.defineTemplateBodyVisitor(
+    return defineTemplateBodyVisitor(
       context,
       templateBodyVisitor,
       scriptVisitor

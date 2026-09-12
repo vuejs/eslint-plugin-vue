@@ -3,7 +3,12 @@
  * @author Yu Kimura
  */
 import type { ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import {
+  compositingVisitors,
+  defineScriptSetupVisitor,
+  executeOnVue,
+  getComponentPropsFromOptions
+} from '../utils/index.js'
 import { getChecker } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
@@ -33,14 +38,14 @@ function create(context: RuleContext) {
       }
     }
   }
-  return utils.compositingVisitors(
-    utils.defineScriptSetupVisitor(context, {
+  return compositingVisitors(
+    defineScriptSetupVisitor(context, {
       onDefinePropsEnter(_node, props) {
         processProps(props)
       }
     }),
-    utils.executeOnVue(context, (obj) => {
-      processProps(utils.getComponentPropsFromOptions(obj))
+    executeOnVue(context, (obj) => {
+      processProps(getComponentPropsFromOptions(obj))
     })
   )
 }

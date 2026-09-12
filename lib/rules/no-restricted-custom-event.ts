@@ -4,7 +4,17 @@
  */
 import { findVariable } from '@eslint-community/eslint-utils'
 import type { NameWithLoc } from '../utils/index.js'
-import utils from '../utils/index.js'
+import {
+  skipChainExpression,
+  getStaticPropertyName,
+  defineTemplateBodyVisitor,
+  getNameParamNode,
+  compositingVisitors,
+  defineVueVisitor,
+  skipDefaultParamValue,
+  findAssignmentProperty,
+  getScope
+} from '../utils/index.js'
 import { toRegExp } from '../utils/regexp.ts'
 
 interface ParsedOption {
@@ -34,10 +44,10 @@ function parseOption(
  * Get the callee member node from the given CallExpression
  */
 function getCalleeMemberNode(node: CallExpression) {
-  const callee = utils.skipChainExpression(node.callee)
+  const callee = skipChainExpression(node.callee)
 
   if (callee.type === 'MemberExpression') {
-    const name = utils.getStaticPropertyName(callee)
+    const name = getStaticPropertyName(callee)
     if (name) {
       return { name, member: callee }
     }
@@ -130,12 +140,12 @@ export default {
       }
     }
 
-    return utils.defineTemplateBodyVisitor(
+    return defineTemplateBodyVisitor(
       context,
       {
         CallExpression(node) {
           const callee = node.callee
-          const nameWithLoc = utils.getNameParamNode(node)
+          const nameWithLoc = getNameParamNode(node)
           if (!nameWithLoc) {
             // cannot check
             return
@@ -145,10 +155,10 @@ export default {
           }
         }
       },
-      utils.compositingVisitors(
-        utils.defineVueVisitor(context, {
+      compositingVisitors(
+        defineVueVisitor(context, {
           onSetupFunctionEnter(node, { node: vueNode }) {
-            const contextParam = utils.skipDefaultParamValue(node.params[1])
+            const contextParam = skipDefaultParamValue(node.params[1])
             if (!contextParam) {
               // no arguments
               return
@@ -163,17 +173,14 @@ export default {
             const contextReferenceIds = new Set<Identifier>()
             const emitReferenceIds = new Set<Identifier>()
             if (contextParam.type === 'ObjectPattern') {
-              const emitProperty = utils.findAssignmentProperty(
-                contextParam,
-                'emit'
-              )
+              const emitProperty = findAssignmentProperty(contextParam, 'emit')
               if (!emitProperty || emitProperty.value.type !== 'Identifier') {
                 return
               }
               const emitParam = emitProperty.value
               // `setup(props, {emit})`
               const variable = findVariable(
-                utils.getScope(context, emitParam),
+                getScope(context, emitParam),
                 emitParam
               )
               if (!variable) {
@@ -185,7 +192,7 @@ export default {
             } else {
               // `setup(props, context)`
               const variable = findVariable(
-                utils.getScope(context, contextParam),
+                getScope(context, contextParam),
                 contextParam
               )
               if (!variable) {
@@ -201,7 +208,7 @@ export default {
             })
           },
           CallExpression(node, { node: vueNode }) {
-            const nameWithLoc = utils.getNameParamNode(node)
+            const nameWithLoc = getNameParamNode(node)
             if (!nameWithLoc) {
               // cannot check
               return
@@ -237,7 +244,7 @@ export default {
         }),
         {
           CallExpression(node) {
-            const nameWithLoc = utils.getNameParamNode(node)
+            const nameWithLoc = getNameParamNode(node)
             if (!nameWithLoc) {
               // cannot check
               return
