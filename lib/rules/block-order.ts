@@ -45,8 +45,7 @@ export default {
                 { type: 'array', items: { type: 'string' }, uniqueItems: true }
               ]
             },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false

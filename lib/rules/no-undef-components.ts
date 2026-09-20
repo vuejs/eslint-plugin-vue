@@ -95,7 +95,8 @@ export default {
         type: 'object',
         properties: {
           ignorePatterns: {
-            type: 'array'
+            type: 'array',
+            items: { type: 'string' }
           }
         },
         additionalProperties: false

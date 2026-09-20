@@ -32,14 +32,12 @@ export default {
                 { not: { type: 'string', pattern: String.raw`^\s*$` } }
               ]
             },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           },
           ignoreTags: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false

@@ -53,8 +53,7 @@ export default {
           ignores: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           },
           registeredComponentsOnly: {
             type: 'boolean'

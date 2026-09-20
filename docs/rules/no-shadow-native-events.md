@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-shadow-native-events
 description: disallow the use of event names that collide with native web event names
+since: v10.11.0
 ---
 
 # vue/no-shadow-native-events
 
 > disallow the use of event names that collide with native web event names
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -52,6 +51,10 @@ Nothing.
 
 - [Components In-Depth - Events / Component Events](https://vuejs.org/guide/components/events.html#event-arguments)
 - [Vue RFCs - 0030-emits-option](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0030-emits-option.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.11.0
 
 ## :mag: Implementation
 

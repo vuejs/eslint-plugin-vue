@@ -191,7 +191,6 @@ export default {
                 GROUP_INJECT
               ]
             },
-            additionalItems: false,
             uniqueItems: true
           },
           deepData: { type: 'boolean' },
@@ -201,7 +200,6 @@ export default {
             items: {
               enum: [UNREFERENCED_UNKNOWN_MEMBER, UNREFERENCED_RETURN]
             },
-            additionalItems: false,
             uniqueItems: true
           }
         },
