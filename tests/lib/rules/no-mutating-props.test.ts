@@ -474,6 +474,16 @@ ruleTester.run('no-mutating-props', rule, {
       </script>
       `,
       options: [{ shallowOnly: true }]
+    },
+    {
+      // defineModel(): array-destructured form, reassigning the ref is correct
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const [model, modifiers] = defineModel()
+      model.value = { ...model.value, foo: 1 }
+      </script>
+      `
     }
   ],
 
@@ -1618,6 +1628,34 @@ ruleTester.run('no-mutating-props', rule, {
           column: 7,
           endLine: 4,
           endColumn: 26
+        }
+      ]
+    },
+    {
+      // defineModel(): array-destructured form `const [model, modifiers] = defineModel()`
+      // still reports nested mutation of the ref
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const [model, modifiers] = defineModel()
+      model.value.foo = 1
+      model.value.items.push(1)
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 26
+        },
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 32
         }
       ]
     }
