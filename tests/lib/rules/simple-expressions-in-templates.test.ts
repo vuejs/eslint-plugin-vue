@@ -103,6 +103,24 @@ tester.run('simple-expressions-in-templates', rule, {
       `,
       options: [5],
       name: 'Invalid Style Guide Example with Complexity 5'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ [,] }}
+      </template>
+      `,
+      name: 'null as Child Node of ArrayExpression'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ test(([,]) => {}) }}
+      </template>
+      `,
+      name: 'null as Child Node of ArrayPattern'
     }
   ],
   invalid: [

@@ -75,11 +75,11 @@ function expressionComplexity(
 
     // Recursive Step: Recursively traverse all children of the current node.
     for (const key of list) {
-      const value = node[key] as ASTNode | ASTNode[]
+      const value = node[key] as ASTNode | (ASTNode | null)[] | null
 
       if (Array.isArray(value)) {
         for (const item of value) {
-          if (traverse(item)) return true
+          if (item && traverse(item)) return true
         }
       } else if (value && traverse(value)) return true
     }
