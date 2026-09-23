@@ -70,6 +70,7 @@ import noChildContent from './rules/no-child-content.js'
 import noComputedPropertiesInData from './rules/no-computed-properties-in-data.js'
 import noConsole from './rules/no-console.js'
 import noConstantCondition from './rules/no-constant-condition.js'
+import noContentOutsideBlock from './rules/no-content-outside-block.ts'
 import noCustomModifiersOnVModel from './rules/no-custom-modifiers-on-v-model.js'
 import noDeprecatedDataObjectDeclaration from './rules/no-deprecated-data-object-declaration.js'
 import noDeprecatedDeleteSet from './rules/no-deprecated-delete-set.js'
@@ -328,6 +329,7 @@ export default {
     'no-computed-properties-in-data': noComputedPropertiesInData,
     'no-console': noConsole,
     'no-constant-condition': noConstantCondition,
+    'no-content-outside-block': noContentOutsideBlock,
     'no-custom-modifiers-on-v-model': noCustomModifiersOnVModel,
     'no-deprecated-data-object-declaration': noDeprecatedDataObjectDeclaration,
     'no-deprecated-delete-set': noDeprecatedDeleteSet,
