@@ -414,25 +414,12 @@ ruleTester.run('require-default-prop', rule, {
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
     },
-    // defineModel — valid cases
+    // https://github.com/vuejs/eslint-plugin-vue/issues/3135
     {
       filename: 'test.vue',
       code: `
       <script setup>
-      defineModel({ type: Boolean })
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions
-      }
-    },
-    {
-      // Shorthand Boolean constructor is exempt, like a Boolean prop.
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      defineModel(Boolean)
+      defineModel()
       </script>
       `,
       languageOptions: {
@@ -444,7 +431,7 @@ ruleTester.run('require-default-prop', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
-      defineModel({ type: String, required: true })
+      defineModel({ type: String })
       </script>
       `,
       languageOptions: {
@@ -456,96 +443,19 @@ ruleTester.run('require-default-prop', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
-      defineModel({ type: String, default: 'hello' })
+      defineModel('count', { type: Number })
       </script>
       `,
       languageOptions: {
         parser: vueEslintParser,
         ...languageOptions
-      }
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      defineModel('count', { type: Number, default: 0 })
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions
-      }
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      defineModel({ type: Object, default: () => ({}) })
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions
-      }
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      defineModel({ type: Array, default: () => [] })
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions
-      }
-    },
-    // defineModel — TypeScript syntax (valid)
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      defineModel<string>({ required: true })
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions,
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
     },
     {
       filename: 'test.vue',
       code: `
       <script setup lang="ts">
-      defineModel<string>({ default: 'hello' })
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions,
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
-    },
-    // Boolean models don't require a default value, just like Boolean props.
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      defineModel<boolean>()
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions,
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      defineModel<boolean>({})
+      defineModel<string>()
       </script>
       `,
       languageOptions: {
@@ -970,135 +880,6 @@ ruleTester.run('require-default-prop', rule, {
           column: 39,
           endLine: 3,
           endColumn: 52
-        }
-      ]
-    },
-    // defineModel — invalid cases
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      defineModel()
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions
-      },
-      errors: [
-        {
-          message: "Prop 'modelValue' requires default value to be set.",
-          line: 3,
-          column: 7,
-          endLine: 3,
-          endColumn: 20
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      defineModel(String)
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions
-      },
-      errors: [
-        {
-          message: "Prop 'modelValue' requires default value to be set.",
-          line: 3,
-          column: 19,
-          endLine: 3,
-          endColumn: 25
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      defineModel({ type: String })
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions
-      },
-      errors: [
-        {
-          message: "Prop 'modelValue' requires default value to be set.",
-          line: 3,
-          column: 19,
-          endLine: 3,
-          endColumn: 35
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      defineModel('count', { type: Number })
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions
-      },
-      errors: [
-        {
-          message: "Prop 'count' requires default value to be set.",
-          line: 3,
-          column: 28,
-          endLine: 3,
-          endColumn: 44
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      defineModel({ type: Array })
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions
-      },
-      errors: [
-        {
-          message: "Prop 'modelValue' requires default value to be set.",
-          line: 3,
-          column: 19,
-          endLine: 3,
-          endColumn: 34
-        }
-      ]
-    },
-    // defineModel — TypeScript syntax
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      defineModel<string>()
-      </script>
-      `,
-      languageOptions: {
-        parser: vueEslintParser,
-        ...languageOptions,
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      },
-      errors: [
-        {
-          message: "Prop 'modelValue' requires default value to be set.",
-          line: 3,
-          column: 7,
-          endLine: 3,
-          endColumn: 28
         }
       ]
     }
