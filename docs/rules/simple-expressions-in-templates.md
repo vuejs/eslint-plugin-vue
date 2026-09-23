@@ -9,15 +9,7 @@ description: disallow complex template expressions
 
 > disallow complex template expressions
 
-- :gear: This rule is included in the following preset configs:
-  - `*.configs["flat/strongly-recommended"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
-  - `*.configs["flat/recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/recommended"`
-  - `"plugin:vue/vue2-recommended"`
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 

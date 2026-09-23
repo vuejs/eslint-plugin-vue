@@ -8,10 +8,10 @@ import utils from '../utils/index.js'
 
 export default {
   meta: {
-    type: 'problem',
+    type: 'suggestion',
     docs: {
       description: 'disallow complex template expressions',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: [],
       url: 'https://eslint.vuejs.org/rules/simple-expressions-in-templates.html'
     },
     fixable: null,
