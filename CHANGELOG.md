@@ -1,5 +1,15 @@
 # eslint-plugin-vue
 
+## 10.11.1
+
+### Patch Changes
+
+- Fixed [`vue/no-ref-object-reactivity-loss`](https://eslint.vuejs.org/rules/no-ref-object-reactivity-loss.html) false negatives for values gotten in an immediately invoked function expression (IIFE) ([#3115](https://github.com/vuejs/eslint-plugin-vue/pull/3115))
+
+- Fixed [`vue/no-unused-properties`](https://eslint.vuejs.org/rules/no-unused-properties.html) false positive for props explicitly typed as `never` ([#3113](https://github.com/vuejs/eslint-plugin-vue/pull/3113))
+
+- Fixed [`vue/require-default-prop`](https://eslint.vuejs.org/rules/require-default-prop.html) to no longer require a default value for `defineModel` ([#3138](https://github.com/vuejs/eslint-plugin-vue/pull/3138))
+
 ## 10.11.0
 
 ### Minor Changes
