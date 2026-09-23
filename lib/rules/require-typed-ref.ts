@@ -74,14 +74,13 @@ function findFunction(
  * an explicit type annotation.
  */
 function hasTypedParameter(fn: FunctionNode, index: number): boolean {
-  const param = fn.params[index] ?? fn.params.at(-1)
-  if (param == null) {
-    return false
+  const param = fn.params[index]
+  if (param != null) {
+    return hasTypeAnnotation(param)
   }
-  if (fn.params[index] == null && param.type !== 'RestElement') {
-    return false
-  }
-  return hasTypeAnnotation(param)
+
+  const lastParam = fn.params.at(-1)
+  return lastParam?.type === 'RestElement' && hasTypeAnnotation(lastParam)
 }
 
 /**
