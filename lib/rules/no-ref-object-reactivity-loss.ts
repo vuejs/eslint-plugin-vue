@@ -35,6 +35,26 @@ function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
   return false
 }
 
+/**
+ * Checks whether the given function is immediately invoked (IIFE).
+ * The body of such a function runs synchronously within the enclosing scope,
+ * so getting a value there loses reactivity in the same way.
+ * `async` functions and generators are excluded because their bodies are not
+ * guaranteed to run synchronously to completion.
+ */
+function isImmediatelyInvokedFunction(
+  node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+): boolean {
+  if (node.type === 'FunctionDeclaration') {
+    return false
+  }
+  if (node.async || (node.type === 'FunctionExpression' && node.generator)) {
+    return false
+  }
+  const parent = node.parent
+  return parent.type === 'CallExpression' && parent.callee === node
+}
+
 export default {
   meta: {
     type: 'problem',
@@ -110,9 +130,17 @@ export default {
 
     return {
       ':function'(node) {
+        if (isImmediatelyInvokedFunction(node)) {
+          // Keep the scope of an IIFE, because its body is executed in the
+          // same scope.
+          return
+        }
         scopeStack = { upper: scopeStack, node }
       },
-      ':function:exit'() {
+      ':function:exit'(node) {
+        if (isImmediatelyInvokedFunction(node)) {
+          return
+        }
         scopeStack = scopeStack.upper || scopeStack
       },
       CallExpression(node) {
