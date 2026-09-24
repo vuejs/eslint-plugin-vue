@@ -338,6 +338,8 @@ export default {
         }
 
         if (defaultList.length === 0) continue
+        // A type that could not be resolved is inferred as `null` and may accept any value
+        if (typeList.includes('null')) continue
 
         const typeNames = new Set(
           typeList.filter((item) => NATIVE_TYPES.has(item))

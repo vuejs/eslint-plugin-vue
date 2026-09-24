@@ -323,6 +323,24 @@ ruleTester.run('require-valid-default-prop', rule, {
       `,
       ...getTypeScriptFixtureTestOptions()
     },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2279
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import type { Foo } from './types'
+      withDefaults(defineProps<{ msg?: Foo | 'foo' }>(), {
+        msg: false
+      })
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
     // defineModel — no default (nothing to check)
     {
       filename: 'test.vue',
@@ -1434,6 +1452,33 @@ ruleTester.run('require-valid-default-prop', rule, {
           column: 22,
           endLine: 4,
           endColumn: 25
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      type Foo = boolean
+      withDefaults(defineProps<{ msg?: Foo | 'foo' }>(), {
+        msg: 1
+      })
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'msg' prop must be a boolean or string.",
+          line: 5,
+          column: 14,
+          endLine: 5,
+          endColumn: 15
         }
       ]
     },
