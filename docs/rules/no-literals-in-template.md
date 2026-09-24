@@ -15,6 +15,8 @@ since: v10.7.0
 This rule disallows object, array, and function literals in template `v-bind` directives.
 These literals are created as new references on every rerender, which can cause the child component's watchers to trigger unnecessarily even when the object hasn't actually changed.
 
+This still applies to Vue 3. Props are compared by reference, so a child component that receives a literal re-renders whenever its parent does, and watchers on that prop run each time. If such a watcher updates the parent's state, for example by emitting an event, the parent renders a new literal and triggers the watcher again, until Vue aborts with a "Maximum recursive updates exceeded" error.
+
 If the literal references a variable from a `v-for` directive or a scoped slot, it is ignored.
 
 <eslint-code-block :rules="{'vue/no-literals-in-template': ['error']}">
