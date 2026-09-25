@@ -2,11 +2,9 @@
  * @author Przemyslaw Falowski (@przemkow)
  * @fileoverview Disallow use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+)
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -22,10 +20,9 @@ module.exports = {
         "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      "VAttribute[directive=true][key.name.name='bind']"(node) {
+      "VAttribute[directive=true][key.name.name='bind']"(node: VDirective) {
         if (node.key.modifiers.map((mod) => mod.name).includes('sync')) {
           context.report({
             node,

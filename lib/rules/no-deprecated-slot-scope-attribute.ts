@@ -2,12 +2,10 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import slotScopeAttribute from './syntaxes/slot-scope-attribute.js'
 
-const utils = require('../utils')
-const slotScopeAttribute = require('./syntaxes/slot-scope-attribute')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -23,8 +21,7 @@ module.exports = {
       forbiddenSlotScopeAttribute: '`slot-scope` are deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const templateBodyVisitor = slotScopeAttribute.createTemplateBodyVisitor(
       context,
       { fixToUpgrade: true }
