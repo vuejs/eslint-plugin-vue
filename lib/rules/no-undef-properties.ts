@@ -127,7 +127,8 @@ export default {
           toRefs.add(node)
         }
       }
-      return (reactiveApiNodes = { reactive, toRefs })
+      reactiveApiNodes = { reactive, toRefs }
+      return reactiveApiNodes
     }
 
     /**
