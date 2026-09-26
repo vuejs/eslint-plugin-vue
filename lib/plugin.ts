@@ -71,6 +71,7 @@ import noComputedPropertiesInData from './rules/no-computed-properties-in-data.j
 import noConsole from './rules/no-console.js'
 import noConstantCondition from './rules/no-constant-condition.js'
 import noCustomModifiersOnVModel from './rules/no-custom-modifiers-on-v-model.js'
+import noDefineModelDefault from './rules/no-define-model-default.ts'
 import noDeprecatedDataObjectDeclaration from './rules/no-deprecated-data-object-declaration.js'
 import noDeprecatedDeleteSet from './rules/no-deprecated-delete-set.js'
 import noDeprecatedDestroyedLifecycle from './rules/no-deprecated-destroyed-lifecycle.js'
@@ -329,6 +330,7 @@ export default {
     'no-console': noConsole,
     'no-constant-condition': noConstantCondition,
     'no-custom-modifiers-on-v-model': noCustomModifiersOnVModel,
+    'no-define-model-default': noDefineModelDefault,
     'no-deprecated-data-object-declaration': noDeprecatedDataObjectDeclaration,
     'no-deprecated-delete-set': noDeprecatedDeleteSet,
     'no-deprecated-destroyed-lifecycle': noDeprecatedDestroyedLifecycle,
