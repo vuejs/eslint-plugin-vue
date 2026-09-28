@@ -34,60 +34,20 @@ function canVerify(
   )
 }
 
-function addAll<T>(set: Set<T>, iterable: Iterable<T>) {
-  for (const element of iterable) {
-    set.add(element)
-  }
-}
-
-interface ReservedNames {
-  htmlNames: ReadonlySet<string>
-  allNames: ReadonlySet<string>
-}
-
-const reservedNamesCache = new Map<string, ReservedNames>()
-
-// The sets depend only on these options, so build them once instead of for every linted file
-function getReservedNames(
-  shouldDisallowVueBuiltInComponents: boolean,
-  shouldDisallowVue3BuiltInComponents: boolean,
-  isHtmlElementCaseSensitive: boolean
-): ReservedNames {
-  const cacheKey = `${shouldDisallowVueBuiltInComponents}:${shouldDisallowVue3BuiltInComponents}:${isHtmlElementCaseSensitive}`
-  const cached = reservedNamesCache.get(cacheKey)
-  if (cached) return cached
-
-  const htmlNames = new Set<string>(htmlElements)
-  const otherNames = new Set<string>([
-    ...deprecatedHtmlElements,
-    ...kebabCaseElements,
-    ...svgElements
-  ])
-
-  if (!isHtmlElementCaseSensitive) {
-    addAll(htmlNames, htmlElements.map(capitalize))
-    addAll(otherNames, [
-      ...deprecatedHtmlElements.map(capitalize),
-      ...kebabCaseElements.map(pascalCase),
-      ...svgElements.filter(isLowercase).map(capitalize)
-    ])
-  }
-
-  const allNames = new Set<string>([
-    ...htmlNames,
-    ...(shouldDisallowVueBuiltInComponents
-      ? utils.VUE2_BUILTIN_COMPONENT_NAMES
-      : []),
-    ...(shouldDisallowVue3BuiltInComponents
-      ? utils.VUE3_BUILTIN_COMPONENT_NAMES
-      : []),
-    ...otherNames
-  ])
-
-  const reservedNames = { htmlNames, allNames }
-  reservedNamesCache.set(cacheKey, reservedNames)
-  return reservedNames
-}
+const RESERVED_NAMES_IN_HTML = new Set<string>(htmlElements)
+const RESERVED_NAMES_IN_OTHERS = new Set<string>([
+  ...deprecatedHtmlElements,
+  ...kebabCaseElements,
+  ...svgElements
+])
+const CAPITALIZED_RESERVED_NAMES_IN_HTML = new Set<string>(
+  htmlElements.map(capitalize)
+)
+const CAPITALIZED_RESERVED_NAMES_IN_OTHERS = new Set<string>([
+  ...deprecatedHtmlElements.map(capitalize),
+  ...kebabCaseElements.map(pascalCase),
+  ...svgElements.filter(isLowercase).map(capitalize)
+])
 
 export default {
   meta: {
@@ -131,14 +91,35 @@ export default {
       options.disallowVue3BuiltInComponents === true
     const isHtmlElementCaseSensitive = options.htmlElementCaseSensitive === true
 
-    const { htmlNames, allNames: reservedNames } = getReservedNames(
-      shouldDisallowVueBuiltInComponents,
-      shouldDisallowVue3BuiltInComponents,
-      isHtmlElementCaseSensitive
-    )
+    function isReservedInHtml(name: string): boolean {
+      if (RESERVED_NAMES_IN_HTML.has(name)) return true
+      if (isHtmlElementCaseSensitive) return false
+      return CAPITALIZED_RESERVED_NAMES_IN_HTML.has(name)
+    }
+
+    function isReserved(name: string): boolean {
+      if (isReservedInHtml(name)) return true
+      if (RESERVED_NAMES_IN_OTHERS.has(name)) return true
+      if (
+        !isHtmlElementCaseSensitive &&
+        CAPITALIZED_RESERVED_NAMES_IN_OTHERS.has(name)
+      ) {
+        return true
+      }
+      if (
+        shouldDisallowVueBuiltInComponents &&
+        utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)
+      ) {
+        return true
+      }
+      return (
+        shouldDisallowVue3BuiltInComponents &&
+        utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)
+      )
+    }
 
     function getMessageId(name: string): string {
-      if (htmlNames.has(name)) return 'reservedInHtml'
+      if (isReservedInHtml(name)) return 'reservedInHtml'
       if (utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue'
       if (utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue3'
       return 'reserved'
@@ -152,7 +133,7 @@ export default {
       } else {
         name = String(node.value)
       }
-      if (reservedNames.has(name)) {
+      if (isReserved(name)) {
         report(node, name)
       }
     }
@@ -182,7 +163,7 @@ export default {
       utils.executeOnVue(context, (obj) => {
         // Report if a component has been registered locally with a reserved name.
         for (const { node, name } of utils.getRegisteredComponents(obj)) {
-          if (reservedNames.has(name)) {
+          if (isReserved(name)) {
             report(node, name)
           }
         }
