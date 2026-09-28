@@ -91,32 +91,20 @@ export default {
       options.disallowVue3BuiltInComponents === true
     const isHtmlElementCaseSensitive = options.htmlElementCaseSensitive === true
 
-    function isReservedInHtml(name: string): boolean {
-      if (RESERVED_NAMES_IN_HTML.has(name)) return true
-      if (isHtmlElementCaseSensitive) return false
-      return CAPITALIZED_RESERVED_NAMES_IN_HTML.has(name)
-    }
+    const isReservedInHtml = (name: string) =>
+      RESERVED_NAMES_IN_HTML.has(name) ||
+      (!isHtmlElementCaseSensitive &&
+        CAPITALIZED_RESERVED_NAMES_IN_HTML.has(name))
 
-    function isReserved(name: string): boolean {
-      if (isReservedInHtml(name)) return true
-      if (RESERVED_NAMES_IN_OTHERS.has(name)) return true
-      if (
-        !isHtmlElementCaseSensitive &&
-        CAPITALIZED_RESERVED_NAMES_IN_OTHERS.has(name)
-      ) {
-        return true
-      }
-      if (
-        shouldDisallowVueBuiltInComponents &&
-        utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)
-      ) {
-        return true
-      }
-      return (
-        shouldDisallowVue3BuiltInComponents &&
-        utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)
-      )
-    }
+    const isReserved = (name: string) =>
+      isReservedInHtml(name) ||
+      RESERVED_NAMES_IN_OTHERS.has(name) ||
+      (!isHtmlElementCaseSensitive &&
+        CAPITALIZED_RESERVED_NAMES_IN_OTHERS.has(name)) ||
+      (shouldDisallowVueBuiltInComponents &&
+        utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)) ||
+      (shouldDisallowVue3BuiltInComponents &&
+        utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name))
 
     function getMessageId(name: string): string {
       if (isReservedInHtml(name)) return 'reservedInHtml'
