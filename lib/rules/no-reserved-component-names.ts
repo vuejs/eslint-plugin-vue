@@ -40,6 +40,55 @@ function addAll<T>(set: Set<T>, iterable: Iterable<T>) {
   }
 }
 
+interface ReservedNames {
+  htmlNames: ReadonlySet<string>
+  allNames: ReadonlySet<string>
+}
+
+const reservedNamesCache = new Map<string, ReservedNames>()
+
+// The sets depend only on these options, so build them once instead of for every linted file
+function getReservedNames(
+  shouldDisallowVueBuiltInComponents: boolean,
+  shouldDisallowVue3BuiltInComponents: boolean,
+  isHtmlElementCaseSensitive: boolean
+): ReservedNames {
+  const cacheKey = `${shouldDisallowVueBuiltInComponents}:${shouldDisallowVue3BuiltInComponents}:${isHtmlElementCaseSensitive}`
+  const cached = reservedNamesCache.get(cacheKey)
+  if (cached) return cached
+
+  const htmlNames = new Set<string>(htmlElements)
+  const otherNames = new Set<string>([
+    ...deprecatedHtmlElements,
+    ...kebabCaseElements,
+    ...svgElements
+  ])
+
+  if (!isHtmlElementCaseSensitive) {
+    addAll(htmlNames, htmlElements.map(capitalize))
+    addAll(otherNames, [
+      ...deprecatedHtmlElements.map(capitalize),
+      ...kebabCaseElements.map(pascalCase),
+      ...svgElements.filter(isLowercase).map(capitalize)
+    ])
+  }
+
+  const allNames = new Set<string>([
+    ...htmlNames,
+    ...(shouldDisallowVueBuiltInComponents
+      ? utils.VUE2_BUILTIN_COMPONENT_NAMES
+      : []),
+    ...(shouldDisallowVue3BuiltInComponents
+      ? utils.VUE3_BUILTIN_COMPONENT_NAMES
+      : []),
+    ...otherNames
+  ])
+
+  const reservedNames = { htmlNames, allNames }
+  reservedNamesCache.set(cacheKey, reservedNames)
+  return reservedNames
+}
+
 export default {
   meta: {
     type: 'suggestion',
@@ -82,35 +131,14 @@ export default {
       options.disallowVue3BuiltInComponents === true
     const isHtmlElementCaseSensitive = options.htmlElementCaseSensitive === true
 
-    const RESERVED_NAMES_IN_HTML = new Set(htmlElements)
-    const RESERVED_NAMES_IN_OTHERS = new Set([
-      ...deprecatedHtmlElements,
-      ...kebabCaseElements,
-      ...svgElements
-    ])
-
-    if (!isHtmlElementCaseSensitive) {
-      addAll(RESERVED_NAMES_IN_HTML, htmlElements.map(capitalize))
-      addAll(RESERVED_NAMES_IN_OTHERS, [
-        ...deprecatedHtmlElements.map(capitalize),
-        ...kebabCaseElements.map(pascalCase),
-        ...svgElements.filter(isLowercase).map(capitalize)
-      ])
-    }
-
-    const reservedNames = new Set([
-      ...RESERVED_NAMES_IN_HTML,
-      ...(shouldDisallowVueBuiltInComponents
-        ? utils.VUE2_BUILTIN_COMPONENT_NAMES
-        : []),
-      ...(shouldDisallowVue3BuiltInComponents
-        ? utils.VUE3_BUILTIN_COMPONENT_NAMES
-        : []),
-      ...RESERVED_NAMES_IN_OTHERS
-    ])
+    const { htmlNames, allNames: reservedNames } = getReservedNames(
+      shouldDisallowVueBuiltInComponents,
+      shouldDisallowVue3BuiltInComponents,
+      isHtmlElementCaseSensitive
+    )
 
     function getMessageId(name: string): string {
-      if (RESERVED_NAMES_IN_HTML.has(name)) return 'reservedInHtml'
+      if (htmlNames.has(name)) return 'reservedInHtml'
       if (utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue'
       if (utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue3'
       return 'reserved'
