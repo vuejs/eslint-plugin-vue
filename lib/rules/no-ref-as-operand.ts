@@ -25,6 +25,33 @@ function isRefInit(
 }
 
 /**
+ * Checks whether the result of the given logical expression is used as an operand,
+ * e.g. `if (a && b)` or `!(a || b)`, where any ref it evaluates to would be a mistake.
+ */
+function isLogicalExpressionUsedAsOperand(node: LogicalExpression): boolean {
+  let target: Expression = node
+  while (target.parent.type === 'LogicalExpression') {
+    target = target.parent
+  }
+  const parent = target.parent
+  switch (parent.type) {
+    case 'IfStatement':
+    case 'SwitchStatement':
+    case 'UnaryExpression':
+    case 'BinaryExpression': {
+      return true
+    }
+    case 'ConditionalExpression': {
+      return parent.test === target
+    }
+    case 'TemplateLiteral': {
+      return parent.parent.type !== 'TaggedTemplateExpression'
+    }
+  }
+  return false
+}
+
+/**
  * Get the callee member node from the given CallExpression
  */
 function getNameParamNode(node: CallExpression) {
@@ -187,11 +214,15 @@ export default {
           }
           reportIfRefWrapped(node)
         },
-        // refValue || other, refValue && other. ignore: other || refValue
+        // refValue || other, refValue && other, if (other && refValue)
+        // ignore: var foo = other || refValue
         'LogicalExpression>Identifier'(
           node: Identifier & { parent: LogicalExpression }
         ) {
-          if (node.parent.left !== node) {
+          if (
+            node.parent.left !== node &&
+            !isLogicalExpressionUsedAsOperand(node.parent)
+          ) {
             return
           }
           // Report only constants.
