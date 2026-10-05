@@ -47,7 +47,7 @@ Vue.component('Todo', {
 
 </eslint-code-block>
 
-<eslint-code-block filename="src/TodoItem.js" :rules="{'vue/multi-word-component-names': ['error']}">
+<eslint-code-block filename="src/TodoItem.vue" :rules="{'vue/multi-word-component-names': ['error']}">
 
 ```vue
 <script>
@@ -101,7 +101,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block filename="src/TodoItem.js" :rules="{'vue/multi-word-component-names': ['error']}">
+<eslint-code-block filename="src/TodoItem.vue" :rules="{'vue/multi-word-component-names': ['error']}">
 
 ```vue
 <!-- filename: TodoItem.vue -->
