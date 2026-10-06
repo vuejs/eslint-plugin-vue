@@ -849,6 +849,44 @@ tester.run('no-undef-properties', rule, {
       };
       </script>
       `
+    },
+    {
+      // extending local interface
+      code: `
+      <script setup lang="ts">
+      interface BaseProps {
+        foo: string
+      }
+
+      interface Props extends BaseProps {
+        bar: string
+      }
+
+      defineProps<Props>();
+      </script>
+
+      <template>
+      <div>{{ foo }} {{ bar }}</div>
+      </template>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      // extending an imported interface
+      code: `
+      <script setup lang="ts">
+      import type { Props1 as BaseProps } from './test01';
+
+      interface Props extends BaseProps {
+        bar: string
+      }
+
+      defineProps<Props>();
+      </script>
+
+      <template>
+      <div>{{ foo }} {{ bar }}</div>
+      </template>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 
@@ -2013,6 +2051,33 @@ tester.run('no-undef-properties', rule, {
           column: 33,
           endLine: 3,
           endColumn: 34
+        }
+      ]
+    },
+    {
+      // extending an imported interface
+      code: `
+      <script setup lang="ts">
+      import type { Props1 as BaseProps } from './test01';
+
+      interface Props extends BaseProps {
+        qux: string
+      }
+
+      defineProps<Props>();
+      </script>
+
+      <template>
+      <div>{{ undef }}</div>
+      </template>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: "'undef' is not defined.",
+          line: 13,
+          column: 15,
+          endLine: 13,
+          endColumn: 20
         }
       ]
     }

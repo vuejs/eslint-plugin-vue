@@ -419,6 +419,69 @@ tester.run('require-explicit-slots', rule, {
       }
       defineSlots<Slots>()
       </script>`
+    },
+    // extending a local interface
+    {
+      code: `
+      <template>
+        <div>
+          <slot></slot>
+          <slot name="bar"></slot>
+        </div>
+      </template>
+      <script setup lang="ts">
+      interface BaseSlots {
+        default(): any
+      }
+
+      interface Slots extends BaseSlots {
+        bar(props: { msg: string }): any
+      }
+
+      defineSlots<Slots>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // extending an imported interface
+    {
+      code: `
+      <template>
+        <div>
+          <slot></slot>
+          <slot name="foo"></slot>
+          <slot name="bar"></slot>
+        </div>
+      </template>
+      <script setup lang="ts">
+      import type {Slots1 as BaseSlots} from './test01'
+
+      interface Slots extends BaseSlots {
+        bar(props: { msg: string }): any
+      }
+
+      defineSlots<Slots>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // overriding a slot of an extended interface
+    {
+      code: `
+      <template>
+        <div>
+          <slot></slot>
+          <slot name="foo"></slot>
+        </div>
+      </template>
+      <script setup lang="ts">
+      import type {Slots1 as BaseSlots} from './test01'
+
+      interface Slots extends BaseSlots {
+        foo(props: { msg: string, count: number }): any
+      }
+
+      defineSlots<Slots>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
   invalid: [
@@ -975,6 +1038,35 @@ tester.run('require-explicit-slots', rule, {
           column: 9,
           endLine: 14,
           endColumn: 41
+        }
+      ]
+    },
+    // extending imported interface
+    {
+      code: `
+      <template>
+        <div>
+          <slot name="foo" />
+          <slot name="qux" />
+        </div>
+      </template>
+      <script setup lang="ts">
+      import type {Slots1 as BaseSlots} from './test01'
+
+      interface Slots extends BaseSlots {
+        bar(props: { msg: string }): any
+      }
+
+      defineSlots<Slots>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Slots must be explicitly defined.',
+          column: 11,
+          endColumn: 30,
+          endLine: 5,
+          line: 5
         }
       ]
     }
