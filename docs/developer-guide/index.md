@@ -66,4 +66,6 @@ If you'll stuck, remember there are plenty of rules you can learn from already, 
 We have type checking enabled via TypeScript and JSDoc.\
 The command to perform type checking is: `npm run tsc`
 
-This is just to help you write the rules, not to do strict type checking. If you find it difficult to resolve type checking warnings, feel free to suppress warnings using the `// @ts-nocheck` and `// @ts-ignore` comment.
+Some tests import the built plugin from `dist`, so run `npm run build` first. CI runs the type check on every pull request, and it has to pass.
+
+This is just to help you write the rules, not to do strict type checking. If you find it difficult to resolve type checking errors, feel free to suppress them using the `// @ts-nocheck` and `// @ts-ignore` comment.

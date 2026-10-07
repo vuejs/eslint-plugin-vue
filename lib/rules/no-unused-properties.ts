@@ -2,7 +2,7 @@
  * @fileoverview Disallow unused properties, data and computed properties.
  * @author Learning Equality
  */
-import type { GroupName, VueObjectData } from '../utils/index.js'
+import type { ComponentProp, GroupName, VueObjectData } from '../utils/index.js'
 import type { IPropertyReferences } from '../utils/property-references.js'
 import utils from '../utils/index.js'
 import eslintUtils from '@eslint-community/eslint-utils'
