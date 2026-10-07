@@ -32,6 +32,12 @@ const optionsExposeLast = [
   }
 ]
 
+const optionsAllowTypesBetweenMacros = [
+  {
+    allowTypesBetweenMacros: true
+  }
+]
+
 function notAtTopMessage(macro: string): string {
   return `${macro} should be placed at the top of \`<script setup>\` (after any potential import statements or type definitions).`
 }
@@ -336,6 +342,98 @@ tester.run('define-macros-order', rule, {
           order: ['definePage', 'defineModel']
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+
+          type Emit = 'update:foo'
+
+          defineEmits<{ (e: Emit): void }>()
+        </script>
+      `,
+      options: optionsAllowTypesBetweenMacros,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          type Alias = string
+          interface Interface { foo: Alias }
+          declare const ambient: string
+          declare function ambientFn(): void
+          declare module 'ambient-module' {}
+          declare namespace AmbientNamespace {}
+          declare enum AmbientEnum { A }
+          function overloadSignature(value: string): void
+          import type { Foo } from './foo'
+          import { type Bar } from './bar'
+          export type ExportedAlias = Foo
+          export interface ExportedInterface { bar: Bar }
+          export type { Alias }
+          export { type Interface }
+          export type * from './baz'
+          export declare const exportedAmbient: string
+          defineEmits<{ (e: 'x'): void }>()
+        </script>
+      `,
+      options: optionsAllowTypesBetweenMacros,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const a = defineModel<string>('a')
+          type B = number
+          const b = defineModel<B>('b')
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel'],
+          allowTypesBetweenMacros: true
+        }
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          type Foo = string
+          defineEmits<{ (e: 'x'): void }>()
+          defineExpose({})
+        </script>
+      `,
+      options: [
+        {
+          allowTypesBetweenMacros: true,
+          defineExposeLast: true
+        }
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
   invalid: [
@@ -1300,6 +1398,301 @@ tester.run('define-macros-order', rule, {
       `
             }
           ]
+        }
+      ]
+    },
+    {
+      // `allowTypesBetweenMacros` is disabled by default
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+
+          type Emit = 'update:foo'
+
+          defineEmits<{ (e: Emit): void }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+
+          defineEmits<{ (e: Emit): void }>()
+
+          type Emit = 'update:foo'
+
+        </script>
+      `,
+      options: optionsPropsFirst,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 45
+        }
+      ]
+    },
+    {
+      // runtime code is still reported
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+
+          const foo = 'bar'
+
+          defineEmits<{ (e: 'x'): void }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+
+          defineEmits<{ (e: 'x'): void }>()
+
+          const foo = 'bar'
+
+        </script>
+      `,
+      options: optionsAllowTypesBetweenMacros,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      // enums emit runtime code, so they are still reported
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+
+          enum Foo { A = 'a' }
+
+          defineEmits<{ (e: 'x'): void }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+
+          defineEmits<{ (e: 'x'): void }>()
+
+          enum Foo { A = 'a' }
+
+        </script>
+      `,
+      options: optionsAllowTypesBetweenMacros,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      // `const enum` can emit runtime code as well
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          const enum Foo { A = 'a' }
+          defineEmits<{ (e: 'x'): void }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<{ (e: 'x'): void }>()
+          const enum Foo { A = 'a' }
+        </script>
+      `,
+      options: optionsAllowTypesBetweenMacros,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      // a namespace that is not `declare`d can emit runtime code
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          namespace Foo { export type A = string }
+          defineEmits<{ (e: 'x'): void }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<{ (e: 'x'): void }>()
+          namespace Foo { export type A = string }
+        </script>
+      `,
+      options: optionsAllowTypesBetweenMacros,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      // only type imports are allowed between the macros
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          import { bar } from './bar'
+          defineEmits<{ (e: 'x'): void }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<{ (e: 'x'): void }>()
+          import { bar } from './bar'
+        </script>
+      `,
+      options: optionsAllowTypesBetweenMacros,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      // the type declaration between the macros is left untouched by the fixer
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineEmits<{ (e: 'x'): void }>()
+
+          type Props = { foo: string }
+
+          defineProps<Props>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<Props>()
+
+          defineEmits<{ (e: 'x'): void }>()
+
+          type Props = { foo: string }
+
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineProps', 'defineEmits'],
+          allowTypesBetweenMacros: true
+        }
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: unorderedMessage('defineProps', 'defineEmits'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const bar = ref()
+          defineProps<{ foo: string }>()
+          type Foo = string
+          defineEmits<{ (e: 'x'): void }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<{ (e: 'x'): void }>()
+          const bar = ref()
+          type Foo = string
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineProps', 'defineEmits'],
+          allowTypesBetweenMacros: true
+        }
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineProps'),
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 41
         }
       ]
     }
