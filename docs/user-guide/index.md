@@ -81,6 +81,73 @@ By default, all rules from **base** and **essential** categories report ESLint e
 Alternatively, there are versions of the configs with all rules set to error suffixed with `-error` that you can use.
 :::
 
+#### Applying the Configs to a Subset of Files (`eslint.config.js`)
+
+Apart from the entries that this plugin restricts to `.vue` files, the configs above apply to every file ESLint visits. To limit them to some directories only — the flat config equivalent of `overrides` in `.eslintrc` — put your patterns in a `files` key and pull the plugin's config in with `extends`. This requires the [`defineConfig()`](https://eslint.org/docs/latest/use/configure/combine-configs) helper:
+
+::: code-group
+
+```js [eslint.config.js]
+import { defineConfig } from 'eslint/config'
+import pluginVue from 'eslint-plugin-vue'
+import tsParser from '@typescript-eslint/parser'
+
+export default defineConfig([
+  {
+    files: ['packages/client/src/components/**/*.vue', 'stories/**/*.vue'],
+    extends: [pluginVue.configs['flat/strongly-recommended']],
+    languageOptions: {
+      parserOptions: {
+        parser: tsParser
+      }
+    },
+    rules: {
+      'max-lines': ['error', { max: 900 }]
+    }
+  }
+])
+```
+
+```js [.eslintrc.js]
+module.exports = {
+  overrides: [
+    {
+      files: ['packages/client/src/components/**/*.vue', 'stories/**/*.vue'],
+      extends: ['plugin:vue/strongly-recommended'],
+      parser: 'vue-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser'
+      },
+      rules: {
+        'max-lines': ['error', { max: 900 }]
+      }
+    }
+  ]
+}
+```
+
+:::
+
+`extends` combines your `files` with the patterns each config in the array already declares, instead of replacing them. The entries this plugin restricts to `.vue` files — [vue-eslint-parser] and the SFC processor — therefore stay restricted to `.vue` files even when your own patterns also match `.ts` or `.js` files.
+
+:::warning Requires ESLint v9.22.0 or later
+`defineConfig()` and the `extends` key were added in ESLint v9.22.0; `extends` is not a plain flat config key and does not work without the helper.
+
+On earlier versions you can spread the array and set `files` on every entry, but note that this **replaces** the plugin's own `.vue` patterns, so [vue-eslint-parser] and the SFC processor get applied to every file your patterns match. Keep such patterns limited to `.vue` files:
+
+```js
+import pluginVue from 'eslint-plugin-vue'
+
+export default [
+  ...pluginVue.configs['flat/strongly-recommended'].map((config) => ({
+    ...config,
+    files: ['packages/client/src/components/**/*.vue', 'stories/**/*.vue']
+  }))
+]
+```
+
+:::
+
 #### Specifying Globals (`eslint.config.js`)
 
 Specify global objects depending on how you use Vue.js. More information on how to set globals can be found [here](https://eslint.org/docs/latest/use/configure/language-options#predefined-global-variables).

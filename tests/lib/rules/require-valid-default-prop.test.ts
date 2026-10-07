@@ -1438,6 +1438,32 @@ ruleTester.run('require-valid-default-prop', rule, {
       ]
     },
     {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const defaults = { foo: () => 123 }
+        withDefaults(defineProps<{foo:string}>(), defaults)
+      </script>
+      `,
+      languageOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a string.",
+          line: 3,
+          column: 39,
+          endLine: 3,
+          endColumn: 42
+        }
+      ]
+    },
+    {
       code: `
       <script setup lang="ts">
       import {Props2 as Props} from './test01'

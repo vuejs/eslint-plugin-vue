@@ -467,6 +467,62 @@ ruleTester.run('no-dupe-keys', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
+      const props = defineProps(['foo'])
+      const foo = props['foo']
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRefs} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const { foo: renamedFoo, bar: renamedBar } = toRefs(props)
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRef} from './my-utils'
+      const props = defineProps(['foo'])
+      const foo = toRef(props, 'foo')
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      // the aliased prop cannot be resolved, so the declaration is left alone
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRef} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const key = 'bar'
+      const foo = toRef(props, key)
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {computed} from 'vue'
+      const props = defineProps(['foo'])
+      const foo = computed(() => props.foo || 'default')
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
       const {foo,bar} = defineProps(['foo', 'bar'])
       </script>
       `,
@@ -1283,6 +1339,114 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRef} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const foo = toRef(props, 'bar')
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['foo', 'bar'])
+      const foo = props.bar
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRefs} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const { bar: foo } = toRefs(props)
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 41
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['foo', 'bar'])
+      const { bar: foo } = props
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 33
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { toRef } from 'vue'
+      export default {
+        props: ['foo'],
+        setup(props) {
+          const foo = toRef(props, 'foo')
+          return { foo }
+        }
+      }
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 8,
+          column: 20,
+          endLine: 8,
+          endColumn: 23
+        }
+      ]
     }
   ]
 })

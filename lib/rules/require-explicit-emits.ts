@@ -61,6 +61,9 @@ export default {
         properties: {
           allowProps: {
             type: 'boolean'
+          },
+          ignoreMixins: {
+            type: 'boolean'
           }
         },
         additionalProperties: false
@@ -79,6 +82,7 @@ export default {
   create(context: RuleContext) {
     const options = context.options[0] || {}
     const shouldAllowProps = !!options.allowProps
+    const shouldIgnoreMixins = !!options.ignoreMixins
     const setupContexts = new Map<
       ObjectExpression | Program,
       {
@@ -307,6 +311,10 @@ export default {
         }),
         utils.defineVueVisitor(context, {
           onVueObjectEnter(node) {
+            // Emits declared in mixins are not visible, so the component cannot be checked
+            if (shouldIgnoreMixins && utils.findProperty(node, 'mixins')) {
+              return
+            }
             vueEmitsDeclarations.set(
               node,
               utils.getComponentEmitsFromOptions(node)
