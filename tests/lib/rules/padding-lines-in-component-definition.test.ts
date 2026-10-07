@@ -1376,6 +1376,177 @@ tester.run('padding-lines-in-component-definition', rule, {
           endColumn: 32
         }
       ]
+    },
+    {
+      filename: 'BetweenOptionsOnly.vue',
+      code: `
+        <script>
+        export default {
+          name: 'BetweenOptionsOnly',
+          props: {
+            foo: String
+          },
+          data() {
+            return {}
+          },
+          methods: {
+            bar() {}
+          }
+        }
+        </script>
+      `,
+      output: `
+        <script>
+        export default {
+          name: 'BetweenOptionsOnly',
+
+          props: {
+            foo: String
+          },
+
+          data() {
+            return {}
+          },
+
+          methods: {
+            bar() {}
+          }
+        }
+        </script>
+      `,
+      options: [{ betweenOptions: 'always', groupSingleLineProperties: true }],
+      errors: [
+        {
+          message: 'Expected blank line before this definition.',
+          line: 5,
+          column: 11,
+          endLine: 7,
+          endColumn: 12
+        },
+        {
+          message: 'Expected blank line before this definition.',
+          line: 8,
+          column: 11,
+          endLine: 10,
+          endColumn: 12
+        },
+        {
+          message: 'Expected blank line before this definition.',
+          line: 11,
+          column: 11,
+          endLine: 13,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      filename: 'BetweenItemsOnly.vue',
+      code: `
+        <script>
+        export default {
+          methods: {
+            foo() {
+              return 'foo'
+            },
+            bar() {
+              return 'bar'
+            },
+            baz() {
+              return 'baz'
+            }
+          }
+        }
+        </script>
+      `,
+      output: `
+        <script>
+        export default {
+          methods: {
+            foo() {
+              return 'foo'
+            },
+
+            bar() {
+              return 'bar'
+            },
+
+            baz() {
+              return 'baz'
+            }
+          }
+        }
+        </script>
+      `,
+      options: [
+        {
+          betweenOptions: 'always',
+          withinOption: {
+            methods: {
+              betweenItems: 'always'
+            }
+          }
+        }
+      ],
+      errors: [
+        {
+          message: 'Expected blank line before this definition.',
+          line: 8,
+          column: 13,
+          endLine: 10,
+          endColumn: 14
+        },
+        {
+          message: 'Expected blank line before this definition.',
+          line: 11,
+          column: 13,
+          endLine: 13,
+          endColumn: 14
+        }
+      ]
+    },
+    {
+      filename: 'DefineOptionsBetweenOptionsOnly.vue',
+      code: `
+        <script setup>
+        defineOptions({
+          name: 'DefineOptionsBetweenOptionsOnly',
+          inheritAttrs: false,
+          props: {
+            foo: String
+          }
+        })
+        </script>
+      `,
+      output: `
+        <script setup>
+        defineOptions({
+          name: 'DefineOptionsBetweenOptionsOnly',
+
+          inheritAttrs: false,
+
+          props: {
+            foo: String
+          }
+        })
+        </script>
+      `,
+      options: [{ betweenOptions: 'always', groupSingleLineProperties: false }],
+      errors: [
+        {
+          message: 'Expected blank line before this definition.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 30
+        },
+        {
+          message: 'Expected blank line before this definition.',
+          line: 6,
+          column: 11,
+          endLine: 8,
+          endColumn: 12
+        }
+      ]
     }
   ]
 })
