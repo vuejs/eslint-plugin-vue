@@ -4,6 +4,7 @@
 import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-ref-as-operand'
 import vueEslintParser from 'vue-eslint-parser'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 
 const tester = new RuleTester({
   languageOptions: {
@@ -306,7 +307,50 @@ tester.run('no-ref-as-operand', rule, {
       }
     })
     </script>
-    `
+    `,
+    {
+      code: `
+      <script setup lang="ts">
+      import type { Ref } from 'vue'
+      declare function useOk(): Ref<boolean>
+      const ok = useOk()
+      const msg = ok ? 'yes' : 'no'
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import type { MaybeRef, Ref } from 'vue'
+      declare function useMaybe(): MaybeRef<number>
+      declare function useCount(): number
+      declare function useOk(): Ref<boolean>
+      const maybe = useMaybe()
+      const count = useCount()
+      const ok = useOk()
+      if (maybe) {}
+      count++
+      const msg = ok.value ? 'yes' : 'no'
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import { ref, type Ref } from 'vue'
+      declare function useOk(): Ref<boolean>
+      let ok = useOk()
+      ok = ref(false)
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
+    }
   ],
   invalid: [
     {
@@ -1246,6 +1290,88 @@ tester.run('no-ref-as-operand', rule, {
           column: 23,
           endLine: 6,
           endColumn: 28
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import { ref } from 'vue'
+      const useMyRef = () => ref(true)
+      const ctx = useMyRef()
+      if (ctx) {}
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { ref } from 'vue'
+      const useMyRef = () => ref(true)
+      const ctx = useMyRef()
+      if (ctx.value) {}
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Must use `.value` to read or write the value of a ref.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 14
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import type { ComputedRef, Ref, ShallowRef } from 'vue'
+      declare function useOk(): Ref<boolean>
+      declare function useDouble(): ComputedRef<number>
+      declare function useList(): ShallowRef<string[]>
+      const ok = useOk()
+      const double = useDouble()
+      const list = useList()
+      const msg = ok ? 'yes' : 'no'
+      const next = double + 1
+      const text = \`\${list}\`
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import type { ComputedRef, Ref, ShallowRef } from 'vue'
+      declare function useOk(): Ref<boolean>
+      declare function useDouble(): ComputedRef<number>
+      declare function useList(): ShallowRef<string[]>
+      const ok = useOk()
+      const double = useDouble()
+      const list = useList()
+      const msg = ok.value ? 'yes' : 'no'
+      const next = double.value + 1
+      const text = \`\${list.value}\`
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Must use `.value` to read or write the value of a ref.',
+          line: 10,
+          column: 19,
+          endLine: 10,
+          endColumn: 21
+        },
+        {
+          message: 'Must use `.value` to read or write the value of a ref.',
+          line: 11,
+          column: 20,
+          endLine: 11,
+          endColumn: 26
+        },
+        {
+          message: 'Must use `.value` to read or write the value of a ref.',
+          line: 12,
+          column: 23,
+          endLine: 12,
+          endColumn: 27
         }
       ]
     }
