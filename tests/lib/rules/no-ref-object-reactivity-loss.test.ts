@@ -256,6 +256,37 @@ tester.run('no-ref-object-reactivity-loss', rule, {
     },
     {
       code: `
+      <script setup>
+      import { useTemplateRef } from 'vue'
+      const modal = useTemplateRef('modal')
+      defineExpose({
+        modal,
+        open: modal.value?.open,
+        close: modal.value?.close
+      })
+      </script>`,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 20
+        },
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 8,
+          column: 16,
+          endLine: 8,
+          endColumn: 21
+        }
+      ]
+    },
+    {
+      code: `
       import { toRefs } from 'vue'
       const refs = toRefs(foo)
       const value1 = refs.count.value
