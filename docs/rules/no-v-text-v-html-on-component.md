@@ -51,6 +51,10 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
 </eslint-code-block>
 
+`v-text` / `v-html` on a component don't fill its slot. They are passed as `textContent` / `innerHTML` and fall through to the component's root element, so everything inside that element is replaced. If the root element contains nothing but the default `<slot />`, the result looks the same as passing slot content, but any wrapper, icon or child component inside it is lost. If the component has several root nodes, Vue drops the content and warns about extraneous attributes.
+
+This rule can't see the component's template, so it reports every component. If a component's root element only renders its default slot (like `<router-link>`, which renders `<a><slot /></a>`), you can add it to the `allow` option below.
+
 ## :wrench: Options
 
 ```json
