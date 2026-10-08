@@ -138,6 +138,107 @@ tester.run('html-self-closing', rule as RuleModule, {
       ]
     },
     {
+      code: `<template>
+  <el-table-column prop="name" :show-overflow-tooltip=true></el-table-column>
+  <span @click=toggleShowTree></span>
+  <x-test v-bind=attrs></x-test>
+  <x-test size=16></x-test>
+  <x-test size="16"></x-test>
+  <x-test size=16 ></x-test>
+  <x-test :size></x-test>
+  <x-test disabled></x-test>
+</template>`,
+      output: `<template>
+  <el-table-column prop="name" :show-overflow-tooltip=true />
+  <span @click=toggleShowTree />
+  <x-test v-bind=attrs />
+  <x-test size=16 />
+  <x-test size="16"/>
+  <x-test size=16 />
+  <x-test :size/>
+  <x-test disabled/>
+</template>`,
+      errors: [
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<el-table-column>).',
+          line: 2,
+          column: 60,
+          endLine: 2,
+          endColumn: 78
+        },
+        {
+          message: 'Require self-closing on HTML elements (<span>).',
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 38
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 4,
+          column: 24,
+          endLine: 4,
+          endColumn: 33
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 5,
+          column: 19,
+          endLine: 5,
+          endColumn: 28
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 30
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 7,
+          column: 20,
+          endLine: 7,
+          endColumn: 29
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 8,
+          column: 17,
+          endLine: 8,
+          endColumn: 26
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 9,
+          column: 20,
+          endLine: 9,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      code: '<template><img src=a.png></template>',
+      output: '<template><img src=a.png /></template>',
+      options: [{ html: { void: 'always' } }],
+      errors: [
+        {
+          message: 'Require self-closing on HTML void elements (<img>).',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
+    },
+    {
       code: '<template><svg><path></path></svg></template>',
       output: '<template><svg><path/></svg></template>',
       errors: [
