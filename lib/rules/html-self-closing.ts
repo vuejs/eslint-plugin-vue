@@ -152,9 +152,15 @@ export default {
                 if (close.type !== 'HTMLTagClose') {
                   return null
                 }
+                const lastAttribute = node.startTag.attributes.at(-1)
+                const isAfterUnquotedValue =
+                  lastAttribute?.value != null &&
+                  lastAttribute.range[1] === close.range[0] &&
+                  !utils.isVBindSameNameShorthand(lastAttribute) &&
+                  !/^["']/u.test(sourceCode.getText(lastAttribute.value))
                 return fixer.replaceTextRange(
                   [close.range[0], node.range[1]],
-                  '/>'
+                  isAfterUnquotedValue ? ' />' : '/>'
                 )
               }
             })
