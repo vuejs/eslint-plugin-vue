@@ -190,6 +190,26 @@ export default [
 ]
 ```
 
+#### Example configuration with [@vue/eslint-config-typescript](https://github.com/vuejs/eslint-config-typescript)
+
+`@vue/eslint-config-typescript` is the Vue team's config for Vue 3 + TypeScript projects and the one `create-vue` sets up. It applies the typescript-eslint configs to `.vue` files too and takes care of the parser setup:
+
+```bash
+npm install --save-dev eslint eslint-plugin-vue @vue/eslint-config-typescript typescript
+```
+
+```js
+import eslintPluginVue from 'eslint-plugin-vue'
+import { withVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+
+export default withVueTs(
+  eslintPluginVue.configs['flat/recommended'],
+  vueTsConfigs.recommended
+)
+```
+
+Its [README](https://github.com/vuejs/eslint-config-typescript#readme) covers type-aware linting and projects that still have plain JavaScript in `.vue` files.
+
 #### Example configuration with [typescript-eslint](https://typescript-eslint.io/) and [Prettier](https://prettier.io/)
 
 ```bash
@@ -227,26 +247,6 @@ export default typescriptEslint.config(
   eslintConfigPrettier
 );
 ```
-
-#### Example configuration with [@vue/eslint-config-typescript](https://github.com/vuejs/eslint-config-typescript)
-
-`@vue/eslint-config-typescript` is the Vue team's config for Vue 3 + TypeScript projects and the one `create-vue` sets up. It applies the typescript-eslint configs to `.vue` files too and takes care of the parser setup:
-
-```bash
-npm install --save-dev eslint eslint-plugin-vue @vue/eslint-config-typescript typescript
-```
-
-```js
-import pluginVue from 'eslint-plugin-vue'
-import { withVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
-
-export default withVueTs(
-  pluginVue.configs['flat/essential'],
-  vueTsConfigs.recommended
-)
-```
-
-Its [README](https://github.com/vuejs/eslint-config-typescript#readme) covers type-aware linting and projects that still have plain JavaScript in `.vue` files.
 
 ### Configuration (`.eslintrc`)
 
