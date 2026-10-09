@@ -55,17 +55,38 @@ You can use the object as a value and use the following properties:
 - `allowNoLang` ... If `true`, allows the `lang` attribute not to be specified (allows the use of the default language of block).
 
 ::: warning Note
-If the default language is specified for `lang` option of `<template>`, `<style>` and `<script>`, it will be enforced to not specify `lang` attribute.\
-This is to prevent unintended problems with [Vetur](https://vuejs.github.io/vetur/).
+If you use [Vetur](https://vuejs.github.io/vetur/), which expects no `lang` attribute for the default language of `<template>`, `<style>` and `<script>`, don't list the default language in `lang` and set `allowNoLang` to `true` (or keep the default options). Then a block without `lang` is allowed, and `lang="html"`, `lang="css"` or `lang="js"` is reported.
 
 See also [Vetur - Syntax Highlighting](https://vuejs.github.io/vetur/guide/highlighting.html).
 :::
 
 ### `{ script: { lang: 'js' } }`
 
-Same as `{ script: { allowNoLang: true } }`.
+The default language is treated like any other language, so the `lang` attribute is required.
 
 <eslint-code-block :rules="{'vue/block-lang': ['error', { script: { lang: 'js' } }]}">
+
+```vue
+<!-- ✓ GOOD -->
+<script lang="js">
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/block-lang': ['error', { script: { lang: 'js' } }]}">
+
+```vue
+<!-- ✗ BAD -->
+<script>
+</script>
+```
+
+</eslint-code-block>
+
+### `{ script: { allowNoLang: true } }`
+
+<eslint-code-block :rules="{'vue/block-lang': ['error', { script: { allowNoLang: true } }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -75,7 +96,7 @@ Same as `{ script: { allowNoLang: true } }`.
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/block-lang': ['error', { script: { lang: 'js' } }]}">
+<eslint-code-block :rules="{'vue/block-lang': ['error', { script: { allowNoLang: true } }]}">
 
 ```vue
 <!-- ✗ BAD -->

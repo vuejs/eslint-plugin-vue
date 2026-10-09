@@ -21,8 +21,19 @@ tester.run('block-lang', rule, {
     },
     {
       code: `<template></template>
-      <script></script>`,
+      <script lang="js"></script>`,
       options: [{ script: { lang: 'js' } }]
+    },
+    {
+      code: `<template></template>
+      <script></script>
+      <script setup lang="js"></script>`,
+      options: [{ script: { lang: 'js', allowNoLang: true } }]
+    },
+    {
+      code: `<template></template>
+      <script lang="js"></script>`,
+      options: [{ script: { lang: ['ts', 'js'], allowNoLang: false } }]
     },
     {
       code: '<i18n></i18n><i18n lang="json"></i18n>',
@@ -99,7 +110,8 @@ tester.run('block-lang', rule, {
       options: [{ script: { lang: 'js' } }],
       errors: [
         {
-          message: "Do not specify the 'lang' attribute of '<script>'.",
+          message:
+            "Only 'js' can be used for the 'lang' attribute of '<script>'.",
           line: 1,
           column: 30,
           endLine: 1,
@@ -108,8 +120,36 @@ tester.run('block-lang', rule, {
       ]
     },
     {
+      code: `<template></template>
+      <script></script>`,
+      options: [{ script: { lang: 'js', allowNoLang: false } }],
+      errors: [
+        {
+          message: "The 'lang' attribute of '<script>' is missing.",
+          line: 2,
+          column: 7,
+          endLine: 2,
+          endColumn: 15
+        }
+      ]
+    },
+    {
+      code: `<template></template>
+      <script></script>`,
+      options: [{ script: { lang: ['ts', 'js'] } }],
+      errors: [
+        {
+          message: "The 'lang' attribute of '<script>' is missing.",
+          line: 2,
+          column: 7,
+          endLine: 2,
+          endColumn: 15
+        }
+      ]
+    },
+    {
       code: '<template></template><script lang="js"></script>',
-      options: [{ script: { lang: 'js' } }],
+      options: [{ script: { allowNoLang: true } }],
       errors: [
         {
           message:
