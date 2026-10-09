@@ -316,9 +316,9 @@ export default {
       propertyReferencesForProps: IPropertyReferences
     ) {
       if (
-        (property.groupName === 'props' &&
-          propertyReferencesForProps.hasProperty(property.name)) ||
-        propertyReferences.hasProperty('$props')
+        property.groupName === 'props' &&
+        (propertyReferencesForProps.hasProperty(property.name) ||
+          propertyReferences.hasProperty('$props'))
       ) {
         // used props
         return
