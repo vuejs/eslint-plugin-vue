@@ -218,6 +218,7 @@ import restrictedComponentNames from './rules/restricted-component-names.ts'
 import returnInComputedProperty from './rules/return-in-computed-property.js'
 import returnInEmitsValidator from './rules/return-in-emits-validator.js'
 import scriptIndent from './rules/script-indent.ts'
+import simpleExpressionsInTemplates from './rules/simple-expressions-in-templates.ts'
 import singlelineHtmlElementContentNewline from './rules/singleline-html-element-content-newline.ts'
 import slotNameCasing from './rules/slot-name-casing.ts'
 import sortKeys from './rules/sort-keys.js'
@@ -478,6 +479,7 @@ export default {
     'return-in-computed-property': returnInComputedProperty,
     'return-in-emits-validator': returnInEmitsValidator,
     'script-indent': scriptIndent,
+    'simple-expressions-in-templates': simpleExpressionsInTemplates,
     'singleline-html-element-content-newline':
       singlelineHtmlElementContentNewline,
     'slot-name-casing': slotNameCasing,
