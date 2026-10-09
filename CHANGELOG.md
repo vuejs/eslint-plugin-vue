@@ -1,5 +1,25 @@
 # eslint-plugin-vue
 
+## 10.12.0
+
+### Minor Changes
+
+- Added new [`vue/no-define-model-default`](https://eslint.vuejs.org/rules/no-define-model-default.html) rule ([#3146](https://github.com/vuejs/eslint-plugin-vue/pull/3146))
+
+- Added `ignoreMixins` option to [`vue/require-explicit-emits`](https://eslint.vuejs.org/rules/require-explicit-emits.html) rule ([#3141](https://github.com/vuejs/eslint-plugin-vue/pull/3141))
+
+### Patch Changes
+
+- Fixed [`vue/no-dupe-keys`](https://eslint.vuejs.org/rules/no-dupe-keys.html) not reporting `<script setup>` variables that shadow a prop while aliasing a different one, such as `const foo = toRef(props, 'bar')` ([#3124](https://github.com/vuejs/eslint-plugin-vue/pull/3124))
+
+- Improved performance of [`vue/no-reserved-component-names`](https://eslint.vuejs.org/rules/no-reserved-component-names.html) by no longer rebuilding its reserved name sets for every file ([#3147](https://github.com/vuejs/eslint-plugin-vue/pull/3147))
+
+- Fixed [`vue/no-undef-properties`](https://eslint.vuejs.org/rules/no-undef-properties.html) false positives for properties returned via `...toRefs(reactive({ ... }))` from `setup()` ([#3134](https://github.com/vuejs/eslint-plugin-vue/pull/3134))
+
+- Fixed [`vue/require-default-prop`](https://eslint.vuejs.org/rules/require-default-prop.html), [`vue/no-boolean-default`](https://eslint.vuejs.org/rules/no-boolean-default.html), [`vue/no-required-prop-with-default`](https://eslint.vuejs.org/rules/no-required-prop-with-default.html) and [`vue/require-valid-default-prop`](https://eslint.vuejs.org/rules/require-valid-default-prop.html) not handling defaults that are passed to `withDefaults()` by reference or spread instead of an inline object literal ([#3114](https://github.com/vuejs/eslint-plugin-vue/pull/3114))
+
+- Fixed [`vue/require-typed-ref`](https://eslint.vuejs.org/rules/require-typed-ref.html) false positives when an explicit type annotation already applies to the `ref()` call ([#3123](https://github.com/vuejs/eslint-plugin-vue/pull/3123))
+
 ## 10.11.1
 
 ### Patch Changes
