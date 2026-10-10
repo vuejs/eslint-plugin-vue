@@ -676,6 +676,80 @@ tester.run('require-explicit-emits', rule, {
       emit('baz')
       </script>`,
       ...getTypeScriptFixtureTestOptions()
+    },
+    // extending local interface
+    {
+      code: `
+      <script setup lang="ts">
+      interface BaseEmits {
+        (e: 'foo'): void
+      }
+
+      interface Emits extends BaseEmits {
+        (e: 'bar'): void
+      }
+
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('bar')
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // extending imported interface
+    {
+      code: `
+      <script setup lang="ts">
+      import {Emits1 as BaseEmits} from './test01'
+
+      interface Emits extends BaseEmits {
+        (e: 'qux'): void
+      }
+
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('qux')
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // deep interface hierarchy
+    {
+      code: `
+      <script setup lang="ts">
+      import {Emits1 as BaseEmits} from './test01'
+
+      interface LocalBaseEmits extends BaseEmits {
+        (e: 'qux'): void
+      }
+
+      interface Emits extends LocalBaseEmits {
+        (e: 'quux'): void
+      }
+
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('qux')
+      emit('quux')
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // extending local interface without TS services
+    {
+      code: `
+      <script setup lang="ts">
+      interface BaseEmits {
+        (e: 'foo'): void
+      }
+
+      interface Emits extends BaseEmits {
+        (e: 'bar'): void
+      }
+
+      const emit = defineEmits<Emits>()
+      emit('bar')
+      </script>`,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ],
   invalid: [
@@ -2519,6 +2593,62 @@ emits: {'foo': null},
           column: 27,
           endLine: 3,
           endColumn: 32
+        }
+      ]
+    },
+    // extending imported interface
+    {
+      code: `
+      <script setup lang="ts">
+      import {Emits1 as BaseEmits} from './test01'
+
+      interface Emits extends BaseEmits {
+        (e: 'qux'): void
+      }
+
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('quux')
+      </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message:
+            'The "quux" event has been triggered but not declared on `defineEmits`.',
+          column: 12,
+          endColumn: 18,
+          endLine: 11,
+          line: 11
+        }
+      ]
+    },
+    // undeclared event with extended local interface without TS services
+    {
+      code: `
+      <script setup lang="ts">
+      interface BaseEmits {
+        (e: 'foo'): void
+      }
+
+      interface Emits extends BaseEmits {
+        (e: 'bar'): void
+      }
+
+      const emit = defineEmits<Emits>()
+      emit('bar')
+      emit('baz')
+      </script>`,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            'The "baz" event has been triggered but not declared on `defineEmits`.',
+          line: 13,
+          column: 12,
+          endLine: 13,
+          endColumn: 17
         }
       ]
     }

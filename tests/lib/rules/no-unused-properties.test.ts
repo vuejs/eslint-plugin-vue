@@ -5449,6 +5449,32 @@ tester.run('no-unused-properties', rule, {
       ],
       ...getTypeScriptFixtureTestOptions()
     },
+    // overriding a prop of an extended interface
+    {
+      code: `
+      <script setup lang="ts">
+      import type { Props1 } from './test01'
+
+      interface Props extends Props1 {
+        foo: 'a' | 'b'
+      }
+
+      const props = defineProps<Props>()
+      </script>
+      <template>
+      {{ props.bar }}{{ baz }}
+      </template>`,
+      errors: [
+        {
+          message: "'foo' of property found, but never used.",
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 12
+        }
+      ],
+      ...getTypeScriptFixtureTestOptions()
+    },
     // unused inject
     {
       filename: 'test.vue',
