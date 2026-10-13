@@ -149,6 +149,25 @@ tester.run('no-undef-components', rule, {
       </template>
       `
     },
+    {
+      filename: 'Subtree.vue',
+      code: `
+      <template>
+        <ul>
+          <AdminToolbarSubtree v-for="item in items" :key="item.id" :items="item.children" />
+          <admin-toolbar-subtree />
+          <component is="AdminToolbarSubtree" />
+        </ul>
+      </template>
+
+      <script setup>
+      defineOptions({
+        name: 'AdminToolbarSubtree'
+      })
+      defineProps({ items: Array })
+      </script>
+      `
+    },
 
     // options API
     {
@@ -857,6 +876,71 @@ tester.run('no-undef-components', rule, {
           column: 9,
           endLine: 7,
           endColumn: 16
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineOptions({ name: 'tree-node' })
+      </script>
+
+      <template>
+        <tree-node />
+        <TreeNode />
+      </template>
+      `,
+      errors: [
+        {
+          message: "The '<TreeNode>' component has been used, but not defined.",
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 21
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineOptions()
+      </script>
+
+      <template>
+        <TreeNode />
+      </template>
+      `,
+      errors: [
+        {
+          message: "The '<TreeNode>' component has been used, but not defined.",
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 21
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import options from './options'
+      defineOptions(options)
+      </script>
+
+      <template>
+        <TreeNode />
+      </template>
+      `,
+      errors: [
+        {
+          message: "The '<TreeNode>' component has been used, but not defined.",
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 21
         }
       ]
     },
