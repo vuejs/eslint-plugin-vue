@@ -103,7 +103,7 @@ This rule enforces a line break before and after the contents of a multiline ele
     default `false`
 
 ::: info
-  All inline non void elements can be found [here](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/inline-non-void-elements.json).
+  All inline non void elements (including `router-link` and `nuxt-link`) can be found [here](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/inline-non-void-elements.json).
 :::
 
 ### `"ignores": ["VueComponent", "pre", "textarea"]`
