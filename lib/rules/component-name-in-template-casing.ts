@@ -115,6 +115,9 @@ export default {
     function isVerifyTarget(node: VElement): boolean {
       if (
         isIgnored(node.rawName) ||
+        // Namespaced component (e.g. `<Form.Input>`): the member name must
+        // match the object key, so its casing cannot be changed.
+        node.rawName.includes('.') ||
         (!utils.isHtmlElementNode(node) &&
           !utils.isSvgElementNode(node) &&
           !utils.isMathElementNode(node)) ||
