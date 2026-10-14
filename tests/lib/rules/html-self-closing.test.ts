@@ -91,6 +91,39 @@ tester.run('html-self-closing', rule as RuleModule, {
         </div>
       </template>
       `
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2190
+    '<template><slot/><MyComponent><template #foo/></MyComponent></template>',
+    {
+      code: `
+      <template>
+        <div></div>
+        <slot/>
+        <slot name="foo"/>
+        <MyComponent><template #foo/></MyComponent>
+        <component :is="foo"/>
+        <transition/>
+        <keep-alive/>
+      </template>
+      `,
+      options: [
+        { html: { void: 'never', normal: 'never', component: 'always' } }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div/>
+        <slot></slot>
+        <slot name="foo"></slot>
+        <MyComponent><template #foo></template></MyComponent>
+        <component :is="foo"></component>
+        <transition></transition>
+        <keep-alive></keep-alive>
+      </template>
+      `,
+      options: [{ html: { normal: 'always', component: 'never' } }]
     }
 
     // other cases are in `invalid` tests.
@@ -414,6 +447,98 @@ tester.run('html-self-closing', rule as RuleModule, {
           column: 16,
           endLine: 11,
           endColumn: 18
+        }
+      ]
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2190
+    {
+      code: '<template><slot></slot></template>',
+      output: '<template><slot/></template>',
+      errors: [
+        {
+          message: 'Require self-closing on Vue.js custom components (<slot>).',
+          line: 1,
+          column: 17,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
+    },
+    {
+      code: `<template>
+  <div/>
+  <slot></slot>
+  <MyComponent><template #foo></template></MyComponent>
+</template>`,
+      output: `<template>
+  <div></div>
+  <slot/>
+  <MyComponent><template #foo/></MyComponent>
+</template>`,
+      options: [
+        { html: { void: 'never', normal: 'never', component: 'always' } }
+      ],
+      errors: [
+        {
+          message: 'Disallow self-closing on HTML elements (<div/>).',
+          line: 2,
+          column: 7,
+          endLine: 2,
+          endColumn: 9
+        },
+        {
+          message: 'Require self-closing on Vue.js custom components (<slot>).',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 16
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<template>).',
+          line: 4,
+          column: 31,
+          endLine: 4,
+          endColumn: 42
+        }
+      ]
+    },
+    {
+      code: `<template>
+  <div></div>
+  <slot/>
+  <MyComponent><template #foo/></MyComponent>
+</template>`,
+      output: `<template>
+  <div/>
+  <slot></slot>
+  <MyComponent><template #foo></template></MyComponent>
+</template>`,
+      options: [{ html: { normal: 'always', component: 'never' } }],
+      errors: [
+        {
+          message: 'Require self-closing on HTML elements (<div>).',
+          line: 2,
+          column: 8,
+          endLine: 2,
+          endColumn: 14
+        },
+        {
+          message:
+            'Disallow self-closing on Vue.js custom components (<slot/>).',
+          line: 3,
+          column: 8,
+          endLine: 3,
+          endColumn: 10
+        },
+        {
+          message:
+            'Disallow self-closing on Vue.js custom components (<template/>).',
+          line: 4,
+          column: 30,
+          endLine: 4,
+          endColumn: 32
         }
       ]
     }
