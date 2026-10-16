@@ -327,9 +327,9 @@ export function definePropertyReferenceExtractor(
         case 'CallExpression': {
           const argIndex = parent.arguments.indexOf(node)
           // `foo(arg)`
-          return !isWithinTemplate && argIndex !== -1
-            ? extractFromCall(parent, argIndex)
-            : NEVER
+          return isWithinTemplate || argIndex === -1
+            ? NEVER
+            : extractFromCall(parent, argIndex)
         }
         case 'ChainExpression': {
           return extractFromExpression(parent, isWithinTemplate)

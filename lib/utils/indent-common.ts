@@ -412,12 +412,12 @@ export function defineVisitor(
           setBaseline(baseToken)
         }
 
-        if (!shouldAlignVertically && leftToken != null) {
-          // Align tokens relatively to the left token.
-          setOffset(alignTokens, offset, leftToken)
-        } else {
+        if (shouldAlignVertically || leftToken == null) {
           // Align the rest tokens to the first token.
           setOffset(alignTokens, 0, baseToken)
+        } else {
+          // Align tokens relatively to the left token.
+          setOffset(alignTokens, offset, leftToken)
         }
       }
     }
