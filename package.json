@@ -88,7 +88,7 @@
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "@types/eslint": "^9.6.1",
     "@types/natural-compare": "^1.4.3",
-    "@types/node": "^24.13.2",
+    "@types/node": "^26.6.5",
     "@types/semver": "^7.7.1",
     "@types/xml-name-validator": "^4.0.3",
     "@typescript-eslint/eslint-plugin": "^8.62.1",
