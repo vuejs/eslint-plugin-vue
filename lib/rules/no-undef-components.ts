@@ -214,12 +214,13 @@ export default {
         onVueObjectEnter(node, { type }) {
           if (type !== 'export') return
           const nameProperty = utils.findProperty(node, 'name')
+          if (!nameProperty || !utils.isStringLiteral(nameProperty.value)) {
+            return
+          }
 
-          if (nameProperty && utils.isStringLiteral(nameProperty.value)) {
-            const name = utils.getStringLiteralValue(nameProperty.value)
-            if (name) {
-              definedInOptionComponents.addName(name)
-            }
+          const name = utils.getStringLiteralValue(nameProperty.value)
+          if (name) {
+            definedInOptionComponents.addName(name)
           }
         }
       })
@@ -251,12 +252,13 @@ export default {
         )
 
         const nameProperty = utils.findProperty(obj, 'name')
+        if (!nameProperty || !utils.isStringLiteral(nameProperty.value)) {
+          return
+        }
 
-        if (nameProperty && utils.isStringLiteral(nameProperty.value)) {
-          const name = utils.getStringLiteralValue(nameProperty.value)
-          if (name) {
-            definedInOptionComponents.addName(name)
-          }
+        const name = utils.getStringLiteralValue(nameProperty.value)
+        if (name) {
+          definedInOptionComponents.addName(name)
         }
       })
 

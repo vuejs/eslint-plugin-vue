@@ -885,13 +885,14 @@ export function defineVisitor(
       const keyToken = tokenStore.getFirstToken(node)
       const eqToken = tokenStore.getTokenAfter(node.key)
 
-      if (eqToken != null && eqToken.range[1] <= node.range[1]) {
-        setOffset(eqToken, 1, keyToken)
+      if (eqToken == null || eqToken.range[1] > node.range[1]) {
+        return
+      }
+      setOffset(eqToken, 1, keyToken)
 
-        const valueToken = tokenStore.getTokenAfter(eqToken)
-        if (valueToken != null && valueToken.range[1] <= node.range[1]) {
-          setOffset(valueToken, 1, keyToken)
-        }
+      const valueToken = tokenStore.getTokenAfter(eqToken)
+      if (valueToken != null && valueToken.range[1] <= node.range[1]) {
+        setOffset(valueToken, 1, keyToken)
       }
     },
     VElement(node) {
@@ -939,11 +940,12 @@ export function defineVisitor(
     VFilter(node) {
       const idToken = tokenStore.getFirstToken(node)
       const lastToken = tokenStore.getLastToken(node)
-      if (isClosingParenToken(lastToken)) {
-        const leftParenToken = tokenStore.getTokenAfter(node.callee)
-        setOffset(leftParenToken, 1, idToken)
-        processNodeList(node.arguments, leftParenToken, lastToken, 1)
+      if (!isClosingParenToken(lastToken)) {
+        return
       }
+      const leftParenToken = tokenStore.getTokenAfter(node.callee)
+      setOffset(leftParenToken, 1, idToken)
+      processNodeList(node.arguments, leftParenToken, lastToken, 1)
     },
     VFilterSequenceExpression(node) {
       if (node.filters.length === 0) {
@@ -995,13 +997,14 @@ export function defineVisitor(
         options.attribute,
         options.alignAttributesVertically
       )
-      if (closeToken != null && closeToken.type.endsWith('TagClose')) {
-        const offset =
-          closeToken.type === 'HTMLSelfClosingTagClose'
-            ? options.closeBracket.selfClosingTag
-            : options.closeBracket.startTag
-        setOffset(closeToken, offset, openToken)
+      if (closeToken == null || !closeToken.type.endsWith('TagClose')) {
+        return
       }
+      const offset =
+        closeToken.type === 'HTMLSelfClosingTagClose'
+          ? options.closeBracket.selfClosingTag
+          : options.closeBracket.startTag
+      setOffset(closeToken, offset, openToken)
     },
     VText(node) {
       const tokens = tokenStore.getTokens(node, isNotWhitespace)
@@ -1263,15 +1266,19 @@ export function defineVisitor(
         node.source,
         lastToken
       )
-      if (assertionTokens.length > 0) {
-        const assertToken = assertionTokens.shift()!
-        setOffset(assertToken, 0, exportToken)
-        const assertionOpen = assertionTokens.shift()
-        if (assertionOpen) {
-          setOffset(assertionOpen, 1, assertToken)
-          processNodeList(assertionTokens, assertionOpen, lastToken, 1)
-        }
+      if (assertionTokens.length === 0) {
+        return
       }
+
+      const assertToken = assertionTokens.shift()!
+      setOffset(assertToken, 0, exportToken)
+      const assertionOpen = assertionTokens.shift()
+      if (!assertionOpen) {
+        return
+      }
+
+      setOffset(assertionOpen, 1, assertToken)
+      processNodeList(assertionTokens, assertionOpen, lastToken, 1)
     },
     ExportDefaultDeclaration(node) {
       const exportToken = tokenStore.getFirstToken(node)
@@ -1459,15 +1466,17 @@ export function defineVisitor(
       setOffset(ifRightParenToken, 0, ifLeftParenToken)
       processMaybeBlock(node.consequent, ifToken)
 
-      if (node.alternate != null) {
-        const elseToken = tokenStore.getTokenAfter(
-          node.consequent,
-          isNotClosingParenToken
-        )!
-
-        setOffset(elseToken, 0, ifToken)
-        processMaybeBlock(node.alternate, elseToken)
+      if (node.alternate == null) {
+        return
       }
+
+      const elseToken = tokenStore.getTokenAfter(
+        node.consequent,
+        isNotClosingParenToken
+      )!
+
+      setOffset(elseToken, 0, ifToken)
+      processMaybeBlock(node.alternate, elseToken)
     },
     ImportDeclaration(node) {
       const importToken = tokenStore.getFirstToken(node)
@@ -1543,15 +1552,19 @@ export function defineVisitor(
         node.source,
         lastToken
       )
-      if (assertionTokens.length > 0) {
-        const assertToken = assertionTokens.shift()!
-        setOffset(assertToken, 0, importToken)
-        const assertionOpen = assertionTokens.shift()
-        if (assertionOpen) {
-          setOffset(assertionOpen, 1, assertToken)
-          processNodeList(assertionTokens, assertionOpen, lastToken, 1)
-        }
+      if (assertionTokens.length === 0) {
+        return
       }
+
+      const assertToken = assertionTokens.shift()!
+      setOffset(assertToken, 0, importToken)
+      const assertionOpen = assertionTokens.shift()
+      if (!assertionOpen) {
+        return
+      }
+
+      setOffset(assertionOpen, 1, assertToken)
+      processNodeList(assertionTokens, assertionOpen, lastToken, 1)
     },
     ImportNamespaceSpecifier(node) {
       const tokens = tokenStore.getTokens(node)
@@ -1624,14 +1637,16 @@ export function defineVisitor(
         lastKeyToken = keyTokens.lastToken
       }
 
-      if (node.value != null) {
-        const initToken = tokenStore.getFirstToken(node.value)
-        setOffset(
-          [...tokenStore.getTokensBetween(lastKeyToken, initToken), initToken],
-          1,
-          lastKeyToken
-        )
+      if (node.value == null) {
+        return
       }
+
+      const initToken = tokenStore.getFirstToken(node.value)
+      setOffset(
+        [...tokenStore.getTokensBetween(lastKeyToken, initToken), initToken],
+        1,
+        lastKeyToken
+      )
     },
     NewExpression(node) {
       const typeArguments =
@@ -1652,10 +1667,12 @@ export function defineVisitor(
       }
 
       setOffset(calleeToken, 1, newToken)
-      if (leftToken != null) {
-        setOffset(leftToken, 1, calleeToken)
-        processNodeList(node.arguments, leftToken, rightToken, 1)
+      if (leftToken == null) {
+        return
       }
+
+      setOffset(leftToken, 1, calleeToken)
+      processNodeList(node.arguments, leftToken, rightToken, 1)
     },
     'ObjectExpression, ObjectPattern'(node: ObjectExpression | ObjectPattern) {
       const firstToken = tokenStore.getFirstToken(node)
@@ -1747,12 +1764,14 @@ export function defineVisitor(
         setOffset(catchToken, 0, tryToken)
       }
 
-      if (node.finalizer != null) {
-        const finallyToken = tokenStore.getTokenBefore(node.finalizer)
-        const finallyBlockToken = tokenStore.getFirstToken(node.finalizer)
-
-        setOffset([finallyToken, finallyBlockToken], 0, tryToken)
+      if (node.finalizer == null) {
+        return
       }
+
+      const finallyToken = tokenStore.getTokenBefore(node.finalizer)
+      const finallyBlockToken = tokenStore.getFirstToken(node.finalizer)
+
+      setOffset([finallyToken, finallyBlockToken], 0, tryToken)
     },
     UpdateExpression(node) {
       const firstToken = tokenStore.getFirstToken(node)

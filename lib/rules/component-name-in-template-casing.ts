@@ -151,28 +151,31 @@ export default {
           }
 
           const name = node.rawName
-          if (!getChecker(caseType)(name)) {
-            const startTag = node.startTag
-            const open = tokens.getFirstToken(startTag)
-            const casingName = getExactConverter(caseType)(name)
-            context.report({
-              node: open,
-              loc: open.loc,
-              messageId: 'incorrectCase',
-              data: {
-                name,
-                caseType
-              },
-              *fix(fixer) {
-                yield fixer.replaceText(open, `<${casingName}`)
-                const endTag = node.endTag
-                if (endTag) {
-                  const endTagOpen = tokens.getFirstToken(endTag)
-                  yield fixer.replaceText(endTagOpen, `</${casingName}`)
-                }
-              }
-            })
+          if (getChecker(caseType)(name)) {
+            return
           }
+
+          const startTag = node.startTag
+          const open = tokens.getFirstToken(startTag)
+          const casingName = getExactConverter(caseType)(name)
+          context.report({
+            node: open,
+            loc: open.loc,
+            messageId: 'incorrectCase',
+            data: {
+              name,
+              caseType
+            },
+            *fix(fixer) {
+              yield fixer.replaceText(open, `<${casingName}`)
+              const endTag = node.endTag
+              if (!endTag) {
+                return
+              }
+              const endTagOpen = tokens.getFirstToken(endTag)
+              yield fixer.replaceText(endTagOpen, `</${casingName}`)
+            }
+          })
         }
       },
       {

@@ -288,13 +288,12 @@ export default {
           componentUsageStack.pop()
           return
         }
-        if (!utils.isCustomComponent(node)) {
+        if (!utils.isCustomComponent(node) || !pushedNodes.has(node)) {
           return
         }
-        if (pushedNodes.has(node)) {
-          componentUsageStack.pop()
-          pushedNodes.delete(node)
-        }
+
+        componentUsageStack.pop()
+        pushedNodes.delete(node)
       }
     })
   }

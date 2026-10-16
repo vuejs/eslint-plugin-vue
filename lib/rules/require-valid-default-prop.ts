@@ -364,17 +364,15 @@ export default {
           }
         },
         ReturnStatement(node: ReturnStatement) {
-          if (!scopeStack) {
+          if (!scopeStack || !scopeStack.returnTypes || !node.argument) {
             return
           }
-          if (scopeStack.returnTypes && node.argument) {
-            const type = getValueType(node.argument)
-            if (type) {
-              scopeStack.returnTypes.push({
-                type: type.type,
-                node: node.argument
-              })
-            }
+          const type = getValueType(node.argument)
+          if (type) {
+            scopeStack.returnTypes.push({
+              type: type.type,
+              node: node.argument
+            })
           }
         },
         ':function:exit': onFunctionExit

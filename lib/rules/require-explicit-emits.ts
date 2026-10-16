@@ -203,17 +203,19 @@ export default {
         }
 
         // verify $emit
-        if (emit && emit.name === '$emit') {
-          const memObject = utils.skipChainExpression(emit.member.object)
-          if (utils.isThis(memObject, context)) {
-            // verify this.$emit()
-            verifyEmit(
-              emitsDeclarations,
-              vuePropsDeclarations.get(vueDefineNode) || [],
-              nameWithLoc,
-              vueDefineNode
-            )
-          }
+        if (!emit || emit.name !== '$emit') {
+          return
+        }
+
+        const memObject = utils.skipChainExpression(emit.member.object)
+        if (utils.isThis(memObject, context)) {
+          // verify this.$emit()
+          verifyEmit(
+            emitsDeclarations,
+            vuePropsDeclarations.get(vueDefineNode) || [],
+            nameWithLoc,
+            vueDefineNode
+          )
         }
       }
     }

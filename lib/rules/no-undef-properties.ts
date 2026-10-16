@@ -370,17 +370,19 @@ export default {
 
           const ctx = getVueComponentContext(programNode)
           const globalScope = context.sourceCode.scopeManager.globalScope
-          if (globalScope) {
-            for (const variable of globalScope.variables) {
-              ctx.defineProperties.set(variable.name, {})
-            }
-            const moduleScope = globalScope.childScopes.find(
-              (scope) => scope.type === 'module'
-            )
-            const moduleVariables = (moduleScope && moduleScope.variables) || []
-            for (const variable of moduleVariables) {
-              ctx.defineProperties.set(variable.name, {})
-            }
+          if (!globalScope) {
+            return
+          }
+
+          for (const variable of globalScope.variables) {
+            ctx.defineProperties.set(variable.name, {})
+          }
+          const moduleScope = globalScope.childScopes.find(
+            (scope) => scope.type === 'module'
+          )
+          const moduleVariables = (moduleScope && moduleScope.variables) || []
+          for (const variable of moduleVariables) {
+            ctx.defineProperties.set(variable.name, {})
           }
         }
       },
@@ -623,15 +625,17 @@ export default {
             propertyReferenceExtractor.extractFromFunctionParam(node, 0)
           ctx.verifyReferences(propertyReferences)
 
-          if (vueData.functional) {
-            // Check for Vue 2.x render & functional
-            const propertyReferencesForV2 =
-              propertyReferenceExtractor.extractFromFunctionParam(node, 1)
-
-            ctx.verifyReferences(propertyReferencesForV2.getNest('props'), {
-              isProps: true
-            })
+          if (!vueData.functional) {
+            return
           }
+
+          // Check for Vue 2.x render & functional
+          const propertyReferencesForV2 =
+            propertyReferenceExtractor.extractFromFunctionParam(node, 1)
+
+          ctx.verifyReferences(propertyReferencesForV2.getNest('props'), {
+            isProps: true
+          })
         },
         'ThisExpression, Identifier'(
           node: ThisExpression | Identifier,

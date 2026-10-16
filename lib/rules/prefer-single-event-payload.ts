@@ -261,25 +261,24 @@ export default {
           CallExpression(node, { node: vueNode }) {
             const callee = utils.skipChainExpression(node.callee)
             const setupContext = setupContexts.get(vueNode)
-            if (setupContext) {
-              const { contextReferenceIds, emitReferenceIds } = setupContext
+            if (!setupContext) {
+              return
+            }
+
+            const { contextReferenceIds, emitReferenceIds } = setupContext
+            if (callee.type === 'Identifier' && emitReferenceIds.has(callee)) {
+              // setup(props, {emit}) { emit() }
+              verifyEmitCall(node)
+            } else {
+              const emit = getCalleeMemberNode(node)
               if (
-                callee.type === 'Identifier' &&
-                emitReferenceIds.has(callee)
+                emit &&
+                emit.name === 'emit' &&
+                emit.member.object.type === 'Identifier' &&
+                contextReferenceIds.has(emit.member.object)
               ) {
-                // setup(props, {emit}) { emit() }
+                // setup(props, context) { context.emit() }
                 verifyEmitCall(node)
-              } else {
-                const emit = getCalleeMemberNode(node)
-                if (
-                  emit &&
-                  emit.name === 'emit' &&
-                  emit.member.object.type === 'Identifier' &&
-                  contextReferenceIds.has(emit.member.object)
-                ) {
-                  // setup(props, context) { context.emit() }
-                  verifyEmitCall(node)
-                }
               }
             }
           },

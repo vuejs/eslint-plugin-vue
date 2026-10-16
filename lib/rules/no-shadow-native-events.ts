@@ -139,12 +139,14 @@ export default {
         }
 
         // verify $emit
-        if (emit?.name === '$emit') {
-          const memObject = utils.skipChainExpression(emit.member.object)
-          if (utils.isThis(memObject, context)) {
-            // verify this.$emit()
-            verifyEmit(nameWithLoc)
-          }
+        if (emit?.name !== '$emit') {
+          return
+        }
+
+        const memObject = utils.skipChainExpression(emit.member.object)
+        if (utils.isThis(memObject, context)) {
+          // verify this.$emit()
+          verifyEmit(nameWithLoc)
         }
       }
     }

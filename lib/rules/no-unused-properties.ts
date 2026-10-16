@@ -651,15 +651,17 @@ export default {
             propertyReferenceExtractor.extractFromFunctionParam(node, 0)
           container.propertyReferencesForProps.push(propertyReferences)
 
-          if (vueData.functional) {
-            // Check for Vue 2.x render & functional
-            const propertyReferencesForV2 =
-              propertyReferenceExtractor.extractFromFunctionParam(node, 1)
-
-            container.propertyReferencesForProps.push(
-              propertyReferencesForV2.getNest('props')
-            )
+          if (!vueData.functional) {
+            return
           }
+
+          // Check for Vue 2.x render & functional
+          const propertyReferencesForV2 =
+            propertyReferenceExtractor.extractFromFunctionParam(node, 1)
+
+          container.propertyReferencesForProps.push(
+            propertyReferencesForV2.getNest('props')
+          )
         },
         'ThisExpression, Identifier'(
           node: ThisExpression | Identifier,
