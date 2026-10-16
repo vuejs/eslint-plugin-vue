@@ -68,7 +68,7 @@ export default {
     const errors: Rule.ReportDescriptor[] = []
     let componentCount = 0
 
-    function compareNames(name: string, filename: string) {
+    function areNamesEquivalent(name: string, filename: string) {
       return shouldMatchCase
         ? name === filename
         : pascalCase(name) === filename || kebabCase(name) === filename
@@ -83,7 +83,7 @@ export default {
         name = String(node.value)
       }
 
-      if (!compareNames(name, filename)) {
+      if (!areNamesEquivalent(name, filename)) {
         errors.push({
           node,
           messageId: 'shouldMatchFileName',
