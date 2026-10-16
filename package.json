@@ -104,7 +104,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-eslint-plugin": "^7.4.1",
     "eslint-plugin-jsonc": "^3.2.0",
-    "eslint-plugin-markdown-preferences": "^0.41.1",
+    "eslint-plugin-markdown-preferences": "^0.42.0",
     "eslint-plugin-node-dependencies": "^2.2.0",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-unicorn": "^70.0.0",
