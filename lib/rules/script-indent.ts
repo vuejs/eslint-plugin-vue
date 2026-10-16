@@ -5,7 +5,6 @@
 import { defineVisitor } from '../utils/indent-common.ts'
 
 export default {
-  // eslint-disable-next-line eslint-plugin/prefer-message-ids
   meta: {
     type: 'layout',
     docs: {

@@ -2,7 +2,7 @@
  * @fileoverview Disallow unused properties, data and computed properties.
  * @author Learning Equality
  */
-import type { GroupName, VueObjectData } from '../utils/index.js'
+import type { ComponentProp, GroupName, VueObjectData } from '../utils/index.js'
 import type { IPropertyReferences } from '../utils/property-references.js'
 import utils from '../utils/index.js'
 import eslintUtils from '@eslint-community/eslint-utils'
@@ -65,6 +65,19 @@ const PROPERTY_LABEL = {
   watch: 'watch',
   provide: 'provide',
   expose: 'expose'
+}
+
+/**
+ * Check whether the given prop is explicitly typed as `never`.
+ * Such props are declared to forbid their usage, so they are never
+ * referenced by design and reporting them as unused is noise.
+ */
+function isNeverTypeProp(prop: ComponentProp): boolean {
+  return (
+    prop.type === 'type' &&
+    prop.node.type === 'TSPropertySignature' &&
+    prop.node.typeAnnotation?.typeAnnotation.type === 'TSNeverKeyword'
+  )
 }
 
 function findExpression(context: RuleContext, id: Identifier): Expression {
@@ -402,7 +415,7 @@ export default {
           )
 
           for (const prop of props) {
-            if (!prop.propName) {
+            if (!prop.propName || isNeverTypeProp(prop)) {
               continue
             }
             if (prop.type === 'object') {

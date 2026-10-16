@@ -92,7 +92,34 @@ tester.run('no-ref-object-reactivity-loss', rule, {
     `
     let r = $ref(0)
     let c = $computed(() => r)
-    console.log(r.value, c.value)
+    console.log(r, c)
+    `,
+    // https://github.com/vuejs/eslint-plugin-vue/issues/3056
+    // The body of an async function is not executed synchronously to the end.
+    `
+    import { ref } from 'vue'
+    const count = ref(0)
+    ;(async () => {
+      const value1 = count.value
+    })()
+    `,
+    // The body of a generator function is not executed by the call itself.
+    `
+    import { ref } from 'vue'
+    const count = ref(0)
+    ;(function* () {
+      const value1 = count.value
+    })()
+    `,
+    `
+    import { ref } from 'vue'
+    ;(() => {
+      const count = ref(0)
+      const value1 = computed(() => count.value)
+      function fn() {
+        console.log(count.value)
+      }
+    })()
     `
   ],
   invalid: [
@@ -348,6 +375,58 @@ tester.run('no-ref-object-reactivity-loss', rule, {
           column: 9,
           endLine: 7,
           endColumn: 15
+        }
+      ]
+    },
+    // https://github.com/vuejs/eslint-plugin-vue/issues/3056
+    {
+      code: `
+      import { ref } from 'vue'
+      const count = ref(0)
+      ;(() => {
+        const value1 = count.value
+      })()
+      ;(function () {
+        const value2 = count.value
+      })()
+      `,
+      errors: [
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 5,
+          column: 24,
+          endLine: 5,
+          endColumn: 29
+        },
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 8,
+          column: 24,
+          endLine: 8,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+      const count = ref(0)
+      ;(() => {
+        ;(() => {
+          const value1 = count.value
+        })()
+      })()
+      `,
+      errors: [
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 6,
+          column: 26,
+          endLine: 6,
+          endColumn: 31
         }
       ]
     }
