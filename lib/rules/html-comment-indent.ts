@@ -27,7 +27,7 @@ function parseOptions(type: number | 'tab' | undefined): {
 }
 
 function toDisplay(s: string, unitChar?: string) {
-  if (s.length === 0 && unitChar) {
+  if (unitChar && s.length === 0) {
     return `0 ${toUnit(unitChar)}s`
   }
   const char = s[0]

@@ -442,7 +442,7 @@ export function defineVisitor(
   function processSemicolons(node: MaybeNode): void {
     const firstToken = tokenStore.getFirstToken(node)
     const lastToken = tokenStore.getLastToken(node)
-    if (isSemicolonToken(lastToken) && firstToken !== lastToken) {
+    if (firstToken !== lastToken && isSemicolonToken(lastToken)) {
       setOffset(lastToken, 0, firstToken)
     }
 
@@ -453,8 +453,8 @@ export function defineVisitor(
     const info = offsets.get(firstToken)
     const prevToken = tokenStore.getTokenBefore(firstToken)
     if (
-      info != null &&
       prevToken &&
+      info != null &&
       isSemicolonToken(prevToken) &&
       prevToken.loc.end.line === firstToken.loc.start.line
     ) {

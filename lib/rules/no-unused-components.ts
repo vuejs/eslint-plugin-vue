@@ -93,8 +93,8 @@ export default {
         },
         "VElement[name='template']:exit"(node: VElement) {
           if (
-            node.loc.start !== templateLocation ||
             shouldIgnoreReporting ||
+            node.loc.start !== templateLocation ||
             utils.hasAttribute(node, 'src')
           )
             return

@@ -392,10 +392,10 @@ export default {
           onVueObjectExit(node, { type }) {
             const emits = vueEmitsDeclarations.get(node)
             if (
+              emits &&
               (!vueTemplateDefineData ||
                 (vueTemplateDefineData.type !== 'export' &&
                   vueTemplateDefineData.type !== 'setup')) &&
-              emits &&
               // eslint-disable-next-line unicorn/prefer-includes-over-repeated-comparisons -- narrows `type` for `vueTemplateDefineData` below
               (type === 'mark' || type === 'export' || type === 'definition')
             ) {

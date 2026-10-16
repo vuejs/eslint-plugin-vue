@@ -230,9 +230,8 @@ export default {
           const name = utils.getStaticPropertyName(node.parent)
           if (
             name === 'value' ||
-            name == null ||
-            // WritableComputedRef
-            name === 'effect'
+            name === 'effect' || // WritableComputedRef
+            name == null
           ) {
             return
           }

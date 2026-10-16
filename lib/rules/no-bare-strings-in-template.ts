@@ -236,7 +236,7 @@ export default {
         elementStack &&= elementStack.upper
       },
       VAttribute(node: VAttribute | VDirective) {
-        if (!node.value || !elementStack) {
+        if (!elementStack || !node.value) {
           return
         }
         if (node.directive === false) {
