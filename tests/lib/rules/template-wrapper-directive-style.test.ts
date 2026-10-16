@@ -94,9 +94,85 @@ tester.run('template-wrapper-directive-style', rule, {
     {
       filename: 'test.vue',
       code: '<template><TransitionGroup><template v-for="i in items" :key="i"><li>{{ i }}</li></template></TransitionGroup></template>'
+    },
+    // "never": slot templates combined with v-for or a dynamic slot name are ignored
+    {
+      filename: 'test.vue',
+      code: '<template><MyComp><template #default v-for="x in xs">{{ x }}</template></MyComp></template>',
+      options: [{ style: 'never' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComp><template #[name] v-if="a">x</template></MyComp></template>',
+      options: [{ style: 'never' }]
     }
   ],
   invalid: [
+    // "always": a component with v-slot is still an element, its v-if is reported
+    {
+      filename: 'test.vue',
+      code: '<template><MyComp v-slot="props" v-if="a">x</MyComp></template>',
+      errors: [
+        {
+          messageId: 'requireTemplate',
+          line: 1,
+          column: 34,
+          endLine: 1,
+          endColumn: 42
+        }
+      ]
+    },
+    // "never": nested wrappers are both reported
+    {
+      filename: 'test.vue',
+      code: '<template><template v-if="a"><template v-if="b"><div /></template></template></template>',
+      options: [{ style: 'never' }],
+      errors: [
+        {
+          messageId: 'disallowTemplate',
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 29
+        },
+        {
+          messageId: 'disallowTemplate',
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 48
+        }
+      ]
+    },
+    // "never": the whole <template> chain is reported
+    {
+      filename: 'test.vue',
+      code: '<template><template v-if="a"><p /></template><template v-else-if="b"><p /></template><template v-else><p /></template></template>',
+      options: [{ style: 'never' }],
+      errors: [
+        {
+          messageId: 'disallowTemplate',
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 29
+        },
+        {
+          messageId: 'disallowTemplate',
+          line: 1,
+          column: 56,
+          endLine: 1,
+          endColumn: 69
+        },
+        {
+          messageId: 'disallowTemplate',
+          line: 1,
+          column: 96,
+          endLine: 1,
+          endColumn: 102
+        }
+      ]
+    },
     // "always": direct children of <Transition> / <KeepAlive> are reported too
     {
       filename: 'test.vue',

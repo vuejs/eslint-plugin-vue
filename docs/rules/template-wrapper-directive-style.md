@@ -21,7 +21,8 @@ The root `<template>` of a single-file component and slot templates (`v-slot` / 
 
 Children of `<Transition>`, `<KeepAlive>` and `<TransitionGroup>` are checked like any other element.
 A `<template>` wrapper around a single element or component compiles to the same code as the directive
-on the element itself, so these components keep working with `"always"`.
+on the element itself, so these components keep working with `"always"`. A wrapper with more than one
+child is not allowed inside `<Transition>`; Vue reports that error on its own.
 
 <eslint-code-block :rules="{'vue/template-wrapper-directive-style': ['error']}">
 
@@ -89,3 +90,8 @@ Some templates cannot avoid a `<template>` wrapper, for example when several ele
 
 - [vue/no-lone-template](./no-lone-template.md)
 - [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/template-wrapper-directive-style.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/template-wrapper-directive-style.test.ts)

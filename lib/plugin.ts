@@ -227,6 +227,7 @@ import spaceInfixOps from './rules/space-infix-ops.ts'
 import spaceUnaryOps from './rules/space-unary-ops.ts'
 import staticClassNamesOrder from './rules/static-class-names-order.js'
 import templateCurlySpacing from './rules/template-curly-spacing.ts'
+import templateWrapperDirectiveStyle from './rules/template-wrapper-directive-style.ts'
 import thisInTemplate from './rules/this-in-template.js'
 import useVOnExact from './rules/use-v-on-exact.js'
 import vBindStyle from './rules/v-bind-style.ts'
@@ -489,6 +490,7 @@ export default {
     'space-unary-ops': spaceUnaryOps,
     'static-class-names-order': staticClassNamesOrder,
     'template-curly-spacing': templateCurlySpacing,
+    'template-wrapper-directive-style': templateWrapperDirectiveStyle,
     'this-in-template': thisInTemplate,
     'use-v-on-exact': useVOnExact,
     'v-bind-style': vBindStyle,
