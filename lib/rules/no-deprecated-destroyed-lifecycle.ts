@@ -6,21 +6,17 @@ import utils from '../utils/index.js'
 
 function fix(fixer: RuleFixer, property: Property, newName: string) {
   if (property.computed) {
-    if (
-      property.key.type === 'Literal' ||
+    return property.key.type === 'Literal' ||
       property.key.type === 'TemplateLiteral'
-    ) {
-      return fixer.replaceTextRange(
-        [property.key.range[0] + 1, property.key.range[1] - 1],
-        newName
-      )
-    }
-    return null
+      ? fixer.replaceTextRange(
+          [property.key.range[0] + 1, property.key.range[1] - 1],
+          newName
+        )
+      : null
   }
-  if (property.shorthand) {
-    return fixer.insertTextBefore(property.key, `${newName}:`)
-  }
-  return fixer.replaceText(property.key, newName)
+  return property.shorthand
+    ? fixer.insertTextBefore(property.key, `${newName}:`)
+    : fixer.replaceText(property.key, newName)
 }
 
 export default {

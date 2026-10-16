@@ -71,10 +71,9 @@ export default {
       sourceCode.parserServices.getDocumentFragment()
 
     function getTopLevelHTMLElements() {
-      if (documentFragment) {
-        return documentFragment.children.filter(utils.isVElement)
-      }
-      return []
+      return documentFragment
+        ? documentFragment.children.filter(utils.isVElement)
+        : []
     }
 
     return {

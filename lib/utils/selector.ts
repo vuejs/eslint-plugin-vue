@@ -325,10 +325,7 @@ function classNameNodeToVElementMatcher(
   const className = selector.value
   return (element) => {
     const attrValue = getAttributeValue(element, 'class')
-    if (attrValue == null) {
-      return false
-    }
-    return attrValue.split(/\s+/gu).includes(className)
+    return Boolean(attrValue?.split(/\s+/gu).includes(className))
   }
 }
 
@@ -339,13 +336,7 @@ function identifierNodeToVElementMatcher(
   selector: parser.Identifier
 ): VElementMatcher {
   const id = selector.value
-  return (element) => {
-    const attrValue = getAttributeValue(element, 'id')
-    if (attrValue == null) {
-      return false
-    }
-    return attrValue === id
-  }
+  return (element) => getAttributeValue(element, 'id') === id
 }
 
 /**
@@ -474,18 +465,12 @@ function pseudoHasSelectorToVElementMatcher(
   const nodes = cleanSelectorChildren(selector)
   const selectors = selectorToVElementMatcher(nodes)
   const firstNode = nodes[0]
-  if (
+  return buildVElementMatcher(
+    selectors,
     firstNode.type === 'combinator' &&
-    (firstNode.value === '+' || firstNode.value === '~')
-  ) {
-    // adjacent or sibling
-    return buildVElementMatcher(selectors, (element) =>
-      getAfterElements(element)
-    )
-  }
-  // descendant or child
-  return buildVElementMatcher(selectors, (element) =>
-    element.children.filter(utils.isVElement)
+      (firstNode.value === '+' || firstNode.value === '~')
+      ? (element) => getAfterElements(element) // adjacent or sibling
+      : (element) => element.children.filter(utils.isVElement) // descendant or child
   )
 }
 
@@ -586,8 +571,5 @@ function compound(a: VElementMatcher, b: VElementMatcher): VElementMatcher {
  */
 function getAttributeValue(element: VElement, attribute: string) {
   const attr = utils.getAttribute(element, attribute)
-  if (attr) {
-    return (attr.value && attr.value.value) || ''
-  }
-  return null
+  return attr ? attr.value?.value || '' : null
 }

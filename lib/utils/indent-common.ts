@@ -751,20 +751,20 @@ export function defineVisitor(
     lastExpectedIndent: number | undefined
   ): [number, number?] {
     if (typeof lastExpectedIndent === 'number' && isClosingToken(nextToken)) {
-      if (nextExpectedIndent === lastExpectedIndent) {
-        // For solo comment. E.g.,
-        // <div>
-        //    <!-- comment -->
-        // </div>
-        return [nextExpectedIndent + options.indentSize, nextExpectedIndent]
-      }
-
-      // For last comment. E.g.,
-      // <div>
-      //    <div></div>
-      //    <!-- comment -->
-      // </div>
-      return [lastExpectedIndent, nextExpectedIndent]
+      const indent =
+        nextExpectedIndent === lastExpectedIndent
+          ? // For solo comment. E.g.,
+            // <div>
+            //    <!-- comment -->
+            // </div>
+            nextExpectedIndent + options.indentSize
+          : // For last comment. E.g.,
+            // <div>
+            //    <div></div>
+            //    <!-- comment -->
+            // </div>
+            lastExpectedIndent
+      return [indent, nextExpectedIndent]
     }
 
     // Adjust to next normally. E.g.,
@@ -1532,15 +1532,15 @@ export function defineVisitor(
         }
       }
 
-      if (
+      setOffset(
+        beforeTokens,
         beforeTokens.every(
           (t) => isOpeningBraceToken(t) || isClosingBraceToken(t)
         )
-      ) {
-        setOffset(beforeTokens, 0, importToken)
-      } else {
-        setOffset(beforeTokens, 1, importToken)
-      }
+          ? 0
+          : 1,
+        importToken
+      )
       if (fromToken) {
         setOffset(fromToken, 1, importToken)
         setOffset(afterTokens, 0, fromToken)

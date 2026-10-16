@@ -440,16 +440,12 @@ function buildSuggest(
               `, '${nameWithLoc.name}'`
             )
           }
-          if (lastEmit.type === 'object') {
-            // Object
-            return fixer.insertTextAfter(
-              lastEmit.node,
-              `, '${nameWithLoc.name}': null`
-            )
-          }
-          // type
-          // The argument is unknown and cannot be suggested.
-          return null
+          return lastEmit.type === 'object'
+            ? fixer.insertTextAfter(
+                lastEmit.node,
+                `, '${nameWithLoc.name}': null`
+              )
+            : null
         }
       }
     ]

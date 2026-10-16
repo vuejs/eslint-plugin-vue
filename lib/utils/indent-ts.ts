@@ -1170,15 +1170,11 @@ export function defineVisitor({
       )
       setOffset(leftParenToken, 1, firstToken)
 
-      const args = []
-      if (node.source) {
-        args.push(node.source)
-      } else {
-        // For old typescript-eslint parser
-        args.push(
-          node.argument || /** typescript-eslint v5 */ (node as any).parameter
-        )
-      }
+      const args: MaybeNode[] = [
+        node.source ||
+          node.argument || // old typescript-eslint parser
+          /** typescript-eslint v5 */ (node as any).parameter // typescript-eslint v5
+      ]
       if (node.options) {
         args.push(node.options)
       }

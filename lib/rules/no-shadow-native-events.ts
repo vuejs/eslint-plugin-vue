@@ -26,11 +26,11 @@ function isEmitVariableName(
 ): boolean {
   const node = defineEmitsNode?.parent
 
-  if (node?.type === 'VariableDeclarator' && node.id.type === 'Identifier') {
-    return name === node.id.name
-  }
-
-  return false
+  return (
+    node?.type === 'VariableDeclarator' &&
+    node.id.type === 'Identifier' &&
+    name === node.id.name
+  )
 }
 
 export default {

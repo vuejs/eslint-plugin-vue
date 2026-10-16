@@ -13,24 +13,18 @@ import {
  */
 function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
   const parent = node.parent
-  if (
+  return (
     (parent.type === 'UpdateExpression' && parent.argument === node) || // e.g. `pattern++`
-    (parent.type === 'AssignmentExpression' && parent.left === node) // e.g. `pattern = 42`
-  ) {
-    return true
-  }
-  if (
-    (parent.type === 'Property' && parent.value === node) ||
-    parent.type === 'ArrayPattern' ||
-    (parent.type === 'ObjectPattern' &&
-      parent.properties.includes(node as any)) ||
-    (parent.type === 'AssignmentPattern' && parent.left === node) ||
-    parent.type === 'RestElement' ||
-    (parent.type === 'MemberExpression' && parent.object === node)
-  ) {
-    return isUpdate(parent)
-  }
-  return false
+    (parent.type === 'AssignmentExpression' && parent.left === node) || // e.g. `pattern = 42`
+    (((parent.type === 'Property' && parent.value === node) ||
+      parent.type === 'ArrayPattern' ||
+      (parent.type === 'ObjectPattern' &&
+        parent.properties.includes(node as any)) ||
+      (parent.type === 'AssignmentPattern' && parent.left === node) ||
+      parent.type === 'RestElement' ||
+      (parent.type === 'MemberExpression' && parent.object === node)) &&
+      isUpdate(parent))
+  )
 }
 
 /**

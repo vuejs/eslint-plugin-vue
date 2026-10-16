@@ -39,13 +39,17 @@ function toDisplay(s: string, unitChar?: string) {
 }
 
 function toUnit(char: string) {
-  if (char === '\t') {
-    return 'tab'
+  switch (char) {
+    case '\t': {
+      return 'tab'
+    }
+    case ' ': {
+      return 'space'
+    }
+    default: {
+      return JSON.stringify(char)
+    }
   }
-  if (char === ' ') {
-    return 'space'
-  }
-  return JSON.stringify(char)
 }
 
 export default {

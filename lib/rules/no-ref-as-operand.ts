@@ -18,10 +18,7 @@ function isRefInit(
   data: RefObjectReferenceForIdentifier | null
 ): data is RefObjectReferenceForIdentifier {
   const init = data && data.variableDeclarator && data.variableDeclarator.init
-  if (!init) {
-    return false
-  }
-  return data.defineChain.includes(init as any)
+  return init ? data.defineChain.includes(init as any) : false
 }
 
 /**

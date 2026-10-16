@@ -5,17 +5,15 @@
 import utils from '../utils/index.js'
 
 function isFunctionIdentifier(node: Expression | SpreadElement | null) {
-  return node && node.type === 'Identifier' && node.name === 'Function'
+  return !!node && node.type === 'Identifier' && node.name === 'Function'
 }
 
 function hasFunctionType(node: Expression): boolean {
-  if (isFunctionIdentifier(node)) {
-    return true
-  }
-  if (node.type === 'ArrayExpression') {
-    return node.elements.some(isFunctionIdentifier)
-  }
-  return false
+  return (
+    isFunctionIdentifier(node) ||
+    (node.type === 'ArrayExpression' &&
+      node.elements.some(isFunctionIdentifier))
+  )
 }
 
 export default {

@@ -13,19 +13,16 @@ const defaultCase = 'PascalCase'
  * Checks whether the given variable is the type-only import object.
  */
 function isTypeOnlyImport(variable: Variable): boolean {
-  if (variable.defs.length === 0) return false
-
-  return variable.defs.every((def) => {
-    if (def.type !== 'ImportBinding') {
-      return false
-    }
-    if (def.parent.importKind === 'type') {
-      // check for `import type Foo from './xxx'`
-      return true
-    }
-    // check for `import { type Foo } from './xxx'`
-    return def.node.type === 'ImportSpecifier' && def.node.importKind === 'type'
-  })
+  return (
+    variable.defs.length > 0 &&
+    variable.defs.every(
+      (def) =>
+        def.type === 'ImportBinding' &&
+        (def.parent.importKind === 'type' || // check for `import type Foo from './xxx'`
+          (def.node.type === 'ImportSpecifier' &&
+            def.node.importKind === 'type')) // check for `import { type Foo } from './xxx'`
+    )
+  )
 }
 
 export default {
@@ -129,15 +126,11 @@ export default {
         return false
       }
 
-      if (!shouldCheckRegisteredComponentsOnly) {
-        // If the user specifies registeredComponentsOnly as false, it checks all component tags.
-        return true
-      }
-
-      return (
-        registeredComponents.has(pascalCase(node.rawName)) ||
-        isGlobalPattern(node.rawName)
-      )
+      // If the user specifies registeredComponentsOnly as false, it checks all component tags.
+      return shouldCheckRegisteredComponentsOnly
+        ? registeredComponents.has(pascalCase(node.rawName)) ||
+            isGlobalPattern(node.rawName)
+        : true
     }
 
     let hasInvalidEOF = false

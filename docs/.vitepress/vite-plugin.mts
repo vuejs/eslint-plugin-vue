@@ -12,10 +12,9 @@ export function vitePluginRequireResolve(): Plugin {
   return {
     name: 'vite-plugin-require.resolve',
     transform(code, id) {
-      if (id.startsWith(libRoot)) {
-        return code.replaceAll('require.resolve', '(function(){return 0})')
-      }
-      return undefined
+      return id.startsWith(libRoot)
+        ? code.replaceAll('require.resolve', '(function(){return 0})')
+        : undefined
     }
   }
 }

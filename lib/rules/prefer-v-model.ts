@@ -18,10 +18,7 @@ const getStaticArgName = (directive: VDirective): string | null =>
  */
 function getUpdateEventPropName(onDirective: VDirective): string | null {
   const argName = getStaticArgName(onDirective)
-  if (!argName?.startsWith('update:')) {
-    return null
-  }
-  return argName.slice('update:'.length)
+  return argName?.startsWith('update:') ? argName.slice('update:'.length) : null
 }
 
 /**

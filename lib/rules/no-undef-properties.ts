@@ -56,10 +56,9 @@ function getPropertyDataFromObjectProperty(
   return {
     hasNestProperty: Boolean(propertyMap),
     get(name) {
-      if (!propertyMap) {
-        return null
-      }
-      return getPropertyDataFromObjectProperty(propertyMap.get(name))
+      return propertyMap
+        ? getPropertyDataFromObjectProperty(propertyMap.get(name))
+        : null
     }
   }
 }
@@ -355,10 +354,7 @@ export default {
         return null
       }
       const property = node.parent
-      if (!utils.isProperty(property)) {
-        return null
-      }
-      return property
+      return utils.isProperty(property) ? property : null
     }
 
     const scriptVisitor = utils.compositingVisitors(
@@ -503,10 +499,9 @@ export default {
               hasNestProperty: Boolean(propertyMap),
               isProps: prop.groupName === GROUP_PROPERTY,
               get(name) {
-                if (!propertyMap) {
-                  return null
-                }
-                return getPropertyDataFromObjectProperty(propertyMap.get(name))
+                return propertyMap
+                  ? getPropertyDataFromObjectProperty(propertyMap.get(name))
+                  : null
               }
             })
           }

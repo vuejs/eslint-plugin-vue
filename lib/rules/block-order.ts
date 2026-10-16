@@ -93,10 +93,9 @@ export default {
       sourceCode.parserServices.getDocumentFragment()
 
     function getTopLevelHTMLElements() {
-      if (documentFragment) {
-        return documentFragment.children.filter(utils.isVElement)
-      }
-      return []
+      return documentFragment
+        ? documentFragment.children.filter(utils.isVElement)
+        : []
     }
 
     return {
@@ -145,10 +144,7 @@ export default {
                 if (it === firstUnordered.element) {
                   return [element, it]
                 }
-                if (it === element) {
-                  return []
-                }
-                return [it]
+                return it === element ? [] : [it]
               })
               for (let i = elements.length - 1; i >= 0; i--) {
                 if (elements[i] !== fixedElements[i]) {

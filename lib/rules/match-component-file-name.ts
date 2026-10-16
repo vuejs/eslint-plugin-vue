@@ -69,11 +69,9 @@ export default {
     let componentCount = 0
 
     function compareNames(name: string, filename: string) {
-      if (shouldMatchCase) {
-        return name === filename
-      }
-
-      return pascalCase(name) === filename || kebabCase(name) === filename
+      return shouldMatchCase
+        ? name === filename
+        : pascalCase(name) === filename || kebabCase(name) === filename
     }
 
     function verifyName(node: Literal | TemplateLiteral) {

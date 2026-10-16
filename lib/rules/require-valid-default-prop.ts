@@ -42,17 +42,19 @@ function getPropertyNode(obj: ObjectExpression, name: string): Property | null {
 
 function getTypes(targetNode: Expression): string[] {
   const node = utils.skipTSAsExpression(targetNode)
-  if (node.type === 'Identifier') {
-    return [node.name]
-  }
-  if (node.type === 'ArrayExpression') {
-    return node.elements
-      .filter(
-        (item): item is Identifier => item != null && item.type === 'Identifier'
+  switch (node.type) {
+    case 'Identifier': {
+      return [node.name]
+    }
+    case 'ArrayExpression': {
+      return node.elements.flatMap((item) =>
+        item != null && item.type === 'Identifier' ? [item.name] : []
       )
-      .map((item) => item.name)
+    }
+    default: {
+      return []
+    }
   }
-  return []
 }
 
 export default {

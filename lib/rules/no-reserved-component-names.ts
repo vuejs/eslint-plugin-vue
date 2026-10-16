@@ -109,8 +109,9 @@ export default {
     function getMessageId(name: string): string {
       if (isReservedInHtml(name)) return 'reservedInHtml'
       if (utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue'
-      if (utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue3'
-      return 'reserved'
+      return utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)
+        ? 'reservedInVue3'
+        : 'reserved'
     }
 
     function reportIfInvalid(node: Literal | TemplateLiteral) {
