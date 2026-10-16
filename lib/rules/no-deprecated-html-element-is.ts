@@ -2,11 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,10 +19,8 @@ module.exports = {
       unexpected: 'The `is` attribute on HTML element are deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @param {VElement} node */
-    function isValidElement(node) {
+  create(context: RuleContext) {
+    function isValidElement(node: VElement) {
       return (
         !utils.isHtmlWellKnownElementName(node.rawName) &&
         !utils.isSvgWellKnownElementName(node.rawName) &&
@@ -32,9 +28,8 @@ module.exports = {
       )
     }
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
       "VAttribute[directive=true][key.name.name='bind'][key.argument.name='is']"(
-        node
+        node: VDirective
       ) {
         if (isValidElement(node.parent.parent)) {
           return
@@ -45,8 +40,7 @@ module.exports = {
           messageId: 'unexpected'
         })
       },
-      /** @param {VAttribute} node */
-      "VAttribute[directive=false][key.name='is']"(node) {
+      "VAttribute[directive=false][key.name='is']"(node: VAttribute) {
         if (isValidElement(node.parent.parent)) {
           return
         }

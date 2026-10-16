@@ -2,12 +2,10 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import vIs from './syntaxes/v-is.js'
 
-const utils = require('../utils')
-const vIs = require('./syntaxes/v-is')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -21,8 +19,7 @@ module.exports = {
       forbiddenVIs: '`v-is` directive is deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const templateBodyVisitor = vIs.createTemplateBodyVisitor(context)
     return utils.defineTemplateBodyVisitor(context, templateBodyVisitor)
   }

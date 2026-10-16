@@ -2,11 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,12 +19,10 @@ module.exports = {
       deprecated: "'.native' modifier on 'v-on' directive is deprecated."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VIdentifier & {parent:VDirectiveKey} } node */
       "VAttribute[directive=true][key.name.name='on'] > VDirectiveKey > VIdentifier[name='native']"(
-        node
+        node: VIdentifier & { parent: VDirectiveKey }
       ) {
         const key = node.parent
         if (!key.modifiers.includes(node)) return

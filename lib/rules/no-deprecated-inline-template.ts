@@ -2,11 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,12 +19,10 @@ module.exports = {
       unexpected: '`inline-template` are deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VIdentifier} node */
       "VAttribute[directive=false] > VIdentifier[rawName='inline-template']"(
-        node
+        node: VIdentifier
       ) {
         context.report({
           node,

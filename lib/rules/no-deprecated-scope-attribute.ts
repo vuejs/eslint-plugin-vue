@@ -2,12 +2,10 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import scopeAttribute from './syntaxes/scope-attribute.js'
 
-const utils = require('../utils')
-const scopeAttribute = require('./syntaxes/scope-attribute')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -22,8 +20,7 @@ module.exports = {
       forbiddenScopeAttribute: '`scope` attributes are deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const templateBodyVisitor =
       scopeAttribute.createTemplateBodyVisitor(context)
     return utils.defineTemplateBodyVisitor(context, templateBodyVisitor)

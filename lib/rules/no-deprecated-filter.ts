@@ -2,11 +2,9 @@
  * @author Przemyslaw Falowski (@przemkow)
  * @fileoverview disallow using deprecated filters syntax
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,10 +19,9 @@ module.exports = {
       noDeprecatedFilter: 'Filters are deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      VFilterSequenceExpression(node) {
+      VFilterSequenceExpression(node: VFilterSequenceExpression) {
         context.report({
           node,
           loc: node.loc,
