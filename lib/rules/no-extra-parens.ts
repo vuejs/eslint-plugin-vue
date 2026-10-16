@@ -126,7 +126,6 @@ function createForVueSyntax(context: RuleContext): TemplateListener {
     }
 
     const expression =
-      // eslint-disable-next-line unicorn/prefer-minimal-ternary -- factoring `.expression` out would re-widen the type to include `null`
       node.expression.type === 'VFilterSequenceExpression'
         ? node.expression.expression
         : node.expression
