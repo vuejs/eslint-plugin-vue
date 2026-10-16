@@ -65,7 +65,7 @@ export default {
 
 </eslint-code-block>
 
-If type information is available (e.g. `parserOptions.projectService` of [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser) is enabled), this rule also reports values whose type is a ref, such as refs returned from composables.
+If type information is available (e.g. [`parserOptions.projectService`](https://typescript-eslint.io/packages/parser#projectservice) of [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser) is enabled), this rule also reports values whose type is a ref, such as refs returned from composables.
 
 ## :wrench: Options
 

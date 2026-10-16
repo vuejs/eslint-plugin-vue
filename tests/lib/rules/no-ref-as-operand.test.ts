@@ -309,6 +309,7 @@ tester.run('no-ref-as-operand', rule, {
     </script>
     `,
     {
+      // typescript-eslint parser without project service
       code: `
       <script setup lang="ts">
       import type { Ref } from 'vue'
