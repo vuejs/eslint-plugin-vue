@@ -264,32 +264,31 @@ function attributeNodeToVElementMatcher(
 
   switch (selector.operator) {
     case '=': {
-      return buildVElementMatcher(value, (attr, val) => attr === val)
+      return buildVElementMatcher((attr, val) => attr === val)
     }
     case '~=': {
       // words
-      return buildVElementMatcher(value, (attr, val) =>
+      return buildVElementMatcher((attr, val) =>
         attr.split(/\s+/gu).includes(val)
       )
     }
     case '|=': {
       // immediately followed by hyphen
       return buildVElementMatcher(
-        value,
         (attr, val) => attr === val || attr.startsWith(`${val}-`)
       )
     }
     case '^=': {
       // prefixed
-      return buildVElementMatcher(value, (attr, val) => attr.startsWith(val))
+      return buildVElementMatcher((attr, val) => attr.startsWith(val))
     }
     case '$=': {
       // suffixed
-      return buildVElementMatcher(value, (attr, val) => attr.endsWith(val))
+      return buildVElementMatcher((attr, val) => attr.endsWith(val))
     }
     case '*=': {
       // contains
-      return buildVElementMatcher(value, (attr, val) => attr.includes(val))
+      return buildVElementMatcher((attr, val) => attr.includes(val))
     }
     default: {
       throw new SelectorError(`Unsupported operator: ${selector.operator}.`)
@@ -297,12 +296,9 @@ function attributeNodeToVElementMatcher(
   }
 
   function buildVElementMatcher(
-    selectorValue: string,
     test: (attrValue: string, selectorValue: string) => boolean
   ): VElementMatcher {
-    const val = selector.insensitive
-      ? selectorValue.toLowerCase()
-      : selectorValue
+    const val = selector.insensitive ? value.toLowerCase() : value
     return (element) => {
       const attrValue = getAttributeValue(element, key)
       if (attrValue == null) {
