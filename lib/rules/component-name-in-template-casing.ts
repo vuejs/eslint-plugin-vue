@@ -116,12 +116,8 @@ export default {
      * Checks whether the given node is the verification target node.
      */
     function isVerifyTarget(node: VElement): boolean {
-      if (isIgnored(node.rawName)) {
-        // ignore
-        return false
-      }
-
       if (
+        isIgnored(node.rawName) ||
         (!utils.isHtmlElementNode(node) &&
           !utils.isSvgElementNode(node) &&
           !utils.isMathElementNode(node)) ||
@@ -150,11 +146,7 @@ export default {
       context,
       {
         VElement(node) {
-          if (hasInvalidEOF) {
-            return
-          }
-
-          if (!isVerifyTarget(node)) {
+          if (hasInvalidEOF || !isVerifyTarget(node)) {
             return
           }
 

@@ -302,11 +302,7 @@ export default {
         if (
           reserved.includes(name) ||
           isIgnored(name) ||
-          propertiesDefinedByStoreHelpers.has(name)
-        ) {
-          return
-        }
-        if (
+          propertiesDefinedByStoreHelpers.has(name) ||
           // Prevents reporting to the same node.
           this.reported.has(node) ||
           // Prevents reports with the same name.

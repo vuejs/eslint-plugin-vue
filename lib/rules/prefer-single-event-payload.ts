@@ -213,10 +213,8 @@ export default {
         utils.defineVueVisitor(context, {
           onSetupFunctionEnter(node, { node: vueNode }) {
             const contextParam = utils.skipDefaultParamValue(node.params[1])
-            if (!contextParam) {
-              return
-            }
             if (
+              !contextParam ||
               contextParam.type === 'RestElement' ||
               contextParam.type === 'ArrayPattern'
             ) {

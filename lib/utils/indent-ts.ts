@@ -185,10 +185,10 @@ export function defineVisitor({
       processSemicolons(node)
     },
     '*[type=/^TS/]'(node: ASTNode) {
-      if (!utils.isTypeNode(node)) {
-        return
-      }
-      if ((node.parent as any).type === 'TSParenthesizedType') {
+      if (
+        !utils.isTypeNode(node) ||
+        (node.parent as any).type === 'TSParenthesizedType'
+      ) {
         return
       }
       // Process parentheses.

@@ -130,25 +130,16 @@ function createForVueSyntax(context: RuleContext): TemplateListener {
         ? node.expression.expression
         : node.expression
 
-    if (!isParenthesized(expression, tokenStore)) {
-      return
+    if (
+      isParenthesized(expression, tokenStore) &&
+      (isParenthesized(2, expression, tokenStore) ||
+        ((!isIIFE(expression) ||
+          isParenthesized(expression.callee, tokenStore)) &&
+          !isUnwrapChangeToFilter(expression) &&
+          !isStyleVariableWithoutQuote(node, expression)))
+    ) {
+      report(expression)
     }
-
-    if (!isParenthesized(2, expression, tokenStore)) {
-      if (
-        isIIFE(expression) &&
-        !isParenthesized(expression.callee, tokenStore)
-      ) {
-        return
-      }
-      if (isUnwrapChangeToFilter(expression)) {
-        return
-      }
-      if (isStyleVariableWithoutQuote(node, expression)) {
-        return
-      }
-    }
-    report(expression)
   }
 
   /**

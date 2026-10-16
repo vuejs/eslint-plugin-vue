@@ -41,11 +41,9 @@ export default {
         MemberExpression(node) {
           if (
             node.property.type !== 'Identifier' ||
-            node.property.name !== '$listeners'
+            node.property.name !== '$listeners' ||
+            !utils.isThis(node.object, context)
           ) {
-            return
-          }
-          if (!utils.isThis(node.object, context)) {
             return
           }
 

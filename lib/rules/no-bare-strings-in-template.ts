@@ -82,10 +82,7 @@ function parseTargetAttrs(options: Record<string, string[]>): TargetAttrs {
  */
 function getStringValue(value: VExpressionContainer): string | null {
   const expression = value.expression
-  if (!expression) {
-    return null
-  }
-  if (expression.type !== 'Literal') {
+  if (!expression || expression.type !== 'Literal') {
     return null
   }
   if (typeof expression.value === 'string') {

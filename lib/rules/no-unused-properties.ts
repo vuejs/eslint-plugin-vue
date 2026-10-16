@@ -318,21 +318,11 @@ export default {
       if (
         (property.groupName === 'props' &&
           propertyReferencesForProps.hasProperty(property.name)) ||
-        propertyReferences.hasProperty('$props')
-      ) {
-        // used props
-        return
-      }
-      if (
-        property.groupName === 'setup' &&
-        templatePropertiesContainer.refNames.has(property.name)
-      ) {
-        // used template refs
-        return
-      }
-      if (
-        shouldIgnorePublicMembers &&
-        isPublicMember(property, context.sourceCode)
+        propertyReferences.hasProperty('$props') ||
+        (property.groupName === 'setup' &&
+          templatePropertiesContainer.refNames.has(property.name)) ||
+        (shouldIgnorePublicMembers &&
+          isPublicMember(property, context.sourceCode))
       ) {
         return
       }

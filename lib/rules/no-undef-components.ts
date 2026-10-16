@@ -225,13 +225,11 @@ export default {
       })
 
       verifyName = (rawName, reportNode) => {
-        if (!isVerifyTargetComponent(rawName)) {
-          return
-        }
-        if (definedInSetupComponents.isDefinedComponent(rawName)) {
-          return
-        }
-        if (definedInOptionComponents.isDefinedComponent(rawName)) {
+        if (
+          !isVerifyTargetComponent(rawName) ||
+          definedInSetupComponents.isDefinedComponent(rawName) ||
+          definedInOptionComponents.isDefinedComponent(rawName)
+        ) {
           return
         }
 
@@ -263,10 +261,10 @@ export default {
       })
 
       verifyName = (rawName, reportNode) => {
-        if (!isVerifyTargetComponent(rawName)) {
-          return
-        }
-        if (definedInOptionComponents.isDefinedComponent(rawName)) {
+        if (
+          !isVerifyTargetComponent(rawName) ||
+          definedInOptionComponents.isDefinedComponent(rawName)
+        ) {
           return
         }
 

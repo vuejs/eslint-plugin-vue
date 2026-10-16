@@ -191,16 +191,13 @@ export default {
     const vueVisitor = utils.defineVueVisitor(context, {
       onSetupFunctionEnter(node, { node: vueNode }) {
         const contextParam = node.params[1]
-        if (!contextParam) {
+        if (
           // no arguments
-          return
-        }
-        if (contextParam.type === 'RestElement') {
+          !contextParam ||
           // cannot check
-          return
-        }
-        if (contextParam.type === 'ArrayPattern') {
-          // cannot check
+          contextParam.type === 'RestElement' ||
+          contextParam.type === 'ArrayPattern'
+        ) {
           return
         }
         const contextReferenceIds = new Set<Identifier>()

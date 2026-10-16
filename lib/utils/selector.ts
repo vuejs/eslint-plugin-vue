@@ -87,14 +87,11 @@ function cleanSelectorChildren(selector: parser.Selector): ChildNode[] {
     if (node.type === 'root') {
       throw new SelectorError('Unexpected state type=root')
     }
-    if (node.type === 'comment') {
-      continue
-    }
     if (
-      (last == null || last.type === 'combinator') &&
-      isDescendantCombinator(node)
+      node.type === 'comment' ||
+      ((last == null || last.type === 'combinator') &&
+        isDescendantCombinator(node))
     ) {
-      // Ignore descendant combinator
       continue
     }
     if (isDescendantCombinator(last) && node.type === 'combinator') {

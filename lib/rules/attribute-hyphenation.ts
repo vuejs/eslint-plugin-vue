@@ -94,15 +94,11 @@ export default {
           text
         },
         fix: (fixer) => {
-          if (text.includes('_')) {
-            return null
-          }
-
-          if (text.endsWith('.sync')) {
-            return null
-          }
-
-          if (/^[A-Z]/.test(name)) {
+          if (
+            text.includes('_') ||
+            text.endsWith('.sync') ||
+            /^[A-Z]/.test(name)
+          ) {
             return null
           }
 

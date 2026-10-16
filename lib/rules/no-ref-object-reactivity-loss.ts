@@ -13,12 +13,10 @@ import {
  */
 function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
   const parent = node.parent
-  if (parent.type === 'UpdateExpression' && parent.argument === node) {
-    // e.g. `pattern++`
-    return true
-  }
-  if (parent.type === 'AssignmentExpression' && parent.left === node) {
-    // e.g. `pattern = 42`
+  if (
+    (parent.type === 'UpdateExpression' && parent.argument === node) || // e.g. `pattern++`
+    (parent.type === 'AssignmentExpression' && parent.left === node) // e.g. `pattern = 42`
+  ) {
     return true
   }
   if (
@@ -45,10 +43,11 @@ function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
 function isImmediatelyInvokedFunction(
   node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
 ): boolean {
-  if (node.type === 'FunctionDeclaration') {
-    return false
-  }
-  if (node.async || (node.type === 'FunctionExpression' && node.generator)) {
+  if (
+    node.type === 'FunctionDeclaration' ||
+    node.async ||
+    (node.type === 'FunctionExpression' && node.generator)
+  ) {
     return false
   }
   const parent = node.parent
@@ -95,11 +94,7 @@ export default {
      */
     function verifyRefObjectValue(node: Expression | Super | ObjectPattern) {
       const ref = refObjectReferences.get(node)
-      if (!ref) {
-        return
-      }
-      if (scopes.get(ref.define) !== scopeStack) {
-        // Not in the same scope
+      if (!ref || scopes.get(ref.define) !== scopeStack) {
         return
       }
 
@@ -114,11 +109,7 @@ export default {
      */
     function verifyReactiveVariable(node: Identifier) {
       const ref = reactiveVariableReferences.get(node)
-      if (!ref || ref.escape) {
-        return
-      }
-      if (scopes.get(ref.define) !== scopeStack) {
-        // Not in the same scope
+      if (!ref || ref.escape || scopes.get(ref.define) !== scopeStack) {
         return
       }
 

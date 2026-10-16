@@ -75,10 +75,10 @@ export default {
     return utils.defineVueVisitor(context, {
       onVueObjectEnter(node) {
         for (const prop of utils.getComponentPropsFromOptions(node)) {
-          if (prop.type !== 'object') {
-            continue
-          }
-          if (prop.value.type !== 'ObjectExpression') {
+          if (
+            prop.type !== 'object' ||
+            prop.value.type !== 'ObjectExpression'
+          ) {
             continue
           }
           const def = utils.findProperty(prop.value, 'default')
@@ -86,11 +86,10 @@ export default {
             continue
           }
           const type = utils.findProperty(prop.value, 'type')
-          if (type && hasFunctionType(type.value)) {
-            // ignore function type
-            continue
-          }
-          if (def.value.type !== 'FunctionExpression') {
+          if (
+            (type && hasFunctionType(type.value)) ||
+            def.value.type !== 'FunctionExpression'
+          ) {
             continue
           }
           propsDefault.add(def.value)

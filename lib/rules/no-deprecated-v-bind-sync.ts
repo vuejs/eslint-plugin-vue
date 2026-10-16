@@ -29,12 +29,7 @@ export default {
             loc: node.loc,
             messageId: 'syncModifierIsDeprecated',
             fix(fixer) {
-              if (node.key.argument == null) {
-                // is using spread syntax
-                return null
-              }
-              if (node.key.modifiers.length > 1) {
-                // has multiple modifiers
+              if (node.key.argument == null || node.key.modifiers.length > 1) {
                 return null
               }
 

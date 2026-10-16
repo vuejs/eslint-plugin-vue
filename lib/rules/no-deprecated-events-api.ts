@@ -33,21 +33,15 @@ export default {
             ? node.parent.parent
             : node.parent
 
-        if (call.optional) {
-          // It is OK because checking whether it is deprecated.
-          // e.g. `this.$on?.()`
-          return
-        }
-
+        // Optional chaining (e.g. `this.$on?.()`) is OK because checking whether it is deprecated.
         if (
+          call.optional ||
           utils.skipChainExpression(call.callee) !== node ||
           !['$on', '$off', '$once'].includes(
             utils.getStaticPropertyName(node) || ''
-          )
+          ) ||
+          !utils.isThis(node.object, context)
         ) {
-          return
-        }
-        if (!utils.isThis(node.object, context)) {
           return
         }
 

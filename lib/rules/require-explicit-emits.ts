@@ -224,11 +224,7 @@ export default {
         CallExpression(node) {
           const callee = utils.skipChainExpression(node.callee)
           const nameWithLoc = utils.getNameParamNode(node)
-          if (!nameWithLoc) {
-            // cannot check
-            return
-          }
-          if (!vueTemplateDefineData) {
+          if (!nameWithLoc || !vueTemplateDefineData) {
             return
           }
 
@@ -328,16 +324,13 @@ export default {
           },
           onSetupFunctionEnter(node, { node: vueNode }) {
             const contextParam = node.params[1]
-            if (!contextParam) {
+            if (
               // no arguments
-              return
-            }
-            if (contextParam.type === 'RestElement') {
+              !contextParam ||
               // cannot check
-              return
-            }
-            if (contextParam.type === 'ArrayPattern') {
-              // cannot check
+              contextParam.type === 'RestElement' ||
+              contextParam.type === 'ArrayPattern'
+            ) {
               return
             }
             const contextReferenceIds = new Set<Identifier>()

@@ -289,14 +289,13 @@ export default {
             })
           }
         } else {
-          if (typeNames.has(defType.type)) {
-            if (defaultDef.src === 'assignment') {
-              return
-            }
-            if (!FUNCTION_VALUE_TYPES.has(defType.type)) {
-              // For Array and Object, defaults must be defined in the factory function.
-              return
-            }
+          if (
+            typeNames.has(defType.type) &&
+            (defaultDef.src === 'assignment' ||
+              !FUNCTION_VALUE_TYPES.has(defType.type))
+          ) {
+            // For Array and Object, defaults must be defined in the factory function.
+            return
           }
           report(
             defaultDef.expression,
