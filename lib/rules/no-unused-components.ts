@@ -37,10 +37,7 @@ export default {
   },
   create(context: RuleContext) {
     const options = context.options[0] || {}
-    const ignoreWhenBindingPresent =
-      options.ignoreWhenBindingPresent === undefined
-        ? true
-        : options.ignoreWhenBindingPresent
+    const ignoreWhenBindingPresent = options.ignoreWhenBindingPresent ?? true
     const usedComponents = new Set<string>()
     let registeredComponents: { node: Property; name: string }[] = []
     let shouldIgnoreReporting = false
