@@ -33,43 +33,43 @@ tester.run('block-lang', rule, {
       <script></script>
       <style></style>
     `,
-    // `allowNoBlock` defaults to `true`, so a missing block is not reported.
+    // `required` defaults to `false`, so a missing block is not reported.
     {
       code: '<template><div /></template>',
       options: [{ script: { lang: 'ts' } }]
     },
     {
       code: '<template><div /></template>',
-      options: [{ script: { lang: 'ts', allowNoBlock: true } }]
+      options: [{ script: { lang: 'ts', required: false } }]
     },
     '<template><div /></template>',
     {
       code: `<template></template>
       <script lang="ts"></script>`,
-      options: [{ script: { lang: 'ts', allowNoBlock: false } }]
+      options: [{ script: { lang: 'ts', required: true } }]
     },
     {
       code: `<template></template>
       <script setup lang="ts"></script>`,
-      options: [{ script: { lang: 'ts', allowNoBlock: false } }]
+      options: [{ script: { lang: 'ts', required: true } }]
     },
-    // A block with no `lang` satisfies `allowNoBlock` on its own.
+    // A block with no `lang` satisfies `required` on its own.
     {
       code: `<template></template>
       <script></script>`,
-      options: [{ script: { allowNoBlock: false } }]
+      options: [{ script: { required: true } }]
     },
     {
       code: `<template></template>
       <script></script>`,
-      options: [{ script: { lang: 'js', allowNoBlock: false } }]
+      options: [{ script: { lang: 'js', required: true } }]
     },
     // Several blocks of the same name.
     {
       code: `<i18n lang="json"></i18n>
       <i18n lang="json"></i18n>
       <template></template>`,
-      options: [{ i18n: { lang: 'json', allowNoBlock: false } }]
+      options: [{ i18n: { lang: 'json', required: true } }]
     },
     {
       code: `<template></template>
@@ -77,9 +77,9 @@ tester.run('block-lang', rule, {
       <style lang="scss"></style>`,
       options: [
         {
-          template: { allowNoBlock: false },
-          script: { lang: 'ts', allowNoBlock: false },
-          style: { lang: 'scss', allowNoBlock: false }
+          template: { required: true },
+          script: { lang: 'ts', required: true },
+          style: { lang: 'scss', required: true }
         }
       ]
     },
@@ -87,7 +87,7 @@ tester.run('block-lang', rule, {
     {
       filename: 'test.js',
       code: 'var a = 1',
-      options: [{ script: { lang: 'ts', allowNoBlock: false } }]
+      options: [{ script: { lang: 'ts', required: true } }]
     }
   ],
   invalid: [
@@ -266,7 +266,7 @@ tester.run('block-lang', rule, {
     // https://github.com/vuejs/eslint-plugin-vue/issues/2720
     {
       code: '<template><div /></template>',
-      options: [{ script: { lang: 'ts', allowNoBlock: false } }],
+      options: [{ script: { lang: 'ts', required: true } }],
       errors: [
         {
           message: "The '<script>' block is missing.",
@@ -280,7 +280,7 @@ tester.run('block-lang', rule, {
     {
       filename: 'test.vue',
       code: '',
-      options: [{ script: { lang: 'ts', allowNoBlock: false } }],
+      options: [{ script: { lang: 'ts', required: true } }],
       errors: [
         {
           message: "The '<script>' block is missing.",
@@ -294,7 +294,7 @@ tester.run('block-lang', rule, {
     // Requiring a block without restricting its `lang`.
     {
       code: '<template><div /></template>',
-      options: [{ script: { allowNoBlock: false } }],
+      options: [{ script: { required: true } }],
       errors: [
         {
           message: "The '<script>' block is missing.",
@@ -307,7 +307,7 @@ tester.run('block-lang', rule, {
     },
     {
       code: `<script lang="ts"></script>`,
-      options: [{ template: { allowNoBlock: false } }],
+      options: [{ template: { required: true } }],
       errors: [
         {
           message: "The '<template>' block is missing.",
@@ -322,7 +322,7 @@ tester.run('block-lang', rule, {
     {
       code: `<template></template>
       <script lang="ts"></script>`,
-      options: [{ i18n: { lang: 'json', allowNoBlock: false } }],
+      options: [{ i18n: { lang: 'json', required: true } }],
       errors: [
         {
           message: "The '<i18n>' block is missing.",
@@ -338,8 +338,8 @@ tester.run('block-lang', rule, {
       code: '<template><div /></template>',
       options: [
         {
-          script: { lang: 'ts', allowNoBlock: false },
-          style: { lang: 'scss', allowNoBlock: false }
+          script: { lang: 'ts', required: true },
+          style: { lang: 'scss', required: true }
         }
       ],
       errors: [
@@ -363,7 +363,7 @@ tester.run('block-lang', rule, {
     {
       code: `<template></template>
       <script></script>`,
-      options: [{ script: { lang: 'ts', allowNoBlock: false } }],
+      options: [{ script: { lang: 'ts', required: true } }],
       errors: [
         {
           message: "The 'lang' attribute of '<script>' is missing.",
@@ -377,7 +377,7 @@ tester.run('block-lang', rule, {
     {
       code: `<template></template>
       <script setup></script>`,
-      options: [{ script: { lang: 'ts', allowNoBlock: false } }],
+      options: [{ script: { lang: 'ts', required: true } }],
       errors: [
         {
           message: "The 'lang' attribute of '<script>' is missing.",
@@ -393,8 +393,8 @@ tester.run('block-lang', rule, {
       code: `<template lang="pug"></template>`,
       options: [
         {
-          template: { lang: 'pug', allowNoBlock: false },
-          script: { lang: 'ts', allowNoBlock: false }
+          template: { lang: 'pug', required: true },
+          script: { lang: 'ts', required: true }
         }
       ],
       errors: [
