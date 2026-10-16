@@ -107,7 +107,7 @@ export default {
 
         const elementsWithOrder = elements.flatMap((element) => {
           const order = getOrderElement(element)
-          return order ? [{ order, element }] : []
+          return order ? { order, element } : []
         })
         for (const [index, elementWithOrders] of elementsWithOrder.entries()) {
           const { order: expected, element } = elementWithOrders
