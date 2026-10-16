@@ -84,15 +84,12 @@ tester.run('no-ref-object-reactivity-loss', rule, {
     const count = $ref(0)
     const value1 = count
     const value2 = fn(count)
+    let c = $computed(() => count)
+    console.log(count, c)
     `,
     `
     const { count } = $(foo)
     const value1 = count
-    `,
-    `
-    let r = $ref(0)
-    let c = $computed(() => r)
-    console.log(r, c)
     `,
     // https://github.com/vuejs/eslint-plugin-vue/issues/3056
     // The body of an async function is not executed synchronously to the end.
