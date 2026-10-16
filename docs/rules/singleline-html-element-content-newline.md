@@ -65,7 +65,7 @@ This rule enforces a line break before and after the contents of a singleline el
   "vue/singleline-html-element-content-newline": ["error", {
     "ignoreWhenNoAttributes": true,
     "ignoreWhenEmpty": true,
-    "ignores": ["pre", "textarea", ...INLINE_ELEMENTS],
+    "ignores": ["pre", "textarea", "router-link", "nuxt-link", ...INLINE_ELEMENTS],
     "externalIgnores": []
   }]
 }
@@ -76,12 +76,12 @@ This rule enforces a line break before and after the contents of a singleline el
 - `ignoreWhenEmpty` ... disables reporting when element has no content.
     default `true`
 - `ignores` ... the configuration for element names to ignore line breaks style.
-    default `["pre", "textarea", ...INLINE_ELEMENTS]`
+    default `["pre", "textarea", "router-link", "nuxt-link", ...INLINE_ELEMENTS]`
 - `externalIgnores` ... the configuration for external element names to ignore line breaks style, it allows avoiding overwrite the default value of ignores.
     default `[]`
 
 ::: info
-  All inline non void elements (including `router-link` and `nuxt-link`) can be found [here](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/inline-non-void-elements.json).
+  All inline non void elements can be found [here](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/inline-non-void-elements.json).
 :::
 
 ### `"ignoreWhenNoAttributes": true`
