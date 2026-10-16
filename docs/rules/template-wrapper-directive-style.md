@@ -19,6 +19,10 @@ either always on a `<template>` wrapper, or never on one.
 The root `<template>` of a single-file component and slot templates (`v-slot` / `#name`, `slot-scope`,
 `slot`) are always ignored, because they are required by Vue.
 
+Children of `<Transition>`, `<KeepAlive>` and `<TransitionGroup>` are checked like any other element.
+A `<template>` wrapper around a single element or component compiles to the same code as the directive
+on the element itself, so these components keep working with `"always"`.
+
 <eslint-code-block :rules="{'vue/template-wrapper-directive-style': ['error']}">
 
 ```vue

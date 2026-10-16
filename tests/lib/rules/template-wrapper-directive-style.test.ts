@@ -80,9 +80,50 @@ tester.run('template-wrapper-directive-style', rule, {
       filename: 'test.vue',
       code: '<template><MyComp><template slot-scope="props" v-if="a">x</template></MyComp></template>',
       options: [{ style: 'never' }]
+    },
+    // <Transition> / <KeepAlive> / <TransitionGroup> compile to the same code with a
+    // single-child <template> wrapper, so they get no exception
+    {
+      filename: 'test.vue',
+      code: '<template><Transition><template v-if="show"><p>hello</p></template></Transition></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><KeepAlive><template v-if="show"><CompA /></template><template v-else><CompB /></template></KeepAlive></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><TransitionGroup><template v-for="i in items" :key="i"><li>{{ i }}</li></template></TransitionGroup></template>'
     }
   ],
   invalid: [
+    // "always": direct children of <Transition> / <KeepAlive> are reported too
+    {
+      filename: 'test.vue',
+      code: '<template><Transition><p v-if="show">hello</p></Transition></template>',
+      errors: [
+        {
+          messageId: 'requireTemplate',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><KeepAlive><Comp v-if="show" /></KeepAlive></template>',
+      errors: [
+        {
+          messageId: 'requireTemplate',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
+    },
     // "always": v-if on an HTML element
     {
       filename: 'test.vue',
