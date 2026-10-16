@@ -116,49 +116,50 @@ export default {
             .slice(0, index)
             .filter(({ order }) => expected.index < order.index)
             .sort((e1, e2) => e1.order.index - e2.order.index)[0]
-          if (firstUnordered) {
-            const firstUnorderedAttributes = getAttributeString(
-              firstUnordered.element
-            )
-            const elementAttributes = getAttributeString(element)
+          if (!firstUnordered) {
+            continue
+          }
+          const firstUnorderedAttributes = getAttributeString(
+            firstUnordered.element
+          )
+          const elementAttributes = getAttributeString(element)
 
-            context.report({
-              node: element,
-              loc: element.loc,
-              messageId: 'unexpected',
-              data: {
-                elementName: element.name,
-                elementAttributes: elementAttributes
-                  ? ` ${elementAttributes}`
-                  : '',
-                firstUnorderedName: firstUnordered.element.name,
-                firstUnorderedAttributes: firstUnorderedAttributes
-                  ? ` ${firstUnorderedAttributes}`
-                  : '',
-                line: firstUnordered.element.loc.start.line
-              },
-              *fix(fixer) {
-                // insert element before firstUnordered
-                const fixedElements = elements.flatMap((it) => {
-                  if (it === firstUnordered.element) {
-                    return [element, it]
-                  }
-                  if (it === element) {
-                    return []
-                  }
-                  return [it]
-                })
-                for (let i = elements.length - 1; i >= 0; i--) {
-                  if (elements[i] !== fixedElements[i]) {
-                    yield fixer.replaceTextRange(
-                      elements[i].range,
-                      sourceCode.text.slice(...fixedElements[i].range)
-                    )
-                  }
+          context.report({
+            node: element,
+            loc: element.loc,
+            messageId: 'unexpected',
+            data: {
+              elementName: element.name,
+              elementAttributes: elementAttributes
+                ? ` ${elementAttributes}`
+                : '',
+              firstUnorderedName: firstUnordered.element.name,
+              firstUnorderedAttributes: firstUnorderedAttributes
+                ? ` ${firstUnorderedAttributes}`
+                : '',
+              line: firstUnordered.element.loc.start.line
+            },
+            *fix(fixer) {
+              // insert element before firstUnordered
+              const fixedElements = elements.flatMap((it) => {
+                if (it === firstUnordered.element) {
+                  return [element, it]
+                }
+                if (it === element) {
+                  return []
+                }
+                return [it]
+              })
+              for (let i = elements.length - 1; i >= 0; i--) {
+                if (elements[i] !== fixedElements[i]) {
+                  yield fixer.replaceTextRange(
+                    elements[i].range,
+                    sourceCode.text.slice(...fixedElements[i].range)
+                  )
                 }
               }
-            })
-          }
+            }
+          })
         }
       }
     }
