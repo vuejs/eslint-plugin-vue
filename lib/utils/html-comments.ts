@@ -194,24 +194,17 @@ export function defineVisitor(
   return {
     Program(node) {
       visitorOption ||= {}
-      if (utils.hasInvalidEOF(node)) {
-        return
-      }
-      if (!node.templateBody) {
+      if (utils.hasInvalidEOF(node) || !node.templateBody) {
         return
       }
       const parse = defineParser(context.sourceCode, config)
 
       for (const comment of node.templateBody.comments) {
-        if (comment.type !== 'HTMLComment') {
-          continue
-        }
-        if (!visitorOption.includeDirectives && isCommentDirective(comment)) {
-          // ignore directives
-          continue
-        }
-        if (isIEConditionalComment(comment)) {
-          // ignore IE conditional
+        if (
+          comment.type !== 'HTMLComment' ||
+          (!visitorOption.includeDirectives && isCommentDirective(comment)) ||
+          isIEConditionalComment(comment)
+        ) {
           continue
         }
 

@@ -181,10 +181,11 @@ export default {
           visitor
         )
       }
-      if (syntax.createScriptVisitor) {
-        const visitor = syntax.createScriptVisitor(context)
-        scriptVisitor = utils.compositingVisitors(scriptVisitor, visitor)
+      if (!syntax.createScriptVisitor) {
+        continue
       }
+      const visitor = syntax.createScriptVisitor(context)
+      scriptVisitor = utils.compositingVisitors(scriptVisitor, visitor)
     }
 
     return utils.defineTemplateBodyVisitor(

@@ -41,11 +41,10 @@ export default {
         })
       },
       "VAttribute[directive=false][key.name='is']"(node: VAttribute) {
-        if (isValidElement(node.parent.parent)) {
-          return
-        }
-        if (node.value && node.value.value.startsWith('vue:')) {
-          // Usage on native elements 3.1+
+        if (
+          isValidElement(node.parent.parent) ||
+          node.value?.value.startsWith('vue:') // Usage on native elements 3.1+
+        ) {
           return
         }
         context.report({

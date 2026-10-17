@@ -56,10 +56,9 @@ function getPropertyDataFromObjectProperty(
   return {
     hasNestProperty: Boolean(propertyMap),
     get(name) {
-      if (!propertyMap) {
-        return null
-      }
-      return getPropertyDataFromObjectProperty(propertyMap.get(name))
+      return propertyMap
+        ? getPropertyDataFromObjectProperty(propertyMap.get(name))
+        : null
     }
   }
 }
@@ -302,11 +301,7 @@ export default {
         if (
           reserved.includes(name) ||
           isIgnored(name) ||
-          propertiesDefinedByStoreHelpers.has(name)
-        ) {
-          return
-        }
-        if (
+          propertiesDefinedByStoreHelpers.has(name) ||
           // Prevents reporting to the same node.
           this.reported.has(node) ||
           // Prevents reports with the same name.
@@ -359,10 +354,7 @@ export default {
         return null
       }
       const property = node.parent
-      if (!utils.isProperty(property)) {
-        return null
-      }
-      return property
+      return utils.isProperty(property) ? property : null
     }
 
     const scriptVisitor = utils.compositingVisitors(
@@ -374,17 +366,19 @@ export default {
 
           const ctx = getVueComponentContext(programNode)
           const globalScope = context.sourceCode.scopeManager.globalScope
-          if (globalScope) {
-            for (const variable of globalScope.variables) {
-              ctx.defineProperties.set(variable.name, {})
-            }
-            const moduleScope = globalScope.childScopes.find(
-              (scope) => scope.type === 'module'
-            )
-            const moduleVariables = (moduleScope && moduleScope.variables) || []
-            for (const variable of moduleVariables) {
-              ctx.defineProperties.set(variable.name, {})
-            }
+          if (!globalScope) {
+            return
+          }
+
+          for (const variable of globalScope.variables) {
+            ctx.defineProperties.set(variable.name, {})
+          }
+          const moduleScope = globalScope.childScopes.find(
+            (scope) => scope.type === 'module'
+          )
+          const moduleVariables = (moduleScope && moduleScope.variables) || []
+          for (const variable of moduleVariables) {
+            ctx.defineProperties.set(variable.name, {})
           }
         }
       },
@@ -505,10 +499,9 @@ export default {
               hasNestProperty: Boolean(propertyMap),
               isProps: prop.groupName === GROUP_PROPERTY,
               get(name) {
-                if (!propertyMap) {
-                  return null
-                }
-                return getPropertyDataFromObjectProperty(propertyMap.get(name))
+                return propertyMap
+                  ? getPropertyDataFromObjectProperty(propertyMap.get(name))
+                  : null
               }
             })
           }
@@ -627,15 +620,17 @@ export default {
             propertyReferenceExtractor.extractFromFunctionParam(node, 0)
           ctx.verifyReferences(propertyReferences)
 
-          if (vueData.functional) {
-            // Check for Vue 2.x render & functional
-            const propertyReferencesForV2 =
-              propertyReferenceExtractor.extractFromFunctionParam(node, 1)
-
-            ctx.verifyReferences(propertyReferencesForV2.getNest('props'), {
-              isProps: true
-            })
+          if (!vueData.functional) {
+            return
           }
+
+          // Check for Vue 2.x render & functional
+          const propertyReferencesForV2 =
+            propertyReferenceExtractor.extractFromFunctionParam(node, 1)
+
+          ctx.verifyReferences(propertyReferencesForV2.getNest('props'), {
+            isProps: true
+          })
         },
         'ThisExpression, Identifier'(
           node: ThisExpression | Identifier,

@@ -17,14 +17,9 @@ function findPropertyValue(
       property.key.type === 'Identifier' &&
       property.key.name === key
   )
-  if (
-    !property ||
-    property.type !== 'Property' ||
-    !utils.isStringLiteral(property.value)
-  ) {
-    return undefined
-  }
-  return property.value
+  return property?.type === 'Property' && utils.isStringLiteral(property.value)
+    ? property.value
+    : undefined
 }
 
 function replaceLiteral(

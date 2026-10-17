@@ -5,17 +5,15 @@
 import utils from '../utils/index.js'
 
 function isFunctionIdentifier(node: Expression | SpreadElement | null) {
-  return node && node.type === 'Identifier' && node.name === 'Function'
+  return !!node && node.type === 'Identifier' && node.name === 'Function'
 }
 
 function hasFunctionType(node: Expression): boolean {
-  if (isFunctionIdentifier(node)) {
-    return true
-  }
-  if (node.type === 'ArrayExpression') {
-    return node.elements.some(isFunctionIdentifier)
-  }
-  return false
+  return (
+    isFunctionIdentifier(node) ||
+    (node.type === 'ArrayExpression' &&
+      node.elements.some(isFunctionIdentifier))
+  )
 }
 
 export default {
@@ -75,10 +73,10 @@ export default {
     return utils.defineVueVisitor(context, {
       onVueObjectEnter(node) {
         for (const prop of utils.getComponentPropsFromOptions(node)) {
-          if (prop.type !== 'object') {
-            continue
-          }
-          if (prop.value.type !== 'ObjectExpression') {
+          if (
+            prop.type !== 'object' ||
+            prop.value.type !== 'ObjectExpression'
+          ) {
             continue
           }
           const def = utils.findProperty(prop.value, 'default')
@@ -86,11 +84,10 @@ export default {
             continue
           }
           const type = utils.findProperty(prop.value, 'type')
-          if (type && hasFunctionType(type.value)) {
-            // ignore function type
-            continue
-          }
-          if (def.value.type !== 'FunctionExpression') {
+          if (
+            (type && hasFunctionType(type.value)) ||
+            def.value.type !== 'FunctionExpression'
+          ) {
             continue
           }
           propsDefault.add(def.value)

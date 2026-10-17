@@ -45,11 +45,9 @@ export default {
         MemberExpression(node) {
           if (
             node.property.type !== 'Identifier' ||
-            node.property.name !== '$scopedSlots'
+            node.property.name !== '$scopedSlots' ||
+            !utils.isThis(node.object, context)
           ) {
-            return
-          }
-          if (!utils.isThis(node.object, context)) {
             return
           }
 
