@@ -45,26 +45,18 @@ function parseOption(option: any): ParsedOption {
   const parsed = parseOption(option.argument)
   if (option.modifiers) {
     const argTest = parsed.test
-    parsed.test = (key) => {
-      if (!argTest(key)) {
-        return false
-      }
-      return (option.modifiers as string[]).every((modName) =>
+    parsed.test = (key) =>
+      argTest(key) &&
+      (option.modifiers as string[]).every((modName) =>
         key.modifiers.some((mid) => mid.name === modName)
       )
-    }
     parsed.modifiers = option.modifiers
   }
   if (option.element) {
     const argTest = parsed.test
     const tagMatcher = toRegExp(option.element, { remove: 'g' })
-    parsed.test = (key) => {
-      if (!argTest(key)) {
-        return false
-      }
-      const element = key.parent.parent.parent
-      return tagMatcher.test(element.rawName)
-    }
+    parsed.test = (key) =>
+      argTest(key) && tagMatcher.test(key.parent.parent.parent.rawName)
     parsed.useElement = true
   }
   parsed.message = option.message

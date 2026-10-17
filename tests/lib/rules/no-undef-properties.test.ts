@@ -807,7 +807,49 @@ tester.run('no-undef-properties', rule, {
     </script>
     <template>
       <div id="app">Woof: {{ woof }}</div>
-    </template>`
+    </template>`,
+    {
+      // toRefs(reactive({...})) spread in setup() return
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>{{ a }} {{ b }}</div>
+      </template>
+      <script>
+      import { reactive, toRefs } from 'vue'
+
+      export default {
+        setup() {
+          const data = reactive({
+            a: 1,
+            b: 1,
+          });
+          return {
+            ...toRefs(data),
+          };
+        },
+      };
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>{{ a }} {{ b }} {{ c }}</div>
+      </template>
+      <script>
+      import { reactive, toRefs } from 'vue'
+
+      export default {
+        setup: () => ({
+          ...toRefs(reactive({ a: 1 })),
+          ...toRefs(reactive({ b: 1, c: 1 })),
+        }),
+      };
+      </script>
+      `
+    }
   ],
 
   invalid: [
@@ -1938,6 +1980,39 @@ tester.run('no-undef-properties', rule, {
           column: 28,
           endLine: 11,
           endColumn: 29
+        }
+      ]
+    },
+    {
+      // toRefs(reactive({...})) spread in setup() return
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>{{ a }} {{ b }} {{ c }}</div>
+      </template>
+      <script>
+      import { reactive, toRefs } from 'vue'
+
+      export default {
+        setup() {
+          const data = reactive({
+            a: 1,
+            b: 1,
+          });
+          return {
+            ...toRefs(data),
+          };
+        },
+      };
+      </script>
+      `,
+      errors: [
+        {
+          message: "'c' is not defined.",
+          line: 3,
+          column: 33,
+          endLine: 3,
+          endColumn: 34
         }
       ]
     }

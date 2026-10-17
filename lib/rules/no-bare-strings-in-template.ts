@@ -82,16 +82,9 @@ function parseTargetAttrs(options: Record<string, string[]>): TargetAttrs {
  */
 function getStringValue(value: VExpressionContainer): string | null {
   const expression = value.expression
-  if (!expression) {
-    return null
-  }
-  if (expression.type !== 'Literal') {
-    return null
-  }
-  if (typeof expression.value === 'string') {
-    return expression.value
-  }
-  return null
+  return expression?.type === 'Literal' && typeof expression.value === 'string'
+    ? expression.value
+    : null
 }
 
 export default {
@@ -236,7 +229,7 @@ export default {
         elementStack &&= elementStack.upper
       },
       VAttribute(node: VAttribute | VDirective) {
-        if (!node.value || !elementStack) {
+        if (!elementStack || !node.value) {
           return
         }
         if (node.directive === false) {

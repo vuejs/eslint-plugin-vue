@@ -48,18 +48,12 @@ function getElementType(node: VElement): keyof Options {
     return 'COMPONENT'
   }
   if (utils.isHtmlElementNode(node)) {
-    if (utils.isHtmlVoidElementName(node.name)) {
-      return 'VOID'
-    }
-    return 'NORMAL'
+    return utils.isHtmlVoidElementName(node.name) ? 'VOID' : 'NORMAL'
   }
   if (utils.isSvgElementNode(node)) {
     return 'SVG'
   }
-  if (utils.isMathElementNode(node)) {
-    return 'MATH'
-  }
-  return 'UNKNOWN'
+  return utils.isMathElementNode(node) ? 'MATH' : 'UNKNOWN'
 }
 
 /**

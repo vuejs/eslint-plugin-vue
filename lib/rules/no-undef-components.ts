@@ -184,20 +184,13 @@ export default {
             (variable.isTypeVariable && !variable.isValueVariable) ||
             // type-only import seems to have isValueVariable set to true. So we need to check the actual Node.
             (variable.defs.length > 0 &&
-              variable.defs.every((def) => {
-                if (def.type !== 'ImportBinding') {
-                  return false
-                }
-                if (def.parent.importKind === 'type') {
-                  // check for `import type Foo from './xxx'`
-                  return true
-                }
-                // check for `import { type Foo } from './xxx'`
-                return (
-                  def.node.type === 'ImportSpecifier' &&
-                  def.node.importKind === 'type'
-                )
-              }))
+              variable.defs.every(
+                (def) =>
+                  def.type === 'ImportBinding' &&
+                  (def.parent.importKind === 'type' || // check for `import type Foo from './xxx'`
+                    (def.node.type === 'ImportSpecifier' &&
+                      def.node.importKind === 'type')) // check for `import { type Foo } from './xxx'`
+              ))
           ) {
             scriptTypeOnlyNames.add(variable.name)
           } else {
@@ -214,24 +207,23 @@ export default {
         onVueObjectEnter(node, { type }) {
           if (type !== 'export') return
           const nameProperty = utils.findProperty(node, 'name')
+          if (!nameProperty || !utils.isStringLiteral(nameProperty.value)) {
+            return
+          }
 
-          if (nameProperty && utils.isStringLiteral(nameProperty.value)) {
-            const name = utils.getStringLiteralValue(nameProperty.value)
-            if (name) {
-              definedInOptionComponents.addName(name)
-            }
+          const name = utils.getStringLiteralValue(nameProperty.value)
+          if (name) {
+            definedInOptionComponents.addName(name)
           }
         }
       })
 
       verifyName = (rawName, reportNode) => {
-        if (!isVerifyTargetComponent(rawName)) {
-          return
-        }
-        if (definedInSetupComponents.isDefinedComponent(rawName)) {
-          return
-        }
-        if (definedInOptionComponents.isDefinedComponent(rawName)) {
+        if (
+          !isVerifyTargetComponent(rawName) ||
+          definedInSetupComponents.isDefinedComponent(rawName) ||
+          definedInOptionComponents.isDefinedComponent(rawName)
+        ) {
           return
         }
 
@@ -253,20 +245,21 @@ export default {
         )
 
         const nameProperty = utils.findProperty(obj, 'name')
+        if (!nameProperty || !utils.isStringLiteral(nameProperty.value)) {
+          return
+        }
 
-        if (nameProperty && utils.isStringLiteral(nameProperty.value)) {
-          const name = utils.getStringLiteralValue(nameProperty.value)
-          if (name) {
-            definedInOptionComponents.addName(name)
-          }
+        const name = utils.getStringLiteralValue(nameProperty.value)
+        if (name) {
+          definedInOptionComponents.addName(name)
         }
       })
 
       verifyName = (rawName, reportNode) => {
-        if (!isVerifyTargetComponent(rawName)) {
-          return
-        }
-        if (definedInOptionComponents.isDefinedComponent(rawName)) {
+        if (
+          !isVerifyTargetComponent(rawName) ||
+          definedInOptionComponents.isDefinedComponent(rawName)
+        ) {
           return
         }
 
