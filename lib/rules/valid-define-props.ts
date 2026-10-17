@@ -2,56 +2,51 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
 
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
-      description: 'enforce valid `defineEmits` compiler macro',
+      description: 'enforce valid `defineProps` compiler macro',
       categories: ['vue3-essential', 'vue2-essential'],
-      url: 'https://eslint.vuejs.org/rules/valid-define-emits.html'
+      url: 'https://eslint.vuejs.org/rules/valid-define-props.html'
     },
     fixable: null,
     schema: [],
     messages: {
-      hasTypeAndArg: '`defineEmits` has both a type-only emit and an argument.',
+      hasTypeAndArg:
+        '`defineProps` has both a type-only props and an argument.',
       referencingLocally:
-        '`defineEmits` is referencing locally declared variables.',
-      multiple: '`defineEmits` has been called multiple times.',
-      notDefined: 'Custom events are not defined.',
+        '`defineProps` is referencing locally declared variables.',
+      multiple: '`defineProps` has been called multiple times.',
+      notDefined: 'Props are not defined.',
       definedInBoth:
-        'Custom events are defined in both `defineEmits` and `export default {}`.'
+        'Props are defined in both `defineProps` and `export default {}`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const scriptSetup = utils.getScriptSetupElement(context)
     if (!scriptSetup) {
       return {}
     }
 
-    /** @type {Set<Expression | SpreadElement>} */
-    const emitsDefExpressions = new Set()
+    const propsDefExpressions = new Set<Expression | SpreadElement>()
     let hasDefaultExport = false
-    /** @type {CallExpression[]} */
-    const defineEmitsNodes = []
-    /** @type {CallExpression | null} */
-    let emptyDefineEmits = null
+    const definePropsNodes: CallExpression[] = []
+    let emptyDefineProps: CallExpression | null = null
 
     return utils.compositingVisitors(
       utils.defineScriptSetupVisitor(context, {
-        onDefineEmitsEnter(node) {
-          defineEmitsNodes.push(node)
+        onDefinePropsEnter(node) {
+          definePropsNodes.push(node)
 
           const typeArguments =
             'typeArguments' in node ? node.typeArguments : node.typeParameters
           if (node.arguments.length > 0) {
             if (typeArguments && typeArguments.params.length > 0) {
-              // `defineEmits` has both a literal type and an argument.
+              // `defineProps` has both a literal type and an argument.
               context.report({
                 node,
                 messageId: 'hasTypeAndArg'
@@ -59,16 +54,16 @@ module.exports = {
               return
             }
 
-            emitsDefExpressions.add(node.arguments[0])
+            propsDefExpressions.add(node.arguments[0])
           } else {
             if (!typeArguments || typeArguments.params.length === 0) {
-              emptyDefineEmits = node
+              emptyDefineProps = node
             }
           }
         },
         Identifier(node) {
-          for (const defineEmits of emitsDefExpressions) {
-            if (!utils.inRange(defineEmits.range, node)) {
+          for (const defineProps of propsDefExpressions) {
+            if (!utils.inRange(defineProps.range, node)) {
               continue
             }
 
@@ -81,13 +76,13 @@ module.exports = {
                 (def) =>
                   def.type === 'ImportBinding' ||
                   !utils.inRange(scriptSetup.range, def.name) ||
-                  utils.inRange(defineEmits.range, def.name)
+                  utils.inRange(defineProps.range, def.name)
               ) ||
               utils.withinTypeNode(node)
             ) {
               continue
             }
-            //`defineEmits` is referencing locally declared variables.
+            //`defineProps` is referencing locally declared variables.
             context.report({
               node,
               messageId: 'referencingLocally'
@@ -101,17 +96,17 @@ module.exports = {
             return
           }
 
-          hasDefaultExport = Boolean(utils.findProperty(node, 'emits'))
+          hasDefaultExport = Boolean(utils.findProperty(node, 'props'))
         }
       }),
       {
         'Program:exit'() {
-          if (defineEmitsNodes.length === 0) {
+          if (definePropsNodes.length === 0) {
             return
           }
-          if (defineEmitsNodes.length > 1) {
-            // `defineEmits` has been called multiple times.
-            for (const node of defineEmitsNodes) {
+          if (definePropsNodes.length > 1) {
+            // `defineProps` has been called multiple times.
+            for (const node of definePropsNodes) {
               context.report({
                 node,
                 messageId: 'multiple'
@@ -119,18 +114,18 @@ module.exports = {
             }
             return
           }
-          if (emptyDefineEmits) {
+          if (emptyDefineProps) {
             if (!hasDefaultExport) {
-              // Custom events are not defined.
+              // Props are not defined.
               context.report({
-                node: emptyDefineEmits,
+                node: emptyDefineProps,
                 messageId: 'notDefined'
               })
             }
           } else {
             if (hasDefaultExport) {
-              // Custom events are defined in both `defineEmits` and `export default {}`.
-              for (const node of defineEmitsNodes) {
+              // Props are defined in both `defineProps` and `export default {}`.
+              for (const node of definePropsNodes) {
                 context.report({
                   node,
                   messageId: 'definedInBoth'

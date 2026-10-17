@@ -3,11 +3,9 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -23,13 +21,11 @@ module.exports = {
       noChild: 'The template requires child element.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
 
     return {
-      /** @param {Program} program */
-      Program(program) {
+      Program(program: Program) {
         const element = program.templateBody
         if (element == null) {
           return

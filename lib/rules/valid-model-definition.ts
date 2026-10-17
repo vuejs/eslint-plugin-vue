@@ -2,13 +2,11 @@
  * @fileoverview Requires valid keys in model option.
  * @author Alex Sokolov
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 const VALID_MODEL_KEYS = new Set(['prop', 'event'])
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -23,8 +21,7 @@ module.exports = {
       invalidKey: "Invalid key '{{name}}' in model option."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.executeOnVue(context, (obj) => {
       const modelProperty = utils.findProperty(obj, 'model')
       if (!modelProperty || modelProperty.value.type !== 'ObjectExpression') {
