@@ -18,10 +18,7 @@ const getStaticArgName = (directive: VDirective): string | null =>
  */
 function getUpdateEventPropName(onDirective: VDirective): string | null {
   const argName = getStaticArgName(onDirective)
-  if (!argName?.startsWith('update:')) {
-    return null
-  }
-  return argName.slice('update:'.length)
+  return argName?.startsWith('update:') ? argName.slice('update:'.length) : null
 }
 
 /**
@@ -150,12 +147,12 @@ export default {
           const bindExpr = bindDir.value?.expression
           const onExpr = matchingOnDir.value?.expression
           if (
+            !onExpr ||
             !bindExpr ||
             bindExpr.type === 'VFilterSequenceExpression' ||
             bindExpr.type === 'VForExpression' ||
             bindExpr.type === 'VOnExpression' ||
             bindExpr.type === 'VSlotScopeExpression' ||
-            !onExpr ||
             !isMirrorAssignment(
               bindExpr,
               onExpr as VOnExpression | Expression,

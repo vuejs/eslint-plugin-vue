@@ -220,13 +220,13 @@ In Vue 3, a binding that comes after `v-bind="object"` overrides the same key in
     <div
       a="short"
       abc="value"
-      a-prop="longer"
       boolean-prop
+      a-prop="longer"
       :my-prop="value"
       very-long-prop="value"
       @blur="functionCall"
-      @change="functionCall"
-      @input="handleInput">
+      @input="handleInput"
+      @change="functionCall">
     </div>
 
   <!-- ✗ BAD -->

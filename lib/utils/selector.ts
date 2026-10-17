@@ -87,14 +87,11 @@ function cleanSelectorChildren(selector: parser.Selector): ChildNode[] {
     if (node.type === 'root') {
       throw new SelectorError('Unexpected state type=root')
     }
-    if (node.type === 'comment') {
-      continue
-    }
     if (
-      (last == null || last.type === 'combinator') &&
-      isDescendantCombinator(node)
+      node.type === 'comment' ||
+      ((last == null || last.type === 'combinator') &&
+        isDescendantCombinator(node))
     ) {
-      // Ignore descendant combinator
       continue
     }
     if (isDescendantCombinator(last) && node.type === 'combinator') {
@@ -267,32 +264,31 @@ function attributeNodeToVElementMatcher(
 
   switch (selector.operator) {
     case '=': {
-      return buildVElementMatcher(value, (attr, val) => attr === val)
+      return buildVElementMatcher((attr, val) => attr === val)
     }
     case '~=': {
       // words
-      return buildVElementMatcher(value, (attr, val) =>
+      return buildVElementMatcher((attr, val) =>
         attr.split(/\s+/gu).includes(val)
       )
     }
     case '|=': {
       // immediately followed by hyphen
       return buildVElementMatcher(
-        value,
         (attr, val) => attr === val || attr.startsWith(`${val}-`)
       )
     }
     case '^=': {
       // prefixed
-      return buildVElementMatcher(value, (attr, val) => attr.startsWith(val))
+      return buildVElementMatcher((attr, val) => attr.startsWith(val))
     }
     case '$=': {
       // suffixed
-      return buildVElementMatcher(value, (attr, val) => attr.endsWith(val))
+      return buildVElementMatcher((attr, val) => attr.endsWith(val))
     }
     case '*=': {
       // contains
-      return buildVElementMatcher(value, (attr, val) => attr.includes(val))
+      return buildVElementMatcher((attr, val) => attr.includes(val))
     }
     default: {
       throw new SelectorError(`Unsupported operator: ${selector.operator}.`)
@@ -300,12 +296,9 @@ function attributeNodeToVElementMatcher(
   }
 
   function buildVElementMatcher(
-    selectorValue: string,
     test: (attrValue: string, selectorValue: string) => boolean
   ): VElementMatcher {
-    const val = selector.insensitive
-      ? selectorValue.toLowerCase()
-      : selectorValue
+    const val = selector.insensitive ? value.toLowerCase() : value
     return (element) => {
       const attrValue = getAttributeValue(element, key)
       if (attrValue == null) {
@@ -328,10 +321,7 @@ function classNameNodeToVElementMatcher(
   const className = selector.value
   return (element) => {
     const attrValue = getAttributeValue(element, 'class')
-    if (attrValue == null) {
-      return false
-    }
-    return attrValue.split(/\s+/gu).includes(className)
+    return Boolean(attrValue?.split(/\s+/gu).includes(className))
   }
 }
 
@@ -342,13 +332,7 @@ function identifierNodeToVElementMatcher(
   selector: parser.Identifier
 ): VElementMatcher {
   const id = selector.value
-  return (element) => {
-    const attrValue = getAttributeValue(element, 'id')
-    if (attrValue == null) {
-      return false
-    }
-    return attrValue === id
-  }
+  return (element) => getAttributeValue(element, 'id') === id
 }
 
 /**
@@ -477,18 +461,12 @@ function pseudoHasSelectorToVElementMatcher(
   const nodes = cleanSelectorChildren(selector)
   const selectors = selectorToVElementMatcher(nodes)
   const firstNode = nodes[0]
-  if (
+  return buildVElementMatcher(
+    selectors,
     firstNode.type === 'combinator' &&
-    (firstNode.value === '+' || firstNode.value === '~')
-  ) {
-    // adjacent or sibling
-    return buildVElementMatcher(selectors, (element) =>
-      getAfterElements(element)
-    )
-  }
-  // descendant or child
-  return buildVElementMatcher(selectors, (element) =>
-    element.children.filter(utils.isVElement)
+      (firstNode.value === '+' || firstNode.value === '~')
+      ? (element) => getAfterElements(element) // adjacent or sibling
+      : (element) => element.children.filter(utils.isVElement) // descendant or child
   )
 }
 
@@ -589,8 +567,5 @@ function compound(a: VElementMatcher, b: VElementMatcher): VElementMatcher {
  */
 function getAttributeValue(element: VElement, attribute: string) {
   const attr = utils.getAttribute(element, attribute)
-  if (attr) {
-    return (attr.value && attr.value.value) || ''
-  }
-  return null
+  return attr ? attr.value?.value || '' : null
 }

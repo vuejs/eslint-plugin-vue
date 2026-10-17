@@ -107,11 +107,10 @@ export default {
         const element = node.parent.parent
         if (
           !utils.isCustomComponent(element) ||
-          isIgnoredTag(element.rawName)
+          isIgnoredTag(element.rawName) ||
+          !node.key.argument ||
+          node.key.argument.type !== 'VIdentifier'
         ) {
-          return
-        }
-        if (!node.key.argument || node.key.argument.type !== 'VIdentifier') {
           return
         }
         const name = node.key.argument.rawName
