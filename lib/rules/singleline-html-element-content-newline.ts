@@ -58,14 +58,12 @@ export default {
           ignores: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           },
           externalIgnores: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false
@@ -115,10 +113,10 @@ export default {
 
         const elem = node as VElement & { endTag: VEndTag }
 
-        if (!isSinglelineElement(elem)) {
-          return
-        }
-        if (ignoreWhenNoAttributes && elem.startTag.attributes.length === 0) {
+        if (
+          !isSinglelineElement(elem) ||
+          (ignoreWhenNoAttributes && elem.startTag.attributes.length === 0)
+        ) {
           return
         }
 
