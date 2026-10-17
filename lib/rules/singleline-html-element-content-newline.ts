@@ -119,10 +119,10 @@ export default {
 
         const elem = node as VElement & { endTag: VEndTag }
 
-        if (!isSinglelineElement(elem)) {
-          return
-        }
-        if (ignoreWhenNoAttributes && elem.startTag.attributes.length === 0) {
+        if (
+          !isSinglelineElement(elem) ||
+          (ignoreWhenNoAttributes && elem.startTag.attributes.length === 0)
+        ) {
           return
         }
 

@@ -86,12 +86,8 @@ export default {
             : (fixer) => fixer.insertTextAfter(beforeToken, ' ')
         })
       } else {
-        if (openDecoration) {
-          // Ignore expection block
-          return
-        }
-        if (beforeToken.range[1] === value.range[0]) {
-          // Is valid
+        const isValid = beforeToken.range[1] === value.range[0]
+        if (openDecoration || isValid) {
           return
         }
         context.report({
@@ -138,12 +134,8 @@ export default {
             : (fixer) => fixer.insertTextBefore(afterToken, ' ')
         })
       } else {
-        if (closeDecoration) {
-          // Ignore expection block
-          return
-        }
-        if (value.range[1] === afterToken.range[0]) {
-          // Is valid
+        const isValid = value.range[1] === afterToken.range[0]
+        if (closeDecoration || isValid) {
           return
         }
         context.report({

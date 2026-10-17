@@ -28,12 +28,10 @@ module.exports = fs.readdirSync(ROOT).flatMap((file) => {
     meta.docs = { ...meta.docs }
     meta.docs.categories = [meta.docs.category]
   }
-  return [
-    {
-      ruleId: `vue/${name}`,
-      name,
-      ext,
-      meta
-    }
-  ]
+  return {
+    ruleId: `vue/${name}`,
+    name,
+    ext,
+    meta
+  }
 })

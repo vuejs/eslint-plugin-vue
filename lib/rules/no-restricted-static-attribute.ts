@@ -25,33 +25,23 @@ function parseOption(option: any): ParsedOption {
   if (option.value) {
     const keyTest = parsed.test
     if (option.value === true) {
-      parsed.test = (node) => {
-        if (!keyTest(node)) {
-          return false
-        }
-        return node.value == null || node.value.value === node.key.rawName
-      }
+      parsed.test = (node) =>
+        keyTest(node) &&
+        (node.value == null || node.value.value === node.key.rawName)
     } else {
       const valueMatcher = toRegExp(option.value, { remove: 'g' })
-      parsed.test = (node) => {
-        if (!keyTest(node)) {
-          return false
-        }
-        return node.value != null && valueMatcher.test(node.value.value)
-      }
+      parsed.test = (node) =>
+        keyTest(node) &&
+        node.value != null &&
+        valueMatcher.test(node.value.value)
     }
     parsed.useValue = true
   }
   if (option.element) {
     const argTest = parsed.test
     const tagMatcher = toRegExp(option.element, { remove: 'g' })
-    parsed.test = (node) => {
-      if (!argTest(node)) {
-        return false
-      }
-      const element = node.parent.parent
-      return tagMatcher.test(element.rawName)
-    }
+    parsed.test = (node) =>
+      argTest(node) && tagMatcher.test(node.parent.parent.rawName)
     parsed.useElement = true
   }
   parsed.message = option.message
