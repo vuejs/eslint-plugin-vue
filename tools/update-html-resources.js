@@ -68,10 +68,10 @@ async function main() {
     )
 
     for (const [name, element] of Object.entries(bcd.html.elements)) {
-      if (deprecatedHtmlElements.has(name)) {
-        continue
-      }
-      if (element.__compat.status.deprecated) {
+      if (
+        deprecatedHtmlElements.has(name) ||
+        element.__compat.status.deprecated
+      ) {
         continue
       }
       elements.add(name)

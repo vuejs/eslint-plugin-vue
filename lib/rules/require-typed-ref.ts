@@ -182,13 +182,10 @@ export default {
     return {
       Program() {
         for (const ref of defines) {
-          if (ref.name !== 'ref' && ref.name !== 'shallowRef') {
-            continue
-          }
-
           if (
-            ref.node.arguments.length > 0 &&
-            !isNullOrUndefined(ref.node.arguments[0])
+            (ref.name !== 'ref' && ref.name !== 'shallowRef') ||
+            (ref.node.arguments.length > 0 &&
+              !isNullOrUndefined(ref.node.arguments[0]))
           ) {
             continue
           }
