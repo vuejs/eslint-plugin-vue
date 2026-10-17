@@ -5,7 +5,9 @@ export default defineConfig({
   format: ['cjs'],
   copy: ['lib/index.d.ts', 'lib/eslint-typegen.d.ts', 'lib/removed-rules.js'],
   dts: false,
-  external: ['typescript'],
+  deps: {
+    neverBundle: ['typescript']
+  },
   unbundle: true,
   fixedExtension: false
 })

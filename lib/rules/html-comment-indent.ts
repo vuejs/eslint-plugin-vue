@@ -27,7 +27,7 @@ function parseOptions(type: number | 'tab' | undefined): {
 }
 
 function toDisplay(s: string, unitChar?: string) {
-  if (s.length === 0 && unitChar) {
+  if (unitChar && s.length === 0) {
     return `0 ${toUnit(unitChar)}s`
   }
   const char = s[0]
@@ -39,13 +39,17 @@ function toDisplay(s: string, unitChar?: string) {
 }
 
 function toUnit(char: string) {
-  if (char === '\t') {
-    return 'tab'
+  switch (char) {
+    case '\t': {
+      return 'tab'
+    }
+    case ' ': {
+      return 'space'
+    }
+    default: {
+      return JSON.stringify(char)
+    }
   }
-  if (char === ' ') {
-    return 'space'
-  }
-  return JSON.stringify(char)
 }
 
 export default {
