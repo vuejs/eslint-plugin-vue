@@ -3,11 +3,9 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -23,11 +21,9 @@ module.exports = {
       expectedValue: "'v-html' directives require that attribute value."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='html']"(node) {
+      "VAttribute[directive=true][key.name.name='html']"(node: VDirective) {
         if (node.key.argument) {
           context.report({
             node: node.key.argument,

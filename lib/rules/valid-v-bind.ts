@@ -3,13 +3,11 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 const VALID_MODIFIERS = new Set(['prop', 'camel', 'sync', 'attr'])
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -25,11 +23,9 @@ module.exports = {
       expectedValue: "'v-bind' directives require an attribute value."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='bind']"(node) {
+      "VAttribute[directive=true][key.name.name='bind']"(node: VDirective) {
         for (const modifier of node.key.modifiers) {
           if (!VALID_MODIFIERS.has(modifier.name)) {
             context.report({
