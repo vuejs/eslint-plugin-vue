@@ -86,8 +86,7 @@ export default {
       utils.executeOnVue(context, (obj) => {
         const node = utils.findProperty(obj, 'name')
 
-        if (!node) return
-        if (!canConvert(node.value)) return
+        if (!node || !canConvert(node.value)) return
         convertName(node.value)
       }),
       utils.defineScriptSetupVisitor(context, {
@@ -96,8 +95,7 @@ export default {
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
           const nameNode = utils.findProperty(define, 'name')
-          if (!nameNode) return
-          if (!canConvert(nameNode.value)) return
+          if (!nameNode || !canConvert(nameNode.value)) return
           convertName(nameNode.value)
         }
       })

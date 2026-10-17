@@ -45,7 +45,7 @@ This rule enforces proper casing of slot names in Vue components.
 
 ### `"kebab-case"`
 
-<eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'kebab-case']}">
+<eslint-code-block :rules="{'vue/slot-name-casing': ['error', 'kebab-case']}">
 
 ```vue
 <template>
@@ -64,7 +64,7 @@ This rule enforces proper casing of slot names in Vue components.
 
 ### `"singleword"`
 
-<eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'singleword']}">
+<eslint-code-block :rules="{'vue/slot-name-casing': ['error', 'singleword']}">
 
 ```vue
 <template>

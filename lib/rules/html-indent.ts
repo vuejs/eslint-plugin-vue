@@ -18,7 +18,7 @@ export default {
 
     return utils.defineTemplateBodyVisitor(context, visitor)
   },
-  // eslint-disable-next-line eslint-plugin/prefer-message-ids
+
   meta: {
     type: 'layout',
     docs: {
@@ -62,8 +62,7 @@ export default {
                 { not: { type: 'string', pattern: String.raw`^\s*$` } }
               ]
             },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false

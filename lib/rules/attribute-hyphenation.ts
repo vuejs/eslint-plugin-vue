@@ -12,15 +12,11 @@ function getAttributeName(node: VDirective | VAttribute): string | null {
     return node.key.rawName
   }
 
-  if (
-    (node.key.name.name === 'bind' || node.key.name.name === 'model') &&
+  return (node.key.name.name === 'bind' || node.key.name.name === 'model') &&
     node.key.argument &&
     node.key.argument.type === 'VIdentifier'
-  ) {
-    return node.key.argument.rawName
-  }
-
-  return null
+    ? node.key.argument.rawName
+    : null
 }
 
 export default {
@@ -49,14 +45,12 @@ export default {
                 { not: { type: 'string', pattern: String.raw`^\s*$` } }
               ]
             },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           },
           ignoreTags: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false
@@ -95,24 +89,13 @@ export default {
         data: {
           text
         },
-        fix: (fixer) => {
-          if (text.includes('_')) {
-            return null
-          }
-
-          if (text.endsWith('.sync')) {
-            return null
-          }
-
-          if (/^[A-Z]/.test(name)) {
-            return null
-          }
-
-          return fixer.replaceText(
-            node.key,
-            text.replace(name, () => caseConverter(name))
-          )
-        }
+        fix: (fixer) =>
+          text.includes('_') || text.endsWith('.sync') || /^[A-Z]/.test(name)
+            ? null
+            : fixer.replaceText(
+                node.key,
+                text.replace(name, () => caseConverter(name))
+              )
       })
     }
 

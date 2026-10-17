@@ -32,14 +32,12 @@ export default {
                 { not: { type: 'string', pattern: String.raw`^\s*$` } }
               ]
             },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           },
           ignoreTags: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false
@@ -109,11 +107,10 @@ export default {
         const element = node.parent.parent
         if (
           !utils.isCustomComponent(element) ||
-          isIgnoredTag(element.rawName)
+          isIgnoredTag(element.rawName) ||
+          !node.key.argument ||
+          node.key.argument.type !== 'VIdentifier'
         ) {
-          return
-        }
-        if (!node.key.argument || node.key.argument.type !== 'VIdentifier') {
           return
         }
         const name = node.key.argument.rawName

@@ -27,7 +27,7 @@ function getRegisteredDirectives(
   return directivesNode.value.properties.flatMap((node) => {
     const name =
       node.type === 'Property' ? utils.getStaticPropertyName(node) : null
-    return name ? [{ node: node as Property, name }] : []
+    return name ? { node: node as Property, name } : []
   })
 }
 
