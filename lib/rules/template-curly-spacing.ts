@@ -1,12 +1,10 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const { wrapStylisticOrCoreRule } = require('../utils')
+import utils from '../utils/index.js'
 
 // eslint-disable-next-line internal/no-invalid-meta
-module.exports = wrapStylisticOrCoreRule('template-curly-spacing', {
+export default utils.wrapStylisticOrCoreRule('template-curly-spacing', {
   skipDynamicArguments: true,
   applyDocument: true
 })

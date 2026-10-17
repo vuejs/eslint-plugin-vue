@@ -2,22 +2,16 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { wrapStylisticOrCoreRule, flatten } = require('../utils')
+import utils from '../utils/index.js'
 
 // eslint-disable-next-line internal/no-invalid-meta
-module.exports = wrapStylisticOrCoreRule('quote-props', {
+export default utils.wrapStylisticOrCoreRule('quote-props', {
   skipDynamicArguments: true,
   preprocess(context, { wrapContextToOverrideProperties, defineVisitor }) {
     const sourceCode = context.sourceCode
-    /**
-     * @type {'"' | "'" | null}
-     */
-    let htmlQuote = null
+    let htmlQuote: '"' | "'" | null = null
     defineVisitor({
-      /** @param {VExpressionContainer} node */
-      'VAttribute > VExpressionContainer.value'(node) {
+      'VAttribute > VExpressionContainer.value'(node: VExpressionContainer) {
         const text = sourceCode.getText(node)
         const firstChar = text[0]
         htmlQuote = firstChar === "'" || firstChar === '"' ? firstChar : null
@@ -35,7 +29,9 @@ module.exports = wrapStylisticOrCoreRule('quote-props', {
           context.report({
             ...descriptor,
             *fix(fixer) {
-              const fixes = flatten(descriptor.fix && descriptor.fix(fixer))
+              const fixes = utils.flatten(
+                descriptor.fix && descriptor.fix(fixer)
+              )
               for (const fix of fixes) {
                 yield fixer.replaceTextRange(
                   fix.range,
