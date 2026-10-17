@@ -37,10 +37,7 @@ export default {
   },
   create(context: RuleContext) {
     const options = context.options[0] || {}
-    const ignoreWhenBindingPresent =
-      options.ignoreWhenBindingPresent === undefined
-        ? true
-        : options.ignoreWhenBindingPresent
+    const ignoreWhenBindingPresent = options.ignoreWhenBindingPresent ?? true
     const usedComponents = new Set<string>()
     let registeredComponents: { node: Property; name: string }[] = []
     let shouldIgnoreReporting = false
@@ -93,8 +90,8 @@ export default {
         },
         "VElement[name='template']:exit"(node: VElement) {
           if (
-            node.loc.start !== templateLocation ||
             shouldIgnoreReporting ||
+            node.loc.start !== templateLocation ||
             utils.hasAttribute(node, 'src')
           )
             return

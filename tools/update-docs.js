@@ -35,10 +35,9 @@ function pickSince(content) {
       return since[1]
     }
   }
-  if (process.env.IN_VERSION_SCRIPT) {
-    return `v${require('../package.json').version}`
-  }
-  return null
+  return process.env.IN_VERSION_SCRIPT
+    ? `v${require('../package.json').version}`
+    : null
 }
 
 class DocFile {

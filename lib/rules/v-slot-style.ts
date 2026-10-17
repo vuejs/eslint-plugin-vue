@@ -66,10 +66,7 @@ function getActualStyle(node: VDirective): 'shorthand' | 'longform' | 'v-slot' {
   if (name.rawName === '#') {
     return 'shorthand'
   }
-  if (argument != null) {
-    return 'longform'
-  }
-  return 'v-slot'
+  return argument == null ? 'v-slot' : 'longform'
 }
 
 export default {
