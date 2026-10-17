@@ -11,24 +11,22 @@ import utils from '../utils/index.js'
  * so it never shadows a prop.
  */
 function isTypeOnlyVariable(variable: Variable): boolean {
-  if (variable.defs.length === 0) return true
-
-  // e.g. `type Foo = {}`, `interface Foo {}`
-  if (variable.isTypeVariable && !variable.isValueVariable) return true
-
-  // Type-only imports have `isValueVariable` set to true,
-  // so the actual nodes need to be checked.
-  return variable.defs.every((def) => {
-    if (def.type !== 'ImportBinding') {
-      return false
-    }
-    if (def.parent.importKind === 'type') {
-      // e.g. `import type Foo from './foo'`
-      return true
-    }
-    // e.g. `import { type Foo } from './foo'`
-    return def.node.type === 'ImportSpecifier' && def.node.importKind === 'type'
-  })
+  return (
+    variable.defs.length === 0 ||
+    // e.g. `type Foo = {}`, `interface Foo {}`
+    (variable.isTypeVariable && !variable.isValueVariable) ||
+    // Type-only imports have `isValueVariable` set to true,
+    // so the actual nodes need to be checked.
+    variable.defs.every(
+      (def) =>
+        def.type === 'ImportBinding' &&
+        // e.g. `import type Foo from './foo'`
+        (def.parent.importKind === 'type' ||
+          // e.g. `import { type Foo } from './foo'`
+          (def.node.type === 'ImportSpecifier' &&
+            def.node.importKind === 'type'))
+    )
+  )
 }
 
 export default {
@@ -78,9 +76,9 @@ export default {
           globalScope
 
         for (const variable of moduleScope.variables) {
-          if (!propNames.has(variable.name)) continue
-          if (isTypeOnlyVariable(variable)) continue
           if (
+            !propNames.has(variable.name) ||
+            isTypeOnlyVariable(variable) ||
             variable.defs.some(
               (def) => def.type === 'Variable' && propsDeclarators.has(def.node)
             )
