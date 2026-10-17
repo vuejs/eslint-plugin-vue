@@ -153,7 +153,7 @@ tester.run('single-v-slot-style', rule, {
     {
       filename: 'test.vue',
       code: '<template><MyComponent><template #default>foo</template></MyComponent></template>',
-      options: [{ namedSlotStyle: 'any' }]
+      options: [{ namedSlotStyle: 'any', defaultSlotStyle: 'any' }]
     },
     {
       filename: 'test.vue',
@@ -183,11 +183,12 @@ tester.run('single-v-slot-style', rule, {
       code: '<template><MyComponent #foo>foo</MyComponent></template>',
       options: [{ namedSlotStyle: 'without-wrapper' }]
     },
-    // `defaultSlotStyle` inherits from `namedSlotStyle`
     {
       filename: 'test.vue',
       code: '<template><MyComponent><template #default>foo</template></MyComponent></template>',
-      options: [{ namedSlotStyle: 'with-wrapper' }]
+      options: [
+        { namedSlotStyle: 'with-wrapper', defaultSlotStyle: 'with-wrapper' }
+      ]
     },
     {
       filename: 'test.vue',
@@ -624,7 +625,7 @@ tester.run('single-v-slot-style', rule, {
     // option combinations
     // ---------------------------------------------------------------
     {
-      // `defaultSlotStyle` overrides the inherited `namedSlotStyle`
+      // `defaultSlotStyle` is configured independently of `namedSlotStyle`
       filename: 'test.vue',
       code: '<template><MyComponent><template #default>content</template></MyComponent></template>',
       output: '<template><MyComponent>content</MyComponent></template>',
@@ -658,12 +659,12 @@ tester.run('single-v-slot-style', rule, {
       ]
     },
     {
-      // `defaultSlotStyle` inherits `namedSlotStyle` when it is not set
+      // `defaultSlotStyle` keeps its own default when only `namedSlotStyle` is set
       filename: 'test.vue',
       code: '<template><MyComponent><template #default="{ bar }">{{ bar }}</template></MyComponent></template>',
       output:
         '<template><MyComponent v-slot="{ bar }">{{ bar }}</MyComponent></template>',
-      options: [{ namedSlotStyle: 'without-wrapper' }],
+      options: [{ namedSlotStyle: 'with-wrapper' }],
       errors: [
         {
           message:

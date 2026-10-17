@@ -9,7 +9,7 @@ type SlotStyle = 'any' | 'with-wrapper' | 'without-wrapper'
 interface Options {
   /** The style for named slots. */
   namedSlotStyle: SlotStyle
-  /** The style for the default slot. Inherits from `namedSlotStyle` when not set. */
+  /** The style for the default slot. */
   defaultSlotStyle: SlotStyle
   /** Whether HTML comments are ignored when looking for other children. */
   treatCommentsAsInsignificant: boolean
@@ -29,8 +29,6 @@ function normalizeOptions(options: unknown): Options {
     const opts = options as Partial<Options>
     if (opts.namedSlotStyle != null) {
       normalized.namedSlotStyle = opts.namedSlotStyle
-      // `defaultSlotStyle` inherits from `namedSlotStyle` when it is not set.
-      normalized.defaultSlotStyle = opts.namedSlotStyle
     }
     if (opts.defaultSlotStyle != null) {
       normalized.defaultSlotStyle = opts.defaultSlotStyle

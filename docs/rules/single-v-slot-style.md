@@ -107,7 +107,7 @@ A `<template>` that carries anything besides the `v-slot` directive is never rep
 | Name | Type | Default Value | Description
 |:-----|:-----|:--------------|:------------
 | `namedSlotStyle` | `"any"` \| `"with-wrapper"` \| `"without-wrapper"` | `"without-wrapper"` | The style for a single named slot (E.g. `#foo`).
-| `defaultSlotStyle` | `"any"` \| `"with-wrapper"` \| `"without-wrapper"` | inherited from `namedSlotStyle` | The style for a single default slot (E.g. `#default`).
+| `defaultSlotStyle` | `"any"` \| `"with-wrapper"` \| `"without-wrapper"` | `"without-wrapper"` | The style for a single default slot (E.g. `#default`).
 | `treatCommentsAsInsignificant` | `boolean` | `false` | Whether HTML comments next to the slot are ignored when deciding if the slot is the only child.
 
 Each style value means:
@@ -115,8 +115,6 @@ Each style value means:
 - `"without-wrapper"` ... put the `v-slot` directive on the component itself. E.g. `<my-component #foo>`.
 - `"with-wrapper"` ... keep the `<template>` wrapper. E.g. `<my-component><template #foo></template></my-component>`.
 - `"any"` ... do not report either form.
-
-`defaultSlotStyle` inherits the value of `namedSlotStyle` when it is not set, so a single option value configures both.
 
 A string option is supported as a shorthand, to be consistent with the similar [vue/v-slot-style](./v-slot-style.md) rule.
 
