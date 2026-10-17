@@ -35,6 +35,10 @@ ruleTester.run('no-multi-spaces', rule, {
     '<template><div v-for=" i in b ">{{ i }}</div></template>',
     '<template><div :test="`           `"> {{ a }} </div></template>',
     '<template><div :test="`           `">          \n        {{ a }} </div></template>',
+    '<template><div /></template>\n<script setup lang="ts"></script>\n<style scoped></style>',
+    '<script\n  setup\n  lang="ts"\n>\n</script\n>\n<style\n  scoped\n></style>',
+    '<script>\nconst a  =  1\n</script>\n<style>\n.a  { color:  red }\n</style>\n<i18n>\n{ "a":  1 }\n</i18n>',
+    '<template lang="pug">\ndiv(class="a"  id="b")\n</template>',
     {
       filename: 'test.js',
       code: 'export default { }'
@@ -484,6 +488,235 @@ ruleTester.run('no-multi-spaces', rule, {
           column: 23,
           endLine: 5,
           endColumn: 25
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div></div>
+        </template>
+
+        <script   ></script>
+
+        <style    ></style>
+      `,
+      output: `
+        <template>
+          <div></div>
+        </template>
+
+        <script ></script>
+
+        <style ></style>
+      `,
+      errors: [
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 6,
+          column: 16,
+          endLine: 6,
+          endColumn: 19
+        },
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 19
+        }
+      ]
+    },
+    {
+      code: `
+        <script  setup   lang="ts">
+        const  a  =  1
+        </script   >
+      `,
+      output: `
+        <script setup lang="ts">
+        const  a  =  1
+        </script >
+      `,
+      errors: [
+        {
+          message: "Multiple spaces found before 'setup'.",
+          line: 2,
+          column: 16,
+          endLine: 2,
+          endColumn: 18
+        },
+        {
+          message: "Multiple spaces found before 'lang'.",
+          line: 2,
+          column: 23,
+          endLine: 2,
+          endColumn: 26
+        },
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 4,
+          column: 17,
+          endLine: 4,
+          endColumn: 20
+        }
+      ]
+    },
+    {
+      code: `
+        <style  scoped>
+        .a { color: red }
+        </style  >
+      `,
+      output: `
+        <style scoped>
+        .a { color: red }
+        </style >
+      `,
+      errors: [
+        {
+          message: "Multiple spaces found before 'scoped'.",
+          line: 2,
+          column: 15,
+          endLine: 2,
+          endColumn: 17
+        },
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 4,
+          column: 16,
+          endLine: 4,
+          endColumn: 18
+        }
+      ]
+    },
+    {
+      code: `
+        <i18n  lang="json"   >
+        { "en": { "hello": "Hello" } }
+        </i18n  >
+        <i18n   src="./locales.json"   />
+      `,
+      output: `
+        <i18n lang="json" >
+        { "en": { "hello": "Hello" } }
+        </i18n >
+        <i18n src="./locales.json" />
+      `,
+      errors: [
+        {
+          message: "Multiple spaces found before 'lang'.",
+          line: 2,
+          column: 14,
+          endLine: 2,
+          endColumn: 16
+        },
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 2,
+          column: 27,
+          endLine: 2,
+          endColumn: 30
+        },
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 4,
+          column: 15,
+          endLine: 4,
+          endColumn: 17
+        },
+        {
+          message: "Multiple spaces found before 'src'.",
+          line: 5,
+          column: 14,
+          endLine: 5,
+          endColumn: 17
+        },
+        {
+          message: "Multiple spaces found before '/>'.",
+          line: 5,
+          column: 37,
+          endLine: 5,
+          endColumn: 40
+        }
+      ]
+    },
+    {
+      code: `
+        <template  lang="pug"   >
+        div
+        </template  >
+      `,
+      output: `
+        <template lang="pug" >
+        div
+        </template >
+      `,
+      errors: [
+        {
+          message: "Multiple spaces found before 'lang'.",
+          line: 2,
+          column: 18,
+          endLine: 2,
+          endColumn: 20
+        },
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 2,
+          column: 30,
+          endLine: 2,
+          endColumn: 33
+        },
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 21
+        }
+      ]
+    },
+    {
+      code: `
+        <template  >
+          <div  class="foo"></div>
+        </template  >
+        <script   setup></script>
+      `,
+      output: `
+        <template >
+          <div class="foo"></div>
+        </template >
+        <script setup></script>
+      `,
+      errors: [
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 2,
+          column: 18,
+          endLine: 2,
+          endColumn: 20
+        },
+        {
+          message: "Multiple spaces found before 'class'.",
+          line: 3,
+          column: 15,
+          endLine: 3,
+          endColumn: 17
+        },
+        {
+          message: "Multiple spaces found before '>'.",
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 21
+        },
+        {
+          message: "Multiple spaces found before 'setup'.",
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 19
         }
       ]
     }
