@@ -55,7 +55,28 @@ export default {
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/require-name-property": ["error", {
+    "checkScriptSetup": false
+  }]
+}
+```
+
+- `checkScriptSetup` (`boolean`) ... If `true`, also require a `name` in components using `<script setup>`, set with `defineOptions()` or in a normal `<script>` block. Default is `false`, since `<script setup>` components infer their name from the filename.
+
+### `{ "checkScriptSetup": true }`
+
+<eslint-code-block :rules="{'vue/require-name-property': ['error', {checkScriptSetup: true}]}">
+
+```vue
+<script setup>
+/* ✗ BAD */
+defineOptions({})
+</script>
+```
+
+</eslint-code-block>
 
 ## :rocket: Version
 
