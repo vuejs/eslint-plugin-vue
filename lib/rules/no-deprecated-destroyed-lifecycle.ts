@@ -2,16 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @param {RuleFixer} fixer
- * @param {Property} property
- * @param {string} newName
- */
-function fix(fixer, property, newName) {
+function fix(fixer: RuleFixer, property: Property, newName: string) {
   if (property.computed) {
     if (
       property.key.type === 'Literal' ||
@@ -30,7 +23,7 @@ function fix(fixer, property, newName) {
   return fixer.replaceText(property.key, newName)
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -48,8 +41,7 @@ module.exports = {
         'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.executeOnVue(context, (obj) => {
       const destroyed = utils.findProperty(obj, 'destroyed')
 
