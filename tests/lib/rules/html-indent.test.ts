@@ -62,17 +62,15 @@ function loadPatterns(
       const errors: ESLintRuleTester.TestCaseError[] = lines.flatMap((line) =>
         line.indentSize === 0
           ? []
-          : [
-              {
-                message: `Expected indentation of ${line.indentSize} ${kind}${
-                  line.indentSize === 1 ? '' : 's'
-                } but found 0 ${kind}s.`,
-                line: line.number + 1,
-                column: 1,
-                endLine: line.number + 1,
-                endColumn: 1
-              }
-            ]
+          : {
+              message: `Expected indentation of ${line.indentSize} ${kind}${
+                line.indentSize === 1 ? '' : 's'
+              } but found 0 ${kind}s.`,
+              line: line.number + 1,
+              column: 1,
+              endLine: line.number + 1,
+              endColumn: 1
+            }
       )
 
       return Object.assign({}, pattern, { code, output, errors })

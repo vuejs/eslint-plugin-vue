@@ -12,15 +12,11 @@ function getAttributeName(node: VDirective | VAttribute): string | null {
     return node.key.rawName
   }
 
-  if (
-    (node.key.name.name === 'bind' || node.key.name.name === 'model') &&
+  return (node.key.name.name === 'bind' || node.key.name.name === 'model') &&
     node.key.argument &&
     node.key.argument.type === 'VIdentifier'
-  ) {
-    return node.key.argument.rawName
-  }
-
-  return null
+    ? node.key.argument.rawName
+    : null
 }
 
 function shouldConvertToLongForm(

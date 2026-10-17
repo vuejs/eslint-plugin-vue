@@ -41,42 +41,29 @@ ruleTester.run('no-export-in-script-setup', rule, {
       </script>
       `
     },
-    ...(semver.satisfies(typescriptPackageJson.version, '>=4.5.0-0')
-      ? [
-          {
-            filename: 'test.vue',
-            code: `
+    {
+      filename: 'test.vue',
+      code: semver.satisfies(typescriptPackageJson.version, '>=4.5.0-0')
+        ? `
             <script setup lang="ts">
             export { type Foo } from "foo"
             export type Bar = {}
             export interface Bar {}
             </script>
-            `,
-            languageOptions: {
-              parser: vueEslintParser,
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            }
-          }
-        ]
-      : [
-          {
-            filename: 'test.vue',
-            code: `
+          `
+        : `
             <script setup lang="ts">
             export type Bar = {}
             export interface Bar {}
             </script>
-            `,
-            languageOptions: {
-              parser: vueEslintParser,
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            }
-          }
-        ])
+          `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    }
   ],
 
   invalid: [
