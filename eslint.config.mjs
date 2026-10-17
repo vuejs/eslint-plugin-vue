@@ -161,6 +161,7 @@ export default typegen([
       'no-fallthrough': 'error',
       'no-floating-decimal': 'error',
       'no-func-assign': 'error',
+      'no-implicit-coercion': 'error',
       'no-implied-eval': 'error',
       'no-inner-declarations': ['error', 'functions'],
       'no-invalid-regexp': 'error',
