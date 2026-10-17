@@ -420,29 +420,7 @@ tester.run('require-explicit-slots', rule, {
       defineSlots<Slots>()
       </script>`
     },
-    // extending a local interface
-    {
-      code: `
-      <template>
-        <div>
-          <slot></slot>
-          <slot name="bar"></slot>
-        </div>
-      </template>
-      <script setup lang="ts">
-      interface BaseSlots {
-        default(): any
-      }
-
-      interface Slots extends BaseSlots {
-        bar(props: { msg: string }): any
-      }
-
-      defineSlots<Slots>()
-      </script>`,
-      ...getTypeScriptFixtureTestOptions()
-    },
-    // extending an imported interface
+    // interface inheritance
     {
       code: `
       <template>
@@ -450,13 +428,18 @@ tester.run('require-explicit-slots', rule, {
           <slot></slot>
           <slot name="foo"></slot>
           <slot name="bar"></slot>
+          <slot name="baz"></slot>
         </div>
       </template>
       <script setup lang="ts">
       import type {Slots1 as BaseSlots} from './test01'
 
-      interface Slots extends BaseSlots {
+      interface LocalBaseSlots extends BaseSlots {
         bar(props: { msg: string }): any
+      }
+
+      interface Slots extends LocalBaseSlots {
+        baz(props: { msg: string }): any
       }
 
       defineSlots<Slots>()

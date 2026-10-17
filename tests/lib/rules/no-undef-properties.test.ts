@@ -851,40 +851,24 @@ tester.run('no-undef-properties', rule, {
       `
     },
     {
-      // extending local interface
+      // interface inheritance
       code: `
       <script setup lang="ts">
-      interface BaseProps {
-        foo: string
+      import type { Props1 as BaseProps } from './test01'
+
+      interface LocalBaseProps extends BaseProps {
+        qux: string
       }
 
-      interface Props extends BaseProps {
-        bar: string
+      interface Props extends LocalBaseProps {
+        quux: string
       }
 
       defineProps<Props>();
       </script>
 
       <template>
-      <div>{{ foo }} {{ bar }}</div>
-      </template>`,
-      ...getTypeScriptFixtureTestOptions()
-    },
-    {
-      // extending an imported interface
-      code: `
-      <script setup lang="ts">
-      import type { Props1 as BaseProps } from './test01';
-
-      interface Props extends BaseProps {
-        bar: string
-      }
-
-      defineProps<Props>();
-      </script>
-
-      <template>
-      <div>{{ foo }} {{ bar }}</div>
+      <div>{{ foo }} {{ bar }} {{ baz }} {{ qux }} {{ quux }}</div>
       </template>`,
       ...getTypeScriptFixtureTestOptions()
     }

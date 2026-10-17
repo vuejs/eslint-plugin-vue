@@ -677,41 +677,7 @@ tester.run('require-explicit-emits', rule, {
       </script>`,
       ...getTypeScriptFixtureTestOptions()
     },
-    // extending local interface
-    {
-      code: `
-      <script setup lang="ts">
-      interface BaseEmits {
-        (e: 'foo'): void
-      }
-
-      interface Emits extends BaseEmits {
-        (e: 'bar'): void
-      }
-
-      const emit = defineEmits<Emits>()
-      emit('foo')
-      emit('bar')
-      </script>`,
-      ...getTypeScriptFixtureTestOptions()
-    },
-    // extending imported interface
-    {
-      code: `
-      <script setup lang="ts">
-      import {Emits1 as BaseEmits} from './test01'
-
-      interface Emits extends BaseEmits {
-        (e: 'qux'): void
-      }
-
-      const emit = defineEmits<Emits>()
-      emit('foo')
-      emit('qux')
-      </script>`,
-      ...getTypeScriptFixtureTestOptions()
-    },
-    // deep interface hierarchy
+    // interface inheritance
     {
       code: `
       <script setup lang="ts">
