@@ -85,12 +85,14 @@ export default {
 ```json
 {
   "vue/require-explicit-emits": ["error", {
-    "allowProps": false
+    "allowProps": false,
+    "ignoreMixins": false
   }]
 }
 ```
 
 - `"allowProps"` ... If `true`, allow event names defined in `props`. default `false`
+- `"ignoreMixins"` ... If `true`, skip components that use the `mixins` option, since events declared in mixins cannot be checked. default `false`
 
 ### `"allowProps": true`
 
@@ -106,6 +108,28 @@ export default {
       this.$emit('good')
       // ✗ BAD
       this.$emit('bad')
+    }
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+### `"ignoreMixins": true`
+
+<eslint-code-block :rules="{'vue/require-explicit-emits': ['error', {ignoreMixins: true}]}">
+
+```vue
+<script>
+import sampleMixin from './sampleMixin'
+
+export default {
+  mixins: [sampleMixin],
+  methods: {
+    foo() {
+      // ✓ GOOD
+      this.$emit('sample')
     }
   }
 }

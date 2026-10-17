@@ -25,16 +25,15 @@ export function toRegExp(
   const parts = RE_REGEXP_STR.exec(string)
   const { add: forceAddFlags = '', remove: forceRemoveFlags = '' } =
     typeof flags === 'object' ? flags : {} // Avoid issues when this is called directly from array.map
-  if (parts) {
-    return new RegExp(
-      parts[1],
-      parts[2].replaceAll(
-        new RegExp(`[${forceAddFlags}${forceRemoveFlags}]`, 'g'),
-        ''
-      ) + forceAddFlags
-    )
-  }
-  return new RegExp(`^${escape(string)}$`, forceAddFlags)
+  return parts
+    ? new RegExp(
+        parts[1],
+        parts[2].replaceAll(
+          new RegExp(`[${forceAddFlags}${forceRemoveFlags}]`, 'g'),
+          ''
+        ) + forceAddFlags
+      )
+    : new RegExp(`^${escape(string)}$`, forceAddFlags)
 }
 
 /**
@@ -58,10 +57,8 @@ export function toRegExpGroupMatcher(
   // In the future, we could optimize this by joining expressions with identical flags.
   const regexps = patterns.map((pattern) => toRegExp(pattern, { remove: 'g' }))
 
-  if (regexps.length === 1) {
-    return (...toCheck) => toCheck.some((str) => regexps[0].test(str))
-  }
-
-  return (...toCheck) =>
-    regexps.some((regexp) => toCheck.some((str) => regexp.test(str)))
+  return regexps.length === 1
+    ? (...toCheck) => toCheck.some((str) => regexps[0].test(str))
+    : (...toCheck) =>
+        regexps.some((regexp) => toCheck.some((str) => regexp.test(str)))
 }

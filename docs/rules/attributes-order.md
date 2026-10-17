@@ -217,13 +217,13 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
     <div
       a="short"
       abc="value"
-      a-prop="longer"
       boolean-prop
+      a-prop="longer"
       :my-prop="value"
       very-long-prop="value"
       @blur="functionCall"
-      @change="functionCall"
-      @input="handleInput">
+      @input="handleInput"
+      @change="functionCall">
     </div>
 
   <!-- ✗ BAD -->
