@@ -2,27 +2,23 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
-      description:
-        'disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+)',
+      description: 'disallow using deprecated `$listeners` (in Vue.js 3.0.0+)',
       categories: ['vue3-essential'],
-      url: 'https://eslint.vuejs.org/rules/no-deprecated-dollar-scopedslots-api.html'
+      url: 'https://eslint.vuejs.org/rules/no-deprecated-dollar-listeners-api.html'
     },
-    fixable: 'code',
+    fixable: null,
     schema: [],
     messages: {
-      deprecated: 'The `$scopedSlots` is deprecated.'
+      deprecated: 'The `$listeners` is deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(
       context,
       {
@@ -32,13 +28,10 @@ module.exports = {
               // Not vm reference
               continue
             }
-            if (reference.id.name === '$scopedSlots') {
+            if (reference.id.name === '$listeners') {
               context.report({
                 node: reference.id,
-                messageId: 'deprecated',
-                fix(fixer) {
-                  return fixer.replaceText(reference.id, '$slots')
-                }
+                messageId: 'deprecated'
               })
             }
           }
@@ -48,7 +41,7 @@ module.exports = {
         MemberExpression(node) {
           if (
             node.property.type !== 'Identifier' ||
-            node.property.name !== '$scopedSlots'
+            node.property.name !== '$listeners'
           ) {
             return
           }
@@ -58,10 +51,7 @@ module.exports = {
 
           context.report({
             node: node.property,
-            messageId: 'deprecated',
-            fix(fixer) {
-              return fixer.replaceText(node.property, '$slots')
-            }
+            messageId: 'deprecated'
           })
         }
       })

@@ -2,11 +2,9 @@
  * @fileoverview disallow using deprecated events api
  * @author yoyo930021
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,12 +19,14 @@ module.exports = {
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineVueVisitor(context, {
-      /** @param {MemberExpression & ({parent: CallExpression} | {parent: ChainExpression & {parent: CallExpression}})} node */
       'CallExpression > MemberExpression, CallExpression > ChainExpression > MemberExpression'(
-        node
+        node: MemberExpression &
+          (
+            | { parent: CallExpression }
+            | { parent: ChainExpression & { parent: CallExpression } }
+          )
       ) {
         const call =
           // eslint-disable-next-line unicorn/prefer-minimal-ternary -- factoring `.parent` out would widen the type from `CallExpression` to `CallExpression | ChainExpression`

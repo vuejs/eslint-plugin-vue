@@ -2,22 +2,13 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @param {Expression|SpreadElement|null} node
- */
-function isFunctionIdentifier(node) {
+function isFunctionIdentifier(node: Expression | SpreadElement | null) {
   return node && node.type === 'Identifier' && node.name === 'Function'
 }
 
-/**
- * @param {Expression} node
- * @returns {boolean}
- */
-function hasFunctionType(node) {
+function hasFunctionType(node: Expression): boolean {
   if (isFunctionIdentifier(node)) {
     return true
   }
@@ -27,7 +18,7 @@ function hasFunctionType(node) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -43,23 +34,18 @@ module.exports = {
         'Props default value factory functions no longer have access to `this`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionExpression | FunctionDeclaration} node
-     * @property {boolean} propDefault
-     */
-    /** @type {Set<FunctionExpression>} */
-    const propsDefault = new Set()
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+  create(context: RuleContext) {
+    interface ScopeStack {
+      upper: ScopeStack | null
+      node: FunctionExpression | FunctionDeclaration
+      propDefault: boolean
+    }
+    const propsDefault = new Set<FunctionExpression>()
+    let scopeStack: ScopeStack | null = null
 
-    /**
-     * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-     */
-    function onFunctionEnter(node) {
+    function onFunctionEnter(
+      node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+    ) {
       if (node.type === 'ArrowFunctionExpression') {
         return
       }
@@ -78,10 +64,9 @@ module.exports = {
       }
     }
 
-    /**
-     * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-     */
-    function onFunctionExit(node) {
+    function onFunctionExit(
+      node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+    ) {
       if (scopeStack && scopeStack.node === node) {
         scopeStack = scopeStack.upper
       }

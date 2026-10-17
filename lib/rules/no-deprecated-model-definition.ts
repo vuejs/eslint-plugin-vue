@@ -2,19 +2,15 @@
  * @author Flo Edelmann
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 const allowedPropNames = new Set(['modelValue', 'model-value'])
 const allowedEventNames = new Set(['update:modelValue', 'update:model-value'])
 
-/**
- * @param {ObjectExpression} node
- * @param {string} key
- * @returns {Literal | TemplateLiteral | undefined}
- */
-function findPropertyValue(node, key) {
+function findPropertyValue(
+  node: ObjectExpression,
+  key: string
+): Literal | TemplateLiteral | undefined {
   const property = node.properties.find(
     (property) =>
       property.type === 'Property' &&
@@ -31,16 +27,15 @@ function findPropertyValue(node, key) {
   return property.value
 }
 
-/**
- * @param {RuleFixer} fixer
- * @param {Literal | TemplateLiteral} node
- * @param {string} text
- */
-function replaceLiteral(fixer, node, text) {
+function replaceLiteral(
+  fixer: RuleFixer,
+  node: Literal | TemplateLiteral,
+  text: string
+) {
   return fixer.replaceTextRange([node.range[0] + 1, node.range[1] - 1], text)
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -69,8 +64,7 @@ module.exports = {
       changeToKebabModelValue: 'Change to `model-value`/`update:model-value`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const shouldAllowVue3Compat = Boolean(context.options[0]?.allowVue3Compat)
 
     return utils.executeOnVue(context, (obj) => {

@@ -2,11 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,12 +19,10 @@ module.exports = {
       unexpected: '`Vue.config.keyCodes` are deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     return {
-      /** @param {MemberExpression} node */
       "MemberExpression[property.type='Identifier'][property.name='keyCodes']"(
-        node
+        node: MemberExpression
       ) {
         const config = utils.skipChainExpression(node.object)
         if (
