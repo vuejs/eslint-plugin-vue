@@ -32,10 +32,16 @@ const count = shallowRef()
 const count = ref<number>()
 const count = ref(0)
 const count: Ref<number | undefined> = ref()
+const count = ref() as Ref<number | undefined>
+
+function useCount(count: Ref<number | undefined>) {}
+useCount(ref())
 </script>
 ```
 
 </eslint-code-block>
+
+The rule does not report a call when an explicit type annotation already applies to it: a typed variable declaration or assignment, an `as`/`satisfies` expression, or an argument of a function that is declared in the same file with a typed parameter. Since the rule has no type information, annotations that are only known to the type checker — a parameter of an imported function, for example — cannot be detected.
 
 ## :wrench: Options
 

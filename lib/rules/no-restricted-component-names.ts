@@ -96,25 +96,27 @@ export default {
       if (!property) return
 
       const propertyName = utils.getStaticPropertyName(property)
-      if (propertyName === 'name' && property.value.type === 'Literal') {
-        const componentName = property.value.value?.toString()
-        if (!componentName) {
-          return
-        }
+      if (propertyName !== 'name' || property.value.type !== 'Literal') {
+        return
+      }
 
-        for (const option of options) {
-          if (option.test(componentName)) {
-            context.report({
-              node: property.value,
-              messageId: 'disallow',
-              data: {
-                message:
-                  option.message ||
-                  `Using component name \`${componentName}\` is not allowed.`
-              },
-              suggest: createSuggest(property, option.suggest)
-            })
-          }
+      const componentName = property.value.value?.toString()
+      if (!componentName) {
+        return
+      }
+
+      for (const option of options) {
+        if (option.test(componentName)) {
+          context.report({
+            node: property.value,
+            messageId: 'disallow',
+            data: {
+              message:
+                option.message ||
+                `Using component name \`${componentName}\` is not allowed.`
+            },
+            suggest: createSuggest(property, option.suggest)
+          })
         }
       }
     }

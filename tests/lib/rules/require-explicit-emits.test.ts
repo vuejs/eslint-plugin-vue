@@ -395,6 +395,28 @@ tester.run('require-explicit-emits', rule, {
       `,
       options: [{ allowProps: true }]
     },
+    // ignoreMixins
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      import sampleMixin from './sampleMixin'
+      export default {
+        mixins: [sampleMixin],
+        methods: {
+          fn() { this.$emit('bar') }
+        },
+        setup(p, ctx) {
+          ctx.emit('baz')
+        }
+      }
+      </script>
+      `,
+      options: [{ ignoreMixins: true }]
+    },
 
     // <script setup>
     {
@@ -657,6 +679,85 @@ tester.run('require-explicit-emits', rule, {
     }
   ],
   invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      import sampleMixin from './sampleMixin'
+      export default {
+        mixins: [sampleMixin],
+        emits: ['welcome']
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'missing',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      import sampleMixin from './sampleMixin'
+      export default {
+        mixins: [sampleMixin],
+        emits: ['welcome', 'foo']
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: ['welcome']
+      }
+      </script>
+      `,
+      options: [{ ignoreMixins: true }],
+      errors: [
+        {
+          messageId: 'missing',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: ['welcome', 'foo']
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `

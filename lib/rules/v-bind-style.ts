@@ -25,9 +25,11 @@ function isSameName(node: VBindDirective): boolean {
       ? node.value.expression.name
       : null
 
-  if (!attrName || !valueName) return false
-
-  return kebabCaseToCamelCase(attrName) === kebabCaseToCamelCase(valueName)
+  return (
+    !!attrName &&
+    !!valueName &&
+    kebabCaseToCamelCase(attrName) === kebabCaseToCamelCase(valueName)
+  )
 }
 
 function getCutStart(key: VBindDirectiveKey): number {

@@ -8,6 +8,7 @@ import reserved from '../utils/vue-reserved.json' with { type: 'json' }
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
 import { definePropertyReferenceExtractor } from '../utils/property-references.ts'
+import { ReferenceTracker } from '@eslint-community/eslint-utils'
 
 interface PropertyData {
   hasNestProperty?: boolean
@@ -55,10 +56,9 @@ function getPropertyDataFromObjectProperty(
   return {
     hasNestProperty: Boolean(propertyMap),
     get(name) {
-      if (!propertyMap) {
-        return null
-      }
-      return getPropertyDataFromObjectProperty(propertyMap.get(name))
+      return propertyMap
+        ? getPropertyDataFromObjectProperty(propertyMap.get(name))
+        : null
     }
   }
 }
@@ -100,6 +100,138 @@ export default {
      * Property names identified as defined via a Vuex or Pinia helpers
      */
     const propertiesDefinedByStoreHelpers = new Set<string>()
+
+    let reactiveApiNodes: {
+      reactive: Set<ESNode>
+      toRefs: Set<ESNode>
+    } | null = null
+
+    function getReactiveApiNodes() {
+      if (reactiveApiNodes) {
+        return reactiveApiNodes
+      }
+      const tracker = new ReferenceTracker(
+        context.sourceCode.scopeManager.scopes[0]
+      )
+      const reactive = new Set<ESNode>()
+      const toRefs = new Set<ESNode>()
+      const references = utils.iterateReferencesTraceMap(tracker, {
+        reactive: { [ReferenceTracker.CALL]: true },
+        toRefs: { [ReferenceTracker.CALL]: true }
+      })
+      for (const { node, path } of references) {
+        if (path.at(-1) === 'reactive') {
+          reactive.add(node)
+        } else {
+          toRefs.add(node)
+        }
+      }
+      reactiveApiNodes = { reactive, toRefs }
+      return reactiveApiNodes
+    }
+
+    /**
+     * Resolve `toRefs(reactive({...}))`, or `toRefs(x)` where `x` is a `const`
+     * initialized with `reactive({...})`, to the object literal passed to `reactive`.
+     */
+    function getReactiveObjectFromToRefs(
+      node: Expression
+    ): ObjectExpression | null {
+      if (
+        node.type !== 'CallExpression' ||
+        !getReactiveApiNodes().toRefs.has(node)
+      ) {
+        return null
+      }
+      let arg = node.arguments[0]
+      if (arg && arg.type === 'Identifier') {
+        const variable = utils.findVariableByIdentifier(context, arg)
+        if (!variable || variable.defs.length !== 1) {
+          return null
+        }
+        const def = variable.defs[0]
+        if (
+          def.type !== 'Variable' ||
+          def.parent.kind !== 'const' ||
+          !def.node.init
+        ) {
+          return null
+        }
+        arg = def.node.init
+      }
+      if (
+        !arg ||
+        arg.type !== 'CallExpression' ||
+        !getReactiveApiNodes().reactive.has(arg)
+      ) {
+        return null
+      }
+      const reactiveArg = arg.arguments[0]
+      return reactiveArg && reactiveArg.type === 'ObjectExpression'
+        ? reactiveArg
+        : null
+    }
+
+    function* iterateSetupReturnObjects(
+      node: ObjectExpression
+    ): IterableIterator<ObjectExpression> {
+      const setup = utils.findProperty(node, GROUP_SETUP)
+      if (
+        !setup ||
+        (setup.value.type !== 'FunctionExpression' &&
+          setup.value.type !== 'ArrowFunctionExpression')
+      ) {
+        return
+      }
+      const body = setup.value.body
+      if (body.type === 'ObjectExpression') {
+        yield body
+        return
+      }
+      if (body.type !== 'BlockStatement') {
+        return
+      }
+      for (const statement of body.body) {
+        if (
+          statement.type === 'ReturnStatement' &&
+          statement.argument &&
+          statement.argument.type === 'ObjectExpression'
+        ) {
+          yield statement.argument
+        }
+      }
+    }
+
+    function* iterateSpreadToRefsNames(
+      node: ObjectExpression
+    ): IterableIterator<string> {
+      for (const property of node.properties) {
+        const reactiveObject =
+          property.type === 'SpreadElement'
+            ? getReactiveObjectFromToRefs(property.argument)
+            : null
+        if (!reactiveObject) {
+          continue
+        }
+        for (const p of reactiveObject.properties) {
+          const name = p.type === 'Property' && utils.getStaticPropertyName(p)
+          if (name) {
+            yield name
+          }
+        }
+      }
+    }
+
+    /**
+     * Iterate names defined by `...toRefs(reactive({...}))` spreads in the `setup()` return object.
+     */
+    function* iterateSetupToRefsNames(
+      node: ObjectExpression
+    ): IterableIterator<string> {
+      for (const returned of iterateSetupReturnObjects(node)) {
+        yield* iterateSpreadToRefsNames(returned)
+      }
+    }
 
     function isScriptSetupProgram(node: ASTNode) {
       return node === programNode
@@ -169,11 +301,7 @@ export default {
         if (
           reserved.includes(name) ||
           isIgnored(name) ||
-          propertiesDefinedByStoreHelpers.has(name)
-        ) {
-          return
-        }
-        if (
+          propertiesDefinedByStoreHelpers.has(name) ||
           // Prevents reporting to the same node.
           this.reported.has(node) ||
           // Prevents reports with the same name.
@@ -226,10 +354,7 @@ export default {
         return null
       }
       const property = node.parent
-      if (!utils.isProperty(property)) {
-        return null
-      }
-      return property
+      return utils.isProperty(property) ? property : null
     }
 
     const scriptVisitor = utils.compositingVisitors(
@@ -241,17 +366,19 @@ export default {
 
           const ctx = getVueComponentContext(programNode)
           const globalScope = context.sourceCode.scopeManager.globalScope
-          if (globalScope) {
-            for (const variable of globalScope.variables) {
-              ctx.defineProperties.set(variable.name, {})
-            }
-            const moduleScope = globalScope.childScopes.find(
-              (scope) => scope.type === 'module'
-            )
-            const moduleVariables = (moduleScope && moduleScope.variables) || []
-            for (const variable of moduleVariables) {
-              ctx.defineProperties.set(variable.name, {})
-            }
+          if (!globalScope) {
+            return
+          }
+
+          for (const variable of globalScope.variables) {
+            ctx.defineProperties.set(variable.name, {})
+          }
+          const moduleScope = globalScope.childScopes.find(
+            (scope) => scope.type === 'module'
+          )
+          const moduleVariables = (moduleScope && moduleScope.variables) || []
+          for (const variable of moduleVariables) {
+            ctx.defineProperties.set(variable.name, {})
           }
         }
       },
@@ -372,12 +499,17 @@ export default {
               hasNestProperty: Boolean(propertyMap),
               isProps: prop.groupName === GROUP_PROPERTY,
               get(name) {
-                if (!propertyMap) {
-                  return null
-                }
-                return getPropertyDataFromObjectProperty(propertyMap.get(name))
+                return propertyMap
+                  ? getPropertyDataFromObjectProperty(propertyMap.get(name))
+                  : null
               }
             })
+          }
+
+          for (const name of iterateSetupToRefsNames(node)) {
+            if (!ctx.defineProperties.has(name)) {
+              ctx.defineProperties.set(name, {})
+            }
           }
 
           const watchersAndExposes = utils.iterateProperties(
@@ -488,15 +620,17 @@ export default {
             propertyReferenceExtractor.extractFromFunctionParam(node, 0)
           ctx.verifyReferences(propertyReferences)
 
-          if (vueData.functional) {
-            // Check for Vue 2.x render & functional
-            const propertyReferencesForV2 =
-              propertyReferenceExtractor.extractFromFunctionParam(node, 1)
-
-            ctx.verifyReferences(propertyReferencesForV2.getNest('props'), {
-              isProps: true
-            })
+          if (!vueData.functional) {
+            return
           }
+
+          // Check for Vue 2.x render & functional
+          const propertyReferencesForV2 =
+            propertyReferenceExtractor.extractFromFunctionParam(node, 1)
+
+          ctx.verifyReferences(propertyReferencesForV2.getNest('props'), {
+            isProps: true
+          })
         },
         'ThisExpression, Identifier'(
           node: ThisExpression | Identifier,

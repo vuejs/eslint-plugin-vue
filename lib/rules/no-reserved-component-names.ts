@@ -34,11 +34,20 @@ function canVerify(
   )
 }
 
-function addAll<T>(set: Set<T>, iterable: Iterable<T>) {
-  for (const element of iterable) {
-    set.add(element)
-  }
-}
+const RESERVED_NAMES_IN_HTML = new Set<string>(htmlElements)
+const RESERVED_NAMES_IN_OTHERS = new Set<string>([
+  ...deprecatedHtmlElements,
+  ...kebabCaseElements,
+  ...svgElements
+])
+const CAPITALIZED_RESERVED_NAMES_IN_HTML = new Set<string>(
+  htmlElements.map(capitalize)
+)
+const CAPITALIZED_RESERVED_NAMES_IN_OTHERS = new Set<string>([
+  ...deprecatedHtmlElements.map(capitalize),
+  ...kebabCaseElements.map(pascalCase),
+  ...svgElements.filter(isLowercase).map(capitalize)
+])
 
 export default {
   meta: {
@@ -82,38 +91,27 @@ export default {
       options.disallowVue3BuiltInComponents === true
     const isHtmlElementCaseSensitive = options.htmlElementCaseSensitive === true
 
-    const RESERVED_NAMES_IN_HTML = new Set(htmlElements)
-    const RESERVED_NAMES_IN_OTHERS = new Set([
-      ...deprecatedHtmlElements,
-      ...kebabCaseElements,
-      ...svgElements
-    ])
+    const isReservedInHtml = (name: string) =>
+      RESERVED_NAMES_IN_HTML.has(name) ||
+      (!isHtmlElementCaseSensitive &&
+        CAPITALIZED_RESERVED_NAMES_IN_HTML.has(name))
 
-    if (!isHtmlElementCaseSensitive) {
-      addAll(RESERVED_NAMES_IN_HTML, htmlElements.map(capitalize))
-      addAll(RESERVED_NAMES_IN_OTHERS, [
-        ...deprecatedHtmlElements.map(capitalize),
-        ...kebabCaseElements.map(pascalCase),
-        ...svgElements.filter(isLowercase).map(capitalize)
-      ])
-    }
-
-    const reservedNames = new Set([
-      ...RESERVED_NAMES_IN_HTML,
-      ...(shouldDisallowVueBuiltInComponents
-        ? utils.VUE2_BUILTIN_COMPONENT_NAMES
-        : []),
-      ...(shouldDisallowVue3BuiltInComponents
-        ? utils.VUE3_BUILTIN_COMPONENT_NAMES
-        : []),
-      ...RESERVED_NAMES_IN_OTHERS
-    ])
+    const isReserved = (name: string) =>
+      isReservedInHtml(name) ||
+      RESERVED_NAMES_IN_OTHERS.has(name) ||
+      (!isHtmlElementCaseSensitive &&
+        CAPITALIZED_RESERVED_NAMES_IN_OTHERS.has(name)) ||
+      (shouldDisallowVueBuiltInComponents &&
+        utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)) ||
+      (shouldDisallowVue3BuiltInComponents &&
+        utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name))
 
     function getMessageId(name: string): string {
-      if (RESERVED_NAMES_IN_HTML.has(name)) return 'reservedInHtml'
+      if (isReservedInHtml(name)) return 'reservedInHtml'
       if (utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue'
-      if (utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue3'
-      return 'reserved'
+      return utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)
+        ? 'reservedInVue3'
+        : 'reserved'
     }
 
     function reportIfInvalid(node: Literal | TemplateLiteral) {
@@ -124,7 +122,7 @@ export default {
       } else {
         name = String(node.value)
       }
-      if (reservedNames.has(name)) {
+      if (isReserved(name)) {
         report(node, name)
       }
     }
@@ -154,15 +152,14 @@ export default {
       utils.executeOnVue(context, (obj) => {
         // Report if a component has been registered locally with a reserved name.
         for (const { node, name } of utils.getRegisteredComponents(obj)) {
-          if (reservedNames.has(name)) {
+          if (isReserved(name)) {
             report(node, name)
           }
         }
 
         const node = utils.findProperty(obj, 'name')
 
-        if (!node) return
-        if (!canVerify(node.value)) return
+        if (!node || !canVerify(node.value)) return
         reportIfInvalid(node.value)
       }),
       utils.defineScriptSetupVisitor(context, {
@@ -171,8 +168,7 @@ export default {
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
           const nameNode = utils.findProperty(define, 'name')
-          if (!nameNode) return
-          if (!canVerify(nameNode.value)) return
+          if (!nameNode || !canVerify(nameNode.value)) return
           reportIfInvalid(nameNode.value)
         }
       })
