@@ -73,18 +73,17 @@ function* extractClassNames(
     }
     return
   }
-  if (node.type === 'ArrayExpression') {
-    for (const element of node.elements) {
-      if (element == null) {
-        continue
-      }
-      if (element.type === 'SpreadElement') {
-        continue
-      }
-      yield* extractClassNames(element)
-    }
+  if (node.type !== 'ArrayExpression') {
     return
   }
+
+  for (const element of node.elements) {
+    if (element == null || element.type === 'SpreadElement') {
+      continue
+    }
+    yield* extractClassNames(element)
+  }
+  return
 }
 
 export default {

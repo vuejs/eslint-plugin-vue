@@ -35,7 +35,7 @@ function extractComponentProps(code: string, tsFileCode = '') {
   return result
 }
 
-describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
+describe('getComponentPropsFromTypeDefineTypes', { concurrent: false }, () => {
   it.each([
     {
       name: 'inline-type',

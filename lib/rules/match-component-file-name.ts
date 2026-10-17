@@ -68,12 +68,10 @@ export default {
     const errors: Rule.ReportDescriptor[] = []
     let componentCount = 0
 
-    function compareNames(name: string, filename: string) {
-      if (shouldMatchCase) {
-        return name === filename
-      }
-
-      return pascalCase(name) === filename || kebabCase(name) === filename
+    function areNamesEquivalent(name: string, filename: string) {
+      return shouldMatchCase
+        ? name === filename
+        : pascalCase(name) === filename || kebabCase(name) === filename
     }
 
     function verifyName(node: Literal | TemplateLiteral) {
@@ -85,7 +83,7 @@ export default {
         name = String(node.value)
       }
 
-      if (!compareNames(name, filename)) {
+      if (!areNamesEquivalent(name, filename)) {
         errors.push({
           node,
           messageId: 'shouldMatchFileName',
@@ -121,8 +119,7 @@ export default {
 
         componentCount++
 
-        if (!node) return
-        if (!canVerify(node.value)) return
+        if (!node || !canVerify(node.value)) return
         verifyName(node.value)
       }),
       utils.defineScriptSetupVisitor(context, {
@@ -132,8 +129,7 @@ export default {
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
           const nameNode = utils.findProperty(define, 'name')
-          if (!nameNode) return
-          if (!canVerify(nameNode.value)) return
+          if (!nameNode || !canVerify(nameNode.value)) return
           verifyName(nameNode.value)
         }
       }),
