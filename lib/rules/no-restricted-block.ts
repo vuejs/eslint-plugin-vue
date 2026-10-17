@@ -71,10 +71,9 @@ export default {
       sourceCode.parserServices.getDocumentFragment()
 
     function getTopLevelHTMLElements() {
-      if (documentFragment) {
-        return documentFragment.children.filter(utils.isVElement)
-      }
-      return []
+      return documentFragment
+        ? documentFragment.children.filter(utils.isVElement)
+        : []
     }
 
     return {
@@ -84,14 +83,15 @@ export default {
         }
         for (const block of getTopLevelHTMLElements()) {
           const option = options.find((option) => option.test(block))
-          if (option) {
-            const message = option.message || defaultMessage(block)
-            context.report({
-              node: block.startTag,
-              messageId: 'restrictedBlock',
-              data: { message }
-            })
+          if (!option) {
+            continue
           }
+          const message = option.message || defaultMessage(block)
+          context.report({
+            node: block.startTag,
+            messageId: 'restrictedBlock',
+            data: { message }
+          })
         }
       }
     }

@@ -26,11 +26,11 @@ function isEmitVariableName(
 ): boolean {
   const node = defineEmitsNode?.parent
 
-  if (node?.type === 'VariableDeclarator' && node.id.type === 'Identifier') {
-    return name === node.id.name
-  }
-
-  return false
+  return (
+    node?.type === 'VariableDeclarator' &&
+    node.id.type === 'Identifier' &&
+    name === node.id.name
+  )
 }
 
 export default {
@@ -139,12 +139,14 @@ export default {
         }
 
         // verify $emit
-        if (emit?.name === '$emit') {
-          const memObject = utils.skipChainExpression(emit.member.object)
-          if (utils.isThis(memObject, context)) {
-            // verify this.$emit()
-            verifyEmit(nameWithLoc)
-          }
+        if (emit?.name !== '$emit') {
+          return
+        }
+
+        const memObject = utils.skipChainExpression(emit.member.object)
+        if (utils.isThis(memObject, context)) {
+          // verify this.$emit()
+          verifyEmit(nameWithLoc)
         }
       }
     }
@@ -191,16 +193,13 @@ export default {
     const vueVisitor = utils.defineVueVisitor(context, {
       onSetupFunctionEnter(node, { node: vueNode }) {
         const contextParam = node.params[1]
-        if (!contextParam) {
+        if (
           // no arguments
-          return
-        }
-        if (contextParam.type === 'RestElement') {
+          !contextParam ||
           // cannot check
-          return
-        }
-        if (contextParam.type === 'ArrayPattern') {
-          // cannot check
+          contextParam.type === 'RestElement' ||
+          contextParam.type === 'ArrayPattern'
+        ) {
           return
         }
         const contextReferenceIds = new Set<Identifier>()

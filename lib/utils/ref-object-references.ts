@@ -343,12 +343,10 @@ class RefObjectReferenceExtractor implements RefObjectReferences {
         reference.resolved.defs[0].type === 'Variable'
           ? reference.resolved.defs[0]
           : null
-      if (def && def.name === reference.identifier) {
-        continue
-      }
       if (
-        reference.isRead() &&
-        this.processExpression(reference.identifier, ctx)
+        (def && def.name === reference.identifier) ||
+        (reference.isRead() &&
+          this.processExpression(reference.identifier, ctx))
       ) {
         continue
       }

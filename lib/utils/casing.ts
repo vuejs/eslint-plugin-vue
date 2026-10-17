@@ -62,10 +62,9 @@ export function isSnakeCase(str: string): boolean {
  * Convert text to camelCase
  */
 export function camelCase(str: string): string {
-  if (isPascalCase(str)) {
-    return str.charAt(0).toLowerCase() + str.slice(1)
-  }
-  return str.replaceAll(/[-_](\w)/gu, (_, c) => (c ? c.toUpperCase() : ''))
+  return isPascalCase(str)
+    ? str.charAt(0).toLowerCase() + str.slice(1)
+    : str.replaceAll(/[-_](\w)/gu, (_, c) => (c ? c.toUpperCase() : ''))
 }
 
 /**

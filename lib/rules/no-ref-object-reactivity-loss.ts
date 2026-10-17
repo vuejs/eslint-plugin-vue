@@ -10,26 +10,18 @@ import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
  */
 function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
   const parent = node.parent
-  if (parent.type === 'UpdateExpression' && parent.argument === node) {
-    // e.g. `pattern++`
-    return true
-  }
-  if (parent.type === 'AssignmentExpression' && parent.left === node) {
-    // e.g. `pattern = 42`
-    return true
-  }
-  if (
-    (parent.type === 'Property' && parent.value === node) ||
-    parent.type === 'ArrayPattern' ||
-    (parent.type === 'ObjectPattern' &&
-      parent.properties.includes(node as any)) ||
-    (parent.type === 'AssignmentPattern' && parent.left === node) ||
-    parent.type === 'RestElement' ||
-    (parent.type === 'MemberExpression' && parent.object === node)
-  ) {
-    return isUpdate(parent)
-  }
-  return false
+  return (
+    (parent.type === 'UpdateExpression' && parent.argument === node) || // e.g. `pattern++`
+    (parent.type === 'AssignmentExpression' && parent.left === node) || // e.g. `pattern = 42`
+    (((parent.type === 'Property' && parent.value === node) ||
+      parent.type === 'ArrayPattern' ||
+      (parent.type === 'ObjectPattern' &&
+        parent.properties.includes(node as any)) ||
+      (parent.type === 'AssignmentPattern' && parent.left === node) ||
+      parent.type === 'RestElement' ||
+      (parent.type === 'MemberExpression' && parent.object === node)) &&
+      isUpdate(parent))
+  )
 }
 
 /**
@@ -42,10 +34,11 @@ function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
 function isImmediatelyInvokedFunction(
   node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
 ): boolean {
-  if (node.type === 'FunctionDeclaration') {
-    return false
-  }
-  if (node.async || (node.type === 'FunctionExpression' && node.generator)) {
+  if (
+    node.type === 'FunctionDeclaration' ||
+    node.async ||
+    (node.type === 'FunctionExpression' && node.generator)
+  ) {
     return false
   }
   const parent = node.parent
@@ -88,11 +81,7 @@ export default {
      */
     function verifyRefObjectValue(node: Expression | Super | ObjectPattern) {
       const ref = refObjectReferences.get(node)
-      if (!ref) {
-        return
-      }
-      if (scopes.get(ref.define) !== scopeStack) {
-        // Not in the same scope
+      if (!ref || scopes.get(ref.define) !== scopeStack) {
         return
       }
 
