@@ -41,20 +41,10 @@ export default {
      * Checks whether the given node can convert to the `v-slot`.
      */
     function canConvertFromVBindSlotToVSlot(slotAttr: VDirective): boolean {
-      if (!canConvertToVSlot(slotAttr.parent.parent, sourceCode, tokenStore)) {
-        return false
-      }
-
-      if (!slotAttr.value) {
-        return true
-      }
-
-      if (!slotAttr.value.expression) {
-        // parse error or empty expression
-        return false
-      }
-
-      return slotAttr.value.expression.type === 'Identifier'
+      return (
+        canConvertToVSlot(slotAttr.parent.parent, sourceCode, tokenStore) &&
+        (!slotAttr.value || slotAttr.value.expression?.type === 'Identifier')
+      )
     }
 
     /**
