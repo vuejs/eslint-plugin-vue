@@ -51,6 +51,7 @@ tester.run('brace-style', rule, {
         <template>
           <div :attr="function foo() { return true; }" />
         </template>`,
+      // eslint-disable-next-line unicorn/prefer-literal-ascii -- see https://github.com/sindresorhus/eslint-plugin-unicorn/issues/3906
       output: `
         <template>
           <div :attr="function foo() {
