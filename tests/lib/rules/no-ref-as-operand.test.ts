@@ -148,6 +148,20 @@ tester.run('no-ref-as-operand', rule, {
       </script>
     `,
     `
+      <script setup>
+        import { useTemplateRef } from 'vue'
+        const img = useTemplateRef('img')
+        function enlarge() {
+          if (!img.value) return
+          img.value.classList.add('enlarged')
+        }
+      </script>
+      <template>
+        <img ref="img" />
+        <button v-if="img" @click="enlarge" />
+      </template>
+    `,
+    `
       <script>
       import { ref } from 'vue'
       let foo;
@@ -871,6 +885,46 @@ tester.run('no-ref-as-operand', rule, {
           column: 9,
           endLine: 5,
           endColumn: 12
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup>
+        import { useTemplateRef, watch } from 'vue'
+        const props = defineProps(['src'])
+        const img = useTemplateRef('img')
+        watch(
+          () => props.src,
+          () => {
+            if (typeof window == 'undefined' || typeof img == 'undefined') return
+            img.value.classList.remove('loaded')
+          }
+        )
+      </script>
+      `,
+      output: `
+      <script setup>
+        import { useTemplateRef, watch } from 'vue'
+        const props = defineProps(['src'])
+        const img = useTemplateRef('img')
+        watch(
+          () => props.src,
+          () => {
+            if (typeof window == 'undefined' || typeof img.value == 'undefined') return
+            img.value.classList.remove('loaded')
+          }
+        )
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `useTemplateRef()`.',
+          line: 9,
+          column: 56,
+          endLine: 9,
+          endColumn: 59
         }
       ]
     },
