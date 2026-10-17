@@ -3,10 +3,8 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
-const keyAliases = require('../utils/key-aliases.json')
+import utils from '../utils/index.js'
+import keyAliases from '../utils/key-aliases.json' with { type: 'json' }
 
 const VALID_MODIFIERS = new Set([
   'stop',
@@ -36,11 +34,10 @@ const VERB_MODIFIERS = new Set(['stop', 'prevent'])
 // https://www.w3.org/TR/uievents-key/
 const KEY_ALIASES = new Set(keyAliases)
 
-/**
- * @param {VIdentifier} modifierNode
- * @param {Set<string>} customModifiers
- */
-function isValidModifier(modifierNode, customModifiers) {
+function isValidModifier(
+  modifierNode: VIdentifier,
+  customModifiers: Set<string>
+) {
   const modifier = modifierNode.name
   return (
     // built-in aliases
@@ -57,7 +54,7 @@ function isValidModifier(modifierNode, customModifiers) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -87,16 +84,13 @@ module.exports = {
         "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
-    /** @type {Set<string>} */
-    const customModifiers = new Set(options.modifiers || [])
+    const customModifiers = new Set<string>(options.modifiers || [])
     const sourceCode = context.sourceCode
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='on']"(node) {
+      "VAttribute[directive=true][key.name.name='on']"(node: VDirective) {
         for (const modifier of node.key.modifiers) {
           if (!isValidModifier(modifier, customModifiers)) {
             context.report({

@@ -2,16 +2,15 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
+type MemoExpression = NonNullable<VExpressionContainer['expression']>
 
-/**
- * @param {RuleContext} context
- * @param {NonNullable<VExpressionContainer['expression']>} expression
- * @param {NonNullable<VExpressionContainer['expression']>[]} expressions
- */
-function verifyMemoExpression(context, expression, expressions) {
+function verifyMemoExpression(
+  context: RuleContext,
+  expression: MemoExpression,
+  expressions: MemoExpression[]
+) {
   switch (expression.type) {
     case 'ObjectExpression':
     case 'ClassExpression':
@@ -50,7 +49,7 @@ function verifyMemoExpression(context, expression, expressions) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -69,10 +68,8 @@ module.exports = {
       insideVFor: "'v-memo' directive does not work inside 'v-for'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {VElement | null} */
-    let vForElement = null
+  create(context: RuleContext) {
+    let vForElement: VElement | null = null
     return utils.defineTemplateBodyVisitor(context, {
       VElement(node) {
         if (!vForElement && utils.hasDirective(node, 'for')) {
@@ -84,8 +81,7 @@ module.exports = {
           vForElement = null
         }
       },
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='memo']"(node) {
+      "VAttribute[directive=true][key.name.name='memo']"(node: VDirective) {
         if (vForElement && vForElement !== node.parent.parent) {
           context.report({
             node: node.key,

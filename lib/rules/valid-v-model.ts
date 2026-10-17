@@ -3,18 +3,14 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 const VALID_MODIFIERS = new Set(['lazy', 'number', 'trim'])
 
 /**
  * Check whether the given node is valid or not.
- * @param {VElement} node The element node to check.
- * @returns {boolean} `true` if the node is valid.
  */
-function isValidElement(node) {
+function isValidElement(node: VElement): boolean {
   const name = node.name
   return (
     name === 'input' ||
@@ -33,10 +29,8 @@ function isValidElement(node) {
  * e.g.
  * - `a?.b`
  * - `a?.b.c`
- * @param {ASTNode} node The node to check.
- * @returns {boolean} `true` if the node is a MemberExpression containing an optional chaining.
  */
-function isOptionalChainingMemberExpression(node) {
+function isOptionalChainingMemberExpression(node: ASTNode): boolean {
   return (
     node.type === 'ChainExpression' &&
     node.expression.type === 'MemberExpression'
@@ -45,10 +39,8 @@ function isOptionalChainingMemberExpression(node) {
 
 /**
  * Check whether the given node can be LHS (left-hand side).
- * @param {ASTNode} node The node to check.
- * @returns {boolean} `true` if the node can be LHS.
  */
-function isLhs(node) {
+function isLhs(node: ASTNode): boolean {
   switch (node.type) {
     case 'TSAsExpression':
     case 'TSNonNullExpression': {
@@ -69,10 +61,8 @@ function isLhs(node) {
  * e.g.
  * - `(a?.b).c`
  * - `(null).foo`
- * @param {ASTNode} node The node to check.
- * @returns {boolean} `true` if the node is a MemberExpression of a possibly null object.
  */
-function maybeNullObjectMemberExpression(node) {
+function isMaybeNullObjectMemberExpression(node: ASTNode): boolean {
   if (node.type !== 'MemberExpression') {
     return false
   }
@@ -86,7 +76,7 @@ function maybeNullObjectMemberExpression(node) {
       return node.object.value === null && !node.object.bigint
     }
     case 'MemberExpression': {
-      return maybeNullObjectMemberExpression(node.object)
+      return isMaybeNullObjectMemberExpression(node.object)
     }
     default: {
       return false
@@ -96,11 +86,8 @@ function maybeNullObjectMemberExpression(node) {
 
 /**
  * Get the variable by names.
- * @param {string} name The variable name to find.
- * @param {VElement} leafNode The node to look up.
- * @returns {VVariable|null} The found variable or null.
  */
-function getVariable(name, leafNode) {
+function getVariable(name: string, leafNode: VElement): VVariable | null {
   let node = leafNode
 
   while (node != null) {
@@ -121,8 +108,7 @@ function getVariable(name, leafNode) {
   return null
 }
 
-/** @type {RuleModule}  */
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -151,11 +137,9 @@ module.exports = {
         "'v-model' directives cannot update the iteration variable '{{varName}}' itself."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='model']"(node) {
+      "VAttribute[directive=true][key.name.name='model']"(node: VDirective) {
         const element = node.parent.parent
         const name = element.name
 
@@ -215,7 +199,7 @@ module.exports = {
             node: expression,
             messageId: 'unexpectedNonLhsExpression'
           })
-        } else if (maybeNullObjectMemberExpression(expression)) {
+        } else if (isMaybeNullObjectMemberExpression(expression)) {
           context.report({
             node: expression,
             messageId: 'unexpectedNullObject'
