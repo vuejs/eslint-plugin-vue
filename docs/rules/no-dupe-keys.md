@@ -89,6 +89,10 @@ export default {
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/no-props-shadow](./no-props-shadow.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v3.9.0
