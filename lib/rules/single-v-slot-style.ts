@@ -127,13 +127,12 @@ function getIndentStep(
 ): string | null {
   const outer = getLineIndent(text, outerOffset)
   const inner = getLineIndent(text, innerOffset)
-  if (outer == null || inner == null) {
-    return null
-  }
-  if (inner.length <= outer.length || !inner.startsWith(outer)) {
-    return null
-  }
-  return inner.slice(outer.length)
+  return outer == null ||
+    inner == null ||
+    inner.length <= outer.length ||
+    !inner.startsWith(outer)
+    ? null
+    : inner.slice(outer.length)
 }
 
 /**
@@ -387,11 +386,11 @@ export default {
 
         if (vSlotOnComponent) {
           // `<MyComponent #foo>...</MyComponent>`
-          if (slotTemplateChildren.length > 0) {
-            // Mixed form, already reported by `vue/valid-v-slot`.
-            return
-          }
-          if (vSlotOnComponent.key.modifiers.length > 0) {
+          // A mixed form is already reported by `vue/valid-v-slot`.
+          if (
+            slotTemplateChildren.length > 0 ||
+            vSlotOnComponent.key.modifiers.length > 0
+          ) {
             return
           }
           const name = getSlotName(vSlotOnComponent)
@@ -439,12 +438,9 @@ export default {
         if (template.startTag.attributes.length !== 1) {
           return
         }
+        // `vSlot` is guaranteed by the filter above.
         const vSlot = utils.getDirective(template, 'slot')
-        /* c8 ignore next 3 -- guaranteed by the filter above */
-        if (vSlot == null) {
-          return
-        }
-        if (vSlot.key.modifiers.length > 0) {
+        if (vSlot == null || vSlot.key.modifiers.length > 0) {
           return
         }
         const name = getSlotName(vSlot)
