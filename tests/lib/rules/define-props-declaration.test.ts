@@ -60,6 +60,31 @@ tester.run('define-props-declaration', rule, {
     },
     {
       filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel<string>()
+      const namedModel = defineModel<number>('count', { default: 0 })
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel({ type: String })
+      const namedModel = defineModel('count', { type: Number })
+      const untypedModel = defineModel()
+      </script>
+      `,
+      options: ['runtime']
+    },
+    {
+      filename: 'test.vue',
       // ignore script without lang="ts"
       code: `
       <script setup>
@@ -168,6 +193,79 @@ tester.run('define-props-declaration', rule, {
           column: 21,
           endLine: 5,
           endColumn: 11
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel()
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'hasArg',
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 34
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel({ type: String })
+      const namedModel = defineModel('count', { type: Number })
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'hasArg',
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 50
+        },
+        {
+          messageId: 'hasArg',
+          line: 4,
+          column: 26,
+          endLine: 4,
+          endColumn: 64
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel<string>()
+      const namedModel = defineModel<number>('count', { default: 0 })
+      </script>
+      `,
+      options: ['runtime'],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          messageId: 'hasTypeArg',
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 42
+        },
+        {
+          messageId: 'hasTypeArg',
+          line: 4,
+          column: 26,
+          endLine: 4,
+          endColumn: 70
         }
       ]
     }
