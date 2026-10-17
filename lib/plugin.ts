@@ -94,6 +94,7 @@ import noDeprecatedVIs from './rules/no-deprecated-v-is.ts'
 import noDeprecatedVOnNativeModifier from './rules/no-deprecated-v-on-native-modifier.ts'
 import noDeprecatedVOnNumberModifiers from './rules/no-deprecated-v-on-number-modifiers.ts'
 import noDeprecatedVueConfigKeycodes from './rules/no-deprecated-vue-config-keycodes.ts'
+import noDollarEl from './rules/no-dollar-el.ts'
 import noDupeKeys from './rules/no-dupe-keys.ts'
 import noDupeVElseIf from './rules/no-dupe-v-else-if.ts'
 import noDuplicateAttrInheritance from './rules/no-duplicate-attr-inheritance.ts'
@@ -355,6 +356,7 @@ export default {
     'no-deprecated-v-on-native-modifier': noDeprecatedVOnNativeModifier,
     'no-deprecated-v-on-number-modifiers': noDeprecatedVOnNumberModifiers,
     'no-deprecated-vue-config-keycodes': noDeprecatedVueConfigKeycodes,
+    'no-dollar-el': noDollarEl,
     'no-dupe-keys': noDupeKeys,
     'no-dupe-v-else-if': noDupeVElseIf,
     'no-duplicate-attr-inheritance': noDuplicateAttrInheritance,
