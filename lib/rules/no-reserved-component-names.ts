@@ -109,8 +109,9 @@ export default {
     function getMessageId(name: string): string {
       if (isReservedInHtml(name)) return 'reservedInHtml'
       if (utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue'
-      if (utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue3'
-      return 'reserved'
+      return utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)
+        ? 'reservedInVue3'
+        : 'reserved'
     }
 
     function reportIfInvalid(node: Literal | TemplateLiteral) {
@@ -158,8 +159,7 @@ export default {
 
         const node = utils.findProperty(obj, 'name')
 
-        if (!node) return
-        if (!canVerify(node.value)) return
+        if (!node || !canVerify(node.value)) return
         reportIfInvalid(node.value)
       }),
       utils.defineScriptSetupVisitor(context, {
@@ -168,8 +168,7 @@ export default {
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
           const nameNode = utils.findProperty(define, 'name')
-          if (!nameNode) return
-          if (!canVerify(nameNode.value)) return
+          if (!nameNode || !canVerify(nameNode.value)) return
           reportIfInvalid(nameNode.value)
         }
       })
