@@ -103,25 +103,27 @@ export default {
 
         // verify setup context
         const setupContext = setupContexts.get(info ? info.node : programNode)
-        if (setupContext) {
-          const { contextReferenceIds, emitReferenceIds } = setupContext
+        if (!setupContext) {
+          return
+        }
+
+        const { contextReferenceIds, emitReferenceIds } = setupContext
+        if (
+          node.callee.type === 'Identifier' &&
+          emitReferenceIds.has(node.callee)
+        ) {
+          // verify setup(props,{emit}) {emit()}
+          verify(nameWithLoc)
+        } else {
+          const emit = getCalleeMemberNode(node)
           if (
-            node.callee.type === 'Identifier' &&
-            emitReferenceIds.has(node.callee)
+            emit &&
+            emit.name === 'emit' &&
+            emit.member.object.type === 'Identifier' &&
+            contextReferenceIds.has(emit.member.object)
           ) {
-            // verify setup(props,{emit}) {emit()}
+            // verify setup(props,context) {context.emit()}
             verify(nameWithLoc)
-          } else {
-            const emit = getCalleeMemberNode(node)
-            if (
-              emit &&
-              emit.name === 'emit' &&
-              emit.member.object.type === 'Identifier' &&
-              contextReferenceIds.has(emit.member.object)
-            ) {
-              // verify setup(props,context) {context.emit()}
-              verify(nameWithLoc)
-            }
           }
         }
       }
@@ -185,15 +187,13 @@ export default {
         utils.defineVueVisitor(context, {
           onSetupFunctionEnter(node, { node: vueNode }) {
             const contextParam = utils.skipDefaultParamValue(node.params[1])
-            if (!contextParam) {
-              // no arguments
-              return
-            }
             if (
+              // no arguments
+              !contextParam ||
+              // cannot check
               contextParam.type === 'RestElement' ||
               contextParam.type === 'ArrayPattern'
             ) {
-              // cannot check
               return
             }
             const contextReferenceIds = new Set<Identifier>()
