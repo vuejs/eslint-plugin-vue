@@ -2,23 +2,21 @@
  * @fileoverview enforce valid `v-is` directives
  * @author Yosuke Ota
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Check whether the given node is valid or not.
- * @param {VElement} node The element node to check.
- * @returns {boolean} `true` if the node is valid.
+ * @param node The element node to check.
+ * @returns `true` if the node is valid.
  */
-function isValidElement(node) {
+function isValidElement(node: VElement): boolean {
   return (
     !utils.isHtmlElementNode(node) ||
     utils.isHtmlWellKnownElementName(node.rawName)
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -36,10 +34,9 @@ module.exports = {
         "'v-is' directive must be owned by a native HTML element, but '{{name}}' is not."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      "VAttribute[directive=true][key.name.name='is']"(node) {
+      "VAttribute[directive=true][key.name.name='is']"(node: VDirective) {
         if (node.key.argument) {
           context.report({
             node: node.key.argument,

@@ -3,11 +3,9 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -25,11 +23,9 @@ module.exports = {
         "'v-show' directives cannot be put on <template> tags."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='show']"(node) {
+      "VAttribute[directive=true][key.name.name='show']"(node: VDirective) {
         if (node.key.argument) {
           context.report({
             node: node.key.argument,
