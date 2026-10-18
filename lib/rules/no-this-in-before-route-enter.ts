@@ -2,11 +2,9 @@
  * @fileoverview Don't use this in a beforeRouteEnter method
  * @author Przemyslaw Jan Beigert
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,39 +19,31 @@ module.exports = {
         "'beforeRouteEnter' does NOT have access to `this` component instance. https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionExpression | FunctionDeclaration} node
-     * @property {boolean} beforeRouteEnter
-     */
-    /** @type {Set<FunctionExpression>} */
-    const beforeRouteEnterFunctions = new Set()
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+  create(context: RuleContext) {
+    interface ScopeStack {
+      upper: ScopeStack | null
+      node: FunctionExpression | FunctionDeclaration
+      beforeRouteEnter: boolean
+    }
+    const beforeRouteEnterFunctions = new Set<FunctionExpression>()
+    let scopeStack: ScopeStack | null = null
 
-    /**
-     * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-     */
-    function onFunctionEnter(node) {
+    function onFunctionEnter(
+      node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+    ) {
       if (node.type === 'ArrowFunctionExpression') {
         return
       }
       scopeStack = {
         upper: scopeStack,
         node,
-        beforeRouteEnter: beforeRouteEnterFunctions.has(
-          /** @type {never} */ (node)
-        )
+        beforeRouteEnter: beforeRouteEnterFunctions.has(node as never)
       }
     }
 
-    /**
-     * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-     */
-    function onFunctionExit(node) {
+    function onFunctionExit(
+      node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+    ) {
       if (scopeStack && scopeStack.node === node) {
         scopeStack = scopeStack.upper
       }

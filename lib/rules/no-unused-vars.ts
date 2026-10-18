@@ -2,22 +2,17 @@
  * @fileoverview disallow unused variable definitions of v-for directives or scope attributes.
  * @author 薛定谔的猫<hh_2013@foxmail.com>
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {VVariable['kind']} VariableKind
- */
+type VariableKind = VVariable['kind']
 
 /**
  * Groups variables by directive kind.
- * @param {VElement} node The element node
- * @returns { { [kind in VariableKind]?: VVariable[] } } The variables of grouped by directive kind.
  */
-function groupingVariables(node) {
-  /** @type { { [kind in VariableKind]?: VVariable[] } } */
-  const result = {}
+function groupingVariables(node: VElement): {
+  [kind in VariableKind]?: VVariable[]
+} {
+  const result: { [kind in VariableKind]?: VVariable[] } = {}
   for (const variable of node.variables) {
     const kind = variable.kind
     result[kind] ||= []
@@ -28,13 +23,10 @@ function groupingVariables(node) {
 
 /**
  * Checks if the given variable was defined by destructuring.
- * @param {VVariable} variable the given variable to check
- * @returns {boolean} `true` if the given variable was defined by destructuring.
  */
-function isDestructuringVar(variable) {
+function isDestructuringVar(variable: VVariable): boolean {
   const node = variable.id
-  /** @type {ASTNode | null} */
-  let parent = node.parent
+  let parent: ASTNode | null = node.parent
   while (parent) {
     if (
       parent.type === 'VForExpression' ||
@@ -52,11 +44,11 @@ function isDestructuringVar(variable) {
 
 /**
  * Checks if the given variable name is used as a component tag in the element's descendants.
- * @param {string} variableName the variable name to check
- * @param {VElement} element the element node to search within
- * @returns {boolean} `true` if the variable name is used as a component tag.
  */
-function isUsedAsComponentTag(variableName, element) {
+function isUsedAsComponentTag(
+  variableName: string,
+  element: VElement
+): boolean {
   for (const child of element.children) {
     if (child.type !== 'VElement') {
       continue
@@ -73,7 +65,7 @@ function isUsedAsComponentTag(variableName, element) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -101,18 +93,17 @@ module.exports = {
         'Replace `{{name}}` with `_{{name}}` to ignore the unused variable.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const option = context.options[0] || {}
     const ignorePattern = option.ignorePattern
-    /** @type {RegExp | null} */
-    const ignoreRegEx = ignorePattern ? new RegExp(ignorePattern, 'u') : null
+    const ignoreRegEx: RegExp | null = ignorePattern
+      ? new RegExp(ignorePattern, 'u')
+      : null
 
     /**
-     * @param {VVariable[]} variables the variables of a single directive kind
-     * @param {VElement} node the element node the variables belong to
+     * Checks the variables of a single directive kind.
      */
-    function checkVariableGroup(variables, node) {
+    function checkVariableGroup(variables: VVariable[], node: VElement) {
       let hasAfterUsed = false
 
       for (let i = variables.length - 1; i >= 0; i--) {
@@ -158,10 +149,7 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /**
-       * @param {VElement} node
-       */
-      VElement(node) {
+      VElement(node: VElement) {
         const vars = groupingVariables(node)
         for (const variables of Object.values(vars)) {
           if (variables) {

@@ -28,9 +28,7 @@ SOFTWARE.
  * @fileoverview Prevent variables used in JSX to be marked as unused
  * @author Yannick Croissant
  */
-'use strict'
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -40,11 +38,7 @@ module.exports = {
     },
     schema: []
   },
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     return {
       JSXOpeningElement(node) {
         let name

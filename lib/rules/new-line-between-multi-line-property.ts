@@ -2,24 +2,20 @@
  * @fileoverview Enforce new lines between multi-line properties in Vue components.
  * @author IWANABETHATGUY
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @param {Token} node
- */
-function isComma(node) {
+function isComma(node: Token) {
   return node.type === 'Punctuator' && node.value === ','
 }
 
 /**
  * Check whether the between given nodes has empty line.
- * @param {SourceCode} sourceCode
- * @param {ASTNode} pre
- * @param {ASTNode} cur
  */
-function* iterateBetweenTokens(sourceCode, pre, cur) {
+function* iterateBetweenTokens(
+  sourceCode: SourceCode,
+  pre: ASTNode,
+  cur: ASTNode
+) {
   yield sourceCode.getLastToken(pre)
   yield* sourceCode.getTokensBetween(pre, cur, {
     includeComments: true
@@ -29,13 +25,9 @@ function* iterateBetweenTokens(sourceCode, pre, cur) {
 
 /**
  * Check whether the between given nodes has empty line.
- * @param {SourceCode} sourceCode
- * @param {ASTNode} pre
- * @param {ASTNode} cur
  */
-function hasEmptyLine(sourceCode, pre, cur) {
-  /** @type {Token|null} */
-  let preToken = null
+function hasEmptyLine(sourceCode: SourceCode, pre: ASTNode, cur: ASTNode) {
+  let preToken: Token | null = null
   for (const token of iterateBetweenTokens(sourceCode, pre, cur)) {
     if (preToken && token.loc.start.line - preToken.loc.end.line >= 2) {
       return true
@@ -45,7 +37,7 @@ function hasEmptyLine(sourceCode, pre, cur) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -74,8 +66,7 @@ module.exports = {
     }
   },
 
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const minLineOfMultilineProperty =
       context.options &&
       context.options[0] &&
@@ -83,8 +74,7 @@ module.exports = {
         ? context.options[0].minLineOfMultilineProperty
         : 2
 
-    /** @type {CallExpression[]} */
-    const callStack = []
+    const callStack: CallExpression[] = []
     const sourceCode = context.sourceCode
     return Object.assign(
       utils.defineVueVisitor(context, {
@@ -95,10 +85,7 @@ module.exports = {
           callStack.pop()
         },
 
-        /**
-         * @param {ObjectExpression} node
-         */
-        ObjectExpression(node) {
+        ObjectExpression(node: ObjectExpression) {
           if (callStack.length > 0) {
             return
           }
@@ -124,8 +111,7 @@ module.exports = {
               },
               messageId: 'missingEmptyLine',
               fix(fixer) {
-                /** @type {Token|null} */
-                let preToken = null
+                let preToken: Token | null = null
                 for (const token of iterateBetweenTokens(
                   sourceCode,
                   pre,
