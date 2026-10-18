@@ -23,7 +23,6 @@ export default {
   create(context: RuleContext) {
     /**
      * Check the given element about `v-bind:key` attributes.
-     * @param element The element node to check.
      */
     function checkKey(element: VElement) {
       if (utils.hasDirective(element, 'bind', 'key')) {

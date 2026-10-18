@@ -34,7 +34,6 @@ function isExposeProperty(node: Property | SpreadElement): node is Property {
 
 /**
  * Get the callee member node from the given CallExpression
- * @param node CallExpression
  */
 function getCalleeMemberNode(node: CallExpression) {
   const callee = utils.skipChainExpression(node.callee)

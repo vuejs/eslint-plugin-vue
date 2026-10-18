@@ -66,7 +66,6 @@ export default {
 
     /**
      * Check if the given element has display control.
-     * @param element The element node to check.
      */
     function verifyInsideElement(element: VElement) {
       if (utils.isCustomComponent(element)) {
