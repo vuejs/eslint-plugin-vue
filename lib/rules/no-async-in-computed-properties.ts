@@ -2,15 +2,12 @@
  * @fileoverview Check if there are no asynchronous actions inside computed properties.
  * @author Armano
  */
-'use strict'
-const { ReferenceTracker } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').VueObjectData} VueObjectData
- * @typedef {import('../utils').VueVisitor} VueVisitor
- * @typedef {import('../utils').ComponentComputedProperty} ComponentComputedProperty
- */
+import { ReferenceTracker } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import type {
+  ComponentComputedProperty,
+  VueObjectData
+} from '../utils/index.js'
 
 const PROMISE_FUNCTIONS = new Set(['then', 'catch', 'finally'])
 
@@ -32,10 +29,7 @@ const TIMED_FUNCTIONS = new Set([
   'requestAnimationFrame'
 ])
 
-/**
- * @param {CallExpression} node
- */
-function isTimedFunction(node) {
+function isTimedFunction(node: CallExpression) {
   const callee = utils.skipChainExpression(node.callee)
   return (
     ((callee.type === 'Identifier' && TIMED_FUNCTIONS.has(callee.name)) ||
@@ -47,11 +41,7 @@ function isTimedFunction(node) {
   )
 }
 
-/**
- * @param {*} node
- * @returns {*}
- */
-function skipWrapper(node) {
+function skipWrapper(node: any): any {
   while (node && node.expression) {
     node = node.expression
   }
@@ -60,10 +50,10 @@ function skipWrapper(node) {
 
 /**
  * Resolve a single step of the member expression chain walk.
- * @param {*} current
- * @returns {{ done: true, name: string | null } | { done: false, next: * }}
  */
-function resolveRootObjectStep(current) {
+function resolveRootObjectStep(
+  current: any
+): { done: true; name: string | null } | { done: false; next: any } {
   switch (current.type) {
     case 'MemberExpression': {
       return { done: false, next: skipWrapper(current.object) }
@@ -89,10 +79,8 @@ function resolveRootObjectStep(current) {
 
 /**
  * Get the root object name from a member expression chain
- * @param {MemberExpression} memberExpr
- * @returns {string|null}
  */
-function getRootObjectName(memberExpr) {
+function getRootObjectName(memberExpr: MemberExpression): string | null {
   let current = skipWrapper(memberExpr.object)
 
   while (current) {
@@ -106,12 +94,7 @@ function getRootObjectName(memberExpr) {
   return null
 }
 
-/**
- * @param {string} name
- * @param {*} callee
- * @returns {boolean}
- */
-function isPromiseMethod(name, callee) {
+function isPromiseMethod(name: string, callee: MemberExpression): boolean {
   return (
     // hello.PROMISE_FUNCTION()
     PROMISE_FUNCTIONS.has(name) ||
@@ -122,11 +105,7 @@ function isPromiseMethod(name, callee) {
   )
 }
 
-/**
- * @param {CallExpression} node
- * @param {Set<string>} ignoredObjectNames
- */
-function isPromise(node, ignoredObjectNames) {
+function isPromise(node: CallExpression, ignoredObjectNames: Set<string>) {
   const callee = utils.skipChainExpression(node.callee)
   if (callee.type === 'MemberExpression') {
     const name = utils.getStaticPropertyName(callee)
@@ -140,11 +119,7 @@ function isPromise(node, ignoredObjectNames) {
   return false
 }
 
-/**
- * @param {CallExpression} node
- * @param {RuleContext} context
- */
-function isNextTick(node, context) {
+function isNextTick(node: CallExpression, context: RuleContext) {
   const callee = utils.skipChainExpression(node.callee)
   if (callee.type === 'MemberExpression') {
     const name = utils.getStaticPropertyName(callee)
@@ -158,7 +133,7 @@ function isNextTick(node, context) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -187,23 +162,23 @@ module.exports = {
         'Unexpected {{expressionName}} in "{{propertyName}}" computed property.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
-    const ignoredObjectNames = new Set(options.ignoredObjectNames || [])
+    const ignoredObjectNames = new Set<string>(options.ignoredObjectNames || [])
 
-    /** @type {Map<ObjectExpression, ComponentComputedProperty[]>} */
-    const computedPropertiesMap = new Map()
-    /** @type {(FunctionExpression | ArrowFunctionExpression)[]} */
-    const computedFunctionNodes = []
+    const computedPropertiesMap = new Map<
+      ObjectExpression,
+      ComponentComputedProperty[]
+    >()
+    const computedFunctionNodes: (
+      FunctionExpression | ArrowFunctionExpression
+    )[] = []
 
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {BlockStatement | Expression} body
-     */
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+    interface ScopeStack {
+      upper: ScopeStack | null
+      body: BlockStatement | Expression
+    }
+    let scopeStack: ScopeStack | null = null
 
     const expressionTypes = {
       promise: 'asynchronous action',
@@ -214,11 +189,10 @@ module.exports = {
       timed: 'timed function'
     }
 
-    /**
-     * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-     * @param {VueObjectData|undefined} [info]
-     */
-    function onFunctionEnter(node, info) {
+    function onFunctionEnter(
+      node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression,
+      info?: VueObjectData | undefined
+    ) {
       if (node.async) {
         verify(
           node,
@@ -238,13 +212,12 @@ module.exports = {
       scopeStack &&= scopeStack.upper
     }
 
-    /**
-     * @param {ESNode} node
-     * @param {BlockStatement | Expression} targetBody
-     * @param {keyof expressionTypes} type
-     * @param {ComponentComputedProperty[]|undefined|null} computedProperties
-     */
-    function verify(node, targetBody, type, computedProperties) {
+    function verify(
+      node: ESNode,
+      targetBody: BlockStatement | Expression,
+      type: keyof typeof expressionTypes,
+      computedProperties: ComponentComputedProperty[] | undefined | null
+    ) {
       const properties = computedProperties || []
       for (const cp of properties) {
         if (
@@ -286,11 +259,7 @@ module.exports = {
       ':function': onFunctionEnter,
       ':function:exit': onFunctionExit,
 
-      /**
-       * @param {NewExpression} node
-       * @param {VueObjectData|undefined} [info]
-       */
-      NewExpression(node, info) {
+      NewExpression(node: NewExpression, info?: VueObjectData | undefined) {
         if (!scopeStack) {
           return
         }
@@ -307,11 +276,7 @@ module.exports = {
         }
       },
 
-      /**
-       * @param {CallExpression} node
-       * @param {VueObjectData|undefined} [info]
-       */
-      CallExpression(node, info) {
+      CallExpression(node: CallExpression, info?: VueObjectData | undefined) {
         if (!scopeStack) {
           return
         }
@@ -339,11 +304,7 @@ module.exports = {
         }
       },
 
-      /**
-       * @param {AwaitExpression} node
-       * @param {VueObjectData|undefined} [info]
-       */
-      AwaitExpression(node, info) {
+      AwaitExpression(node: AwaitExpression, info?: VueObjectData | undefined) {
         if (!scopeStack) {
           return
         }
@@ -358,8 +319,7 @@ module.exports = {
 
     return utils.compositingVisitors(
       {
-        /** @param {Program} program */
-        Program(program) {
+        Program(program: Program) {
           const tracker = new ReferenceTracker(utils.getScope(context, program))
           const computedRefs = utils.iterateReferencesTraceMap(tracker, {
             computed: {
