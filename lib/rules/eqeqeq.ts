@@ -1,11 +1,9 @@
 /**
  * @author Toru Nagashima
  */
-'use strict'
-
-const { wrapCoreRule } = require('../utils')
+import utils from '../utils/index.js'
 
 // eslint-disable-next-line internal/no-invalid-meta
-module.exports = wrapCoreRule('eqeqeq', {
+export default utils.wrapCoreRule('eqeqeq', {
   applyDocument: true
 })

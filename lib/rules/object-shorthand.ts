@@ -2,11 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { wrapCoreRule } = require('../utils')
+import utils from '../utils/index.js'
 
 // eslint-disable-next-line internal/no-invalid-meta
-module.exports = wrapCoreRule('object-shorthand', {
+export default utils.wrapCoreRule('object-shorthand', {
   skipDynamicArguments: true
 })
