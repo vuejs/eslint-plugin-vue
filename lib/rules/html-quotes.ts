@@ -3,11 +3,9 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -32,16 +30,14 @@ module.exports = {
       expected: 'Expected to be enclosed by {{kind}}.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const shouldUseDoubleQuotes = context.options[0] !== 'single'
     const avoidEscape =
       context.options[1] && context.options[1].avoidEscape === true
     const quoteChar = shouldUseDoubleQuotes ? '"' : "'"
     const quoteName = shouldUseDoubleQuotes ? 'double quotes' : 'single quotes'
-    /** @type {boolean} */
-    let hasInvalidEOF
+    let hasInvalidEOF: boolean
 
     return utils.defineTemplateBodyVisitor(
       context,

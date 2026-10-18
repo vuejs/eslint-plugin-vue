@@ -2,34 +2,28 @@
  * @author dev1437
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Split the source code into multiple lines based on the line delimiters.
  * Copied from padding-line-between-blocks
- * @param {string} text Source code as a string.
- * @returns {string[]} Array of source code lines.
  */
-function splitLines(text) {
+function splitLines(text: string): string[] {
   return text.split(/\r\n|[\r\n\u{2028}\u{2029}]/gu)
 }
 
-/**
- * @param {RuleContext} context
- * @param {VElement} tag
- * @param {VElement} sibling
- * @param {number} lineDifference
- */
-function insertNewLine(context, tag, sibling, lineDifference) {
+function insertNewLine(
+  context: RuleContext,
+  tag: VElement,
+  sibling: VElement,
+  lineDifference: number
+) {
   const endTag = tag.endTag || tag.startTag
 
   if (lineDifference === 1) {
     context.report({
       messageId: 'always',
       loc: sibling.loc,
-      // @ts-ignore
       fix(fixer) {
         return fixer.insertTextAfter(tag, '\n')
       }
@@ -38,11 +32,10 @@ function insertNewLine(context, tag, sibling, lineDifference) {
     context.report({
       messageId: 'always',
       loc: sibling.loc,
-      // @ts-ignore
       fix(fixer) {
-        const lastSpaces = /** @type {RegExpExecArray} */ (
-          /^\s*/.exec(context.sourceCode.lines[endTag.loc.start.line - 1])
-        )[0]
+        const lastSpaces = /^\s*/.exec(
+          context.sourceCode.lines[endTag.loc.start.line - 1]
+        )![0]
 
         return fixer.insertTextAfter(endTag, `\n\n${lastSpaces}`)
       }
@@ -50,13 +43,12 @@ function insertNewLine(context, tag, sibling, lineDifference) {
   }
 }
 
-/**
- * @param {RuleContext} context
- * @param {VEndTag | VStartTag} endTag
- * @param {VElement} sibling
- * @param {number} lineDifference
- */
-function removeExcessLines(context, endTag, sibling, lineDifference) {
+function removeExcessLines(
+  context: RuleContext,
+  endTag: VEndTag | VStartTag,
+  sibling: VElement,
+  lineDifference: number
+) {
   if (lineDifference <= 1) {
     return
   }
@@ -73,7 +65,6 @@ function removeExcessLines(context, endTag, sibling, lineDifference) {
     context.report({
       messageId: 'never',
       loc: sibling.loc,
-      // @ts-ignore
       fix(fixer) {
         const start = endTag.range[1]
         const end = sibling.range[0]
@@ -95,10 +86,8 @@ function removeExcessLines(context, endTag, sibling, lineDifference) {
 
 /**
  * Check if a tag is single-line (opening and closing tags on the same line)
- * @param {VElement} element
- * @returns {boolean}
  */
-function isSingleLine(element) {
+function isSingleLine(element: VElement): boolean {
   const endTag = element.endTag || element.startTag
   return element.startTag.loc.start.line === endTag.loc.end.line
 }
@@ -106,11 +95,8 @@ function isSingleLine(element) {
 /**
  * Match a selector string against an element.
  * Supports pseudo-classes `:single-line` and `:multi-line`.
- * @param {string} selector
- * @param {VElement} element
- * @returns {boolean}
  */
-function matchesTag(selector, element) {
+function matchesTag(selector: string, element: VElement) {
   const colonIndex = selector.lastIndexOf(':')
 
   if (colonIndex > 0) {
@@ -132,39 +118,33 @@ function matchesTag(selector, element) {
 
 /**
  * Check if the configuration matches the given elements
- * @param {{blankLine: string, prev: string, next: string}} configure
- * @param {VElement} prevElement
- * @param {VElement} nextElement
- * @returns {boolean}
  */
-function matchesConfiguration(configure, prevElement, nextElement) {
+function matchesConfiguration(
+  configure: { blankLine: string; prev: string; next: string },
+  prevElement: VElement,
+  nextElement: VElement
+) {
   return (
     matchesTag(configure.prev, prevElement) &&
     matchesTag(configure.next, nextElement)
   )
 }
 
-/**
- * @param {RuleContext} context
- */
-function checkNewline(context) {
-  /** @type {Array<{blankLine: "always" | "never" | "consistent", prev: string, next: string}>} */
-  const configureList = context.options[0] || [
-    { blankLine: 'always', prev: '*', next: '*' }
-  ]
+function checkNewline(context: RuleContext) {
+  const configureList: Array<{
+    blankLine: 'always' | 'never' | 'consistent'
+    prev: string
+    next: string
+  }> = context.options[0] || [{ blankLine: 'always', prev: '*', next: '*' }]
 
   const reverseConfigureList = [...configureList].reverse()
 
   /**
    * It has the style of the first `blankLine="consistent"`.
-   * @type {Map<VElement, "always" | "never">}
    */
-  const firstConsistentBlankLines = new Map()
+  const firstConsistentBlankLines = new Map<VElement, 'always' | 'never'>()
 
-  /**
-   * @param {VElement} block
-   */
-  return (block) => {
+  return (block: VElement) => {
     if (!block.parent.parent) {
       return
     }
@@ -181,7 +161,7 @@ function checkNewline(context) {
       return
     }
 
-    const closestSibling = /** @type {VElement} */ (lowerSiblings[0])
+    const closestSibling = lowerSiblings[0] as VElement
 
     const configure = reverseConfigureList.find((configure) =>
       matchesConfiguration(configure, block, closestSibling)
@@ -215,7 +195,7 @@ function checkNewline(context) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -246,8 +226,7 @@ module.exports = {
       always: 'Expected blank line before this tag.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
       VElement: checkNewline(context)
     })

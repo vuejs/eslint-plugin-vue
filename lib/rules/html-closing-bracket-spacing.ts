@@ -2,21 +2,23 @@
  * @author Toru Nagashima <https://github.com/mysticatea>
  */
 
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef { {startTag?:"always"|"never",endTag?:"always"|"never",selfClosingTag?:"always"|"never"} } Options
- */
+interface Options {
+  startTag?: 'always' | 'never'
+  endTag?: 'always' | 'never'
+  selfClosingTag?: 'always' | 'never'
+}
 
 /**
  * Normalize options.
- * @param {Options} options The options user configured.
- * @param {ParserServices.TokenStore} tokens The token store of template body.
- * @returns {Options & { detectType: (node: VStartTag | VEndTag) => 'never' | 'always' | null }} The normalized options.
  */
-function parseOptions(options, tokens) {
+function parseOptions(
+  options: Options,
+  tokens: ParserServices.TokenStore
+): Options & {
+  detectType: (node: VStartTag | VEndTag) => 'never' | 'always' | null
+} {
   const opts = Object.assign(
     {
       startTag: 'never',
@@ -26,11 +28,7 @@ function parseOptions(options, tokens) {
     options
   )
   return Object.assign(opts, {
-    /**
-     * @param {VStartTag | VEndTag} node
-     * @returns {'never' | 'always' | null}
-     */
-    detectType(node) {
+    detectType(node: VStartTag | VEndTag): 'never' | 'always' | null {
       const openType = tokens.getFirstToken(node).type
       const closeType = tokens.getLastToken(node).type
 
@@ -48,7 +46,7 @@ function parseOptions(options, tokens) {
   })
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -73,8 +71,7 @@ module.exports = {
       unexpected: "Expected no space before '{{bracket}}', but found."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const tokens =
       sourceCode.parserServices.getTemplateBodyTokenStore &&
@@ -82,8 +79,7 @@ module.exports = {
     const options = parseOptions(context.options[0], tokens)
 
     return utils.defineDocumentVisitor(context, {
-      /** @param {VStartTag | VEndTag} node */
-      'VStartTag, VEndTag'(node) {
+      'VStartTag, VEndTag'(node: VStartTag | VEndTag) {
         const type = options.detectType(node)
         const lastToken = tokens.getLastToken(node)
         const prevToken = tokens.getLastToken(node, 1)
