@@ -2,25 +2,19 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
+type HandlerKind = 'method' | 'inline' | 'inline-function'
+interface ObjectOption {
+  ignoreIncludesComment?: boolean
+}
 
-/**
- * @typedef {import('eslint').ReportDescriptorFix} ReportDescriptorFix
- * @typedef {'method' | 'inline' | 'inline-function'} HandlerKind
- * @typedef {object} ObjectOption
- * @property {boolean} [ignoreIncludesComment]
- */
-
-/**
- * @param {RuleContext} context
- */
-function parseOptions(context) {
-  /** @type {[HandlerKind | HandlerKind[] | undefined, ObjectOption | undefined]} */
-  const options = /** @type {any} */ (context.options)
-  /** @type {HandlerKind[]} */
-  const allows = []
+function parseOptions(context: RuleContext) {
+  const options = context.options as [
+    HandlerKind | HandlerKind[] | undefined,
+    ObjectOption | undefined
+  ]
+  const allows: HandlerKind[] = []
   if (options[0]) {
     if (Array.isArray(options[0])) {
       allows.push(...options[0])
@@ -39,10 +33,8 @@ function parseOptions(context) {
 
 /**
  * Check whether the given token is a quote.
- * @param {Token} token The token to check.
- * @returns {boolean} `true` if the token is a quote.
  */
-function isQuote(token) {
+function isQuote(token: Token): boolean {
   return (
     token != null &&
     token.type === 'Punctuator' &&
@@ -51,10 +43,10 @@ function isQuote(token) {
 }
 /**
  * Check whether the given node is an identifier call expression. e.g. `foo()`
- * @param {Expression} node The node to check.
- * @returns {node is CallExpression & {callee: Identifier}}
  */
-function isIdentifierCallExpression(node) {
+function isIdentifierCallExpression(
+  node: Expression
+): node is CallExpression & { callee: Identifier } {
   if (node.type !== 'CallExpression' || node.optional) {
     return false
   }
@@ -69,12 +61,11 @@ function isIdentifierCallExpression(node) {
  *   @click="foo()"
  *   @click="{ foo() }"
  *   @click="foo();;"
- * @param {VOnExpression | BlockStatement} node
- * @returns {CallExpression & {callee: Identifier} | null}
  */
-function getIdentifierCallExpression(node) {
-  /** @type {ExpressionStatement} */
-  let exprStatement
+function getIdentifierCallExpression(
+  node: VOnExpression | BlockStatement
+): (CallExpression & { callee: Identifier }) | null {
+  let exprStatement: ExpressionStatement
   let body = node.body
   while (true) {
     const statements = body.filter((st) => st.type !== 'EmptyStatement')
@@ -96,7 +87,7 @@ function getIdentifierCallExpression(node) {
   return isIdentifierCallExpression(expression) ? expression : null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -153,25 +144,22 @@ module.exports = {
         'Prefer inline function over inline handler in v-on.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const { allows, shouldIgnoreIncludesComment } = parseOptions(context)
 
-    /** @type {Set<VElement>} */
-    const upperElements = new Set()
-    /** @type {Map<string, number>} */
-    const methodParamCountMap = new Map()
-    /** @type {Identifier[]} */
-    const $eventIdentifiers = []
+    const upperElements = new Set<VElement>()
+    const methodParamCountMap = new Map<string, number>()
+    const $eventIdentifiers: Identifier[] = []
 
+    /* eslint-disable unicorn/consistent-boolean-name -- the `verify*` and `report*` helpers report and return whether they did */
     /**
-     * Verify for inline handler.
-     * @param {VOnExpression} node
-     * @param {HandlerKind} kind
-     * @returns {boolean} Returns `true` if reported.
+     * Verify for inline handler. Returns `true` if reported.
      */
-    function verifyForInlineHandler(node, kind) {
+    function verifyForInlineHandler(
+      node: VOnExpression,
+      kind: HandlerKind
+    ): boolean {
       switch (kind) {
         case 'method': {
           return verifyCanUseMethodHandlerForInlineHandler(node)
@@ -184,12 +172,12 @@ module.exports = {
       return false
     }
     /**
-     * Report for method handler.
-     * @param {Identifier} node
-     * @param {HandlerKind} kind
-     * @returns {boolean} Returns `true` if reported.
+     * Report for method handler. Returns `true` if reported.
      */
-    function reportForMethodHandler(node, kind) {
+    function reportForMethodHandler(
+      node: Identifier,
+      kind: HandlerKind
+    ): boolean {
       switch (kind) {
         case 'inline':
         case 'inline-function': {
@@ -207,12 +195,12 @@ module.exports = {
       return false
     }
     /**
-     * Verify for inline function handler.
-     * @param {ArrowFunctionExpression | FunctionExpression} node
-     * @param {HandlerKind} kind
-     * @returns {boolean} Returns `true` if reported.
+     * Verify for inline function handler. Returns `true` if reported.
      */
-    function verifyForInlineFunction(node, kind) {
+    function verifyForInlineFunction(
+      node: ArrowFunctionExpression | FunctionExpression,
+      kind: HandlerKind
+    ): boolean {
       switch (kind) {
         case 'method': {
           return verifyCanUseMethodHandlerForInlineFunction(node)
@@ -227,9 +215,8 @@ module.exports = {
 
     /**
      * Get token information for the given VExpressionContainer node.
-     * @param {VExpressionContainer} node
      */
-    function getVExpressionContainerTokenInfo(node) {
+    function getVExpressionContainerTokenInfo(node: VExpressionContainer) {
       const tokenStore = sourceCode.parserServices.getTemplateBodyTokenStore()
       const tokens = tokenStore.getTokens(node, {
         includeComments: true
@@ -238,8 +225,7 @@ module.exports = {
       const lastToken = tokens.at(-1)
 
       if (!lastToken) {
-        /** @type {Range} */
-        const rangeWithoutQuotes = [0, 0]
+        const rangeWithoutQuotes: Range = [0, 0]
         return {
           rangeWithoutQuotes,
           hasComment: false,
@@ -248,8 +234,7 @@ module.exports = {
       }
 
       const hasQuote = isQuote(firstToken)
-      /** @type {Range} */
-      const rangeWithoutQuotes = hasQuote
+      const rangeWithoutQuotes: Range = hasQuote
         ? [firstToken.range[1], lastToken.range[0]]
         : [firstToken.range[0], lastToken.range[1]]
 
@@ -266,9 +251,10 @@ module.exports = {
 
     /**
      * Checks whether the given node refers to a variable of the element.
-     * @param {Expression | VOnExpression} node
      */
-    function hasReferenceUpperElementVariable(node) {
+    function hasReferenceUpperElementVariable(
+      node: Expression | VOnExpression
+    ) {
       for (const element of upperElements) {
         for (const vv of element.variables) {
           for (const reference of vv.references) {
@@ -283,10 +269,11 @@ module.exports = {
     }
     /**
      * Check if `v-on:click="foo()"` can be converted to `v-on:click="foo"` and report if it can.
-     * @param {VOnExpression} node
-     * @returns {boolean} Returns `true` if reported.
+     * Returns `true` if reported.
      */
-    function verifyCanUseMethodHandlerForInlineHandler(node) {
+    function verifyCanUseMethodHandlerForInlineHandler(
+      node: VOnExpression
+    ): boolean {
       const { rangeWithoutQuotes, hasComment } =
         getVExpressionContainerTokenInfo(node.parent)
       if (shouldIgnoreIncludesComment && hasComment) {
@@ -329,20 +316,18 @@ module.exports = {
     }
     /**
      * Check if `v-on:click="() => foo()"` can be converted to `v-on:click="foo"` and report if it can.
-     * @param {ArrowFunctionExpression | FunctionExpression} node
-     * @returns {boolean} Returns `true` if reported.
+     * Returns `true` if reported.
      */
-    function verifyCanUseMethodHandlerForInlineFunction(node) {
+    function verifyCanUseMethodHandlerForInlineFunction(
+      node: ArrowFunctionExpression | FunctionExpression
+    ): boolean {
       const { rangeWithoutQuotes, hasComment } =
-        getVExpressionContainerTokenInfo(
-          /** @type {VExpressionContainer} */ (node.parent)
-        )
+        getVExpressionContainerTokenInfo(node.parent as VExpressionContainer)
       if (shouldIgnoreIncludesComment && hasComment) {
         return false
       }
 
-      /** @type {CallExpression & {callee: Identifier} | null} */
-      let idCallExpr = null
+      let idCallExpr: (CallExpression & { callee: Identifier }) | null = null
       if (node.body.type === 'BlockStatement') {
         idCallExpr = getIdentifierCallExpression(node.body)
       } else if (isIdentifierCallExpression(node.body)) {
@@ -386,9 +371,8 @@ module.exports = {
 
       /**
        * Checks whether parameters are passed as arguments as-is.
-       * @param {CallExpression} expression
        */
-      function isSameParamsAndArgs(expression) {
+      function isSameParamsAndArgs(expression: CallExpression) {
         return (
           node.params.length === expression.arguments.length &&
           node.params.every((param, index) => {
@@ -405,12 +389,13 @@ module.exports = {
         )
       }
     }
+    /* eslint-enable unicorn/consistent-boolean-name */
     /**
      * Report `v-on:click="foo()"` can be converted to `v-on:click="()=>foo()"`.
-     * @param {VOnExpression} node
-     * @returns {void}
      */
-    function reportCanUseInlineFunctionForInlineHandler(node) {
+    function reportCanUseInlineFunctionForInlineHandler(
+      node: VOnExpression
+    ): void {
       context.report({
         node,
         messageId: 'preferInlineFunctionOverInline',
@@ -451,10 +436,10 @@ module.exports = {
     }
     /**
      * Report `v-on:click="() => foo()"` can be converted to `v-on:click="foo()"`.
-     * @param {ArrowFunctionExpression | FunctionExpression} node
-     * @returns {void}
      */
-    function reportCanUseInlineHandlerForInlineFunction(node) {
+    function reportCanUseInlineHandlerForInlineFunction(
+      node: ArrowFunctionExpression | FunctionExpression
+    ): void {
       // If a function has one parameter, you can turn it into an inline handler using $event.
       // If a function has two or more parameters, it cannot be easily converted to an inline handler.
       // However, users can use inline handlers by changing the payload of the component's custom event.
@@ -488,9 +473,8 @@ module.exports = {
         'VElement:exit'(node) {
           upperElements.delete(node)
         },
-        /** @param {VExpressionContainer} node */
         "VAttribute[directive=true][key.name.name='on'][key.argument!=null] > VExpressionContainer.value:exit"(
-          node
+          node: VExpressionContainer
         ) {
           const expression = node.expression
           if (!expression) {
@@ -543,7 +527,7 @@ module.exports = {
           ? // Collect $event identifiers to check for side effects
             // when converting from `v-on:click="foo($event)"` to `v-on:click="()=>foo($event)"` .
             {
-              'Identifier[name="$event"]'(node) {
+              'Identifier[name="$event"]'(node: Identifier) {
                 $eventIdentifiers.push(node)
               }
             }
