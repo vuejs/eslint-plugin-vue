@@ -3,31 +3,27 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
-      description: 'enforce valid `v-text` directives',
+      description: 'enforce valid `v-pre` directives',
       categories: ['vue3-essential', 'vue2-essential'],
-      url: 'https://eslint.vuejs.org/rules/valid-v-text.html'
+      url: 'https://eslint.vuejs.org/rules/valid-v-pre.html'
     },
     fixable: null,
     schema: [],
     messages: {
-      unexpectedArgument: "'v-text' directives require no argument.",
-      unexpectedModifier: "'v-text' directives require no modifier.",
-      expectedValue: "'v-text' directives require that attribute value."
+      unexpectedArgument: "'v-pre' directives require no argument.",
+      unexpectedModifier: "'v-pre' directives require no modifier.",
+      unexpectedValue: "'v-pre' directives require no attribute value."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='text']"(node) {
+      "VAttribute[directive=true][key.name.name='pre']"(node: VDirective) {
         if (node.key.argument) {
           context.report({
             node: node.key.argument,
@@ -45,10 +41,10 @@ module.exports = {
             messageId: 'unexpectedModifier'
           })
         }
-        if (!node.value || utils.isEmptyValueDirective(node, context)) {
+        if (node.value) {
           context.report({
-            node,
-            messageId: 'expectedValue'
+            node: node.value,
+            messageId: 'unexpectedValue'
           })
         }
       }
