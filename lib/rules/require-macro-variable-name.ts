@@ -2,9 +2,7 @@
  * @author ItMaga
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 const DEFAULT_OPTIONS = {
   defineProps: 'props',
@@ -14,7 +12,7 @@ const DEFAULT_OPTIONS = {
   useAttrs: 'attrs'
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -43,8 +41,7 @@ module.exports = {
       changeName: 'Change the variable name to "{{variableName}}".'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = Object.assign({}, DEFAULT_OPTIONS, context.options[0])
     const relevantMacros = new Set([
       ...Object.keys(DEFAULT_OPTIONS),

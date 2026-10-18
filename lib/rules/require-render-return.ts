@@ -2,11 +2,9 @@
  * @fileoverview Enforces render function to always return value.
  * @author Armano
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -20,10 +18,8 @@ module.exports = {
       expectedReturn: 'Expected to return a value in render function.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Map<ESNode, Property['key']>} */
-    const renderFunctions = new Map()
+  create(context: RuleContext) {
+    const renderFunctions = new Map<ESNode, Property['key']>()
 
     return utils.compositingVisitors(
       utils.defineVueVisitor(context, {

@@ -2,14 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @param {VDirective} vBindAppear
- */
-function isValidBindAppear(vBindAppear) {
+function isValidBindAppear(vBindAppear: VDirective) {
   return (
     !vBindAppear.value?.expression ||
     vBindAppear.value.expression.type !== 'Literal' ||
@@ -17,10 +12,7 @@ function isValidBindAppear(vBindAppear) {
   )
 }
 
-/**
- * @param {string[]} directives
- */
-function createDirectiveList(directives) {
+function createDirectiveList(directives: string[]) {
   let str = ''
 
   for (const [index, directive] of directives.entries()) {
@@ -36,7 +28,7 @@ function createDirectiveList(directives) {
   return str
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -66,25 +58,21 @@ module.exports = {
         'The element inside `<transition>` is expected to have a {{allowedDirectives}} directive.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Array<string>} */
-    const additionalDirectives =
+  create(context: RuleContext) {
+    const additionalDirectives: string[] =
       (context.options[0] && context.options[0].additionalDirectives) || []
     const allowedDirectives = ['if', 'show', ...additionalDirectives]
     const allowedDirectivesString = createDirectiveList(allowedDirectives)
 
     /**
      * Check if the given element has display control.
-     * @param {VElement} element The element node to check.
      */
-    function verifyInsideElement(element) {
+    function verifyInsideElement(element: VElement) {
       if (utils.isCustomComponent(element)) {
         return
       }
 
-      /** @type VElement */ // @ts-expect-error
-      const parent = element.parent
+      const parent = element.parent as VElement
       const vBindAppear = utils.getDirective(parent, 'bind', 'appear')
       if (
         utils.hasAttribute(parent, 'appear') ||
@@ -112,8 +100,7 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VElement} node */
-      "VElement[name='transition'] > VElement"(node) {
+      "VElement[name='transition'] > VElement"(node: VElement) {
         const child = node.parent.children.find(utils.isVElement)
         if (child !== node) {
           return

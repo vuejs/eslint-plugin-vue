@@ -2,11 +2,9 @@
  * @fileoverview require the component to be directly exported
  * @author Hiroki Osame <hiroki.osame@gmail.com>
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -29,28 +27,26 @@ module.exports = {
         'Expected the component literal to be directly exported.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const filePath = context.filename
     if (!utils.isVueFile(filePath)) return {}
 
     const disallowFunctional = (context.options[0] || {})
       .disallowFunctionalComponentFunction
 
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {boolean} withinVue3FunctionalBody
-     */
+    interface ScopeStack {
+      upper: ScopeStack | null
+      withinVue3FunctionalBody: boolean
+    }
 
-    /** @type { { body: BlockStatement, hasReturnArgument: boolean } } */
-    let maybeVue3Functional
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+    let maybeVue3Functional: {
+      body: BlockStatement
+      hasReturnArgument: boolean
+    }
+    let scopeStack: ScopeStack | null = null
 
     return {
-      /** @param {Declaration | Expression} node */
-      'ExportDefaultDeclaration > *'(node) {
+      'ExportDefaultDeclaration > *'(node: Declaration | Expression) {
         if (node.type === 'ObjectExpression') {
           // OK
           return
@@ -104,8 +100,7 @@ module.exports = {
       ...(disallowFunctional
         ? {}
         : {
-            /** @param {BlockStatement} node */
-            ':function > BlockStatement'(node) {
+            ':function > BlockStatement'(node: BlockStatement) {
               if (!maybeVue3Functional) {
                 return
               }
@@ -114,8 +109,7 @@ module.exports = {
                 withinVue3FunctionalBody: maybeVue3Functional.body === node
               }
             },
-            /** @param {ReturnStatement} node */
-            ReturnStatement(node) {
+            ReturnStatement(node: ReturnStatement) {
               if (
                 scopeStack &&
                 scopeStack.withinVue3FunctionalBody &&
@@ -127,8 +121,7 @@ module.exports = {
             ':function > BlockStatement:exit'() {
               scopeStack &&= scopeStack.upper
             },
-            /** @param {ExportDefaultDeclaration} node */
-            'ExportDefaultDeclaration:exit'(node) {
+            'ExportDefaultDeclaration:exit'(node: ExportDefaultDeclaration) {
               if (!maybeVue3Functional) {
                 return
               }
