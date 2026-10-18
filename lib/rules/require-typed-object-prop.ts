@@ -2,15 +2,13 @@
  * @author Przemysław Jan Beigert
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @param {RuleContext} context
- * @param {Identifier} identifierNode
- */
-const checkPropIdentifierType = (context, identifierNode) => {
+const checkPropIdentifierType = (
+  context: RuleContext,
+  identifierNode: Identifier
+) => {
   if (identifierNode.name !== 'Object' && identifierNode.name !== 'Array') {
     return
   }
@@ -44,11 +42,10 @@ const checkPropIdentifierType = (context, identifierNode) => {
   })
 }
 
-/**
- * @param {RuleContext} context
- * @param {ArrayExpression} arrayNode
- */
-const checkPropArrayType = (context, arrayNode) => {
+const checkPropArrayType = (
+  context: RuleContext,
+  arrayNode: ArrayExpression
+) => {
   for (const elementNode of arrayNode.elements) {
     if (elementNode?.type === 'Identifier') {
       checkPropIdentifierType(context, elementNode)
@@ -56,11 +53,10 @@ const checkPropArrayType = (context, arrayNode) => {
   }
 }
 
-/**
- * @param {RuleContext} context
- * @param {ObjectExpression} objectNode
- */
-const checkPropObjectType = (context, objectNode) => {
+const checkPropObjectType = (
+  context: RuleContext,
+  objectNode: ObjectExpression
+) => {
   const typeProperty = objectNode.properties.find(
     (prop) =>
       prop.type === 'Property' &&
@@ -80,11 +76,7 @@ const checkPropObjectType = (context, objectNode) => {
   }
 }
 
-/**
- * @param {import('../utils').ComponentProp} prop
- * @param {RuleContext} context
- */
-const checkProp = (prop, context) => {
+const checkProp = (prop: ComponentProp, context: RuleContext) => {
   if (prop.type !== 'object') {
     return
   }
@@ -112,7 +104,7 @@ const checkProp = (prop, context) => {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -128,8 +120,7 @@ module.exports = {
       addTypeAnnotation: 'Add `{{ type }}` type annotation.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const filename = context.filename
     if (!utils.isVueFile(filename) && !utils.isTypeScriptFile(filename)) {
       return {}
@@ -144,8 +135,8 @@ module.exports = {
         return {}
       }
       const scripts = documentFragment.children.filter(
-        /** @returns {element is VElement} */
-        (element) => utils.isVElement(element) && element.name === 'script'
+        (element): element is VElement =>
+          utils.isVElement(element) && element.name === 'script'
       )
       if (
         scripts.every((script) => !utils.hasAttribute(script, 'lang', 'ts'))

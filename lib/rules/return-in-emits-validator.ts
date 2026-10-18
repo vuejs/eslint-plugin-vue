@@ -2,21 +2,13 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').ComponentEmit} ComponentEmit
- * @typedef {import('../utils').ComponentObjectEmit} ComponentObjectEmit
- */
+import type { ComponentEmit, ComponentObjectEmit } from '../utils/index.js'
+import utils from '../utils/index.js'
 
 /**
  * Checks if the given node value is falsy.
- * @param {Expression} node The node to check
- * @returns {boolean} If `true`, the given node value is falsy.
  */
-function isFalsy(node) {
+function isFalsy(node: Expression): boolean {
   if (node.type === 'Literal') {
     if (node.bigint) {
       return node.bigint === '0'
@@ -31,7 +23,7 @@ function isFalsy(node) {
     (node.name === 'undefined' || node.name === 'NaN')
   )
 }
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -49,27 +41,19 @@ module.exports = {
         'Expected to return a boolean value in "{{name}}" emits validator.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {ComponentObjectEmit[]} */
-    const emitsValidators = []
+  create(context: RuleContext) {
+    const emitsValidators: ComponentObjectEmit[] = []
 
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} functionNode
-     * @property {boolean} hasReturnValue
-     * @property {boolean} possibleOfReturnTrue
-     */
-    /**
-     * @type {ScopeStack | null}
-     */
-    let scopeStack = null
+    interface ScopeStack {
+      upper: ScopeStack | null
+      functionNode:
+        FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+      hasReturnValue: boolean
+      possibleOfReturnTrue: boolean
+    }
+    let scopeStack: ScopeStack | null = null
 
-    /**
-     * @param {ComponentEmit[]} emits
-     */
-    function processEmits(emits) {
+    function processEmits(emits: ComponentEmit[]) {
       for (const emit of emits) {
         if (
           emit.type !== 'object' ||
@@ -89,14 +73,15 @@ module.exports = {
         }
       }),
       utils.defineVueVisitor(context, {
-        /** @param {ObjectExpression} obj */
-        onVueObjectEnter(obj) {
+        onVueObjectEnter(obj: ObjectExpression) {
           processEmits(utils.getComponentEmitsFromOptions(obj))
         }
       }),
       {
-        /** @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node */
-        ':function'(node) {
+        ':function'(
+          node:
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+        ) {
           scopeStack = {
             upper: scopeStack,
             functionNode: node,
@@ -114,8 +99,7 @@ module.exports = {
             scopeStack.possibleOfReturnTrue = true
           }
         },
-        /** @param {ReturnStatement} node */
-        ReturnStatement(node) {
+        ReturnStatement(node: ReturnStatement) {
           if (!scopeStack || !node.argument) {
             return
           }
@@ -126,8 +110,10 @@ module.exports = {
             scopeStack.possibleOfReturnTrue = true
           }
         },
-        /** @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node */
-        ':function:exit'(node) {
+        ':function:exit'(
+          node:
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+        ) {
           if (scopeStack && !scopeStack.possibleOfReturnTrue) {
             const emits = emitsValidators.find((e) => e.value === node)
             if (emits) {
