@@ -105,6 +105,38 @@ tester.run('template-wrapper-directive-style', rule, {
       filename: 'test.vue',
       code: '<template><MyComp><template #[name] v-if="a">x</template></MyComp></template>',
       options: [{ style: 'never' }]
+    },
+    // "never": a wrapper that cannot be unwrapped (not exactly one element inside) is allowed
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <template v-for="item in items" :key="item.id">
+          <MyItem />
+          <MyOther />
+        </template>
+      </template>`,
+      options: [{ style: 'never' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-if="a">Hello</template></template>',
+      options: [{ style: 'never' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-if="a">{{ name }}</template></template>',
+      options: [{ style: 'never' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-if="a">Hi <b>{{ name }}</b></template></template>',
+      options: [{ style: 'never' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-if="a"></template></template>',
+      options: [{ style: 'never' }]
     }
   ],
   invalid: [
@@ -341,8 +373,8 @@ tester.run('template-wrapper-directive-style', rule, {
       code: `
       <template>
         <template v-for="item in items" :key="item.id">
+          <!-- whitespace and comments do not count as content -->
           <MyItem />
-          <MyOther />
         </template>
       </template>`,
       options: [{ style: 'never' }],

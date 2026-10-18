@@ -71,6 +71,13 @@ child is not allowed inside `<Transition>`; Vue reports that error on its own.
   <Content v-else />
   <MyItem v-for="item in items" :key="item.id" :item="item" />
 
+  <!-- ✓ GOOD: the wrapper cannot be removed -->
+  <template v-if="loading">
+    <Spinner />
+    <p>Loading…</p>
+  </template>
+  <template v-if="user">Hello {{ user.name }}</template>
+
   <!-- ✗ BAD -->
   <template v-if="loading">
     <Spinner />
@@ -83,8 +90,9 @@ child is not allowed inside `<Transition>`; Vue reports that error on its own.
 
 </eslint-code-block>
 
-Some templates cannot avoid a `<template>` wrapper, for example when several elements share one
-`v-if` without an extra wrapper element. Disable the rule for those lines or add a wrapper element.
+With `"never"`, a `<template>` wrapper is only reported when it contains exactly one element and nothing
+else, because only then can the directives be moved to that element. Wrappers with several elements,
+text or interpolations are not reported.
 
 ## :couple: Related Rules
 

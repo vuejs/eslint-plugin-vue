@@ -34,6 +34,23 @@ function isSlotTemplate(element: VElement): boolean {
   })
 }
 
+/**
+ * Whether the directives of a `<template>` wrapper could be moved to its content, which is the case
+ * only when it contains exactly one element and nothing else (whitespace aside). With several
+ * elements, text or interpolations there is no single element to move the directives to.
+ */
+function hasSingleElementChild(element: VElement): boolean {
+  let elements = 0
+  for (const child of element.children) {
+    if (child.type === 'VElement') {
+      elements++
+    } else if (child.type === 'VExpressionContainer' || child.value.trim()) {
+      return false
+    }
+  }
+  return elements === 1
+}
+
 /** The checked directives of an element, in source order. */
 function getCheckedDirectives(element: VElement): VDirective[] {
   return element.startTag.attributes.filter(
@@ -101,7 +118,12 @@ export default {
           return
         }
 
-        if (style === 'never' && isTemplate && !isSlotTemplate(element)) {
+        if (
+          style === 'never' &&
+          isTemplate &&
+          !isSlotTemplate(element) &&
+          hasSingleElementChild(element)
+        ) {
           for (const directive of directives) {
             context.report({
               node: directive,
