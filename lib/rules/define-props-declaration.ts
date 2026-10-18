@@ -2,11 +2,9 @@
  * @author Amorites
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -25,8 +23,7 @@ module.exports = {
       hasTypeArg: 'Use runtime declaration instead of type-based declaration.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const scriptSetup = utils.getScriptSetupElement(context)
     if (!scriptSetup || !utils.hasAttribute(scriptSetup, 'lang', 'ts')) {
       return {}

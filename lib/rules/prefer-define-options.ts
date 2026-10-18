@@ -2,11 +2,9 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -20,22 +18,15 @@ module.exports = {
       preferDefineOptions: 'Use `defineOptions` instead of default export.'
     }
   },
-  /**
-   * @param {RuleContext} context
-   * @returns {RuleListener}
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const scriptSetup = utils.getScriptSetupElement(context)
     if (!scriptSetup) {
       return {}
     }
 
-    /** @type {CallExpression | null} */
-    let defineOptionsNode = null
-    /** @type {ExportDefaultDeclaration | null} */
-    let exportDefaultDeclaration = null
-    /** @type {ImportDeclaration|null} */
-    let lastImportDeclaration = null
+    let defineOptionsNode: CallExpression | null = null
+    let exportDefaultDeclaration: ExportDefaultDeclaration | null = null
+    let lastImportDeclaration: ImportDeclaration | null = null
 
     return utils.compositingVisitors(
       utils.defineScriptSetupVisitor(context, {
@@ -65,18 +56,15 @@ module.exports = {
       }
     )
 
-    /**
-     * @param {ExportDefaultDeclaration} node
-     * @param {VElement} scriptSetup
-     * @returns {(fixer: RuleFixer) => Fix[]}
-     */
-    function buildFix(node, scriptSetup) {
+    function buildFix(
+      node: ExportDefaultDeclaration,
+      scriptSetup: VElement
+    ): (fixer: RuleFixer) => Fix[] {
       return (fixer) => {
         const sourceCode = context.sourceCode
 
         // Calc remove range
-        /** @type {Range} */
-        let removeRange = [...node.range]
+        let removeRange: Range = [...node.range]
 
         const script = scriptSetup.parent.children
           .filter(utils.isVElement)
@@ -114,8 +102,8 @@ module.exports = {
                 })
         }
 
-        /** @type {VStartTag | ImportDeclaration} */
-        const insertAfterTag = lastImportDeclaration || scriptSetup.startTag
+        const insertAfterTag: VStartTag | ImportDeclaration =
+          lastImportDeclaration || scriptSetup.startTag
 
         return [
           fixer.removeRange(removeRange),

@@ -2,20 +2,13 @@
  * @author Thomasan1999
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
+type ScriptRef = [string, CallExpression]
 
-/**
- * @typedef ScriptRef
- * @type {[string, CallExpression]}
- */
-
-/**
- * @param body {(Statement | ModuleDeclaration)[]}
- * @returns {ScriptRef[]}
- * */
-function getScriptRefsFromSetupFunction(body) {
+function getScriptRefsFromSetupFunction(
+  body: (Statement | ModuleDeclaration)[]
+): ScriptRef[] {
   return body.flatMap((child) => {
     if (child.type === 'VariableDeclaration') {
       const declarator = child.declarations[0]
@@ -33,8 +26,7 @@ function getScriptRefsFromSetupFunction(body) {
   })
 }
 
-/** @type {import("eslint").Rule.RuleModule} */
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -48,14 +40,10 @@ module.exports = {
       preferUseTemplateRef: "Replace '{{name}}' with 'useTemplateRef'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type Set<string> */
-    const templateRefs = new Set()
+  create(context: RuleContext) {
+    const templateRefs = new Set<string>()
 
-    /**
-     * @type ScriptRef[] */
-    const scriptRefs = []
+    const scriptRefs: ScriptRef[] = []
 
     return utils.compositingVisitors(
       utils.defineTemplateBodyVisitor(context, {
@@ -96,7 +84,7 @@ module.exports = {
               node: scriptRef,
               messageId: 'preferUseTemplateRef',
               data: {
-                name: /** @type {Identifier} */ (scriptRef.callee).name
+                name: (scriptRef.callee as Identifier).name
               }
             })
           }
