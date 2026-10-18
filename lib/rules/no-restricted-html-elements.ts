@@ -2,11 +2,9 @@
  * @author Doug Wade <douglas.b.wade@gmail.com>
  */
 
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -45,16 +43,9 @@ module.exports = {
       customMessage: '{{message}}'
     }
   },
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     return utils.defineTemplateBodyVisitor(context, {
-      /**
-       * @param {VElement} node
-       */
-      VElement(node) {
+      VElement(node: VElement) {
         if (
           !utils.isHtmlElementNode(node) &&
           !utils.isSvgElementNode(node) &&

@@ -2,11 +2,9 @@
  * @fileoverview Alphabetizes static class names.
  * @author Maciej Chmurski
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const { defineTemplateBodyVisitor } = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -20,11 +18,9 @@ module.exports = {
       shouldBeOrdered: 'Classes should be ordered alphabetically.'
     }
   },
-  /** @param {RuleContext} context */
-  create: (context) =>
-    defineTemplateBodyVisitor(context, {
-      /** @param {VAttribute} node */
-      "VAttribute[directive=false][key.name='class']"(node) {
+  create: (context: RuleContext) =>
+    utils.defineTemplateBodyVisitor(context, {
+      "VAttribute[directive=false][key.name='class']"(node: VAttribute) {
         const value = node.value
         if (!value) {
           return

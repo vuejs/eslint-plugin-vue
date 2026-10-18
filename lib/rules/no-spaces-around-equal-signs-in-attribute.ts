@@ -2,11 +2,9 @@
  * @author Yosuke Ota
  * issue https://github.com/vuejs/eslint-plugin-vue/issues/460
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -20,16 +18,14 @@ module.exports = {
       unexpectedSpaces: 'Unexpected spaces found around equal signs.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     return utils.defineTemplateBodyVisitor(context, {
       VAttribute(node) {
         if (!node.value) {
           return
         }
-        /** @type {Range} */
-        const range = [node.key.range[1], node.value.range[0]]
+        const range: Range = [node.key.range[1], node.value.range[0]]
         const eqText = sourceCode.text.slice(range[0], range[1])
         const expect = eqText.trim()
 
