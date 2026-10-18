@@ -2,15 +2,10 @@
  * @fileoverview Prop definitions should be detailed
  * @author Armano
  */
-'use strict'
+import type { ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').ComponentProp} ComponentProp
- */
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -24,13 +19,8 @@ module.exports = {
       requireType: 'Prop "{{name}}" should define at least its type.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @param {Expression} node
-     * @returns {boolean|null}
-     */
-    function optionHasType(node) {
+  create(context: RuleContext) {
+    function optionHasType(node: Expression): boolean | null {
       switch (node.type) {
         case 'ObjectExpression': {
           // foo: {
@@ -49,11 +39,7 @@ module.exports = {
       // Unknown
       return null
     }
-    /**
-     * @param {ObjectExpression} node
-     * @returns {boolean}
-     */
-    function objectHasType(node) {
+    function objectHasType(node: ObjectExpression) {
       const typeProperty = node.properties.find(
         (p) =>
           p.type === 'Property' &&
@@ -67,10 +53,7 @@ module.exports = {
       )
       return Boolean(typeProperty || validatorProperty)
     }
-    /**
-     * @param {ComponentProp} prop
-     */
-    function checkProperty(prop) {
+    function checkProperty(prop: ComponentProp) {
       if (prop.type !== 'object' && prop.type !== 'array') {
         return
       }
