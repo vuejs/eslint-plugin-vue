@@ -2,27 +2,24 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
+import type { Scope } from 'eslint'
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
 
 /**
- * @typedef {'props'|'prop'} PropIdKind
- *    - `'props'`: A node is a container object that has props.
- *    - `'prop'`: A node is a variable with one prop.
+ * - `'props'`: A node is a container object that has props.
+ * - `'prop'`: A node is a variable with one prop.
  */
-/**
- * @typedef {object} PropId
- * @property {Pattern} node
- * @property {PropIdKind} kind
- */
+type PropIdKind = 'props' | 'prop'
+interface PropId {
+  node: Pattern
+  kind: PropIdKind
+}
 /**
  * Iterates over Prop identifiers by parsing the given pattern
  * in the left operand of defineProps().
- * @param {Pattern} node
- * @returns {IterableIterator<PropId>}
  */
-function* iteratePropIds(node) {
+function* iteratePropIds(node: Pattern): IterableIterator<PropId> {
   switch (node.type) {
     case 'ObjectPattern': {
       for (const prop of node.properties) {
@@ -48,16 +45,11 @@ function* iteratePropIds(node) {
   }
 }
 
-/**
- * @template {Pattern} T
- * @param {T} node
- * @returns {Pattern}
- */
-function unwrapAssignment(node) {
+function unwrapAssignment<T extends Pattern>(node: T): Pattern {
   return node.type === 'AssignmentPattern' ? node.left : node
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -75,31 +67,29 @@ module.exports = {
         'Getting a value from the `props` in root scope of `{{scopeName}}` will cause the value to lose reactivity.'
     }
   },
-  /**
-   * @param {RuleContext} context
-   * @returns {RuleListener}
-   **/
-  create(context) {
-    /**
-     * @typedef {object} ScopePropsReferences
-     * @property {object} refs
-     * @property {Set<Identifier>} refs.props A set of references to container objects with multiple props.
-     * @property {Set<Identifier>} refs.prop A set of references a variable with one property.
-     * @property {string} scopeName
-     */
-    /** @type {Map<FunctionDeclaration | FunctionExpression | ArrowFunctionExpression | Program, ScopePropsReferences>} */
-    const setupScopePropsReferenceIds = new Map()
+  create(context: RuleContext): RuleListener {
+    interface ScopePropsReferences {
+      refs: {
+        /** A set of references to container objects with multiple props. */
+        props: Set<Identifier>
+        /** A set of references a variable with one property. */
+        prop: Set<Identifier>
+      }
+      scopeName: string
+    }
+    const setupScopePropsReferenceIds = new Map<
+      | FunctionDeclaration
+      | FunctionExpression
+      | ArrowFunctionExpression
+      | Program,
+      ScopePropsReferences
+    >()
     const wrapperExpressionTypes = new Set([
       'ArrayExpression',
       'ObjectExpression'
     ])
 
-    /**
-     * @param {ESNode} node
-     * @param {string} messageId
-     * @param {string} scopeName
-     */
-    function report(node, messageId, scopeName) {
+    function report(node: ESNode, messageId: string, scopeName: string) {
       context.report({
         node,
         messageId,
@@ -109,12 +99,11 @@ module.exports = {
       })
     }
 
-    /**
-     * @param {Pattern} left
-     * @param {Expression | null} right
-     * @param {ScopePropsReferences} propsReferences
-     */
-    function verify(left, right, propsReferences) {
+    function verify(
+      left: Pattern,
+      right: Expression | null,
+      propsReferences: ScopePropsReferences
+    ) {
       if (!right) {
         return
       }
@@ -131,13 +120,12 @@ module.exports = {
       }
 
       // Get the expression that provides the value.
-      /** @type {Expression | Super} */
-      let expression = rightNode
+      let expression: Expression | Super = rightNode
       while (expression.type === 'MemberExpression') {
         expression = utils.skipChainExpression(expression.object)
       }
-      /** @type {Expression[]} A list of expression nodes to verify */
-      const expressions = []
+      /** A list of expression nodes to verify */
+      const expressions: Expression[] = []
       switch (expression.type) {
         case 'TemplateLiteral': {
           expressions.push(...expression.expressions)
@@ -177,11 +165,10 @@ module.exports = {
       }
     }
 
-    /**
-     * @param {Expression | Super} node
-     * @param {ScopePropsReferences} propsReferences
-     */
-    function isPropsMemberAccessed(node, propsReferences) {
+    function isPropsMemberAccessed(
+      node: Expression | Super,
+      propsReferences: ScopePropsReferences
+    ) {
       for (const props of propsReferences.refs.props) {
         const isPropsInExpressionRange = utils.inRange(node.range, props)
         const isPropsMemberExpression =
@@ -204,23 +191,26 @@ module.exports = {
       return false
     }
 
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionDeclaration | FunctionExpression | ArrowFunctionExpression | Program} scopeNode
-     */
-    /**
-     * @type {ScopeStack | null}
-     */
-    let scopeStack = null
+    interface ScopeStack {
+      upper: ScopeStack | null
+      scopeNode:
+        | FunctionDeclaration
+        | FunctionExpression
+        | ArrowFunctionExpression
+        | Program
+    }
+    let scopeStack: ScopeStack | null = null
 
-    /**
-     * @param {PropId} propId
-     * @param {FunctionDeclaration | FunctionExpression | ArrowFunctionExpression | Program} scopeNode
-     * @param {import('eslint').Scope.Scope} currentScope
-     * @param {string} scopeName
-     */
-    function processPropId({ node, kind }, scopeNode, currentScope, scopeName) {
+    function processPropId(
+      { node, kind }: PropId,
+      scopeNode:
+        | FunctionDeclaration
+        | FunctionExpression
+        | ArrowFunctionExpression
+        | Program,
+      currentScope: Scope.Scope,
+      scopeName: string
+    ) {
       if (
         // eslint-disable-next-line unicorn/prefer-includes-over-repeated-comparisons -- narrows `node`'s type for the code below
         node.type === 'RestElement' ||
@@ -264,27 +254,30 @@ module.exports = {
 
     return utils.compositingVisitors(
       {
-        /**
-         * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression | Program} node
-         */
-        'Program, :function'(node) {
+        'Program, :function'(
+          node:
+            | FunctionExpression
+            | FunctionDeclaration
+            | ArrowFunctionExpression
+            | Program
+        ) {
           scopeStack = {
             upper: scopeStack,
             scopeNode: node
           }
         },
-        /**
-         * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression | Program} node
-         */
-        'Program, :function:exit'(node) {
+        'Program, :function:exit'(
+          node:
+            | FunctionExpression
+            | FunctionDeclaration
+            | ArrowFunctionExpression
+            | Program
+        ) {
           scopeStack &&= scopeStack.upper
 
           setupScopePropsReferenceIds.delete(node)
         },
-        /**
-         * @param {CallExpression} node
-         */
-        CallExpression(node) {
+        CallExpression(node: CallExpression) {
           if (!scopeStack) {
             return
           }
@@ -301,10 +294,7 @@ module.exports = {
             report(node, 'getProperty', propsReferenceIds.scopeName)
           }
         },
-        /**
-         * @param {VariableDeclarator} node
-         */
-        VariableDeclarator(node) {
+        VariableDeclarator(node: VariableDeclarator) {
           if (!scopeStack) {
             return
           }
@@ -316,10 +306,7 @@ module.exports = {
           }
           verify(node.id, node.init, propsReferenceIds)
         },
-        /**
-         * @param {AssignmentExpression} node
-         */
-        AssignmentExpression(node) {
+        AssignmentExpression(node: AssignmentExpression) {
           if (!scopeStack) {
             return
           }
@@ -348,8 +335,7 @@ module.exports = {
             return
           }
 
-          /** @type {Pattern|null} */
-          let id = null
+          let id: Pattern | null = null
           if (target.parent.type === 'VariableDeclarator') {
             id = target.parent.init === target ? target.parent.id : null
           } else if (target.parent.type === 'AssignmentExpression') {

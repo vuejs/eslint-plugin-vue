@@ -2,28 +2,17 @@
  * @fileoverview Prevents boolean defaults from being set
  * @author Hiroki Osame
  */
-'use strict'
+import utils from '../utils/index.js'
+import type { ComponentProp, ComponentObjectProp } from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').ComponentProp} ComponentProp
- * @typedef {import('../utils').ComponentObjectProp} ComponentObjectProp
- */
-
-/**
- * @param {Expression|undefined} node
- */
-function isBooleanIdentifier(node) {
+function isBooleanIdentifier(node: Expression | undefined) {
   return Boolean(node && node.type === 'Identifier' && node.name === 'Boolean')
 }
 
 /**
  * Detects whether given prop node is a Boolean
- * @param {ComponentObjectProp} prop
- * @return {Boolean}
  */
-function isBooleanProp(prop) {
+function isBooleanProp(prop: ComponentObjectProp): boolean {
   const value = utils.skipTSAsExpression(prop.value)
   return (
     isBooleanIdentifier(value) ||
@@ -32,14 +21,11 @@ function isBooleanProp(prop) {
   )
 }
 
-/**
- * @param {ObjectExpression} propDefValue
- */
-function getDefaultNode(propDefValue) {
+function getDefaultNode(propDefValue: ObjectExpression) {
   return utils.findProperty(propDefValue, 'default')
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -59,14 +45,12 @@ module.exports = {
       defaultFalse: 'Boolean prop should only be defaulted to false.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const booleanType = context.options[0] || 'no-default'
-    /**
-     * @param {ComponentProp} prop
-     * @param {(propName: string) => Expression[]} otherDefaultProvider
-     */
-    function processProp(prop, otherDefaultProvider) {
+    function processProp(
+      prop: ComponentProp,
+      otherDefaultProvider: (propName: string) => Expression[]
+    ) {
       if (prop.type === 'object') {
         if (!isBooleanProp(prop)) {
           return
@@ -91,20 +75,16 @@ module.exports = {
         }
       }
     }
-    /**
-     * @param {ComponentProp[]} props
-     * @param {(propName: string) => Expression[]} otherDefaultProvider
-     */
-    function processProps(props, otherDefaultProvider) {
+    function processProps(
+      props: ComponentProp[],
+      otherDefaultProvider: (propName: string) => Expression[]
+    ) {
       for (const prop of props) {
         processProp(prop, otherDefaultProvider)
       }
     }
 
-    /**
-     * @param {Expression} defaultNode
-     */
-    function verifyDefaultExpression(defaultNode) {
+    function verifyDefaultExpression(defaultNode: Expression) {
       switch (booleanType) {
         case 'no-default': {
           context.report({
