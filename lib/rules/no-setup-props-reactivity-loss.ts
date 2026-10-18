@@ -45,7 +45,7 @@ function* iteratePropIds(node: Pattern): IterableIterator<PropId> {
   }
 }
 
-function unwrapAssignment<T extends Pattern>(node: T): Pattern {
+function unwrapAssignment(node: Pattern): Pattern {
   return node.type === 'AssignmentPattern' ? node.left : node
 }
 
