@@ -3,11 +3,9 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -22,11 +20,9 @@ module.exports = {
         "Expected '<component>' elements to have 'v-bind:is' attribute."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VElement} node */
-      "VElement[name='component']"(node) {
+      "VElement[name='component']"(node: VElement) {
         if (!utils.hasDirective(node, 'bind', 'is')) {
           context.report({
             node,

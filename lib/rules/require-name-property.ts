@@ -2,18 +2,17 @@
  * @fileoverview Require a name property in Vue components
  * @author LukeeeeBennett
  */
-'use strict'
+import path from 'node:path'
+import utils from '../utils/index.js'
 
-const path = require('node:path')
-const utils = require('../utils')
-const { getVueComponentDefinitionType } = require('../utils')
+const { getVueComponentDefinitionType } = utils
 /**
  * Get the text of the empty indentation part of the line which the given token is on.
- * @param {SourceCode} sourceCode the source code object
- * @param {Token} token the token to get the indentation text of the line which the token is on
- * @returns {string} The text of indentation part.
+ * @param sourceCode the source code object
+ * @param token the token to get the indentation text of the line which the token is on
+ * @returns The text of indentation part.
  */
-function getLineEmptyIndent(sourceCode, token) {
+function getLineEmptyIndent(sourceCode: SourceCode, token: Token): string {
   const LT_CHAR = /[\n\r\u{2028}\u{2029}]/u
   const EMPTY_CHAR = /\s/
   const text = sourceCode.text
@@ -29,11 +28,8 @@ function getLineEmptyIndent(sourceCode, token) {
 
   return text.slice(i + 1, j)
 }
-/**
- * @param {Property | SpreadElement} node
- * @returns {node is ObjectExpressionProperty}
- */
-function isNameProperty(node) {
+
+function isNameProperty(node: Property | SpreadElement): node is Property {
   return (
     node.type === 'Property' &&
     utils.getStaticPropertyName(node) === 'name' &&
@@ -41,7 +37,7 @@ function isNameProperty(node) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -57,8 +53,7 @@ module.exports = {
       addName: 'Add name property to component.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     if (utils.isScriptSetup(context)) {
       return {}
     }

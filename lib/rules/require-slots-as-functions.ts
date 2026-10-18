@@ -2,10 +2,8 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
-const { findVariable } = require('@eslint-community/eslint-utils')
+import utils from '../utils/index.js'
+import { findVariable } from '@eslint-community/eslint-utils'
 
 // Parent node types where a `$slots` property is used as a value rather than called.
 const SLOT_USED_AS_VALUE_PARENT_TYPES = new Set([
@@ -15,7 +13,7 @@ const SLOT_USED_AS_VALUE_PARENT_TYPES = new Set([
   'ArrayExpression' // [this.$slots.foo]
 ])
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -29,14 +27,16 @@ module.exports = {
       unexpected: 'Property in `$slots` should be used as function.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     /**
      * Verify the given node
-     * @param {MemberExpression | Identifier | ChainExpression} node The node to verify
-     * @param {Expression} reportNode The node to report
+     * @param node The node to verify
+     * @param reportNode The node to report
      */
-    function verify(node, reportNode) {
+    function verify(
+      node: MemberExpression | Identifier | ChainExpression,
+      reportNode: Expression
+    ) {
       const parent = node.parent
 
       if (
@@ -73,10 +73,10 @@ module.exports = {
     }
     /**
      * Verify the references of the given node.
-     * @param {Identifier} node The node to verify
-     * @param {Expression} reportNode The node to report
+     * @param node The node to verify
+     * @param reportNode The node to report
      */
-    function verifyReferences(node, reportNode) {
+    function verifyReferences(node: Identifier, reportNode: Expression) {
       const variable = findVariable(utils.getScope(context, node), node)
       if (!variable) {
         return
@@ -85,15 +85,13 @@ module.exports = {
         if (!reference.isRead()) {
           continue
         }
-        /** @type {Identifier} */
-        const id = reference.identifier
+        const id: Identifier = reference.identifier
         verify(id, reportNode)
       }
     }
 
     return utils.defineVueVisitor(context, {
-      /** @param {MemberExpression} node */
-      MemberExpression(node) {
+      MemberExpression(node: MemberExpression) {
         const object = utils.skipChainExpression(node.object)
         if (
           object.type !== 'MemberExpression' ||

@@ -2,11 +2,9 @@
  * @author ItMaga
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,8 +19,7 @@ module.exports = {
       mustBeDefaultExport: 'Component must be the default export.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const documentFragment = sourceCode.parserServices.getDocumentFragment?.()
 
@@ -51,13 +48,10 @@ module.exports = {
           hasDefaultExport = true
         },
 
-        /**
-         * @param {Program} node
-         */
-        'Program:exit'(node) {
+        'Program:exit'(node: Program) {
           if (!hasDefaultExport && node.body.length > 0) {
             context.report({
-              loc: /** @type {Token} */ (node.tokens.at(-1)).loc,
+              loc: node.tokens.at(-1)!.loc,
               messageId: hasDefinedComponent ? 'mustBeDefaultExport' : 'missing'
             })
           }

@@ -3,11 +3,9 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -22,13 +20,12 @@ module.exports = {
         "Elements in iteration expect to have 'v-bind:key' directives."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     /**
      * Check the given element about `v-bind:key` attributes.
-     * @param {VElement} element The element node to check.
+     * @param element The element node to check.
      */
-    function checkKey(element) {
+    function checkKey(element: VElement) {
       if (utils.hasDirective(element, 'bind', 'key')) {
         return
       }
@@ -48,8 +45,7 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='for']"(node) {
+      "VAttribute[directive=true][key.name.name='for']"(node: VDirective) {
         checkKey(node.parent.parent)
       }
     })

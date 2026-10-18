@@ -2,20 +2,10 @@
  * @author Mussin Benarbia
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { TSESTree } from '@typescript-eslint/types'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {import('@typescript-eslint/types').TSESTree.TypeNode} TypeNode
- * @typedef {import('@typescript-eslint/types').TSESTree.TypeElement} TypeElement
- */
-
-/**
- * @param {TypeElement} node
- * @return {string | null}
- */
-function getSlotsName(node) {
+function getSlotsName(node: TSESTree.TypeElement): string | null {
   if (
     node.type !== 'TSMethodSignature' &&
     node.type !== 'TSPropertySignature'
@@ -31,11 +21,7 @@ function getSlotsName(node) {
   return key.type === 'Identifier' ? key.name : null
 }
 
-/**
- * @param {VElement} node
- * @return {VAttribute | VDirective | undefined}
- */
-function getSlotNameNode(node) {
+function getSlotNameNode(node: VElement): VAttribute | VDirective | undefined {
   return node.startTag.attributes.find(
     (node) =>
       (!node.directive && node.key.name === 'name') ||
@@ -46,7 +32,7 @@ function getSlotNameNode(node) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -61,8 +47,7 @@ module.exports = {
       alreadyDefinedSlot: 'Slot {{slotName}} is already defined.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const documentFragment =
       sourceCode.parserServices.getDocumentFragment &&
@@ -71,19 +56,15 @@ module.exports = {
       return {}
     }
     const scripts = documentFragment.children.filter(
-      /** @returns {element is VElement} */
-      (element) => utils.isVElement(element) && element.name === 'script'
+      (element): element is VElement =>
+        utils.isVElement(element) && element.name === 'script'
     )
     if (scripts.every((script) => !utils.hasAttribute(script, 'lang', 'ts'))) {
       return {}
     }
     const slotsDefined = new Set()
 
-    /**
-     * @param {VElement} node
-     * @param {string | undefined} slotName
-     */
-    function reportMissingSlot(node, slotName) {
+    function reportMissingSlot(node: VElement, slotName: string | undefined) {
       if (!slotsDefined.has(slotName)) {
         context.report({
           node,
@@ -128,9 +109,7 @@ module.exports = {
           'typeArguments' in slotsTypeHelper
             ? slotsTypeHelper.typeArguments
             : slotsTypeHelper.typeParameters
-        const param = /** @type {TypeNode|undefined} */ (
-          typeArguments?.params[0]
-        )
+        const param = typeArguments?.params[0] as TSESTree.TypeNode | undefined
         if (!param) return
 
         if (param.type === 'TSTypeLiteral') {
@@ -153,8 +132,7 @@ module.exports = {
         }
       }),
       utils.defineTemplateBodyVisitor(context, {
-        /** @param {VElement} node */
-        "VElement[name='slot']"(node) {
+        "VElement[name='slot']"(node: VElement) {
           const nameNode = getSlotNameNode(node)
 
           // if no slot name is declared, default to 'default'

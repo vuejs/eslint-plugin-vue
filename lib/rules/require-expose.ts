@@ -2,15 +2,14 @@
  * @fileoverview Require `expose` in Vue components
  * @author Yosuke Ota <https://github.com/ota-meshi>
  */
-'use strict'
-
-const {
+import {
   findVariable,
   isOpeningBraceToken,
   isClosingBraceToken
-} = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-const { getVueComponentDefinitionType } = require('../utils')
+} from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+
+const { getVueComponentDefinitionType } = utils
 
 const FIX_EXPOSE_BEFORE_OPTIONS = new Set([
   'name',
@@ -25,11 +24,7 @@ const FIX_EXPOSE_BEFORE_OPTIONS = new Set([
   'emits'
 ])
 
-/**
- * @param {Property | SpreadElement} node
- * @returns {node is ObjectExpressionProperty}
- */
-function isExposeProperty(node) {
+function isExposeProperty(node: Property | SpreadElement): node is Property {
   return (
     node.type === 'Property' &&
     utils.getStaticPropertyName(node) === 'expose' &&
@@ -39,9 +34,9 @@ function isExposeProperty(node) {
 
 /**
  * Get the callee member node from the given CallExpression
- * @param {CallExpression} node CallExpression
+ * @param node CallExpression
  */
-function getCalleeMemberNode(node) {
+function getCalleeMemberNode(node: CallExpression) {
   const callee = utils.skipChainExpression(node.callee)
 
   if (callee.type === 'MemberExpression') {
@@ -53,7 +48,7 @@ function getCalleeMemberNode(node) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -73,46 +68,31 @@ module.exports = {
         'Add the `expose` option to declare all properties.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     if (utils.isScriptSetup(context)) {
       return {}
     }
 
-    /**
-     * @typedef {object} SetupContext
-     * @property {Set<Identifier>} exposeReferenceIds
-     * @property {Set<Identifier>} contextReferenceIds
-     */
+    interface SetupContext {
+      exposeReferenceIds: Set<Identifier>
+      contextReferenceIds: Set<Identifier>
+    }
 
-    /** @type {Map<ObjectExpression, SetupContext>} */
-    const setupContexts = new Map()
-    /** @type {Set<ObjectExpression>} */
-    const calledExpose = new Set()
+    const setupContexts = new Map<ObjectExpression, SetupContext>()
+    const calledExpose = new Set<ObjectExpression>()
 
-    /**
-     * @typedef {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} FunctionNode
-     */
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionNode} functionNode
-     * @property {boolean} returnFunction
-     */
-    /**
-     * @type {ScopeStack | null}
-     */
-    let scopeStack = null
-    /** @type {Map<FunctionNode, ObjectExpression>} */
-    const setupFunctions = new Map()
-    /** @type {Set<ObjectExpression>} */
-    const setupRender = new Set()
+    type FunctionNode =
+      FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+    interface ScopeStack {
+      upper: ScopeStack | null
+      functionNode: FunctionNode
+      returnFunction: boolean
+    }
+    let scopeStack: ScopeStack | null = null
+    const setupFunctions = new Map<FunctionNode, ObjectExpression>()
+    const setupRender = new Set<ObjectExpression>()
 
-    /**
-     * @param {Expression} node
-     * @returns {boolean}
-     */
-    function isFunction(node) {
+    function isFunction(node: Expression): boolean {
       if (
         node.type === 'ArrowFunctionExpression' ||
         node.type === 'FunctionExpression'
@@ -147,10 +127,8 @@ module.exports = {
         ) {
           return
         }
-        /** @type {Set<Identifier>} */
-        const contextReferenceIds = new Set()
-        /** @type {Set<Identifier>} */
-        const exposeReferenceIds = new Set()
+        const contextReferenceIds = new Set<Identifier>()
+        const exposeReferenceIds = new Set<Identifier>()
         if (contextParam.type === 'ObjectPattern') {
           const exposeProperty = utils.findAssignmentProperty(
             contextParam,
@@ -225,8 +203,7 @@ module.exports = {
           }
         }
       },
-      /** @param {FunctionNode} node */
-      ':function'(node) {
+      ':function'(node: FunctionNode) {
         scopeStack = {
           upper: scopeStack,
           functionNode: node,
@@ -289,12 +266,10 @@ module.exports = {
   }
 }
 
-/**
- * @param {ObjectExpression} object
- * @param {RuleContext} context
- * @returns {Rule.SuggestionReportDescriptor[]}
- */
-function buildSuggest(object, context) {
+function buildSuggest(
+  object: ObjectExpression,
+  context: RuleContext
+): Rule.SuggestionReportDescriptor[] {
   const propertyNodes = object.properties.filter(utils.isProperty)
 
   const sourceCode = context.sourceCode
@@ -328,14 +303,8 @@ function buildSuggest(object, context) {
       : [])
   ]
 
-  /**
-   * @param {string} text
-   */
-  function buildFix(text) {
-    /**
-     * @param {RuleFixer} fixer
-     */
-    return (fixer) => {
+  function buildFix(text: string) {
+    return (fixer: RuleFixer) => {
       if (beforeOptionNode) {
         return fixer.insertTextAfter(beforeOptionNode, `,\n${text}`)
       }
@@ -346,12 +315,14 @@ function buildSuggest(object, context) {
           `\n${text},`
         )
       }
-      const objectLeftBrace = /** @type {Token} */ (
-        sourceCode.getFirstToken(object, isOpeningBraceToken)
-      )
-      const objectRightBrace = /** @type {Token} */ (
-        sourceCode.getLastToken(object, isClosingBraceToken)
-      )
+      const objectLeftBrace = sourceCode.getFirstToken(
+        object,
+        isOpeningBraceToken
+      )!
+      const objectRightBrace = sourceCode.getLastToken(
+        object,
+        isClosingBraceToken
+      )!
       return fixer.insertTextAfter(
         objectLeftBrace,
         `\n${text}${
