@@ -6,8 +6,6 @@ import utils from '../utils/index.js'
 
 /**
  * Check whether the given node is valid or not.
- * @param node The element node to check.
- * @returns `true` if the node is valid.
  */
 function isValidElement(node: VElement): boolean {
   return (
