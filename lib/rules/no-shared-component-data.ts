@@ -2,25 +2,17 @@
  * @fileoverview Enforces component's data property to be a function.
  * @author Armano
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/** @param {Token} token  */
-function isOpenParen(token) {
+function isOpenParen(token: Token) {
   return token.type === 'Punctuator' && token.value === '('
 }
 
-/** @param {Token} token  */
-function isCloseParen(token) {
+function isCloseParen(token: Token) {
   return token.type === 'Punctuator' && token.value === ')'
 }
 
-/**
- * @param {Expression} node
- * @param {SourceCode} sourceCode
- */
-function getFirstAndLastTokens(node, sourceCode) {
+function getFirstAndLastTokens(node: Expression, sourceCode: SourceCode) {
   let first = sourceCode.getFirstToken(node)
   let last = sourceCode.getLastToken(node)
 
@@ -37,7 +29,7 @@ function getFirstAndLastTokens(node, sourceCode) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -52,8 +44,7 @@ module.exports = {
         '`data` property in component must be a function.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
 
     return utils.executeOnVueComponent(context, (obj) => {

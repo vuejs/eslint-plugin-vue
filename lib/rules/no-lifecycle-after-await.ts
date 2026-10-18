@@ -2,13 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-const { ReferenceTracker } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-
-/**
- * @typedef {import('@eslint-community/eslint-utils').TYPES.TraceMap} TraceMap
- */
+import { ReferenceTracker } from '@eslint-community/eslint-utils'
+import type { TYPES } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
 
 const LIFECYCLE_HOOKS = [
   'onBeforeMount',
@@ -24,7 +20,7 @@ const LIFECYCLE_HOOKS = [
   'onDeactivated'
 ]
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -38,33 +34,29 @@ module.exports = {
       forbidden: 'Lifecycle hooks are forbidden after an `await` expression.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @typedef {object} SetupScopeData
-     * @property {boolean} afterAwait
-     * @property {[number,number]} range
-     */
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionDeclaration | FunctionExpression | ArrowFunctionExpression} scopeNode
-     */
-    /** @type {Set<ESNode>} */
-    const lifecycleHookCallNodes = new Set()
-    /** @type {Map<FunctionDeclaration | FunctionExpression | ArrowFunctionExpression, SetupScopeData>} */
-    const setupScopes = new Map()
+  create(context: RuleContext) {
+    interface SetupScopeData {
+      afterAwait: boolean
+      range: [number, number]
+    }
+    interface ScopeStack {
+      upper: ScopeStack | null
+      scopeNode:
+        FunctionDeclaration | FunctionExpression | ArrowFunctionExpression
+    }
+    const lifecycleHookCallNodes = new Set<ESNode>()
+    const setupScopes = new Map<
+      FunctionDeclaration | FunctionExpression | ArrowFunctionExpression,
+      SetupScopeData
+    >()
 
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+    let scopeStack: ScopeStack | null = null
 
     return utils.compositingVisitors(
       {
-        /** @param {Program} program */
-        Program(program) {
+        Program(program: Program) {
           const tracker = new ReferenceTracker(utils.getScope(context, program))
-          /** @type {TraceMap} */
-          const traceMap = {}
+          const traceMap: TYPES.TraceMap = {}
           for (const lifecycleHook of LIFECYCLE_HOOKS) {
             traceMap[lifecycleHook] = {
               [ReferenceTracker.CALL]: true
@@ -86,10 +78,10 @@ module.exports = {
             range: node.range
           })
         },
-        /**
-         * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-         */
-        ':function'(node) {
+        ':function'(
+          node:
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+        ) {
           scopeStack = {
             upper: scopeStack,
             scopeNode: node
@@ -98,8 +90,7 @@ module.exports = {
         ':function:exit'() {
           scopeStack &&= scopeStack.upper
         },
-        /** @param {AwaitExpression} node */
-        AwaitExpression(node) {
+        AwaitExpression(node: AwaitExpression) {
           if (!scopeStack) {
             return
           }
@@ -109,8 +100,7 @@ module.exports = {
           }
           setupScope.afterAwait = true
         },
-        /** @param {CallExpression} node */
-        CallExpression(node) {
+        CallExpression(node: CallExpression) {
           if (!scopeStack) {
             return
           }

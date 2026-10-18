@@ -2,21 +2,13 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-const fs = require('node:fs')
-const path = require('node:path')
-const { ReferenceTracker } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
+import fs from 'node:fs'
+import path from 'node:path'
+import { ReferenceTracker } from '@eslint-community/eslint-utils'
+import type { TYPES } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
 
-/**
- * @typedef {import('@eslint-community/eslint-utils').TYPES.TraceMap} TraceMap
- * @typedef {import('@eslint-community/eslint-utils').TYPES.TraceKind} TraceKind
- */
-
-/**
- * @param {string} id
- */
-function safeRequireResolve(id) {
+function safeRequireResolve(id: string) {
   try {
     if (fs.statSync(id).isDirectory()) {
       return require.resolve(id)
@@ -27,7 +19,7 @@ function safeRequireResolve(id) {
   return id
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -66,34 +58,28 @@ module.exports = {
       restricted: '{{message}}'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @typedef {object} SetupScopeData
-     * @property {boolean} afterAwait
-     * @property {[number,number]} range
-     */
+  create(context: RuleContext) {
+    interface SetupScopeData {
+      afterAwait: boolean
+      range: [number, number]
+    }
 
-    /** @type {Map<ESNode, string>} */
-    const restrictedCallNodes = new Map()
-    /** @type {Map<FunctionExpression | ArrowFunctionExpression | FunctionDeclaration, SetupScopeData>} */
-    const setupScopes = new Map()
+    const restrictedCallNodes = new Map<ESNode, string>()
+    const setupScopes = new Map<
+      FunctionExpression | ArrowFunctionExpression | FunctionDeclaration,
+      SetupScopeData
+    >()
 
-    /**x
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionExpression | ArrowFunctionExpression | FunctionDeclaration} scopeNode
-     */
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+    interface ScopeStack {
+      upper: ScopeStack | null
+      scopeNode:
+        FunctionExpression | ArrowFunctionExpression | FunctionDeclaration
+    }
+    let scopeStack: ScopeStack | null = null
 
-    /** @type {Record<string, string[]> | null} */
-    let allLocalImports = null
+    let allLocalImports: Record<string, string[]> | null = null
 
-    /**
-     * @param {Program} ast
-     */
-    function getAllLocalImports(ast) {
+    function getAllLocalImports(ast: Program) {
       if (!allLocalImports) {
         allLocalImports = {}
         const dir = path.dirname(context.filename)
@@ -114,14 +100,8 @@ module.exports = {
       return allLocalImports
     }
 
-    /**
-     * @param {string} moduleName
-     * @param {Program} ast
-     * @returns {string[]}
-     */
-    function normalizeModules(moduleName, ast) {
-      /** @type {string} */
-      let modulePath
+    function normalizeModules(moduleName: string, ast: Program): string[] {
+      let modulePath: string
       if (moduleName.startsWith('.')) {
         modulePath = safeRequireResolve(path.join(context.cwd, moduleName))
       } else if (path.isAbsolute(moduleName)) {
@@ -134,23 +114,20 @@ module.exports = {
 
     return utils.compositingVisitors(
       {
-        /** @param {Program} node */
-        Program(node) {
+        Program(node: Program) {
           const tracker = new ReferenceTracker(utils.getScope(context, node))
 
           for (const option of context.options) {
             const modules = normalizeModules(option.module, node)
 
             for (const module of modules) {
-              /** @type {TraceMap} */
-              const traceMap = {
+              const traceMap: TYPES.TraceMap = {
                 [module]: {
                   [ReferenceTracker.ESM]: true
                 }
               }
 
-              /** @type {TraceKind & TraceMap} */
-              const mod = traceMap[module]
+              const mod: TYPES.TraceKind & TYPES.TraceMap = traceMap[module]
               let local = mod
               const paths = Array.isArray(option.path)
                 ? option.path
@@ -180,8 +157,10 @@ module.exports = {
             range: node.range
           })
         },
-        /** @param {FunctionExpression | ArrowFunctionExpression | FunctionDeclaration} node */
-        ':function'(node) {
+        ':function'(
+          node:
+            FunctionExpression | ArrowFunctionExpression | FunctionDeclaration
+        ) {
           scopeStack = {
             upper: scopeStack,
             scopeNode: node
@@ -190,8 +169,7 @@ module.exports = {
         ':function:exit'() {
           scopeStack &&= scopeStack.upper
         },
-        /** @param {AwaitExpression} node */
-        AwaitExpression(node) {
+        AwaitExpression(node: AwaitExpression) {
           if (!scopeStack) {
             return
           }
@@ -201,8 +179,7 @@ module.exports = {
           }
           setupScope.afterAwait = true
         },
-        /** @param {CallExpression} node */
-        CallExpression(node) {
+        CallExpression(node: CallExpression) {
           if (!scopeStack) {
             return
           }

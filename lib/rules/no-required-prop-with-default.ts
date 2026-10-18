@@ -2,17 +2,10 @@
  * @author @neferqiqi
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-const utils = require('../utils')
-/**
- * @typedef {import('../utils').ComponentTypeProp} ComponentTypeProp
- * @typedef {import('../utils').ComponentArrayProp} ComponentArrayProp
- * @typedef {import('../utils').ComponentObjectProp} ComponentObjectProp
- * @typedef {import('../utils').ComponentUnknownProp} ComponentUnknownProp
- * @typedef {import('../utils').ComponentProp} ComponentProp
- */
+import utils from '../utils/index.js'
+import type { ComponentProp } from '../utils/index.js'
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -38,19 +31,17 @@ module.exports = {
       fixRequiredProp: `Change this prop to be optional.`
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     let canAutoFix = false
     const option = context.options[0]
     if (option) {
       canAutoFix = option.autofix
     }
 
-    /**
-     * @param {ComponentProp} prop
-     * @param {Set<string>} [defaultProps]
-     **/
-    const handleObjectProp = (prop, defaultProps) => {
+    const handleObjectProp = (
+      prop: ComponentProp,
+      defaultProps?: Set<string>
+    ) => {
       if (
         prop.type === 'object' &&
         prop.propName &&

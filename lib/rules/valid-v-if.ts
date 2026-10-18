@@ -3,55 +3,43 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
-      description: 'enforce valid `v-else-if` directives',
+      description: 'enforce valid `v-if` directives',
       categories: ['vue3-essential', 'vue2-essential'],
-      url: 'https://eslint.vuejs.org/rules/valid-v-else-if.html'
+      url: 'https://eslint.vuejs.org/rules/valid-v-if.html'
     },
     fixable: null,
     schema: [],
     messages: {
-      missingVIf:
-        "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive.",
-      withVIf:
-        "'v-else-if' and 'v-if' directives can't exist on the same element.",
       withVElse:
-        "'v-else-if' and 'v-else' directives can't exist on the same element.",
-      unexpectedArgument: "'v-else-if' directives require no argument.",
-      unexpectedModifier: "'v-else-if' directives require no modifier.",
-      expectedValue: "'v-else-if' directives require that attribute value."
+        "'v-if' and 'v-else' directives can't exist on the same element. You may want 'v-else-if' directives.",
+      withVElseIf:
+        "'v-if' and 'v-else-if' directives can't exist on the same element.",
+      unexpectedArgument: "'v-if' directives require no argument.",
+      unexpectedModifier: "'v-if' directives require no modifier.",
+      expectedValue: "'v-if' directives require that attribute value."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='else-if']"(node) {
+      "VAttribute[directive=true][key.name.name='if']"(node: VDirective) {
         const element = node.parent.parent
 
-        if (!utils.prevElementHasIf(element)) {
-          context.report({
-            node,
-            messageId: 'missingVIf'
-          })
-        }
-        if (utils.hasDirective(element, 'if')) {
-          context.report({
-            node,
-            messageId: 'withVIf'
-          })
-        }
         if (utils.hasDirective(element, 'else')) {
           context.report({
             node,
             messageId: 'withVElse'
+          })
+        }
+        if (utils.hasDirective(element, 'else-if')) {
+          context.report({
+            node,
+            messageId: 'withVElseIf'
           })
         }
         if (node.key.argument) {

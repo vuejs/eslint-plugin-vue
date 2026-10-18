@@ -2,12 +2,10 @@
  * @author Doug Wade <douglas.b.wade@gmail.com>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import xnv from 'xml-name-validator'
 
-const utils = require('../utils')
-const xnv = require('xml-name-validator')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,17 +19,12 @@ module.exports = {
       attribute: 'Attribute name {{name}} is not valid.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @param {string | VIdentifier} key
-     * @return {string}
-     */
-    const getName = (key) => (typeof key === 'string' ? key : key.name)
+  create(context: RuleContext) {
+    const getName = (key: string | VIdentifier): string =>
+      typeof key === 'string' ? key : key.name
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective | VAttribute} node */
-      VAttribute(node) {
+      VAttribute(node: VDirective | VAttribute) {
         if (utils.isCustomComponent(node.parent.parent)) {
           return
         }

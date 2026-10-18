@@ -3,31 +3,27 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
-      description: 'enforce valid `v-pre` directives',
+      description: 'enforce valid `v-once` directives',
       categories: ['vue3-essential', 'vue2-essential'],
-      url: 'https://eslint.vuejs.org/rules/valid-v-pre.html'
+      url: 'https://eslint.vuejs.org/rules/valid-v-once.html'
     },
     fixable: null,
     schema: [],
     messages: {
-      unexpectedArgument: "'v-pre' directives require no argument.",
-      unexpectedModifier: "'v-pre' directives require no modifier.",
-      unexpectedValue: "'v-pre' directives require no attribute value."
+      unexpectedArgument: "'v-once' directives require no argument.",
+      unexpectedModifier: "'v-once' directives require no modifier.",
+      unexpectedValue: "'v-once' directives require no attribute value."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='pre']"(node) {
+      "VAttribute[directive=true][key.name.name='once']"(node: VDirective) {
         if (node.key.argument) {
           context.report({
             node: node.key.argument,
