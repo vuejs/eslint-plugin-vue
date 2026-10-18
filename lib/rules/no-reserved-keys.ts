@@ -2,17 +2,11 @@
  * @fileoverview Prevent overwrite reserved keys
  * @author Armano
  */
-'use strict'
+import utils from '../utils/index.js'
+import type { GroupName } from '../utils/index.js'
+import RESERVED_KEYS from '../utils/vue-reserved.json' with { type: 'json' }
 
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').GroupName} GroupName
- */
-
-const RESERVED_KEYS = require('../utils/vue-reserved.json')
-/** @type {GroupName[]} */
-const GROUP_NAMES = [
+const GROUP_NAMES: GroupName[] = [
   'props',
   'computed',
   'data',
@@ -21,7 +15,7 @@ const GROUP_NAMES = [
   'setup'
 ]
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -52,8 +46,7 @@ module.exports = {
         "Keys starting with '_' are reserved in '{{name}}' group."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const reservedKeys = new Set([
       ...RESERVED_KEYS,
