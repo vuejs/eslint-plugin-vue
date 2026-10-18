@@ -2,10 +2,9 @@
  * @author tyankatsu <https://github.com/tyankatsu0105>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -19,11 +18,9 @@ module.exports = {
       unexpected: "Don't use 'v-text'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='text']"(node) {
+      "VAttribute[directive=true][key.name.name='text']"(node: VDirective) {
         context.report({
           node,
           loc: node.loc,

@@ -2,13 +2,14 @@
  * @fileoverview enforce usage of `exact` modifier on `v-on`.
  * @author Armano
  */
-'use strict'
+import utils from '../utils/index.js'
 
-/**
- * @typedef { {name: string, node: VDirectiveKey, modifiers: string[], hasHandler: boolean } } EventDirective
- */
-
-const utils = require('../utils')
+interface EventDirective {
+  name: string
+  node: VDirectiveKey
+  modifiers: string[]
+  hasHandler: boolean
+}
 
 const SYSTEM_MODIFIERS = new Set(['ctrl', 'shift', 'alt', 'meta'])
 const GLOBAL_MODIFIERS = new Set([
@@ -24,12 +25,11 @@ const KEYBOARD_EVENTS = new Set(['keydown', 'keypress', 'keyup'])
 
 /**
  * Finds and returns all keys for event directives
- *
- * @param {VStartTag} startTag Element startTag
- * @param {SourceCode} sourceCode The source code object.
- * @returns {EventDirective[]} [{ name, node, modifiers }]
  */
-function getEventDirectives(startTag, sourceCode) {
+function getEventDirectives(
+  startTag: VStartTag,
+  sourceCode: SourceCode
+): EventDirective[] {
   return utils.getDirectives(startTag, 'on').map((attribute) => ({
     name: attribute.key.argument
       ? sourceCode.getText(attribute.key.argument)
@@ -42,43 +42,31 @@ function getEventDirectives(startTag, sourceCode) {
 
 /**
  * Checks whether given modifier is key modifier
- *
- * @param {string} modifier
- * @returns {boolean}
  */
-function isKeyModifier(modifier) {
+function isKeyModifier(modifier: string): boolean {
   return !GLOBAL_MODIFIERS.has(modifier) && !SYSTEM_MODIFIERS.has(modifier)
 }
 
 /**
  * Checks whether given modifier is system one
- *
- * @param {string} modifier
- * @returns {boolean}
  */
-function isSystemModifier(modifier) {
+function isSystemModifier(modifier: string): boolean {
   return SYSTEM_MODIFIERS.has(modifier)
 }
 
 /**
  * Checks whether given any of provided modifiers
  * has system modifier
- *
- * @param {string[]} modifiers
- * @returns {boolean}
  */
-function hasSystemModifier(modifiers) {
+function hasSystemModifier(modifiers: string[]): boolean {
   return modifiers.some(isSystemModifier)
 }
 
 /**
  * Checks whether the event catches every key event to stop propagation,
  * only applies global modifiers, and has no handler.
- *
- * @param {EventDirective} event
- * @returns {boolean}
  */
-function isGlobalOnlyKeyboardStopEvent(event) {
+function isGlobalOnlyKeyboardStopEvent(event: EventDirective): boolean {
   return (
     KEYBOARD_EVENTS.has(event.name) &&
     event.modifiers.includes('stop') &&
@@ -91,12 +79,12 @@ function isGlobalOnlyKeyboardStopEvent(event) {
  * Groups all events in object,
  * with keys represinting each event name
  *
- * @param {EventDirective[]} events
- * @returns { { [key: string]: EventDirective[] } } { click: [], keypress: [] }
+ * @returns { click: [], keypress: [] }
  */
-function groupEvents(events) {
-  /** @type { { [key: string]: EventDirective[] } } */
-  const grouped = {}
+function groupEvents(events: EventDirective[]): {
+  [key: string]: EventDirective[]
+} {
+  const grouped: { [key: string]: EventDirective[] } = {}
   for (const event of events) {
     if (!grouped[event.name]) {
       grouped[event.name] = []
@@ -109,10 +97,9 @@ function groupEvents(events) {
 /**
  * Creates alphabetically sorted string with system modifiers
  *
- * @param {string[]} modifiers
- * @returns {string} e.g. "alt,ctrl,del,shift"
+ * @returns e.g. "alt,ctrl,del,shift"
  */
-function getSystemModifiersString(modifiers) {
+function getSystemModifiersString(modifiers: string[]): string {
   return modifiers
     .filter(isSystemModifier)
     .sort((a, b) => a.localeCompare(b))
@@ -122,10 +109,9 @@ function getSystemModifiersString(modifiers) {
 /**
  * Creates alphabetically sorted string with key modifiers
  *
- * @param {string[]} modifiers
- * @returns {string} e.g. "enter,tab"
+ * @returns e.g. "enter,tab"
  */
-function getKeyModifiersString(modifiers) {
+function getKeyModifiersString(modifiers: string[]): string {
   return modifiers
     .filter(isKeyModifier)
     .sort((a, b) => a.localeCompare(b))
@@ -135,12 +121,11 @@ function getKeyModifiersString(modifiers) {
 /**
  * Compares two events based on their modifiers
  * to detect possible event leakeage
- *
- * @param {EventDirective} baseEvent
- * @param {EventDirective} event
- * @returns {boolean}
  */
-function hasConflictedModifiers(baseEvent, event) {
+function hasConflictedModifiers(
+  baseEvent: EventDirective,
+  event: EventDirective
+): boolean {
   if (
     event.node === baseEvent.node ||
     event.modifiers.includes('exact') ||
@@ -172,12 +157,10 @@ function hasConflictedModifiers(baseEvent, event) {
 /**
  * Searches for events that might conflict with each other
  *
- * @param {EventDirective[]} events
- * @returns {EventDirective[]} conflicted events, without duplicates
+ * @returns conflicted events, without duplicates
  */
-function findConflictedEvents(events) {
-  /** @type {EventDirective[]} */
-  const conflictedEvents = []
+function findConflictedEvents(events: EventDirective[]): EventDirective[] {
+  const conflictedEvents: EventDirective[] = []
   for (const event of events) {
     conflictedEvents.push(
       ...events
@@ -188,7 +171,7 @@ function findConflictedEvents(events) {
   return conflictedEvents
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -205,16 +188,12 @@ module.exports = {
 
   /**
    * Creates AST event handlers for use-v-on-exact.
-   *
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
    */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const sourceCode = context.sourceCode
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VStartTag} node */
-      VStartTag(node) {
+      VStartTag(node: VStartTag) {
         if (node.attributes.length === 0) return
 
         const isCustomComponent = utils.isCustomComponent(node.parent)

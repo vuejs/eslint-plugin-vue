@@ -2,9 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 // https://github.com/vuejs/vue-next/blob/64e2f4643602c5980361e66674141e61ba60ef70/packages/compiler-core/src/parse.ts#L405
 const SPECIAL_TEMPLATE_DIRECTIVES = new Set([
@@ -15,10 +13,7 @@ const SPECIAL_TEMPLATE_DIRECTIVES = new Set([
   'slot'
 ])
 
-/**
- * @param {VAttribute | VDirective} attr
- */
-function getKeyName(attr) {
+function getKeyName(attr: VAttribute | VDirective) {
   if (attr.directive) {
     return attr.key.name.name !== 'bind' ||
       !attr.key.argument ||
@@ -29,10 +24,7 @@ function getKeyName(attr) {
   return attr.key.name
 }
 
-/**
- * @param {VAttribute | VDirective} attr
- */
-function isFragmentTemplateAttribute(attr) {
+function isFragmentTemplateAttribute(attr: VAttribute | VDirective) {
   if (attr.directive) {
     const directiveName = attr.key.name.name
     if (
@@ -49,7 +41,7 @@ function isFragmentTemplateAttribute(attr) {
   return keyName === 'slot'
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -64,11 +56,11 @@ module.exports = {
       unexpectedDir: 'Unexpected useless directive on `<template>`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VStartTag} node */
-      "VElement[name='template'][parent.type='VElement'] > VStartTag"(node) {
+      "VElement[name='template'][parent.type='VElement'] > VStartTag"(
+        node: VStartTag
+      ) {
         if (!node.attributes.some(isFragmentTemplateAttribute)) {
           return
         }

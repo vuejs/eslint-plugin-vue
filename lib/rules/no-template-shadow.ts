@@ -2,16 +2,10 @@
  * @fileoverview Disallow variable declarations from shadowing variables declared in the outer scope.
  * @author Armano
  */
-'use strict'
+import utils from '../utils/index.js'
+import type { GroupName } from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').GroupName} GroupName
- */
-
-/** @type {GroupName[]} */
-const GROUP_NAMES = [
+const GROUP_NAMES: GroupName[] = [
   'props',
   'computed',
   'data',
@@ -20,15 +14,11 @@ const GROUP_NAMES = [
   'setup'
 ]
 
-/**
- * @param {RuleContext} context
- * @param {string} variableName
- */
-function isAllowedVarName(context, variableName) {
+function isAllowedVarName(context: RuleContext, variableName: string) {
   return context.options[0]?.allow?.includes(variableName) ?? false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -58,18 +48,14 @@ module.exports = {
         "Variable '{{name}}' is already declared in the upper scope."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Set<string>} */
-    const jsVars = new Set()
+  create(context: RuleContext) {
+    const jsVars = new Set<string>()
 
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} parent
-     * @property {Identifier[]} nodes
-     */
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+    interface ScopeStack {
+      parent: ScopeStack | null
+      nodes: Identifier[]
+    }
+    let scopeStack: ScopeStack | null = null
 
     return utils.compositingVisitors(
       utils.isScriptSetup(context)
@@ -114,8 +100,7 @@ module.exports = {
         }
       }),
       utils.defineTemplateBodyVisitor(context, {
-        /** @param {VElement} node */
-        VElement(node) {
+        VElement(node: VElement) {
           scopeStack = {
             parent: scopeStack,
             nodes: scopeStack ? [...scopeStack.nodes] : []

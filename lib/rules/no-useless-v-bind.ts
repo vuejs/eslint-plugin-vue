@@ -2,34 +2,18 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
+const DOUBLE_QUOTES_RE = /"/gu
+const SINGLE_QUOTES_RE = /'/gu
 
-/**
- * Strip quotes string
- * @param {string} text
- * @returns {string|null}
- */
-function stripQuotesForHTML(text) {
-  if (['"', "'", '`'].includes(text[0]) && text[0] === text.at(-1)) {
-    return text.slice(1, -1)
-  }
-
-  const re =
-    /^(?:&(?:quot|apos|#\d+|#x[\da-f]+);|["'`])([\s\S]*)(?:&(?:quot|apos|#\d+|#x[\da-f]+);|["'`])$/u.exec(
-      text
-    )
-  return re ? re[1] : null
-}
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'disallow unnecessary mustache interpolations',
+      description: 'disallow unnecessary `v-bind` directives',
       categories: undefined,
-      url: 'https://eslint.vuejs.org/rules/no-useless-mustaches.html'
+      url: 'https://eslint.vuejs.org/rules/no-useless-v-bind.html'
     },
     fixable: 'code',
     schema: [
@@ -47,12 +31,10 @@ module.exports = {
       }
     ],
     messages: {
-      unexpected:
-        'Unexpected mustache interpolation with a string literal value.'
+      unexpected: 'Unexpected `v-bind` with a string literal value.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const opts = context.options[0] || {}
     const ignoreIncludesComment = opts.ignoreIncludesComment
     const ignoreStringEscape = opts.ignoreStringEscape
@@ -60,17 +42,18 @@ module.exports = {
 
     /**
      * Report if the value expression is string literals
-     * @param {VExpressionContainer} node the node to check
      */
-    function verify(node) {
-      const { expression } = node
+    function verify(node: VDirective) {
+      const { value, key } = node
+      if (!value || key.modifiers.length > 0) {
+        return
+      }
+      const { expression } = value
       if (!expression) {
         return
       }
-      /** @type {string} */
-      let strValue
-      /** @type {string} */
-      let rawValue
+      let strValue: string
+      let rawValue: string
       if (expression.type === 'Literal') {
         if (typeof expression.value !== 'string') {
           return
@@ -86,9 +69,10 @@ module.exports = {
       } else {
         return
       }
+
       const tokenStore = sourceCode.parserServices.getTemplateBodyTokenStore()
       const hasComment = tokenStore
-        .getTokens(node, { includeComments: true })
+        .getTokens(value, { includeComments: true })
         .some((t) => t.type === 'Block' || t.type === 'Line')
       if (ignoreIncludesComment && hasComment) {
         return
@@ -122,28 +106,42 @@ module.exports = {
       context.report({
         node,
         messageId: 'unexpected',
-        fix(fixer) {
+        *fix(fixer) {
           if (hasComment || hasEscape) {
             // cannot fix
-            return null
+            return
           }
-          const text = stripQuotesForHTML(sourceCode.getText(expression))
-          if (text == null || text.includes('\n') || /^\s|\s$/u.test(text)) {
-            // It doesn't autofix because another rule like indent or eol space might remove spaces.
-            return null
-          }
-          const escaped = text.replaceAll('<', '&lt;')
+          const text = sourceCode.getText(value)
+          const quoteChar = text[0]
 
-          return fixer.replaceText(
-            node,
-            escaped.replaceAll(/\\([\S\s])/g, '$1')
-          )
+          const isShorthand = key.name.rawName === ':'
+          const keyDirectiveRange: Range = [
+            key.name.range[0],
+            key.name.range[1] + (isShorthand ? 0 : 1)
+          ]
+
+          yield fixer.removeRange(keyDirectiveRange)
+
+          let attrValue
+          if (quoteChar === '"') {
+            attrValue = strValue.replaceAll(DOUBLE_QUOTES_RE, '&quot;')
+            attrValue = quoteChar + attrValue + quoteChar
+          } else if (quoteChar === "'") {
+            attrValue = strValue.replaceAll(SINGLE_QUOTES_RE, '&apos;')
+            attrValue = quoteChar + attrValue + quoteChar
+          } else {
+            attrValue = strValue
+              .replaceAll(DOUBLE_QUOTES_RE, '&quot;')
+              .replaceAll(SINGLE_QUOTES_RE, '&apos;')
+          }
+          yield fixer.replaceText(value, attrValue)
         }
       })
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      'VElement > VExpressionContainer': verify
+      "VAttribute[directive=true][key.name.name='bind'][key.argument!=null]":
+        verify
     })
   }
 }

@@ -2,13 +2,11 @@
  * @author Przemyslaw Falowski (@przemkow)
  * @fileoverview This rule checks whether v-model used on the component do not have custom modifiers
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 const VALID_MODIFIERS = new Set(['lazy', 'number', 'trim'])
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -23,10 +21,9 @@ module.exports = {
         "'v-model' directives don't support the modifier '{{name}}'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      "VAttribute[directive=true][key.name.name='model']"(node) {
+      "VAttribute[directive=true][key.name.name='model']"(node: VDirective) {
         const element = node.parent.parent
 
         if (utils.isCustomComponent(element)) {

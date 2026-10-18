@@ -3,11 +3,9 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -22,14 +20,12 @@ module.exports = {
       expectedLonghand: "Expected 'v-on:' instead of '@'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const shouldPreferShorthand = context.options[0] !== 'longform'
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
       "VAttribute[directive=true][key.name.name='on'][key.argument!=null]"(
-        node
+        node: VDirective
       ) {
         const isShorthand = node.key.name.rawName === '@'
         if (isShorthand === shouldPreferShorthand) {
