@@ -3,17 +3,12 @@
  * This rule is based on X_V_FOR_TEMPLATE_KEY_PLACEMENT error of Vue 3.
  * see https://github.com/vuejs/vue-next/blob/b0d01e9db9ffe5781cce5a2d62c8552db3d615b0/packages/compiler-core/src/errors.ts#L70
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Check whether the given attribute is using the variables which are defined by `v-for` directives.
- * @param {VDirective} vFor The attribute node of `v-for` to check.
- * @param {VDirective} vBindKey The attribute node of `v-bind:key` to check.
- * @returns {boolean} `true` if the node is using the variables which are defined by `v-for` directives.
  */
-function isUsingIterationVar(vFor, vBindKey) {
+function isUsingIterationVar(vFor: VDirective, vBindKey: VDirective): boolean {
   if (vBindKey.value == null) {
     return false
   }
@@ -27,7 +22,7 @@ function isUsingIterationVar(vFor, vBindKey) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -43,12 +38,10 @@ module.exports = {
         '`<template v-for>` key should be placed on the `<template>` tag.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
       "VElement[name='template'] > VStartTag > VAttribute[directive=true][key.name.name='for']"(
-        node
+        node: VDirective
       ) {
         const template = node.parent.parent
         const vBindKeyOnTemplate = utils.getDirective(template, 'bind', 'key')

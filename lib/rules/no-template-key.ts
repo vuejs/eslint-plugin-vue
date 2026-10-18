@@ -3,11 +3,9 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -22,11 +20,9 @@ module.exports = {
         "'<template>' cannot be keyed. Place the key on real elements instead."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VElement} node */
-      "VElement[name='template']"(node) {
+      "VElement[name='template']"(node: VElement) {
         const keyNode =
           utils.getAttribute(node, 'key') ||
           utils.getDirective(node, 'bind', 'key')
