@@ -20,15 +20,13 @@ function isSlotTemplate(element: VElement): boolean {
   return element.startTag.attributes.some((attr) => {
     if (attr.directive) {
       const name = attr.key.name.name
-      if (SLOT_DIRECTIVES.has(name)) {
-        return true
-      }
-      // `:slot="..."` (deprecated in Vue.js 2.6)
       return (
-        name === 'bind' &&
-        attr.key.argument != null &&
-        attr.key.argument.type === 'VIdentifier' &&
-        attr.key.argument.name === 'slot'
+        SLOT_DIRECTIVES.has(name) ||
+        // `:slot="..."` (deprecated in Vue.js 2.6)
+        (name === 'bind' &&
+          attr.key.argument != null &&
+          attr.key.argument.type === 'VIdentifier' &&
+          attr.key.argument.name === 'slot')
       )
     }
     // `slot="..."` (deprecated in Vue.js 2.6)
