@@ -3,36 +3,31 @@
  */
 /* eslint-disable eslint-plugin/report-message-format */
 
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {object} RuleAndLocation
- * @property {string} RuleAndLocation.ruleId
- * @property {number} RuleAndLocation.index
- * @property {string} [RuleAndLocation.key]
- */
+interface RuleAndLocation {
+  ruleId: string
+  index: number
+  key?: string
+}
 
 const COMMENT_DIRECTIVE_B = /^\s*(eslint-(?:en|dis)able)(?:\s+|$)/
 const COMMENT_DIRECTIVE_L = /^\s*(eslint-disable(?:-next)?-line)(?:\s+|$)/
 
 /**
  * Remove the ignored part from a given directive comment and trim it.
- * @param {string} value The comment text to strip.
- * @returns {string} The stripped text.
  */
-function stripDirectiveComment(value) {
+function stripDirectiveComment(value: string): string {
   return value.split(/\s-{2,}\s/u, 1)[0]
 }
 
 /**
  * Parse a given comment.
- * @param {RegExp} pattern The RegExp pattern to parse.
- * @param {string} comment The comment value to parse.
- * @returns {({type:string,rules:RuleAndLocation[]})|null} The parsing result.
  */
-function parse(pattern, comment) {
+function parse(
+  pattern: RegExp,
+  comment: string
+): { type: string; rules: RuleAndLocation[] } | null {
   const text = stripDirectiveComment(comment)
   const match = pattern.exec(text)
   if (match == null) {
@@ -41,8 +36,7 @@ function parse(pattern, comment) {
 
   const type = match[1]
 
-  /** @type {RuleAndLocation[]} */
-  const rules = []
+  const rules: RuleAndLocation[] = []
 
   const rulesRe = /([^\s,]+)[\s,]*/g
   let startIndex = match[0].length
@@ -63,13 +57,13 @@ function parse(pattern, comment) {
 
 /**
  * Enable rules.
- * @param {RuleContext} context The rule context.
- * @param {{line:number,column:number}} loc The location information to enable.
- * @param { 'block' | 'line' } group The group to enable.
- * @param {string | null} rule The rule ID to enable.
- * @returns {void}
  */
-function enable(context, loc, group, rule) {
+function enable(
+  context: RuleContext,
+  loc: { line: number; column: number },
+  group: 'block' | 'line',
+  rule: string | null
+): void {
   if (rule) {
     context.report({
       loc,
@@ -86,14 +80,14 @@ function enable(context, loc, group, rule) {
 
 /**
  * Disable rules.
- * @param {RuleContext} context The rule context.
- * @param {{line:number,column:number}} loc The location information to disable.
- * @param { 'block' | 'line' } group The group to disable.
- * @param {string | null} rule The rule ID to disable.
- * @param {string} key The disable directive key.
- * @returns {void}
  */
-function disable(context, loc, group, rule, key) {
+function disable(
+  context: RuleContext,
+  loc: { line: number; column: number },
+  group: 'block' | 'line',
+  rule: string | null,
+  key: string
+): void {
   if (rule) {
     context.report({
       loc,
@@ -112,18 +106,18 @@ function disable(context, loc, group, rule, key) {
 /**
  * Process a given comment token.
  * If the comment is `eslint-disable` or `eslint-enable` then it reports the comment.
- * @param {RuleContext} context The rule context.
- * @param {Token} comment The comment token to process.
- * @param {boolean} reportUnusedDisableDirectives To report unused eslint-disable comments.
- * @returns {void}
  */
-function processBlock(context, comment, reportUnusedDisableDirectives) {
+function processBlock(
+  context: RuleContext,
+  comment: Token,
+  shouldReportUnusedDisableDirectives: boolean
+): void {
   const parsed = parse(COMMENT_DIRECTIVE_B, comment.value)
   if (parsed === null) return
 
   if (parsed.type === 'eslint-disable') {
     if (parsed.rules.length > 0) {
-      const rules = reportUnusedDisableDirectives
+      const rules = shouldReportUnusedDisableDirectives
         ? reportUnusedRules(context, comment, parsed.type, parsed.rules)
         : parsed.rules
       for (const rule of rules) {
@@ -136,7 +130,7 @@ function processBlock(context, comment, reportUnusedDisableDirectives) {
         )
       }
     } else {
-      const key = reportUnusedDisableDirectives
+      const key = shouldReportUnusedDisableDirectives
         ? reportUnused(context, comment, parsed.type)
         : ''
       disable(context, comment.loc.start, 'block', null, key)
@@ -155,12 +149,12 @@ function processBlock(context, comment, reportUnusedDisableDirectives) {
 /**
  * Process a given comment token.
  * If the comment is `eslint-disable-line` or `eslint-disable-next-line` then it reports the comment.
- * @param {RuleContext} context The rule context.
- * @param {Token} comment The comment token to process.
- * @param {boolean} reportUnusedDisableDirectives To report unused eslint-disable comments.
- * @returns {void}
  */
-function processLine(context, comment, reportUnusedDisableDirectives) {
+function processLine(
+  context: RuleContext,
+  comment: Token,
+  shouldReportUnusedDisableDirectives: boolean
+): void {
   const parsed = parse(COMMENT_DIRECTIVE_L, comment.value)
   if (parsed == null || comment.loc.start.line !== comment.loc.end.line) {
     return
@@ -170,7 +164,7 @@ function processLine(context, comment, reportUnusedDisableDirectives) {
     comment.loc.start.line + (parsed.type === 'eslint-disable-line' ? 0 : 1)
   const column = -1
   if (parsed.rules.length > 0) {
-    const rules = reportUnusedDisableDirectives
+    const rules = shouldReportUnusedDisableDirectives
       ? reportUnusedRules(context, comment, parsed.type, parsed.rules)
       : parsed.rules
     for (const rule of rules) {
@@ -178,7 +172,7 @@ function processLine(context, comment, reportUnusedDisableDirectives) {
       enable(context, { line: line + 1, column }, 'line', rule.ruleId)
     }
   } else {
-    const key = reportUnusedDisableDirectives
+    const key = shouldReportUnusedDisableDirectives
       ? reportUnused(context, comment, parsed.type)
       : ''
     disable(context, { line, column }, 'line', null, key)
@@ -189,12 +183,12 @@ function processLine(context, comment, reportUnusedDisableDirectives) {
 /**
  * Reports unused disable directive.
  * Do not check the use of directives here. Filter the directives used with postprocess.
- * @param {RuleContext} context The rule context.
- * @param {Token} comment The comment token to report.
- * @param {string} kind The comment directive kind.
- * @returns {string} The report key
  */
-function reportUnused(context, comment, kind) {
+function reportUnused(
+  context: RuleContext,
+  comment: Token,
+  kind: string
+): string {
   const loc = comment.loc
 
   context.report({
@@ -209,13 +203,13 @@ function reportUnused(context, comment, kind) {
 /**
  * Reports unused disable directive rules.
  * Do not check the use of directives here. Filter the directives used with postprocess.
- * @param {RuleContext} context The rule context.
- * @param {Token} comment The comment token to report.
- * @param {string} kind The comment directive kind.
- * @param {RuleAndLocation[]} rules To report rule.
- * @returns { { ruleId: string, key: string }[] }
  */
-function reportUnusedRules(context, comment, kind, rules) {
+function reportUnusedRules(
+  context: RuleContext,
+  comment: Token,
+  kind: string,
+  rules: RuleAndLocation[]
+): { ruleId: string; key: string }[] {
   const sourceCode = context.sourceCode
   const commentStart = comment.range[0] + 4 /* <!-- */
 
@@ -240,27 +234,25 @@ function reportUnusedRules(context, comment, kind, rules) {
 
 /**
  * Gets the key of location
- * @param {Position} location The location
- * @returns {string} The key
  */
-function locToKey(location) {
+function locToKey(location: Position): string {
   return `line:${location.line},column${location.column}`
 }
 
 /**
  * Extracts the top-level elements in document fragment.
- * @param {VDocumentFragment} documentFragment The document fragment.
- * @returns {VElement[]} The top-level elements
  */
-function extractTopLevelHTMLElements(documentFragment) {
+function extractTopLevelHTMLElements(
+  documentFragment: VDocumentFragment
+): VElement[] {
   return documentFragment.children.filter(utils.isVElement)
 }
 /**
  * Extracts the top-level comments in document fragment.
- * @param {VDocumentFragment} documentFragment The document fragment.
- * @returns {Token[]} The top-level comments
  */
-function extractTopLevelDocumentFragmentComments(documentFragment) {
+function extractTopLevelDocumentFragmentComments(
+  documentFragment: VDocumentFragment
+): Token[] {
   const elements = extractTopLevelHTMLElements(documentFragment)
 
   return documentFragment.comments.filter((comment) =>
@@ -272,7 +264,7 @@ function extractTopLevelDocumentFragmentComments(documentFragment) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -307,14 +299,10 @@ module.exports = {
         "Unused {{kind}} directive (no problems were reported from '{{rule}}')."
     }
   },
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const options = context.options[0] || {}
-    /** @type {boolean} */
-    const reportUnusedDisableDirectives = options.reportUnusedDisableDirectives
+    const shouldReportUnusedDisableDirectives: boolean =
+      options.reportUnusedDisableDirectives
     const sourceCode = context.sourceCode
     const documentFragment =
       sourceCode.parserServices.getDocumentFragment &&
@@ -325,8 +313,8 @@ module.exports = {
         if (node.templateBody) {
           // Send directives to the post-process.
           for (const comment of node.templateBody.comments) {
-            processBlock(context, comment, reportUnusedDisableDirectives)
-            processLine(context, comment, reportUnusedDisableDirectives)
+            processBlock(context, comment, shouldReportUnusedDisableDirectives)
+            processLine(context, comment, shouldReportUnusedDisableDirectives)
           }
 
           // Send a clear mark to the post-process.
@@ -343,8 +331,8 @@ module.exports = {
         for (const comment of extractTopLevelDocumentFragmentComments(
           documentFragment
         )) {
-          processBlock(context, comment, reportUnusedDisableDirectives)
-          processLine(context, comment, reportUnusedDisableDirectives)
+          processBlock(context, comment, shouldReportUnusedDisableDirectives)
+          processLine(context, comment, shouldReportUnusedDisableDirectives)
         }
 
         // Send a clear mark to the post-process.
