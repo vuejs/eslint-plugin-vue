@@ -2,15 +2,12 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-const { ReferenceTracker } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
+import { ReferenceTracker } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
 
-/**
- * @param {CallExpression | ChainExpression} node
- * @returns {boolean}
- */
-function isMaybeUsedStopHandle(node) {
+function isMaybeUsedStopHandle(
+  node: CallExpression | ChainExpression
+): boolean {
   const parent = node.parent
   if (parent) {
     switch (parent.type) {
@@ -42,7 +39,7 @@ function isMaybeUsedStopHandle(node) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -56,29 +53,27 @@ module.exports = {
       forbidden: '`watch` is forbidden after an `await` expression.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const watchCallNodes = new Set()
-    /**
-     * @typedef {object} SetupScopeData
-     * @property {boolean} afterAwait
-     * @property {[number,number]} range
-     */
-    /** @type {Map<FunctionExpression | ArrowFunctionExpression | FunctionDeclaration, SetupScopeData>} */
-    const setupScopes = new Map()
+    interface SetupScopeData {
+      afterAwait: boolean
+      range: [number, number]
+    }
+    const setupScopes = new Map<
+      FunctionExpression | ArrowFunctionExpression | FunctionDeclaration,
+      SetupScopeData
+    >()
 
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionExpression | ArrowFunctionExpression | FunctionDeclaration} scopeNode
-     */
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+    interface ScopeStack {
+      upper: ScopeStack | null
+      scopeNode:
+        FunctionExpression | ArrowFunctionExpression | FunctionDeclaration
+    }
+    let scopeStack: ScopeStack | null = null
 
     return utils.compositingVisitors(
       {
-        /** @param {Program} program */
-        Program(program) {
+        Program(program: Program) {
           const tracker = new ReferenceTracker(utils.getScope(context, program))
 
           const watchRefs = utils.iterateReferencesTraceMap(tracker, {
@@ -101,8 +96,10 @@ module.exports = {
             range: node.range
           })
         },
-        /** @param {FunctionExpression | ArrowFunctionExpression | FunctionDeclaration} node */
-        ':function'(node) {
+        ':function'(
+          node:
+            FunctionExpression | ArrowFunctionExpression | FunctionDeclaration
+        ) {
           scopeStack = {
             upper: scopeStack,
             scopeNode: node
@@ -111,8 +108,7 @@ module.exports = {
         ':function:exit'() {
           scopeStack &&= scopeStack.upper
         },
-        /** @param {AwaitExpression} node */
-        AwaitExpression(node) {
+        AwaitExpression(node: AwaitExpression) {
           if (!scopeStack) {
             return
           }
@@ -122,8 +118,7 @@ module.exports = {
           }
           setupScope.afterAwait = true
         },
-        /** @param {CallExpression} node */
-        CallExpression(node) {
+        CallExpression(node: CallExpression) {
           if (!scopeStack) {
             return
           }
