@@ -2,12 +2,10 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
 
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -27,17 +25,14 @@ module.exports = {
       typeArgs: '`defineOptions()` cannot accept type arguments.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const scriptSetup = utils.getScriptSetupElement(context)
     if (!scriptSetup) {
       return {}
     }
 
-    /** @type {Set<Expression | SpreadElement>} */
-    const optionsDefExpressions = new Set()
-    /** @type {CallExpression[]} */
-    const defineOptionsNodes = []
+    const optionsDefExpressions = new Set<Expression | SpreadElement>()
+    const defineOptionsNodes: CallExpression[] = []
 
     return utils.compositingVisitors(
       utils.defineScriptSetupVisitor(context, {

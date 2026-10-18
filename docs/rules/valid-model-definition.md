@@ -124,5 +124,5 @@ This rule was introduced in eslint-plugin-vue v9.0.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-model-definition.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-model-definition.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-model-definition.test.ts)
