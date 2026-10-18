@@ -2,10 +2,10 @@
  * @author kevsommer Kevin Sommer
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-const utils = require('../utils')
+import utils from '../utils/index.js'
+import type { ComponentProp } from '../utils/index.js'
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -32,16 +32,13 @@ module.exports = {
         'Component has too many props ({{propCount}}). Maximum allowed is {{limit}}.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Record<string, number>} */
-    const option = context.options[0] || {}
+  create(context: RuleContext) {
+    const option: Record<string, number> = context.options[0] || {}
 
-    /**
-     * @param {import('../utils').ComponentProp[]} props
-     * @param {CallExpression | Property} node
-     */
-    function checkMaxNumberOfProps(props, node) {
+    function checkMaxNumberOfProps(
+      props: ComponentProp[],
+      node: CallExpression | Property
+    ) {
       const uniqueProps = new Set(props.map((prop) => prop.propName))
       const propCount = uniqueProps.size
       if (propCount > option.maxProps && props[0].node) {
@@ -59,8 +56,7 @@ module.exports = {
     return utils.compositingVisitors(
       utils.executeOnVue(context, (node) => {
         const propsNode = node.properties.find(
-          /** @returns {p is Property} */
-          (p) =>
+          (p): p is Property =>
             p.type === 'Property' && utils.getStaticPropertyName(p) === 'props'
         )
 

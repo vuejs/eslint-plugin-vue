@@ -2,38 +2,33 @@
  * @fileoverview Require or disallow padding lines between blocks
  * @author Yosuke Ota
  */
-'use strict'
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Split the source code into multiple lines based on the line delimiters.
- * @param {string} text Source code as a string.
- * @returns {string[]} Array of source code lines.
  */
-function splitLines(text) {
+function splitLines(text: string): string[] {
   return text.split(/\r\n|[\r\n\u{2028}\u{2029}]/gu)
 }
 
 /**
  * Check and report blocks for `never` configuration.
  * This autofix removes blank lines between the given 2 blocks.
- * @param {RuleContext} context The rule context to report.
- * @param {VElement} prevBlock The previous block to check.
- * @param {VElement} nextBlock The next block to check.
- * @param {Token[]} betweenTokens The array of tokens between blocks.
- * @returns {void}
  * @private
  */
-function verifyForNever(context, prevBlock, nextBlock, betweenTokens) {
+function verifyForNever(
+  context: RuleContext,
+  prevBlock: VElement,
+  nextBlock: VElement,
+  betweenTokens: Token[]
+): void {
   if (prevBlock.loc.end.line === nextBlock.loc.start.line) {
     // same line
     return
   }
   const tokenOrNodes = [...betweenTokens, nextBlock]
-  /** @type {ASTNode | Token} */
-  let prev = prevBlock
-  /** @type {[ASTNode | Token, ASTNode | Token][]} */
-  const paddingLines = []
+  let prev: ASTNode | Token = prevBlock
+  const paddingLines: [ASTNode | Token, ASTNode | Token][] = []
   for (const tokenOrNode of tokenOrNodes) {
     const numOfLineBreaks = tokenOrNode.loc.start.line - prev.loc.end.line
     if (numOfLineBreaks > 1) {
@@ -63,19 +58,17 @@ function verifyForNever(context, prevBlock, nextBlock, betweenTokens) {
 /**
  * Check and report blocks for `always` configuration.
  * This autofix inserts a blank line between the given 2 blocks.
- * @param {RuleContext} context The rule context to report.
- * @param {VElement} prevBlock The previous block to check.
- * @param {VElement} nextBlock The next block to check.
- * @param {Token[]} betweenTokens The array of tokens between blocks.
- * @returns {void}
  * @private
  */
-function verifyForAlways(context, prevBlock, nextBlock, betweenTokens) {
+function verifyForAlways(
+  context: RuleContext,
+  prevBlock: VElement,
+  nextBlock: VElement,
+  betweenTokens: Token[]
+): void {
   const tokenOrNodes = [...betweenTokens, nextBlock]
-  /** @type {ASTNode | Token} */
-  let prev = prevBlock
-  /** @type {ASTNode | Token | undefined} */
-  let linebreak
+  let prev: ASTNode | Token = prevBlock
+  let linebreak: ASTNode | Token | undefined
   for (const tokenOrNode of tokenOrNodes) {
     const numOfLineBreaks = tokenOrNode.loc.start.line - prev.loc.end.line
     if (numOfLineBreaks > 1) {
@@ -110,7 +103,7 @@ const PaddingTypes = {
   always: { verify: verifyForAlways }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -130,8 +123,7 @@ module.exports = {
       always: 'Expected blank line before this block.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     if (!sourceCode.parserServices.getDocumentFragment) {
       return {}
@@ -142,24 +134,15 @@ module.exports = {
     }
     const documentFragment = df
 
-    /** @type {'always' | 'never'} */
-    const option = context.options[0] || 'always'
+    const option: 'always' | 'never' = context.options[0] || 'always'
     const paddingType = PaddingTypes[option]
 
-    /** @type {Token[]} */
-    let tokens
-    /**
-     * @returns {VElement[]}
-     */
-    function getTopLevelHTMLElements() {
+    let tokens: Token[]
+    function getTopLevelHTMLElements(): VElement[] {
       return documentFragment.children.filter(utils.isVElement)
     }
 
-    /**
-     * @param {VElement} prev
-     * @param {VElement} next
-     */
-    function getTokenAndCommentsBetween(prev, next) {
+    function getTokenAndCommentsBetween(prev: VElement, next: VElement) {
       // When there is no <template>, tokenStore.getTokensBetween cannot be used.
       if (!tokens) {
         tokens = [
@@ -191,8 +174,7 @@ module.exports = {
       context,
       {},
       {
-        /** @param {Program} node */
-        Program(node) {
+        Program(node: Program) {
           if (utils.hasInvalidEOF(node)) {
             return
           }

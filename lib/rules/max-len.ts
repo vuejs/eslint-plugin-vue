@@ -2,9 +2,7 @@
  * @author Yosuke Ota
  * @fileoverview Rule to check for max length on a line of Vue file.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 const OPTIONS_SCHEMA = {
   type: 'object',
@@ -68,13 +66,10 @@ const OPTIONS_OR_INTEGER_SCHEMA = {
 
 /**
  * Computes the length of a line that may contain tabs. The width of each
- * tab will be the number of spaces to the next tab stop.
- * @param {string} line The line.
- * @param {number} tabWidth The width of each tab stop in spaces.
- * @returns {number} The computed line length.
- * @private
+ * tab will be the number of spaces to the next tab stop, which are `tabWidth`
+ * spaces apart.
  */
-function computeLineLength(line, tabWidth) {
+function computeLineLength(line: string, tabWidth: number): number {
   let extraCharacterCount = 0
 
   const re = /\t/gu
@@ -92,13 +87,13 @@ function computeLineLength(line, tabWidth) {
 
 /**
  * Tells if a given comment is trailing: it starts on the current line and
- * extends to or past the end of the current line.
- * @param {string} line The source line we want to check for a trailing comment on
- * @param {number} lineNumber The one-indexed line number for line
- * @param {Token | null} comment The comment to inspect
- * @returns {comment is Token} If the comment is trailing on the given line
+ * extends to or past the end of the current line. `lineNumber` is one-indexed.
  */
-function isTrailingComment(line, lineNumber, comment) {
+function isTrailingComment(
+  line: string,
+  lineNumber: number,
+  comment: Token | null
+): comment is Token {
   return Boolean(
     comment &&
     comment.loc.start.line === lineNumber &&
@@ -109,13 +104,13 @@ function isTrailingComment(line, lineNumber, comment) {
 }
 
 /**
- * Tells if a comment encompasses the entire line.
- * @param {string} line The source line with a trailing comment
- * @param {number} lineNumber The one-indexed line number this is on
- * @param {Token | null} comment The comment to remove
- * @returns {boolean} If the comment covers the entire line
+ * Tells if a comment encompasses the entire line. `lineNumber` is one-indexed.
  */
-function isFullLineComment(line, lineNumber, comment) {
+function isFullLineComment(
+  line: string,
+  lineNumber: number,
+  comment: Token | null
+): boolean {
   if (!comment) {
     return false
   }
@@ -135,11 +130,8 @@ function isFullLineComment(line, lineNumber, comment) {
 /**
  * Gets the line after the comment and any remaining trailing whitespace is
  * stripped.
- * @param {string} line The source line with a trailing comment
- * @param {Token} comment The comment to remove
- * @returns {string} Line without comment and trailing whitepace
  */
-function stripTrailingComment(line, comment) {
+function stripTrailingComment(line: string, comment: Token): string {
   // loc.column is zero-indexed
   return line.slice(0, comment.loc.start.column).replace(/\s+$/u, '')
 }
@@ -147,13 +139,10 @@ function stripTrailingComment(line, comment) {
 /**
  * Group AST nodes by line number, both start and end.
  *
- * @param {Token[]} nodes the AST nodes in question
- * @returns { { [key: number]: Token[] } } the grouped nodes
  * @private
  */
-function groupByLineNumber(nodes) {
-  /** @type { { [key: number]: Token[] } } */
-  const grouped = {}
+function groupByLineNumber(nodes: Token[]): { [key: number]: Token[] } {
+  const grouped: { [key: number]: Token[] } = {}
   for (const node of nodes) {
     for (let i = node.loc.start.line; i <= node.loc.end.line; ++i) {
       if (!Array.isArray(grouped[i])) {
@@ -165,7 +154,7 @@ function groupByLineNumber(nodes) {
   return grouped
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
 
@@ -190,11 +179,7 @@ module.exports = {
         'This line has a comment length of {{lineLength}}. Maximum allowed is {{maxCommentLength}}.'
     }
   },
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     /*
      * Inspired by https://tools.ietf.org/html/rfc3986#appendix-B, however:
      * - They're matching an entire string that we know is a URI
@@ -206,12 +191,9 @@ module.exports = {
     const URL_REGEXP = /[^:/?#]:\/\/[^?#]/u
 
     const sourceCode = context.sourceCode
-    /** @type {Token[]} */
-    const tokens = []
-    /** @type {(HTMLComment | HTMLBogusComment | Comment)[]} */
-    const comments = []
-    /** @type {VLiteral[]} */
-    const htmlAttributeValues = []
+    const tokens: Token[] = []
+    const comments: (HTMLComment | HTMLBogusComment | Comment)[] = []
+    const htmlAttributeValues: VLiteral[] = []
 
     // The options object must be the last option specified…
     const options = Object.assign({}, context.options.at(-1))
@@ -225,12 +207,11 @@ module.exports = {
     if (typeof context.options[1] === 'number') {
       options.tabWidth = context.options[1]
     }
-    /** @type {number} */
-    const scriptMaxLength = typeof options.code === 'number' ? options.code : 80
-    /** @type {number} */
-    const tabWidth = typeof options.tabWidth === 'number' ? options.tabWidth : 2 // default value of `vue/html-indent`
-    /** @type {number} */
-    const templateMaxLength =
+    const scriptMaxLength: number =
+      typeof options.code === 'number' ? options.code : 80
+    const tabWidth: number =
+      typeof options.tabWidth === 'number' ? options.tabWidth : 2 // default value of `vue/html-indent`
+    const templateMaxLength: number =
       typeof options.template === 'number' ? options.template : scriptMaxLength
     const shouldIgnoreComments = Boolean(options.ignoreComments)
     const shouldIgnoreStrings = Boolean(options.ignoreStrings)
@@ -243,10 +224,8 @@ module.exports = {
       options.ignoreHTMLAttributeValues
     )
     const shouldIgnoreHTMLTextContents = Boolean(options.ignoreHTMLTextContents)
-    /** @type {number} */
-    const maxCommentLength = options.comments
-    /** @type {RegExp} */
-    let ignorePattern = options.ignorePattern || null
+    const maxCommentLength: number = options.comments
+    let ignorePattern: RegExp = options.ignorePattern || null
 
     if (ignorePattern) {
       ignorePattern = new RegExp(ignorePattern, 'u')
@@ -254,10 +233,8 @@ module.exports = {
 
     /**
      * Retrieves an array containing all strings (" or ') in the source code.
-     *
-     * @returns {Token[]} An array of string nodes.
      */
-    function getAllStrings() {
+    function getAllStrings(): Token[] {
       return tokens.filter(
         (token) =>
           token.type === 'String' ||
@@ -269,38 +246,30 @@ module.exports = {
 
     /**
      * Retrieves an array containing all template literals in the source code.
-     *
-     * @returns {Token[]} An array of template literal nodes.
      */
-    function getAllTemplateLiterals() {
+    function getAllTemplateLiterals(): Token[] {
       return tokens.filter((token) => token.type === 'Template')
     }
 
     /**
      * Retrieves an array containing all RegExp literals in the source code.
-     *
-     * @returns {Token[]} An array of RegExp literal nodes.
      */
-    function getAllRegExpLiterals() {
+    function getAllRegExpLiterals(): Token[] {
       return tokens.filter((token) => token.type === 'RegularExpression')
     }
 
     /**
      * Retrieves an array containing all HTML texts in the source code.
-     *
-     * @returns {Token[]} An array of HTML text nodes.
      */
-    function getAllHTMLTextContents() {
+    function getAllHTMLTextContents(): Token[] {
       return tokens.filter((token) => token.type === 'HTMLText')
     }
 
     /**
      * Check the program for max length
-     * @param {Program} node Node to examine
-     * @returns {void}
      * @private
      */
-    function checkProgramForMaxLength(node) {
+    function checkProgramForMaxLength(node: Program): void {
       const programNode = node
       const templateBody = node.templateBody
 
@@ -341,8 +310,7 @@ module.exports = {
         }
       }
 
-      /** @type {Range | undefined} */
-      let scriptLinesRange
+      let scriptLinesRange: Range | undefined
       if (scriptTokens.length > 0) {
         scriptLinesRange =
           scriptComments.length > 0
@@ -352,18 +320,18 @@ module.exports = {
                   scriptComments[0].loc.start.line
                 ),
                 Math.max(
-                  /** @type {Token} */ (scriptTokens.at(-1)).loc.end.line,
-                  /** @type {Comment} */ (scriptComments.at(-1)).loc.end.line
+                  scriptTokens.at(-1)!.loc.end.line,
+                  scriptComments.at(-1)!.loc.end.line
                 )
               ]
             : [
                 scriptTokens[0].loc.start.line,
-                /** @type {Token} */ (scriptTokens.at(-1)).loc.end.line
+                scriptTokens.at(-1)!.loc.end.line
               ]
       } else if (scriptComments.length > 0) {
         scriptLinesRange = [
           scriptComments[0].loc.start.line,
-          /** @type {Comment} */ (scriptComments.at(-1)).loc.end.line
+          scriptComments.at(-1)!.loc.end.line
         ]
       }
       const templateLinesRange = templateBody && [
@@ -503,8 +471,7 @@ module.exports = {
 
     return utils.compositingVisitors(
       utils.defineTemplateBodyVisitor(context, {
-        /** @param {VLiteral} node */
-        'VAttribute[directive=false] > VLiteral'(node) {
+        'VAttribute[directive=false] > VLiteral'(node: VLiteral) {
           htmlAttributeValues.push(node)
         }
       }),

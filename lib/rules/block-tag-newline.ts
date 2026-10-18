@@ -2,28 +2,24 @@
  * @fileoverview Enforce line breaks style after opening and before closing block-level tags.
  * @author Yosuke Ota
  */
-'use strict'
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
-/**
- * @typedef { 'always' | 'never' | 'consistent' | 'ignore' } OptionType
- * @typedef { { singleline?: OptionType, multiline?: OptionType, maxEmptyLines?: number } } ContentsOptions
- * @typedef { ContentsOptions & { blocks?: { [element: string]: ContentsOptions } } } Options
- * @typedef { Required<ContentsOptions> } ArgsOptions
- */
+type OptionType = 'always' | 'never' | 'consistent' | 'ignore'
+interface ContentsOptions {
+  singleline?: OptionType
+  multiline?: OptionType
+  maxEmptyLines?: number
+}
+type Options = ContentsOptions & {
+  blocks?: { [element: string]: ContentsOptions }
+}
+type ArgsOptions = Required<ContentsOptions>
 
-/**
- * @param {string} text Source code as a string.
- * @returns {number}
- */
-function getLinebreakCount(text) {
+function getLinebreakCount(text: string): number {
   return text.split(/\r\n|[\r\n\u{2028}\u{2029}]/gu).length - 1
 }
 
-/**
- * @param {number} lineBreaks
- */
-function getPhrase(lineBreaks) {
+function getPhrase(lineBreaks: number) {
   switch (lineBreaks) {
     case 1: {
       return '1 line break'
@@ -35,7 +31,7 @@ function getPhrase(lineBreaks) {
 }
 
 const ENUM_OPTIONS = { enum: ['always', 'never', 'consistent', 'ignore'] }
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -82,8 +78,7 @@ module.exports = {
       missingClosingLinebreak: "A line break is required before '</{{tag}}>'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const df =
       sourceCode.parserServices.getDocumentFragment &&
@@ -92,21 +87,13 @@ module.exports = {
       return {}
     }
 
-    /**
-     * @param {VStartTag} startTag
-     * @param {string} beforeText
-     * @param {number} beforeLinebreakCount
-     * @param {'always' | 'never'} beforeOption
-     * @param {number} maxEmptyLines
-     * @returns {void}
-     */
     function verifyBeforeSpaces(
-      startTag,
-      beforeText,
-      beforeLinebreakCount,
-      beforeOption,
-      maxEmptyLines
-    ) {
+      startTag: VStartTag,
+      beforeText: string,
+      beforeLinebreakCount: number,
+      beforeOption: 'always' | 'never',
+      maxEmptyLines: number
+    ): void {
       if (beforeOption === 'always') {
         if (beforeLinebreakCount === 0) {
           context.report({
@@ -163,21 +150,13 @@ module.exports = {
         }
       }
     }
-    /**
-     * @param {VEndTag} endTag
-     * @param {string} afterText
-     * @param {number} afterLinebreakCount
-     * @param {'always' | 'never'} afterOption
-     * @param {number} maxEmptyLines
-     * @returns {void}
-     */
     function verifyAfterSpaces(
-      endTag,
-      afterText,
-      afterLinebreakCount,
-      afterOption,
-      maxEmptyLines
-    ) {
+      endTag: VEndTag,
+      afterText: string,
+      afterLinebreakCount: number,
+      afterOption: 'always' | 'never',
+      maxEmptyLines: number
+    ): void {
       if (afterOption === 'always') {
         if (afterLinebreakCount === 0) {
           context.report({
@@ -234,12 +213,7 @@ module.exports = {
         }
       }
     }
-    /**
-     * @param {VElement} element
-     * @param {ArgsOptions} options
-     * @returns {void}
-     */
-    function verifyElement(element, options) {
+    function verifyElement(element: VElement, options: ArgsOptions): void {
       const { startTag, endTag } = element
       if (endTag == null || startTag.selfClosing) {
         return
@@ -259,15 +233,13 @@ module.exports = {
       if (option === 'ignore') {
         return
       }
-      const beforeText = /** @type {RegExpExecArray} */ (/^\s*/u.exec(text))[0]
-      const afterText = /** @type {RegExpExecArray} */ (/\s*$/u.exec(text))[0]
+      const beforeText = /^\s*/u.exec(text)![0]
+      const afterText = /\s*$/u.exec(text)![0]
       const beforeLinebreakCount = getLinebreakCount(beforeText)
       const afterLinebreakCount = getLinebreakCount(afterText)
 
-      /** @type {'always' | 'never'} */
-      let beforeOption
-      /** @type {'always' | 'never'} */
-      let afterOption
+      let beforeOption: 'always' | 'never'
+      let afterOption: 'always' | 'never'
       if (option === 'always' || option === 'never') {
         beforeOption = option
         afterOption = option
@@ -299,18 +271,16 @@ module.exports = {
 
     /**
      * Normalizes a given option value.
-     * @param { Options | undefined } option An option value to parse.
-     * @returns { (element: VElement) => void } Verify function.
      */
-    function normalizeOptionValue(option) {
+    function normalizeOptionValue(
+      option: Options | undefined
+    ): (element: VElement) => void {
       if (!option) {
         return normalizeOptionValue({})
       }
 
-      /** @type {ContentsOptions} */
-      const contentsOptions = option
-      /** @type {ArgsOptions} */
-      const options = {
+      const contentsOptions: ContentsOptions = option
+      const options: ArgsOptions = {
         singleline: contentsOptions.singleline || 'consistent',
         multiline: contentsOptions.multiline || 'always',
         maxEmptyLines: contentsOptions.maxEmptyLines || 0
@@ -344,8 +314,7 @@ module.exports = {
       context,
       {},
       {
-        /** @param {Program} node */
-        Program(node) {
+        Program(node: Program) {
           if (utils.hasInvalidEOF(node)) {
             return
           }

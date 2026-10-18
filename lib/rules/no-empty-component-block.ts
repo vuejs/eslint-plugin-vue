@@ -2,15 +2,12 @@
  * @author tyankatsu <https://github.com/tyankatsu0105>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { isVElement } = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * check whether has attribute `src`
- * @param {VElement} componentBlock
  */
-function hasAttributeSrc(componentBlock) {
+function hasAttributeSrc(componentBlock: VElement) {
   const hasAttribute = componentBlock.startTag.attributes.length > 0
 
   const hasSrc = componentBlock.startTag.attributes.some(
@@ -26,9 +23,8 @@ function hasAttributeSrc(componentBlock) {
 
 /**
  * check whether value under the component block is only whitespaces or break lines
- * @param {VElement} componentBlock
  */
-function isValueOnlyWhiteSpacesOrLineBreaks(componentBlock) {
+function isValueOnlyWhiteSpacesOrLineBreaks(componentBlock: VElement) {
   return (
     componentBlock.children.length === 1 &&
     componentBlock.children[0].type === 'VText' &&
@@ -36,7 +32,7 @@ function isValueOnlyWhiteSpacesOrLineBreaks(componentBlock) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -52,11 +48,7 @@ module.exports = {
     }
   },
 
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const sourceCode = context.sourceCode
     if (!sourceCode.parserServices.getDocumentFragment) {
       return {}
@@ -66,7 +58,7 @@ module.exports = {
       return {}
     }
 
-    const componentBlocks = documentFragment.children.filter(isVElement)
+    const componentBlocks = documentFragment.children.filter(utils.isVElement)
 
     return {
       Program() {

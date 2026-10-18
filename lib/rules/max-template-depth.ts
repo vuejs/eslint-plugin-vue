@@ -2,9 +2,7 @@
  * @author kevsommer Kevin Sommer
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -31,15 +29,10 @@ module.exports = {
         'Element is nested too deeply (depth of {{depth}}, maximum allowed is {{limit}}).'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const option = context.options[0] || {}
 
-    /**
-     * @param {VElement} element
-     * @param {number} curDepth
-     */
-    function checkMaxDepth(element, curDepth) {
+    function checkMaxDepth(element: VElement, curDepth: number) {
       if (curDepth > option.maxDepth) {
         context.report({
           node: element,
@@ -63,8 +56,7 @@ module.exports = {
     }
 
     return {
-      /** @param {Program} program */
-      Program(program) {
+      Program(program: Program) {
         const element = program.templateBody
 
         if (element == null || element.type !== 'VElement') {
