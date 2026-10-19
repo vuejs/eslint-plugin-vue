@@ -42,13 +42,7 @@ function getAllowsLangPhrase(lang: Set<string>): string {
   }
 }
 
-/**
- * Normalizes the option of the given block.
- */
-function normalizeOption(
-  blockName: string,
-  option: UserBlockOptions
-): BlockOptions {
+function normalizeOption(option: UserBlockOptions): BlockOptions {
   let lang: Set<string>
 
   if (Array.isArray(option.lang)) {
@@ -59,28 +53,10 @@ function normalizeOption(
     lang = new Set()
   }
 
-  let hasDefault = false
-  const defaultLanguages = DEFAULT_LANGUAGES[blockName] || []
-  for (const def of defaultLanguages) {
-    if (!lang.has(def)) {
-      continue
-    }
-
-    lang.delete(def)
-    hasDefault = true
-  }
-  const isRequired = option.required === true
-  if (lang.size === 0) {
-    return {
-      lang,
-      allowNoLang: true,
-      required: isRequired
-    }
-  }
   return {
     lang,
-    allowNoLang: hasDefault || Boolean(option.allowNoLang),
-    required: isRequired
+    allowNoLang: lang.size === 0 || Boolean(option.allowNoLang),
+    required: Boolean(option.required)
   }
 }
 /**
@@ -95,7 +71,7 @@ function normalizeOptions(options: UserOptions): Options {
 
   for (const [blockName, value] of Object.entries(options)) {
     if (value) {
-      normalized[blockName] = normalizeOption(blockName, value)
+      normalized[blockName] = normalizeOption(value)
     }
   }
 
