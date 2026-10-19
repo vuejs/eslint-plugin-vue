@@ -96,7 +96,7 @@ function isSingleLine(element: VElement): boolean {
  * Match a selector string against an element.
  * Supports pseudo-classes `:single-line` and `:multi-line`.
  */
-function matchesTag(selector: string, element: VElement) {
+function matchesTag(selector: string, element: VElement): boolean {
   const colonIndex = selector.lastIndexOf(':')
 
   if (colonIndex > 0) {
@@ -123,7 +123,7 @@ function matchesConfiguration(
   configure: { blankLine: string; prev: string; next: string },
   prevElement: VElement,
   nextElement: VElement
-) {
+): boolean {
   return (
     matchesTag(configure.prev, prevElement) &&
     matchesTag(configure.next, nextElement)
