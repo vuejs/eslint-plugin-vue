@@ -1,12 +1,10 @@
 /**
- * @author Yosuke Ota
+ * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 // eslint-disable-next-line internal/no-invalid-meta
-module.exports = utils.wrapCoreRule('no-loss-of-precision', {
+export default utils.wrapCoreRule('no-negated-condition', {
   applyDocument: true
 })

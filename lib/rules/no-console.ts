@@ -2,12 +2,10 @@
  * @author ItMaga <https://github.com/ItMaga>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 // eslint-disable-next-line internal/no-invalid-meta
-module.exports = utils.wrapCoreRule('no-console', {
+export default utils.wrapCoreRule('no-console', {
   skipBaseHandlers: true,
   create(context) {
     const options = context.options[0] || {}
@@ -17,10 +15,8 @@ module.exports = utils.wrapCoreRule('no-console', {
      * Copied from the core rule `no-console`.
      * Checks whether the property name of the given MemberExpression node
      * is allowed by options or not.
-     * @param {MemberExpression} node The MemberExpression node to check.
-     * @returns {boolean} `true` if the property name of the node is allowed.
      */
-    function isAllowed(node) {
+    function isAllowed(node: MemberExpression): boolean {
       const propertyName = utils.getStaticPropertyName(node)
 
       return propertyName && allowed.includes(propertyName)

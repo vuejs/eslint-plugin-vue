@@ -1,14 +1,12 @@
 /**
  * @author Flo Edelmann
  */
-'use strict'
-
-const { wrapCoreRule } = require('../utils')
+import utils from '../utils/index.js'
 
 const conditionalDirectiveNames = new Set(['v-show', 'v-if', 'v-else-if'])
 
 // eslint-disable-next-line internal/no-invalid-meta
-module.exports = wrapCoreRule('no-constant-condition', {
+export default utils.wrapCoreRule('no-constant-condition', {
   create(_context, { baseHandlers }) {
     return {
       VDirectiveKey(node) {

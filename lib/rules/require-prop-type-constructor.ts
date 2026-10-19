@@ -2,14 +2,8 @@
  * @fileoverview require prop type to be a constructor
  * @author Michał Sajnóg
  */
-'use strict'
-
-const utils = require('../utils')
-const { isDef } = require('../utils')
-
-/**
- * @typedef {import('../utils').ComponentProp} ComponentProp
- */
+import type { ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.js'
 
 const forbiddenTypes = new Set([
   'Literal',
@@ -18,17 +12,14 @@ const forbiddenTypes = new Set([
   'UpdateExpression'
 ])
 
-/**
- * @param {ESNode} node
- */
-function isForbiddenType(node) {
+function isForbiddenType(node: ESNode) {
   return (
     forbiddenTypes.has(node.type) &&
     !(node.type === 'Literal' && node.value == null && !node.bigint)
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -43,16 +34,12 @@ module.exports = {
     }
   },
 
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @param {string} propName
-     * @param {ESNode} node
-     */
-    function checkPropertyNode(propName, node) {
-      /** @type {ESNode[]} */
-      const nodes =
-        node.type === 'ArrayExpression' ? node.elements.filter(isDef) : [node]
+  create(context: RuleContext) {
+    function checkPropertyNode(propName: string, node: ESNode) {
+      const nodes: ESNode[] =
+        node.type === 'ArrayExpression'
+          ? node.elements.filter(utils.isDef)
+          : [node]
 
       for (const prop of nodes) {
         if (!isForbiddenType(prop)) continue
@@ -77,8 +64,7 @@ module.exports = {
       }
     }
 
-    /** @param {ComponentProp[]} props */
-    function verifyProps(props) {
+    function verifyProps(props: ComponentProp[]) {
       for (const prop of props) {
         if (prop.type !== 'object' || prop.propName == null) {
           continue

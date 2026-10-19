@@ -2,15 +2,10 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @param {ArrayExpression} node
- * @param {RuleContext} context
- */
-function checkArrayExpression(node, context) {
+function checkArrayExpression(node: ArrayExpression, context: RuleContext) {
   const booleanType = node.elements.find(
     (element) =>
       element && element.type === 'Identifier' && element.name === 'Boolean'
@@ -44,7 +39,7 @@ function checkArrayExpression(node, context) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -60,12 +55,8 @@ module.exports = {
       moveToFirst: 'Move `Boolean` to be first in prop types.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @param {import('../utils').ComponentProp} prop
-     */
-    function checkProperty(prop) {
+  create(context: RuleContext) {
+    function checkProperty(prop: ComponentProp) {
       if (prop.type !== 'object') {
         return
       }
@@ -78,8 +69,7 @@ module.exports = {
         checkArrayExpression(value, context)
       } else if (value.type === 'ObjectExpression') {
         const type = value.properties.find(
-          /** @return {property is Property} */
-          (property) =>
+          (property): property is Property =>
             property.type === 'Property' &&
             utils.getStaticPropertyName(property) === 'type'
         )

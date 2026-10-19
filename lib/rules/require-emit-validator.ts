@@ -2,15 +2,10 @@
  * @fileoverview Emit definitions should be detailed
  * @author Pig Fang
  */
-'use strict'
+import type { ComponentEmit } from '../utils/index.js'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').ComponentEmit} ComponentEmit
- */
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -28,14 +23,9 @@ module.exports = {
       emptyValidation: 'Replace with a validator function with no parameters.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @param {ComponentEmit} emit
-     */
-    function checker(emit) {
-      /** @type {Expression|null} */
-      let value = null
+  create(context: RuleContext) {
+    function checker(emit: ComponentEmit) {
+      let value: Expression | null = null
       let hasType = false
       if (emit.type === 'object') {
         value = emit.value

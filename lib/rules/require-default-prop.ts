@@ -2,17 +2,12 @@
  * @fileoverview Require default value for props
  * @author Michał Sajnóg <msajnog93@gmail.com> (https://github.com/michalsnik)
  */
-'use strict'
-
-/**
- * @typedef {import('../utils').ComponentProp} ComponentProp
- * @typedef {import('../utils').ComponentObjectProp} ComponentObjectProp
- * @typedef {import('../utils').ComponentTypeProp} ComponentTypeProp
- * @typedef {ComponentObjectProp & { value: ObjectExpression} } ComponentObjectPropObject
- */
-
-const utils = require('../utils')
-const { isDef } = require('../utils')
+import type {
+  ComponentProp,
+  ComponentObjectProp,
+  ComponentTypeProp
+} from '../utils/index.js'
+import utils from '../utils/index.js'
 
 const NATIVE_TYPES = new Set([
   'String',
@@ -26,15 +21,13 @@ const NATIVE_TYPES = new Set([
 
 /**
  * Detects whether given value node is a Boolean type
- * @param {Expression} value
- * @return {boolean}
  */
-function isValueNodeOfBooleanType(value) {
+function isValueNodeOfBooleanType(value: Expression): boolean {
   if (value.type === 'Identifier' && value.name === 'Boolean') {
     return true
   }
   if (value.type === 'ArrayExpression') {
-    const elements = value.elements.filter(isDef)
+    const elements = value.elements.filter(utils.isDef)
     return (
       elements.length === 1 &&
       elements[0].type === 'Identifier' &&
@@ -44,7 +37,7 @@ function isValueNodeOfBooleanType(value) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -58,14 +51,11 @@ module.exports = {
       missingDefault: `Prop '{{propName}}' requires default value to be set.`
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     /**
      * Checks if the passed prop is required
-     * @param {ObjectExpression} propValue - ObjectExpression AST node for a single prop
-     * @return {boolean}
      */
-    function propIsRequired(propValue) {
+    function propIsRequired(propValue: ObjectExpression) {
       return propValue.properties.some(
         (p) =>
           p.type === 'Property' &&
@@ -77,10 +67,8 @@ module.exports = {
 
     /**
      * Checks if the passed prop has a default value
-     * @param {ObjectExpression} propValue - ObjectExpression AST node for a single prop
-     * @return {boolean}
      */
-    function propHasDefault(propValue) {
+    function propHasDefault(propValue: ObjectExpression) {
       return propValue.properties.some(
         (p) =>
           p.type === 'Property' && utils.getStaticPropertyName(p) === 'default'
@@ -89,10 +77,8 @@ module.exports = {
 
     /**
      * Checks whether the given props that don't have a default value
-     * @param {ComponentObjectProp} prop Vue component's "props" node
-     * @return {boolean}
      */
-    function isWithoutDefaultValue(prop) {
+    function isWithoutDefaultValue(prop: ComponentObjectProp): boolean {
       switch (prop.value.type) {
         case 'ObjectExpression': {
           return !propIsRequired(prop.value) && !propHasDefault(prop.value)
@@ -112,10 +98,8 @@ module.exports = {
 
     /**
      * Detects whether given prop node is a Boolean
-     * @param {ComponentObjectProp} prop
-     * @return {Boolean}
      */
-    function isBooleanProp(prop) {
+    function isBooleanProp(prop: ComponentObjectProp): boolean {
       const value = utils.skipTSAsExpression(prop.value)
 
       return (
@@ -131,18 +115,17 @@ module.exports = {
       )
     }
 
-    /**
-     * @param {ComponentProp[]} props
-     * @param {(prop: ComponentObjectProp|ComponentTypeProp)=>boolean} [ignore]
-     */
-    function processProps(props, ignore) {
+    function processProps(
+      props: ComponentProp[],
+      shouldIgnore?: (prop: ComponentObjectProp | ComponentTypeProp) => boolean
+    ) {
       for (const prop of props) {
         if (prop.type === 'object') {
           if (
             prop.node.shorthand ||
             !isWithoutDefaultValue(prop) ||
             isBooleanProp(prop) ||
-            ignore?.(prop)
+            shouldIgnore?.(prop)
           ) {
             continue
           }
@@ -160,7 +143,7 @@ module.exports = {
           if (
             prop.required ||
             (prop.types.length === 1 && prop.types[0] === 'Boolean') ||
-            ignore?.(prop)
+            shouldIgnore?.(prop)
           ) {
             continue
           }
