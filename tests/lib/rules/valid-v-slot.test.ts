@@ -131,6 +131,28 @@ tester.run('valid-v-slot', rule, {
         </svg>
       </template>
     `,
+    // named slot directly on a component (#1229)
+    `<template>
+      <MyComponent v-slot:named="{data}">{{data}}</MyComponent>
+    </template>`,
+    `<template>
+      <MyComponent #named>named</MyComponent>
+    </template>`,
+    `<template>
+      <my-component #named="{data}">{{data}}</my-component>
+    </template>`,
+    `<template>
+      <MyComponent #[name]>dynamic</MyComponent>
+    </template>`,
+    `<template>
+      <component :is="comp" #named>named</component>
+    </template>`,
+    `<template>
+      <MyComponent #named>
+        <template v-if="ok">a</template>
+        <template v-else>b</template>
+      </MyComponent>
+    </template>`,
     // parsing error
     {
       filename: 'parsing-error.vue',
@@ -187,13 +209,6 @@ tester.run('valid-v-slot', rule, {
           column: 16,
           endLine: 3,
           endColumn: 37
-        },
-        {
-          messageId: 'namedSlotMustBeOnTemplate',
-          line: 3,
-          column: 16,
-          endLine: 3,
-          endColumn: 37
         }
       ]
     },
@@ -217,7 +232,10 @@ tester.run('valid-v-slot', rule, {
     {
       code: `
         <template>
-          <MyComponent v-slot:named="{data}">{{data}}</MyComponent>
+          <MyComponent v-slot:named="{data}">
+            {{data}}
+            <template #other></template>
+          </MyComponent>
         </template>
       `,
       errors: [
@@ -227,6 +245,44 @@ tester.run('valid-v-slot', rule, {
           column: 24,
           endLine: 3,
           endColumn: 45
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent #named>
+            named
+            <template #default>default</template>
+          </MyComponent>
+        </template>
+      `,
+      errors: [
+        {
+          messageId: 'namedSlotMustBeOnTemplate',
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent #[name]>
+            dynamic
+            <template #other></template>
+          </MyComponent>
+        </template>
+      `,
+      errors: [
+        {
+          messageId: 'namedSlotMustBeOnTemplate',
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 31
         }
       ]
     },
@@ -258,13 +314,6 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       errors: [
-        {
-          messageId: 'namedSlotMustBeOnTemplate',
-          line: 3,
-          column: 40,
-          endLine: 3,
-          endColumn: 50
-        },
         {
           messageId: 'disallowDuplicateSlotsOnElement',
           line: 3,
