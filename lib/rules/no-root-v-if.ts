@@ -3,11 +3,9 @@
  * @copyright 2023 Perry Song. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -21,11 +19,9 @@ module.exports = {
       noRootVIf: '`v-if` should not be used on root element without `v-else`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     return {
-      /** @param {Program} program */
-      Program(program) {
+      Program(program: Program) {
         const element = program.templateBody
         if (element == null) {
           return

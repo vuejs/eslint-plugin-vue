@@ -4,11 +4,9 @@
  * @copyright 2020 Flo Edelmann. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -23,26 +21,22 @@ module.exports = {
         "Expected '{{preferredDelimiter}}' instead of '{{usedDelimiter}}' in 'v-for'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const preferredDelimiter =
-      /** @type {string|undefined} */ (context.options[0]) || 'in'
+      (context.options[0] as string | undefined) || 'in'
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VForExpression} node */
-      VForExpression(node) {
+      VForExpression(node: VForExpression) {
         const sourceCode = context.sourceCode
         const tokenStore =
           sourceCode.parserServices.getTemplateBodyTokenStore &&
           sourceCode.parserServices.getTemplateBodyTokenStore()
 
         const lastLeftNode = node.left.at(-1)
-        const delimiterToken = /** @type {Token} */ (
-          tokenStore.getTokenAfter(
-            lastLeftNode ?? tokenStore.getFirstToken(node),
-            (token) => token.type !== 'Punctuator'
-          )
-        )
+        const delimiterToken = tokenStore.getTokenAfter(
+          lastLeftNode ?? tokenStore.getFirstToken(node),
+          (token) => token.type !== 'Punctuator'
+        )!
 
         if (delimiterToken.value === preferredDelimiter) {
           return
