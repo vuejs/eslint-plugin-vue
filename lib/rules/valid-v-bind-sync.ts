@@ -2,16 +2,12 @@
  * @fileoverview enforce valid `.sync` modifier on `v-bind` directives
  * @author Yosuke Ota
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Check whether the given node is valid or not.
- * @param {VElement} node The element node to check.
- * @returns {boolean} `true` if the node is valid.
  */
-function isValidElement(node) {
+function isValidElement(node: VElement): boolean {
   return utils.isCustomComponent(node)
 }
 
@@ -20,10 +16,8 @@ function isValidElement(node) {
  * e.g.
  * - `a?.b`
  * - `a?.b.c`
- * @param {ASTNode} node The node to check.
- * @returns {boolean} `true` if the node is a MemberExpression containing an optional chaining.
  */
-function isOptionalChainingMemberExpression(node) {
+function isOptionalChainingMemberExpression(node: ASTNode): boolean {
   return (
     node.type === 'ChainExpression' &&
     node.expression.type === 'MemberExpression'
@@ -32,10 +26,8 @@ function isOptionalChainingMemberExpression(node) {
 
 /**
  * Check whether the given node can be LHS (left-hand side).
- * @param {ASTNode} node The node to check.
- * @returns {boolean} `true` if the node can be LHS.
  */
-function isLhs(node) {
+function isLhs(node: ASTNode): boolean {
   return node.type === 'Identifier' || node.type === 'MemberExpression'
 }
 
@@ -44,10 +36,8 @@ function isLhs(node) {
  * e.g.
  * - `(a?.b).c`
  * - `(null).foo`
- * @param {ASTNode} node The node to check.
- * @returns {boolean} `true` if the node is a MemberExpression of a possibly null object.
  */
-function maybeNullObjectMemberExpression(node) {
+function isMaybeNullObjectMemberExpression(node: ASTNode): boolean {
   if (node.type !== 'MemberExpression') {
     return false
   }
@@ -61,7 +51,7 @@ function maybeNullObjectMemberExpression(node) {
       return node.object.value === null && !node.object.bigint
     }
     case 'MemberExpression': {
-      return maybeNullObjectMemberExpression(node.object)
+      return isMaybeNullObjectMemberExpression(node.object)
     }
     default: {
       return false
@@ -69,7 +59,7 @@ function maybeNullObjectMemberExpression(node) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -93,11 +83,9 @@ module.exports = {
         "'.sync' modifiers cannot update the iteration variable '{{varName}}' itself."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='bind']"(node) {
+      "VAttribute[directive=true][key.name.name='bind']"(node: VDirective) {
         if (!node.key.modifiers.map((mod) => mod.name).includes('sync')) {
           return
         }
@@ -131,7 +119,7 @@ module.exports = {
             node: expression,
             messageId: 'unexpectedNonLhsExpression'
           })
-        } else if (maybeNullObjectMemberExpression(expression)) {
+        } else if (isMaybeNullObjectMemberExpression(expression)) {
           context.report({
             node: expression,
             messageId: 'unexpectedNullObject'

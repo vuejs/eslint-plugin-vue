@@ -2,34 +2,26 @@
  * @author Toru Nagashima
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef { { expr: VForExpression, variables: VVariable[] } } VSlotVForVariables
- */
+interface VSlotVForVariables {
+  expr: VForExpression
+  variables: VVariable[]
+}
 
 /**
  * Get all `v-slot` directives on a given element.
- * @param {VElement} node The VElement node to check.
- * @returns {VDirective[]} The array of `v-slot` directives.
  */
-function getSlotDirectivesOnElement(node) {
+function getSlotDirectivesOnElement(node: VElement): VDirective[] {
   return utils.getDirectives(node, 'slot')
 }
 
 /**
- * Get all `v-slot` directives on the children of a given element.
- * @param {VElement} node The VElement node to check.
- * @returns {VDirective[][]}
- * The array of the group of `v-slot` directives.
- * The group bundles `v-slot` directives of element sequence which is connected
- * by `v-if`/`v-else-if`/`v-else`.
+ * Get all `v-slot` directives on the children of a given element, grouped by
+ * `v-if`/`v-else-if`/`v-else` sequences.
  */
-function getSlotDirectivesOnChildren(node) {
-  /** @type {VDirective[][]} */
-  const groups = []
+function getSlotDirectivesOnChildren(node: VElement): VDirective[][] {
+  const groups: VDirective[][] = []
   for (const group of utils.iterateChildElementsChains(node)) {
     const slotDirs = group
       .map((childElement) =>
@@ -48,11 +40,8 @@ function getSlotDirectivesOnChildren(node) {
 
 /**
  * Get the normalized name of a given `v-slot` directive node with modifiers after `v-slot:` directive.
- * @param {VDirective} node The `v-slot` directive node.
- * @param {SourceCode} sourceCode The source code.
- * @returns {string} The normalized name.
  */
-function getNormalizedName(node, sourceCode) {
+function getNormalizedName(node: VDirective, sourceCode: SourceCode): string {
   if (node.key.argument == null) {
     return 'default'
   }
@@ -63,20 +52,15 @@ function getNormalizedName(node, sourceCode) {
 
 /**
  * Get all `v-slot` directives which are distributed to the same slot as a given `v-slot` directive node.
- * @param {VDirective[][]} vSlotGroups The result of `getAllNamedSlotElements()`.
- * @param {VDirective} currentVSlot The current `v-slot` directive node.
- * @param {VSlotVForVariables | null} currentVSlotVForVars The current `v-for` variables.
- * @param {SourceCode} sourceCode The source code.
- * @param {ParserServices.TokenStore} tokenStore The token store.
- * @returns {VDirective[][]} The array of the group of `v-slot` directives.
+ * @param vSlotGroups The result of `getAllNamedSlotElements()`.
  */
 function filterSameSlot(
-  vSlotGroups,
-  currentVSlot,
-  currentVSlotVForVars,
-  sourceCode,
-  tokenStore
-) {
+  vSlotGroups: VDirective[][],
+  currentVSlot: VDirective,
+  currentVSlotVForVars: VSlotVForVariables | null,
+  sourceCode: SourceCode,
+  tokenStore: ParserServices.TokenStore
+): VDirective[][] {
   const currentName = getNormalizedName(currentVSlot, sourceCode)
   return vSlotGroups
     .map((vSlots) =>
@@ -89,7 +73,11 @@ function filterSameSlot(
           utils.getDirective(vSlot.parent.parent, 'for')
         )
         return currentVSlotVForVars && vForExpr
-          ? equalVSlotVForVariables(currentVSlotVForVars, vForExpr, tokenStore)
+          ? areVSlotVForVariablesEqual(
+              currentVSlotVForVars,
+              vForExpr,
+              tokenStore
+            )
           : !currentVSlotVForVars && !vForExpr
       })
     )
@@ -98,15 +86,15 @@ function filterSameSlot(
 
 /**
  * Determines whether the two given `v-slot` variables are considered to be equal.
- * @param {VSlotVForVariables} a First element.
- * @param {VSlotVForVariables} b Second element.
- * @param {ParserServices.TokenStore} tokenStore The token store.
- * @returns {boolean} `true` if the elements are considered to be equal.
  */
-function equalVSlotVForVariables(a, b, tokenStore) {
+function areVSlotVForVariablesEqual(
+  a: VSlotVForVariables,
+  b: VSlotVForVariables,
+  tokenStore: ParserServices.TokenStore
+): boolean {
   if (
     a.variables.length !== b.variables.length ||
-    !equal(a.expr.right, b.expr.right)
+    !isEqual(a.expr.right, b.expr.right)
   ) {
     return false
   }
@@ -124,7 +112,7 @@ function equalVSlotVForVariables(a, b, tokenStore) {
       (v) => bPtn.range[0] <= v.id.range[0] && v.id.range[1] <= bPtn.range[1]
     )
     if (aVar && bVar) {
-      if (aVar.id.name !== bVar.id.name || !equal(aPtn, bPtn)) {
+      if (aVar.id.name !== bVar.id.name || !isEqual(aPtn, bPtn)) {
         return false
       }
       checkedVarNames.add(aVar.id.name)
@@ -140,24 +128,20 @@ function equalVSlotVForVariables(a, b, tokenStore) {
 
   /**
    * Determines whether the two given nodes are considered to be equal.
-   * @param {ASTNode} a First node.
-   * @param {ASTNode} b Second node.
-   * @returns {boolean} `true` if the nodes are considered to be equal.
    */
-  function equal(a, b) {
+  function isEqual(a: ASTNode, b: ASTNode): boolean {
     return a.type === b.type && utils.equalTokens(a, b, tokenStore)
   }
 }
 
 /**
  * Gets the `v-for` directive and variable that provide the variables used by the given` v-slot` directive.
- * @param {VDirective} vSlot The current `v-slot` directive node.
- * @param {VDirective | null} [vFor] The current `v-for` directive node.
- * @returns { VSlotVForVariables | null } The VSlotVForVariable.
  */
-function getVSlotVForVariableIfUsingIterationVars(vSlot, vFor) {
-  const expr =
-    vFor && vFor.value && /** @type {VForExpression} */ (vFor.value.expression)
+function getVSlotVForVariableIfUsingIterationVars(
+  vSlot: VDirective,
+  vFor?: VDirective | null
+): VSlotVForVariables | null {
+  const expr = vFor && vFor.value && (vFor.value.expression as VForExpression)
   const variables =
     expr && getUsingIterationVars(vSlot.key.argument, vSlot.parent.parent)
   return expr && variables && variables.length > 0 ? { expr, variables } : null
@@ -165,12 +149,12 @@ function getVSlotVForVariableIfUsingIterationVars(vSlot, vFor) {
 
 /**
  * Gets iterative variables if a given argument node is using iterative variables that the element defined.
- * @param {VExpressionContainer|VIdentifier|null} argument The argument node to check.
- * @param {VElement} element The element node which has the argument.
- * @returns {VVariable[]} The argument node is using iteration variables.
  */
-function getUsingIterationVars(argument, element) {
-  const vars = []
+function getUsingIterationVars(
+  argument: VExpressionContainer | VIdentifier | null,
+  element: VElement
+): VVariable[] {
+  const vars: VVariable[] = []
   if (argument && argument.type === 'VExpressionContainer') {
     for (const { variable } of argument.references) {
       if (
@@ -188,10 +172,8 @@ function getUsingIterationVars(argument, element) {
 
 /**
  * Check whether a given argument node is using an scope variable that the directive defined.
- * @param {VDirective} vSlot The `v-slot` directive to check.
- * @returns {boolean} `true` if that argument node is using a scope variable the directive defined.
  */
-function isUsingScopeVar(vSlot) {
+function isUsingScopeVar(vSlot: VDirective): boolean {
   const argument = vSlot.key.argument
   const value = vSlot.value
 
@@ -213,17 +195,17 @@ function isUsingScopeVar(vSlot) {
 /**
  * If `allowModifiers` option is set to `true`, check whether a given argument node has invalid modifiers like `v-slot.foo`.
  * Otherwise, check whether a given argument node has at least one modifier.
- * @param {VDirective} vSlot The `v-slot` directive to check.
- * @param {boolean} shouldAllowModifiers `allowModifiers` option in context.
- * @return {boolean} `true` if that argument node has invalid modifiers like `v-slot.foo`.
  */
-function hasInvalidModifiers(vSlot, shouldAllowModifiers) {
+function hasInvalidModifiers(
+  vSlot: VDirective,
+  shouldAllowModifiers: boolean
+): boolean {
   return shouldAllowModifiers
     ? vSlot.key.argument == null && vSlot.key.modifiers.length > 0
     : vSlot.key.modifiers.length > 0
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -261,8 +243,7 @@ module.exports = {
         "'v-slot' directive on a custom element requires that attribute value."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const tokenStore =
       sourceCode.parserServices.getTemplateBodyTokenStore &&
@@ -271,8 +252,7 @@ module.exports = {
     const shouldAllowModifiers = options.allowModifiers === true
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='slot']"(node) {
+      "VAttribute[directive=true][key.name.name='slot']"(node: VDirective) {
         const isDefaultSlot =
           node.key.argument == null ||
           (node.key.argument.type === 'VIdentifier' &&

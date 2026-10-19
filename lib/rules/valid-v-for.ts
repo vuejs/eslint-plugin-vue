@@ -3,17 +3,12 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Check whether the given attribute is using the variables which are defined by `v-for` directives.
- * @param {VDirective} vFor The attribute node of `v-for` to check.
- * @param {VDirective} vBindKey The attribute node of `v-bind:key` to check.
- * @returns {boolean} `true` if the node is using the variables which are defined by `v-for` directives.
  */
-function isUsingIterationVar(vFor, vBindKey) {
+function isUsingIterationVar(vFor: VDirective, vBindKey: VDirective): boolean {
   if (vBindKey.value == null) {
     return false
   }
@@ -29,11 +24,12 @@ function isUsingIterationVar(vFor, vBindKey) {
 
 /**
  * Check the child element in tempalte v-for about `v-bind:key` attributes.
- * @param {RuleContext} context The rule context to report.
- * @param {VDirective} vFor The attribute node of `v-for` to check.
- * @param {VElement} child The child node to check.
  */
-function checkChildKey(context, vFor, child) {
+function checkChildKey(
+  context: RuleContext,
+  vFor: VDirective,
+  child: VElement
+) {
   const childFor = utils.getDirective(child, 'for')
   // if child has v-for, check if parent iterator is used in v-for
   if (childFor != null) {
@@ -57,11 +53,8 @@ function checkChildKey(context, vFor, child) {
 
 /**
  * Check the given element about `v-bind:key` attributes.
- * @param {RuleContext} context The rule context to report.
- * @param {VDirective} vFor The attribute node of `v-for` to check.
- * @param {VElement} element The element node to check.
  */
-function checkKey(context, vFor, element) {
+function checkKey(context: RuleContext, vFor: VDirective, element: VElement) {
   const vBindKey = utils.getDirective(element, 'bind', 'key')
 
   if (vBindKey == null && element.name === 'template') {
@@ -87,7 +80,7 @@ function checkKey(context, vFor, element) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -121,23 +114,17 @@ module.exports = {
       invalidAlias: "Invalid alias '{{text}}'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const options = context.options[0] || {}
     const shouldAllowEmptyAlias = options.allowEmptyAlias === true
 
-    /**
-     * @param {Pattern|null} alias
-     * @returns {boolean}
-     */
-    function isValidAlias(alias) {
+    function isValidAlias(alias: Pattern | null): boolean {
       return alias ? alias.type === 'Identifier' : shouldAllowEmptyAlias
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='for']"(node) {
+      "VAttribute[directive=true][key.name.name='for']"(node: VDirective) {
         const element = node.parent.parent
 
         checkKey(context, node, element)
