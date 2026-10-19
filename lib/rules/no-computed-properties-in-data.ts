@@ -2,15 +2,10 @@
  * @author  Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import type { VueObjectData } from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').VueObjectData} VueObjectData
- */
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -25,25 +20,27 @@ module.exports = {
         'The computed property cannot be used in `data()` because it is before initialization.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Map<ObjectExpression, {data: FunctionExpression | ArrowFunctionExpression, computedNames:Set<string>}>} */
-    const contextMap = new Map()
+  create(context: RuleContext) {
+    const contextMap = new Map<
+      ObjectExpression,
+      {
+        data: FunctionExpression | ArrowFunctionExpression
+        computedNames: Set<string>
+      }
+    >()
 
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-     */
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+    interface ScopeStack {
+      upper: ScopeStack | null
+      node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+    }
+    let scopeStack: ScopeStack | null = null
 
     return utils.compositingVisitors(
       {
-        /**
-         * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-         */
-        ':function'(node) {
+        ':function'(
+          node:
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+        ) {
           scopeStack = {
             upper: scopeStack,
             node
@@ -63,7 +60,7 @@ module.exports = {
           ) {
             return
           }
-          const computedNames = new Set()
+          const computedNames = new Set<string>()
           const computedProperties = utils.iterateProperties(
             node,
             new Set(['computed'])
@@ -74,11 +71,7 @@ module.exports = {
 
           contextMap.set(node, { data: dataProperty.value, computedNames })
         },
-        /**
-         * @param {MemberExpression} node
-         * @param {VueObjectData} vueData
-         */
-        MemberExpression(node, vueData) {
+        MemberExpression(node: MemberExpression, vueData: VueObjectData) {
           if (!scopeStack || !utils.isThis(node.object, context)) {
             return
           }

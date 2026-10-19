@@ -1,11 +1,9 @@
 /**
  * @author Sosuke Suzuki
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -20,8 +18,7 @@ module.exports = {
         'You should not use an arrow function to define a watcher.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.executeOnVue(context, (obj) => {
       const watchNode = utils.findProperty(obj, 'watch')
       if (watchNode == null) {
