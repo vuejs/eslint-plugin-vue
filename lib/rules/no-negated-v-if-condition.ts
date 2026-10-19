@@ -41,12 +41,11 @@ function isDirectlyFollowedByElse(element: VElement): boolean {
 
 function getDirective(element: VElement) {
   return element.startTag.attributes.find(
-    (attr) =>
+    (attr): attr is VIfDirective =>
       attr.directive &&
-      attr.key.name &&
-      attr.key.name.name &&
+      Boolean(attr.key.name?.name) &&
       ['if', 'else-if', 'else'].includes(attr.key.name.name)
-  ) as VIfDirective | undefined
+  )
 }
 
 export default {
