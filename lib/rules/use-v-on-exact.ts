@@ -76,10 +76,8 @@ function isGlobalOnlyKeyboardStopEvent(event: EventDirective): boolean {
 }
 
 /**
- * Groups all events in object,
- * with keys represinting each event name
- *
- * @returns { click: [], keypress: [] }
+ * Groups all events in an object with keys representing each event name,
+ * e.g. `{ click: [], keypress: [] }`.
  */
 function groupEvents(events: EventDirective[]): {
   [key: string]: EventDirective[]
@@ -95,9 +93,7 @@ function groupEvents(events: EventDirective[]): {
 }
 
 /**
- * Creates alphabetically sorted string with system modifiers
- *
- * @returns e.g. "alt,ctrl,del,shift"
+ * Creates an alphabetically sorted string of system modifiers, e.g. `"alt,ctrl,del,shift"`.
  */
 function getSystemModifiersString(modifiers: string[]): string {
   return modifiers
@@ -107,9 +103,7 @@ function getSystemModifiersString(modifiers: string[]): string {
 }
 
 /**
- * Creates alphabetically sorted string with key modifiers
- *
- * @returns e.g. "enter,tab"
+ * Creates an alphabetically sorted string of key modifiers, e.g. `"enter,tab"`.
  */
 function getKeyModifiersString(modifiers: string[]): string {
   return modifiers
@@ -155,9 +149,7 @@ function hasConflictedModifiers(
 }
 
 /**
- * Searches for events that might conflict with each other
- *
- * @returns conflicted events, without duplicates
+ * Searches for events that might conflict with each other and returns them without duplicates.
  */
 function findConflictedEvents(events: EventDirective[]): EventDirective[] {
   const conflictedEvents: EventDirective[] = []
