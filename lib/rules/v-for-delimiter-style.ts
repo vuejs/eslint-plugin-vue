@@ -36,7 +36,7 @@ export default {
         const delimiterToken = tokenStore.getTokenAfter(
           lastLeftNode ?? tokenStore.getFirstToken(node),
           (token) => token.type !== 'Punctuator'
-        ) as Token
+        )!
 
         if (delimiterToken.value === preferredDelimiter) {
           return
