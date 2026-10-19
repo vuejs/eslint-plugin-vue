@@ -2,19 +2,13 @@
  * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
+type VIfDirective = VDirective & {
+  value: (VExpressionContainer & { expression: Expression | null }) | null
+}
 
-/**
- * @typedef { VDirective & { value: (VExpressionContainer & { expression: Expression | null } ) | null  } } VIfDirective
- */
-
-/**
- * @param {Expression} expression
- * @returns {boolean}
- */
-function isNegatedExpression(expression) {
+function isNegatedExpression(expression: Expression): boolean {
   return (
     (expression.type === 'UnaryExpression' && expression.operator === '!') ||
     (expression.type === 'BinaryExpression' &&
@@ -22,11 +16,7 @@ function isNegatedExpression(expression) {
   )
 }
 
-/**
- * @param {VElement} node
- * @returns {VElement|null}
- */
-function getNextSibling(node) {
+function getNextSibling(node: VElement): VElement | null {
   if (!node.parent?.children) {
     return null
   }
@@ -44,31 +34,21 @@ function getNextSibling(node) {
   return null
 }
 
-/**
- * @param {VElement} element
- * @returns {boolean}
- */
-function isDirectlyFollowedByElse(element) {
+function isDirectlyFollowedByElse(element: VElement): boolean {
   const nextElement = getNextSibling(element)
   return nextElement ? utils.hasDirective(nextElement, 'else') : false
 }
 
-/**
- * @param {VElement} element
- */
-function getDirective(element) {
-  return /** @type {VIfDirective|undefined} */ (
-    element.startTag.attributes.find(
-      (attr) =>
-        attr.directive &&
-        attr.key.name &&
-        attr.key.name.name &&
-        ['if', 'else-if', 'else'].includes(attr.key.name.name)
-    )
+function getDirective(element: VElement) {
+  return element.startTag.attributes.find(
+    (attr): attr is VIfDirective =>
+      attr.directive &&
+      Boolean(attr.key.name?.name) &&
+      ['if', 'else-if', 'else'].includes(attr.key.name.name)
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -82,17 +62,12 @@ module.exports = {
       negatedCondition: 'Unexpected negated condition in v-if with v-else.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
 
     const processedPairs = new Set()
 
-    /**
-     * @param {Expression} expression
-     * @returns {string}
-     */
-    function getConvertedCondition(expression) {
+    function getConvertedCondition(expression: Expression): string {
       if (
         expression.type === 'UnaryExpression' &&
         expression.operator === '!'
@@ -118,10 +93,7 @@ module.exports = {
       return sourceCode.getText(expression)
     }
 
-    /**
-     * @param {VIfDirective} node
-     */
-    function checkNegatedCondition(node) {
+    function checkNegatedCondition(node: VIfDirective) {
       if (!node.value?.expression) {
         return
       }
@@ -154,13 +126,12 @@ module.exports = {
       })
     }
 
-    /**
-     * @param {RuleFixer} fixer
-     * @param {VElement} ifElement
-     * @param {VElement} elseElement
-     * @param {Expression} expression
-     */
-    function* swapElements(fixer, ifElement, elseElement, expression) {
+    function* swapElements(
+      fixer: RuleFixer,
+      ifElement: VElement,
+      elseElement: VElement,
+      expression: Expression
+    ) {
       const convertedCondition = getConvertedCondition(expression)
 
       const ifDir = getDirective(ifElement)
@@ -198,12 +169,12 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VIfDirective} node */
-      "VAttribute[directive=true][key.name.name='if']"(node) {
+      "VAttribute[directive=true][key.name.name='if']"(node: VIfDirective) {
         checkNegatedCondition(node)
       },
-      /** @param {VIfDirective} node */
-      "VAttribute[directive=true][key.name.name='else-if']"(node) {
+      "VAttribute[directive=true][key.name.name='else-if']"(
+        node: VIfDirective
+      ) {
         checkNegatedCondition(node)
       }
     })

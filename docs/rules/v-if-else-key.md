@@ -23,9 +23,9 @@ This rule is not required in Vue 3, as the key is automatically assigned to the 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <my-component v-if="condition1" :key="one" />
-  <my-component v-else-if="condition2" :key="two" />
-  <my-component v-else :key="three" />
+  <my-component v-if="condition1" key="one" />
+  <my-component v-else-if="condition2" key="two" />
+  <my-component v-else key="three" />
 
   <!-- ✗ BAD -->
   <my-component v-if="condition1" />

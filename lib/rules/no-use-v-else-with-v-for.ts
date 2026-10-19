@@ -1,8 +1,6 @@
-'use strict'
+import utils from '../utils/index.js'
 
-const { defineTemplateBodyVisitor, hasDirective } = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -18,20 +16,18 @@ module.exports = {
         'Unexpected `{{ directiveName }}` and `v-for` on the same element. Move `{{ directiveName }}` to a wrapper element instead.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    return defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='for']"(node) {
+  create(context: RuleContext) {
+    return utils.defineTemplateBodyVisitor(context, {
+      "VAttribute[directive=true][key.name.name='for']"(node: VDirective) {
         const element = node.parent.parent
 
-        if (hasDirective(element, 'else-if')) {
+        if (utils.hasDirective(element, 'else-if')) {
           context.report({
             node: element,
             messageId: 'unexpectedDirectiveWithVFor',
             data: { directiveName: 'v-else-if' }
           })
-        } else if (hasDirective(element, 'else')) {
+        } else if (utils.hasDirective(element, 'else')) {
           context.report({
             node: element,
             messageId: 'unexpectedDirectiveWithVFor',

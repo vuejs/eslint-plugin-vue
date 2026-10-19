@@ -1,11 +1,9 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,12 +19,10 @@ module.exports = {
         "'<template v-for>' cannot be keyed. Place the key on real elements instead."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
       "VElement[name='template'] > VStartTag > VAttribute[directive=true][key.name.name='for']"(
-        node
+        node: VDirective
       ) {
         const element = node.parent.parent
         const keyNode =

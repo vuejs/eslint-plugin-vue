@@ -3,21 +3,16 @@
  *
  * Style guide: https://vuejs.org/style-guide/rules-essential.html#avoid-v-if-with-v-for
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Check whether the given `v-if` node is using the variable which is defined by the `v-for` directive.
- * @param {VDirective} vIf The `v-if` attribute node to check.
- * @returns {boolean} `true` if the `v-if` is using the variable which is defined by the `v-for` directive.
  */
-function isUsingIterationVar(vIf) {
+function isUsingIterationVar(vIf: VDirective): boolean {
   return getVForUsingIterationVar(vIf) !== null
 }
 
-/** @param {VDirective} vIf */
-function getVForUsingIterationVar(vIf) {
+function getVForUsingIterationVar(vIf: VDirective) {
   if (!vIf.value) {
     return null
   }
@@ -34,7 +29,7 @@ function getVForUsingIterationVar(vIf) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -60,13 +55,11 @@ module.exports = {
         "The '{{iteratorName}}' {{kind}} inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const shouldAllowUsingIterationVar = options.allowUsingIterationVar === true // default false
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='if']"(node) {
+      "VAttribute[directive=true][key.name.name='if']"(node: VDirective) {
         const element = node.parent.parent
 
         if (utils.hasDirective(element, 'for')) {
@@ -79,7 +72,7 @@ module.exports = {
 
               let targetVForExpr = vForVar.id.parent
               while (targetVForExpr.type !== 'VForExpression') {
-                targetVForExpr = /** @type {ASTNode} */ (targetVForExpr.parent)
+                targetVForExpr = targetVForExpr.parent as ASTNode
               }
               const iteratorNode = targetVForExpr.right
               context.report({

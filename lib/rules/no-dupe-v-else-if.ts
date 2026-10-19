@@ -2,29 +2,29 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
+type VExpression = NonNullable<VExpressionContainer['expression']>
 
-/**
- * @typedef {NonNullable<VExpressionContainer['expression']>} VExpression
- */
-/**
- * @typedef {object} OrOperands
- * @property {VExpression} OrOperands.node
- * @property {AndOperands[]} OrOperands.operands
- *
- * @typedef {object} AndOperands
- * @property {VExpression} AndOperands.node
- * @property {VExpression[]} AndOperands.operands
- */
+interface OrOperands {
+  node: VExpression
+  operands: AndOperands[]
+}
+
+interface AndOperands {
+  node: VExpression
+  operands: VExpression[]
+}
+
 /**
  * Splits the given node by the given logical operator.
- * @param {string} operator Logical operator `||` or `&&`.
- * @param {VExpression} node The node to split.
- * @returns {VExpression[]} Array of conditions that makes the node when joined by the operator.
+ * @param operator Logical operator `||` or `&&`.
+ * @returns Array of conditions that makes the node when joined by the operator.
  */
-function splitByLogicalOperator(operator, node) {
+function splitByLogicalOperator(
+  operator: string,
+  node: VExpression
+): VExpression[] {
   if (node.type === 'LogicalExpression' && node.operator === operator) {
     return [
       ...splitByLogicalOperator(operator, node.left),
@@ -34,24 +34,14 @@ function splitByLogicalOperator(operator, node) {
   return [node]
 }
 
-/**
- * @param {VExpression} node
- */
-function splitByOr(node) {
+function splitByOr(node: VExpression) {
   return splitByLogicalOperator('||', node)
 }
-/**
- * @param {VExpression} node
- */
-function splitByAnd(node) {
+function splitByAnd(node: VExpression) {
   return splitByLogicalOperator('&&', node)
 }
 
-/**
- * @param {VExpression} node
- * @returns {OrOperands}
- */
-function buildOrOperands(node) {
+function buildOrOperands(node: VExpression): OrOperands {
   const orOperands = splitByOr(node)
   return {
     node,
@@ -65,7 +55,7 @@ function buildOrOperands(node) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -81,8 +71,7 @@ module.exports = {
         'This branch can never execute. Its condition is a duplicate or covered by previous conditions in the `v-if` / `v-else-if` chain.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const tokenStore =
       sourceCode.parserServices.getTemplateBodyTokenStore &&
@@ -90,11 +79,8 @@ module.exports = {
     /**
      * Determines whether the two given nodes are considered to be equal. In particular, given that the nodes
      * represent expressions in a boolean context, `||` and `&&` can be considered as commutative operators.
-     * @param {VExpression} a First node.
-     * @param {VExpression} b Second node.
-     * @returns {boolean} `true` if the nodes are considered to be equal.
      */
-    function equal(a, b) {
+    function isEqual(a: VExpression, b: VExpression): boolean {
       return (
         a.type === b.type &&
         (utils.equalTokens(a, b, tokenStore) ||
@@ -102,8 +88,8 @@ module.exports = {
             b.type === 'LogicalExpression' &&
             (a.operator === '||' || a.operator === '&&') &&
             a.operator === b.operator &&
-            ((equal(a.left, b.left) && equal(a.right, b.right)) ||
-              (equal(a.left, b.right) && equal(a.right, b.left)))))
+            ((isEqual(a.left, b.left) && isEqual(a.right, b.right)) ||
+              (isEqual(a.left, b.right) && isEqual(a.right, b.left)))))
       )
     }
 
@@ -111,14 +97,10 @@ module.exports = {
      * Determines whether the first given AndOperands is a subset of the second given AndOperands.
      *
      * e.g. A: (a && b), B: (a && b && c): B is a subset of A.
-     *
-     * @param {AndOperands} operandsA The AndOperands to compare from.
-     * @param {AndOperands} operandsB The AndOperands to compare against.
-     * @returns {boolean} `true` if the `andOperandsA` is a subset of the `andOperandsB`.
      */
-    function isSubset(operandsA, operandsB) {
+    function isSubset(operandsA: AndOperands, operandsB: AndOperands): boolean {
       return operandsA.operands.every((operandA) =>
-        operandsB.operands.some((operandB) => equal(operandA, operandB))
+        operandsB.operands.some((operandB) => isEqual(operandA, operandB))
       )
     }
 
@@ -134,8 +116,7 @@ module.exports = {
             : [test]
         const listToCheck = conditionsToCheck.map(buildOrOperands)
 
-        /** @type {VElement | null} */
-        let current = node.parent.parent
+        let current: VElement | null = node.parent.parent
         while ((current &&= utils.prevSibling(current))) {
           const vIf = utils.getDirective(current, 'if')
           const currentTestDir = vIf || utils.getDirective(current, 'else-if')
