@@ -26,8 +26,8 @@ function isSameName(node: VBindDirective): boolean {
       : null
 
   return (
-    !!attrName &&
-    !!valueName &&
+    attrName !== null &&
+    valueName !== null &&
     kebabCaseToCamelCase(attrName) === kebabCaseToCamelCase(valueName)
   )
 }
