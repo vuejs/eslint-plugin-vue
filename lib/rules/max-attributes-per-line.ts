@@ -156,7 +156,7 @@ export default {
             // that is not a white space
             const prevToken = template.getTokenBefore(prop, {
               filter: (token) => token.type !== 'HTMLWhitespace'
-            }) as Token
+            })!
 
             const range: Range = [prevToken.range[1], prop.range[0]]
 
