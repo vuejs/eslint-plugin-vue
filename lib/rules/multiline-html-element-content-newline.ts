@@ -13,7 +13,13 @@ function isMultilineElement(element: VElement & { endTag: VEndTag }) {
 function parseOptions(options: any) {
   return Object.assign(
     {
-      ignores: ['pre', 'textarea', ...INLINE_ELEMENTS],
+      ignores: [
+        'pre',
+        'textarea',
+        'router-link',
+        'nuxt-link',
+        ...INLINE_ELEMENTS
+      ],
       ignoreWhenEmpty: true,
       allowEmptyLines: false
     },
@@ -64,8 +70,7 @@ export default {
           ignores: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           },
           allowEmptyLines: {
             type: 'boolean'

@@ -13,26 +13,39 @@ import {
  */
 function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
   const parent = node.parent
-  if (parent.type === 'UpdateExpression' && parent.argument === node) {
-    // e.g. `pattern++`
-    return true
-  }
-  if (parent.type === 'AssignmentExpression' && parent.left === node) {
-    // e.g. `pattern = 42`
-    return true
-  }
+  return (
+    (parent.type === 'UpdateExpression' && parent.argument === node) || // e.g. `pattern++`
+    (parent.type === 'AssignmentExpression' && parent.left === node) || // e.g. `pattern = 42`
+    (((parent.type === 'Property' && parent.value === node) ||
+      parent.type === 'ArrayPattern' ||
+      (parent.type === 'ObjectPattern' &&
+        parent.properties.includes(node as any)) ||
+      (parent.type === 'AssignmentPattern' && parent.left === node) ||
+      parent.type === 'RestElement' ||
+      (parent.type === 'MemberExpression' && parent.object === node)) &&
+      isUpdate(parent))
+  )
+}
+
+/**
+ * Checks whether the given function is immediately invoked (IIFE).
+ * The body of such a function runs synchronously within the enclosing scope,
+ * so getting a value there loses reactivity in the same way.
+ * `async` functions and generators are excluded because their bodies are not
+ * guaranteed to run synchronously to completion.
+ */
+function isImmediatelyInvokedFunction(
+  node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
+): boolean {
   if (
-    (parent.type === 'Property' && parent.value === node) ||
-    parent.type === 'ArrayPattern' ||
-    (parent.type === 'ObjectPattern' &&
-      parent.properties.includes(node as any)) ||
-    (parent.type === 'AssignmentPattern' && parent.left === node) ||
-    parent.type === 'RestElement' ||
-    (parent.type === 'MemberExpression' && parent.object === node)
+    node.type === 'FunctionDeclaration' ||
+    node.async ||
+    (node.type === 'FunctionExpression' && node.generator)
   ) {
-    return isUpdate(parent)
+    return false
   }
-  return false
+  const parent = node.parent
+  return parent.type === 'CallExpression' && parent.callee === node
 }
 
 export default {
@@ -75,11 +88,7 @@ export default {
      */
     function verifyRefObjectValue(node: Expression | Super | ObjectPattern) {
       const ref = refObjectReferences.get(node)
-      if (!ref) {
-        return
-      }
-      if (scopes.get(ref.define) !== scopeStack) {
-        // Not in the same scope
+      if (!ref || scopes.get(ref.define) !== scopeStack) {
         return
       }
 
@@ -94,11 +103,7 @@ export default {
      */
     function verifyReactiveVariable(node: Identifier) {
       const ref = reactiveVariableReferences.get(node)
-      if (!ref || ref.escape) {
-        return
-      }
-      if (scopes.get(ref.define) !== scopeStack) {
-        // Not in the same scope
+      if (!ref || ref.escape || scopes.get(ref.define) !== scopeStack) {
         return
       }
 
@@ -110,9 +115,17 @@ export default {
 
     return {
       ':function'(node) {
+        if (isImmediatelyInvokedFunction(node)) {
+          // Keep the scope of an IIFE, because its body is executed in the
+          // same scope.
+          return
+        }
         scopeStack = { upper: scopeStack, node }
       },
-      ':function:exit'() {
+      ':function:exit'(node) {
+        if (isImmediatelyInvokedFunction(node)) {
+          return
+        }
         scopeStack = scopeStack.upper || scopeStack
       },
       CallExpression(node) {

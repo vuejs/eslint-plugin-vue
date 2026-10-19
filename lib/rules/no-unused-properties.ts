@@ -2,7 +2,7 @@
  * @fileoverview Disallow unused properties, data and computed properties.
  * @author Learning Equality
  */
-import type { GroupName, VueObjectData } from '../utils/index.js'
+import type { ComponentProp, GroupName, VueObjectData } from '../utils/index.js'
 import type { IPropertyReferences } from '../utils/property-references.js'
 import utils from '../utils/index.js'
 import eslintUtils from '@eslint-community/eslint-utils'
@@ -67,6 +67,19 @@ const PROPERTY_LABEL = {
   expose: 'expose'
 }
 
+/**
+ * Check whether the given prop is explicitly typed as `never`.
+ * Such props are declared to forbid their usage, so they are never
+ * referenced by design and reporting them as unused is noise.
+ */
+function isNeverTypeProp(prop: ComponentProp): boolean {
+  return (
+    prop.type === 'type' &&
+    prop.node.type === 'TSPropertySignature' &&
+    prop.node.typeAnnotation?.typeAnnotation.type === 'TSNeverKeyword'
+  )
+}
+
 function findExpression(context: RuleContext, id: Identifier): Expression {
   const variable = utils.findVariableByIdentifier(context, id)
   if (!variable) {
@@ -79,10 +92,9 @@ function findExpression(context: RuleContext, id: Identifier): Expression {
       def.parent.kind === 'const' &&
       def.node.init
     ) {
-      if (def.node.init.type === 'Identifier') {
-        return findExpression(context, def.node.init)
-      }
-      return def.node.init
+      return def.node.init.type === 'Identifier'
+        ? findExpression(context, def.node.init)
+        : def.node.init
     }
   }
   return id
@@ -95,14 +107,12 @@ function isPublicMember(
   property: ComponentPropertyData,
   sourceCode: SourceCode
 ) {
-  if (
+  // Props do not support @public.
+  return (
     property.type === 'object' &&
-    // Props do not support @public.
-    property.groupName !== 'props'
-  ) {
-    return isPublicProperty(property.property, sourceCode)
-  }
-  return false
+    property.groupName !== 'props' &&
+    isPublicProperty(property.property, sourceCode)
+  )
 }
 
 /**
@@ -110,10 +120,7 @@ function isPublicMember(
  */
 function isPublicProperty(node: Property, sourceCode: SourceCode) {
   const jsdoc = getJSDocFromProperty(node, sourceCode)
-  if (jsdoc) {
-    return /(?:^|\s|\*)@public\b/u.test(jsdoc.value)
-  }
-  return false
+  return jsdoc !== null && /(?:^|\s|\*)@public\b/u.test(jsdoc.value)
 }
 
 /**
@@ -124,14 +131,10 @@ function getJSDocFromProperty(node: Property, sourceCode: SourceCode) {
   if (jsdoc) {
     return jsdoc
   }
-  if (
-    node.value.type === 'FunctionExpression' ||
+  return node.value.type === 'FunctionExpression' ||
     node.value.type === 'ArrowFunctionExpression'
-  ) {
-    return findJSDocComment(node.value, sourceCode)
-  }
-
-  return null
+    ? findJSDocComment(node.value, sourceCode)
+    : null
 }
 
 /**
@@ -158,11 +161,7 @@ function findJSDocComment(
     break
   }
 
-  if (tokenBefore && isJSDocComment(tokenBefore)) {
-    return tokenBefore
-  }
-
-  return null
+  return tokenBefore && isJSDocComment(tokenBefore) ? tokenBefore : null
 }
 
 export default {
@@ -191,7 +190,6 @@ export default {
                 GROUP_INJECT
               ]
             },
-            additionalItems: false,
             uniqueItems: true
           },
           deepData: { type: 'boolean' },
@@ -201,7 +199,6 @@ export default {
             items: {
               enum: [UNREFERENCED_UNKNOWN_MEMBER, UNREFERENCED_RETURN]
             },
-            additionalItems: false,
             uniqueItems: true
           }
         },
@@ -307,21 +304,11 @@ export default {
       if (
         (property.groupName === 'props' &&
           propertyReferencesForProps.hasProperty(property.name)) ||
-        propertyReferences.hasProperty('$props')
-      ) {
-        // used props
-        return
-      }
-      if (
-        property.groupName === 'setup' &&
-        templatePropertiesContainer.refNames.has(property.name)
-      ) {
-        // used template refs
-        return
-      }
-      if (
-        shouldIgnorePublicMembers &&
-        isPublicMember(property, context.sourceCode)
+        propertyReferences.hasProperty('$props') ||
+        (property.groupName === 'setup' &&
+          templatePropertiesContainer.refNames.has(property.name)) ||
+        (shouldIgnorePublicMembers &&
+          isPublicMember(property, context.sourceCode))
       ) {
         return
       }
@@ -387,10 +374,7 @@ export default {
         return null
       }
       const property = node.parent
-      if (!utils.isProperty(property)) {
-        return null
-      }
-      return property
+      return utils.isProperty(property) ? property : null
     }
 
     const scriptVisitor = utils.compositingVisitors(
@@ -404,7 +388,7 @@ export default {
           )
 
           for (const prop of props) {
-            if (!prop.propName) {
+            if (!prop.propName || isNeverTypeProp(prop)) {
               continue
             }
             if (prop.type === 'object') {
@@ -650,15 +634,17 @@ export default {
             propertyReferenceExtractor.extractFromFunctionParam(node, 0)
           container.propertyReferencesForProps.push(propertyReferences)
 
-          if (vueData.functional) {
-            // Check for Vue 2.x render & functional
-            const propertyReferencesForV2 =
-              propertyReferenceExtractor.extractFromFunctionParam(node, 1)
-
-            container.propertyReferencesForProps.push(
-              propertyReferencesForV2.getNest('props')
-            )
+          if (!vueData.functional) {
+            return
           }
+
+          // Check for Vue 2.x render & functional
+          const propertyReferencesForV2 =
+            propertyReferenceExtractor.extractFromFunctionParam(node, 1)
+
+          container.propertyReferencesForProps.push(
+            propertyReferencesForV2.getNest('props')
+          )
         },
         'ThisExpression, Identifier'(
           node: ThisExpression | Identifier,

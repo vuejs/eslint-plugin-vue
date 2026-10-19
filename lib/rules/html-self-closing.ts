@@ -44,22 +44,19 @@ function parseOptions(options: any): Options {
  * Get the elementType of the given element.
  */
 function getElementType(node: VElement): keyof Options {
-  if (utils.isCustomComponent(node)) {
+  if (
+    utils.isCustomComponent(node) ||
+    utils.isVueBuiltInElementName(node.rawName)
+  ) {
     return 'COMPONENT'
   }
   if (utils.isHtmlElementNode(node)) {
-    if (utils.isHtmlVoidElementName(node.name)) {
-      return 'VOID'
-    }
-    return 'NORMAL'
+    return utils.isHtmlVoidElementName(node.name) ? 'VOID' : 'NORMAL'
   }
   if (utils.isSvgElementNode(node)) {
     return 'SVG'
   }
-  if (utils.isMathElementNode(node)) {
-    return 'MATH'
-  }
-  return 'UNKNOWN'
+  return utils.isMathElementNode(node) ? 'MATH' : 'UNKNOWN'
 }
 
 /**
@@ -149,13 +146,12 @@ export default {
                 const tokens =
                   sourceCode.parserServices.getTemplateBodyTokenStore()
                 const close = tokens.getLastToken(node.startTag)
-                if (close.type !== 'HTMLTagClose') {
-                  return null
-                }
-                return fixer.replaceTextRange(
-                  [close.range[0], node.range[1]],
-                  '/>'
-                )
+                return close.type === 'HTMLTagClose'
+                  ? fixer.replaceTextRange(
+                      [close.range[0], node.range[1]],
+                      '/>'
+                    )
+                  : null
               }
             })
           }

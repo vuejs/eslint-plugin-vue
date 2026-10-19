@@ -10,6 +10,7 @@ import type {
 import { findVariable } from '@eslint-community/eslint-utils'
 import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
 import utils from '../utils/index.js'
+import tsUtils from '../utils/ts-utils/index.js'
 
 /**
  * Checks whether the given identifier reference has been initialized with a ref object.
@@ -18,10 +19,7 @@ function isRefInit(
   data: RefObjectReferenceForIdentifier | null
 ): data is RefObjectReferenceForIdentifier {
   const init = data && data.variableDeclarator && data.variableDeclarator.init
-  if (!init) {
-    return false
-  }
-  return data.defineChain.includes(init as any)
+  return init ? data.defineChain.includes(init as any) : false
 }
 
 /**
@@ -68,7 +66,9 @@ export default {
     schema: [],
     messages: {
       requireDotValue:
-        'Must use `.value` to read or write the value wrapped by `{{method}}()`.'
+        'Must use `.value` to read or write the value wrapped by `{{method}}()`.',
+      requireDotValueOfRef:
+        'Must use `.value` to read or write the value of a ref.'
     }
   },
   create(context: RuleContext) {
@@ -91,21 +91,28 @@ export default {
       }
     }
 
-    function reportIfRefWrapped(node: Identifier) {
+    function reportIfRefWrapped(node: Identifier, shouldCheckType = true) {
       const data = refReferences.get(node)
-      if (!isRefInit(data)) {
-        return
+      if (isRefInit(data)) {
+        context.report({
+          node,
+          messageId: 'requireDotValue',
+          data: {
+            method: data.method
+          },
+          fix(fixer) {
+            return fixer.insertTextAfter(node, '.value')
+          }
+        })
+      } else if (shouldCheckType && tsUtils.isRefObjectType(context, node)) {
+        context.report({
+          node,
+          messageId: 'requireDotValueOfRef',
+          fix(fixer) {
+            return fixer.insertTextAfter(node, '.value')
+          }
+        })
       }
-      context.report({
-        node,
-        messageId: 'requireDotValue',
-        data: {
-          method: data.method
-        },
-        fix(fixer) {
-          return fixer.insertTextAfter(node, '.value')
-        }
-      })
     }
 
     function reportWrappedIdentifiers(node: CallExpression) {
@@ -182,7 +189,12 @@ export default {
         'AssignmentExpression>Identifier'(
           node: Identifier & { parent: AssignmentExpression }
         ) {
-          if (node.parent.operator === '=' && node.parent.left !== node) {
+          if (node.parent.operator === '=') {
+            if (node.parent.left !== node) {
+              return
+            }
+            // Assigning another ref to a variable typed as a ref is valid
+            reportIfRefWrapped(node, false)
             return
           }
           reportIfRefWrapped(node)
@@ -230,9 +242,8 @@ export default {
           const name = utils.getStaticPropertyName(node.parent)
           if (
             name === 'value' ||
-            name == null ||
-            // WritableComputedRef
-            name === 'effect'
+            name === 'effect' || // WritableComputedRef
+            name == null
           ) {
             return
           }
@@ -268,15 +279,13 @@ export default {
       utils.defineVueVisitor(context, {
         onSetupFunctionEnter(node, { node: vueNode }) {
           const contextParam = utils.skipDefaultParamValue(node.params[1])
-          if (!contextParam) {
-            // no arguments
-            return
-          }
           if (
+            // no arguments
+            !contextParam ||
+            // cannot check
             contextParam.type === 'RestElement' ||
             contextParam.type === 'ArrayPattern'
           ) {
-            // cannot check
             return
           }
 

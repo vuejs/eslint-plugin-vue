@@ -62,15 +62,6 @@ export default {
   }
 }
 </script>
-<script setup>
-/* ✓ GOOD */
-defineModel({ type: String, default: 'hello' })
-defineModel({ type: Boolean }) // Boolean doesn't require a default
-
-/* ✗ BAD */
-defineModel({ type: String })
-defineModel('count', { type: Number })
-</script>
 ```
 
 </eslint-code-block>
@@ -93,5 +84,5 @@ This rule was introduced in eslint-plugin-vue v3.13.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-default-prop.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-default-prop.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-default-prop.test.ts)

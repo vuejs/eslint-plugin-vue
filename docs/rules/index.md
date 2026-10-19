@@ -233,6 +233,8 @@ For example:
 | [vue/next-tick-style] | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template] | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
+| [vue/no-content-outside-block] | disallow content outside of the top-level blocks | :bulb: | :warning: |
+| [vue/no-define-model-default] | disallow default values in `defineModel` |  | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-duplicate-class-names] | disallow duplication of class names in class attributes | :wrench: | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
@@ -241,6 +243,7 @@ For example:
 | [vue/no-multiple-objects-in-class] | disallow passing multiple objects in an array to class |  | :hammer: |
 | [vue/no-negated-v-if-condition] | disallow negated conditions in v-if/v-else | :wrench: | :hammer: |
 | [vue/no-potential-component-option-typo] | disallow a potential typo in your component property | :bulb: | :hammer: |
+| [vue/no-props-shadow] | disallow declarations that shadow props in `<script setup>` |  | :warning: |
 | [vue/no-ref-object-reactivity-loss] | disallow usages of ref objects that can lead to loss of reactivity |  | :warning: |
 | [vue/no-restricted-block] | disallow specific block |  | :hammer: |
 | [vue/no-restricted-call-after-await] | disallow asynchronously called restricted methods |  | :hammer: |
@@ -448,7 +451,9 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-computed-properties-in-data]: ./no-computed-properties-in-data.md
 [vue/no-console]: ./no-console.md
 [vue/no-constant-condition]: ./no-constant-condition.md
+[vue/no-content-outside-block]: ./no-content-outside-block.md
 [vue/no-custom-modifiers-on-v-model]: ./no-custom-modifiers-on-v-model.md
+[vue/no-define-model-default]: ./no-define-model-default.md
 [vue/no-deprecated-data-object-declaration]: ./no-deprecated-data-object-declaration.md
 [vue/no-deprecated-delete-set]: ./no-deprecated-delete-set.md
 [vue/no-deprecated-destroyed-lifecycle]: ./no-deprecated-destroyed-lifecycle.md
@@ -496,6 +501,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-negated-v-if-condition]: ./no-negated-v-if-condition.md
 [vue/no-parsing-error]: ./no-parsing-error.md
 [vue/no-potential-component-option-typo]: ./no-potential-component-option-typo.md
+[vue/no-props-shadow]: ./no-props-shadow.md
 [vue/no-ref-as-operand]: ./no-ref-as-operand.md
 [vue/no-ref-object-reactivity-loss]: ./no-ref-object-reactivity-loss.md
 [vue/no-required-prop-with-default]: ./no-required-prop-with-default.md

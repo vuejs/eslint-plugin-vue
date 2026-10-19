@@ -21,8 +21,7 @@ export default {
           ignores: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false
@@ -98,8 +97,7 @@ export default {
       }),
       {
         'Program:exit'(node) {
-          if (hasName) return
-          if (!hasVue && node.body.length > 0) return
+          if (hasName || (!hasVue && node.body.length > 0)) return
           const fileName = context.filename
           const componentName = path.basename(fileName, path.extname(fileName))
           if (
