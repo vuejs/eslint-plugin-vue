@@ -2,11 +2,9 @@
  * @author Przemyslaw Falowski (@przemkow)
  * @fileoverview This rule checks whether v-model used on custom component do not have an argument
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -22,11 +20,9 @@ module.exports = {
       vModelRequireNoArgument: "'v-model' directives require no argument."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='model']"(node) {
+      "VAttribute[directive=true][key.name.name='model']"(node: VDirective) {
         const element = node.parent.parent
 
         if (node.key.argument && utils.isCustomComponent(element)) {

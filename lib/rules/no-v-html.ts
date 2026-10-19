@@ -2,10 +2,9 @@
  * @fileoverview Restrict or warn use of v-html to prevent XSS attack
  * @author Nathan Zeplowitz
  */
-'use strict'
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -29,8 +28,7 @@ module.exports = {
       unexpected: "'v-html' directive can lead to XSS attack."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0]
     const ignoreRegEx = options?.ignorePattern
       ? new RegExp(options.ignorePattern, 'u')
@@ -38,11 +36,11 @@ module.exports = {
 
     /**
      * Check if the expression matches the ignore pattern
-     * @param {VExpressionContainer['expression']} expression
-     * @param {SourceCode} sourceCode
-     * @returns {boolean}
      */
-    function shouldIgnore(expression, sourceCode) {
+    function shouldIgnore(
+      expression: VExpressionContainer['expression'],
+      sourceCode: SourceCode
+    ): boolean {
       if (!ignoreRegEx || !expression) {
         return false
       }
@@ -58,8 +56,7 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
-      "VAttribute[directive=true][key.name.name='html']"(node) {
+      "VAttribute[directive=true][key.name.name='html']"(node: VDirective) {
         const sourceCode = context.sourceCode
 
         if (
