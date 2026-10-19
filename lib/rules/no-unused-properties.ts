@@ -120,7 +120,7 @@ function isPublicMember(
  */
 function isPublicProperty(node: Property, sourceCode: SourceCode) {
   const jsdoc = getJSDocFromProperty(node, sourceCode)
-  return !!jsdoc && /(?:^|\s|\*)@public\b/u.test(jsdoc.value)
+  return jsdoc !== null && /(?:^|\s|\*)@public\b/u.test(jsdoc.value)
 }
 
 /**

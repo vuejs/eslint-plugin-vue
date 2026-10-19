@@ -1,0 +1,77 @@
+/**
+ * @fileoverview enforce valid `v-is` directives
+ * @author Yosuke Ota
+ */
+import utils from '../utils/index.js'
+
+/**
+ * Check whether the given node is valid or not.
+ */
+function isValidElement(node: VElement): boolean {
+  return (
+    !utils.isHtmlElementNode(node) ||
+    utils.isHtmlWellKnownElementName(node.rawName)
+  )
+}
+
+export default {
+  meta: {
+    type: 'problem',
+    docs: {
+      description: 'enforce valid `v-is` directives',
+      categories: ['vue3-essential'],
+      url: 'https://eslint.vuejs.org/rules/valid-v-is.html'
+    },
+    fixable: null,
+    schema: [],
+    messages: {
+      unexpectedArgument: "'v-is' directives require no argument.",
+      unexpectedModifier: "'v-is' directives require no modifier.",
+      expectedValue: "'v-is' directives require that attribute value.",
+      ownerMustBeHTMLElement:
+        "'v-is' directive must be owned by a native HTML element, but '{{name}}' is not."
+    }
+  },
+  create(context: RuleContext) {
+    return utils.defineTemplateBodyVisitor(context, {
+      "VAttribute[directive=true][key.name.name='is']"(node: VDirective) {
+        if (node.key.argument) {
+          context.report({
+            node: node.key.argument,
+            messageId: 'unexpectedArgument'
+          })
+        }
+        const lastModifier = node.key.modifiers.at(-1)
+        if (lastModifier) {
+          context.report({
+            node,
+            loc: {
+              start: node.key.modifiers[0].loc.start,
+              end: lastModifier.loc.end
+            },
+            messageId: 'unexpectedModifier'
+          })
+        }
+        if (!node.value || utils.isEmptyValueDirective(node, context)) {
+          context.report({
+            node,
+            messageId: 'expectedValue'
+          })
+        }
+
+        const element = node.parent.parent
+
+        if (isValidElement(element)) {
+          return
+        }
+
+        const name = element.name
+        context.report({
+          node,
+          messageId: 'ownerMustBeHTMLElement',
+          data: { name }
+        })
+      }
+    })
+  }
+}

@@ -1,0 +1,127 @@
+/**
+ * @author Yosuke Ota <https://github.com/ota-meshi>
+ * See LICENSE file in root directory for full license.
+ */
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+
+export default {
+  meta: {
+    type: 'problem',
+    docs: {
+      description: 'enforce valid `defineOptions` compiler macro',
+      categories: ['vue3-essential'],
+      url: 'https://eslint.vuejs.org/rules/valid-define-options.html'
+    },
+    fixable: null,
+    schema: [],
+    messages: {
+      referencingLocally:
+        '`defineOptions` is referencing locally declared variables.',
+      multiple: '`defineOptions` has been called multiple times.',
+      notDefined: 'Options are not defined.',
+      disallowProp:
+        '`defineOptions()` cannot be used to declare `{{propName}}`. Use `{{insteadMacro}}()` instead.',
+      typeArgs: '`defineOptions()` cannot accept type arguments.'
+    }
+  },
+  create(context: RuleContext) {
+    const scriptSetup = utils.getScriptSetupElement(context)
+    if (!scriptSetup) {
+      return {}
+    }
+
+    const optionsDefExpressions = new Set<Expression | SpreadElement>()
+    const defineOptionsNodes: CallExpression[] = []
+
+    return utils.compositingVisitors(
+      utils.defineScriptSetupVisitor(context, {
+        onDefineOptionsEnter(node) {
+          defineOptionsNodes.push(node)
+
+          if (node.arguments.length > 0) {
+            const define = node.arguments[0]
+            if (define.type === 'ObjectExpression') {
+              for (const [propName, insteadMacro] of [
+                ['props', 'defineProps'],
+                ['emits', 'defineEmits'],
+                ['expose', 'defineExpose'],
+                ['slots', 'defineSlots']
+              ]) {
+                const prop = utils.findProperty(define, propName)
+                if (prop) {
+                  context.report({
+                    node,
+                    messageId: 'disallowProp',
+                    data: { propName, insteadMacro }
+                  })
+                }
+              }
+            }
+
+            optionsDefExpressions.add(node.arguments[0])
+          } else {
+            context.report({
+              node,
+              messageId: 'notDefined'
+            })
+          }
+
+          const typeArguments =
+            'typeArguments' in node ? node.typeArguments : node.typeParameters
+          if (typeArguments) {
+            context.report({
+              node: typeArguments,
+              messageId: 'typeArgs'
+            })
+          }
+        },
+        Identifier(node) {
+          for (const defineOptions of optionsDefExpressions) {
+            if (!utils.inRange(defineOptions.range, node)) {
+              continue
+            }
+
+            const variable = findVariable(utils.getScope(context, node), node)
+            if (
+              !variable ||
+              variable.references.every((ref) => ref.identifier !== node) ||
+              variable.defs.length === 0 ||
+              variable.defs.some(
+                (def) =>
+                  def.type === 'ImportBinding' ||
+                  !utils.inRange(scriptSetup.range, def.name) ||
+                  utils.inRange(defineOptions.range, def.name) ||
+                  (def.type === 'Variable' &&
+                    def.parent.kind === 'const' &&
+                    def.node.init &&
+                    def.node.init.type === 'Literal')
+              ) ||
+              utils.withinTypeNode(node)
+            ) {
+              continue
+            }
+            //`defineOptions` is referencing locally declared variables.
+            context.report({
+              node,
+              messageId: 'referencingLocally'
+            })
+          }
+        }
+      }),
+      {
+        'Program:exit'() {
+          if (defineOptionsNodes.length > 1) {
+            // `defineOptions` has been called multiple times.
+            for (const node of defineOptionsNodes) {
+              context.report({
+                node,
+                messageId: 'multiple'
+              })
+            }
+          }
+        }
+      }
+    )
+  }
+}

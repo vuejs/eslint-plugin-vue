@@ -5,7 +5,7 @@
 import utils from '../utils/index.js'
 
 function isFunctionIdentifier(node: Expression | SpreadElement | null) {
-  return !!node && node.type === 'Identifier' && node.name === 'Function'
+  return node !== null && node.type === 'Identifier' && node.name === 'Function'
 }
 
 function hasFunctionType(node: Expression): boolean {
