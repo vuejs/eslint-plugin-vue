@@ -17,10 +17,8 @@ function getSlotDirectivesOnElement(node: VElement): VDirective[] {
 }
 
 /**
- * Get all `v-slot` directives on the children of a given element.
- * @returns The array of the group of `v-slot` directives.
- * The group bundles `v-slot` directives of element sequence which is connected
- * by `v-if`/`v-else-if`/`v-else`.
+ * Get all `v-slot` directives on the children of a given element, grouped by
+ * `v-if`/`v-else-if`/`v-else` sequences.
  */
 function getSlotDirectivesOnChildren(node: VElement): VDirective[][] {
   const groups: VDirective[][] = []
@@ -151,7 +149,6 @@ function getVSlotVForVariableIfUsingIterationVars(
 
 /**
  * Gets iterative variables if a given argument node is using iterative variables that the element defined.
- * @param element The element node which has the argument.
  */
 function getUsingIterationVars(
   argument: VExpressionContainer | VIdentifier | null,
@@ -198,7 +195,6 @@ function isUsingScopeVar(vSlot: VDirective): boolean {
 /**
  * If `allowModifiers` option is set to `true`, check whether a given argument node has invalid modifiers like `v-slot.foo`.
  * Otherwise, check whether a given argument node has at least one modifier.
- * @param shouldAllowModifiers `allowModifiers` option in context.
  */
 function hasInvalidModifiers(
   vSlot: VDirective,
