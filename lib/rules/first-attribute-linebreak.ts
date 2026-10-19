@@ -2,11 +2,9 @@
  * @fileoverview Enforce the location of first attribute
  * @author Yosuke Ota
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -30,13 +28,10 @@ module.exports = {
       unexpected: 'Expected no linebreak before this attribute.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {"below" | "beside" | "ignore"} */
-    const singleline =
+  create(context: RuleContext) {
+    const singleline: 'below' | 'beside' | 'ignore' =
       (context.options[0] && context.options[0].singleline) || 'ignore'
-    /** @type {"below" | "beside" | "ignore"} */
-    const multiline =
+    const multiline: 'below' | 'beside' | 'ignore' =
       (context.options[0] && context.options[0].multiline) || 'below'
 
     const sourceCode = context.sourceCode
@@ -46,10 +41,11 @@ module.exports = {
 
     /**
      * Report attribute
-     * @param {VAttribute | VDirective} firstAttribute
-     * @param { "below" | "beside"} location
      */
-    function report(firstAttribute, location) {
+    function report(
+      firstAttribute: VAttribute | VDirective,
+      location: 'below' | 'beside'
+    ) {
       context.report({
         node: firstAttribute,
         messageId: location === 'beside' ? 'unexpected' : 'expected',

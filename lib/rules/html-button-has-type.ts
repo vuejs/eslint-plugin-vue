@@ -2,16 +2,9 @@
  * @fileoverview Disallow usage of button without an explicit type attribute
  * @author Jonathan Santerre <jonathan@santerre.dev>
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- *
- * @param {string} type
- * @returns {type is 'button' | 'submit' | 'reset'}
- */
-function isButtonType(type) {
+function isButtonType(type: string): type is 'button' | 'submit' | 'reset' {
   return ['button', 'submit', 'reset'].includes(type)
 }
 
@@ -21,7 +14,13 @@ const optionDefaults = {
   reset: true
 }
 
-module.exports = {
+interface Configuration {
+  button: boolean
+  submit: boolean
+  reset: boolean
+}
+
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -52,26 +51,18 @@ module.exports = {
     }
   },
 
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
-    /**
-     * @typedef {object} Configuration
-     * @property {boolean} button
-     * @property {boolean} submit
-     * @property {boolean} reset
-     */
-    /** @type {Configuration} */
-    const configuration = Object.assign({}, optionDefaults, context.options[0])
+  create(context: RuleContext): RuleListener {
+    const configuration: Configuration = Object.assign(
+      {},
+      optionDefaults,
+      context.options[0]
+    )
 
-    /**
-     * @param {ASTNode} node
-     * @param {string} messageId
-     * @param {any} [data]
-     */
-    function report(node, messageId, data) {
+    function report(
+      node: ASTNode,
+      messageId: string,
+      data?: Record<string, string>
+    ) {
       context.report({
         node,
         messageId,
@@ -79,10 +70,7 @@ module.exports = {
       })
     }
 
-    /**
-     * @param {VAttribute} attribute
-     */
-    function validateAttribute(attribute) {
+    function validateAttribute(attribute: VAttribute) {
       const value = attribute.value
       if (!value || !value.value) {
         report(value || attribute, 'emptyTypeAttribute')
@@ -97,10 +85,7 @@ module.exports = {
       }
     }
 
-    /**
-     * @param {VDirective} directive
-     */
-    function validateDirective(directive) {
+    function validateDirective(directive: VDirective) {
       const value = directive.value
       if (!value || !value.expression) {
         report(value || directive, 'emptyTypeAttribute')
@@ -108,10 +93,7 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /**
-       * @param {VElement} node
-       */
-      "VElement[rawName='button']"(node) {
+      "VElement[rawName='button']"(node: VElement) {
         const typeAttr = utils.getAttribute(node, 'type')
         if (typeAttr) {
           validateAttribute(typeAttr)

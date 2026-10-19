@@ -2,11 +2,9 @@
  * @fileoverview enforce unified spacing in mustache interpolations.
  * @author Armano
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -27,8 +25,7 @@ module.exports = {
       unexpectedSpaceBefore: "Expected no space before '}}', but found."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || 'always'
     const sourceCode = context.sourceCode
     const template =
@@ -36,8 +33,7 @@ module.exports = {
       sourceCode.parserServices.getTemplateBodyTokenStore()
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VExpressionContainer} node */
-      'VExpressionContainer[expression!=null]'(node) {
+      'VExpressionContainer[expression!=null]'(node: VExpressionContainer) {
         const openBrace = template.getFirstToken(node)
         const closeBrace = template.getLastToken(node)
 

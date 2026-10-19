@@ -2,14 +2,9 @@
  * @fileoverview Define the number of attributes allows per line
  * @author Filipa Lacerda
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @param {any} options
- */
-function parseOptions(options) {
+function parseOptions(options: any) {
   const defaults = {
     singleline: 1,
     multiline: 1
@@ -40,10 +35,7 @@ function parseOptions(options) {
   return defaults
 }
 
-/**
- * @param {(VDirective | VAttribute)[]} attributes
- */
-function groupAttrsByLine(attributes) {
+function groupAttrsByLine(attributes: (VDirective | VAttribute)[]) {
   const propsPerLine = [[attributes[0]]]
 
   for (let index = 1; index < attributes.length; index++) {
@@ -51,9 +43,7 @@ function groupAttrsByLine(attributes) {
     const current = attributes[index]
 
     if (previous.loc.end.line === current.loc.start.line) {
-      const lastProp = /** @type {(VDirective | VAttribute)[]} */ (
-        propsPerLine.at(-1)
-      )
+      const lastProp = propsPerLine.at(-1)!
       lastProp.push(current)
     } else {
       propsPerLine.push([current])
@@ -63,7 +53,7 @@ function groupAttrsByLine(attributes) {
   return propsPerLine
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -120,8 +110,7 @@ module.exports = {
       shouldBeOnNewLine: "'{{name}}' should be on a new line."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const configuration = parseOptions(context.options[0])
     const multilineMaximum = configuration.multiline
@@ -153,10 +142,7 @@ module.exports = {
       }
     })
 
-    /**
-     * @param {(VDirective | VAttribute)[]} attributes
-     */
-    function showErrors(attributes) {
+    function showErrors(attributes: (VDirective | VAttribute)[]) {
       for (const [i, prop] of attributes.entries()) {
         context.report({
           node: prop,
@@ -168,14 +154,11 @@ module.exports = {
 
             // Find the closest token before the current prop
             // that is not a white space
-            const prevToken = /** @type {Token} */ (
-              template.getTokenBefore(prop, {
-                filter: (token) => token.type !== 'HTMLWhitespace'
-              })
-            )
+            const prevToken = template.getTokenBefore(prop, {
+              filter: (token) => token.type !== 'HTMLWhitespace'
+            })!
 
-            /** @type {Range} */
-            const range = [prevToken.range[1], prop.range[0]]
+            const range: Range = [prevToken.range[1], prop.range[0]]
 
             return fixer.replaceTextRange(range, '\n')
           }

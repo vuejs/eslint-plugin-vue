@@ -3,14 +3,9 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @param {number} lineBreaks
- */
-function getPhrase(lineBreaks) {
+function getPhrase(lineBreaks: number) {
   switch (lineBreaks) {
     case 0: {
       return 'no line breaks'
@@ -24,33 +19,28 @@ function getPhrase(lineBreaks) {
   }
 }
 
-/**
- * @typedef LineBreakBehavior
- * @type {('always'|'never')}
- */
+type LineBreakBehavior = 'always' | 'never'
 
-/**
- * @typedef LineType
- * @type {('singleline'|'multiline')}
- */
+type LineType = 'singleline' | 'multiline'
 
-/**
- * @typedef RuleOptions
- * @type {object}
- * @property {LineBreakBehavior} singleline - The behavior for single line tags.
- * @property {LineBreakBehavior} multiline - The behavior for multiline tags.
- * @property {object} selfClosingTag
- * @property {LineBreakBehavior} selfClosingTag.singleline - The behavior for single line self closing tags.
- * @property {LineBreakBehavior} selfClosingTag.multiline - The behavior for multiline self closing tags.
- */
+interface RuleOptions {
+  /** The behavior for single line tags. */
+  singleline: LineBreakBehavior
+  /** The behavior for multiline tags. */
+  multiline: LineBreakBehavior
+  selfClosingTag?: {
+    /** The behavior for single line self closing tags. */
+    singleline?: LineBreakBehavior
+    /** The behavior for multiline self closing tags. */
+    multiline?: LineBreakBehavior
+  }
+}
 
-/**
- * @param {VStartTag | VEndTag} node - The node representing a start or end tag.
- * @param {RuleOptions} options - The options for line breaks.
- * @param {LineType} type - The type of line break.
- * @returns {number} - The expected line breaks.
- */
-function getExpectedLineBreaks(node, options, type) {
+function getExpectedLineBreaks(
+  node: VStartTag | VEndTag,
+  options: RuleOptions,
+  type: LineType
+): number {
   const isSelfClosingTag = node.type === 'VStartTag' && node.selfClosing
   if (
     isSelfClosingTag &&
@@ -63,7 +53,7 @@ function getExpectedLineBreaks(node, options, type) {
   return options[type] === 'always' ? 1 : 0
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -97,8 +87,7 @@ module.exports = {
         'Expected {{expected}} before closing bracket, but {{actual}} found.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = Object.assign(
       {},
       {
@@ -113,8 +102,7 @@ module.exports = {
       sourceCode.parserServices.getTemplateBodyTokenStore()
 
     return utils.defineDocumentVisitor(context, {
-      /** @param {VStartTag | VEndTag} node */
-      'VStartTag, VEndTag'(node) {
+      'VStartTag, VEndTag'(node: VStartTag | VEndTag) {
         const closingBracketToken = template.getLastToken(node)
         if (
           closingBracketToken.type !== 'HTMLSelfClosingTagClose' &&
@@ -147,8 +135,10 @@ module.exports = {
               actual: getPhrase(actualLineBreaks)
             },
             fix(fixer) {
-              /** @type {Range} */
-              const range = [prevToken.range[1], closingBracketToken.range[0]]
+              const range: Range = [
+                prevToken.range[1],
+                closingBracketToken.range[0]
+              ]
               const text = '\n'.repeat(expectedLineBreaks)
               return fixer.replaceTextRange(range, text)
             }

@@ -3,11 +3,9 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -21,8 +19,7 @@ module.exports = {
       missingEndTag: "'<{{name}}>' should have end tag."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     let hasInvalidEOF = false
 
     return utils.defineTemplateBodyVisitor(
