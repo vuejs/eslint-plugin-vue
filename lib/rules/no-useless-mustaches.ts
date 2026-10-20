@@ -124,12 +124,17 @@ export default {
             // It doesn't autofix because another rule like indent or eol space might remove spaces.
             return null
           }
-          const escaped = text.replaceAll('<', '&lt;')
+          const replacement = text
+            .replaceAll('<', '&lt;')
+            .replaceAll(/\\([\S\s])/g, '$1')
+          const prevChar = sourceCode.text[node.range[0] - 1] ?? ''
+          const nextChar = sourceCode.text[node.range[1]] ?? ''
+          if (`${prevChar}${replacement}${nextChar}`.includes('{{')) {
+            // `{{` in static text would start a new mustache interpolation.
+            return null
+          }
 
-          return fixer.replaceText(
-            node,
-            escaped.replaceAll(/\\([\S\s])/g, '$1')
-          )
+          return fixer.replaceText(node, replacement)
         }
       })
     }

@@ -461,6 +461,66 @@ tester.run('no-useless-mustaches', rule, {
     {
       code: `
       <template>
+        <code>{{ '{{' }} count }}</code>
+        <code>{{ 'a {{ b' }}</code>
+        <code>{{ '{' }}{{ '{' }} count }}</code>
+        <code>{{ '\\{\\{' }} count }}</code>
+      </template>
+      `,
+      output: `
+      <template>
+        <code>{{ '{{' }} count }}</code>
+        <code>{{ 'a {{ b' }}</code>
+        <code>{{ '{' }}{ count }}</code>
+        <code>{{ '\\{\\{' }} count }}</code>
+      </template>
+      `,
+      errors: [
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 15,
+          endLine: 3,
+          endColumn: 25
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 4,
+          column: 15,
+          endLine: 4,
+          endColumn: 29
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 24
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 5,
+          column: 24,
+          endLine: 5,
+          endColumn: 33
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 27
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
         {{ \`foo
 bar\` }}
       </template>
