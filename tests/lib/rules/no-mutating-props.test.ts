@@ -428,10 +428,211 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps<{ a: { x: number }, b: number[] }>()
+        const x = (props.a as { x: number }).x
+        const y = props.b!.length
+        foo(props as any, props.a satisfies object)
+        </script>
+        <template>
+          <div :foo="(props.a as any).x" :bar="props.b!.length" />
+        </template>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
 
   invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps<{ a: { x: number }, b: number[], c: number }>()
+        props!.c = 1;
+        (props as any).a.x = 2;
+        (props.b as number[]).push(1);
+        (props.a satisfies object).x++;
+        (<any>props).c = 3
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Unexpected mutation of "c" prop.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 21
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 31
+        },
+        {
+          message: 'Unexpected mutation of "b" prop.',
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 38
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 39
+        },
+        {
+          message: 'Unexpected mutation of "c" prop.',
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 27
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const { a, b } = defineProps<{ a: { x: number }, b: number[] }>();
+        (a as any).x = 2;
+        b!.push(1)
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 25
+        },
+        {
+          message: 'Unexpected mutation of "b" prop.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 19
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps<{ a: { x: number } }>()
+        </script>
+        <template>
+          <div @click="props!.a.x++" />
+          <div @click="(a as any).x = 1" />
+          <input v-model="(props.a as any).x" />
+          <input v-model="a!.x" />
+        </template>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 36
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 7,
+          column: 24,
+          endLine: 7,
+          endColumn: 40
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 8,
+          column: 27,
+          endLine: 8,
+          endColumn: 45
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 9,
+          column: 27,
+          endLine: 9,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script lang="ts">
+        export default {
+          props: ['a'],
+          setup(props) {
+            (props as any).a.x = 1
+          },
+          methods: {
+            foo() {
+              (this as any).a = 1
+              this.a!.x = 2
+            }
+          }
+        }
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 35
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 10,
+          column: 15,
+          endLine: 10,
+          endColumn: 34
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 11,
+          column: 15,
+          endLine: 11,
+          endColumn: 28
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `
