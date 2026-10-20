@@ -127,14 +127,25 @@ export default {
           const replacement = text
             .replaceAll('<', '&lt;')
             .replaceAll(/\\([\S\s])/g, '$1')
-          const prevChar = sourceCode.text[node.range[0] - 1] ?? ''
-          const nextChar = sourceCode.text[node.range[1]] ?? ''
-          if (`${prevChar}${replacement}${nextChar}`.includes('{{')) {
-            // `{{` in static text would start a new mustache interpolation.
-            return null
-          }
+          const textBefore = sourceCode.text.slice(
+            Math.max(0, node.range[0] - 32),
+            node.range[0]
+          )
+          const textAfter = sourceCode.text.slice(
+            node.range[1],
+            node.range[1] + 1
+          )
+          // `{{` in static text would start a new mustache interpolation.
+          const canStartMustache =
+            `${textBefore.slice(-1)}${replacement}${textAfter}`.includes('{{')
+          // `&` would join the surrounding text into a different character reference.
+          const canJoinCharacterReference =
+            (/&[\w#]*$/u.test(replacement) && /^[\w#;]/u.test(textAfter)) ||
+            (/^[\w#;]/u.test(replacement) && /&[\w#]*$/u.test(textBefore))
 
-          return fixer.replaceText(node, replacement)
+          return canStartMustache || canJoinCharacterReference
+            ? null
+            : fixer.replaceText(node, replacement)
         }
       })
     }
