@@ -55,14 +55,14 @@ export default {
     const options = context.options[0] || {}
     const shouldCheckMultiRootNodes = options.checkMultiRootNodes === true
 
-    let inheritAttrsValue: Literal['value'] = true
+    let shouldInheritAttrs = true
     const attrsRefs: VReference[] = []
 
     function processOptions(node: ObjectExpression) {
       const inheritAttrsProp = utils.findProperty(node, 'inheritAttrs')
 
       if (inheritAttrsProp && inheritAttrsProp.value.type === 'Literal') {
-        inheritAttrsValue = inheritAttrsProp.value.value
+        shouldInheritAttrs = Boolean(inheritAttrsProp.value.value)
       }
     }
 
@@ -80,7 +80,7 @@ export default {
         "VAttribute[directive=true][key.name.name='bind'][key.argument=null] > VExpressionContainer"(
           node: VExpressionContainer
         ) {
-          if (!inheritAttrsValue) {
+          if (!shouldInheritAttrs) {
             return
           }
           const reference = node.references.find(
