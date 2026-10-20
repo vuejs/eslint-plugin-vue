@@ -238,6 +238,60 @@ export default {
       }
     }
 
+    /**
+     * Verifies that a `defineModel()` ref binding is not mutated through `.value`.
+     *
+     * `defineModel()` returns a ref that bridges a `modelValue` prop and an
+     * `update:modelValue` emit. Reassigning the ref (`model.value = next`) goes
+     * through the ref setter and emits the update, so it is the correct pattern and
+     * is intentionally allowed. Mutating a nested property in place
+     * (`model.value.foo = 1`, `model.value.items[0] = 1`, `model.value.items.push(1)`,
+     * `Object.assign(model.value, {...})`) bypasses the setter, never emits, and
+     * silently desyncs the parent, so it is reported.
+     */
+    function verifyModelVariable(defId: Identifier, name: string) {
+      const variable = findVariable(utils.getScope(context, defId), defId)
+      if (!variable) {
+        return
+      }
+
+      for (const reference of variable.references) {
+        if (!reference.isRead()) {
+          continue
+        }
+        const id = reference.identifier
+        const valueNode = id.parent
+        if (
+          !valueNode ||
+          valueNode.type !== 'MemberExpression' ||
+          valueNode.object !== id ||
+          utils.getStaticPropertyName(valueNode) !== 'value'
+        ) {
+          continue
+        }
+
+        const invalid = utils.findMutating(valueNode)
+        if (!invalid) {
+          continue
+        }
+        // `model.value = next` (empty path, assignment/update) reassigns the ref and
+        // is the required update pattern; only report mutation nested below `.value`
+        // or in-place calls such as `push()`/`Object.assign()`.
+        const isNestedMutation =
+          invalid.pathNodes.length > 0 || invalid.kind === 'call'
+        if (!isNestedMutation) {
+          continue
+        }
+        // `shallowOnly` permits mutating the value while keeping the reference; for a
+        // model ref that means nested mutation is allowed.
+        if (shallowOnly) {
+          continue
+        }
+
+        report(invalid.node, name)
+      }
+    }
+
     function* extractDefineVariableNames() {
       const globalScope = context.sourceCode.scopeManager.globalScope
       if (!globalScope) {
@@ -329,6 +383,18 @@ export default {
             }
             verifyPropVariable(prop, path)
           }
+        },
+        onDefineModelEnter(node, model) {
+          const parent = node.parent
+          if (
+            !parent ||
+            parent.type !== 'VariableDeclarator' ||
+            parent.init !== node ||
+            parent.id.type !== 'Identifier'
+          ) {
+            return
+          }
+          verifyModelVariable(parent.id, model.name.modelName)
         }
       }),
       utils.defineVueVisitor(context, {
