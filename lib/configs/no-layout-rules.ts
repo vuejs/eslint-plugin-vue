@@ -52,6 +52,7 @@ export default {
     'vue/space-infix-ops': 'off',
     'vue/space-unary-ops': 'off',
     'vue/template-curly-spacing': 'off',
+    'vue/template-wrapper-directive-style': 'off',
     'vue/v-for-delimiter-style': 'off'
   }
 }
