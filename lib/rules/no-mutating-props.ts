@@ -389,12 +389,22 @@ export default {
           if (
             !parent ||
             parent.type !== 'VariableDeclarator' ||
-            parent.init !== node ||
-            parent.id.type !== 'Identifier'
+            parent.init !== node
           ) {
             return
           }
-          verifyModelVariable(parent.id, model.name.modelName)
+          const id = parent.id
+          if (id.type === 'Identifier') {
+            // `const model = defineModel()`
+            verifyModelVariable(id, model.name.modelName)
+          } else if (id.type === 'ArrayPattern') {
+            // `const [model, modifiers] = defineModel()`. The first element is
+            // the model ref; the second is the modifiers object.
+            const modelRef = id.elements[0]
+            if (modelRef && modelRef.type === 'Identifier') {
+              verifyModelVariable(modelRef, model.name.modelName)
+            }
+          }
         }
       }),
       utils.defineVueVisitor(context, {
