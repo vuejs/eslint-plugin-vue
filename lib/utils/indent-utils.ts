@@ -34,7 +34,7 @@ export function isNotWhitespace(
   return (
     token != null &&
     token.type !== 'HTMLWhitespace' &&
-    (token.type !== 'JSXText' || !!token.value.trim())
+    (token.type !== 'JSXText' || token.value.trim() !== '')
   )
 }
 

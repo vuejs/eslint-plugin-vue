@@ -59,6 +59,10 @@ export default {
 
 - `vueVersion` (`2 | 3`) ... Specify the version of Vue you are using. Default is `3`.
 
+## :couple: Related Rules
+
+- [vue/no-props-shadow](./no-props-shadow.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v8.0.0

@@ -1,0 +1,134 @@
+/**
+ * @author Toru Nagashima
+ * @copyright 2017 Toru Nagashima. All rights reserved.
+ * See LICENSE file in root directory for full license.
+ */
+import utils from '../utils/index.js'
+import keyAliases from '../utils/key-aliases.json' with { type: 'json' }
+
+const VALID_MODIFIERS = new Set([
+  'stop',
+  'prevent',
+  'capture',
+  'self',
+  'ctrl',
+  'shift',
+  'alt',
+  'meta',
+  'native',
+  'once',
+  'left',
+  'right',
+  'middle',
+  'passive',
+  'esc',
+  'tab',
+  'enter',
+  'space',
+  'up',
+  'down',
+  'delete',
+  'exact'
+])
+const VERB_MODIFIERS = new Set(['stop', 'prevent'])
+// https://www.w3.org/TR/uievents-key/
+const KEY_ALIASES = new Set(keyAliases)
+
+function isValidModifier(
+  modifierNode: VIdentifier,
+  customModifiers: Set<string>
+) {
+  const modifier = modifierNode.name
+  return (
+    // built-in aliases
+    VALID_MODIFIERS.has(modifier) ||
+    // keyCode
+    // eslint-disable-next-line unicorn/prefer-number-coercion -- parsing an integer keyCode from a v-on modifier; `parseInt` radix-10 semantics are intentional
+    Number.isSafeInteger(Number.parseInt(modifier, 10)) ||
+    // keyAlias (an Unicode character)
+    [...modifier].length === 1 ||
+    // keyAlias (special keys)
+    KEY_ALIASES.has(modifier) ||
+    // custom modifiers
+    customModifiers.has(modifier)
+  )
+}
+
+export default {
+  meta: {
+    type: 'problem',
+    docs: {
+      description: 'enforce valid `v-on` directives',
+      categories: ['vue3-essential', 'vue2-essential'],
+      url: 'https://eslint.vuejs.org/rules/valid-v-on.html'
+    },
+    fixable: null,
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          modifiers: {
+            type: 'array',
+            items: { type: 'string' }
+          }
+        },
+        additionalProperties: false
+      }
+    ],
+    messages: {
+      unsupportedModifier:
+        "'v-on' directives don't support the modifier '{{modifier}}'.",
+      avoidKeyword:
+        'Avoid using JavaScript keyword as "v-on" value: {{value}}.',
+      expectedValueOrVerb:
+        "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."
+    }
+  },
+  create(context: RuleContext) {
+    const options = context.options[0] || {}
+    const customModifiers = new Set<string>(options.modifiers || [])
+    const sourceCode = context.sourceCode
+
+    return utils.defineTemplateBodyVisitor(context, {
+      "VAttribute[directive=true][key.name.name='on']"(node: VDirective) {
+        for (const modifier of node.key.modifiers) {
+          if (!isValidModifier(modifier, customModifiers)) {
+            context.report({
+              node: modifier,
+              messageId: 'unsupportedModifier',
+              data: { modifier: modifier.name }
+            })
+          }
+        }
+
+        if (
+          (!node.value || !node.value.expression) &&
+          node.key.modifiers.every(
+            (modifier) => !VERB_MODIFIERS.has(modifier.name)
+          )
+        ) {
+          if (node.value && !utils.isEmptyValueDirective(node, context)) {
+            const valueText = sourceCode.getText(node.value)
+            const innerText =
+              (valueText[0] === '"' || valueText[0] === "'") &&
+              valueText[0] === valueText.at(-1)
+                ? valueText.slice(1, -1) // quoted
+                : valueText
+            if (/^\w+$/.test(innerText)) {
+              context.report({
+                node: node.value,
+                messageId: 'avoidKeyword',
+                data: { value: valueText }
+              })
+            }
+          } else {
+            context.report({
+              node,
+              messageId: 'expectedValueOrVerb'
+            })
+          }
+        }
+      }
+    })
+  }
+}
