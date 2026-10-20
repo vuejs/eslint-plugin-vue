@@ -519,21 +519,31 @@ tester.run('no-useless-mustaches', rule, {
       ]
     },
     {
-      code: `
+      code: String.raw`
       <template>
         <p>{{ '&' }}copy;</p>
         <p>&{{ 'amp;' }}</p>
         <p>&am{{ 'p;' }}</p>
         <p>{{ 'Tom &' }}amp; Jerry</p>
+        <p>&{{ '' }}copy;</p>
+        <p>&#0000000000000000000000000000000000000000{{ '65;' }}</p>
+        <p>{{ '&\amp;' }}</p>
+        <p>{{ '&#92;<' }}</p>
+        <p>{{ '&copy' }}cat</p>
         <p>{{ 'Tom &amp; Jerry' }}</p>
       </template>
       `,
-      output: `
+      output: String.raw`
       <template>
         <p>{{ '&' }}copy;</p>
         <p>&{{ 'amp;' }}</p>
         <p>&am{{ 'p;' }}</p>
         <p>{{ 'Tom &' }}amp; Jerry</p>
+        <p>&{{ '' }}copy;</p>
+        <p>&#0000000000000000000000000000000000000000{{ '65;' }}</p>
+        <p>{{ '&\amp;' }}</p>
+        <p>{{ '&#92;<' }}</p>
+        <p>{{ '&copy' }}cat</p>
         <p>Tom &amp; Jerry</p>
       </template>
       `,
@@ -574,8 +584,48 @@ tester.run('no-useless-mustaches', rule, {
           message:
             'Unexpected mustache interpolation with a string literal value.',
           line: 7,
-          column: 12,
+          column: 13,
           endLine: 7,
+          endColumn: 21
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 8,
+          column: 54,
+          endLine: 8,
+          endColumn: 65
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 9,
+          column: 12,
+          endLine: 9,
+          endColumn: 26
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 10,
+          column: 12,
+          endLine: 10,
+          endColumn: 26
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 11,
+          column: 12,
+          endLine: 11,
+          endColumn: 25
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 12,
+          column: 12,
+          endLine: 12,
           endColumn: 35
         }
       ]

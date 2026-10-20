@@ -19,6 +19,34 @@ function stripQuotesForHTML(text: string): string | null {
   return re ? re[1] : null
 }
 
+/**
+ * Checks whether the given string literal content contains a character reference
+ * that would not render the same as static text.
+ * Vue decodes character references in mustaches before evaluating the expression,
+ * so only complete references without backslash escapes are kept as they are.
+ */
+function hasUnsafeCharacterReference(text: string): boolean {
+  return (
+    text.includes('&') &&
+    (text.includes('\\') ||
+      // `&bsol;`, `&#92;` and `&#x5c;` decode to a backslash, which starts an escape sequence.
+      /&(?:bsol|#0*92|#x0*5c);/iu.test(text) ||
+      !/^(?:[^&]|&(?:[a-z][\da-z]*|#\d+|#x[\da-f]+);)*$/iu.test(text))
+  )
+}
+
+/**
+ * Checks whether the text before the given offset ends with an unterminated
+ * character reference start such as `&`, `&am` or `&#12`.
+ */
+function isAfterCharacterReferenceStart(text: string, offset: number): boolean {
+  let index = offset - 1
+  while (index >= 0 && /[\w#]/u.test(text[index])) {
+    index--
+  }
+  return text[index] === '&'
+}
+
 export default {
   meta: {
     type: 'suggestion',
@@ -127,23 +155,19 @@ export default {
           const replacement = text
             .replaceAll('<', '&lt;')
             .replaceAll(/\\([\S\s])/g, '$1')
-          const textBefore = sourceCode.text.slice(
-            Math.max(0, node.range[0] - 32),
-            node.range[0]
-          )
-          const textAfter = sourceCode.text.slice(
-            node.range[1],
-            node.range[1] + 1
-          )
+          const charBefore = sourceCode.text[node.range[0] - 1] ?? ''
+          const charAfter = sourceCode.text[node.range[1]] ?? ''
           // `{{` in static text would start a new mustache interpolation.
           const canStartMustache =
-            `${textBefore.slice(-1)}${replacement}${textAfter}`.includes('{{')
+            `${charBefore}${replacement}${charAfter}`.includes('{{')
           // `&` would join the surrounding text into a different character reference.
           const canJoinCharacterReference =
-            (/&[\w#]*$/u.test(replacement) && /^[\w#;]/u.test(textAfter)) ||
-            (/^[\w#;]/u.test(replacement) && /&[\w#]*$/u.test(textBefore))
+            isAfterCharacterReferenceStart(sourceCode.text, node.range[0]) &&
+            /^[\w#;]/u.test(`${replacement}${charAfter}`)
 
-          return canStartMustache || canJoinCharacterReference
+          return canStartMustache ||
+            canJoinCharacterReference ||
+            hasUnsafeCharacterReference(text)
             ? null
             : fixer.replaceText(node, replacement)
         }
