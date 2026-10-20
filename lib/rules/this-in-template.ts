@@ -2,12 +2,12 @@
  * @fileoverview disallow usage of `this` in template.
  * @author Armano
  */
-'use strict'
+import utils from '../utils/index.js'
+import jsReserved from '../utils/js-reserved.json' with { type: 'json' }
 
-const utils = require('../utils')
-const RESERVED_NAMES = new Set(require('../utils/js-reserved.json'))
+const RESERVED_NAMES = new Set(jsReserved)
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -29,24 +29,18 @@ module.exports = {
 
   /**
    * Creates AST event handlers for this-in-template.
-   *
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
    */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const options = context.options[0] === 'always' ? 'always' : 'never'
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} parent
-     * @property {Identifier[]} nodes
-     */
+    interface ScopeStack {
+      parent: ScopeStack | null
+      nodes: Identifier[]
+    }
 
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+    let scopeStack: ScopeStack | null = null
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VElement} node */
-      VElement(node) {
+      VElement(node: VElement) {
         scopeStack = {
           parent: scopeStack,
           nodes: scopeStack
@@ -69,8 +63,9 @@ module.exports = {
       },
       ...(options === 'never'
         ? {
-            /** @param { ThisExpression & { parent: MemberExpression } } node */
-            'VExpressionContainer MemberExpression > ThisExpression'(node) {
+            'VExpressionContainer MemberExpression > ThisExpression'(
+              node: ThisExpression & { parent: MemberExpression }
+            ) {
               if (!scopeStack) {
                 return
               }
@@ -96,8 +91,7 @@ module.exports = {
             }
           }
         : {
-            /** @param {VExpressionContainer} node */
-            VExpressionContainer(node) {
+            VExpressionContainer(node: VExpressionContainer) {
               if (!scopeStack || node.parent.type === 'VDirectiveKey') {
                 // We cannot use `.` in dynamic arguments because the right of the `.` becomes a modifier.
                 // For example, In `:[this.prop]` case, `:[this` is an argument and `prop]` is a modifier.

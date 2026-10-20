@@ -3,16 +3,12 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Get the name of the given attribute node.
- * @param {VAttribute | VDirective} attribute The attribute node to get.
- * @returns {string | null} The name of the attribute.
  */
-function getName(attribute) {
+function getName(attribute: VAttribute | VDirective): string | null {
   return attribute.directive
     ? (attribute.key.name.name === 'bind' &&
         attribute.key.argument?.type === 'VIdentifier' &&
@@ -21,7 +17,7 @@ function getName(attribute) {
     : attribute.key.name
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -49,22 +45,15 @@ module.exports = {
       duplicateAttribute: "Duplicate attribute '{{name}}'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const shouldAllowCoexistStyle = options.allowCoexistStyle !== false
     const shouldAllowCoexistClass = options.allowCoexistClass !== false
 
-    /** @type {Set<string>} */
-    const directiveNames = new Set()
-    /** @type {Set<string>} */
-    const attributeNames = new Set()
+    const directiveNames = new Set<string>()
+    const attributeNames = new Set<string>()
 
-    /**
-     * @param {string} name
-     * @param {boolean} isDirective
-     */
-    function isDuplicate(name, isDirective) {
+    function isDuplicate(name: string, isDirective: boolean) {
       if (
         (shouldAllowCoexistStyle && name === 'style') ||
         (shouldAllowCoexistClass && name === 'class')

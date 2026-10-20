@@ -2,11 +2,9 @@
  * @fileoverview disallow adding multiple root nodes to the template
  * @author Przemyslaw Falowski (@przemkow)
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -34,11 +32,7 @@ module.exports = {
       disallowedDirective: "The template root disallows 'v-for' directives."
     }
   },
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const options = context.options[0] || {}
     const disallowComments = options.disallowComments
     const sourceCode = context.sourceCode

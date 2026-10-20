@@ -2,16 +2,12 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Checks whether if the given property node is a static value.
- * @param {Property} prop property node to check
- * @returns {boolean} `true` if the given property node is a static value.
  */
-function isStaticValue(prop) {
+function isStaticValue(prop: Property): boolean {
   return (
     !prop.computed &&
     prop.value.type === 'Literal' &&
@@ -20,7 +16,7 @@ function isStaticValue(prop) {
 }
 
 /**
- * Gets the static properties of a given expression node.
+ * Gets the static properties of a given `:style` directive.
  * - If `SpreadElement` or computed property exists, it gets only the static properties before it.
  *   `:style="{ color: 'red', display: 'flex', ...spread, width: '16px' }"`
  *              ^^^^^^^^^^^^  ^^^^^^^^^^^^^^^
@@ -30,10 +26,8 @@ function isStaticValue(prop) {
  * - If all properties are static properties, it returns one root node.
  *   `:style="[ { color: 'red' }, { display: 'flex', width: '16px' } ]"`
  *    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- * @param {VDirective} node `:style` node to check
- * @returns {Property[] | [VDirective]} the static properties.
  */
-function getReportNodes(node) {
+function getReportNodes(node: VDirective): Property[] | [VDirective] {
   const { value } = node
   if (!value) {
     return []
@@ -81,7 +75,7 @@ function getReportNodes(node) {
   return [node]
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -106,13 +100,11 @@ module.exports = {
       forbiddenStyleAttr: '`style` attributes are forbidden.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     /**
-     * Reports if the value is static.
-     * @param {VDirective} node `:style` node to check
+     * Reports the static parts of a `:style` directive.
      */
-    function verifyVBindStyle(node) {
+    function verifyVBindStyle(node: VDirective) {
       for (const n of getReportNodes(node)) {
         context.report({
           node: n,
@@ -121,10 +113,8 @@ module.exports = {
       }
     }
 
-    /** @type {TemplateListener} */
-    const visitor = {
-      /** @param {VAttribute} node */
-      "VAttribute[directive=false][key.name='style']"(node) {
+    const visitor: TemplateListener = {
+      "VAttribute[directive=false][key.name='style']"(node: VAttribute) {
         context.report({
           node,
           messageId: 'forbiddenStyleAttr'

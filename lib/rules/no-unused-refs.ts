@@ -2,19 +2,16 @@
  * @fileoverview Disallow unused refs.
  * @author Yosuke Ota
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * Extract names from references objects.
- * @param {VReference[]} references
  */
-function getReferences(references) {
+function getReferences(references: VReference[]) {
   return references.filter((ref) => ref.variable == null).map((ref) => ref.id)
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -28,13 +25,10 @@ module.exports = {
       unused: "'{{name}}' is defined as ref, but never used."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Set<string>} */
-    const usedRefs = new Set()
+  create(context: RuleContext) {
+    const usedRefs = new Set<string>()
 
-    /** @type {VLiteral[]} */
-    const defineRefs = []
+    const defineRefs: VLiteral[] = []
     let hasUnknown = false
 
     /**
@@ -58,10 +52,8 @@ module.exports = {
 
     /**
      * Extract the use ref names for ObjectPattern.
-     * @param {ObjectPattern} node
-     * @returns {void}
      */
-    function extractUsedForObjectPattern(node) {
+    function extractUsedForObjectPattern(node: ObjectPattern): void {
       for (const prop of node.properties) {
         if (prop.type === 'Property') {
           const name = utils.getStaticPropertyName(prop)
@@ -79,12 +71,11 @@ module.exports = {
     }
     /**
      * Extract the use ref names.
-     * @param {Identifier | MemberExpression} refsNode
-     * @returns {void}
      */
-    function extractUsedForPattern(refsNode) {
-      /** @type {Identifier | MemberExpression | ChainExpression} */
-      let node = refsNode
+    function extractUsedForPattern(
+      refsNode: Identifier | MemberExpression
+    ): void {
+      let node: Identifier | MemberExpression | ChainExpression = refsNode
       while (node.parent.type === 'ChainExpression') {
         node = node.parent
       }
@@ -145,10 +136,7 @@ module.exports = {
     return utils.defineTemplateBodyVisitor(
       context,
       {
-        /**
-         * @param {VExpressionContainer} node
-         */
-        VExpressionContainer(node) {
+        VExpressionContainer(node: VExpressionContainer) {
           if (hasUnknown) {
             return
           }
@@ -159,10 +147,7 @@ module.exports = {
             extractUsedForPattern(id)
           }
         },
-        /**
-         * @param {VAttribute} node
-         */
-        'VAttribute[directive=false]'(node) {
+        'VAttribute[directive=false]'(node: VAttribute) {
           if (hasUnknown) {
             return
           }
@@ -220,8 +205,7 @@ module.exports = {
             if (hasUnknown || id.name !== '$refs') {
               return
             }
-            /** @type {Identifier | MemberExpression} */
-            const refsNode =
+            const refsNode: Identifier | MemberExpression =
               id.parent.type === 'MemberExpression' && id.parent.property === id
                 ? id.parent // `this.$refs.foo`
                 : id

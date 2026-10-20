@@ -2,22 +2,22 @@
  * @author tyankatsu <https://github.com/tyankatsu0105>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { defineTemplateBodyVisitor } = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * count ObjectExpression element
- * @param {VDirective & {value: VExpressionContainer & {expression: ArrayExpression}}} node
- * @return {number}
  */
-function countObjectExpression(node) {
+function countObjectExpression(
+  node: VDirective & {
+    value: VExpressionContainer & { expression: ArrayExpression }
+  }
+): number {
   return node.value.expression.elements.filter(
     (element) => element && element.type === 'ObjectExpression'
   ).length
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -31,12 +31,12 @@ module.exports = {
       unexpected: 'Unexpected multiple objects. Merge objects.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    return defineTemplateBodyVisitor(context, {
-      /** @param {VDirective & {value: VExpressionContainer & {expression: ArrayExpression}}} node */
+  create(context: RuleContext) {
+    return utils.defineTemplateBodyVisitor(context, {
       'VAttribute[directive=true][key.argument.name="class"][key.name.name="bind"][value.expression.type="ArrayExpression"]'(
-        node
+        node: VDirective & {
+          value: VExpressionContainer & { expression: ArrayExpression }
+        }
       ) {
         if (countObjectExpression(node) > 1) {
           context.report({
