@@ -2,17 +2,17 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/define-props-declaration
-description: enforce declaration style of `defineProps`
+description: enforce declaration style of `defineProps` and `defineModel`
 since: v9.5.0
 ---
 
 # vue/define-props-declaration
 
-> enforce declaration style of `defineProps`
+> enforce declaration style of `defineProps` and `defineModel`
 
 ## :book: Rule Details
 
-This rule enforces `defineProps` typing style which you should use `type-based` or `runtime` declaration.
+This rule enforces whether `defineProps` and `defineModel` should use `type-based` or `runtime` declarations.
 
 This rule only works in setup script and `lang="ts"`.
 
@@ -25,12 +25,15 @@ const props = defineProps<{
   kind: string
   options: { title: string }
 }>()
+const model = defineModel<string>()
 
 /* ✗ BAD */
 const props = defineProps({
   kind: { type: String },
   options: { type: Object as PropType<{ title: string }> }
 })
+const model = defineModel({ type: String })
+const untypedModel = defineModel()
 </script>
 ```
 
@@ -56,12 +59,14 @@ const props = defineProps({
   kind: { type: String },
   options: { type: Object as PropType<{ title: string }> }
 })
+const model = defineModel({ type: String })
 
 /* ✗ BAD */
 const props = defineProps<{
   kind: string
   options: { title: string }
 }>()
+const model = defineModel<string>()
 </script>
 ```
 
@@ -75,6 +80,7 @@ const props = defineProps<{
 ## :books: Further Reading
 
 - [`defineProps`](https://vuejs.org/api/sfc-script-setup.html#defineprops-defineemits)
+- [`defineModel`](https://vuejs.org/api/sfc-script-setup.html#definemodel)
 - [Typescript-only-features of `defineProps`](https://vuejs.org/api/sfc-script-setup.html#typescript-only-features)
 - [Guide - Typing-component-props](https://vuejs.org/guide/typescript/composition-api.html#typing-component-props)
 
