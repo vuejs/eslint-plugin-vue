@@ -2,12 +2,9 @@
  * @fileoverview disallow target="_blank" attribute without rel="noopener noreferrer"
  * @author Sosukesuzuki
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/** @param {VAttribute} node */
-function isTargetBlank(node) {
+function isTargetBlank(node: VAttribute) {
   return (
     node.key &&
     node.key.name === 'target' &&
@@ -15,11 +12,7 @@ function isTargetBlank(node) {
     node.value.value === '_blank'
   )
 }
-/**
- * @param {VStartTag} node
- * @param {boolean} allowReferrer
- */
-function hasSecureRel(node, allowReferrer) {
+function hasSecureRel(node: VStartTag, isReferrerAllowed: boolean) {
   return node.attributes.some((attr) => {
     if (attr.key && attr.key.name === 'rel') {
       const tags =
@@ -29,17 +22,14 @@ function hasSecureRel(node, allowReferrer) {
       return (
         tags &&
         tags.includes('noopener') &&
-        (allowReferrer || tags.includes('noreferrer'))
+        (isReferrerAllowed || tags.includes('noreferrer'))
       )
     }
     return false
   })
 }
 
-/**
- * @param {VStartTag} node
- */
-function hasExternalLink(node) {
+function hasExternalLink(node: VStartTag) {
   return node.attributes.some(
     (attr) =>
       attr.key &&
@@ -50,10 +40,7 @@ function hasExternalLink(node) {
   )
 }
 
-/**
- * @param {VStartTag} node
- */
-function hasDynamicLink(node) {
+function hasDynamicLink(node: VStartTag) {
   return node.attributes.some(
     (attr) =>
       attr.key &&
@@ -66,11 +53,7 @@ function hasDynamicLink(node) {
   )
 }
 
-/**
- * @param {VAttribute} node
- * @returns {Rule.SuggestionReportDescriptor}
- */
-function getSuggestion(node) {
+function getSuggestion(node: VAttribute): Rule.SuggestionReportDescriptor {
   const relAttributeNode = node.parent.attributes.find(
     (attribute) => attribute.key.name === 'rel'
   )
@@ -92,7 +75,7 @@ function getSuggestion(node) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -124,18 +107,14 @@ module.exports = {
 
   /**
    * Creates AST event handlers for no-template-target-blank
-   *
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
    */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const configuration = context.options[0] || {}
     const allowReferrer = configuration.allowReferrer || false
     const enforceDynamicLinks = configuration.enforceDynamicLinks || 'always'
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VAttribute} node */
-      'VAttribute[directive=false]'(node) {
+      'VAttribute[directive=false]'(node: VAttribute) {
         if (!isTargetBlank(node) || hasSecureRel(node.parent, allowReferrer)) {
           return
         }

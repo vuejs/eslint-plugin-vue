@@ -2,28 +2,20 @@
  * @author Flo Edelmann
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-const { defineTemplateBodyVisitor } = require('../utils')
+import utils from '../utils/index.js'
 
-/**
- * @typedef {object} RuleOption
- * @property {string[]} additionalDirectives
- */
+interface RuleOption {
+  additionalDirectives: string[]
+}
 
-/**
- * @param {VNode | Token} node
- * @returns {boolean}
- */
-function isWhitespaceTextNode(node) {
+function isWhitespaceTextNode(node: VNode | Token): boolean {
   return node.type === 'VText' && node.value.trim() === ''
 }
 
-/**
- * @param {Position} pos1
- * @param {Position} pos2
- * @returns {'less' | 'equal' | 'greater'}
- */
-function comparePositions(pos1, pos2) {
+function comparePositions(
+  pos1: Position,
+  pos2: Position
+): 'less' | 'equal' | 'greater' {
   if (
     pos1.line < pos2.line ||
     (pos1.line === pos2.line && pos1.column < pos2.column)
@@ -37,15 +29,11 @@ function comparePositions(pos1, pos2) {
     : 'equal'
 }
 
-/**
- * @param {(VNode | Token)[]} nodes
- * @returns {SourceLocation | undefined}
- */
-function getLocationRange(nodes) {
-  /** @type {Position | undefined} */
-  let start
-  /** @type {Position | undefined} */
-  let end
+function getLocationRange(
+  nodes: (VNode | Token)[]
+): SourceLocation | undefined {
+  let start: Position | undefined
+  let end: Position | undefined
 
   for (const node of nodes) {
     if (!start || comparePositions(node.loc.start, start) === 'less') {
@@ -60,7 +48,7 @@ function getLocationRange(nodes) {
   return start === undefined || end === undefined ? undefined : { start, end }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -94,21 +82,18 @@ module.exports = {
       removeChildContent: 'Remove child content.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const directives = new Set(['html', 'text'])
 
-    /** @type {RuleOption | undefined} */
-    const option = context.options[0]
+    const option: RuleOption | undefined = context.options[0]
     if (option !== undefined) {
       for (const directive of option.additionalDirectives) {
         directives.add(directive)
       }
     }
 
-    return defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} directiveNode */
-      'VAttribute[directive=true]'(directiveNode) {
+    return utils.defineTemplateBodyVisitor(context, {
+      'VAttribute[directive=true]'(directiveNode: VDirective) {
         const directiveName = directiveNode.key.name.name
         const elementNode = directiveNode.parent.parent
 

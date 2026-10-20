@@ -3,11 +3,9 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,11 +19,11 @@ module.exports = {
       unexpected: "Unexpected mustache. Use 'v-model' instead."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VExpressionContainer} node */
-      "VElement[rawName='textarea'] VExpressionContainer"(node) {
+      "VElement[rawName='textarea'] VExpressionContainer"(
+        node: VExpressionContainer
+      ) {
         if (node.parent.type !== 'VElement') {
           return
         }

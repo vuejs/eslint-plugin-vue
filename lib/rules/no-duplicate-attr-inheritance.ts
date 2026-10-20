@@ -2,12 +2,9 @@
  * @fileoverview Disable inheritAttrs when using v-bind="$attrs"
  * @author Hiroki Osame
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/** @param {VElement[]} elements */
-function isConditionalGroup(elements) {
+function isConditionalGroup(elements: VElement[]) {
   const firstElement = elements[0]
   const lastElement = elements.at(-1)
 
@@ -25,12 +22,11 @@ function isConditionalGroup(elements) {
   )
 }
 
-/** @param {VElement[]} elements */
-function isMultiRootNodes(elements) {
+function isMultiRootNodes(elements: VElement[]) {
   return elements.length > 1 && !isConditionalGroup(elements)
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -55,22 +51,18 @@ module.exports = {
       noDuplicateAttrInheritance: 'Set "inheritAttrs" to false.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const shouldCheckMultiRootNodes = options.checkMultiRootNodes === true
 
-    /** @type {Literal['value']} */
     let shouldInheritAttrs = true
-    /** @type {VReference[]} */
-    const attrsRefs = []
+    const attrsRefs: VReference[] = []
 
-    /** @param {ObjectExpression} node */
-    function processOptions(node) {
+    function processOptions(node: ObjectExpression) {
       const inheritAttrsProp = utils.findProperty(node, 'inheritAttrs')
 
       if (inheritAttrsProp && inheritAttrsProp.value.type === 'Literal') {
-        shouldInheritAttrs = inheritAttrsProp.value.value
+        shouldInheritAttrs = Boolean(inheritAttrsProp.value.value)
       }
     }
 
@@ -85,9 +77,8 @@ module.exports = {
         }
       }),
       utils.defineTemplateBodyVisitor(context, {
-        /** @param {VExpressionContainer} node */
         "VAttribute[directive=true][key.name.name='bind'][key.argument=null] > VExpressionContainer"(
-          node
+          node: VExpressionContainer
         ) {
           if (!shouldInheritAttrs) {
             return
