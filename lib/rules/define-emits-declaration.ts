@@ -2,16 +2,10 @@
  * @author Amorites
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { TSESTree } from '@typescript-eslint/types'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {import('@typescript-eslint/types').TSESTree.TypeNode} TypeNode
- *
- */
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -32,8 +26,7 @@ module.exports = {
         'Use new type literal declaration instead of the old call signature declaration.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const scriptSetup = utils.getScriptSetupElement(context)
     if (!scriptSetup || !utils.hasAttribute(scriptSetup, 'lang', 'ts')) {
       return {}
@@ -73,8 +66,7 @@ module.exports = {
       }
     })
 
-    /** @param {CallExpression} node */
-    function verifyTypeLiteral(node) {
+    function verifyTypeLiteral(node: CallExpression) {
       if (node.arguments.length > 0) {
         context.report({
           node,
@@ -84,7 +76,7 @@ module.exports = {
       }
 
       const typeArguments = node.typeArguments || node.typeParameters
-      const param = /** @type {TypeNode|undefined} */ (typeArguments?.params[0])
+      const param = typeArguments?.params[0] as TSESTree.TypeNode | undefined
       if (!param) return
       if (param.type === 'TSTypeLiteral') {
         for (const memberNode of param.members) {

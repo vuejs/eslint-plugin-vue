@@ -2,9 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import vue3ExportNamesList from '../utils/vue3-export-names.json' with { type: 'json' }
 
-const vue3ExportNames = new Set(require('../utils/vue3-export-names.json'))
+const vue3ExportNames = new Set(vue3ExportNamesList)
 
 const TARGET_AT_VUE_MODULES = new Set([
   '@vue/runtime-dom',
@@ -13,11 +13,9 @@ const TARGET_AT_VUE_MODULES = new Set([
   '@vue/shared'
 ])
 
-/**
- * @param {ImportDeclaration['specifiers'][number]} specifier
- * @returns {IterableIterator<string | null>}
- */
-function* extractSpecifierNames(specifier) {
+function* extractSpecifierNames(
+  specifier: ImportDeclaration['specifiers'][number]
+): IterableIterator<string | null> {
   switch (specifier.type) {
     case 'ImportDefaultSpecifier': {
       yield 'default'
@@ -34,16 +32,13 @@ function* extractSpecifierNames(specifier) {
   }
 }
 
-/**
- * @param {ImportDeclaration} node
- */
-function* extractImportNames(node) {
+function* extractImportNames(node: ImportDeclaration) {
   for (const specifier of node.specifiers) {
     yield* extractSpecifierNames(specifier)
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -57,18 +52,15 @@ module.exports = {
       importedAtVue: "Import from 'vue' instead of '{{source}}'."
     }
   },
-  /**
-   * @param {RuleContext} context
-   * @returns {RuleListener}
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     /**
-     *
-     * @param {Literal & { value: string }} source
-     * @param { () => boolean } fixable
-     * @param {string[]} names Named bindings imported or exported from the source.
+     * `names` are the named bindings imported or exported from the source.
      */
-    function verifySource(source, fixable, names) {
+    function verifySource(
+      source: Literal & { value: string },
+      isFixable: () => boolean,
+      names: string[]
+    ) {
       // Don't report when none of the named bindings are re-exported by 'vue'.
       if (
         !TARGET_AT_VUE_MODULES.has(source.value) ||
@@ -81,7 +73,7 @@ module.exports = {
         node: source,
         messageId: 'importedAtVue',
         data: { source: source.value },
-        fix: fixable()
+        fix: isFixable()
           ? (fixer) =>
               fixer.replaceTextRange(
                 [source.range[0] + 1, source.range[1] - 1],
@@ -102,8 +94,7 @@ module.exports = {
         )
         const importedNames = hasOnlyNamedSpecifiers
           ? node.specifiers.map(
-              (specifier) =>
-                /** @type {ImportSpecifier} */ (specifier).imported.name
+              (specifier) => (specifier as ImportSpecifier).imported.name
             )
           : []
 

@@ -2,17 +2,10 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { TSESTree } from '@typescript-eslint/types'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @typedef {import('@typescript-eslint/types').TSESTree.ExportAllDeclaration} TSESTreeExportAllDeclaration
- * @typedef {import('@typescript-eslint/types').TSESTree.ExportDefaultDeclaration} TSESTreeExportDefaultDeclaration
- * @typedef {import('@typescript-eslint/types').TSESTree.ExportNamedDeclaration} TSESTreeExportNamedDeclaration
- */
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -26,17 +19,18 @@ module.exports = {
       forbidden: '`<script setup>` cannot contain ES module exports.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @param {ExportAllDeclaration | ExportDefaultDeclaration | ExportNamedDeclaration} node
-     * @param {SourceLocation} loc
-     */
-    function verify(node, loc) {
-      const tsNode =
-        /** @type {TSESTreeExportAllDeclaration | TSESTreeExportDefaultDeclaration | TSESTreeExportNamedDeclaration} */ (
-          node
-        )
+  create(context: RuleContext) {
+    function verify(
+      node:
+        | ExportAllDeclaration
+        | ExportDefaultDeclaration
+        | ExportNamedDeclaration,
+      loc: SourceLocation
+    ) {
+      const tsNode = node as
+        | TSESTree.ExportAllDeclaration
+        | TSESTree.ExportDefaultDeclaration
+        | TSESTree.ExportNamedDeclaration
       if (
         tsNode.exportKind === 'type' ||
         (tsNode.type === 'ExportNamedDeclaration' &&

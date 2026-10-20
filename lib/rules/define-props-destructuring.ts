@@ -2,11 +2,9 @@
  * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -32,8 +30,7 @@ module.exports = {
       avoidWithDefaults: 'Avoid using `withDefaults` with destructuring.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const destructurePreference = options.destructure || 'only-when-assigned'
 

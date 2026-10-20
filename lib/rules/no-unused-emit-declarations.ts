@@ -2,30 +2,22 @@
  * @author ItMaga
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { ComponentEmit, VueObjectData } from '../utils/index.js'
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
 
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').ComponentEmit} ComponentEmit
- * @typedef {import('../utils').NameWithLoc} NameWithLoc
- * @typedef {import('../utils').VueObjectData} VueObjectData
- */
-
-/**
- * @typedef {object} SetupContext
- * @property {Set<Identifier>} contextReferenceIds
- * @property {Set<Identifier>} emitReferenceIds
- */
+interface SetupContext {
+  contextReferenceIds: Set<Identifier>
+  emitReferenceIds: Set<Identifier>
+}
 
 /**
  * Check if the given node is a reference of setup context
- * @param {Expression | Super | SpreadElement} value
- * @param {SetupContext} setupContext
- * @returns {boolean}
- * */
-function hasReferenceId(value, setupContext) {
+ */
+function hasReferenceId(
+  value: Expression | Super | SpreadElement,
+  setupContext: SetupContext
+): boolean {
   const { contextReferenceIds, emitReferenceIds } = setupContext
   return (
     value.type === 'Identifier' &&
@@ -33,7 +25,7 @@ function hasReferenceId(value, setupContext) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -47,21 +39,14 @@ module.exports = {
       unused: '`{{name}}` is defined as emit but never used.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Map<string, ComponentEmit>} */
-    const emitDeclarations = new Map()
-    /** @type {Map<string, Expression>} */
-    const emitCalls = new Map()
-    /** @type {Map<ObjectExpression | Program, SetupContext>} */
-    const setupContexts = new Map()
+  create(context: RuleContext) {
+    const emitDeclarations = new Map<string, ComponentEmit>()
+    const emitCalls = new Map<string, Expression>()
+    const setupContexts = new Map<ObjectExpression | Program, SetupContext>()
     const programNode = context.sourceCode.ast
     let emitParamName = ''
 
-    /**
-     * @param {CallExpression} node
-     * */
-    function addEmitCall(node) {
+    function addEmitCall(node: CallExpression) {
       const nameParamNode = utils.getNameParamNode(node)
       if (nameParamNode) {
         emitCalls.set(nameParamNode.name, node)
@@ -72,12 +57,10 @@ module.exports = {
       emitDeclarations.clear()
     }
 
-    /**
-     * @param {Expression | SpreadElement} expression
-     * @param {SetupContext} setupContext
-     * @returns {boolean}
-     * */
-    function checkExpressionReference(expression, setupContext) {
+    function hasExpressionReference(
+      expression: Expression | SpreadElement,
+      setupContext: SetupContext
+    ): boolean {
       if (expression.type === 'MemberExpression') {
         const memObject = utils.skipChainExpression(expression.object)
         if (hasReferenceId(memObject, setupContext)) {
@@ -92,19 +75,16 @@ module.exports = {
       return false
     }
 
-    /**
-     *
-     * @param {Array<Expression | SpreadElement>} args
-     * @param {SetupContext} setupContext
-     * @returns {boolean}
-     */
-    function verifyArgumentsReferences(args, setupContext) {
+    function hasArgumentsReferences(
+      args: Array<Expression | SpreadElement>,
+      setupContext: SetupContext
+    ): boolean {
       for (const argument of args) {
         if (argument.type === 'ObjectExpression') {
           for (const property of argument.properties) {
             if (
               property.type === 'Property' &&
-              checkExpressionReference(property.value, setupContext)
+              hasExpressionReference(property.value, setupContext)
             ) {
               return true
             }
@@ -113,36 +93,31 @@ module.exports = {
           argument.type === 'ArrayExpression' &&
           argument.elements.some(
             (element) =>
-              element && checkExpressionReference(element, setupContext)
+              element && hasExpressionReference(element, setupContext)
           )
         ) {
           return true
         }
 
-        if (checkExpressionReference(argument, setupContext)) {
+        if (hasExpressionReference(argument, setupContext)) {
           return true
         }
       }
       return false
     }
 
-    /**
-     * @param {Expression | Super} callee
-     * @param {Set<Identifier>} referenceIds
-     * @param {CallExpression} node
-     * */
-    function addEmitCallByReference(callee, referenceIds, node) {
+    function addEmitCallByReference(
+      callee: Expression | Super,
+      referenceIds: Set<Identifier>,
+      node: CallExpression
+    ) {
       if (callee.type === 'Identifier' && referenceIds.has(callee)) {
         addEmitCall(node)
       }
     }
 
     const callVisitor = {
-      /**
-       * @param {CallExpression} node
-       * @param {VueObjectData} [info]
-       */
-      CallExpression(node, info) {
+      CallExpression(node: CallExpression, info?: VueObjectData) {
         const callee = utils.skipChainExpression(node.callee)
 
         let emit = null
@@ -159,7 +134,7 @@ module.exports = {
           if (
             callee.parent.type === 'CallExpression' &&
             callee.parent.arguments &&
-            verifyArgumentsReferences(callee.parent.arguments, setupContext)
+            hasArgumentsReferences(callee.parent.arguments, setupContext)
           ) {
             // skip if the emit passed as argument
             return
@@ -216,10 +191,8 @@ module.exports = {
             return
           }
 
-          /** @type {Set<Identifier>} */
-          const contextReferenceIds = new Set()
-          /** @type {Set<Identifier>} */
-          const emitReferenceIds = new Set()
+          const contextReferenceIds = new Set<Identifier>()
+          const emitReferenceIds = new Set<Identifier>()
           if (contextParam.type === 'ObjectPattern') {
             const emitProperty = utils.findAssignmentProperty(
               contextParam,
@@ -286,8 +259,7 @@ module.exports = {
           if (!variable) {
             return
           }
-          /** @type {Set<Identifier>} */
-          const emitReferenceIds = new Set()
+          const emitReferenceIds = new Set<Identifier>()
           for (const reference of variable.references) {
             emitReferenceIds.add(reference.identifier)
           }

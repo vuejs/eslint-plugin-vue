@@ -2,17 +2,11 @@
  * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { TYPES } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { ReferenceTracker } from '@eslint-community/eslint-utils'
 
-const utils = require('../utils')
-const { ReferenceTracker } = require('@eslint-community/eslint-utils')
-
-/**
- * @typedef {import('@eslint-community/eslint-utils').TYPES.TraceMap} TraceMap
- */
-
-/** @type {TraceMap} */
-const deletedImportApisMap = {
+const deletedImportApisMap: TYPES.TraceMap = {
   set: {
     [ReferenceTracker.CALL]: true
   },
@@ -23,14 +17,11 @@ const deletedImportApisMap = {
 const deprecatedApis = new Set(['set', 'delete'])
 const deprecatedDollarApis = new Set(['$set', '$delete'])
 
-/**
- * @param {Expression|Super} node
- */
-function isVue(node) {
+function isVue(node: Expression | Super) {
   return node.type === 'Identifier' && node.name === 'Vue'
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -45,14 +36,11 @@ module.exports = {
       deprecated: 'The `$delete`, `$set` is deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @param {Identifier} identifier
-     * @param {RuleContext} context
-     * @returns {CallExpression|undefined}
-     */
-    function getVueDeprecatedCallExpression(identifier, context) {
+  create(context: RuleContext) {
+    function getVueDeprecatedCallExpression(
+      identifier: Identifier,
+      context: RuleContext
+    ): CallExpression | undefined {
       // Instance API: this.$set()
       // and Vue 2 Global API: Vue.set()
       return identifier.parent.type === 'MemberExpression' &&
@@ -67,8 +55,7 @@ module.exports = {
     }
 
     const nodeVisitor = {
-      /** @param {Identifier} node */
-      Identifier(node) {
+      Identifier(node: Identifier) {
         const callExpression = getVueDeprecatedCallExpression(node, context)
         if (!callExpression) {
           return
@@ -85,8 +72,7 @@ module.exports = {
       utils.defineVueVisitor(context, nodeVisitor),
       utils.defineScriptSetupVisitor(context, nodeVisitor),
       {
-        /** @param {Program} node */
-        Program(node) {
+        Program(node: Program) {
           const tracker = new ReferenceTracker(utils.getScope(context, node))
 
           // import { set } from 'vue'; set()
@@ -107,7 +93,7 @@ module.exports = {
             ...tracker.iterateEsmReferences(esmTraceMap),
             ...tracker.iterateCjsReferences(cjsTraceMap)
           ]) {
-            const refNode = /** @type {CallExpression} */ (node)
+            const refNode = node as CallExpression
             context.report({
               node: refNode.callee,
               messageId: 'deprecated'

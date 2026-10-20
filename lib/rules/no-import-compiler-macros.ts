@@ -2,9 +2,7 @@
  * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 const COMPILER_MACROS = new Set([
   'defineProps',
@@ -18,14 +16,11 @@ const COMPILER_MACROS = new Set([
 
 const VUE_MODULES = new Set(['@vue/runtime-core', '@vue/runtime-dom', 'vue'])
 
-/**
- * @param {Token} node
- */
-function isComma(node) {
+function isComma(node: Token) {
   return node.type === 'Punctuator' && node.value === ','
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -42,11 +37,7 @@ module.exports = {
         "'{{name}}' is a compiler macro and can only be used inside <script setup>."
     }
   },
-  /**
-   * @param {RuleContext} context
-   * @returns {RuleListener}
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const sourceCode = context.sourceCode
 
     return {
