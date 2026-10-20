@@ -2,15 +2,12 @@
  * @author Mussin Benarbia
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { isVElement } = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * check whether a tag has the `scoped` attribute
- * @param {VElement} componentBlock
  */
-function isScoped(componentBlock) {
+function isScoped(componentBlock: VElement) {
   return componentBlock.startTag.attributes.some(
     (attribute) => !attribute.directive && attribute.key.name === 'scoped'
   )
@@ -18,9 +15,8 @@ function isScoped(componentBlock) {
 
 /**
  * check whether a tag has the `module` attribute
- * @param {VElement} componentBlock
  */
-function isModule(componentBlock) {
+function isModule(componentBlock: VElement) {
   return componentBlock.startTag.attributes.some(
     (attribute) => !attribute.directive && attribute.key.name === 'module'
   )
@@ -28,14 +24,12 @@ function isModule(componentBlock) {
 
 /**
  * check if a tag doesn't have either the `scoped` nor `module` attribute
- * @param {VElement} componentBlock
  */
-function isPlain(componentBlock) {
+function isPlain(componentBlock: VElement) {
   return !isScoped(componentBlock) && !isModule(componentBlock)
 }
 
-/** @param {RuleContext} context */
-function getUserDefinedAllowedAttrs(context) {
+function getUserDefinedAllowedAttrs(context: RuleContext) {
   return context.options[0] && context.options[0].allow
     ? context.options[0].allow
     : []
@@ -43,7 +37,7 @@ function getUserDefinedAllowedAttrs(context) {
 
 const defaultAllowedAttrs = ['scoped']
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -80,8 +74,7 @@ module.exports = {
     }
   },
 
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     if (!sourceCode.parserServices.getDocumentFragment) {
       return {}
@@ -92,8 +85,8 @@ module.exports = {
     }
 
     const topLevelStyleTags = documentFragment.children.filter(
-      /** @returns {element is VElement} */
-      (element) => isVElement(element) && element.rawName === 'style'
+      (element): element is VElement =>
+        utils.isVElement(element) && element.rawName === 'style'
     )
 
     if (topLevelStyleTags.length === 0) {

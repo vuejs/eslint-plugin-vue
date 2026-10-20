@@ -2,11 +2,9 @@
  * @fileoverview enforce that each component should be in its own file
  * @author Armano
  */
-'use strict'
-const utils = require('../utils')
-const { getVueComponentDefinitionType } = require('../utils')
+import utils from '../utils/index.js'
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -20,16 +18,14 @@ module.exports = {
       tooManyComponents: 'There is more than one component in this file.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {ObjectExpression[]} */
-    const components = []
+  create(context: RuleContext) {
+    const components: ObjectExpression[] = []
 
     return Object.assign(
       {},
       utils.executeOnVueComponent(context, (node, type) => {
         if (type === 'definition') {
-          const defType = getVueComponentDefinitionType(context, node)
+          const defType = utils.getVueComponentDefinitionType(context, node)
           if (defType === 'mixin') {
             return
           }

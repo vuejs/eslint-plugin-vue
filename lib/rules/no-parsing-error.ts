@@ -3,8 +3,6 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
 // https://html.spec.whatwg.org/multipage/parsing.html#parse-errors
 const DEFAULT_OPTIONS = Object.freeze(
   Object.assign(Object.create(null), {
@@ -47,7 +45,7 @@ const DEFAULT_OPTIONS = Object.freeze(
   })
 )
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -72,11 +70,7 @@ module.exports = {
       parsingError: 'Parsing error: {{message}}.'
     }
   },
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const options = Object.assign({}, DEFAULT_OPTIONS, context.options[0] || {})
 
     return {

@@ -2,19 +2,14 @@
  * @author lsdsjy
  * @fileoverview Rule for checking the maximum number of lines in Vue SFC blocks.
  */
-'use strict'
+import { SourceCode } from 'eslint'
+import utils from '../utils/index.js'
 
-const { SourceCode } = require('eslint')
-const utils = require('../utils')
-
-/**
- * @param {string} text
- */
-function isEmptyLine(text) {
+function isEmptyLine(text: string) {
   return !text.trim()
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -51,13 +46,9 @@ module.exports = {
         'Block has too many lines ({{lineCount}}). Maximum allowed is {{limit}}.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const option = context.options[0] || {}
-    /**
-     * @type {Record<string, number>}
-     */
-    const limits = {
+    const limits: Record<string, number> = {
       template: option.template,
       script: option.script,
       style: option.style
@@ -75,8 +66,7 @@ module.exports = {
     }
 
     return {
-      /** @param {Program} node */
-      Program(node) {
+      Program(node: Program) {
         if (utils.hasInvalidEOF(node)) {
           return
         }
