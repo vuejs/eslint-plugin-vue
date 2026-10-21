@@ -2,26 +2,22 @@
  * @fileoverview Prevents duplication of field names.
  * @author Armano
  */
-'use strict'
+import type { GroupName } from '../utils/index.js'
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
 
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').GroupName} GroupName
- * @typedef {import('eslint').Scope.Variable} Variable
- * @typedef {import('../utils').ComponentProp} ComponentProp
- */
-
-/** @type {GroupName[]} */
-const GROUP_NAMES = ['props', 'computed', 'data', 'methods', 'setup']
+const GROUP_NAMES: GroupName[] = [
+  'props',
+  'computed',
+  'data',
+  'methods',
+  'setup'
+]
 
 /**
  * Gets the props pattern node from given `defineProps()` node
- * @param {CallExpression} node
- * @returns {Pattern|null}
  */
-function getPropsPattern(node) {
+function getPropsPattern(node: CallExpression): Pattern | null {
   let target = node
   if (
     target.parent &&
@@ -41,10 +37,8 @@ function getPropsPattern(node) {
 
 /**
  * Checks whether the initialization of the given variable declarator node contains one of the references.
- * @param {VariableDeclarator} node
- * @param {ESNode[]} references
  */
-function isInsideInitializer(node, references) {
+function isInsideInitializer(node: VariableDeclarator, references: ESNode[]) {
   const init = node.init
   return (
     init !== null &&
@@ -55,12 +49,13 @@ function isInsideInitializer(node, references) {
 }
 
 /**
- * Gets the name of the prop that the given expression reads from the props object.
- * @param {Expression} node
- * @param {ESNode[]} propReferences References to the props object
- * @returns {string|null} The prop name, or `null` if it cannot be resolved
+ * Gets the name of the prop that the given expression reads from the props object,
+ * or `null` if it cannot be resolved.
  */
-function getAliasedPropName(node, propReferences) {
+function getAliasedPropName(
+  node: Expression,
+  propReferences: ESNode[]
+): string | null {
   const expression = utils.skipChainExpression(utils.skipTSAsExpression(node))
 
   // `props.foo` or `props['foo']`
@@ -89,10 +84,8 @@ function getAliasedPropName(node, propReferences) {
 /**
  * Checks whether the given expression evaluates to the props object itself,
  * e.g. `props`, `defineProps()` or `toRefs(props)`.
- * @param {Expression} node
- * @param {ESNode[]} propReferences References to the props object
  */
-function isPropsObject(node, propReferences) {
+function isPropsObject(node: Expression, propReferences: ESNode[]) {
   return (
     propReferences.includes(node) ||
     (node.type === 'CallExpression' &&
@@ -107,11 +100,12 @@ function isPropsObject(node, propReferences) {
  * e.g. `const foo = toRef(props, 'bar')`. Such a declaration shadows the `propName` prop
  * in the template, so it is a duplicate key even though it reads from the props object.
  * Declarations whose source prop cannot be resolved are not reported.
- * @param {VariableDeclarator} node
- * @param {string} propName
- * @param {ESNode[]} propReferences References to the props object
  */
-function aliasesOtherProp(node, propName, propReferences) {
+function aliasesOtherProp(
+  node: VariableDeclarator,
+  propName: string,
+  propReferences: ESNode[]
+) {
   const init = node.init
   if (!init) {
     return false
@@ -139,12 +133,10 @@ function aliasesOtherProp(node, propName, propReferences) {
 }
 
 /**
- * Collects all renamed props from a pattern
- * @param {Pattern | null} pattern - The destructuring pattern
- * @returns {Set<string>} - Set of prop names that have been renamed
+ * Collects the names of all renamed props from a destructuring pattern
  */
-function collectRenamedProps(pattern) {
-  const renamedProps = new Set()
+function collectRenamedProps(pattern: Pattern | null): Set<string> {
+  const renamedProps = new Set<string>()
 
   if (!pattern || pattern.type !== 'ObjectPattern') {
     return renamedProps
@@ -165,7 +157,7 @@ function collectRenamedProps(pattern) {
   return renamedProps
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -191,16 +183,14 @@ module.exports = {
         "Duplicate key '{{name}}'. May cause name collision in script or template tag."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const groups = new Set([...GROUP_NAMES, ...(options.groups || [])])
 
     return utils.compositingVisitors(
       utils.executeOnVue(context, (obj) => {
         const properties = utils.iterateProperties(obj, groups)
-        /** @type {Set<string>} */
-        const usedNames = new Set()
+        const usedNames = new Set<string>()
         for (const o of properties) {
           if (usedNames.has(o.name)) {
             context.report({
@@ -264,10 +254,8 @@ module.exports = {
 
     /**
      * Extracts references from the given node.
-     * @param {Pattern} node
-     * @returns {Identifier[]} References
      */
-    function extractReferences(node) {
+    function extractReferences(node: Pattern): Identifier[] {
       switch (node.type) {
         case 'Identifier': {
           const variable = findVariable(utils.getScope(context, node), node)

@@ -2,16 +2,9 @@
  * @author ItMaga <https://github.com/ItMaga>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-/**
- * @typedef {import('../utils').ComponentProp} ComponentProp
- * @typedef {import('../utils').ComponentEmit} ComponentEmit
- * @typedef {import('../utils').GroupName} GroupName
- */
-
-const utils = require('../utils')
-const { isCommentToken } = require('@eslint-community/eslint-utils')
+import type { ComponentEmit, ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.js'
+import { isCommentToken } from '@eslint-community/eslint-utils'
 
 const AvailablePaddingOptions = {
   Never: 'never',
@@ -26,22 +19,18 @@ const OptionKeys = {
   GroupSingleLineProperties: 'groupSingleLineProperties'
 }
 
-/**
- * @param {Token} node
- */
-function isComma(node) {
+function isComma(node: Token) {
   return node.type === 'Punctuator' && node.value === ','
 }
 
-/**
- * @typedef {Exclude<ComponentProp | ComponentEmit, {type:'infer-type'}> & { node: {type: 'Property' | 'SpreadElement'} }} ValidComponentPropOrEmit
- */
-/**
- * @template {ComponentProp | ComponentEmit} T
- * @param {T} propOrEmit
- * @returns {propOrEmit is ValidComponentPropOrEmit & T}
- */
-function isValidProperties(propOrEmit) {
+type ValidComponentPropOrEmit = Exclude<
+  ComponentProp | ComponentEmit,
+  { type: 'infer-type' }
+> & { node: { type: 'Property' | 'SpreadElement' } }
+
+function isValidProperties<T extends ComponentProp | ComponentEmit>(
+  propOrEmit: T
+): propOrEmit is ValidComponentPropOrEmit & T {
   return Boolean(
     propOrEmit.type !== 'infer-type' &&
     propOrEmit.node &&
@@ -51,30 +40,18 @@ function isValidProperties(propOrEmit) {
 
 /**
  * Split the source code into multiple lines based on the line delimiters.
- * @param {string} text Source code as a string.
- * @returns {string[]} Array of source code lines.
  */
-function splitLines(text) {
+function splitLines(text: string): string[] {
   return text.split(/\r\n|[\r\n\u{2028}\u{2029}]/gu)
 }
 
-/**
- * @param {any} initialOption
- * @param {string} optionKey
- * @private
- * */
-function parseOption(initialOption, optionKey) {
+function parseOption(initialOption: any, optionKey: string) {
   return typeof initialOption === 'string'
     ? initialOption
     : initialOption[optionKey]
 }
 
-/**
- * @param {any} initialOption
- * @param {string} optionKey
- * @private
- * */
-function parseBooleanOption(initialOption, optionKey) {
+function parseBooleanOption(initialOption: any, optionKey: string) {
   if (typeof initialOption === 'string') {
     if (initialOption === AvailablePaddingOptions.Always) return true
     if (initialOption === AvailablePaddingOptions.Never) return false
@@ -82,23 +59,20 @@ function parseBooleanOption(initialOption, optionKey) {
   return initialOption[optionKey]
 }
 
-/**
- * @param {(Property | SpreadElement)} currentProperty
- * @param {(Property | SpreadElement)} nextProperty
- * @param {boolean} option
- * @returns {boolean}
- * @private
- * */
-function needGroupSingleLineProperties(currentProperty, nextProperty, option) {
+function shouldGroupSingleLineProperties(
+  currentProperty: Property | SpreadElement,
+  nextProperty: Property | SpreadElement,
+  isGroupingEnabled: boolean
+): boolean {
   const isSingleCurrentProperty =
     currentProperty.loc.start.line === currentProperty.loc.end.line
   const isSingleNextProperty =
     nextProperty.loc.start.line === nextProperty.loc.end.line
 
-  return isSingleCurrentProperty && isSingleNextProperty && option
+  return isSingleCurrentProperty && isSingleNextProperty && isGroupingEnabled
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -171,17 +145,15 @@ module.exports = {
         'Unexpected blank line between single line properties.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || AvailablePaddingOptions.Always
     const sourceCode = context.sourceCode
 
-    /**
-     * @param {(Property | SpreadElement)} currentProperty
-     * @param {(Property | SpreadElement | Token)} nextProperty
-     * @param {RuleFixer} fixer
-     * */
-    function replaceLines(currentProperty, nextProperty, fixer) {
+    function replaceLines(
+      currentProperty: Property | SpreadElement,
+      nextProperty: Property | SpreadElement | Token,
+      fixer: RuleFixer
+    ) {
       const commaToken = sourceCode.getTokenAfter(currentProperty, isComma)
 
       const start = (commaToken || currentProperty).range[1]
@@ -193,36 +165,27 @@ module.exports = {
       return fixer.replaceTextRange([start, end], newText)
     }
 
-    /**
-     * @param {(Property | SpreadElement)} currentProperty
-     * @param {(Property | SpreadElement | Token)} nextProperty
-     * @param {RuleFixer} fixer
-     * @param {number} betweenLinesRange
-     * */
     function insertLines(
-      currentProperty,
-      nextProperty,
-      fixer,
-      betweenLinesRange
+      currentProperty: Property | SpreadElement,
+      nextProperty: Property | SpreadElement | Token,
+      fixer: RuleFixer,
+      betweenLinesRange: number
     ) {
       const commaToken = sourceCode.getTokenAfter(currentProperty, isComma)
 
       const lineBeforeNextProperty =
         sourceCode.lines[nextProperty.loc.start.line - 1]
-      const lastSpaces = /** @type {RegExpExecArray} */ (
-        /^\s*/.exec(lineBeforeNextProperty)
-      )[0]
+      const lastSpaces = /^\s*/.exec(lineBeforeNextProperty)![0]
 
       const newText = betweenLinesRange === 0 ? `\n\n${lastSpaces}` : '\n'
       return fixer.insertTextAfter(commaToken || currentProperty, newText)
     }
 
-    /**
-     * @param {(Property | SpreadElement)[]} properties
-     * @param {any} option
-     * @param {any} nextOption
-     * */
-    function verify(properties, option, nextOption) {
+    function verify(
+      properties: (Property | SpreadElement)[],
+      option: any,
+      nextOption: any
+    ) {
       const groupSingleLineProperties = parseBooleanOption(
         options,
         OptionKeys.GroupSingleLineProperties
@@ -242,7 +205,7 @@ module.exports = {
             reportNode.loc.start.line - currentProperty.loc.end.line
 
           if (
-            needGroupSingleLineProperties(
+            shouldGroupSingleLineProperties(
               currentProperty,
               nextProperty,
               groupSingleLineProperties
@@ -295,10 +258,9 @@ module.exports = {
 
         if (!nextOption) return
 
-        const name = /** @type {GroupName | null} */ (
+        const name =
           currentProperty.type === 'Property' &&
-            utils.getStaticPropertyName(currentProperty)
-        )
+          utils.getStaticPropertyName(currentProperty)
         if (!name) continue
 
         const propertyOption = parseOption(nextOption, name)
