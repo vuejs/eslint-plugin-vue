@@ -2,30 +2,26 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
 /**
  * Checks whether the given node can convert to the `slot`.
- * @param {VDirective} vSlotAttr node of `v-slot`
- * @returns {boolean} `true` if the given node can convert to the `slot`
  */
-function canConvertToSlot(vSlotAttr) {
+function canConvertToSlot(vSlotAttr: VDirective): boolean {
   return vSlotAttr.parent.parent.name === 'template'
 }
 
-module.exports = {
+export default {
   supported: '>=2.6.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
     const sourceCode = context.sourceCode
 
     /**
      * Convert to `slot` and `slot-scope`.
-     * @param {RuleFixer} fixer fixer
-     * @param {VDirective} vSlotAttr node of `v-slot`
-     * @returns {null|Fix} fix data
      */
-    function fixVSlotToSlot(fixer, vSlotAttr) {
+    function fixVSlotToSlot(
+      fixer: RuleFixer,
+      vSlotAttr: VDirective
+    ): Fix | null {
       const key = vSlotAttr.key
       if (key.modifiers.length > 0) {
         // unknown modifiers
@@ -60,10 +56,8 @@ module.exports = {
     }
     /**
      * Reports `v-slot` node
-     * @param {VDirective} vSlotAttr node of `v-slot`
-     * @returns {void}
      */
-    function reportVSlot(vSlotAttr) {
+    function reportVSlot(vSlotAttr: VDirective): void {
       context.report({
         node: vSlotAttr.key,
         messageId: 'forbiddenVSlot',

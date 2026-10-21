@@ -2,18 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-module.exports = {
+export default {
   supported: '>=3.2.0 || >=2.6.0-beta.1 <=2.6.0-beta.3',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
     /**
      * Reports `.prop` shorthand node
-     * @param { VDirectiveKey & { argument: VIdentifier } } bindPropKey node of `.prop` shorthand
-     * @returns {void}
      */
-    function reportPropModifierShorthand(bindPropKey) {
+    function reportPropModifierShorthand(
+      bindPropKey: VDirectiveKey & { argument: VIdentifier }
+    ): void {
       context.report({
         node: bindPropKey,
         messageId: 'forbiddenVBindPropModifierShorthand',

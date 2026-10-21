@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import utils from '../utils/index.js'
-import vIs from './syntaxes/v-is.js'
+import vIs from './syntaxes/v-is.ts'
 
 export default {
   meta: {

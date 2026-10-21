@@ -2,14 +2,11 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-module.exports = {
+export default {
   supported: '>=3.1.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
     return {
-      /** @param {VAttribute} node */
-      "VAttribute[directive=false][key.name='is']"(node) {
+      "VAttribute[directive=false][key.name='is']"(node: VAttribute) {
         if (!node.value) {
           return
         }

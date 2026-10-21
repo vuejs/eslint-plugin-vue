@@ -2,18 +2,13 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-module.exports = {
+export default {
   supported: '>=3.2.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
     /**
      * Reports `v-bind.attr` node
-     * @param { VIdentifier } mod node of `v-bind.attr`
-     * @returns {void}
      */
-    function report(mod) {
+    function report(mod: VIdentifier): void {
       context.report({
         node: mod,
         messageId: 'forbiddenVBindAttrModifier'

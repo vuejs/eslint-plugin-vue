@@ -2,17 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-module.exports = {
+export default {
   supported: '>=2.6.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
     /**
      * Reports dynamic argument node
-     * @param {VExpressionContainer} dynamicArgument node of dynamic argument
-     * @returns {void}
      */
-    function reportDynamicArgument(dynamicArgument) {
+    function reportDynamicArgument(
+      dynamicArgument: VExpressionContainer
+    ): void {
       context.report({
         node: dynamicArgument,
         messageId: 'forbiddenDynamicDirectiveArguments'
