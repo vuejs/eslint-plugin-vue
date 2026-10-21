@@ -152,10 +152,10 @@ export default {
     const methodParamCountMap = new Map<string, number>()
     const $eventIdentifiers: Identifier[] = []
 
-    /* eslint-disable unicorn/consistent-boolean-name -- the `verify*` and `report*` helpers report and return whether they did */
     /**
      * Verify for inline handler. Returns `true` if reported.
      */
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- reports and returns whether it did
     function verifyForInlineHandler(
       node: VOnExpression,
       kind: HandlerKind
@@ -174,6 +174,7 @@ export default {
     /**
      * Report for method handler. Returns `true` if reported.
      */
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- reports and returns whether it did
     function reportForMethodHandler(
       node: Identifier,
       kind: HandlerKind
@@ -197,6 +198,7 @@ export default {
     /**
      * Verify for inline function handler. Returns `true` if reported.
      */
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- reports and returns whether it did
     function verifyForInlineFunction(
       node: ArrowFunctionExpression | FunctionExpression,
       kind: HandlerKind
@@ -271,6 +273,7 @@ export default {
      * Check if `v-on:click="foo()"` can be converted to `v-on:click="foo"` and report if it can.
      * Returns `true` if reported.
      */
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- reports and returns whether it did
     function verifyCanUseMethodHandlerForInlineHandler(
       node: VOnExpression
     ): boolean {
@@ -318,6 +321,7 @@ export default {
      * Check if `v-on:click="() => foo()"` can be converted to `v-on:click="foo"` and report if it can.
      * Returns `true` if reported.
      */
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- reports and returns whether it did
     function verifyCanUseMethodHandlerForInlineFunction(
       node: ArrowFunctionExpression | FunctionExpression
     ): boolean {
@@ -389,7 +393,6 @@ export default {
         )
       }
     }
-    /* eslint-enable unicorn/consistent-boolean-name */
     /**
      * Report `v-on:click="foo()"` can be converted to `v-on:click="()=>foo()"`.
      */
