@@ -2,14 +2,11 @@
  * @fileoverview Keep order of properties in components
  * @author Michał Sajnóg
  */
-'use strict'
+import type { VisitorKeys } from 'eslint-visitor-keys'
+import vueEslintParser from 'vue-eslint-parser'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-const traverseNodes = require('vue-eslint-parser').AST.traverseNodes
-
-/**
- * @typedef {import('eslint-visitor-keys').VisitorKeys} VisitorKeys
- */
+const traverseNodes = vueEslintParser.AST.traverseNodes
 
 const defaultOrder = [
   // Side Effects (triggers effects outside the component)
@@ -77,8 +74,7 @@ const defaultOrder = [
   'renderError'
 ]
 
-/** @type { { [key: string]: string[] } } */
-const groups = {
+const groups: { [key: string]: string[] } = {
   LIFECYCLE_HOOKS: [
     'beforeCreate',
     'created',
@@ -99,12 +95,8 @@ const groups = {
   ROUTER_GUARDS: ['beforeRouteEnter', 'beforeRouteUpdate', 'beforeRouteLeave']
 }
 
-/**
- * @param {(string | string[])[]} order
- */
-function getOrderMap(order) {
-  /** @type {Map<string, number>} */
-  const orderMap = new Map()
+function getOrderMap(order: (string | string[])[]) {
+  const orderMap = new Map<string, number>()
 
   for (const [i, property] of order.entries()) {
     if (Array.isArray(property)) {
@@ -119,10 +111,7 @@ function getOrderMap(order) {
   return orderMap
 }
 
-/**
- * @param {Token} node
- */
-function isComma(node) {
+function isComma(node: Token) {
   return node.type === 'Punctuator' && node.value === ','
 }
 
@@ -161,19 +150,16 @@ const NO_SIDE_EFFECT_NODE_TYPES = new Set([
  * node.type === 'AssignmentExpression'
  * node.type === 'TaggedTemplateExpression'
  * node.type === 'UnaryExpression' && node.operator === 'delete'
- *
- * @param  {ASTNode} node target node
- * @param  {VisitorKeys} visitorKeys sourceCode.visitorKey
- * @returns {boolean} no side effects
  */
-function isNotSideEffectsNode(node, visitorKeys) {
+function isNotSideEffectsNode(
+  node: ASTNode,
+  visitorKeys: VisitorKeys
+): boolean {
   let isValidOrder = true
-  /** @type {ASTNode | null} */
-  let skipNode = null
+  let skipNode: ASTNode | null = null
   traverseNodes(node, {
     visitorKeys,
-    /** @param {ASTNode} node */
-    enterNode(node) {
+    enterNode(node: ASTNode) {
       if (!isValidOrder || skipNode) {
         return
       }
@@ -202,8 +188,7 @@ function isNotSideEffectsNode(node, visitorKeys) {
         isValidOrder = false
       }
     },
-    /** @param {ASTNode} node */
-    leaveNode(node) {
+    leaveNode(node: ASTNode) {
       if (skipNode === node) {
         skipNode = null
       }
@@ -213,7 +198,7 @@ function isNotSideEffectsNode(node, visitorKeys) {
   return isValidOrder
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -247,32 +232,25 @@ module.exports = {
         'Manually move "{{name}}" property above "{{firstUnorderedPropertyName}}" property on line {{line}} (might break side effects).'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
-    /** @type {(string|string[])[]} */
-    const order = options.order || defaultOrder
-    /** @type {(string|string[])[]} */
-    const extendedOrder = order.map(
+    const order: (string | string[])[] = options.order || defaultOrder
+    const extendedOrder: (string | string[])[] = order.map(
       (property) =>
         (typeof property === 'string' && groups[property]) || property
     )
     const orderMap = getOrderMap(extendedOrder)
     const sourceCode = context.sourceCode
 
-    /**
-     * @param {string} name
-     */
-    function getOrderPosition(name) {
+    function getOrderPosition(name: string) {
       return orderMap.get(name) ?? -1
     }
 
-    /**
-     * @param {RuleFixer} fixer
-     * @param {Property} propertyNode
-     * @param {Property} unorderedPropertyNode
-     */
-    function* handleFix(fixer, propertyNode, unorderedPropertyNode) {
+    function* handleFix(
+      fixer: RuleFixer,
+      propertyNode: Property,
+      unorderedPropertyNode: Property
+    ) {
       const afterComma = sourceCode.getTokenAfter(propertyNode)
       const hasAfterComma = isComma(afterComma)
 
@@ -290,10 +268,7 @@ module.exports = {
       yield fixer.insertTextAfter(insertTarget, propertyCode)
     }
 
-    /**
-     * @param {(Property | SpreadElement)[]} propertiesNodes
-     */
-    function checkOrder(propertiesNodes) {
+    function checkOrder(propertiesNodes: (Property | SpreadElement)[]) {
       const properties = propertiesNodes
         .filter(utils.isProperty)
         .map((property) => ({
