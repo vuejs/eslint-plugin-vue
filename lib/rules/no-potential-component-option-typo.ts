@@ -2,11 +2,9 @@
  * @fileoverview detect if there is a potential typo in your component property
  * @author IWANABETHATGUY
  */
-'use strict'
-
-const utils = require('../utils')
-const vueComponentOptions = require('../utils/vue-component-options.json')
-module.exports = {
+import utils from '../utils/index.js'
+import vueComponentOptions from '../utils/vue-component-options.json' with { type: 'json' }
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -47,15 +45,13 @@ module.exports = {
       potentialTypo: `'{{name}}' may be a typo, which is similar to option [{{option}}].`
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const option = context.options[0] || {}
     const custom = option.custom || []
-    /** @type {('all' | 'vue' | 'vue-router' | 'nuxt')[]} */
-    const presets = option.presets || ['vue']
+    const presets: ('all' | 'vue' | 'vue-router' | 'nuxt')[] =
+      option.presets || ['vue']
     const threshold = option.threshold || 1
-    /** @type {Set<string>} */
-    const candidateOptionSet = new Set(custom)
+    const candidateOptionSet = new Set<string>(custom)
     for (const preset of presets) {
       if (preset === 'all') {
         for (const opts of Object.values(vueComponentOptions)) {

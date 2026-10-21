@@ -3,10 +3,8 @@
  * @author Loren Klingman
  * Original ESLint sort-keys by Toru Nagashima
  */
-'use strict'
-
-const naturalCompare = require('natural-compare')
-const utils = require('../utils')
+import naturalCompare from 'natural-compare'
+import utils from '../utils/index.js'
 
 /**
  * Gets the property name of the given `Property` node.
@@ -15,11 +13,9 @@ const utils = require('../utils')
  *   whether it's a computed property or not.
  * - If the property has a static name, this returns the static name.
  * - Otherwise, this returns null.
- * @param {Property} node The `Property` node to get.
- * @returns {string|null} The property name or null.
  * @private
  */
-function getPropertyName(node) {
+function getPropertyName(node: Property): string | null {
   const staticName = utils.getStaticPropertyName(node)
 
   if (staticName !== null) {
@@ -35,9 +31,8 @@ function getPropertyName(node) {
  * Postfix `I` is meant insensitive.
  * Postfix `N` is meant natural.
  * @private
- * @type { { [key: string]: (a:string, b:string) => boolean } }
  */
-const orderComparators = {
+const orderComparators: { [key: string]: (a: string, b: string) => boolean } = {
   asc(a, b) {
     return a <= b
   },
@@ -64,7 +59,7 @@ const orderComparators = {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -111,17 +106,12 @@ module.exports = {
         "Expected object keys to be in {{natural}}{{insensitive}}{{order}}ending order. '{{thisName}}' should be before '{{prevName}}'."
     }
   },
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     // Parse options.
     const options = context.options[1]
     const order = context.options[0] || 'asc'
 
-    /** @type {Set<string>} */
-    const ignoreGrandchildrenOf = new Set(
+    const ignoreGrandchildrenOf = new Set<string>(
       (options && options.ignoreGrandchildrenOf) || [
         'computed',
         'directives',
@@ -130,8 +120,7 @@ module.exports = {
         'watch'
       ]
     )
-    /** @type {Set<string>} */
-    const ignoreChildrenOf = new Set(
+    const ignoreChildrenOf = new Set<string>(
       (options && options.ignoreChildrenOf) || ['model']
     )
     const insensitive = options && options.caseSensitive === false
@@ -143,34 +132,32 @@ module.exports = {
       orderComparators[order + (insensitive ? 'I' : '') + (natural ? 'N' : '')]
     const sourceCode = context.sourceCode
 
-    /**
-     * @typedef {object} ObjectStack
-     * @property {ObjectStack | null} ObjectStack.upper
-     * @property {string | null} ObjectStack.prevName
-     * @property {Property | null} ObjectStack.prevNode
-     * @property {boolean} ObjectStack.prevBlankLine
-     * @property {number} ObjectStack.numKeys
-     * @property {VueState} ObjectStack.vueState
-     *
-     * @typedef {object} VueState
-     * @property {Property} [VueState.currentProperty]
-     * @property {boolean} [VueState.isVueObject]
-     * @property {boolean} [VueState.within]
-     * @property {string} [VueState.propName]
-     * @property {number} [VueState.chainLevel]
-     * @property {boolean} [VueState.ignore]
-     */
+    interface ObjectStack {
+      upper: ObjectStack | null
+      prevName: string | null
+      prevNode: Property | null
+      prevBlankLine: boolean
+      numKeys: number
+      vueState: VueState
+    }
+
+    interface VueState {
+      currentProperty?: Property
+      isVueObject?: boolean
+      within?: boolean
+      propName?: string
+      chainLevel?: number
+      ignore?: boolean
+    }
 
     /**
      * The stack to save the previous property's name for each object literals.
-     * @type {ObjectStack | null}
      */
-    let objectStack
+    let objectStack: ObjectStack | null
 
     return {
       ObjectExpression(node) {
-        /** @type {VueState} */
-        const vueState = {}
+        const vueState: VueState = {}
         const upperVueState = (objectStack && objectStack.vueState) || {}
         objectStack = {
           upper: objectStack,
@@ -234,7 +221,7 @@ module.exports = {
           objectStack.prevName = null
         }
       },
-      'ObjectExpression > Property'(node) {
+      'ObjectExpression > Property'(node: Property) {
         if (!objectStack) {
           return
         }

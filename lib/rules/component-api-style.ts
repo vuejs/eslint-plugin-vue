@@ -2,40 +2,33 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
+type PreferOption =
+  'script-setup' | 'composition' | 'composition-vue2' | 'options'
 
-/**
- * @typedef { 'script-setup' | 'composition' | 'composition-vue2' | 'options' } PreferOption
- *
- * @typedef {PreferOption[]} UserPreferOption
- *
- * @typedef {object} NormalizeOptions
- * @property {object} allowsSFC
- * @property {boolean} [allowsSFC.scriptSetup]
- * @property {boolean} [allowsSFC.composition]
- * @property {boolean} [allowsSFC.compositionVue2]
- * @property {boolean} [allowsSFC.options]
- * @property {object} allowsOther
- * @property {boolean} [allowsOther.composition]
- * @property {boolean} [allowsOther.compositionVue2]
- * @property {boolean} [allowsOther.options]
- */
+type UserPreferOption = PreferOption[]
 
-/** @type {PreferOption[]} */
-const STYLE_OPTIONS = [
+interface AllowsOption {
+  scriptSetup?: boolean
+  composition?: boolean
+  compositionVue2?: boolean
+  options?: boolean
+}
+
+interface NormalizeOptions {
+  allowsSFC: AllowsOption
+  allowsOther: Omit<AllowsOption, 'scriptSetup'>
+}
+
+const STYLE_OPTIONS: PreferOption[] = [
   'script-setup',
   'composition',
   'composition-vue2',
   'options'
 ]
 
-/**
- * @param {NormalizeOptions} opts
- * @param {PreferOption} prefer
- */
-function applyPreferOption(opts, prefer) {
+function applyPreferOption(opts: NormalizeOptions, prefer: PreferOption) {
   switch (prefer) {
     case 'script-setup': {
       opts.allowsSFC.scriptSetup = true
@@ -61,15 +54,14 @@ function applyPreferOption(opts, prefer) {
 
 /**
  * Normalize options.
- * @param {any[]} options The options user configured.
- * @returns {NormalizeOptions} The normalized options.
  */
-function parseOptions(options) {
-  /** @type {NormalizeOptions} */
-  const opts = { allowsSFC: {}, allowsOther: {} }
+function parseOptions(options: any[]): NormalizeOptions {
+  const opts: NormalizeOptions = { allowsSFC: {}, allowsOther: {} }
 
-  /** @type {UserPreferOption} */
-  const preferOptions = options[0] || ['script-setup', 'composition']
+  const preferOptions: UserPreferOption = options[0] || [
+    'script-setup',
+    'composition'
+  ]
   for (const prefer of preferOptions) {
     applyPreferOption(opts, prefer)
   }
@@ -144,18 +136,7 @@ const LIFECYCLE_HOOK_OPTIONS = new Set([
   'errorCaptured'
 ])
 
-/**
- * @typedef { 'script-setup' | 'composition' | 'options' } ApiStyle
- */
-
-/**
- * @param {object} allowsOpt
- * @param {boolean} [allowsOpt.scriptSetup]
- * @param {boolean} [allowsOpt.composition]
- * @param {boolean} [allowsOpt.compositionVue2]
- * @param {boolean} [allowsOpt.options]
- */
-function buildAllowedPhrase(allowsOpt) {
+function buildAllowedPhrase(allowsOpt: AllowsOption) {
   const phrases = []
   if (allowsOpt.scriptSetup) {
     phrases.push('`<script setup>`')
@@ -174,14 +155,7 @@ function buildAllowedPhrase(allowsOpt) {
     : phrases.join(' or ')
 }
 
-/**
- * @param {object} allowsOpt
- * @param {boolean} [allowsOpt.scriptSetup]
- * @param {boolean} [allowsOpt.composition]
- * @param {boolean} [allowsOpt.compositionVue2]
- * @param {boolean} [allowsOpt.options]
- */
-function isPreferScriptSetup(allowsOpt) {
+function isPreferScriptSetup(allowsOpt: AllowsOption) {
   return (
     allowsOpt.scriptSetup &&
     !allowsOpt.composition &&
@@ -190,10 +164,7 @@ function isPreferScriptSetup(allowsOpt) {
   )
 }
 
-/**
- * @param {string} name
- */
-function buildOptionPhrase(name) {
+function buildOptionPhrase(name: string) {
   if (LIFECYCLE_HOOK_OPTIONS.has(name)) return `\`${name}\` lifecycle hook`
 
   return name === 'setup' || name === 'render'
@@ -201,7 +172,7 @@ function buildOptionPhrase(name) {
     : `\`${name}\` option`
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -229,8 +200,7 @@ module.exports = {
         '{{disallowedApi}} is not allowed in your project. Use `<script setup>` instead.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = parseOptions(context.options)
 
     return utils.compositingVisitors(
