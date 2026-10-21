@@ -31,7 +31,7 @@ This rule checks whether every `v-slot` directive is valid.
 This rule reports `v-slot` directives in the following cases:
 
 - The directive is not owned by a custom element. E.g. `<div v-slot=""></div>`
-- The directive is a named slot and is on a custom element directly. E.g. `<my-component v-slot:foo></my-component>`
+- The directive is a named slot, is on a custom element directly, and there are other slots. E.g. `<my-component v-slot:foo=""><template v-slot:bar></template></my-component>`
 - The directive is the default slot, is on a custom element directly, and there are other named slots. E.g. `<my-component v-slot=""><template v-slot:foo></template></my-component>`
 - The element which has the directive has another `v-slot` directive. E.g. `<my-component v-slot:one v-slot:two></my-component>`
 - The element which has the directive has another `v-slot` directive that is distributed to the same slot. E.g. `<my-component><template v-slot:foo></template><template v-slot:foo></template></my-component>`
@@ -45,6 +45,9 @@ This rule reports `v-slot` directives in the following cases:
 <template>
   <!-- ✓ GOOD -->
   <my-component v-slot="data">
+    {{ data }}
+  </my-component>
+  <my-component v-slot:one="data">
     {{ data }}
   </my-component>
   <my-component>
@@ -71,6 +74,9 @@ This rule reports `v-slot` directives in the following cases:
 
   <my-component v-slot:one="data">
     {{ data }}
+    <template v-slot:two>
+      two
+    </template>
   </my-component>
   <my-component v-slot="data">
     {{ data }}
