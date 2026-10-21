@@ -3,10 +3,10 @@
  * @author Michał Sajnóg
  */
 import type { VisitorKeys } from 'eslint-visitor-keys'
-import { AST } from 'vue-eslint-parser'
+import vueEslintParser from 'vue-eslint-parser'
 import utils from '../utils/index.js'
 
-const traverseNodes = AST.traverseNodes
+const traverseNodes = vueEslintParser.AST.traverseNodes
 
 const defaultOrder = [
   // Side Effects (triggers effects outside the component)
