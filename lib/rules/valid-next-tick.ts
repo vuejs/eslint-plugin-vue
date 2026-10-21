@@ -4,17 +4,13 @@
  * @copyright 2021 Flo Edelmann. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { findVariable } from '@eslint-community/eslint-utils'
 
-const utils = require('../utils')
-const { findVariable } = require('@eslint-community/eslint-utils')
-
-/**
- * @param {Identifier} identifier
- * @param {RuleContext} context
- * @returns {ASTNode|undefined}
- */
-function getVueNextTickNode(identifier, context) {
+function getVueNextTickNode(
+  identifier: Identifier,
+  context: RuleContext
+): ASTNode | undefined {
   // Instance API: this.$nextTick()
   // and Vue 2 Global API: Vue.nextTick()
   if (
@@ -48,11 +44,7 @@ function getVueNextTickNode(identifier, context) {
   return undefined
 }
 
-/**
- * @param {CallExpression} callExpression
- * @returns {boolean}
- */
-function isAwaitedPromise(callExpression) {
+function isAwaitedPromise(callExpression: CallExpression): boolean {
   switch (callExpression.parent.type) {
     // cases like `await nextTick()`
     case 'AwaitExpression': {
@@ -98,7 +90,7 @@ function isAwaitedPromise(callExpression) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -119,11 +111,9 @@ module.exports = {
         'Either await the Promise or pass a callback function to `nextTick`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineVueVisitor(context, {
-      /** @param {Identifier} node */
-      Identifier(node) {
+      Identifier(node: Identifier) {
         const nextTickNode = getVueNextTickNode(node, context)
         if (!nextTickNode || !nextTickNode.parent) {
           return

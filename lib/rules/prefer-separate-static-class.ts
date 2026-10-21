@@ -2,21 +2,13 @@
  * @author Flo Edelmann
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const {
-  defineTemplateBodyVisitor,
-  isStringLiteral,
-  getStringLiteralValue
-} = require('../utils')
-
-/**
- * @param {TemplateElement} templateElement
- * @param {number} index
- * @param {TemplateLiteral} templateLiteral
- * @returns {boolean}
- */
-function isStaticClassTemplateElement(templateElement, index, templateLiteral) {
+function isStaticClassTemplateElement(
+  templateElement: TemplateElement,
+  index: number,
+  templateLiteral: TemplateLiteral
+): boolean {
   const value = templateElement.value.cooked
   return (
     value.trim() !== '' &&
@@ -25,11 +17,9 @@ function isStaticClassTemplateElement(templateElement, index, templateLiteral) {
   )
 }
 
-/**
- * @param {ASTNode | TemplateLiteral} expressionNode
- * @returns {(Literal | TemplateLiteral | TemplateElement | Identifier)[]}
- */
-function findStaticClasses(expressionNode) {
+function findStaticClasses(
+  expressionNode: ASTNode | TemplateLiteral
+): (Literal | TemplateLiteral | TemplateElement | Identifier)[] {
   if (
     expressionNode.type === 'TemplateLiteral' &&
     expressionNode.expressions.length > 0
@@ -39,7 +29,7 @@ function findStaticClasses(expressionNode) {
     )
   }
 
-  if (isStringLiteral(expressionNode)) {
+  if (utils.isStringLiteral(expressionNode)) {
     return [expressionNode]
   }
 
@@ -53,12 +43,11 @@ function findStaticClasses(expressionNode) {
     }
 
     case 'ObjectExpression': {
-      // eslint-disable-next-line unicorn/no-unnecessary-array-flat-map -- needed for type narrowing
       return expressionNode.properties.flatMap((property) =>
         property.type === 'Property' &&
         property.value.type === 'Literal' &&
         property.value.value === true &&
-        (isStringLiteral(property.key) ||
+        (utils.isStringLiteral(property.key) ||
           (property.key.type === 'Identifier' && !property.computed))
           ? [property.key]
           : []
@@ -69,11 +58,9 @@ function findStaticClasses(expressionNode) {
   return []
 }
 
-/**
- * @param {Literal | TemplateLiteral | TemplateElement | Identifier} staticClassNameNode
- * @returns {string | null}
- */
-function getStaticClassName(staticClassNameNode) {
+function getStaticClassName(
+  staticClassNameNode: Literal | TemplateLiteral | TemplateElement | Identifier
+): string | null {
   if (staticClassNameNode.type === 'Identifier') {
     return staticClassNameNode.name
   }
@@ -81,14 +68,12 @@ function getStaticClassName(staticClassNameNode) {
     const value = staticClassNameNode.value.cooked
     return value === null ? null : value.trim().replaceAll(/\s+/gu, ' ')
   }
-  return getStringLiteralValue(staticClassNameNode, true)
+  return utils.getStringLiteralValue(staticClassNameNode, true)
 }
 
-/**
- * @param {VAttribute | VDirective} attributeNode
- * @returns {attributeNode is VAttribute & { value: VLiteral }}
- */
-function isStaticClassAttribute(attributeNode) {
+function isStaticClassAttribute(
+  attributeNode: VAttribute | VDirective
+): attributeNode is VAttribute & { value: VLiteral } {
   return (
     !attributeNode.directive &&
     attributeNode.key.name === 'class' &&
@@ -98,11 +83,12 @@ function isStaticClassAttribute(attributeNode) {
 
 /**
  * Removes the node together with the comma before or after the node.
- * @param {RuleFixer} fixer
- * @param {ParserServices.TokenStore} tokenStore
- * @param {ASTNode} node
  */
-function* removeNodeWithComma(fixer, tokenStore, node) {
+function* removeNodeWithComma(
+  fixer: RuleFixer,
+  tokenStore: ParserServices.TokenStore,
+  node: ASTNode
+) {
   const prevToken = tokenStore.getTokenBefore(node)
   if (prevToken.type === 'Punctuator' && prevToken.value === ',') {
     yield fixer.removeRange([prevToken.range[0], node.range[1]])
@@ -125,7 +111,7 @@ function* removeNodeWithComma(fixer, tokenStore, node) {
   yield fixer.remove(node)
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -141,12 +127,10 @@ module.exports = {
         'Static class "{{className}}" should be in a static `class` attribute.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    return defineTemplateBodyVisitor(context, {
-      /** @param {VDirectiveKey} directiveKeyNode */
+  create(context: RuleContext) {
+    return utils.defineTemplateBodyVisitor(context, {
       "VAttribute[directive=true] > VDirectiveKey[name.name='bind'][argument.name='class']"(
-        directiveKeyNode
+        directiveKeyNode: VDirectiveKey
       ) {
         const attributeNode = directiveKeyNode.parent
         if (!attributeNode.value || !attributeNode.value.expression) {
@@ -181,7 +165,7 @@ module.exports = {
                * Remove class from dynamic `:class` directive.
                */
               function* removeFromClassDirective() {
-                if (isStringLiteral(expressionNode)) {
+                if (utils.isStringLiteral(expressionNode)) {
                   yield fixer.remove(attributeNode)
                   isDynamicClassDirectiveRemoved = true
                   return
