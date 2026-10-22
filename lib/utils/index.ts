@@ -2311,9 +2311,6 @@ function compositingVisitors<T>(
 
 /**
  * Find the variable of a given identifier.
- * @param {RuleContext} context The rule context
- * @param {Identifier} node The variable name to find.
- * @returns {Variable|null} The found variable or null.
  */
 function findVariableByIdentifier(
   context: RuleContext,
@@ -2324,10 +2321,6 @@ function findVariableByIdentifier(
 
 /**
  * Finds the property with the given name from the given ObjectExpression node.
- * @param {ObjectExpression} node
- * @param {string} name
- * @param { (p: Property) => boolean } [isMatching]
- * @returns { (Property) | null}
  */
 function findProperty(
   node: ObjectExpression,
@@ -2336,10 +2329,6 @@ function findProperty(
 ): Property | null {
   return (
     node.properties.find(
-      /**
-       * @param {Property | SpreadElement} prop
-       * @returns {prop is Property}
-       */
       (prop: Property | SpreadElement): prop is Property =>
         isProperty(prop) &&
         getStaticPropertyName(prop) === name &&
@@ -2350,10 +2339,6 @@ function findProperty(
 
 /**
  * Finds the assignment property with the given name from the given ObjectPattern node.
- * @param {ObjectPattern} node
- * @param {string} name
- * @param { (p: AssignmentProperty) => boolean } [isMatching]
- * @returns { (AssignmentProperty) | null}
  */
 function findAssignmentProperty(
   node: ObjectPattern,
@@ -2362,10 +2347,6 @@ function findAssignmentProperty(
 ): AssignmentProperty | null {
   return (
     node.properties.find(
-      /**
-       * @param {AssignmentProperty | RestElement} prop
-       * @returns {prop is AssignmentProperty}
-       */
       (prop: AssignmentProperty | RestElement): prop is AssignmentProperty =>
         isAssignmentProperty(prop) &&
         getStaticPropertyName(prop) === name &&
@@ -2376,8 +2357,6 @@ function findAssignmentProperty(
 
 /**
  * Checks whether the given node is Property.
- * @param {Property | SpreadElement | AssignmentProperty} node
- * @returns {node is Property}
  */
 function isProperty(
   node: Property | SpreadElement | AssignmentProperty
@@ -2389,8 +2368,6 @@ function isProperty(
 }
 /**
  * Checks whether the given node is AssignmentProperty.
- * @param {AssignmentProperty | RestElement} node
- * @returns {node is AssignmentProperty}
  */
 function isAssignmentProperty(
   node: AssignmentProperty | RestElement
@@ -2399,8 +2376,6 @@ function isAssignmentProperty(
 }
 /**
  * Checks whether the given node is VElement.
- * @param {VElement | VExpressionContainer | VText | VDocumentFragment} node
- * @returns {node is VElement}
  */
 function isVElement(
   node: VElement | VExpressionContainer | VText | VDocumentFragment
@@ -2410,11 +2385,8 @@ function isVElement(
 
 /**
  * Checks whether the given node is in export default.
- * @param {ASTNode} node
- * @returns {boolean}
  */
 function isInExportDefault(node: ASTNode): boolean {
-  /** @type {ASTNode | null} */
   let parent: ASTNode | null = node.parent
   while (parent) {
     if (parent.type === 'ExportDefaultDeclaration') {
@@ -2427,9 +2399,6 @@ function isInExportDefault(node: ASTNode): boolean {
 
 /**
  * Retrieve `TSAsExpression#expression` value if the given node a `TSAsExpression` node. Otherwise, pass through it.
- * @template T Node type
- * @param {T | TSAsExpression} node The node to address.
- * @returns {T} The `TSAsExpression#expression` value if the node is a `TSAsExpression` node. Otherwise, the node.
  */
 function skipTSAsExpression<T>(node: T | TSAsExpression): T {
   if (!node) {
@@ -2445,8 +2414,6 @@ function skipTSAsExpression<T>(node: T | TSAsExpression): T {
 
 /**
  * Gets the parent node of the given node. This method returns a value ignoring `X as F`.
- * @param {Expression} node
- * @returns {ASTNode}
  */
 function getParent(node: Expression): ASTNode {
   let parent = node.parent
@@ -2458,8 +2425,6 @@ function getParent(node: Expression): ASTNode {
 
 /**
  * Checks if the given node is a property value.
- * @param {Property} prop
- * @param {Expression} node
  */
 function isPropertyChain(prop: Property, node: Expression) {
   let value = node
@@ -2471,9 +2436,6 @@ function isPropertyChain(prop: Property, node: Expression) {
 
 /**
  * Retrieve `AssignmentPattern#left` value if the given node a `AssignmentPattern` node. Otherwise, pass through it.
- * @template T Node type
- * @param {T | AssignmentPattern} node The node to address.
- * @return {T} The `AssignmentPattern#left` value if the node is a `AssignmentPattern` node. Otherwise, the node.
  */
 function skipDefaultParamValue<T>(node: T | AssignmentPattern): T {
   if (!node) {
@@ -2489,9 +2451,6 @@ function skipDefaultParamValue<T>(node: T | AssignmentPattern): T {
 
 /**
  * Retrieve `ChainExpression#expression` value if the given node a `ChainExpression` node. Otherwise, pass through it.
- * @template T Node type
- * @param {T | ChainExpression} node The node to address.
- * @returns {T} The `ChainExpression#expression` value if the node is a `ChainExpression` node. Otherwise, the node.
  */
 function skipChainExpression<T>(node: T | ChainExpression): T {
   if (!node) {
@@ -2507,11 +2466,8 @@ function skipChainExpression<T>(node: T | ChainExpression): T {
 
 /**
  * Checks whether the given node is in a type annotation.
- * @param {ESNode} node
- * @returns {boolean}
  */
 function isWithinTypeNode(node: ESNode): boolean {
-  /** @type {ASTNode | null} */
   let target: ASTNode | null = node
   while (target) {
     if (isTypeNode(target)) {
@@ -2524,8 +2480,6 @@ function isWithinTypeNode(node: ESNode): boolean {
 
 /**
  * Gets the property name of a given node.
- * @param {Property|AssignmentProperty|MethodDefinition|MemberExpression} node - The node to get.
- * @return {string|null} The property name if static. Otherwise, null.
  */
 export function getStaticPropertyName(
   node: Property | AssignmentProperty | MethodDefinition | MemberExpression
@@ -2555,9 +2509,6 @@ export function getStaticPropertyName(
 
 /**
  * Gets the string of a given node.
- * @param {Literal|TemplateLiteral} node - The node to get.
- * @param {boolean} [isStringOnly]
- * @return {string|null} The string if static. Otherwise, null.
  */
 export function getStringLiteralValue(
   node: Literal | TemplateLiteral,
@@ -2581,8 +2532,6 @@ export function getStringLiteralValue(
 
 /**
  * Gets the name parameter from the given call expression.
- * @param {CallExpression} node - The call expression to get.
- * @returns {NameWithLoc|null} The name and location if static.
  */
 function getNameParamNode(node: CallExpression): NameWithLoc | null {
   const nameLiteralNode = node.arguments[0]
