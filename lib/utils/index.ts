@@ -139,19 +139,12 @@ const {
 } = tsUtils
 const { getScope } = scopeUtils
 
-/**
- * @type { WeakMap<RuleContext, Token[]> }
- */
 const componentComments: WeakMap<RuleContext, Token[]> = new WeakMap()
 
-/** @type { Map<string, RuleModule> | null } */
 let coreRuleMap: Map<string, RuleModule> | null = null
-/** @type { Map<string, RuleModule> } */
 const stylisticRuleMap: Map<string, RuleModule> = new Map()
 /**
  * Get the core rule implementation from the rule name
- * @param {string} name
- * @returns {RuleModule | null}
  */
 export function getCoreRule(name: string): RuleModule | null {
   try {
@@ -166,9 +159,6 @@ export function getCoreRule(name: string): RuleModule | null {
 }
 /**
  * Get ESLint Stylistic rule implementation from the rule name
- * @param {string} name
- * @param {'@stylistic/eslint-plugin' | '@stylistic/eslint-plugin-ts' | '@stylistic/eslint-plugin-js'} [preferModule]
- * @returns {RuleModule | null}
  */
 function getStylisticRule(
   name: string,
@@ -206,12 +196,6 @@ function getStylisticRule(
   return null
 }
 
-/**
- * @template {object} T
- * @param {T} target
- * @param {Partial<T>[]} propsArray
- * @returns {T}
- */
 function newProxy<T extends object>(target: T, ...propsArray: Partial<T>[]): T {
   const result = new Proxy(
     {},
@@ -243,11 +227,6 @@ function newProxy<T extends object>(target: T, ...propsArray: Partial<T>[]): T {
 
 /**
  * Wrap the rule context object to override methods which access to tokens (such as getTokenAfter).
- * @param {RuleContext} context The rule context object.
- * @param {ParserServices.TokenStore} tokenStore The token store object for template.
- * @param {Object} options The option of this rule.
- * @param {boolean} [options.applyDocument] If `true`, apply check to document fragment.
- * @returns {RuleContext}
  */
 function wrapContextToOverrideTokenMethods(
   context: RuleContext,
@@ -259,7 +238,6 @@ function wrapContextToOverrideTokenMethods(
     ? eslintSourceCode.parserServices.getDocumentFragment &&
       eslintSourceCode.parserServices.getDocumentFragment()
     : eslintSourceCode.ast.templateBody
-  /** @type {Token[] | null} */
   let tokensAndComments: Token[] | null = null
   function getTokensAndComments() {
     if (tokensAndComments) {
@@ -273,15 +251,12 @@ function wrapContextToOverrideTokenMethods(
     return tokensAndComments
   }
 
-  /** @param {number} index */
   function getNodeByRangeIndex(index: number) {
     if (!rootNode) {
       return eslintSourceCode.ast
     }
 
-    /** @type {ASTNode} */
     let result: ASTNode = eslintSourceCode.ast
-    /** @type {ASTNode[]} */
     const skipNodes: ASTNode[] = []
     let shouldBreak = false
 
@@ -326,13 +301,8 @@ function wrapContextToOverrideTokenMethods(
     tokenStore
   )
 
-  /** @type {WeakMap<ASTNode, import('eslint').Scope.ScopeManager>} */
   const containerScopes: WeakMap<ASTNode, Scope.ScopeManager> = new WeakMap()
 
-  /**
-   * @param {ASTNode} node
-   * @returns {import('eslint').Scope.ScopeManager|null}
-   */
   function getContainerScope(node: ASTNode): Scope.ScopeManager | null {
     const exprContainer = getVExpressionContainer(node)
     if (!exprContainer) {
@@ -388,10 +358,6 @@ function wrapContextToOverrideTokenMethods(
     getDeclaredVariables
   })
 
-  /**
-   * @param {ESNode} node
-   * @returns {Variable[]}
-   */
   function getDeclaredVariables(node: ESNode): Variable[] {
     const scope = getContainerScope(node)
     return scope?.getDeclaredVariables(node) ?? []
@@ -400,8 +366,6 @@ function wrapContextToOverrideTokenMethods(
 
 /**
  * Wrap the rule context object to override report method to skip the dynamic argument.
- * @param {RuleContext} context The rule context object.
- * @returns {RuleContext}
  */
 function wrapContextToOverrideReportMethodToSkipDynamicArgument(
   context: RuleContext
@@ -411,7 +375,6 @@ function wrapContextToOverrideReportMethodToSkipDynamicArgument(
   if (!templateBody) {
     return context
   }
-  /** @type {Range[]} */
   const directiveKeyRanges: Range[] = []
   traverseNodes(templateBody, {
     enterNode(node, parent) {
@@ -495,9 +458,6 @@ interface WrapRuleOptions {
 }
 /**
  * Wrap a given core rule to apply it to Vue.js template.
- * @param {string} coreRuleName The name of the core rule implementation to wrap.
- * @param {WrapRuleOptions} [options] The option of this rule.
- * @returns {RuleModule} The wrapped rule implementation.
  */
 export function wrapCoreRule(
   coreRuleName: string,
@@ -550,9 +510,6 @@ interface RuleNames {
 }
 /**
  * Wrap a core rule or ESLint Stylistic rule to apply it to Vue.js template.
- * @param {RuleNames|string} ruleNames The names of the rule implementation to wrap.
- * @param {WrapRuleOptions} [options] The option of this rule.
- * @returns {RuleModule} The wrapped rule implementation.
  */
 function wrapStylisticOrCoreRule(
   ruleNames: RuleNames | string,
@@ -613,10 +570,6 @@ function wrapStylisticOrCoreRule(
 }
 /**
  * Wrap a given rule to apply it to Vue.js template.
- * @param {RuleModule} baseRule The rule implementation to wrap.
- * @param {string} ruleName The name of the wrapped rule.
- * @param {WrapRuleOptions} [options] The option of this rule.
- * @returns {RuleModule} The wrapped rule implementation.
  */
 function wrapRuleModule(
   baseRule: RuleModule,
@@ -657,7 +610,6 @@ function wrapRuleModule(
           wrapContextToOverrideReportMethodToSkipDynamicArgument(context)
       }
 
-      /** @type {TemplateListener} */
       const handlers: TemplateListener = {}
 
       if (preprocess) {
@@ -699,7 +651,6 @@ function wrapRuleModule(
         let isWithinDynamicArguments = false
         for (const name of Object.keys(handlers)) {
           const original = handlers[name]
-          /** @param {any[]} args */
           handlers[name] = (...args: any[]) => {
             if (isWithinDynamicArguments) return
             // @ts-expect-error -- the handlers have different signatures
@@ -743,12 +694,6 @@ const utils = {
    * Register the given visitor to parser services.
    * If the parser service of `vue-eslint-parser` was not found,
    * this generates a warning.
-   *
-   * @param {RuleContext} context The rule context to use parser services.
-   * @param {TemplateListener} templateBodyVisitor The visitor to traverse the template body.
-   * @param {RuleListener} [scriptVisitor] The visitor to traverse the script.
-   * @param { { templateBodyTriggerSelector: "Program" | "Program:exit" } } [options] The options.
-   * @returns {RuleListener} The merged visitor.
    */
   defineTemplateBodyVisitor,
 
@@ -756,38 +701,24 @@ const utils = {
    * Register the given visitor to parser services.
    * If the parser service of `vue-eslint-parser` was not found,
    * this generates a warning.
-   *
-   * @param {RuleContext} context The rule context to use parser services.
-   * @param {TemplateListener} documentVisitor The visitor to traverse the document.
-   * @param { { triggerSelector: "Program" | "Program:exit" } } [options] The options.
-   * @returns {RuleListener} The merged visitor.
    */
   defineDocumentVisitor,
   /**
    * Wrap a given core rule to apply it to Vue.js template.
-   * @type {typeof wrapCoreRule}
    */
   wrapCoreRule,
   wrapStylisticOrCoreRule,
   getCoreRule,
   /**
    * Checks whether the given value is defined.
-   * @template T
-   * @param {T | null | undefined} v
-   * @returns {v is T}
    */
   isDef,
   /**
    * Flattens arrays, objects and iterable objects.
-   * @template T
-   * @param {T | Iterable<T> | null | undefined} v
-   * @returns {T[]}
    */
   flatten,
   /**
    * Get the previous sibling element of the given element.
-   * @param {VElement} node The element node to get the previous sibling element.
-   * @returns {VElement|null} The previous sibling element.
    */
   prevSibling(node: VElement): VElement | null {
     let prevElement = null
@@ -2484,9 +2415,6 @@ export const {
 
 /**
  * Checks whether the given value is defined.
- * @template T
- * @param {T | null | undefined} v
- * @returns {v is T}
  */
 function isDef<T>(v: T | null | undefined): v is T {
   return v != null
@@ -2494,12 +2422,8 @@ function isDef<T>(v: T | null | undefined): v is T {
 
 /**
  * Flattens arrays, objects and iterable objects.
- * @template T
- * @param {T | Iterable<T> | null | undefined} v
- * @returns {T[]}
  */
 function flatten<T>(v: T | Iterable<T> | null | undefined): T[] {
-  /** @type {T[]} */
   const result: T[] = []
   if (v) {
     if (isIterable(v)) {
@@ -2511,10 +2435,6 @@ function flatten<T>(v: T | Iterable<T> | null | undefined): T[] {
   return result
 }
 
-/**
- * @param {*} v
- * @returns {v is Iterable<any>}
- */
 function isIterable(v: any): v is Iterable<any> {
   return v && Symbol.iterator in v
 }
@@ -2527,12 +2447,6 @@ function isIterable(v: any): v is Iterable<any> {
  * Register the given visitor to parser services.
  * If the parser service of `vue-eslint-parser` was not found,
  * this generates a warning.
- *
- * @param {RuleContext} context The rule context to use parser services.
- * @param {TemplateListener} templateBodyVisitor The visitor to traverse the template body.
- * @param {RuleListener} [scriptVisitor] The visitor to traverse the script.
- * @param { { templateBodyTriggerSelector: "Program" | "Program:exit" } } [options] The options.
- * @returns {RuleListener} The merged visitor.
  */
 function defineTemplateBodyVisitor(
   context: RuleContext,
@@ -2562,11 +2476,6 @@ function defineTemplateBodyVisitor(
  * Register the given visitor to parser services.
  * If the parser service of `vue-eslint-parser` was not found,
  * this generates a warning.
- *
- * @param {RuleContext} context The rule context to use parser services.
- * @param {TemplateListener} documentVisitor The visitor to traverse the document.
- * @param { { triggerSelector: "Program" | "Program:exit" } } [options] The options.
- * @returns {RuleListener} The merged visitor.
  */
 export function defineDocumentVisitor(
   context: RuleContext,
@@ -2591,12 +2500,6 @@ export function defineDocumentVisitor(
   )
 }
 
-/**
- * @template T
- * @param {T} visitor
- * @param {...(TemplateListener | RuleListener | NodeListener)} visitors
- * @returns {T}
- */
 function compositingVisitors<T>(
   visitor: T,
   ...visitors: (TemplateListener | RuleListener | NodeListener)[]
