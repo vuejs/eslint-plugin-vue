@@ -337,12 +337,32 @@ export default {
       }
       return ctx
     }
+    let templateContext: VueComponentContext | undefined
     function getVueComponentContextForTemplate():
       VueComponentContext | undefined {
+      if (templateContext) {
+        return templateContext
+      }
       const keys = [...vueComponentContextMap.keys()]
-      const exported =
-        keys.find(isScriptSetupProgram) || keys.find(utils.isInExportDefault)
-      return exported && vueComponentContextMap.get(exported)
+      const setupKey = keys.find(isScriptSetupProgram)
+      const exportedKey = keys.find(utils.isInExportDefault)
+      const setupCtx = setupKey && vueComponentContextMap.get(setupKey)
+      const exportedCtx = exportedKey && vueComponentContextMap.get(exportedKey)
+      if (setupCtx && exportedCtx) {
+        // Both `<script setup>` and `<script>` are used, so the template can
+        // refer to the properties defined in either of them.
+        templateContext = new VueComponentContext()
+        for (const ctx of [exportedCtx, setupCtx]) {
+          for (const [name, data] of ctx.defineProperties) {
+            templateContext.defineProperties.set(name, data)
+          }
+          if (ctx.hasUnknownProperty) {
+            templateContext.markAsHasUnknownProperty()
+          }
+        }
+        return templateContext
+      }
+      return setupCtx || exportedCtx
     }
 
     function getParentProperty(node: Expression): Property | null {
