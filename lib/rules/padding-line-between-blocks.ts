@@ -2,7 +2,7 @@
  * @fileoverview Require or disallow padding lines between blocks
  * @author Yosuke Ota
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Split the source code into multiple lines based on the line delimiters.

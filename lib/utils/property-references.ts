@@ -4,7 +4,7 @@
  * See LICENSE file in root directory for full license.
  */
 import type { StyleVariablesContext } from './style-variables/index.ts'
-import utils from './index.js'
+import utils from './index.ts'
 import { ReferenceTracker } from '@eslint-community/eslint-utils'
 
 interface IHasPropertyOption {

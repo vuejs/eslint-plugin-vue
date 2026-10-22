@@ -2,7 +2,7 @@
  * @author Przemyslaw Falowski (@przemkow)
  * @fileoverview This rule checks whether v-model used on custom component do not have an argument
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
