@@ -22,6 +22,8 @@ This rule reports macro variables not corresponding to the specified name.
 <!-- ✓ GOOD -->
 <script setup>
 const props = defineProps({ msg: String })
+const modelValue = defineModel()
+const title = defineModel('title')
 const emit = defineEmits(['update:msg'])
 </script>
 ```
@@ -34,6 +36,7 @@ const emit = defineEmits(['update:msg'])
 <!-- ✗ BAD  -->
 <script setup>
 const propsDefined = defineProps({ msg: String })
+const model = defineModel()
 const emitsDefined = defineEmits(['update:msg'])
 </script>
 ```
@@ -45,6 +48,7 @@ const emitsDefined = defineEmits(['update:msg'])
 ```json
 {
   "vue/require-macro-variable-name": ["error", {
+    "defineModel": "modelValue",
     "defineProps": "props",
     "defineEmits": "emit",
     "defineSlots": "slots",
@@ -54,6 +58,7 @@ const emitsDefined = defineEmits(['update:msg'])
 }
 ```
 
+- `defineModel` - The name of the macro variable for `defineModel()` called without a model name. A named model such as `defineModel('title')` must be assigned to a variable with that name. default: `modelValue`
 - `defineProps` - The name of the macro variable for `defineProps`. default: `props`
 - `defineEmits` - The name of the macro variable for `defineEmits`. default: `emit`
 - `defineSlots` - The name of the macro variable for `defineSlots`. default: `slots`
@@ -63,6 +68,7 @@ const emitsDefined = defineEmits(['update:msg'])
 ### With custom macro variable names
 
 <eslint-code-block :rules="{'vue/require-macro-variable-name': ['error', {
+    'defineModel': 'modelCustom',
     'defineProps': 'propsCustom',
     'defineEmits': 'emitCustom',
     'defineSlots': 'slotsCustom',
@@ -72,6 +78,7 @@ const emitsDefined = defineEmits(['update:msg'])
 
 ```vue
 <script setup>
+const modelCustom = defineModel()
 const slotsCustom = defineSlots()
 const attrsCustom = useAttrs()
 </script>

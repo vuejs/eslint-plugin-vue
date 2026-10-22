@@ -5,6 +5,7 @@
 import utils from '../utils/index.js'
 
 const DEFAULT_OPTIONS = {
+  defineModel: 'modelValue',
   defineProps: 'props',
   defineEmits: 'emit',
   defineSlots: 'slots',
@@ -26,6 +27,7 @@ export default {
       {
         type: 'object',
         properties: {
+          defineModel: { type: 'string' },
           defineProps: { type: 'string' },
           defineEmits: { type: 'string' },
           defineSlots: { type: 'string' },
@@ -54,7 +56,8 @@ export default {
           !node.init ||
           node.init.type !== 'CallExpression' ||
           node.init.callee.type !== 'Identifier' ||
-          !relevantMacros.has(node.init.callee.name)
+          !relevantMacros.has(node.init.callee.name) ||
+          node.id.type !== 'Identifier'
         ) {
           return
         }
@@ -64,26 +67,38 @@ export default {
             ? 'defineProps'
             : node.init.callee.name
 
-        if (
-          node.id.type === 'Identifier' &&
-          node.id.name !== options[macroName]
-        ) {
+        let variableName: string = options[macroName]
+        if (macroName === 'defineModel') {
+          const [firstArg] = node.init.arguments
+          if (firstArg && firstArg.type !== 'ObjectExpression') {
+            // `defineModel('name')` must be assigned to a variable called `name`
+            if (
+              firstArg.type !== 'Literal' ||
+              typeof firstArg.value !== 'string'
+            ) {
+              return
+            }
+            variableName = firstArg.value
+          }
+        }
+
+        if (node.id.name !== variableName) {
           context.report({
             node: node.id,
             loc: node.id.loc,
             messageId: 'requireName',
             data: {
               macroName,
-              variableName: options[macroName]
+              variableName
             },
             suggest: [
               {
                 messageId: 'changeName',
                 data: {
-                  variableName: options[macroName]
+                  variableName
                 },
                 fix(fixer) {
-                  return fixer.replaceText(node.id, options[macroName])
+                  return fixer.replaceText(node.id, variableName)
                 }
               }
             ]
