@@ -738,9 +738,6 @@ const utils = {
 
   /**
    * Check whether the given directive attribute has their empty value (`=""`).
-   * @param {VDirective} node The directive attribute node to check.
-   * @param {RuleContext} context The rule context to use parser services.
-   * @returns {boolean} `true` if the directive attribute has their empty value (`=""`).
    */
   isEmptyValueDirective(node: VDirective, context: RuleContext): boolean {
     if (node.value == null || node.value.expression != null) {
@@ -761,9 +758,6 @@ const utils = {
 
   /**
    * Check whether the given directive attribute has their empty expression value (e.g. `=" "`, `="/* &ast;/"`).
-   * @param {VDirective} node The directive attribute node to check.
-   * @param {RuleContext} context The rule context to use parser services.
-   * @returns {boolean} `true` if the directive attribute has their empty expression value.
    */
   isEmptyExpressionValueDirective(
     node: VDirective,
@@ -812,44 +806,25 @@ const utils = {
 
   /**
    * Get the attribute which has the given name.
-   * @param {VElement} node The start tag node to check.
-   * @param {string} name The attribute name to check.
-   * @param {string} [value] The attribute value to check.
-   * @returns {VAttribute | null} The found attribute.
    */
   getAttribute,
 
   /**
    * Check whether the given start tag has specific directive.
-   * @param {VElement} node The start tag node to check.
-   * @param {string} name The attribute name to check.
-   * @param {string} [value] The attribute value to check.
-   * @returns {boolean} `true` if the start tag has the attribute.
    */
   hasAttribute,
 
   /**
    * Get the directive list which has the given name.
-   * @param {VElement | VStartTag} node The start tag node to check.
-   * @param {string} name The directive name to check.
-   * @returns {VDirective[]} The array of `v-slot` directives.
    */
   getDirectives,
   /**
    * Get the directive which has the given name.
-   * @param {VElement} node The start tag node to check.
-   * @param {string} name The directive name to check.
-   * @param {string} [argument] The directive argument to check.
-   * @returns {VDirective | null} The found directive.
    */
   getDirective,
 
   /**
    * Check whether the given start tag has specific directive.
-   * @param {VElement} node The start tag node to check.
-   * @param {string} name The directive name to check.
-   * @param {string} [argument] The directive argument to check.
-   * @returns {boolean} `true` if the start tag has the directive.
    */
   hasDirective,
 
@@ -857,8 +832,6 @@ const utils = {
 
   /**
    * Returns the list of all registered components
-   * @param {ObjectExpression} componentObject
-   * @returns { { node: Property, name: string }[] } Array of ASTNodes
    */
   getRegisteredComponents(
     componentObject: ObjectExpression
@@ -884,8 +857,6 @@ const utils = {
 
   /**
    * Check whether the previous sibling element has `if` or `else-if` directive.
-   * @param {VElement} node The element node to check.
-   * @returns {boolean} `true` if the previous sibling element has `if` or `else-if` directive.
    */
   prevElementHasIf(node: VElement): boolean {
     const prev = this.prevSibling(node)
@@ -901,12 +872,9 @@ const utils = {
 
   /**
    * Returns a generator with all child element v-if chains of the given element.
-   * @param {VElement} node The element node to check.
-   * @returns {IterableIterator<VElement[]>}
    */
   *iterateChildElementsChains(node: VElement): IterableIterator<VElement[]> {
     let isVIf = false
-    /** @type {VElement[]} */
     let elementChain: VElement[] = []
     for (const childNode of node.children) {
       if (childNode.type === 'VElement') {
@@ -946,9 +914,6 @@ const utils = {
 
   /**
    * Check whether the given node is a custom component or not.
-   * @param {VElement} node The start tag node to check.
-   * @param {boolean} [shouldIgnoreElementNamespaces=false] If `true`, ignore element namespaces.
-   * @returns {boolean} `true` if the node is a custom component.
    */
   isCustomComponent(
     node: VElement,
@@ -975,8 +940,6 @@ const utils = {
 
   /**
    * Check whether the given node is a HTML element or not.
-   * @param {VElement} node The node to check.
-   * @returns {boolean} `true` if the node is a HTML element.
    */
   isHtmlElementNode(node: VElement): boolean {
     return node.namespace === NS.HTML
@@ -984,8 +947,6 @@ const utils = {
 
   /**
    * Check whether the given node is a SVG element or not.
-   * @param {VElement} node The node to check.
-   * @returns {boolean} `true` if the name is a SVG element.
    */
   isSvgElementNode(node: VElement): boolean {
     return node.namespace === NS.SVG
@@ -993,8 +954,6 @@ const utils = {
 
   /**
    * Check whether the given name is a MathML element or not.
-   * @param {VElement} node The node to check.
-   * @returns {boolean} `true` if the node is a MathML element.
    */
   isMathElementNode(node: VElement): boolean {
     return node.namespace === NS.MathML
@@ -1005,8 +964,6 @@ const utils = {
 
   /**
    * Check whether the given name is an well-known element or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is an well-known element name.
    */
   isHtmlWellKnownElementName(name: string): boolean {
     return HTML_ELEMENT_NAMES.has(name)
@@ -1014,8 +971,6 @@ const utils = {
 
   /**
    * Check whether the given name is an well-known SVG element or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is an well-known SVG element name.
    */
   isSvgWellKnownElementName(name: string): boolean {
     return SVG_ELEMENT_NAMES.has(name)
@@ -1023,8 +978,6 @@ const utils = {
 
   /**
    * Check whether the given name is a well-known MathML element or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a well-known MathML element name.
    */
   isMathWellKnownElementName(name: string): boolean {
     return MATH_ELEMENT_NAMES.has(name)
@@ -1032,8 +985,6 @@ const utils = {
 
   /**
    * Check whether the given name is a void element name or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a void element name.
    */
   isHtmlVoidElementName(name: string): boolean {
     return VOID_ELEMENT_NAMES.has(name)
@@ -1041,8 +992,6 @@ const utils = {
 
   /**
    * Check whether the given name is Vue builtin component name or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a builtin component name
    */
   isBuiltInComponentName(name: string): boolean {
     return (
@@ -1053,8 +1002,6 @@ const utils = {
 
   /**
    * Check whether the given name is Vue builtin element name or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a builtin Vue element name
    */
   isVueBuiltInElementName(name: string): boolean {
     return VUE_BUILTIN_ELEMENT_NAMES.has(name.toLowerCase())
@@ -1062,8 +1009,6 @@ const utils = {
 
   /**
    * Check whether the given name is Vue builtin directive name or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a builtin Directive name
    */
   isBuiltInDirectiveName(name: string): boolean {
     return BUILTIN_DIRECTIVE_NAMES.has(name)
@@ -2816,11 +2761,8 @@ function getNameParamNode(node: CallExpression): NameWithLoc | null {
 }
 /**
  * Gets the VExpressionContainer of a given node.
- * @param {ASTNode} node - The node to get.
- * @return {VExpressionContainer|null}
  */
 function getVExpressionContainer(node: ASTNode): VExpressionContainer | null {
-  /** @type {ASTNode | null} */
   let n: ASTNode | null = node
   while (n && n.type !== 'VExpressionContainer') {
     n = n.parent
@@ -3296,10 +3238,6 @@ function createCompositionApiTraceMap(map: TYPES.TraceMap) {
 
 /**
  * Get the attribute which has the given name.
- * @param {VElement} node The start tag node to check.
- * @param {string} name The attribute name to check.
- * @param {string} [value] The attribute value to check.
- * @returns {VAttribute | null} The found attribute.
  */
 function getAttribute(
   node: VElement,
@@ -3308,10 +3246,6 @@ function getAttribute(
 ): VAttribute | null {
   return (
     node.startTag.attributes.find(
-      /**
-       * @param {VAttribute | VDirective} node
-       * @returns {node is VAttribute}
-       */
       (node: VAttribute | VDirective): node is VAttribute =>
         !node.directive &&
         node.key.name === name &&
@@ -3323,28 +3257,17 @@ function getAttribute(
 
 /**
  * Get the directive list which has the given name.
- * @param {VElement | VStartTag} node The start tag node to check.
- * @param {string} name The directive name to check.
- * @returns {VDirective[]} The array of `v-slot` directives.
  */
 function getDirectives(node: VElement | VStartTag, name: string): VDirective[] {
   const attributes = (node.type === 'VElement' ? node.startTag : node)
     .attributes
   return attributes.filter(
-    /**
-     * @param {VAttribute | VDirective} node
-     * @returns {node is VDirective}
-     */
     (node: VAttribute | VDirective): node is VDirective =>
       node.directive && node.key.name.name === name
   )
 }
 /**
  * Get the directive which has the given name.
- * @param {VElement} node The start tag node to check.
- * @param {string} name The directive name to check.
- * @param {string} [argument] The directive argument to check.
- * @returns {VDirective | null} The found directive.
  */
 function getDirective(
   node: VElement,
@@ -3353,10 +3276,6 @@ function getDirective(
 ): VDirective | null {
   return (
     node.startTag.attributes.find(
-      /**
-       * @param {VAttribute | VDirective} node
-       * @returns {node is VDirective}
-       */
       (node: VAttribute | VDirective): node is VDirective =>
         node.directive &&
         node.key.name.name === name &&
@@ -3370,10 +3289,6 @@ function getDirective(
 
 /**
  * Check whether the given start tag has specific directive.
- * @param {VElement} node The start tag node to check.
- * @param {string} name The attribute name to check.
- * @param {string} [value] The attribute value to check.
- * @returns {boolean} `true` if the start tag has the attribute.
  */
 function hasAttribute(node: VElement, name: string, value?: string): boolean {
   return Boolean(getAttribute(node, name, value))
@@ -3381,10 +3296,6 @@ function hasAttribute(node: VElement, name: string, value?: string): boolean {
 
 /**
  * Check whether the given start tag has specific directive.
- * @param {VElement} node The start tag node to check.
- * @param {string} name The directive name to check.
- * @param {string} [argument] The directive argument to check.
- * @returns {boolean} `true` if the start tag has the directive.
  */
 function hasDirective(
   node: VElement,
@@ -3396,8 +3307,6 @@ function hasDirective(
 
 /**
  * Check whether the given directive node is v-bind same-name shorthand.
- * @param {VAttribute | VDirective} node The directive node to check.
- * @returns {node is VDirective & { value: VExpressionContainer & { expression: Identifier } }} `true` if the directive node is v-bind same-name shorthand.
  */
 function isVBindSameNameShorthand(
   node: VAttribute | VDirective
@@ -3413,10 +3322,6 @@ function isVBindSameNameShorthand(
   )
 }
 
-/**
- * @param {ASTNode} node
- * @returns {node is Literal | TemplateLiteral}
- */
 function isStringLiteral(node: ASTNode): node is Literal | TemplateLiteral {
   return (
     (node.type === 'Literal' && typeof node.value === 'string') ||
