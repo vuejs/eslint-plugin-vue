@@ -1016,39 +1016,27 @@ const utils = {
 
   /**
    * Gets the property name of a given node.
-   * @param {Property|AssignmentProperty|MethodDefinition|MemberExpression} node - The node to get.
-   * @return {string|null} The property name if static. Otherwise, null.
    */
   getStaticPropertyName,
   /**
    * Gets the string of a given node.
-   * @param {Literal|TemplateLiteral} node - The node to get.
-   * @return {string|null} The string if static. Otherwise, null.
    */
   getStringLiteralValue,
   /**
    * Gets the name parameter from the given call expression.
-   * @param {CallExpression} node - The call expression to get.
-   * @returns {NameWithLoc|null} The name and location if static.
    */
   getNameParamNode,
   /**
    * Get all props by looking at all component's properties
-   * @param {ObjectExpression} componentObject Object with component definition
-   * @return {(ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp)[]} Array of component props
    */
   getComponentPropsFromOptions,
   /**
    * Get all emits by looking at all component's properties
-   * @param {ObjectExpression} componentObject Object with component definition
-   * @return {(ComponentArrayEmit | ComponentObjectEmit | ComponentUnknownEmit)[]} Array of component emits
    */
   getComponentEmitsFromOptions,
 
   /**
    * Get all computed properties by looking at all component's properties
-   * @param {ObjectExpression} componentObject Object with component definition
-   * @return {ComponentComputedProperty[]} Array of computed properties in format: [{key: String, value: ASTNode}]
    */
   getComputedProperties(
     componentObject: ObjectExpression
@@ -1070,9 +1058,7 @@ const utils = {
       .filter(isProperty)
       .map((cp) => {
         const key = getStaticPropertyName(cp)
-        /** @type {Expression} */
         const propValue: Expression = skipTSAsExpression(cp.value)
-        /** @type {BlockStatement | null} */
         let value: BlockStatement | null = null
 
         if (propValue.type === 'FunctionExpression') {
@@ -1092,8 +1078,6 @@ const utils = {
 
   /**
    * Get getter body from computed function
-   * @param {CallExpression} callExpression call of computed function
-   * @return {FunctionExpression | ArrowFunctionExpression | null} getter function
    */
   getGetterBodyFromComputedFunction(
     callExpression: CallExpression
@@ -1133,20 +1117,15 @@ const utils = {
 
   /**
    * Checks whether the current file is uses `<script setup>`
-   * @param {RuleContext} context The ESLint rule context object.
    */
   isScriptSetup,
   /**
    * Gets the element of `<script setup>`
-   * @param {RuleContext} context The ESLint rule context object.
-   * @returns {VElement | null} the element of `<script setup>`
    */
   getScriptSetupElement,
 
   /**
    * Check if current file is a Vue instance or component and call callback
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param { (node: ObjectExpression, type: VueObjectType) => void } cb Callback function
    */
   executeOnVue(
     context: RuleContext,
@@ -1166,18 +1145,10 @@ const utils = {
    * - `onVueObjectExit` ... Event when Vue Object visit ends.
    * - `onSetupFunctionEnter` ... Event when setup function found.
    * - `onRenderFunctionEnter` ... Event when render function found.
-   *
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param {VueVisitor} visitor The visitor to traverse the Vue Objects.
    */
   defineVueVisitor(context: RuleContext, visitor: VueVisitor) {
-    /** @type {VueObjectData | null} */
     let vueStack: VueObjectData | null = null
 
-    /**
-     * @param {string} key
-     * @param {ESNode} node
-     */
     function callVisitor(key: string, node: ESNode) {
       if (vueStack && visitor[key]) {
         // @ts-expect-error -- the visitor key is not narrowed to a listener
@@ -1185,15 +1156,11 @@ const utils = {
       }
     }
 
-    /** @type {NodeListener} */
     const vueVisitor: NodeListener = {}
     for (const key in visitor) {
       vueVisitor[key] = (node) => callVisitor(key, node)
     }
 
-    /**
-     * @param {ObjectExpression} node
-     */
     vueVisitor.ObjectExpression = (node: ObjectExpression) => {
       const type = getVueObjectType(context, node)
       if (type) {
@@ -1228,7 +1195,6 @@ const utils = {
       visitor.onRenderFunctionEnter
     ) {
       const setups = new Set()
-      /** @param { (FunctionExpression | ArrowFunctionExpression) & { parent: Property } } node */
       vueVisitor[
         'Property[value.type=/^(Arrow)?FunctionExpression$/] > :function'
       ] = (
@@ -1236,7 +1202,6 @@ const utils = {
           parent: Property
         }
       ) => {
-        /** @type {Property} */
         const prop: Property = node.parent
         if (vueStack && prop.parent === vueStack.node && prop.value === node) {
           const name = getStaticPropertyName(prop)
@@ -1253,7 +1218,6 @@ const utils = {
         )
       }
       if (visitor.onSetupFunctionExit) {
-        /** @param { (FunctionExpression | ArrowFunctionExpression) & { parent: Property } } node */
         vueVisitor[
           'Property[value.type=/^(Arrow)?FunctionExpression$/] > :function:exit'
         ] = (
@@ -1537,24 +1501,18 @@ const utils = {
   getVueComponentDefinitionType,
   /**
    * Checks whether the given object is an SFC definition.
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param {ObjectExpression} node Node to check
-   * @returns { boolean } `true`, the given object is an SFC definition.
    */
   isSFCObject,
   compositingVisitors,
 
   /**
    * Check if current file is a Vue instance (new Vue) and call callback
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param { (node: ObjectExpression, type: VueObjectType) => void } cb Callback function
    */
   executeOnVueInstance(
     context: RuleContext,
     cb: (node: ObjectExpression, type: VueObjectType) => void
   ) {
     return {
-      /** @param {ObjectExpression} node */
       'ObjectExpression:exit'(node: ObjectExpression) {
         const type = getVueObjectType(context, node)
         if (!type || type !== 'instance') return
@@ -1565,8 +1523,6 @@ const utils = {
 
   /**
    * Check if current file is a Vue component and call callback
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param { (node: ObjectExpression, type: VueObjectType) => void } cb Callback function
    */
   executeOnVueComponent(
     context: RuleContext,
@@ -1574,7 +1530,6 @@ const utils = {
   ) {
     const types = new Set(['mark', 'export', 'definition'])
     return {
-      /** @param {ObjectExpression} node */
       'ObjectExpression:exit'(node: ObjectExpression) {
         const type = getVueObjectType(context, node)
         if (type && types.has(type)) {
@@ -1586,15 +1541,12 @@ const utils = {
 
   /**
    * Check call `Vue.component` and call callback.
-   * @param {RuleContext} _context The ESLint rule context object.
-   * @param { (node: CallExpression) => void } cb Callback function
    */
   executeOnCallVueComponent(
     _context: RuleContext,
     cb: (node: CallExpression) => void
   ) {
     return {
-      /** @param {Identifier & { parent: MemberExpression & { parent: CallExpression } } } node */
       "CallExpression > MemberExpression > Identifier[name='component']": (
         node: Identifier & {
           parent: MemberExpression & { parent: CallExpression }
@@ -1622,9 +1574,6 @@ const utils = {
   },
   /**
    * Return generator with all properties
-   * @param {ObjectExpression} node Node to check
-   * @param {Set<GroupName>} groups Name of parent group
-   * @returns {IterableIterator<ComponentPropertyData>}
    */
   *iterateProperties(
     node: ObjectExpression,
@@ -1643,9 +1592,6 @@ const utils = {
   },
   /**
    * Return generator with all properties defined by the given property value.
-   * @param {Expression} value Property value node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentPropertyData>}
    */
   *iteratePropertyValue(
     value: Expression,
@@ -1673,9 +1619,6 @@ const utils = {
 
   /**
    * Return generator with all elements inside ArrayExpression
-   * @param {ArrayExpression} node Node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentArrayPropertyData>}
    */
   *iterateArrayExpression(
     node: ArrayExpression,
@@ -1698,15 +1641,11 @@ const utils = {
 
   /**
    * Return generator with all elements inside ObjectExpression
-   * @param {ObjectExpression} node Node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentObjectPropertyData>}
    */
   *iterateObjectExpression(
     node: ObjectExpression,
     groupName: GroupName
   ): IterableIterator<ComponentObjectPropertyData> {
-    /** @type {Set<Property> | undefined} */
     let usedGetter: Set<Property> | undefined
     for (const item of node.properties) {
       if (item.type !== 'Property') {
@@ -1760,9 +1699,6 @@ const utils = {
 
   /**
    * Return generator with all elements inside FunctionExpression
-   * @param {FunctionExpression} node Node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentObjectPropertyData>}
    */
   *iterateFunctionExpression(
     node: FunctionExpression,
@@ -1783,9 +1719,6 @@ const utils = {
 
   /**
    * Return generator with all elements inside ArrowFunctionExpression
-   * @param {ArrowFunctionExpression} node Node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentObjectPropertyData>}
    */
   *iterateArrowFunctionExpression(
     node: ArrowFunctionExpression,
@@ -1809,10 +1742,6 @@ const utils = {
 
   /**
    * Find all functions which do not always return values
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param {boolean} shouldTreatUndefinedAsUnspecified
-   * @param { (node: ArrowFunctionExpression | FunctionExpression | FunctionDeclaration) => void } cb Callback function
-   * @returns {RuleListener}
    */
   executeOnFunctionsWithoutReturn(
     context: RuleContext,
@@ -1833,25 +1762,21 @@ const utils = {
       currentSegments: CodePathSegment[]
     }
 
-    /** @type {FuncInfo | null} */
     let funcInfo: FuncInfo | null = null
 
     // "Spurious" = ESLint sees the segment as reachable, but TypeScript proves
     // it can't actually execute (the phantom no-match edge of a type-exhaustive
     // switch with no default).
-    /** @type {WeakSet<CodePathSegment>} */
     const spuriousSegments: WeakSet<CodePathSegment> = new WeakSet()
 
     // Segments started inside a switch case body. Lets us distinguish post-switch
     // reachability via a real path (break, fall-through) from the phantom no-match
     // path. Depth is a counter to support nested switches.
-    /** @type {WeakSet<CodePathSegment>} */
     const caseBodySegments: WeakSet<CodePathSegment> = new WeakSet()
     let caseBodyDepth = 0
 
     /**
      * Treat spurious segments the same as unreachable.
-     * @param {CodePathSegment} segment
      */
     function isEffectivelyUnreachable(segment: CodePathSegment) {
       return !segment.reachable || spuriousSegments.has(segment)
@@ -1868,10 +1793,6 @@ const utils = {
     }
 
     return {
-      /**
-       * @param {CodePath} codePath
-       * @param {ESNode} node
-       */
       onCodePathStart(codePath: CodePath, node: ESNode) {
         if (
           // eslint-disable-next-line unicorn/prefer-includes-over-repeated-comparisons -- narrows `node`'s type for `funcInfo` below
@@ -1889,7 +1810,6 @@ const utils = {
           }
         }
       },
-      /** @param {CodePathSegment} segment */
       onCodePathSegmentStart(segment: CodePathSegment) {
         funcInfo?.currentSegments.push(segment)
         // Spurious propagates: if every reachable predecessor is spurious, so is this segment.
@@ -1909,7 +1829,6 @@ const utils = {
       onCodePathEnd() {
         funcInfo &&= funcInfo.funcInfo
       },
-      /** @param {ReturnStatement} node */
       ReturnStatement(node: ReturnStatement) {
         if (!funcInfo) {
           return
@@ -1924,7 +1843,6 @@ const utils = {
       'SwitchCase:exit'() {
         caseBodyDepth--
       },
-      /** @param {SwitchStatement} node */
       'SwitchStatement:exit'(node: SwitchStatement) {
         if (
           !funcInfo ||
@@ -1950,7 +1868,6 @@ const utils = {
           spuriousSegments.add(segment)
         }
       },
-      /** @param {ArrowFunctionExpression} node */
       'ArrowFunctionExpression:exit'(node: ArrowFunctionExpression) {
         if (funcInfo && !isValidReturn() && !node.expression) {
           cb(funcInfo.node)
@@ -1966,8 +1883,6 @@ const utils = {
 
   /**
    * Check whether the component is declared in a single line or not.
-   * @param {ASTNode} node
-   * @returns {boolean}
    */
   isSingleLine(node: ASTNode): boolean {
     return node.loc.start.line === node.loc.end.line
@@ -1975,8 +1890,6 @@ const utils = {
 
   /**
    * Check whether the templateBody of the program has invalid EOF or not.
-   * @param {Program} node The program node to check.
-   * @returns {boolean} `true` if it has invalid EOF.
    */
   hasInvalidEOF(node: Program): boolean {
     const body = node.templateBody
@@ -1992,12 +1905,8 @@ const utils = {
 
   /**
    * Get the chaining nodes of MemberExpression.
-   *
-   * @param  {ESNode} node The node to parse
-   * @return {[ESNode, ...MemberExpression[]]} The chaining nodes
    */
   getMemberChaining(node: ESNode): [ESNode, ...MemberExpression[]] {
-    /** @type {MemberExpression[]} */
     const nodes: MemberExpression[] = []
     let n = skipChainExpression(node)
 
@@ -2010,9 +1919,6 @@ const utils = {
   },
   /**
    * return two string editdistance
-   * @param {string} a string a to compare
-   * @param {string} b string b to compare
-   * @returns {number}
    */
   editDistance(a: string, b: string): number {
     if (a === b) {
@@ -2041,8 +1947,6 @@ const utils = {
   },
   /**
    * Checks whether the target node is within the given range.
-   * @param { [number, number] | ASTNode | Token } rangeOrNode
-   * @param {ASTNode | Token} target
    */
   isInRange(
     rangeOrNode: [number, number] | ASTNode | Token,
@@ -2073,8 +1977,6 @@ const utils = {
   findAssignmentProperty,
   /**
    * Checks if the given node is a property value.
-   * @param {Property} prop
-   * @param {Expression} node
    */
   isPropertyChain,
   /**
@@ -2097,16 +1999,11 @@ const utils = {
   getScope,
   /**
    * Checks whether the given node is in export default.
-   * @param {ASTNode} node
-   * @returns {boolean}
    */
   isInExportDefault,
 
   /**
    * Check whether the given node is `this` or variable that stores `this`.
-   * @param  {ESNode} node The node to check
-   * @param {RuleContext} context The rule context to use parser services.
-   * @returns {boolean} `true` if the given node is `this`.
    */
   isThis(node: ESNode, context: RuleContext): boolean {
     if (node.type === 'ThisExpression') {
@@ -2142,9 +2039,6 @@ const utils = {
 
   /**
    * Check if a call expression is Object.assign with the given node as first argument
-   * @param {CallExpression} callExpr
-   * @param {ASTNode} targetNode
-   * @returns {boolean}
    */
   isObjectAssignCall(callExpr: CallExpression, targetNode: ASTNode): boolean {
     const { callee, arguments: args } = callExpr
@@ -2160,18 +2054,12 @@ const utils = {
     )
   },
 
-  /**
-   * @param {MemberExpression|Identifier} props
-   * @returns { { kind: 'assignment' | 'update' | 'call' , node: ESNode, pathNodes: MemberExpression[] } | null }
-   */
   findMutating(props: MemberExpression | Identifier): {
     kind: 'assignment' | 'update' | 'call'
     node: ESNode
     pathNodes: MemberExpression[]
   } | null {
-    /** @type {MemberExpression[]} */
     const pathNodes: MemberExpression[] = []
-    /** @type {MemberExpression | Identifier | ChainExpression} */
     let node: MemberExpression | Identifier | ChainExpression = props
     let target = node.parent
     while (true) {
@@ -2186,10 +2074,6 @@ const utils = {
 
   /**
    * Resolve a single step of the parent chain walk in `findMutating`.
-   * @param {MemberExpression | Identifier | ChainExpression} node
-   * @param {ASTNode} target
-   * @param {MemberExpression[]} pathNodes
-   * @returns {{ done: true, result: { kind: 'assignment' | 'update' | 'call', node: ESNode, pathNodes: MemberExpression[] } | null } | { done: false, node: MemberExpression | ChainExpression, target: ASTNode }}
    */
   findMutatingStep(
     node: MemberExpression | Identifier | ChainExpression,
@@ -2281,24 +2165,17 @@ const utils = {
 
   /**
    * Return generator with the all handler nodes defined in the given watcher property.
-   * @param {Property|Expression} property
-   * @returns {IterableIterator<Expression>}
    */
   iterateWatchHandlerValues,
 
   /**
    * Wraps composition API trace map in 'vue', '@vue/composition-api' and '@nuxtjs/composition-api' imports, or '#imports' from unimport
-   * @param {import('@eslint-community/eslint-utils').TYPES.TraceMap} map
    */
   createCompositionApiTraceMap,
 
   /**
    * Iterates all references in the given trace map.
    * Take the third argument option to detect auto-imported references.
-   *
-   * @param {import('@eslint-community/eslint-utils').ReferenceTracker} tracker
-   * @param {import('@eslint-community/eslint-utils').TYPES.TraceMap} map
-   * @returns {ReturnType<import('@eslint-community/eslint-utils').ReferenceTracker['iterateEsmReferences']>}
    */
   *iterateReferencesTraceMap(
     tracker: ReferenceTracker,
@@ -2320,10 +2197,6 @@ const utils = {
 
   /**
    * Checks whether or not the tokens of two given nodes are same.
-   * @param {ASTNode} left A node 1 to compare.
-   * @param {ASTNode} right A node 2 to compare.
-   * @param {ParserServices.TokenStore | SourceCode} sourceCode The ESLint source code object.
-   * @returns {boolean} the source code for the given node.
    */
   equalTokens(
     left: ASTNode,
@@ -2770,9 +2643,6 @@ function getVExpressionContainer(node: ASTNode): VExpressionContainer | null {
   return n
 }
 
-/**
- * @param {string} path
- */
 function isTypeScriptFile(path: string) {
   return path.endsWith('.ts') || path.endsWith('.tsx') || path.endsWith('.mts')
 }
@@ -2781,24 +2651,18 @@ function isTypeScriptFile(path: string) {
 // Vue Helpers
 // ------------------------------------------------------------------------------
 
-/**
- * @param {string} path
- */
 function isVueFile(path: string) {
   return path.endsWith('.vue') || path.endsWith('.jsx') || path.endsWith('.tsx')
 }
 
 /**
  * Checks whether the current file is uses `<script setup>`
- * @param {RuleContext} context The ESLint rule context object.
  */
 function isScriptSetup(context: RuleContext) {
   return Boolean(getScriptSetupElement(context))
 }
 /**
  * Gets the element of `<script setup>`
- * @param {RuleContext} context The ESLint rule context object.
- * @returns {VElement | null} the element of `<script setup>`
  */
 function getScriptSetupElement(context: RuleContext): VElement | null {
   const sourceCode = context.sourceCode
@@ -2809,7 +2673,6 @@ function getScriptSetupElement(context: RuleContext): VElement | null {
     return null
   }
   const scripts = df.children.filter(
-    /** @returns {e is VElement} */
     (e): e is VElement => isVElement(e) && e.name === 'script'
   )
   if (scripts.length === 2) {
@@ -2823,9 +2686,6 @@ function getScriptSetupElement(context: RuleContext): VElement | null {
  * Check whether the given node is a Vue component based
  * on the filename and default export type
  * export default {} in .vue || .jsx
- * @param {ESNode} node Node to check
- * @param {string} path File name with extension
- * @returns {boolean}
  */
 function isVueComponentFile(node: ESNode, path: string): boolean {
   return (
@@ -2837,9 +2697,6 @@ function isVueComponentFile(node: ESNode, path: string): boolean {
 
 /**
  * Whether the given callee refers to a symbol exported by Vue.
- * @param {Identifier} callee Node to check.
- * @param {RuleContext} context The rule context to use parser services.
- * @returns {boolean}
  */
 function isGlobalOrImportedFromVue(
   callee: Identifier,
@@ -2886,7 +2743,6 @@ function isGlobalOrImportedFromVue(
 
   if (variable !== null && variable.defs.length === 1) {
     const def = variable.defs[0]
-    /** @type {Set<string | null>} */
     const vueLikePackageNames: Set<string | null> = new Set([
       'vue',
       '@vue/composition-api',
@@ -2946,9 +2802,6 @@ function isGlobalOrImportedFromVue(
 /**
  * Get the Vue component definition type from given node
  * Vue.component('xxx', {}) || component('xxx', {})
- * @param {RuleContext} context The rule context to use parser services.
- * @param {ObjectExpression} node Node to check
- * @returns {'component' | 'mixin' | 'extend' | 'createApp' | 'defineComponent' | 'defineNuxtComponent' | null}
  */
 function getVueComponentDefinitionType(
   context: RuleContext,
@@ -3023,7 +2876,6 @@ function getVueComponentDefinitionType(
   return null
 }
 
-/** @param {CallExpression} node */
 function isObjectArgument(node: CallExpression) {
   const lastArgument = node.arguments.at(-1)
   return (
@@ -3034,8 +2886,6 @@ function isObjectArgument(node: CallExpression) {
 /**
  * Check whether given node is new Vue instance
  * new Vue({})
- * @param {NewExpression} node Node to check
- * @returns {boolean}
  */
 function isVueInstance(node: NewExpression): boolean {
   const callee = node.callee
@@ -3050,9 +2900,6 @@ function isVueInstance(node: NewExpression): boolean {
 
 /**
  * If the given object is a Vue component or instance, returns the Vue definition type.
- * @param {RuleContext} context The ESLint rule context object.
- * @param {ObjectExpression} node Node to check
- * @returns { VueObjectType | null } The Vue definition type.
  */
 function getVueObjectType(
   context: RuleContext,
@@ -3113,9 +2960,6 @@ function getVueObjectType(
 
 /**
  * Checks whether the given object is an SFC definition.
- * @param {RuleContext} context The ESLint rule context object.
- * @param {ObjectExpression} node Node to check
- * @returns { boolean } `true`, the given object is an SFC definition.
  */
 function isSFCObject(context: RuleContext, node: ObjectExpression): boolean {
   if (node.type !== 'ObjectExpression') {
@@ -3125,10 +2969,6 @@ function isSFCObject(context: RuleContext, node: ObjectExpression): boolean {
   const ext = path.extname(filePath)
   return (ext === '.vue' || !ext) && isSFC(node)
 
-  /**
-   * @param {Expression} node
-   * @returns {boolean}
-   */
   function isSFC(node: Expression): boolean {
     const parent = getParent(node)
     switch (parent.type) {
@@ -3182,8 +3022,6 @@ function isSFCObject(context: RuleContext, node: ObjectExpression): boolean {
 
 /**
  * Gets the component comments of a given context.
- * @param {RuleContext} context The ESLint rule context object.
- * @return {Token[]} The the component comments.
  */
 function getComponentComments(context: RuleContext): Token[] {
   let tokens = componentComments.get(context)
@@ -3200,8 +3038,6 @@ function getComponentComments(context: RuleContext): Token[] {
 
 /**
  * Return generator with the all handler nodes defined in the given watcher property.
- * @param {Property|Expression} property
- * @returns {IterableIterator<Expression>}
  */
 function* iterateWatchHandlerValues(
   property: Property | Expression
@@ -3225,7 +3061,6 @@ function* iterateWatchHandlerValues(
 
 /**
  * Wraps composition API trace map in 'vue', '@vue/composition-api' and '@nuxtjs/composition-api' imports, or '#imports' from unimport
- * @param {import('@eslint-community/eslint-utils').TYPES.TraceMap} map
  */
 function createCompositionApiTraceMap(map: TYPES.TraceMap) {
   return {
@@ -3532,8 +3367,6 @@ function getLeftOfDefineProps(node: CallExpression): Pattern | null {
 
 /**
  * Get all props from component options object.
- * @param {ObjectExpression} componentObject Object with component definition
- * @return {(ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp)[]} Array of component props
  */
 export function getComponentPropsFromOptions(
   componentObject: ObjectExpression
@@ -3561,8 +3394,6 @@ export function getComponentPropsFromOptions(
 
 /**
  * Get all emits from component options object.
- * @param {ObjectExpression} componentObject Object with component definition
- * @return {(ComponentArrayEmit | ComponentObjectEmit | ComponentUnknownEmit)[]} Array of component emits
  */
 function getComponentEmitsFromOptions(
   componentObject: ObjectExpression
@@ -3734,15 +3565,12 @@ function getComponentModelFromDefineModel(
 
 /**
  * Get all props by looking at all component's properties
- * @param {ObjectExpression|ArrayExpression} propsNode Object with props definition
- * @return {(ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp)[]} Array of component props
  */
 function getComponentPropsFromDefine(
   propsNode: ObjectExpression | ArrayExpression
 ): (ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp)[] {
   if (propsNode.type === 'ObjectExpression') {
     return propsNode.properties.map(
-      /** @returns {ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp} */
       (
         prop
       ): ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp => {
@@ -3799,8 +3627,6 @@ function getComponentPropsFromDefine(
 
 /**
  * Get all emits by looking at all component's properties
- * @param {ObjectExpression|ArrayExpression} emitsNode Object with emits definition
- * @return {(ComponentArrayEmit | ComponentObjectEmit | ComponentUnknownEmit)[]} Array of component emits.
  */
 function getComponentEmitsFromDefine(
   emitsNode: ObjectExpression | ArrayExpression
@@ -3859,11 +3685,6 @@ function getComponentEmitsFromDefine(
   })
 }
 
-/**
- * @param {RuleContext} context The rule context object.
- * @param {ESNode} node
- * @returns {ObjectExpression | ArrayExpression | null}
- */
 function getObjectOrArray(
   context: RuleContext,
   node: ESNode
