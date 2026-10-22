@@ -35,9 +35,9 @@ import htmlElements from './html-elements.json' with { type: 'json' }
 import svgElements from './svg-elements.json' with { type: 'json' }
 import mathElements from './math-elements.json' with { type: 'json' }
 import voidElements from './void-elements.json' with { type: 'json' }
-import vue2BuiltinComponents from './vue2-builtin-components.js'
-import vue3BuiltinComponents from './vue3-builtin-components.js'
-import vueBuiltinElements from './vue-builtin-elements.js'
+import vue2BuiltinComponents from './vue2-builtin-components.ts'
+import vue3BuiltinComponents from './vue3-builtin-components.ts'
+import vueBuiltinElements from './vue-builtin-elements.ts'
 
 export type {
   ComponentArrayProp,

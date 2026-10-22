@@ -7,8 +7,8 @@ import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import htmlElements from '../utils/html-elements.json' with { type: 'json' }
 import deprecatedHtmlElements from '../utils/deprecated-html-elements.json' with { type: 'json' }
 import svgElements from '../utils/svg-elements.json' with { type: 'json' }
-import vue2builtinComponents from '../utils/vue2-builtin-components.js'
-import vue3builtinComponents from '../utils/vue3-builtin-components.js'
+import vue2builtinComponents from '../utils/vue2-builtin-components.ts'
+import vue3builtinComponents from '../utils/vue3-builtin-components.ts'
 
 const reservedNames = new Set([
   ...htmlElements,
