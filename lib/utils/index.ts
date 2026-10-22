@@ -1254,9 +1254,6 @@ const utils = {
    * - `onDefineExposeExit` ... Event when defineExpose visit ends.
    * - `onDefineModelEnter` ... Event when defineModel is found.
    * - `onDefineModelExit` ... Event when defineModel visit ends.
-   *
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param {ScriptSetupVisitor} visitor The visitor to traverse the AST nodes.
    */
   defineScriptSetupVisitor(context: RuleContext, visitor: ScriptSetupVisitor) {
     const scriptSetup = getScriptSetupElement(context)
@@ -1265,20 +1262,12 @@ const utils = {
     }
     const scriptSetupRange = scriptSetup.range
 
-    /**
-     * @param {ESNode} node
-     */
     function isInScriptSetup(node: ESNode) {
       return (
         scriptSetupRange[0] <= node.range[0] &&
         node.range[1] <= scriptSetupRange[1]
       )
     }
-    /**
-     * @param {string} key
-     * @param {ESNode} node
-     * @param {any[]} args
-     */
     function callVisitor(key: string, node: ESNode, ...args: any[]) {
       if (visitor[key] && (node.type === 'Program' || isInScriptSetup(node))) {
         // @ts-expect-error -- the visitor key is not narrowed to a listener
@@ -1286,7 +1275,6 @@ const utils = {
       }
     }
 
-    /** @type {NodeListener} */
     const scriptSetupVisitor: NodeListener = {}
     for (const key in visitor) {
       scriptSetupVisitor[key] = (node) => callVisitor(key, node)
@@ -1304,13 +1292,6 @@ const utils = {
       hasListener: boolean
       paramsMap: Map<CallExpression, unknown>
 
-      /**
-       * @param {string} name
-       * @param {string} enterName
-       * @param {string} exitName
-       * @param {(candidateMacro: Expression | null, node: CallExpression) => boolean} isMacroNode
-       * @param {(context: RuleContext, node: CallExpression) => unknown} buildParam
-       */
       constructor(
         name: string,
         enterName: string,
@@ -1378,9 +1359,7 @@ const utils = {
       )
     ].filter((m) => m.hasListener)
     if (macroListenerList.length > 0) {
-      /** @type {Expression | null} */
       let candidateMacro: Expression | null = null
-      /** @param {VariableDeclarator|ExpressionStatement} node */
       scriptSetupVisitor[
         'Program > VariableDeclaration > VariableDeclarator, Program > ExpressionStatement'
       ] = (node: VariableDeclarator | ExpressionStatement) => {
@@ -1389,7 +1368,6 @@ const utils = {
             node.type === 'VariableDeclarator' ? node.init : node.expression
         }
       }
-      /** @param {VariableDeclarator|ExpressionStatement} node */
       scriptSetupVisitor[
         'Program > VariableDeclaration > VariableDeclarator, Program > ExpressionStatement:exit'
       ] = (node: VariableDeclarator | ExpressionStatement) => {
@@ -1400,9 +1378,6 @@ const utils = {
           candidateMacro = null
         }
       }
-      /**
-       * @param {CallExpression} node
-       */
       scriptSetupVisitor.CallExpression = (node: CallExpression) => {
         if (
           candidateMacro &&
@@ -1446,8 +1421,6 @@ const utils = {
 
   /**
    * Checks whether given defineProps call node has withDefaults.
-   * @param {CallExpression} node The node of defineProps
-   * @returns {node is CallExpression & { parent: CallExpression }}
    */
   hasWithDefaults,
 
@@ -1459,31 +1432,22 @@ const utils = {
    * spread elements are resolved, but anything that cannot be determined
    * statically sets `hasUnknown`, which means that props missing from `props`
    * may still have a default value.
-   * @param {RuleContext} context The rule context object.
-   * @param {CallExpression} node The node of defineProps
-   * @returns { { props: { [key: string]: Expression | undefined }, hasUnknown: boolean } }
    */
   getWithDefaultsPropExpressions,
   /**
    * Gets a map of the property nodes defined in withDefaults.
    * Only an inline object literal is looked at, because the returned nodes are
    * used as edit targets by fixers.
-   * @param {CallExpression} node The node of defineProps
-   * @returns { { [key: string]: Property | undefined } }
    */
   getWithDefaultsProps,
   /**
    * Gets the default definition nodes for defineProp
    * using the props destructure with assignment pattern.
-   * @param {CallExpression} node The node of defineProps
-   * @returns { Record<string, {prop: AssignmentProperty , expression: Expression} | undefined> }
    */
   getDefaultPropExpressionsForPropsDestructure,
   getLeftOfDefineProps,
   /**
    * Checks whether the given defineProps node is using Props Destructure.
-   * @param {CallExpression} node The node of defineProps
-   * @returns {boolean}
    */
   isUsingPropsDestructure(node: CallExpression): boolean {
     const left = getLeftOfDefineProps(node)
@@ -1491,8 +1455,6 @@ const utils = {
   },
   /**
    * Gets the props destructure property nodes for defineProp.
-   * @param {CallExpression} node The node of defineProps
-   * @returns { Record<string, AssignmentProperty | undefined> }
    */
   getPropsDestructure,
 
@@ -3166,8 +3128,6 @@ function isStringLiteral(node: ASTNode): node is Literal | TemplateLiteral {
 
 /**
  * Checks whether given defineProps call node has withDefaults.
- * @param {CallExpression} node The node of defineProps
- * @returns {node is CallExpression & { parent: CallExpression }}
  */
 function hasWithDefaults(
   node: CallExpression
@@ -3183,8 +3143,6 @@ function hasWithDefaults(
 
 /**
  * Get the withDefaults call node from given defineProps call node.
- * @param {CallExpression} node The node of defineProps
- * @returns {CallExpression | null}
  */
 function getWithDefaults(node: CallExpression): CallExpression | null {
   return hasWithDefaults(node) ? node.parent : null
@@ -3192,8 +3150,6 @@ function getWithDefaults(node: CallExpression): CallExpression | null {
 
 /**
  * Gets a map of the property nodes defined in withDefaults.
- * @param {CallExpression} node The node of defineProps
- * @returns { { [key: string]: Property | undefined } }
  */
 function getWithDefaultsProps(node: CallExpression): {
   [key: string]: Property | undefined
@@ -3206,7 +3162,6 @@ function getWithDefaultsProps(node: CallExpression): {
     return {}
   }
 
-  /** @type {Record<string, Property>} */
   const result: Record<string, Property> = {}
 
   for (const prop of param.properties) {
@@ -3226,11 +3181,7 @@ function getWithDefaultsProps(node: CallExpression): {
  * Collects the property expressions of the object that the given node refers
  * to, following `const` references and spread elements. Properties are
  * collected in source order, so a later definition overrides an earlier one.
- * @param {RuleContext} context The rule context object.
- * @param {ESNode} node
- * @param {Record<string, Expression | undefined>} result
- * @param {Set<ObjectExpression>} visited
- * @returns {boolean} `false` if the object cannot be determined statically.
+ * Returns `false` if the object cannot be determined statically.
  */
 // eslint-disable-next-line unicorn/consistent-boolean-name -- returning a boolean is not the primary purpose
 function collectPropExpressions(
@@ -3272,15 +3223,11 @@ function collectPropExpressions(
 
 /**
  * Gets a map of the expressions defined in withDefaults.
- * @param {RuleContext} context The rule context object.
- * @param {CallExpression} node The node of defineProps
- * @returns { { props: { [key: string]: Expression | undefined }, hasUnknown: boolean } }
  */
 function getWithDefaultsPropExpressions(
   context: RuleContext,
   node: CallExpression
 ): { props: { [key: string]: Expression | undefined }; hasUnknown: boolean } {
-  /** @type {Record<string, Expression | undefined>} */
   const props: Record<string, Expression | undefined> = {}
   if (!hasWithDefaults(node)) {
     return { props, hasUnknown: false }
@@ -3298,14 +3245,12 @@ function getWithDefaultsPropExpressions(
 
 /**
  * Gets the props destructure property nodes for defineProp.
- * @param {CallExpression} node The node of defineProps
- * @returns { Record<string, AssignmentProperty | undefined> }
  */
 function getPropsDestructure(
   node: CallExpression
 ): Record<string, AssignmentProperty | undefined> {
-  /** @type {ReturnType<typeof getPropsDestructure>} */
-  const result: ReturnType<typeof getPropsDestructure> = Object.create(null)
+  const result: Record<string, AssignmentProperty | undefined> =
+    Object.create(null)
   const left = getLeftOfDefineProps(node)
   if (!left || left.type !== 'ObjectPattern') {
     return result
@@ -3323,8 +3268,6 @@ function getPropsDestructure(
 /**
  * Gets the default definition nodes for defineProp
  * using the props destructure with assignment pattern.
- * @param {CallExpression} node The node of defineProps
- * @returns { Record<string, {prop: AssignmentProperty , expression: Expression} | undefined> }
  */
 function getDefaultPropExpressionsForPropsDestructure(
   node: CallExpression
@@ -3332,9 +3275,9 @@ function getDefaultPropExpressionsForPropsDestructure(
   string,
   { prop: AssignmentProperty; expression: Expression } | undefined
 > {
-  /** @type {ReturnType<typeof getDefaultPropExpressionsForPropsDestructure>} */
-  const result: ReturnType<
-    typeof getDefaultPropExpressionsForPropsDestructure
+  const result: Record<
+    string,
+    { prop: AssignmentProperty; expression: Expression } | undefined
   > = Object.create(null)
   const propsDestructureEntries = Object.entries(getPropsDestructure(node))
   for (const [name, prop] of propsDestructureEntries) {
@@ -3348,8 +3291,6 @@ function getDefaultPropExpressionsForPropsDestructure(
 
 /**
  * Gets the pattern of the left operand of defineProps.
- * @param {CallExpression} node The node of defineProps
- * @returns {Pattern | null} The pattern of the left operand of defineProps
  */
 function getLeftOfDefineProps(node: CallExpression): Pattern | null {
   let target = node
@@ -3421,9 +3362,6 @@ function getComponentEmitsFromOptions(
 
 /**
  * Get all props from `defineProps` call expression.
- * @param {RuleContext} context The rule context object.
- * @param {CallExpression} node `defineProps` call expression
- * @return {ComponentProp[]} Array of component props
  */
 function getComponentPropsFromDefineProps(
   context: RuleContext,
@@ -3458,9 +3396,6 @@ function getComponentPropsFromDefineProps(
 
 /**
  * Get all emits from `defineEmits` call expression.
- * @param {RuleContext} context The rule context object.
- * @param {CallExpression} node `defineEmits` call expression
- * @return {ComponentEmit[]} Array of component emits
  */
 function getComponentEmitsFromDefineEmits(
   context: RuleContext,
@@ -3495,9 +3430,6 @@ function getComponentEmitsFromDefineEmits(
 
 /**
  * Get all slots from `defineSlots` call expression.
- * @param {RuleContext} context The rule context object.
- * @param {CallExpression} node `defineSlots` call expression
- * @return {ComponentSlot[]} Array of component slots
  */
 function getComponentSlotsFromDefineSlots(
   context: RuleContext,
@@ -3519,20 +3451,15 @@ function getComponentSlotsFromDefineSlots(
 
 /**
  * Get model info from `defineModel` call expression.
- * @param {RuleContext} _context The rule context object.
- * @param {CallExpression} node `defineModel` call expression
- * @return {ComponentModel} Object of component model
  */
 function getComponentModelFromDefineModel(
   _context: RuleContext,
   node: CallExpression
 ): ComponentModel {
-  /** @type {ComponentModelName} */
   let name: ComponentModelName = {
     modelName: 'modelValue',
     node: null
   }
-  /** @type {Expression|null} */
   let options: Expression | null =
     node.arguments[0]?.type === 'SpreadElement' ? null : node.arguments[0]
   if (node.arguments.length > 0) {
