@@ -2,8 +2,8 @@
  * @fileoverview Emit definitions should be detailed
  * @author Pig Fang
  */
-import type { ComponentEmit } from '../utils/index.js'
-import utils from '../utils/index.js'
+import type { ComponentEmit } from '../utils/index.ts'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

@@ -2,8 +2,8 @@
  * @author ItMaga <https://github.com/ItMaga>
  * See LICENSE file in root directory for full license.
  */
-import type { ComponentEmit, ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import type { ComponentEmit, ComponentProp } from '../utils/index.ts'
+import utils from '../utils/index.ts'
 import { isCommentToken } from '@eslint-community/eslint-utils'
 
 const AvailablePaddingOptions = {
