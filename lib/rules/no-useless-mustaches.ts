@@ -19,6 +19,43 @@ function stripQuotesForHTML(text: string): string | null {
   return re ? re[1] : null
 }
 
+/** Complete character references such as `&amp;`, `&#38;` and `&#x26;`. */
+const CHARACTER_REFERENCE = /&(?:[a-z][\da-z]*|#\d+|#x[\da-f]+);/giu
+/** `&bsol;`, `&#92;` and `&#x5c;` decode to a backslash, which starts an escape sequence. */
+const BACKSLASH_REFERENCE = /&(?:bsol|#0*92|#x0*5c);/iu
+
+/**
+ * Checks whether the given string literal content contains a character reference
+ * that would not render the same as static text.
+ * Vue decodes character references in mustaches before evaluating the expression,
+ * so only complete references without backslash escapes are kept as they are.
+ */
+function hasUnsafeCharacterReference(text: string): boolean {
+  if (!text.includes('&')) {
+    return false
+  }
+  const hasIncompleteReference = text
+    .replaceAll(CHARACTER_REFERENCE, '')
+    .includes('&')
+  return (
+    text.includes('\\') ||
+    BACKSLASH_REFERENCE.test(text) ||
+    hasIncompleteReference
+  )
+}
+
+/**
+ * Checks whether the text before the given offset ends with an unterminated
+ * character reference start such as `&`, `&am` or `&#12`.
+ */
+function isAfterCharacterReferenceStart(text: string, offset: number): boolean {
+  let index = offset - 1
+  while (index >= 0 && /[\w#]/u.test(text[index])) {
+    index--
+  }
+  return text[index] === '&'
+}
+
 export default {
   meta: {
     type: 'suggestion',
@@ -124,12 +161,24 @@ export default {
             // It doesn't autofix because another rule like indent or eol space might remove spaces.
             return null
           }
-          const escaped = text.replaceAll('<', '&lt;')
+          const replacement = text
+            .replaceAll('<', '&lt;')
+            .replaceAll(/\\([\S\s])/g, '$1')
+          const charBefore = sourceCode.text[node.range[0] - 1] ?? ''
+          const charAfter = sourceCode.text[node.range[1]] ?? ''
+          // `{{` in static text would start a new mustache interpolation.
+          const canStartMustache =
+            `${charBefore}${replacement}${charAfter}`.includes('{{')
+          // `&` would join the surrounding text into a different character reference.
+          const canJoinCharacterReference =
+            isAfterCharacterReferenceStart(sourceCode.text, node.range[0]) &&
+            /^[\w#;]/u.test(`${replacement}${charAfter}`)
 
-          return fixer.replaceText(
-            node,
-            escaped.replaceAll(/\\([\S\s])/g, '$1')
-          )
+          return canStartMustache ||
+            canJoinCharacterReference ||
+            hasUnsafeCharacterReference(text)
+            ? null
+            : fixer.replaceText(node, replacement)
         }
       })
     }
