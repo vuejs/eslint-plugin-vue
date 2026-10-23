@@ -2,20 +2,14 @@
  * @fileoverview This rule warns about the usage of extra whitespaces between attributes
  * @author Armano
  */
-'use strict'
+import path from 'node:path'
 
-const path = require('node:path')
-
-/**
- * @param {RuleContext} context
- * @param {Token} node
- */
-const isProperty = (context, node) => {
+const isProperty = (context: RuleContext, node: Token) => {
   const sourceCode = context.sourceCode
   return node.type === 'Punctuator' && sourceCode.getText(node) === ':'
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -45,11 +39,7 @@ module.exports = {
     }
   },
 
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const options = context.options[0] || {}
     const shouldIgnoreProperties = options.ignoreProperties === true
     const shouldIgnoreEOLComments = options.ignoreEOLComments === true
@@ -75,7 +65,7 @@ module.exports = {
           includeComments: true
         })
 
-        let prevToken = /** @type {Token} */ (tokens.shift())
+        let prevToken = tokens.shift()!
         for (const token of tokens) {
           const spaces = token.range[0] - prevToken.range[1]
           let shouldIgnore =

@@ -2,9 +2,7 @@
  * @author Eduard Deisling
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 const MACROS_EMITS = 'defineEmits'
 const MACROS_PROPS = 'defineProps'
@@ -22,28 +20,18 @@ const KNOWN_MACROS = new Set([
 ])
 const DEFAULT_ORDER = [MACROS_PROPS, MACROS_EMITS]
 
-/**
- * @param {VElement} scriptSetup
- * @param {ASTNode} node
- */
-function isInScriptSetup(scriptSetup, node) {
+function isInScriptSetup(scriptSetup: VElement, node: ASTNode) {
   return (
     scriptSetup.range[0] <= node.range[0] &&
     node.range[1] <= scriptSetup.range[1]
   )
 }
 
-/**
- * @param {ASTNode} node
- */
-function isDeclareStatement(node) {
+function isDeclareStatement(node: ASTNode) {
   return 'declare' in node && node.declare === true
 }
 
-/**
- * @param {ASTNode} node
- */
-function isUseStrictStatement(node) {
+function isUseStrictStatement(node: ASTNode) {
   return (
     node.type === 'ExpressionStatement' &&
     node.expression.type === 'Literal' &&
@@ -54,10 +42,8 @@ function isUseStrictStatement(node) {
 /**
  * Get an index of the first statement after imports and interfaces in order
  * to place defineEmits and defineProps before this statement
- * @param {VElement} scriptSetup
- * @param {Program} program
  */
-function getTargetStatementPosition(scriptSetup, program) {
+function getTargetStatementPosition(scriptSetup: VElement, program: Program) {
   const skipStatements = new Set([
     'ImportDeclaration',
     'TSEnumDeclaration',
@@ -87,10 +73,8 @@ function getTargetStatementPosition(scriptSetup, program) {
  * We need to handle cases like "const props = defineProps(...)"
  * Define macros must be used only on top, so we can look for "Program" type
  * inside node.parent.type
- * @param {CallExpression|ASTNode} node
- * @return {ASTNode}
  */
-function getDefineMacrosStatement(node) {
+function getDefineMacrosStatement(node: ASTNode): ASTNode {
   if (!node.parent) {
     throw new Error('Node has no parent')
   }
@@ -100,8 +84,7 @@ function getDefineMacrosStatement(node) {
     : getDefineMacrosStatement(node.parent)
 }
 
-/** @param {RuleContext} context */
-function create(context) {
+function create(context: RuleContext) {
   const scriptSetup = utils.getScriptSetupElement(context)
 
   if (!scriptSetup) {
@@ -109,21 +92,18 @@ function create(context) {
   }
 
   const options = context.options
-  /** @type {[string, string]} */
-  const order = (options[0] && options[0].order) || DEFAULT_ORDER
-  /** @type {boolean} */
-  const defineExposeLast = (options[0] && options[0].defineExposeLast) || false
-  if (defineExposeLast && order.includes(MACROS_EXPOSE)) {
+  const order: string[] = (options[0] && options[0].order) || DEFAULT_ORDER
+  const shouldDefineExposeBeLast: boolean =
+    (options[0] && options[0].defineExposeLast) || false
+  if (shouldDefineExposeBeLast && order.includes(MACROS_EXPOSE)) {
     throw new Error(
       "`defineExpose` macro can't be in the `order` array if `defineExposeLast` is true."
     )
   }
 
   const sourceCode = context.sourceCode
-  /** @type {Map<string, ASTNode[]>} */
-  const macrosNodes = new Map()
-  /** @type {ASTNode} */
-  let defineExposeNode
+  const macrosNodes = new Map<string, ASTNode[]>()
+  let defineExposeNode: ASTNode
 
   return utils.compositingVisitors(
     utils.defineScriptSetupVisitor(context, {
@@ -148,9 +128,8 @@ function create(context) {
         defineExposeNode = getDefineMacrosStatement(node)
       },
 
-      /** @param {CallExpression} node */
       'Program > ExpressionStatement > CallExpression, Program > VariableDeclaration > VariableDeclarator > CallExpression'(
-        node
+        node: CallExpression
       ) {
         if (
           node.callee &&
@@ -164,11 +143,10 @@ function create(context) {
     }),
     {
       'Program:exit'(program) {
-        /**
-         * @typedef {object} OrderedData
-         * @property {string} name
-         * @property {ASTNode} node
-         */
+        interface OrderedData {
+          name: string
+          node: ASTNode
+        }
         const firstStatementIndex = getTargetStatementPosition(
           scriptSetup,
           program
@@ -178,13 +156,10 @@ function create(context) {
             const nodes = macrosNodes.get(name) ?? []
             return nodes.map((node) => ({ name, node }))
           })
-          .filter(
-            /** @returns {data is OrderedData} */
-            (data) => utils.isDef(data.node)
-          )
+          .filter((data): data is OrderedData => utils.isDef(data.node))
 
         // check last node
-        if (defineExposeLast) {
+        if (shouldDefineExposeBeLast) {
           const lastNode = program.body.at(-1)
           if (defineExposeNode && lastNode && lastNode !== defineExposeNode) {
             reportExposeNotOnBottom(defineExposeNode, lastNode)
@@ -212,12 +187,7 @@ function create(context) {
     }
   )
 
-  /**
-   * @param {string} macro
-   * @param {ASTNode[]} nodes
-   * @param {ASTNode} before
-   */
-  function reportNotOnTop(macro, nodes, before) {
+  function reportNotOnTop(macro: string, nodes: ASTNode[], before: ASTNode) {
     // Determine if 'before' is a macro from the order list
     const beforeMacro = order.find((macroName) =>
       (macrosNodes.get(macroName) ?? []).includes(before)
@@ -240,11 +210,7 @@ function create(context) {
     })
   }
 
-  /**
-   * @param {ASTNode} node
-   * @param {ASTNode} lastNode
-   */
-  function reportExposeNotOnBottom(node, lastNode) {
+  function reportExposeNotOnBottom(node: ASTNode, lastNode: ASTNode) {
     context.report({
       node,
       loc: node.loc,
@@ -262,11 +228,8 @@ function create(context) {
 
   /**
    * Move all lines of "node" with its comments to after the "target"
-   * @param {RuleFixer} fixer
-   * @param {ASTNode} node
-   * @param {ASTNode} target
    */
-  function moveNodeToLast(fixer, node, target) {
+  function moveNodeToLast(fixer: RuleFixer, node: ASTNode, target: ASTNode) {
     // get comments under tokens(if any)
     const beforeNodeToken = sourceCode.getTokenBefore(node)
     const nodeComment = sourceCode.getTokenAfter(beforeNodeToken, {
@@ -294,11 +257,8 @@ function create(context) {
 
   /**
    * Move all lines of "node" with its comments to before the "target"
-   * @param {RuleFixer} fixer
-   * @param {ASTNode} node
-   * @param {ASTNode} target
    */
-  function moveNodeBefore(fixer, node, target) {
+  function moveNodeBefore(fixer: RuleFixer, node: ASTNode, target: ASTNode) {
     // get comments under tokens(if any)
     const beforeNodeToken = sourceCode.getTokenBefore(node)
     const nodeComment = sourceCode.getTokenAfter(beforeNodeToken, {
@@ -330,10 +290,8 @@ function create(context) {
 
   /**
    * Get result text to insert
-   * @param {string} textNode
-   * @param {ASTNode} target
    */
-  function getInsertText(textNode, target) {
+  function getInsertText(textNode: string, target: ASTNode) {
     const afterTargetComment = sourceCode.getTokenAfter(target, {
       includeComments: true
     })
@@ -349,10 +307,11 @@ function create(context) {
 
   /**
    * Get position of the beginning of the token's line(or prevToken end if no line)
-   * @param {ASTNode|Token} token
-   * @param {ASTNode|Token} prevToken
    */
-  function getLineStartIndex(token, prevToken) {
+  function getLineStartIndex(
+    token: ASTNode | Token,
+    prevToken: ASTNode | Token
+  ) {
     // if we have next token on the same line - get index right before that token
     if (token.loc.start.line === prevToken.loc.end.line) {
       return prevToken.range[1]
@@ -365,7 +324,7 @@ function create(context) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {

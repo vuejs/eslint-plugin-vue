@@ -2,12 +2,11 @@
  * @fileoverview enforce ordering of attributes
  * @author Erin Depew
  */
-'use strict'
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
-/**
- * @typedef { VDirective & { key: VDirectiveKey & { name: VIdentifier & { name: 'bind' } } } } VBindDirective
- */
+type VBindDirective = VDirective & {
+  key: VDirectiveKey & { name: VIdentifier & { name: 'bind' } }
+}
 
 const ATTRS = {
   DEFINITION: 'DEFINITION',
@@ -29,60 +28,59 @@ const ATTRS = {
 
 /**
  * Check whether the given attribute is `v-bind` directive.
- * @param {VAttribute | VDirective | undefined | null} node
- * @returns { node is VBindDirective }
  */
-function isVBind(node) {
+function isVBind(
+  node: VAttribute | VDirective | undefined | null
+): node is VBindDirective {
   return Boolean(node && node.directive && node.key.name.name === 'bind')
 }
 /**
  * Check whether the given attribute is `v-model` directive.
- * @param {VAttribute | VDirective | undefined | null} node
- * @returns { node is VDirective }
  */
-function isVModel(node) {
+function isVModel(
+  node: VAttribute | VDirective | undefined | null
+): node is VDirective {
   return Boolean(node && node.directive && node.key.name.name === 'model')
 }
 /**
  * Check whether the given attribute is plain attribute.
- * @param {VAttribute | VDirective | undefined | null} node
- * @returns { node is VAttribute }
  */
-function isVAttribute(node) {
+function isVAttribute(
+  node: VAttribute | VDirective | undefined | null
+): node is VAttribute {
   return Boolean(node && !node.directive)
 }
 /**
  * Check whether the given attribute is plain attribute, `v-bind` directive or `v-model` directive.
- * @param {VAttribute | VDirective | undefined | null} node
- * @returns { node is VAttribute }
  */
-function isVAttributeOrVBindOrVModel(node) {
+function isVAttributeOrVBindOrVModel(
+  node: VAttribute | VDirective | undefined | null
+): node is VAttribute {
   return isVAttribute(node) || isVBind(node) || isVModel(node)
 }
 
 /**
  * Check whether the given attribute is `v-bind="..."` directive.
- * @param {VAttribute | VDirective | undefined | null} node
- * @returns { node is VBindDirective }
  */
-function isVBindObject(node) {
+function isVBindObject(
+  node: VAttribute | VDirective | undefined | null
+): node is VBindDirective {
   return isVBind(node) && node.key.argument == null
 }
 
 /**
  * Check whether the given attribute is a shorthand boolean like `selected`.
- * @param {VAttribute | VDirective | undefined | null} node
- * @returns { node is VAttribute }
  */
-function isVShorthandBoolean(node) {
+function isVShorthandBoolean(
+  node: VAttribute | VDirective | undefined | null
+): node is VAttribute {
   return isVAttribute(node) && !node.value
 }
 
-/**
- * @param {VAttribute | VDirective} attribute
- * @param {SourceCode} sourceCode
- */
-function getAttributeName(attribute, sourceCode) {
+function getAttributeName(
+  attribute: VAttribute | VDirective,
+  sourceCode: SourceCode
+) {
   if (attribute.directive) {
     if (isVBind(attribute)) {
       return attribute.key.argument
@@ -94,11 +92,10 @@ function getAttributeName(attribute, sourceCode) {
   return attribute.key.name
 }
 
-/**
- * @param {VDirectiveKey} directiveKey
- * @param {SourceCode} sourceCode
- */
-function getDirectiveKeyName(directiveKey, sourceCode) {
+function getDirectiveKeyName(
+  directiveKey: VDirectiveKey,
+  sourceCode: SourceCode
+) {
   let text = `v-${directiveKey.name.name}`
   if (directiveKey.argument) {
     text += `:${sourceCode.getText(directiveKey.argument)}`
@@ -109,10 +106,7 @@ function getDirectiveKeyName(directiveKey, sourceCode) {
   return text
 }
 
-/**
- * @param {VAttribute | VDirective} attribute
- */
-function getAttributeType(attribute) {
+function getAttributeType(attribute: VAttribute | VDirective) {
   let propName
   if (attribute.directive) {
     if (!isVBind(attribute)) {
@@ -187,21 +181,21 @@ function getAttributeType(attribute) {
 }
 
 /**
- * @param {VAttribute | VDirective} attribute
- * @param { { [key: string]: number } } attributePosition
- * @returns {number | null} If the value is null, the order is omitted. Do not force the order.
+ * Returns `null` if the order of the attribute is omitted, so it is not enforced.
  */
-function getPosition(attribute, attributePosition) {
+function getPosition(
+  attribute: VAttribute | VDirective,
+  attributePosition: { [key: string]: number }
+): number | null {
   const attributeType = getAttributeType(attribute)
   return attributePosition[attributeType] ?? null
 }
 
-/**
- * @param {VAttribute | VDirective} prevNode
- * @param {VAttribute | VDirective} currNode
- * @param {SourceCode} sourceCode
- */
-function isAlphabetical(prevNode, currNode, sourceCode) {
+function isAlphabetical(
+  prevNode: VAttribute | VDirective,
+  currNode: VAttribute | VDirective,
+  sourceCode: SourceCode
+) {
   const prevName = getAttributeName(prevNode, sourceCode)
   const currName = getAttributeName(currNode, sourceCode)
   if (prevName === currName) {
@@ -212,11 +206,7 @@ function isAlphabetical(prevNode, currNode, sourceCode) {
   return prevName < currName
 }
 
-/**
- * @param {RuleContext} context - The rule context.
- * @returns {RuleListener} AST event handlers.
- */
-function create(context) {
+function create(context: RuleContext): RuleListener {
   const sourceCode = context.sourceCode
   const otherAttrs = [
     ATTRS.ATTR_DYNAMIC,
@@ -273,8 +263,7 @@ function create(context) {
     context.options[0] && context.options[0].ignoreVBindObject
   )
 
-  /** @type { { [key: string]: number } } */
-  const attributePosition = {}
+  const attributePosition: { [key: string]: number } = {}
   for (const [i, item] of attributeOrder.entries()) {
     if (Array.isArray(item)) {
       for (const attr of item) {
@@ -283,11 +272,10 @@ function create(context) {
     } else attributePosition[item] = i
   }
 
-  /**
-   * @param {VAttribute | VDirective} node
-   * @param {VAttribute | VDirective} previousNode
-   */
-  function reportIssue(node, previousNode) {
+  function reportIssue(
+    node: VAttribute | VDirective,
+    previousNode: VAttribute | VDirective
+  ) {
     const currentNode = sourceCode.getText(node.key)
     const prevNode = sourceCode.getText(previousNode.key)
     context.report({
@@ -301,8 +289,7 @@ function create(context) {
       fix(fixer) {
         const attributes = node.parent.attributes
 
-        /** @type { (node: VAttribute | VDirective | undefined) => boolean } */
-        let isMoveUp
+        let isMoveUp: (node: VAttribute | VDirective | undefined) => boolean
 
         if (isVBindObject(node)) {
           // prev, v-bind:foo, v-bind -> v-bind:foo, v-bind, prev
@@ -375,11 +362,9 @@ function create(context) {
     }
   })
 
-  /**
-   * @param {VStartTag} node
-   * @returns { { attr: ( VAttribute | VDirective ), position: number }[] }
-   */
-  function getAttributeAndPositionList(node) {
+  function getAttributeAndPositionList(
+    node: VStartTag
+  ): { attr: VAttribute | VDirective; position: number }[] {
     const attributes = node.attributes.filter(
       (node, index, attributes) =>
         // If ignoreVBindObject is enabled, ignore v-bind="object"
@@ -405,11 +390,7 @@ function create(context) {
 
     return results
 
-    /**
-     * @param {number} index
-     * @returns {number | null}
-     */
-    function getPositionFromAttrIndex(index) {
+    function getPositionFromAttrIndex(index: number): number | null {
       const node = attributes[index]
       if (isVBindObject(node)) {
         // node is `v-bind="object"` syntax
@@ -432,7 +413,7 @@ function create(context) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
