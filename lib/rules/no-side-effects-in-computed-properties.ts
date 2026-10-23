@@ -59,8 +59,8 @@ export default {
       ':function': onFunctionEnter,
       ':function:exit': onFunctionExit,
 
-      'MemberExpression > :matches(Identifier, ThisExpression)'(
-        node: (Identifier | ThisExpression) & { parent: MemberExpression },
+      ':matches(MemberExpression, TSAsExpression, TSSatisfiesExpression, TSNonNullExpression, TSTypeAssertion) > :matches(Identifier, ThisExpression)'(
+        node: Identifier | ThisExpression,
         info?: VueObjectData | undefined
       ) {
         if (!scopeStack) {
@@ -78,8 +78,8 @@ export default {
             targetBody === cp.value
         )
         if (computedProperty) {
-          const mem = node.parent
-          if (mem.object !== node) {
+          const mem = utils.getParentMemberExpression(node)
+          if (!mem) {
             return
           }
 
@@ -117,12 +117,7 @@ export default {
             node.range[1] <= c.range[1] &&
             targetBody === c.body
         )
-        if (!computedFunction) {
-          return
-        }
-
-        const mem = node.parent
-        if (mem.object !== node) {
+        if (!computedFunction || !utils.getParentMemberExpression(node)) {
           return
         }
 
