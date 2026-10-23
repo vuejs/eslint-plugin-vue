@@ -2,27 +2,20 @@
  * @fileoverview Disallow use other than available `lang`
  * @author Yosuke Ota
  */
-'use strict'
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
-/**
- * @typedef {object} BlockOptions
- * @property {Set<string>} lang
- * @property {boolean} allowNoLang
- * @property {boolean} required
- */
-/**
- * @typedef { { [element: string]: BlockOptions | undefined } } Options
- */
-/**
- * @typedef {object} UserBlockOptions
- * @property {string[] | string} [lang]
- * @property {boolean} [allowNoLang]
- * @property {boolean} [required]
- */
-/**
- * @typedef { { [element: string]: UserBlockOptions | undefined } } UserOptions
- */
+interface BlockOptions {
+  lang: Set<string>
+  allowNoLang: boolean
+  required: boolean
+}
+type Options = Record<string, BlockOptions | undefined>
+interface UserBlockOptions {
+  lang?: string[] | string
+  allowNoLang?: boolean
+  required?: boolean
+}
+type UserOptions = Record<string, UserBlockOptions | undefined>
 
 /**
  * https://vuejs.github.io/vetur/guide/highlighting.html
@@ -30,18 +23,14 @@ const utils = require('../utils')
  * <style lang="css"></style>
  * <script lang="js"></script>
  * <script lang="javascript"></script>
- * @type {Record<string, string[] | undefined>}
  */
-const DEFAULT_LANGUAGES = {
+const DEFAULT_LANGUAGES: Record<string, string[] | undefined> = {
   template: ['html'],
   style: ['css'],
   script: ['js', 'javascript']
 }
 
-/**
- * @param {NonNullable<BlockOptions['lang']>} lang
- */
-function getAllowsLangPhrase(lang) {
+function getAllowsLangPhrase(lang: Set<string>): string {
   const langs = [...lang].map((s) => `'${s}'`)
   switch (langs.length) {
     case 1: {
@@ -54,14 +43,13 @@ function getAllowsLangPhrase(lang) {
 }
 
 /**
- * Normalizes a given option.
- * @param {string} blockName The block name.
- * @param {UserBlockOptions} option An option to parse.
- * @returns {BlockOptions} Normalized option.
+ * Normalizes the option of the given block.
  */
-function normalizeOption(blockName, option) {
-  /** @type {Set<string>} */
-  let lang
+function normalizeOption(
+  blockName: string,
+  option: UserBlockOptions
+): BlockOptions {
+  let lang: Set<string>
 
   if (Array.isArray(option.lang)) {
     lang = new Set(option.lang)
@@ -96,17 +84,14 @@ function normalizeOption(blockName, option) {
   }
 }
 /**
- * Normalizes a given options.
- * @param { UserOptions } options An option to parse.
- * @returns {Options} Normalized option.
+ * Normalizes the given options.
  */
-function normalizeOptions(options) {
+function normalizeOptions(options: UserOptions): Options {
   if (!options) {
     return {}
   }
 
-  /** @type {Options} */
-  const normalized = {}
+  const normalized: Options = {}
 
   for (const [blockName, value] of Object.entries(options)) {
     if (value) {
@@ -117,7 +102,7 @@ function normalizeOptions(options) {
   return normalized
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -170,8 +155,7 @@ module.exports = {
         "Do not explicitly specify the default language for the 'lang' attribute of '<{{tag}}>'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const options = normalizeOptions(
       context.options[0] || {
         script: { allowNoLang: true },
@@ -183,11 +167,7 @@ module.exports = {
       return {}
     }
 
-    /**
-     * @param {VElement} element
-     * @returns {void}
-     */
-    function verify(element) {
+    function verify(element: VElement): void {
       const tag = element.name
       const option = options[tag]
       if (!option) {
@@ -233,9 +213,8 @@ module.exports = {
 
     /**
      * Reports the blocks that are required to exist but are not in the document.
-     * @returns {void}
      */
-    function verifyMissingBlocks() {
+    function verifyMissingBlocks(): void {
       const documentFragment =
         context.sourceCode.parserServices.getDocumentFragment?.()
       if (!documentFragment) {
