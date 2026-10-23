@@ -1,5 +1,39 @@
 # eslint-plugin-vue
 
+## 10.12.0
+
+### Minor Changes
+
+- Added `required` option to [`vue/block-lang`](https://eslint.vuejs.org/rules/block-lang.html) to report components that omit a required block entirely ([#3125](https://github.com/vuejs/eslint-plugin-vue/pull/3125))
+
+- Added new [`vue/no-props-shadow`](https://eslint.vuejs.org/rules/no-props-shadow.html) rule ([#3118](https://github.com/vuejs/eslint-plugin-vue/pull/3118))
+
+- Changed [`vue/singleline-html-element-content-newline`](https://eslint.vuejs.org/rules/singleline-html-element-content-newline.html) and [`vue/multiline-html-element-content-newline`](https://eslint.vuejs.org/rules/multiline-html-element-content-newline.html) rules to ignore `router-link` and `nuxt-link` elements by default ([#3165](https://github.com/vuejs/eslint-plugin-vue/pull/3165))
+
+- Changed [`vue/html-self-closing`](https://eslint.vuejs.org/rules/html-self-closing.html) to treat Vue's special `<slot>` and `<template>` elements as components (`html.component` option) instead of normal HTML elements ([#3164](https://github.com/vuejs/eslint-plugin-vue/pull/3164))
+
+- Added new [`vue/no-define-model-default`](https://eslint.vuejs.org/rules/no-define-model-default.html) rule ([#3146](https://github.com/vuejs/eslint-plugin-vue/pull/3146))
+
+- Added support for refs detected by type information, such as refs returned from composables, to [`vue/no-ref-as-operand`](https://eslint.vuejs.org/rules/no-ref-as-operand.html) rule ([#3144](https://github.com/vuejs/eslint-plugin-vue/pull/3144))
+
+- Added new [`vue/no-content-outside-block`](https://eslint.vuejs.org/rules/no-content-outside-block.html) rule ([#3119](https://github.com/vuejs/eslint-plugin-vue/pull/3119))
+
+- Added `ignoreMixins` option to [`vue/require-explicit-emits`](https://eslint.vuejs.org/rules/require-explicit-emits.html) rule ([#3141](https://github.com/vuejs/eslint-plugin-vue/pull/3141))
+
+### Patch Changes
+
+- Fixed [`vue/no-dupe-keys`](https://eslint.vuejs.org/rules/no-dupe-keys.html) not reporting `<script setup>` variables that shadow a prop while aliasing a different one, such as `const foo = toRef(props, 'bar')` ([#3124](https://github.com/vuejs/eslint-plugin-vue/pull/3124))
+
+- Improved performance of [`vue/no-reserved-component-names`](https://eslint.vuejs.org/rules/no-reserved-component-names.html) by no longer rebuilding its reserved name sets for every file ([#3147](https://github.com/vuejs/eslint-plugin-vue/pull/3147))
+
+- Fixed [`vue/no-undef-properties`](https://eslint.vuejs.org/rules/no-undef-properties.html) false positives for properties returned via `...toRefs(reactive({ ... }))` from `setup()` ([#3134](https://github.com/vuejs/eslint-plugin-vue/pull/3134))
+
+- Fixed [`vue/require-default-prop`](https://eslint.vuejs.org/rules/require-default-prop.html), [`vue/no-boolean-default`](https://eslint.vuejs.org/rules/no-boolean-default.html), [`vue/no-required-prop-with-default`](https://eslint.vuejs.org/rules/no-required-prop-with-default.html) and [`vue/require-valid-default-prop`](https://eslint.vuejs.org/rules/require-valid-default-prop.html) not handling defaults that are passed to `withDefaults()` by reference or spread instead of an inline object literal ([#3114](https://github.com/vuejs/eslint-plugin-vue/pull/3114))
+
+- Fixed [`vue/require-typed-ref`](https://eslint.vuejs.org/rules/require-typed-ref.html) false positives when an explicit type annotation already applies to the `ref()` call ([#3123](https://github.com/vuejs/eslint-plugin-vue/pull/3123))
+
+- Fixed [`vue/v-if-else-key`](https://eslint.vuejs.org/rules/v-if-else-key.html) false positive for components with a bound `:key` ([#3150](https://github.com/vuejs/eslint-plugin-vue/pull/3150))
+
 ## 10.11.1
 
 ### Patch Changes
