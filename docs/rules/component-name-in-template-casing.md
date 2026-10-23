@@ -17,6 +17,7 @@ Define a style for the component name in template casing for consistency purpose
 ## :book: Rule Details
 
 This rule aims to warn the tag names other than the configured casing in Vue.js template.
+Namespaced components such as `<Form.Input>` are not checked, because the part after the dot has to match the object key.
 
 ## :wrench: Options
 

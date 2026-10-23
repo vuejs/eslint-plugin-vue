@@ -215,6 +215,58 @@ tester.run('component-name-in-template-casing', rule, {
       options: ['kebab-case', { globals: ['/^c-/', 'other-component'] }]
     },
 
+    // namespaced components
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as Form from './form-components'
+        </script>
+        <template>
+          <Form.Input>
+            <Form.Label>label</Form.Label>
+          </Form.Input>
+        </template>
+      `,
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as Form from './form-components'
+        </script>
+        <template>
+          <Form.Input>
+            <Form.Label>label</Form.Label>
+          </Form.Input>
+        </template>
+      `,
+      options: ['kebab-case', { registeredComponentsOnly: false }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Input from './Input.vue'
+          const Form = { Input }
+        </script>
+        <template>
+          <Form.Input />
+          <Form.input />
+        </template>
+      `,
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: `
+        <template>
+          <Form.Input />
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['/^Form/'] }]
+    },
+
     // type-only imports
 
     {
@@ -1388,6 +1440,42 @@ tester.run('component-name-in-template-casing', rule, {
           column: 11,
           endLine: 18,
           endColumn: 24
+        }
+      ]
+    },
+    // namespaced components
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as Form from './form-components'
+          import TheComponent from './TheComponent.vue'
+        </script>
+        <template>
+          <Form.Input>
+            <the-component />
+          </Form.Input>
+        </template>
+      `,
+      output: `
+        <script setup>
+          import * as Form from './form-components'
+          import TheComponent from './TheComponent.vue'
+        </script>
+        <template>
+          <Form.Input>
+            <TheComponent />
+          </Form.Input>
+        </template>
+      `,
+      options: ['PascalCase', { registeredComponentsOnly: false }],
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 27
         }
       ]
     }
