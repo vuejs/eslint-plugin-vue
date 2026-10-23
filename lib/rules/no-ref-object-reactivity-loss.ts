@@ -3,10 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import utils from '../utils/index.js'
-import {
-  extractRefObjectReferences,
-  extractReactiveVariableReferences
-} from '../utils/ref-object-references.ts'
+import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
 
 /**
  * Checks whether writing assigns a value to the given pattern.
@@ -61,9 +58,7 @@ export default {
     schema: [],
     messages: {
       getValueInSameScope:
-        'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-      getReactiveVariableInSameScope:
-        'Getting a reactive variable in the same scope will cause the value to lose reactivity.'
+        'Getting a value from the ref object in the same scope will cause the value to lose reactivity.'
     }
   },
   create(context: RuleContext): RuleListener {
@@ -80,8 +75,6 @@ export default {
     const scopes = new Map<CallExpression, ScopeStack>()
 
     const refObjectReferences = extractRefObjectReferences(context)
-    const reactiveVariableReferences =
-      extractReactiveVariableReferences(context)
 
     /**
      * Verify the given ref object value. `refObj = ref(); refObj.value;`
@@ -95,21 +88,6 @@ export default {
       context.report({
         node,
         messageId: 'getValueInSameScope'
-      })
-    }
-
-    /**
-     * Verify the given reactive variable. `refVal = $ref(); refVal;`
-     */
-    function verifyReactiveVariable(node: Identifier) {
-      const ref = reactiveVariableReferences.get(node)
-      if (!ref || ref.escape || scopes.get(ref.define) !== scopeStack) {
-        return
-      }
-
-      context.report({
-        node,
-        messageId: 'getReactiveVariableInSameScope'
       })
     }
 
@@ -154,16 +132,6 @@ export default {
           return
         }
         verifyRefObjectValue(node)
-      },
-      /**
-       * Check for reactive variable`.
-       */
-      'Identifier:exit'(node) {
-        if (isUpdate(node)) {
-          // e.g. `reactiveVariable = 42`, `reactiveVariable++`
-          return
-        }
-        verifyReactiveVariable(node)
       }
     }
   }
