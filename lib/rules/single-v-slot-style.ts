@@ -15,7 +15,9 @@ interface Options {
   treatCommentsAsInsignificant: boolean
 }
 
-function normalizeOptions(options: unknown): Options {
+function normalizeOptions(
+  options: SlotStyle | Partial<Options> | undefined
+): Options {
   const normalized: Options = {
     namedSlotStyle: 'without-wrapper',
     defaultSlotStyle: 'without-wrapper',
@@ -23,19 +25,18 @@ function normalizeOptions(options: unknown): Options {
   }
 
   if (typeof options === 'string') {
-    normalized.namedSlotStyle = options as SlotStyle
-    normalized.defaultSlotStyle = options as SlotStyle
+    normalized.namedSlotStyle = options
+    normalized.defaultSlotStyle = options
   } else if (options != null) {
-    const opts = options as Partial<Options>
-    if (opts.namedSlotStyle != null) {
-      normalized.namedSlotStyle = opts.namedSlotStyle
+    if (options.namedSlotStyle != null) {
+      normalized.namedSlotStyle = options.namedSlotStyle
     }
-    if (opts.defaultSlotStyle != null) {
-      normalized.defaultSlotStyle = opts.defaultSlotStyle
+    if (options.defaultSlotStyle != null) {
+      normalized.defaultSlotStyle = options.defaultSlotStyle
     }
-    if (opts.treatCommentsAsInsignificant != null) {
+    if (options.treatCommentsAsInsignificant != null) {
       normalized.treatCommentsAsInsignificant =
-        opts.treatCommentsAsInsignificant === true
+        options.treatCommentsAsInsignificant
     }
   }
 
@@ -64,21 +65,21 @@ function isSignificantChild(node: VElement['children'][number]): boolean {
 }
 
 /**
- * Get the HTML comments that are direct children of a given element.
+ * Check whether a given element has HTML comments as direct children.
  * `vue-eslint-parser` does not put comments into `children`, so they have to be
  * matched by range instead.
  */
-function getOwnComments<T extends { range: Range }>(
+function hasOwnComments(
   element: VElement,
-  comments: readonly T[]
-): T[] {
+  comments: readonly (HTMLComment | HTMLBogusComment | Comment)[]
+): boolean {
   const { endTag } = element
   if (endTag == null) {
-    return []
+    return false
   }
   const start = element.startTag.range[1]
   const end = endTag.range[0]
-  return comments.filter(
+  return comments.some(
     (comment) =>
       comment.range[0] >= start &&
       comment.range[1] <= end &&
@@ -429,7 +430,7 @@ export default {
         if (!options.treatCommentsAsInsignificant) {
           const templateBody = sourceCode.ast.templateBody
           const comments = templateBody ? templateBody.comments : []
-          if (getOwnComments(node, comments).length > 0) {
+          if (hasOwnComments(node, comments)) {
             return
           }
         }
