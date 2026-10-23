@@ -2,14 +2,11 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../../utils/index.js'
 
-const utils = require('../../utils/index')
-
-module.exports = {
+export default {
   supported: '>=3.4.0',
-  /** @param {RuleContext} context @returns {RuleListener} */
-  createScriptVisitor(context) {
+  createScriptVisitor(context: RuleContext): RuleListener {
     return utils.defineScriptSetupVisitor(context, {
       onDefineModelEnter(node) {
         context.report({

@@ -2,29 +2,28 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../../../utils/index.js'
 
-const utils = require('../../../utils')
-/**
- * @typedef {object} SlotVForVariables
- * @property {VForExpression} expr
- * @property {VVariable[]} variables
- */
-/**
- * @typedef {object} SlotContext
- * @property {VElement} element
- * @property {VAttribute | VDirective | null} slot
- * @property {VDirective | null} vFor
- * @property {SlotVForVariables | null} slotVForVars
- * @property {string} normalizedName
- */
+interface SlotVForVariables {
+  expr: VForExpression
+  variables: VVariable[]
+}
+interface SlotContext {
+  element: VElement
+  slot: VAttribute | VDirective | null
+  vFor: VDirective | null
+  slotVForVars: SlotVForVariables | null
+  normalizedName: string
+}
+
 /**
  * Checks whether the given element can use v-slot.
- * @param {VElement} element
- * @param {SourceCode} sourceCode
- * @param {ParserServices.TokenStore} tokenStore
  */
-module.exports = function canConvertToVSlot(element, sourceCode, tokenStore) {
+export default function canConvertToVSlot(
+  element: VElement,
+  sourceCode: SourceCode,
+  tokenStore: ParserServices.TokenStore
+) {
   const ownerElement = element.parent
   if (
     ownerElement.type === 'VDocumentFragment' ||
@@ -40,12 +39,11 @@ module.exports = function canConvertToVSlot(element, sourceCode, tokenStore) {
     !hasSameSlotDirective(ownerElement, slot, sourceCode, tokenStore)
   )
 }
-/**
- * @param {VElement} element
- * @param {SourceCode} sourceCode
- * @returns {SlotContext}
- */
-function getSlotContext(element, sourceCode) {
+
+function getSlotContext(
+  element: VElement,
+  sourceCode: SourceCode
+): SlotContext {
   const slot =
     utils.getAttribute(element, 'slot') ||
     utils.getDirective(element, 'bind', 'slot')
@@ -63,16 +61,15 @@ function getSlotContext(element, sourceCode) {
 
 /**
  * Gets the `v-for` directive and variable that provide the variables used by the given `slot` attribute.
- * @param {VAttribute | VDirective | null} slot The current `slot` attribute node.
- * @param {VDirective | null} [vFor] The current `v-for` directive node.
- * @returns { SlotVForVariables | null } The SlotVForVariables.
  */
-function getSlotVForVariableIfUsingIterationVars(slot, vFor) {
+function getSlotVForVariableIfUsingIterationVars(
+  slot: VAttribute | VDirective | null,
+  vFor?: VDirective | null
+): SlotVForVariables | null {
   if (!slot || !slot.directive) {
     return null
   }
-  const expr =
-    vFor && vFor.value && /** @type {VForExpression} */ (vFor.value.expression)
+  const expr = vFor && vFor.value && (vFor.value.expression as VForExpression)
   const variables =
     expr && getUsingIterationVars(slot.value, slot.parent.parent)
   return expr && variables && variables.length > 0 ? { expr, variables } : null
@@ -80,11 +77,11 @@ function getSlotVForVariableIfUsingIterationVars(slot, vFor) {
 
 /**
  * Gets iterative variables if a given expression node is using iterative variables that the element defined.
- * @param {VExpressionContainer|null} expression The expression node to check.
- * @param {VElement} element The element node which has the expression.
- * @returns {VVariable[]} The expression node is using iteration variables.
  */
-function getUsingIterationVars(expression, element) {
+function getUsingIterationVars(
+  expression: VExpressionContainer | null,
+  element: VElement
+): VVariable[] {
   const vars = []
   if (expression && expression.type === 'VExpressionContainer') {
     for (const { variable } of expression.references) {
@@ -103,11 +100,11 @@ function getUsingIterationVars(expression, element) {
 
 /**
  * Get the normalized name of a given `slot` attribute node.
- * @param {VAttribute | VDirective | null} slotAttr node of `slot`
- * @param {SourceCode} sourceCode The source code.
- * @returns {string} The normalized name.
  */
-function getNormalizedName(slotAttr, sourceCode) {
+function getNormalizedName(
+  slotAttr: VAttribute | VDirective | null,
+  sourceCode: SourceCode
+): string {
   if (!slotAttr) {
     return 'default'
   }
@@ -119,16 +116,12 @@ function getNormalizedName(slotAttr, sourceCode) {
 
 /**
  * Checks whether parent element has the same slot as the given slot.
- * @param {VElement} ownerElement The parent element.
- * @param {SlotContext} targetSlot The SlotContext with a slot to check if they are the same.
- * @param {SourceCode} sourceCode
- * @param {ParserServices.TokenStore} tokenStore
  */
 function hasSameSlotDirective(
-  ownerElement,
-  targetSlot,
-  sourceCode,
-  tokenStore
+  ownerElement: VElement,
+  targetSlot: SlotContext,
+  sourceCode: SourceCode,
+  tokenStore: ParserServices.TokenStore
 ) {
   for (const group of utils.iterateChildElementsChains(ownerElement)) {
     if (group.includes(targetSlot.element)) {
@@ -145,7 +138,7 @@ function hasSameSlotDirective(
           return true
         }
       } else if (
-        equalSlotVForVariables(
+        areSlotVForVariablesEqual(
           targetSlot.slotVForVars,
           slot.slotVForVars,
           tokenStore
@@ -160,15 +153,15 @@ function hasSameSlotDirective(
 
 /**
  * Determines whether the two given `v-slot` variables are considered to be equal.
- * @param {SlotVForVariables} a First element.
- * @param {SlotVForVariables} b Second element.
- * @param {ParserServices.TokenStore} tokenStore The token store.
- * @returns {boolean} `true` if the elements are considered to be equal.
  */
-function equalSlotVForVariables(a, b, tokenStore) {
+function areSlotVForVariablesEqual(
+  a: SlotVForVariables,
+  b: SlotVForVariables,
+  tokenStore: ParserServices.TokenStore
+): boolean {
   if (
     a.variables.length !== b.variables.length ||
-    !equal(a.expr.right, b.expr.right)
+    !isEqual(a.expr.right, b.expr.right)
   ) {
     return false
   }
@@ -186,7 +179,7 @@ function equalSlotVForVariables(a, b, tokenStore) {
       (v) => bPtn.range[0] <= v.id.range[0] && v.id.range[1] <= bPtn.range[1]
     )
     if (aVar && bVar) {
-      if (aVar.id.name !== bVar.id.name || !equal(aPtn, bPtn)) {
+      if (aVar.id.name !== bVar.id.name || !isEqual(aPtn, bPtn)) {
         return false
       }
       checkedVarNames.add(aVar.id.name)
@@ -202,11 +195,8 @@ function equalSlotVForVariables(a, b, tokenStore) {
 
   /**
    * Determines whether the two given nodes are considered to be equal.
-   * @param {ASTNode} a First node.
-   * @param {ASTNode} b Second node.
-   * @returns {boolean} `true` if the nodes are considered to be equal.
    */
-  function equal(a, b) {
+  function isEqual(a: ASTNode, b: ASTNode): boolean {
     return a.type === b.type && utils.equalTokens(a, b, tokenStore)
   }
 }

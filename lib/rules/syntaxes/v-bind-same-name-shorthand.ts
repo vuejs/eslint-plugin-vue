@@ -2,20 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../../utils/index.js'
 
-const utils = require('../../utils')
-
-module.exports = {
+export default {
   supported: '>=3.4.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
     /**
      * Verify the directive node
-     * @param {VDirective} node The directive node to check
-     * @returns {void}
      */
-    function checkDirective(node) {
+    function checkDirective(node: VDirective): void {
       if (utils.isVBindSameNameShorthand(node)) {
         context.report({
           node,

@@ -2,14 +2,11 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../../utils/index.js'
 
-const utils = require('../../utils/index')
-
-module.exports = {
+export default {
   supported: '>=3.3.0',
-  /** @param {RuleContext} context @returns {RuleListener} */
-  createScriptVisitor(context) {
+  createScriptVisitor(context: RuleContext): RuleListener {
     const sourceCode = context.sourceCode
     return utils.defineScriptSetupVisitor(context, {
       onDefineOptionsEnter(node) {
@@ -24,10 +21,9 @@ module.exports = {
     })
 
     /**
-     * @param {RuleFixer} fixer
-     * @param {CallExpression} node defineOptions() node
+     * Moves the options of the given `defineOptions()` call to `<script>`.
      */
-    function fix(fixer, node) {
+    function fix(fixer: RuleFixer, node: CallExpression) {
       if (node.arguments.length === 0) return null
       const scriptSetup = utils.getScriptSetupElement(context)
       if (
@@ -44,14 +40,12 @@ module.exports = {
       }
 
       // Find defineOptions statement
-      /** @type {ASTNode} */
-      let statement = node
+      let statement: ASTNode = node
       while (statement.parent && statement.parent.type !== 'Program') {
         statement = statement.parent
       }
       // Calc remove range
-      /** @type {Range} */
-      const removeRange = [...statement.range]
+      const removeRange: Range = [...statement.range]
       if (
         sourceCode.lines[statement.loc.start.line - 1]
           .slice(0, statement.loc.start.column)

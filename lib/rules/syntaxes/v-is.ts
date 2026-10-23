@@ -2,18 +2,14 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-module.exports = {
+export default {
   deprecated: '3.1.0',
   supported: '>=3.0.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
     /**
      * Reports `v-is` node
-     * @param {VDirective} vIsAttr node of `v-is`
-     * @returns {void}
      */
-    function reportVIs(vIsAttr) {
+    function reportVIs(vIsAttr: VDirective): void {
       context.report({
         node: vIsAttr.key,
         messageId: 'forbiddenVIs'

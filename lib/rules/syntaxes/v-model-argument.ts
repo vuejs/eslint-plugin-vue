@@ -2,16 +2,12 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-module.exports = {
+export default {
   supported: '>=3.0.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
     return {
-      /** @param {VDirectiveKey & { argument: VExpressionContainer | VIdentifier }} node */
       "VAttribute[directive=true] > VDirectiveKey[name.name='model'][argument!=null]"(
-        node
+        node: VDirectiveKey & { argument: VExpressionContainer | VIdentifier }
       ) {
         context.report({
           node: node.argument,

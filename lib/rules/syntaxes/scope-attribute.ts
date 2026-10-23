@@ -2,18 +2,14 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-module.exports = {
+export default {
   deprecated: '2.5.0',
   supported: '<3.0.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
     /**
      * Reports `scope` node
-     * @param {VDirectiveKey} scopeKey node of `scope`
-     * @returns {void}
      */
-    function reportScope(scopeKey) {
+    function reportScope(scopeKey: VDirectiveKey): void {
       context.report({
         node: scopeKey,
         messageId: 'forbiddenScopeAttribute',

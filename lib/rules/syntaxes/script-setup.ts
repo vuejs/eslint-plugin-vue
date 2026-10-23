@@ -2,14 +2,11 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../../utils/index.js'
 
-const utils = require('../../utils')
-
-module.exports = {
+export default {
   supported: '>=2.7.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createScriptVisitor(context) {
+  createScriptVisitor(context: RuleContext): TemplateListener {
     const scriptSetup = utils.getScriptSetupElement(context)
     if (!scriptSetup) {
       return {}

@@ -2,20 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import canConvertToVSlotForElement from './utils/can-convert-to-v-slot.ts'
 
-const canConvertToVSlotForElement = require('./utils/can-convert-to-v-slot')
-
-module.exports = {
+export default {
   deprecated: '2.6.0',
   supported: '>=2.5.0 <3.0.0',
-  /**
-   * @param {RuleContext} context
-   * @param {object} option
-   * @param {boolean} [option.fixToUpgrade]
-   * @returns {TemplateListener}
-   */
-  createTemplateBodyVisitor(context, { fixToUpgrade } = {}) {
+  createTemplateBodyVisitor(
+    context: RuleContext,
+    { fixToUpgrade }: { fixToUpgrade?: boolean } = {}
+  ): TemplateListener {
     const sourceCode = context.sourceCode
     const tokenStore =
       sourceCode.parserServices.getTemplateBodyTokenStore &&
@@ -23,10 +18,8 @@ module.exports = {
 
     /**
      * Checks whether the given node can convert to the `v-slot`.
-     * @param {VStartTag} startTag node of `<element v-slot ... >`
-     * @returns {boolean} `true` if the given node can convert to the `v-slot`
      */
-    function canConvertToVSlot(startTag) {
+    function canConvertToVSlot(startTag: VStartTag): boolean {
       if (
         !canConvertToVSlotForElement(startTag.parent, sourceCode, tokenStore)
       ) {
@@ -57,11 +50,11 @@ module.exports = {
 
     /**
      * Convert to `v-slot`.
-     * @param {RuleFixer} fixer fixer
-     * @param {VDirective} scopeAttr node of `slot-scope`
-     * @returns {Fix[]} fix data
      */
-    function fixSlotScopeToVSlot(fixer, scopeAttr) {
+    function fixSlotScopeToVSlot(
+      fixer: RuleFixer,
+      scopeAttr: VDirective
+    ): Fix[] {
       const element = scopeAttr.parent.parent
       const scopeValue =
         scopeAttr && scopeAttr.value
@@ -81,10 +74,8 @@ module.exports = {
     }
     /**
      * Reports `slot-scope` node
-     * @param {VDirective} scopeAttr node of `slot-scope`
-     * @returns {void}
      */
-    function reportSlotScope(scopeAttr) {
+    function reportSlotScope(scopeAttr: VDirective): void {
       context.report({
         node: scopeAttr.key,
         messageId: 'forbiddenSlotScopeAttribute',
