@@ -101,7 +101,9 @@ export default {
 
         const slotsTypeHelper =
           slotsProperty.value.type === 'TSAsExpression' &&
-          slotsProperty.value.typeAnnotation?.typeName.name === 'SlotsType' &&
+          slotsProperty.value.typeAnnotation?.type === 'TSTypeReference' &&
+          slotsProperty.value.typeAnnotation.typeName.type === 'Identifier' &&
+          slotsProperty.value.typeAnnotation.typeName.name === 'SlotsType' &&
           slotsProperty.value.typeAnnotation
         if (!slotsTypeHelper) return
 
