@@ -3,23 +3,18 @@
  * @author Yizack Rangel
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-/**
- * @param {VDirective} node
- * @param {Expression} [expression]
- * @param {boolean} [isUnconditional=true] whether the expression is unconditional
- * @param {Expression} [parentExpr] parent expression for context
- * @return {IterableIterator<{ node: Literal | TemplateElement, isUnconditional: boolean, parentExpr?: Expression }>}
- */
 function* extractClassNodes(
-  node,
-  expression,
+  node: VDirective,
+  expression?: Expression,
   isUnconditional = true,
-  parentExpr
-) {
+  parentExpr?: Expression
+): IterableIterator<{
+  node: Literal | TemplateElement
+  isUnconditional: boolean
+  parentExpr?: Expression
+}> {
   const nodeExpression = expression ?? node.value?.expression
   if (!nodeExpression) return
 
@@ -110,20 +105,14 @@ function* extractClassNodes(
   }
 }
 
-/**
- * @param {string} classList
- * @returns {string[]}
- */
-function getClassNames(classList) {
+function getClassNames(classList: string): string[] {
   return classList.split(/\s+/).filter(Boolean)
 }
 
 /**
  * Append the given token to the last non-whitespace item in `kept`.
- * @param {string[]} kept
- * @param {string} token
  */
-function appendToLastClassName(kept, token) {
+function appendToLastClassName(kept: string[], token: string) {
   for (let j = kept.length - 1; j >= 0; j--) {
     if (!/^\s+$/.test(kept[j])) {
       const parts = kept[j].split(/(\s+)/)
@@ -134,16 +123,14 @@ function appendToLastClassName(kept, token) {
 }
 
 /**
- * @param {string} raw - raw class names string including quotes
- * @returns {string}
+ * Remove duplicate class names from `raw`, the class names string including its quotes.
  */
-function removeDuplicateClassNames(raw) {
+function removeDuplicateClassNames(raw: string): string {
   const quote = raw[0]
   const inner = raw.slice(1, -1)
   const tokens = inner.split(/(\s+)/)
 
-  /** @type {string[]} */
-  const kept = []
+  const kept: string[] = []
   const used = new Set()
 
   for (let i = 0; i < tokens.length; i++) {
@@ -191,15 +178,14 @@ function removeDuplicateClassNames(raw) {
   return quote + kept.join('') + quote
 }
 
-/** @param {VLiteral | Literal | TemplateElement | null} node */
-function getRawValue(node) {
+function getRawValue(node: VLiteral | Literal | TemplateElement | null) {
   if (!node?.value) return null
   return typeof node.value === 'object' && 'raw' in node.value
     ? node.value.raw
     : node.value
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -213,12 +199,10 @@ module.exports = {
       duplicateClassNames: 'Duplicate class name{{plural}} {{names}}.'
     }
   },
-  /** @param {RuleContext} context */
-  create: (context) => {
-    /**
-     * @param {VLiteral | Literal | TemplateElement | null} node
-     */
-    function reportDuplicateClasses(node) {
+  create: (context: RuleContext) => {
+    function reportDuplicateClasses(
+      node: VLiteral | Literal | TemplateElement | null
+    ) {
       if (!node?.value) return
 
       const classList = getRawValue(node)
@@ -228,7 +212,7 @@ module.exports = {
       if (classNames.length <= 1) return
 
       const seen = new Set()
-      const duplicates = new Set()
+      const duplicates = new Set<string>()
 
       for (const className of classNames) {
         if (seen.has(className)) {
@@ -258,15 +242,13 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VAttribute} node */
       "VAttribute[directive=false][key.name='class'][value.type='VLiteral']"(
-        node
+        node: VAttribute
       ) {
         reportDuplicateClasses(node.value)
       },
-      /** @param {VDirective} node */
       "VAttribute[directive=true][key.argument.name='class'][value.type='VExpressionContainer']"(
-        node
+        node: VDirective
       ) {
         const parent = node.parent
         const attrs = parent.attributes || []
@@ -279,35 +261,27 @@ module.exports = {
         )
 
         // get static classes
-        /** @type {Set<string> | null} */
-        const staticClasses =
+        const staticClasses: Set<string> | null =
           staticAttr && staticAttr.value && staticAttr.value.type === 'VLiteral'
             ? new Set(getClassNames(String(staticAttr.value.value)))
             : null
 
-        /** @type {Set<string>} */
-        const reported = new Set()
+        const reported = new Set<string>()
 
-        /** @type {Set<string>} */
-        const duplicatesInExpression = new Set()
+        const duplicatesInExpression = new Set<string>()
 
-        /** @type {Map<string, ASTNode>} */
-        const seen = new Map()
+        const seen = new Map<string, ASTNode>()
 
-        /** @type {Map<string, {node: ASTNode, isUnconditional: boolean, parentExpr?: Expression}>} */
-        const collected = new Map()
+        const collected = new Map<
+          string,
+          { node: ASTNode; isUnconditional: boolean; parentExpr?: Expression }
+        >()
 
-        /**
-         * @param {string} className
-         * @param {Literal | TemplateElement} reportNode
-         * @param {boolean} isUnconditional
-         * @param {Expression} [parentExpr]
-         */
         function collectClassName(
-          className,
-          reportNode,
-          isUnconditional,
-          parentExpr
+          className: string,
+          reportNode: Literal | TemplateElement,
+          isUnconditional: boolean,
+          parentExpr?: Expression
         ) {
           // skip if already reported by reportDuplicateClasses
           if (reported.has(className)) {
