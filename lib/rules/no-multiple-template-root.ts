@@ -2,7 +2,7 @@
  * @fileoverview disallow adding multiple root nodes to the template
  * @author Przemyslaw Falowski (@przemkow)
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

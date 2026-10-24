@@ -3,11 +3,11 @@
  * @author Armano
  */
 import { ReferenceTracker } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import type {
   ComponentComputedProperty,
   VueObjectData
-} from '../utils/index.js'
+} from '../utils/index.ts'
 
 const PROMISE_FUNCTIONS = new Set(['then', 'catch', 'finally'])
 

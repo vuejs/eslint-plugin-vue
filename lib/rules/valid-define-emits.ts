@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -77,7 +77,7 @@ export default {
                   !utils.inRange(scriptSetup.range, def.name) ||
                   utils.inRange(defineEmits.range, def.name)
               ) ||
-              utils.withinTypeNode(node)
+              utils.isWithinTypeNode(node)
             ) {
               continue
             }

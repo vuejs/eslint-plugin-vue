@@ -2,9 +2,9 @@
  * @fileoverview Prevents duplication of field names.
  * @author Armano
  */
-import type { GroupName } from '../utils/index.js'
+import type { GroupName } from '../utils/index.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const GROUP_NAMES: GroupName[] = [
   'props',

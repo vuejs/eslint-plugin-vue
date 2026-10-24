@@ -2,7 +2,7 @@
  * @fileoverview Restrict or warn use of v-html to prevent XSS attack
  * @author Nathan Zeplowitz
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -97,7 +97,7 @@ export default {
                     def.node.init &&
                     def.node.init.type === 'Literal')
               ) ||
-              utils.withinTypeNode(node)
+              utils.isWithinTypeNode(node)
             ) {
               continue
             }
