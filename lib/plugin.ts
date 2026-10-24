@@ -228,6 +228,7 @@ import spaceInfixOps from './rules/space-infix-ops.ts'
 import spaceUnaryOps from './rules/space-unary-ops.ts'
 import staticClassNamesOrder from './rules/static-class-names-order.ts'
 import templateCurlySpacing from './rules/template-curly-spacing.ts'
+import templateRefPattern from './rules/template-ref-pattern.ts'
 import thisInTemplate from './rules/this-in-template.ts'
 import useVOnExact from './rules/use-v-on-exact.ts'
 import vBindStyle from './rules/v-bind-style.ts'
@@ -491,6 +492,7 @@ export default {
     'space-unary-ops': spaceUnaryOps,
     'static-class-names-order': staticClassNamesOrder,
     'template-curly-spacing': templateCurlySpacing,
+    'template-ref-pattern': templateRefPattern,
     'this-in-template': thisInTemplate,
     'use-v-on-exact': useVOnExact,
     'v-bind-style': vBindStyle,
