@@ -15,6 +15,7 @@ const tester = new RuleTester({
 })
 
 const customOptions = {
+  defineModel: 'customModel',
   defineProps: 'customProps',
   defineEmits: 'customEmits',
   defineSlots: 'customSlots',
@@ -24,6 +25,27 @@ const customOptions = {
 
 tester.run('require-macro-variable-name', rule, {
   valid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const modelValue = defineModel()
+        const name = defineModel('name')
+        const title = defineModel('title', { type: String })
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const model = defineModel()
+        const other = defineModel(name)
+        const { a } = defineModel('b')
+      </script>
+      `,
+      options: [{ defineModel: 'model' }]
+    },
     {
       filename: 'test.vue',
       code: `
@@ -83,6 +105,88 @@ tester.run('require-macro-variable-name', rule, {
     }
   ],
   invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const m = defineModel()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'The variable name of "defineModel" must be "modelValue".',
+          line: 3,
+          column: 15,
+          endLine: 3,
+          endColumn: 16,
+          suggestions: [
+            {
+              desc: 'Change the variable name to "modelValue".',
+              output: `
+      <script setup>
+        const modelValue = defineModel()
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const n = defineModel('name')
+      </script>
+      `,
+      errors: [
+        {
+          message: 'The variable name of "defineModel" must be "name".',
+          line: 3,
+          column: 15,
+          endLine: 3,
+          endColumn: 16,
+          suggestions: [
+            {
+              desc: 'Change the variable name to "name".',
+              output: `
+      <script setup>
+        const name = defineModel('name')
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const m = defineModel({ type: String })
+      </script>
+      `,
+      options: [{ defineModel: 'customModel' }],
+      errors: [
+        {
+          message: 'The variable name of "defineModel" must be "customModel".',
+          line: 3,
+          column: 15,
+          endLine: 3,
+          endColumn: 16,
+          suggestions: [
+            {
+              desc: 'Change the variable name to "customModel".',
+              output: `
+      <script setup>
+        const customModel = defineModel({ type: String })
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `
