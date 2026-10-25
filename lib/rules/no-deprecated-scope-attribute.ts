@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import utils from '../utils/index.js'
-import scopeAttribute from './syntaxes/scope-attribute.js'
+import scopeAttribute from './syntaxes/scope-attribute.ts'
 
 export default {
   meta: {
