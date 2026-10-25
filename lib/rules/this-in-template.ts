@@ -1,0 +1,122 @@
+/**
+ * @fileoverview disallow usage of `this` in template.
+ * @author Armano
+ */
+import utils from '../utils/index.js'
+import jsReserved from '../utils/js-reserved.json' with { type: 'json' }
+
+const RESERVED_NAMES = new Set(jsReserved)
+
+export default {
+  meta: {
+    type: 'suggestion',
+    docs: {
+      description: 'disallow usage of `this` in template',
+      categories: ['vue3-recommended', 'vue2-recommended'],
+      url: 'https://eslint.vuejs.org/rules/this-in-template.html'
+    },
+    fixable: 'code',
+    schema: [
+      {
+        enum: ['always', 'never']
+      }
+    ],
+    messages: {
+      unexpected: "Unexpected usage of 'this'.",
+      expected: "Expected 'this'."
+    }
+  },
+
+  /**
+   * Creates AST event handlers for this-in-template.
+   */
+  create(context: RuleContext): RuleListener {
+    const options = context.options[0] === 'always' ? 'always' : 'never'
+    interface ScopeStack {
+      parent: ScopeStack | null
+      nodes: Identifier[]
+    }
+
+    let scopeStack: ScopeStack | null = null
+
+    return utils.defineTemplateBodyVisitor(context, {
+      VElement(node: VElement) {
+        scopeStack = {
+          parent: scopeStack,
+          nodes: scopeStack
+            ? [...scopeStack.nodes] // make copy
+            : []
+        }
+        if (node.variables) {
+          for (const variable of node.variables) {
+            const varNode = variable.id
+            const name = varNode.name
+            if (scopeStack.nodes.every((node) => node.name !== name)) {
+              // Prevent adding duplicates
+              scopeStack.nodes.push(varNode)
+            }
+          }
+        }
+      },
+      'VElement:exit'() {
+        scopeStack &&= scopeStack.parent
+      },
+      ...(options === 'never'
+        ? {
+            'VExpressionContainer MemberExpression > ThisExpression'(
+              node: ThisExpression & { parent: MemberExpression }
+            ) {
+              if (!scopeStack) {
+                return
+              }
+              const propertyName = utils.getStaticPropertyName(node.parent)
+              if (
+                !propertyName ||
+                scopeStack.nodes.some((el) => el.name === propertyName) ||
+                RESERVED_NAMES.has(propertyName) || // this.class | this['class']
+                /^\d.*$|[^\w$]/.test(propertyName) // this['0aaaa'] | this['foo-bar bas']
+              ) {
+                return
+              }
+
+              context.report({
+                node,
+                loc: node.loc,
+                fix(fixer) {
+                  // node.parent should be some code like `this.test`, `this?.['result']`
+                  return fixer.replaceText(node.parent, propertyName)
+                },
+                messageId: 'unexpected'
+              })
+            }
+          }
+        : {
+            VExpressionContainer(node: VExpressionContainer) {
+              if (!scopeStack || node.parent.type === 'VDirectiveKey') {
+                // We cannot use `.` in dynamic arguments because the right of the `.` becomes a modifier.
+                // For example, In `:[this.prop]` case, `:[this` is an argument and `prop]` is a modifier.
+                return
+              }
+              if (node.references) {
+                for (const reference of node.references) {
+                  if (
+                    scopeStack.nodes.every(
+                      (el) => el.name !== reference.id.name
+                    )
+                  ) {
+                    context.report({
+                      node: reference.id,
+                      loc: reference.id.loc,
+                      messageId: 'expected',
+                      fix(fixer) {
+                        return fixer.insertTextBefore(reference.id, 'this.')
+                      }
+                    })
+                  }
+                }
+              }
+            }
+          })
+    })
+  }
+}
