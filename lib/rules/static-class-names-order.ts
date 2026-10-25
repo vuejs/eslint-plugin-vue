@@ -1,0 +1,52 @@
+/**
+ * @fileoverview Alphabetizes static class names.
+ * @author Maciej Chmurski
+ */
+import utils from '../utils/index.js'
+
+export default {
+  meta: {
+    type: 'suggestion',
+    docs: {
+      url: 'https://eslint.vuejs.org/rules/static-class-names-order.html',
+      description: 'enforce static class names order',
+      categories: undefined
+    },
+    fixable: 'code',
+    schema: [],
+    messages: {
+      shouldBeOrdered: 'Classes should be ordered alphabetically.'
+    }
+  },
+  create: (context: RuleContext) =>
+    utils.defineTemplateBodyVisitor(context, {
+      "VAttribute[directive=false][key.name='class']"(node: VAttribute) {
+        const value = node.value
+        if (!value) {
+          return
+        }
+        const classList = value.value
+        const classListWithWhitespace = classList.split(/(\s+)/)
+
+        // Detect and reuse any type of whitespace.
+        const divider =
+          classListWithWhitespace.length > 1 ? classListWithWhitespace[1] : ''
+
+        const classListNoWhitespace = classListWithWhitespace.filter(
+          (className) => className.trim() !== ''
+        )
+        const classListSorted = classListNoWhitespace
+          .sort((a, b) => a.localeCompare(b))
+          .join(divider)
+
+        if (classList !== classListSorted) {
+          context.report({
+            node,
+            loc: node.loc,
+            messageId: 'shouldBeOrdered',
+            fix: (fixer) => fixer.replaceText(value, `"${classListSorted}"`)
+          })
+        }
+      }
+    })
+}

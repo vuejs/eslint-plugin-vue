@@ -81,8 +81,8 @@ export default {
   },
   create(context: RuleContext) {
     const options = context.options[0] || {}
-    const shouldAllowProps = !!options.allowProps
-    const shouldIgnoreMixins = !!options.ignoreMixins
+    const shouldAllowProps = Boolean(options.allowProps)
+    const shouldIgnoreMixins = Boolean(options.ignoreMixins)
     const setupContexts = new Map<
       ObjectExpression | Program,
       {
