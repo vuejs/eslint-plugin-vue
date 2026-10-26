@@ -29,13 +29,7 @@ This rule reports uses of the `$el` component instance property, both on the cur
   <button @click="$el.querySelector('input').focus()">Focus</button>
   <button @click="$refs.modal.$el.focus()">Focus</button>
 </template>
-```
 
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/no-dollar-el': ['error']}">
-
-```vue
 <script>
 export default {
   mounted() {
