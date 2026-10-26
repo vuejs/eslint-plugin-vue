@@ -256,7 +256,7 @@ export default {
           }
         }
 
-        if (!nextOption) return
+        if (!nextOption) continue
 
         const name =
           currentProperty.type === 'Property' &&
