@@ -6,17 +6,21 @@ import utils from '../utils/index.js'
 import type { ComponentProp, ComponentObjectProp } from '../utils/index.js'
 
 function isValueNodeOfBooleanType(value: Expression | undefined): boolean {
-  return Boolean(
-    value &&
-    ((value.type === 'Identifier' && value.name === 'Boolean') ||
-      (value.type === 'ArrayExpression' &&
-        value.elements.some(
-          (element) =>
-            element != null &&
-            element.type === 'Identifier' &&
-            element.name === 'Boolean'
-        )))
-  )
+  if (!value) {
+    return false
+  }
+  if (value.type === 'Identifier' && value.name === 'Boolean') {
+    return true
+  }
+  if (value.type === 'ArrayExpression') {
+    const elements = value.elements.filter(utils.isDef)
+    return (
+      elements.length > 0 &&
+      elements[0].type === 'Identifier' &&
+      elements[0].name === 'Boolean'
+    )
+  }
+  return false
 }
 
 /**
@@ -77,7 +81,7 @@ export default {
           }
         }
       } else if (prop.type === 'type') {
-        if (!prop.types.includes('Boolean')) {
+        if (prop.types[0] !== 'Boolean') {
           return
         }
         for (const defaultNode of otherDefaultProvider(prop.propName)) {

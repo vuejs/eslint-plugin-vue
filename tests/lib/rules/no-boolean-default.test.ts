@@ -393,6 +393,38 @@ ruleTester.run('no-boolean-default', rule, {
       languageOptions: {
         parser: vueEslintParser
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            enabled: {
+              type: [String, Boolean],
+              default: false
+            }
+          }
+        }
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo: string | boolean
+      }
+      withDefaults(defineProps<Props>(), {
+        foo: false
+      })
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
 

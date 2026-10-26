@@ -593,6 +593,10 @@ ruleTester.run('require-default-prop', rule, {
             d: {
               type: Number,
               required: false
+            },
+            e: [String, Boolean],
+            f: {
+              type: [String, Boolean],
             }
           }
         }
@@ -624,6 +628,20 @@ ruleTester.run('require-default-prop', rule, {
           line: 9,
           column: 13,
           endLine: 12,
+          endColumn: 14
+        },
+        {
+          message: `Prop 'e' requires default value to be set.`,
+          line: 13,
+          column: 13,
+          endLine: 13,
+          endColumn: 33
+        },
+        {
+          message: `Prop 'f' requires default value to be set.`,
+          line: 14,
+          column: 13,
+          endLine: 16,
           endColumn: 14
         }
       ]
@@ -1004,6 +1022,28 @@ ruleTester.run('require-default-prop', rule, {
           column: 39,
           endLine: 3,
           endColumn: 52
+        }
+      ]
+    },
+    {
+      filename: 'type-with-props-destructure.vue',
+      code: `
+      <script setup lang="ts">
+      const {foo, bar} = defineProps<{foo?: string | boolean; bar: number}>()
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message: "Prop 'foo' requires default value to be set.",
+          line: 3,
+          column: 39,
+          endLine: 3,
+          endColumn: 62
         }
       ]
     }
