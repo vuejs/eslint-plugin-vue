@@ -3,6 +3,7 @@
  * @author Armano
  */
 import path from 'node:path'
+import utils from '../utils/index.js'
 
 const isProperty = (context: RuleContext, node: Token) => {
   const sourceCode = context.sourceCode
@@ -57,57 +58,75 @@ export default {
           }
           return
         }
-        if (!node.templateBody) {
+        const tokenStore = sourceCode.parserServices.getTemplateBodyTokenStore()
+        const documentFragment =
+          sourceCode.parserServices.getDocumentFragment &&
+          sourceCode.parserServices.getDocumentFragment()
+        if (!documentFragment) {
           return
         }
-        const tokenStore = sourceCode.parserServices.getTemplateBodyTokenStore()
-        const tokens = tokenStore.getTokens(node.templateBody, {
-          includeComments: true
-        })
-
-        let prevToken = tokens.shift()!
-        for (const token of tokens) {
-          const spaces = token.range[0] - prevToken.range[1]
-          let shouldIgnore =
-            shouldIgnoreProperties &&
-            (isProperty(context, token) || isProperty(context, prevToken))
-
-          if (
-            !shouldIgnore &&
-            shouldIgnoreEOLComments &&
-            (token.type === 'Line' || token.type === 'Block')
-          ) {
-            const nextToken = tokenStore.getTokenAfter(token, {
-              includeComments: true
-            })
-            if (!nextToken || nextToken.loc.start.line > token.loc.end.line) {
-              shouldIgnore = true
+        const tokenLists: Token[][] = []
+        for (const element of documentFragment.children) {
+          if (!utils.isVElement(element)) {
+            continue
+          }
+          if (element === node.templateBody) {
+            tokenLists.push(
+              tokenStore.getTokens(element, { includeComments: true })
+            )
+          } else {
+            tokenLists.push(tokenStore.getTokens(element.startTag))
+            if (element.endTag) {
+              tokenLists.push(tokenStore.getTokens(element.endTag))
             }
           }
+        }
 
-          if (
-            !shouldIgnore &&
-            spaces > 1 &&
-            token.loc.start.line === prevToken.loc.start.line
-          ) {
-            context.report({
-              node: token,
-              loc: {
-                start: prevToken.loc.end,
-                end: token.loc.start
-              },
-              messageId: 'multipleSpaces',
-              fix: (fixer) =>
-                fixer.replaceTextRange(
-                  [prevToken.range[1], token.range[0]],
-                  ' '
-                ),
-              data: {
-                displayValue: sourceCode.getText(token)
+        for (const tokens of tokenLists) {
+          let prevToken = tokens.shift()!
+          for (const token of tokens) {
+            const spaces = token.range[0] - prevToken.range[1]
+            let shouldIgnore =
+              shouldIgnoreProperties &&
+              (isProperty(context, token) || isProperty(context, prevToken))
+
+            if (
+              !shouldIgnore &&
+              shouldIgnoreEOLComments &&
+              (token.type === 'Line' || token.type === 'Block')
+            ) {
+              const nextToken = tokenStore.getTokenAfter(token, {
+                includeComments: true
+              })
+              if (!nextToken || nextToken.loc.start.line > token.loc.end.line) {
+                shouldIgnore = true
               }
-            })
+            }
+
+            if (
+              !shouldIgnore &&
+              spaces > 1 &&
+              token.loc.start.line === prevToken.loc.start.line
+            ) {
+              context.report({
+                node: token,
+                loc: {
+                  start: prevToken.loc.end,
+                  end: token.loc.start
+                },
+                messageId: 'multipleSpaces',
+                fix: (fixer) =>
+                  fixer.replaceTextRange(
+                    [prevToken.range[1], token.range[0]],
+                    ' '
+                  ),
+                data: {
+                  displayValue: sourceCode.getText(token)
+                }
+              })
+            }
+            prevToken = token
           }
-          prevToken = token
         }
       }
     }
