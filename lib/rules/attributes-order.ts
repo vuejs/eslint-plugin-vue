@@ -69,6 +69,27 @@ function isVBindObject(
 }
 
 /**
+ * Check whether moving the attributes changes which of `v-bind="object"` and
+ * another binding comes first. In Vue 3 the later one wins, so the behavior changes.
+ */
+function isVBindObjectOverrideChanged(
+  before: (VAttribute | VDirective)[],
+  after: (VAttribute | VDirective)[]
+): boolean {
+  return before.some(
+    (vBindObject, vBindObjectIndex) =>
+      isVBindObject(vBindObject) &&
+      before.some(
+        (attr, index) =>
+          isVAttributeOrVBindOrVModel(attr) &&
+          !isVBindObject(attr) &&
+          index < vBindObjectIndex !==
+            after.indexOf(attr) < after.indexOf(vBindObject)
+      )
+  )
+}
+
+/**
  * Check whether the given attribute is a shorthand boolean like `selected`.
  */
 function isVShorthandBoolean(
@@ -278,47 +299,53 @@ function create(context: RuleContext): RuleListener {
   ) {
     const currentNode = sourceCode.getText(node.key)
     const prevNode = sourceCode.getText(previousNode.key)
+    const attributes = node.parent.attributes
+
+    let isMoveUp: (node: VAttribute | VDirective | undefined) => boolean
+
+    if (isVBindObject(node)) {
+      // prev, v-bind:foo, v-bind -> v-bind:foo, v-bind, prev
+      isMoveUp = isVAttributeOrVBindOrVModel
+    } else if (isVAttributeOrVBindOrVModel(node)) {
+      // prev, v-bind, v-bind:foo -> v-bind, v-bind:foo, prev
+      isMoveUp = isVBindObject
+    } else {
+      isMoveUp = () => false
+    }
+
+    const previousNodes = attributes.slice(
+      attributes.indexOf(previousNode),
+      attributes.indexOf(node)
+    )
+    const moveNodes = [node]
+    for (const node of previousNodes) {
+      if (isMoveUp(node)) {
+        moveNodes.unshift(node)
+      } else {
+        moveNodes.push(node)
+      }
+    }
+
+    const fix = (fixer: RuleFixer) =>
+      moveNodes.map((moveNode, index) => {
+        const text = sourceCode.getText(moveNode)
+        return fixer.replaceText(previousNodes[index] || node, text)
+      })
+    const data = { currentNode, prevNode }
+
+    // Don't autofix if it would change what `v-bind="object"` overrides
+    const shouldSuggest = isVBindObjectOverrideChanged(
+      [...previousNodes, node],
+      moveNodes
+    )
     context.report({
       node,
       messageId: 'expectedOrder',
-      data: {
-        currentNode,
-        prevNode
-      },
-
-      fix(fixer) {
-        const attributes = node.parent.attributes
-
-        let isMoveUp: (node: VAttribute | VDirective | undefined) => boolean
-
-        if (isVBindObject(node)) {
-          // prev, v-bind:foo, v-bind -> v-bind:foo, v-bind, prev
-          isMoveUp = isVAttributeOrVBindOrVModel
-        } else if (isVAttributeOrVBindOrVModel(node)) {
-          // prev, v-bind, v-bind:foo -> v-bind, v-bind:foo, prev
-          isMoveUp = isVBindObject
-        } else {
-          isMoveUp = () => false
-        }
-
-        const previousNodes = attributes.slice(
-          attributes.indexOf(previousNode),
-          attributes.indexOf(node)
-        )
-        const moveNodes = [node]
-        for (const node of previousNodes) {
-          if (isMoveUp(node)) {
-            moveNodes.unshift(node)
-          } else {
-            moveNodes.push(node)
-          }
-        }
-
-        return moveNodes.map((moveNode, index) => {
-          const text = sourceCode.getText(moveNode)
-          return fixer.replaceText(previousNodes[index] || node, text)
-        })
-      }
+      data,
+      fix: shouldSuggest ? null : fix,
+      suggest: shouldSuggest
+        ? [{ messageId: 'moveAttribute', data, fix }]
+        : null
     })
   }
 
@@ -422,6 +449,7 @@ export default {
       url: 'https://eslint.vuejs.org/rules/attributes-order.html'
     },
     fixable: 'code',
+    hasSuggestions: true,
     schema: [
       {
         type: 'object',
@@ -452,7 +480,9 @@ export default {
       }
     ],
     messages: {
-      expectedOrder: `Attribute "{{currentNode}}" should go before "{{prevNode}}".`
+      expectedOrder: `Attribute "{{currentNode}}" should go before "{{prevNode}}".`,
+      moveAttribute:
+        'Move "{{currentNode}}" before "{{prevNode}}", which changes what `v-bind="..."` overrides.'
     }
   },
   create
