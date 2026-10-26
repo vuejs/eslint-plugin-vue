@@ -70,7 +70,7 @@ jobs:
       - name: Install Packages
         run: npm install --legacy-peer-deps
       - name: Restore dist cache
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: dist
           path: dist
@@ -94,7 +94,7 @@ jobs:
       - name: Install ESLint v8
         run: npm install --save-dev eslint@8 espree@10 eslint-visitor-keys@4 --force
       - name: Restore dist cache
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: dist
           path: dist
@@ -118,7 +118,7 @@ jobs:
       - name: Install ESLint v9
         run: npm install --save-dev eslint@9 espree@10 eslint-visitor-keys@4 --force
       - name: Restore dist cache
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: dist
           path: dist
@@ -140,7 +140,7 @@ jobs:
       - name: Uninstall @stylistic/eslint-plugin
         run: npm uninstall @stylistic/eslint-plugin
       - name: Restore dist cache
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: dist
           path: dist
@@ -165,7 +165,7 @@ jobs:
       - name: Install @stylistic/eslint-plugin v${{ matrix.stylistic }}
         run: npm install -D @stylistic/eslint-plugin@${{ matrix.stylistic }} --force
       - name: Restore dist cache
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: dist
           path: dist
@@ -187,7 +187,7 @@ jobs:
       - name: Install @typescript-eslint/parser v7 with compatible ESLint v9
         run: npm install -D @typescript-eslint/parser@7 eslint@9 espree@10 eslint-visitor-keys@4 --force
       - name: Restore dist cache
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: dist
           path: dist
