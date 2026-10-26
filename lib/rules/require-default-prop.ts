@@ -23,18 +23,16 @@ const NATIVE_TYPES = new Set([
  * Detects whether given value node is a Boolean type
  */
 function isValueNodeOfBooleanType(value: Expression): boolean {
-  if (value.type === 'Identifier' && value.name === 'Boolean') {
-    return true
-  }
-  if (value.type === 'ArrayExpression') {
-    const elements = value.elements.filter(utils.isDef)
-    return (
-      elements.length === 1 &&
-      elements[0].type === 'Identifier' &&
-      elements[0].name === 'Boolean'
-    )
-  }
-  return false
+  return (
+    (value.type === 'Identifier' && value.name === 'Boolean') ||
+    (value.type === 'ArrayExpression' &&
+      value.elements.some(
+        (element) =>
+          element != null &&
+          element.type === 'Identifier' &&
+          element.name === 'Boolean'
+      ))
+  )
 }
 
 export default {
@@ -142,7 +140,7 @@ export default {
         } else if (prop.type === 'type') {
           if (
             prop.required ||
-            (prop.types.length === 1 && prop.types[0] === 'Boolean') ||
+            prop.types.includes('Boolean') ||
             shouldIgnore?.(prop)
           ) {
             continue

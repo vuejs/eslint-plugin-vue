@@ -47,11 +47,11 @@ export default {
     d: {
       type: Boolean, // Boolean is the only type that doesn't require default
     },
+    e: [Boolean, Number],
 
     /* ✗ BAD */
-    e: Number,
-    f: [Number, String],
-    g: [Boolean, Number],
+    f: Number,
+    g: [Number, String],
     j: {
       type: Number
     },

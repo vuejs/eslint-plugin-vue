@@ -5,8 +5,18 @@
 import utils from '../utils/index.js'
 import type { ComponentProp, ComponentObjectProp } from '../utils/index.js'
 
-function isBooleanIdentifier(node: Expression | undefined) {
-  return Boolean(node && node.type === 'Identifier' && node.name === 'Boolean')
+function isValueNodeOfBooleanType(value: Expression | undefined): boolean {
+  return Boolean(
+    value &&
+    ((value.type === 'Identifier' && value.name === 'Boolean') ||
+      (value.type === 'ArrayExpression' &&
+        value.elements.some(
+          (element) =>
+            element != null &&
+            element.type === 'Identifier' &&
+            element.name === 'Boolean'
+        )))
+  )
 }
 
 /**
@@ -15,9 +25,9 @@ function isBooleanIdentifier(node: Expression | undefined) {
 function isBooleanProp(prop: ComponentObjectProp): boolean {
   const value = utils.skipTSAsExpression(prop.value)
   return (
-    isBooleanIdentifier(value) ||
+    isValueNodeOfBooleanType(value) ||
     (value.type === 'ObjectExpression' &&
-      isBooleanIdentifier(utils.findProperty(value, 'type')?.value))
+      isValueNodeOfBooleanType(utils.findProperty(value, 'type')?.value))
   )
 }
 
@@ -67,7 +77,7 @@ export default {
           }
         }
       } else if (prop.type === 'type') {
-        if (prop.types.length !== 1 || prop.types[0] !== 'Boolean') {
+        if (!prop.types.includes('Boolean')) {
           return
         }
         for (const defaultNode of otherDefaultProvider(prop.propName)) {
