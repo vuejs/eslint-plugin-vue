@@ -235,6 +235,7 @@ For example:
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
 | [vue/no-content-outside-block] | disallow content outside of the top-level blocks | :bulb: | :warning: |
 | [vue/no-define-model-default] | disallow default values in `defineModel` |  | :warning: |
+| [vue/no-deprecated-html-elements] | disallow using deprecated HTML elements |  | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-duplicate-class-names] | disallow duplication of class names in class attributes | :wrench: | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
@@ -463,6 +464,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-deprecated-filter]: ./no-deprecated-filter.md
 [vue/no-deprecated-functional-template]: ./no-deprecated-functional-template.md
 [vue/no-deprecated-html-element-is]: ./no-deprecated-html-element-is.md
+[vue/no-deprecated-html-elements]: ./no-deprecated-html-elements.md
 [vue/no-deprecated-inline-template]: ./no-deprecated-inline-template.md
 [vue/no-deprecated-model-definition]: ./no-deprecated-model-definition.md
 [vue/no-deprecated-props-default-this]: ./no-deprecated-props-default-this.md
