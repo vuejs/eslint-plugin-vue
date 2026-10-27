@@ -72,13 +72,14 @@ export default {
           const [firstArg] = node.init.arguments
           if (firstArg && firstArg.type !== 'ObjectExpression') {
             // `defineModel('name')` must be assigned to a variable called `name`
-            if (
-              firstArg.type !== 'Literal' ||
-              typeof firstArg.value !== 'string'
-            ) {
+            if (!utils.isStringLiteral(firstArg)) {
               return
             }
-            variableName = firstArg.value
+            const modelName = utils.getStringLiteralValue(firstArg)
+            if (modelName == null) {
+              return
+            }
+            variableName = modelName
           }
         }
 

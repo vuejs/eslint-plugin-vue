@@ -39,6 +39,14 @@ tester.run('require-macro-variable-name', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
+        const name = defineModel(\`name\`)
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
         const model = defineModel()
         const other = defineModel(name)
         const { a } = defineModel('b')
@@ -152,6 +160,33 @@ tester.run('require-macro-variable-name', rule, {
               output: `
       <script setup>
         const name = defineModel('name')
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const n = defineModel(\`name\`)
+      </script>
+      `,
+      errors: [
+        {
+          message: 'The variable name of "defineModel" must be "name".',
+          line: 3,
+          column: 15,
+          endLine: 3,
+          endColumn: 16,
+          suggestions: [
+            {
+              desc: 'Change the variable name to "name".',
+              output: `
+      <script setup>
+        const name = defineModel(\`name\`)
       </script>
       `
             }
