@@ -1734,7 +1734,18 @@ tester.run('attributes-order', rule, {
           v-bind:id="a">
         </div>
       </template>`,
-      output: `
+      output: null,
+      errors: [
+        {
+          message: 'Attribute "v-bind:id" should go before "v-model".',
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 24,
+          suggestions: [
+            {
+              desc: 'Move "v-bind:id" before "v-model", which changes what `v-bind="..."` overrides.',
+              output: `
       <template>
         <div
           v-if="x"
@@ -1742,14 +1753,75 @@ tester.run('attributes-order', rule, {
           v-bind:id="a"
           v-model="c">
         </div>
+      </template>`
+            }
+          ]
+        }
+      ]
+    },
+    ...[{}, { ignoreVBindObject: true }].map((options) => ({
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          a="1"
+          v-bind="$attrs"
+          v-model="modelValue"
+          b="2"
+        />
       </template>`,
+      output: null,
+      options: [options],
       errors: [
         {
-          message: 'Attribute "v-bind:id" should go before "v-model".',
-          line: 7,
+          message: 'Attribute "v-model" should go before "a".',
+          line: 6,
           column: 11,
-          endLine: 7,
-          endColumn: 24
+          endLine: 6,
+          endColumn: 31,
+          suggestions: [
+            {
+              desc: 'Move "v-model" before "a", which changes what `v-bind="..."` overrides.',
+              output: `
+      <template>
+        <div
+          v-bind="$attrs"
+          v-model="modelValue"
+          a="1"
+          b="2"
+        />
+      </template>`
+            }
+          ]
+        }
+      ]
+    })),
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind="$attrs"
+          b="2"
+          v-model="modelValue"
+        />
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-bind="$attrs"
+          v-model="modelValue"
+          b="2"
+        />
+      </template>`,
+      options: [{ ignoreVBindObject: true }],
+      errors: [
+        {
+          message: 'Attribute "v-model" should go before "b".',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 31
         }
       ]
     },

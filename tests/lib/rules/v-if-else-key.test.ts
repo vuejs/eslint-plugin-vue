@@ -210,6 +210,25 @@ tester.run('v-if-else-key', rule, {
         }
         </script>
         `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <CustomComponent v-if="some-condition" :key="key1" />
+            <CustomComponent v-else-if="other-condition" v-bind:key="key2" />
+            <CustomComponent v-else key="key3" />
+          </div>
+        </template>
+        <script>
+        export default {
+            components: {
+                CustomComponent
+            }
+        }
+        </script>
+        `
     }
   ],
   invalid: [
@@ -629,6 +648,49 @@ tester.run('v-if-else-key', rule, {
           line: 9,
           column: 13,
           endLine: 9,
+          endColumn: 34
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <ComponentA v-if="foo" :key="id" />
+            <ComponentA v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            ComponentA
+          }
+        }
+        </script>
+        `,
+      output: `
+        <template>
+          <div>
+            <ComponentA v-if="foo" :key="id" />
+            <ComponentA key="component-a-2" v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            ComponentA
+          }
+        }
+        </script>
+        `,
+      errors: [
+        {
+          message:
+            "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
+          line: 5,
+          column: 13,
+          endLine: 5,
           endColumn: 34
         }
       ]

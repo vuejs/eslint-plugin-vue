@@ -179,7 +179,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
-| [vue/attributes-order] | enforce order of attributes | :wrench: | :three::two::hammer: |
+| [vue/attributes-order] | enforce order of attributes | :wrench::bulb: | :three::two::hammer: |
 | [vue/block-order] | enforce order of component top-level elements | :wrench: | :three::two::hammer: |
 | [vue/no-lone-template] | disallow unnecessary `<template>` |  | :three::two::warning: |
 | [vue/no-multiple-slot-args] | disallow passing multiple arguments to scoped slots |  | :three::two::warning: |
@@ -243,6 +243,7 @@ For example:
 | [vue/no-multiple-objects-in-class] | disallow passing multiple objects in an array to class |  | :hammer: |
 | [vue/no-negated-v-if-condition] | disallow negated conditions in v-if/v-else | :wrench: | :hammer: |
 | [vue/no-potential-component-option-typo] | disallow a potential typo in your component property | :bulb: | :hammer: |
+| [vue/no-props-shadow] | disallow declarations that shadow props in `<script setup>` |  | :warning: |
 | [vue/no-ref-object-reactivity-loss] | disallow usages of ref objects that can lead to loss of reactivity |  | :warning: |
 | [vue/no-restricted-block] | disallow specific block |  | :hammer: |
 | [vue/no-restricted-call-after-await] | disallow asynchronously called restricted methods |  | :hammer: |
@@ -501,6 +502,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-negated-v-if-condition]: ./no-negated-v-if-condition.md
 [vue/no-parsing-error]: ./no-parsing-error.md
 [vue/no-potential-component-option-typo]: ./no-potential-component-option-typo.md
+[vue/no-props-shadow]: ./no-props-shadow.md
 [vue/no-ref-as-operand]: ./no-ref-as-operand.md
 [vue/no-ref-object-reactivity-loss]: ./no-ref-object-reactivity-loss.md
 [vue/no-required-prop-with-default]: ./no-required-prop-with-default.md
