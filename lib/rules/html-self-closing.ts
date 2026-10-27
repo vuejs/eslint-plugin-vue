@@ -44,22 +44,19 @@ function parseOptions(options: any): Options {
  * Get the elementType of the given element.
  */
 function getElementType(node: VElement): keyof Options {
-  if (utils.isCustomComponent(node)) {
+  if (
+    utils.isCustomComponent(node) ||
+    utils.isVueBuiltInElementName(node.rawName)
+  ) {
     return 'COMPONENT'
   }
   if (utils.isHtmlElementNode(node)) {
-    if (utils.isHtmlVoidElementName(node.name)) {
-      return 'VOID'
-    }
-    return 'NORMAL'
+    return utils.isHtmlVoidElementName(node.name) ? 'VOID' : 'NORMAL'
   }
   if (utils.isSvgElementNode(node)) {
     return 'SVG'
   }
-  if (utils.isMathElementNode(node)) {
-    return 'MATH'
-  }
-  return 'UNKNOWN'
+  return utils.isMathElementNode(node) ? 'MATH' : 'UNKNOWN'
 }
 
 /**

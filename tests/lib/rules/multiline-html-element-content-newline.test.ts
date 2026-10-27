@@ -108,6 +108,26 @@ tester.run('multiline-html-element-content-newline', rule, {
     `,
     `
       <template>
+        <router-link
+          to="/"
+          class="link"
+        >Home</router-link>
+        <RouterLink
+          to="/"
+          class="link"
+        >Home</RouterLink>
+        <nuxt-link
+          to="/"
+          class="link"
+        >Home</nuxt-link>
+        <NuxtLink
+          to="/"
+          class="link"
+        >Home</NuxtLink>
+      </template>
+    `,
+    `
+      <template>
         <div>
           <div>
             content

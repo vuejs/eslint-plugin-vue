@@ -30,18 +30,15 @@ interface ConditionalFamily {
 const hasConditionalRenderedSiblings = (
   node: VElement,
   componentName: string
-): boolean => {
-  if (!node.parent || node.parent.type !== 'VElement') {
-    return false
-  }
-  return node.parent.children.some(
+): boolean =>
+  node.parent?.type === 'VElement' &&
+  node.parent.children.some(
     (sibling) =>
       sibling !== node &&
       sibling.type === 'VElement' &&
       sibling.rawName === componentName &&
       hasConditionalDirective(sibling)
   )
-}
 
 /**
  * Checks for the presence of a 'key' attribute in the given node. If the 'key' attribute is missing
@@ -72,7 +69,11 @@ const checkForKey = (
 
   const conditionalFamily = conditionalFamilies.get(node.parent)
 
-  if (!conditionalFamily || utils.hasAttribute(node, 'key')) {
+  if (
+    !conditionalFamily ||
+    utils.hasAttribute(node, 'key') ||
+    utils.hasDirective(node, 'bind', 'key')
+  ) {
     return
   }
 
@@ -288,13 +289,12 @@ export default {
           componentUsageStack.pop()
           return
         }
-        if (!utils.isCustomComponent(node)) {
+        if (!utils.isCustomComponent(node) || !pushedNodes.has(node)) {
           return
         }
-        if (pushedNodes.has(node)) {
-          componentUsageStack.pop()
-          pushedNodes.delete(node)
-        }
+
+        componentUsageStack.pop()
+        pushedNodes.delete(node)
       }
     })
   }

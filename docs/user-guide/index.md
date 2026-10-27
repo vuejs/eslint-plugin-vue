@@ -190,6 +190,26 @@ export default [
 ]
 ```
 
+#### Example configuration with [@vue/eslint-config-typescript](https://github.com/vuejs/eslint-config-typescript)
+
+`@vue/eslint-config-typescript` is the Vue team's config for Vue 3 + TypeScript projects and the one `create-vue` sets up. It applies the typescript-eslint configs to `.vue` files too and takes care of the parser setup:
+
+```bash
+npm install --save-dev eslint eslint-plugin-vue @vue/eslint-config-typescript typescript
+```
+
+```js
+import eslintPluginVue from 'eslint-plugin-vue'
+import { withVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+
+export default withVueTs(
+  eslintPluginVue.configs['flat/recommended'],
+  vueTsConfigs.recommended
+)
+```
+
+Its [README](https://github.com/vuejs/eslint-config-typescript#readme) covers type-aware linting and projects that still have plain JavaScript in `.vue` files.
+
 #### Example configuration with [typescript-eslint](https://typescript-eslint.io/) and [Prettier](https://prettier.io/)
 
 ```bash
@@ -274,11 +294,6 @@ You can use the following configs by adding them to `extends`.
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
 
 Alternatively, there are versions of the configs with all rules set to error suffixed with `-error` that you can use.
-:::
-
-:::warning Status of Vue.js 3.x supports
-This plugin supports the basic syntax of Vue.js 3.2, `<script setup>`, and CSS variable injection, but the ref sugar, an experimental feature of Vue.js 3.2, is not yet supported.\
-If you have issues with these, please also refer to the [FAQ](#does-not-work-well-with-script-setup). If you can't find a solution, search for the issue and if the issue doesn't exist, open a new issue.
 :::
 
 #### Specifying Environments (`.eslintrc`)

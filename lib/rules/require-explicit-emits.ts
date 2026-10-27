@@ -81,8 +81,8 @@ export default {
   },
   create(context: RuleContext) {
     const options = context.options[0] || {}
-    const shouldAllowProps = !!options.allowProps
-    const shouldIgnoreMixins = !!options.ignoreMixins
+    const shouldAllowProps = Boolean(options.allowProps)
+    const shouldIgnoreMixins = Boolean(options.ignoreMixins)
     const setupContexts = new Map<
       ObjectExpression | Program,
       {
@@ -203,17 +203,19 @@ export default {
         }
 
         // verify $emit
-        if (emit && emit.name === '$emit') {
-          const memObject = utils.skipChainExpression(emit.member.object)
-          if (utils.isThis(memObject, context)) {
-            // verify this.$emit()
-            verifyEmit(
-              emitsDeclarations,
-              vuePropsDeclarations.get(vueDefineNode) || [],
-              nameWithLoc,
-              vueDefineNode
-            )
-          }
+        if (!emit || emit.name !== '$emit') {
+          return
+        }
+
+        const memObject = utils.skipChainExpression(emit.member.object)
+        if (utils.isThis(memObject, context)) {
+          // verify this.$emit()
+          verifyEmit(
+            emitsDeclarations,
+            vuePropsDeclarations.get(vueDefineNode) || [],
+            nameWithLoc,
+            vueDefineNode
+          )
         }
       }
     }
@@ -224,11 +226,7 @@ export default {
         CallExpression(node) {
           const callee = utils.skipChainExpression(node.callee)
           const nameWithLoc = utils.getNameParamNode(node)
-          if (!nameWithLoc) {
-            // cannot check
-            return
-          }
-          if (!vueTemplateDefineData) {
+          if (!nameWithLoc || !vueTemplateDefineData) {
             return
           }
 
@@ -328,16 +326,13 @@ export default {
           },
           onSetupFunctionEnter(node, { node: vueNode }) {
             const contextParam = node.params[1]
-            if (!contextParam) {
+            if (
               // no arguments
-              return
-            }
-            if (contextParam.type === 'RestElement') {
+              !contextParam ||
               // cannot check
-              return
-            }
-            if (contextParam.type === 'ArrayPattern') {
-              // cannot check
+              contextParam.type === 'RestElement' ||
+              contextParam.type === 'ArrayPattern'
+            ) {
               return
             }
             const contextReferenceIds = new Set<Identifier>()
@@ -392,10 +387,10 @@ export default {
           onVueObjectExit(node, { type }) {
             const emits = vueEmitsDeclarations.get(node)
             if (
+              emits &&
               (!vueTemplateDefineData ||
                 (vueTemplateDefineData.type !== 'export' &&
                   vueTemplateDefineData.type !== 'setup')) &&
-              emits &&
               // eslint-disable-next-line unicorn/prefer-includes-over-repeated-comparisons -- narrows `type` for `vueTemplateDefineData` below
               (type === 'mark' || type === 'export' || type === 'definition')
             ) {
@@ -445,16 +440,12 @@ function buildSuggest(
               `, '${nameWithLoc.name}'`
             )
           }
-          if (lastEmit.type === 'object') {
-            // Object
-            return fixer.insertTextAfter(
-              lastEmit.node,
-              `, '${nameWithLoc.name}': null`
-            )
-          }
-          // type
-          // The argument is unknown and cannot be suggested.
-          return null
+          return lastEmit.type === 'object'
+            ? fixer.insertTextAfter(
+                lastEmit.node,
+                `, '${nameWithLoc.name}': null`
+              )
+            : null
         }
       }
     ]

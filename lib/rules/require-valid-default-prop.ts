@@ -42,17 +42,19 @@ function getPropertyNode(obj: ObjectExpression, name: string): Property | null {
 
 function getTypes(targetNode: Expression): string[] {
   const node = utils.skipTSAsExpression(targetNode)
-  if (node.type === 'Identifier') {
-    return [node.name]
-  }
-  if (node.type === 'ArrayExpression') {
-    return node.elements
-      .filter(
-        (item): item is Identifier => item != null && item.type === 'Identifier'
+  switch (node.type) {
+    case 'Identifier': {
+      return [node.name]
+    }
+    case 'ArrayExpression': {
+      return node.elements.flatMap((item) =>
+        item != null && item.type === 'Identifier' ? [item.name] : []
       )
-      .map((item) => item.name)
+    }
+    default: {
+      return []
+    }
   }
-  return []
 }
 
 export default {
@@ -289,14 +291,13 @@ export default {
             })
           }
         } else {
-          if (typeNames.has(defType.type)) {
-            if (defaultDef.src === 'assignment') {
-              return
-            }
-            if (!FUNCTION_VALUE_TYPES.has(defType.type)) {
-              // For Array and Object, defaults must be defined in the factory function.
-              return
-            }
+          if (
+            typeNames.has(defType.type) &&
+            (defaultDef.src === 'assignment' ||
+              !FUNCTION_VALUE_TYPES.has(defType.type))
+          ) {
+            // For Array and Object, defaults must be defined in the factory function.
+            return
           }
           report(
             defaultDef.expression,
@@ -365,17 +366,15 @@ export default {
           }
         },
         ReturnStatement(node: ReturnStatement) {
-          if (!scopeStack) {
+          if (!scopeStack || !scopeStack.returnTypes || !node.argument) {
             return
           }
-          if (scopeStack.returnTypes && node.argument) {
-            const type = getValueType(node.argument)
-            if (type) {
-              scopeStack.returnTypes.push({
-                type: type.type,
-                node: node.argument
-              })
-            }
+          const type = getValueType(node.argument)
+          if (type) {
+            scopeStack.returnTypes.push({
+              type: type.type,
+              node: node.argument
+            })
           }
         },
         ':function:exit': onFunctionExit

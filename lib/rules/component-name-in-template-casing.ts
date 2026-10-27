@@ -13,19 +13,16 @@ const defaultCase = 'PascalCase'
  * Checks whether the given variable is the type-only import object.
  */
 function isTypeOnlyImport(variable: Variable): boolean {
-  if (variable.defs.length === 0) return false
-
-  return variable.defs.every((def) => {
-    if (def.type !== 'ImportBinding') {
-      return false
-    }
-    if (def.parent.importKind === 'type') {
-      // check for `import type Foo from './xxx'`
-      return true
-    }
-    // check for `import { type Foo } from './xxx'`
-    return def.node.type === 'ImportSpecifier' && def.node.importKind === 'type'
-  })
+  return (
+    variable.defs.length > 0 &&
+    variable.defs.every(
+      (def) =>
+        def.type === 'ImportBinding' &&
+        (def.parent.importKind === 'type' || // check for `import type Foo from './xxx'`
+          (def.node.type === 'ImportSpecifier' &&
+            def.node.importKind === 'type')) // check for `import { type Foo } from './xxx'`
+    )
+  )
 }
 
 export default {
@@ -116,12 +113,8 @@ export default {
      * Checks whether the given node is the verification target node.
      */
     function isVerifyTarget(node: VElement): boolean {
-      if (isIgnored(node.rawName)) {
-        // ignore
-        return false
-      }
-
       if (
+        isIgnored(node.rawName) ||
         (!utils.isHtmlElementNode(node) &&
           !utils.isSvgElementNode(node) &&
           !utils.isMathElementNode(node)) ||
@@ -133,15 +126,11 @@ export default {
         return false
       }
 
-      if (!shouldCheckRegisteredComponentsOnly) {
-        // If the user specifies registeredComponentsOnly as false, it checks all component tags.
-        return true
-      }
-
-      return (
-        registeredComponents.has(pascalCase(node.rawName)) ||
-        isGlobalPattern(node.rawName)
-      )
+      // If the user specifies registeredComponentsOnly as false, it checks all component tags.
+      return shouldCheckRegisteredComponentsOnly
+        ? registeredComponents.has(pascalCase(node.rawName)) ||
+            isGlobalPattern(node.rawName)
+        : true
     }
 
     let hasInvalidEOF = false
@@ -150,37 +139,36 @@ export default {
       context,
       {
         VElement(node) {
-          if (hasInvalidEOF) {
-            return
-          }
-
-          if (!isVerifyTarget(node)) {
+          if (hasInvalidEOF || !isVerifyTarget(node)) {
             return
           }
 
           const name = node.rawName
-          if (!getChecker(caseType)(name)) {
-            const startTag = node.startTag
-            const open = tokens.getFirstToken(startTag)
-            const casingName = getExactConverter(caseType)(name)
-            context.report({
-              node: open,
-              loc: open.loc,
-              messageId: 'incorrectCase',
-              data: {
-                name,
-                caseType
-              },
-              *fix(fixer) {
-                yield fixer.replaceText(open, `<${casingName}`)
-                const endTag = node.endTag
-                if (endTag) {
-                  const endTagOpen = tokens.getFirstToken(endTag)
-                  yield fixer.replaceText(endTagOpen, `</${casingName}`)
-                }
-              }
-            })
+          if (getChecker(caseType)(name)) {
+            return
           }
+
+          const startTag = node.startTag
+          const open = tokens.getFirstToken(startTag)
+          const casingName = getExactConverter(caseType)(name)
+          context.report({
+            node: open,
+            loc: open.loc,
+            messageId: 'incorrectCase',
+            data: {
+              name,
+              caseType
+            },
+            *fix(fixer) {
+              yield fixer.replaceText(open, `<${casingName}`)
+              const endTag = node.endTag
+              if (!endTag) {
+                return
+              }
+              const endTagOpen = tokens.getFirstToken(endTag)
+              yield fixer.replaceText(endTagOpen, `</${casingName}`)
+            }
+          })
         }
       },
       {

@@ -5391,6 +5391,89 @@ tester.run('no-unused-properties', rule, {
       ]
     },
 
+    // $props does not mark other groups as used
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input v-bind="$props" />
+      </template>
+      <script>
+      export default {
+        props: ['value'],
+        data() {
+          return { count: 0 }
+        },
+        computed: {
+          double() {}
+        },
+        methods: {
+          reset() {}
+        },
+        setup() {
+          return { state: 1 }
+        }
+      }
+      </script>`,
+      options: allOptions,
+      errors: [
+        {
+          message: "'count' of data found, but never used.",
+          line: 9,
+          column: 20,
+          endLine: 9,
+          endColumn: 25
+        },
+        {
+          message: "'double' of computed property found, but never used.",
+          line: 12,
+          column: 11,
+          endLine: 12,
+          endColumn: 17
+        },
+        {
+          message: "'reset' of method found, but never used.",
+          line: 15,
+          column: 11,
+          endLine: 15,
+          endColumn: 16
+        },
+        {
+          message:
+            "'state' of property returned from `setup()` found, but never used.",
+          line: 18,
+          column: 20,
+          endLine: 18,
+          endColumn: 25
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        props: ['value'],
+        data() {
+          return { count: 0 }
+        },
+        created() {
+          this.$emit('ready', this.$props)
+        }
+      }
+      </script>`,
+      options: allOptions,
+      errors: [
+        {
+          message: "'count' of data found, but never used.",
+          line: 6,
+          column: 20,
+          endLine: 6,
+          endColumn: 25
+        }
+      ]
+    },
+
     // props.prop in template
     {
       filename: 'test.vue',

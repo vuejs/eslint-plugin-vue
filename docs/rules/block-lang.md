@@ -53,6 +53,7 @@ You can use the object as a value and use the following properties:
 
 - `lang` ... Specifies the available value for the `lang` attribute of the block. If multiple languages are available, specify them as an array. If you do not specify it, will disallow any language.
 - `allowNoLang` ... If `true`, allows the `lang` attribute not to be specified (allows the use of the default language of block).
+- `required` ... If `true`, requires the block to be present in the component. Default is `false`, which only checks the blocks that are actually written.
 
 ::: warning Note
 If the default language is specified for `lang` option of `<template>`, `<style>` and `<script>`, it will be enforced to not specify `lang` attribute.\
@@ -85,11 +86,40 @@ Same as `{ script: { allowNoLang: true } }`.
 
 </eslint-code-block>
 
+### `{ script: { lang: 'ts', required: true } }`
+
+By default the rule only checks the blocks that a component actually has, so a component that omits the block entirely is not reported. Set `required` to `true` to also require the block to be present.
+
+<eslint-code-block :rules="{'vue/block-lang': ['error', { script: { lang: 'ts', required: true } }]}">
+
+```vue
+<!-- ✓ GOOD -->
+<template>
+  <div />
+</template>
+
+<script setup lang="ts">
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/block-lang': ['error', { script: { lang: 'ts', required: true } }]}">
+
+```vue
+<!-- ✗ BAD -->
+<template>
+  <div />
+</template>
+```
+
+</eslint-code-block>
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v7.15.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/block-lang.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/block-lang.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/block-lang.test.ts)
