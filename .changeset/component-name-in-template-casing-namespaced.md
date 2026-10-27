@@ -2,4 +2,4 @@
 'eslint-plugin-vue': patch
 ---
 
-Fixed `vue/component-name-in-template-casing` reporting namespaced components such as `<Form.Input>`, whose autofix could never change the name and caused circular fixes
+Fixed `vue/component-name-in-template-casing` to check and autofix only the part before the dot of namespaced components such as `<Form.Input>`

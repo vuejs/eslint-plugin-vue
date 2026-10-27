@@ -224,11 +224,10 @@ tester.run('component-name-in-template-casing', rule, {
         </script>
         <template>
           <Form.Input>
-            <Form.Label>label</Form.Label>
+            <Form.label>label</Form.label>
           </Form.Input>
         </template>
-      `,
-      options: ['PascalCase', { registeredComponentsOnly: false }]
+      `
     },
     {
       filename: 'test.vue',
@@ -237,26 +236,24 @@ tester.run('component-name-in-template-casing', rule, {
           import * as Form from './form-components'
         </script>
         <template>
-          <Form.Input>
-            <Form.Label>label</Form.Label>
-          </Form.Input>
+          <form.Input>
+            <form.label>label</form.label>
+          </form.Input>
         </template>
       `,
-      options: ['kebab-case', { registeredComponentsOnly: false }]
+      options: ['kebab-case']
     },
     {
       filename: 'test.vue',
       code: `
         <script setup>
           import Input from './Input.vue'
-          const Form = { Input }
+          const form = { Input }
         </script>
         <template>
-          <Form.Input />
-          <Form.input />
+          <form.Input />
         </template>
-      `,
-      options: ['PascalCase', { registeredComponentsOnly: false }]
+      `
     },
     {
       code: `
@@ -1444,6 +1441,102 @@ tester.run('component-name-in-template-casing', rule, {
       ]
     },
     // namespaced components
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as Form from './form-components'
+        </script>
+        <template>
+          <form.input>label</form.input>
+          <form.Label />
+        </template>
+      `,
+      output: `
+        <script setup>
+          import * as Form from './form-components'
+        </script>
+        <template>
+          <Form.input>label</Form.input>
+          <Form.Label />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "form.input" is not PascalCase.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 22
+        },
+        {
+          message: 'Component name "form.Label" is not PascalCase.',
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 22
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as MyForm from './form-components'
+        </script>
+        <template>
+          <MyForm.Input>label</MyForm.Input>
+          <my-form.Label />
+        </template>
+      `,
+      output: `
+        <script setup>
+          import * as MyForm from './form-components'
+        </script>
+        <template>
+          <my-form.Input>label</my-form.Input>
+          <my-form.Label />
+        </template>
+      `,
+      options: ['kebab-case'],
+      errors: [
+        {
+          message: 'Component name "MyForm.Input" is not kebab-case.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 24
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as MyForm from './form-components'
+        </script>
+        <template>
+          <my-form.input />
+        </template>
+      `,
+      output: `
+        <script setup>
+          import * as MyForm from './form-components'
+        </script>
+        <template>
+          <MyForm.input />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "my-form.input" is not PascalCase.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `
