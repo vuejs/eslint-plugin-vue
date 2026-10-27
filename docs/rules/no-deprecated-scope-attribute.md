@@ -57,5 +57,5 @@ This rule was introduced in eslint-plugin-vue v6.0.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-deprecated-scope-attribute.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-deprecated-scope-attribute.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-deprecated-scope-attribute.test.ts)

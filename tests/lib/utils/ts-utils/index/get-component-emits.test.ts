@@ -28,7 +28,7 @@ function extractComponentEmits(code: string, tsFileCode = '') {
   return result
 }
 
-describe.sequential('getComponentEmitsFromTypeDefineTypes', () => {
+describe('getComponentEmitsFromTypeDefineTypes', { concurrent: false }, () => {
   it.each([
     {
       name: 'inline-call-signatures',

@@ -13,7 +13,13 @@ function isSinglelineElement(element: VElement & { endTag: VEndTag }) {
 function parseOptions(options: any) {
   return Object.assign(
     {
-      ignores: ['pre', 'textarea', ...INLINE_ELEMENTS],
+      ignores: [
+        'pre',
+        'textarea',
+        'router-link',
+        'nuxt-link',
+        ...INLINE_ELEMENTS
+      ],
       externalIgnores: [],
       ignoreWhenNoAttributes: true,
       ignoreWhenEmpty: true
@@ -113,10 +119,10 @@ export default {
 
         const elem = node as VElement & { endTag: VEndTag }
 
-        if (!isSinglelineElement(elem)) {
-          return
-        }
-        if (ignoreWhenNoAttributes && elem.startTag.attributes.length === 0) {
+        if (
+          !isSinglelineElement(elem) ||
+          (ignoreWhenNoAttributes && elem.startTag.attributes.length === 0)
+        ) {
           return
         }
 

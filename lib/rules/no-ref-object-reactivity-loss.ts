@@ -3,36 +3,25 @@
  * See LICENSE file in root directory for full license.
  */
 import utils from '../utils/index.js'
-import {
-  extractRefObjectReferences,
-  extractReactiveVariableReferences
-} from '../utils/ref-object-references.ts'
+import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
 
 /**
  * Checks whether writing assigns a value to the given pattern.
  */
 function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
   const parent = node.parent
-  if (parent.type === 'UpdateExpression' && parent.argument === node) {
-    // e.g. `pattern++`
-    return true
-  }
-  if (parent.type === 'AssignmentExpression' && parent.left === node) {
-    // e.g. `pattern = 42`
-    return true
-  }
-  if (
-    (parent.type === 'Property' && parent.value === node) ||
-    parent.type === 'ArrayPattern' ||
-    (parent.type === 'ObjectPattern' &&
-      parent.properties.includes(node as any)) ||
-    (parent.type === 'AssignmentPattern' && parent.left === node) ||
-    parent.type === 'RestElement' ||
-    (parent.type === 'MemberExpression' && parent.object === node)
-  ) {
-    return isUpdate(parent)
-  }
-  return false
+  return (
+    (parent.type === 'UpdateExpression' && parent.argument === node) || // e.g. `pattern++`
+    (parent.type === 'AssignmentExpression' && parent.left === node) || // e.g. `pattern = 42`
+    (((parent.type === 'Property' && parent.value === node) ||
+      parent.type === 'ArrayPattern' ||
+      (parent.type === 'ObjectPattern' &&
+        parent.properties.includes(node as any)) ||
+      (parent.type === 'AssignmentPattern' && parent.left === node) ||
+      parent.type === 'RestElement' ||
+      (parent.type === 'MemberExpression' && parent.object === node)) &&
+      isUpdate(parent))
+  )
 }
 
 /**
@@ -45,10 +34,11 @@ function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
 function isImmediatelyInvokedFunction(
   node: FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
 ): boolean {
-  if (node.type === 'FunctionDeclaration') {
-    return false
-  }
-  if (node.async || (node.type === 'FunctionExpression' && node.generator)) {
+  if (
+    node.type === 'FunctionDeclaration' ||
+    node.async ||
+    (node.type === 'FunctionExpression' && node.generator)
+  ) {
     return false
   }
   const parent = node.parent
@@ -68,9 +58,7 @@ export default {
     schema: [],
     messages: {
       getValueInSameScope:
-        'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-      getReactiveVariableInSameScope:
-        'Getting a reactive variable in the same scope will cause the value to lose reactivity.'
+        'Getting a value from the ref object in the same scope will cause the value to lose reactivity.'
     }
   },
   create(context: RuleContext): RuleListener {
@@ -87,44 +75,19 @@ export default {
     const scopes = new Map<CallExpression, ScopeStack>()
 
     const refObjectReferences = extractRefObjectReferences(context)
-    const reactiveVariableReferences =
-      extractReactiveVariableReferences(context)
 
     /**
      * Verify the given ref object value. `refObj = ref(); refObj.value;`
      */
     function verifyRefObjectValue(node: Expression | Super | ObjectPattern) {
       const ref = refObjectReferences.get(node)
-      if (!ref) {
-        return
-      }
-      if (scopes.get(ref.define) !== scopeStack) {
-        // Not in the same scope
+      if (!ref || scopes.get(ref.define) !== scopeStack) {
         return
       }
 
       context.report({
         node,
         messageId: 'getValueInSameScope'
-      })
-    }
-
-    /**
-     * Verify the given reactive variable. `refVal = $ref(); refVal;`
-     */
-    function verifyReactiveVariable(node: Identifier) {
-      const ref = reactiveVariableReferences.get(node)
-      if (!ref || ref.escape) {
-        return
-      }
-      if (scopes.get(ref.define) !== scopeStack) {
-        // Not in the same scope
-        return
-      }
-
-      context.report({
-        node,
-        messageId: 'getReactiveVariableInSameScope'
       })
     }
 
@@ -169,16 +132,6 @@ export default {
           return
         }
         verifyRefObjectValue(node)
-      },
-      /**
-       * Check for reactive variable`.
-       */
-      'Identifier:exit'(node) {
-        if (isUpdate(node)) {
-          // e.g. `reactiveVariable = 42`, `reactiveVariable++`
-          return
-        }
-        verifyReactiveVariable(node)
       }
     }
   }

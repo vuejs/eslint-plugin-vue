@@ -467,6 +467,62 @@ ruleTester.run('no-dupe-keys', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
+      const props = defineProps(['foo'])
+      const foo = props['foo']
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRefs} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const { foo: renamedFoo, bar: renamedBar } = toRefs(props)
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRef} from './my-utils'
+      const props = defineProps(['foo'])
+      const foo = toRef(props, 'foo')
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      // the aliased prop cannot be resolved, so the declaration is left alone
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRef} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const key = 'bar'
+      const foo = toRef(props, key)
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {computed} from 'vue'
+      const props = defineProps(['foo'])
+      const foo = computed(() => props.foo || 'default')
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
       const {foo,bar} = defineProps(['foo', 'bar'])
       </script>
       `,
@@ -525,10 +581,194 @@ ruleTester.run('no-dupe-keys', rule, {
       </script>
       `,
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['id'])
+      const modelValue = defineModel()
+      const checked = defineModel('checked')
+      const [foo, fooModifiers] = defineModel('foo', { default: '' })
+      const bar = defineModel('baz')
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { computed } from 'vue'
+      const model = defineModel('open')
+      const open = computed(() => model.value)
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['id', 'label'])
+      const model = defineModel()
+      const { modelValue, ...rest } = props
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
     }
   ],
 
   invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({
+        modelValue: { type: [Date, String], default: '' },
+        format: String
+      })
+      const dateValue = defineModel()
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'modelValue'. May cause name collision in script or template tag.",
+          line: 7,
+          column: 25,
+          endLine: 7,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const isCollapsed = defineModel<boolean>('collapsed', { default: false })
+      const props = defineProps<{ legend?: string; collapsed?: boolean }>()
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            "Duplicate key 'collapsed'. May cause name collision in script or template tag.",
+          line: 3,
+          column: 48,
+          endLine: 3,
+          endColumn: 59
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = withDefaults(defineProps<{ state?: string }>(), {})
+      const { foo } = defineProps(['foo'])
+      const value = defineModel<string>('state', { default: 'pending' })
+      const model = defineModel('foo')
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            "Duplicate key 'state'. May cause name collision in script or template tag.",
+          line: 5,
+          column: 41,
+          endLine: 5,
+          endColumn: 48
+        },
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 6,
+          column: 33,
+          endLine: 6,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ checked: Boolean })
+      const checked = defineModel('checked')
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'checked'. May cause name collision in script or template tag.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 45
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { ref } from 'vue'
+      import { label } from './label'
+      const modelOpen = defineModel('open')
+      const text = defineModel('label')
+      const model = defineModel('value')
+      const draft = defineModel('value')
+      function open() {}
+      const value = ref('')
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'label'. May cause name collision in script or template tag.",
+          line: 4,
+          column: 16,
+          endLine: 4,
+          endColumn: 21
+        },
+        {
+          message:
+            "Duplicate key 'value'. May cause name collision in script or template tag.",
+          line: 8,
+          column: 33,
+          endLine: 8,
+          endColumn: 40
+        },
+        {
+          message:
+            "Duplicate key 'open'. May cause name collision in script or template tag.",
+          line: 9,
+          column: 7,
+          endLine: 9,
+          endColumn: 25
+        },
+        {
+          message:
+            "Duplicate key 'value'. May cause name collision in script or template tag.",
+          line: 10,
+          column: 13,
+          endLine: 10,
+          endColumn: 28
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `
@@ -1283,6 +1523,114 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRef} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const foo = toRef(props, 'bar')
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['foo', 'bar'])
+      const foo = props.bar
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRefs} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const { bar: foo } = toRefs(props)
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 41
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['foo', 'bar'])
+      const { bar: foo } = props
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 33
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { toRef } from 'vue'
+      export default {
+        props: ['foo'],
+        setup(props) {
+          const foo = toRef(props, 'foo')
+          return { foo }
+        }
+      }
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 8,
+          column: 20,
+          endLine: 8,
+          endColumn: 23
+        }
+      ]
     }
   ]
 })
