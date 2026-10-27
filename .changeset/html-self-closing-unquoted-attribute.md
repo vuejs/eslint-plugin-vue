@@ -2,4 +2,4 @@
 "eslint-plugin-vue": patch
 ---
 
-Fixed `vue/html-self-closing` autofix breaking elements whose last attribute has an unquoted value
+Changed `vue/html-self-closing` autofix to always add a space before `/>`, which also stops it from breaking elements whose last attribute has an unquoted value
