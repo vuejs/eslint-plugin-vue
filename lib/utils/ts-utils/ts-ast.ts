@@ -9,9 +9,7 @@ import type {
   ComponentUnknownSlot
 } from '../index.ts'
 import { getScope } from '../scope.ts'
-import tsTypes from './ts-types.js'
-
-const { inferRuntimeTypeFromTypeNode } = tsTypes
+import { inferRuntimeTypeFromTypeNode } from './ts-types.ts'
 
 /**
  * All type node types. Typed as `Record<TypeNode['type'], true>` so that the

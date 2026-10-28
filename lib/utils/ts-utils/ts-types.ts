@@ -1,4 +1,14 @@
-const {
+import type { TSESTree } from '@typescript-eslint/types'
+import type { Type, TypeChecker, Node as TypeScriptNode } from 'typescript'
+import type {
+  ComponentInferTypeProp,
+  ComponentUnknownProp,
+  ComponentInferTypeEmit,
+  ComponentUnknownEmit,
+  ComponentInferTypeSlot,
+  ComponentUnknownSlot
+} from '../index.ts'
+import {
   getTypeScript,
   isAny,
   isUnknown,
@@ -12,44 +22,18 @@ const {
   isBigIntLike,
   isArrayLikeObject,
   isReferenceObject
-} = require('./typescript')
-/**
- * @typedef {import('@typescript-eslint/types').TSESTree.Node} TSESTreeNode
- * @typedef {import('typescript').Type} Type
- * @typedef {import('typescript').TypeChecker} TypeChecker
- * @typedef {import('typescript').Node} TypeScriptNode
- */
-/**
- * @typedef {import('../index').ComponentInferTypeProp} ComponentInferTypeProp
- * @typedef {import('../index').ComponentUnknownProp} ComponentUnknownProp
- * @typedef {import('../index').ComponentInferTypeEmit} ComponentInferTypeEmit
- * @typedef {import('../index').ComponentUnknownEmit} ComponentUnknownEmit
- * @typedef {import('../index').ComponentInferTypeSlot} ComponentInferTypeSlot
- * @typedef {import('../index').ComponentUnknownSlot} ComponentUnknownSlot
- */
+} from './typescript.ts'
 
-module.exports = {
-  getComponentPropsFromTypeDefineTypes,
-  getComponentEmitsFromTypeDefineTypes,
-  getComponentSlotsFromTypeDefineTypes,
-  inferRuntimeTypeFromTypeNode,
-  isExhaustiveSwitch,
-  isRefObjectType
+interface Services {
+  ts: typeof import('typescript')
+  tsNodeMap: Map<ESNode | TSNode | TSESTree.Node, TypeScriptNode>
+  checker: TypeChecker
 }
 
 /**
- * @typedef {object} Services
- * @property {typeof import("typescript")} ts
- * @property {Map<ESNode | TSNode | TSESTreeNode, TypeScriptNode>} tsNodeMap
- * @property {import('typescript').TypeChecker} checker
- */
-
-/**
  * Get TypeScript parser services.
- * @param {RuleContext} context The ESLint rule context object.
- * @returns {Services|null}
  */
-function getTSParserServices(context) {
+function getTSParserServices(context: RuleContext): Services | null {
   const sourceCode = context.sourceCode
   const tsNodeMap = sourceCode.parserServices.esTreeNodeToTSNodeMap
   if (!tsNodeMap) return null
@@ -73,11 +57,11 @@ function getTSParserServices(context) {
 
 /**
  * Get all props by looking at all component's properties
- * @param {RuleContext} context The ESLint rule context object.
- * @param {TypeNode} propsNode Type with props definition
- * @return {(ComponentInferTypeProp|ComponentUnknownProp)[]} Array of component props
  */
-function getComponentPropsFromTypeDefineTypes(context, propsNode) {
+export function getComponentPropsFromTypeDefineTypes(
+  context: RuleContext,
+  propsNode: TypeNode
+): (ComponentInferTypeProp | ComponentUnknownProp)[] {
   const services = getTSParserServices(context)
   const tsNode = services && services.tsNodeMap.get(propsNode)
   const type = tsNode && services.checker.getTypeAtLocation(tsNode)
@@ -101,11 +85,11 @@ function getComponentPropsFromTypeDefineTypes(context, propsNode) {
 
 /**
  * Get all emits by looking at all component's properties
- * @param {RuleContext} context The ESLint rule context object.
- * @param {TypeNode} emitsNode Type with emits definition
- * @return {(ComponentInferTypeEmit|ComponentUnknownEmit)[]} Array of component emits
  */
-function getComponentEmitsFromTypeDefineTypes(context, emitsNode) {
+export function getComponentEmitsFromTypeDefineTypes(
+  context: RuleContext,
+  emitsNode: TypeNode
+): (ComponentInferTypeEmit | ComponentUnknownEmit)[] {
   const services = getTSParserServices(context)
   const tsNode = services && services.tsNodeMap.get(emitsNode)
   const type = tsNode && services.checker.getTypeAtLocation(tsNode)
@@ -129,11 +113,11 @@ function getComponentEmitsFromTypeDefineTypes(context, emitsNode) {
 
 /**
  * Get all slots by looking at all component's properties
- * @param {RuleContext} context The ESLint rule context object.
- * @param {TypeNode} slotsNode Type with slots definition
- * @return {(ComponentInferTypeSlot|ComponentUnknownSlot)[]} Array of component slots
  */
-function getComponentSlotsFromTypeDefineTypes(context, slotsNode) {
+export function getComponentSlotsFromTypeDefineTypes(
+  context: RuleContext,
+  slotsNode: TypeNode
+): (ComponentInferTypeSlot | ComponentUnknownSlot)[] {
   const services = getTSParserServices(context)
   const tsNode = services && services.tsNodeMap.get(slotsNode)
   const type = tsNode && services.checker.getTypeAtLocation(tsNode)
@@ -155,26 +139,22 @@ function getComponentSlotsFromTypeDefineTypes(context, slotsNode) {
   return [...extractRuntimeSlots(type, slotsNode)]
 }
 
-/**
- * @param {RuleContext} context The ESLint rule context object.
- * @param {TypeNode|Expression} node
- * @returns {string[]}
- */
-function inferRuntimeTypeFromTypeNode(context, node) {
+export function inferRuntimeTypeFromTypeNode(
+  context: RuleContext,
+  node: TypeNode | Expression
+): string[] {
   const services = getTSParserServices(context)
   const tsNode = services && services.tsNodeMap.get(node)
   const type = tsNode && services.checker.getTypeAtLocation(tsNode)
   return type ? inferRuntimeTypeInternal(type, services) : ['null']
 }
 
-/**
- * @param {Type} type
- * @param {TypeScriptNode} tsNode
- * @param {TypeNode} propsNode Type with props definition
- * @param {Services} services
- * @returns {IterableIterator<ComponentInferTypeProp>}
- */
-function* extractRuntimeProps(type, tsNode, propsNode, services) {
+function* extractRuntimeProps(
+  type: Type,
+  tsNode: TypeScriptNode,
+  propsNode: TypeNode,
+  services: Services
+): IterableIterator<ComponentInferTypeProp> {
   const { ts, checker } = services
   for (const property of type.getProperties()) {
     const isOptional = (property.flags & ts.SymbolFlags.Optional) !== 0
@@ -192,15 +172,9 @@ function* extractRuntimeProps(type, tsNode, propsNode, services) {
   }
 }
 
-/**
- * @param {Type} type
- * @param {Services} services
- * @returns {string[]}
- */
-function inferRuntimeTypeInternal(type, services) {
+function inferRuntimeTypeInternal(type: Type, services: Services): string[] {
   const { checker } = services
-  /** @type {Set<string>} */
-  const types = new Set()
+  const types: Set<string> = new Set()
 
   // handle generic parameter types
   if (type.isTypeParameter()) {
@@ -248,14 +222,12 @@ function inferRuntimeTypeInternal(type, services) {
   return [...types]
 }
 
-/**
- * @param {Type} type
- * @param {TypeScriptNode} tsNode
- * @param {TypeNode} emitsNode Type with emits definition
- * @param {Services} services
- * @returns {IterableIterator<ComponentInferTypeEmit|ComponentUnknownEmit>}
- */
-function* extractRuntimeEmits(type, tsNode, emitsNode, services) {
+function* extractRuntimeEmits(
+  type: Type,
+  tsNode: TypeScriptNode,
+  emitsNode: TypeNode,
+  services: Services
+): IterableIterator<ComponentInferTypeEmit | ComponentUnknownEmit> {
   const { checker } = services
   if (isFunction(type)) {
     for (const signature of type.getCallSignatures()) {
@@ -302,12 +274,10 @@ function* extractRuntimeEmits(type, tsNode, emitsNode, services) {
   }
 }
 
-/**
- * @param {Type} type
- * @param {TypeNode} slotsNode Type with slots definition
- * @returns {IterableIterator<ComponentInferTypeSlot>}
- */
-function* extractRuntimeSlots(type, slotsNode) {
+function* extractRuntimeSlots(
+  type: Type,
+  slotsNode: TypeNode
+): IterableIterator<ComponentInferTypeSlot> {
   for (const property of type.getProperties()) {
     const name = property.getName()
 
@@ -319,11 +289,7 @@ function* extractRuntimeSlots(type, slotsNode) {
   }
 }
 
-/**
- * @param {Type} type
- * @returns {Iterable<Type>}
- */
-function* iterateTypes(type) {
+function* iterateTypes(type: Type): Iterable<Type> {
   if (isReferenceObject(type) && type.target !== type) {
     yield* iterateTypes(type.target)
   } else if (type.isUnion() && !isBooleanLike(type)) {
@@ -335,28 +301,18 @@ function* iterateTypes(type) {
   }
 }
 
-/**
- * @param {Type} type
- * @returns {Type[]}
- */
-function unionConstituents(type) {
+function unionConstituents(type: Type): Type[] {
   return type.isUnion() ? type.types : [type]
 }
 
-/**
- * @param {Type} type
- * @returns {Type[]}
- */
-function intersectionConstituents(type) {
+function intersectionConstituents(type: Type): Type[] {
   return type.isIntersection() ? type.types : [type]
 }
 
-/**
- * @param {Type} type
- * @param {typeof import('typescript')} ts
- * @returns {boolean}
- */
-function isTypeLiteralLike(type, ts) {
+function isTypeLiteralLike(
+  type: Type,
+  ts: typeof import('typescript')
+): boolean {
   return (
     (type.flags &
       (ts.TypeFlags.Literal |
@@ -370,11 +326,8 @@ function isTypeLiteralLike(type, ts) {
 /**
  * Check whether the given expression is typed as a Vue ref object,
  * e.g. `Ref`, `ShallowRef` or `ComputedRef`.
- * @param {RuleContext} context
- * @param {ESNode} node
- * @returns {boolean}
  */
-function isRefObjectType(context, node) {
+export function isRefObjectType(context: RuleContext, node: ESNode): boolean {
   const services = getTSParserServices(context)
   const tsNode = services && services.tsNodeMap.get(node)
   if (!tsNode) return false
@@ -394,11 +347,11 @@ function isRefObjectType(context, node) {
  * types and every union member is covered by a case clause.
  * Does NOT verify that case bodies terminate — callers can use ESLint's code
  * path analysis for that.
- * @param {RuleContext} context
- * @param {SwitchStatement} switchNode
- * @returns {boolean}
  */
-function isExhaustiveSwitch(context, switchNode) {
+export function isExhaustiveSwitch(
+  context: RuleContext,
+  switchNode: SwitchStatement
+): boolean {
   const services = getTSParserServices(context)
   if (!services) return false
 
@@ -412,8 +365,7 @@ function isExhaustiveSwitch(context, switchNode) {
   discriminantType =
     checker.getBaseConstraintOfType(discriminantType) ?? discriminantType
 
-  /** @type {Set<Type>} */
-  const caseTypes = new Set()
+  const caseTypes: Set<Type> = new Set()
   for (const switchCase of switchNode.cases) {
     if (switchCase.test === null) return true
     const caseTSNode = tsNodeMap.get(switchCase.test)

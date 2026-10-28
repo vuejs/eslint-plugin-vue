@@ -19,18 +19,14 @@ import {
   isTSInterfaceBody,
   extractRuntimeSlots
 } from './ts-ast.ts'
-import tsTypes from './ts-types.js'
-
-const {
+import {
   getComponentPropsFromTypeDefineTypes,
   getComponentEmitsFromTypeDefineTypes,
-  getComponentSlotsFromTypeDefineTypes,
-  isExhaustiveSwitch,
-  isRefObjectType
-} = tsTypes
+  getComponentSlotsFromTypeDefineTypes
+} from './ts-types.ts'
 
 export { isTypeNode } from './ts-ast.ts'
-export { isExhaustiveSwitch, isRefObjectType }
+export { isExhaustiveSwitch, isRefObjectType } from './ts-types.ts'
 
 /**
  * Get all props by looking at all component's properties
