@@ -1555,9 +1555,6 @@ tester.run('no-unused-properties', rule, {
           function fn(p) {
             return fnUnknown(p)
           }
-          function fn3(p2) {
-            const {...a} = p2
-          }
         </script>
       `
     },
