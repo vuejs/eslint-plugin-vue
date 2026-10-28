@@ -303,7 +303,9 @@ export default {
     ) {
       if (
         (property.groupName === 'props' &&
-          (propertyReferencesForProps.hasProperty(property.name) ||
+          (propertyReferencesForProps.hasProperty(property.name, {
+            externalCallAsAny: true
+          }) ||
             propertyReferences.hasProperty('$props'))) ||
         (property.groupName === 'setup' &&
           templatePropertiesContainer.refNames.has(property.name)) ||

@@ -1541,6 +1541,83 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(props)
+            }
+          }
+
+          function fn(p) {
+            return fnUnknown(p)
+          }
+          function fn3(p2) {
+            const {...a} = p2
+          }
+        </script>
+      `
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2062
+      filename: 'test.vue',
+      code: `
+        <script>
+          import { defineComponent } from 'vue'
+          import { useVModels } from '@vueuse/core'
+
+          export default defineComponent({
+            props: {
+              msg: {
+                type: String,
+                required: true
+              }
+            },
+            setup(props, { emit }) {
+              const { msg: msgModel } = useVModels(props, emit)
+
+              return {
+                msgModel
+              }
+            }
+          })
+        </script>
+      `
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2495
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import { useExample } from '@/utils/example'
+
+          const props = defineProps({ example: Boolean })
+          const { text } = useExample(props)
+        </script>
+
+        <template>
+          {{ text }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          import * as helpers from './helpers'
+
+          export default {
+            props: ['foo', 'bar'],
+            setup (props) {
+              helpers.useExample(props)
+            }
+          }
+        </script>
+      `
+    },
 
     // render & functional
     {
@@ -4142,49 +4219,6 @@ tester.run('no-unused-properties', rule, {
       filename: 'test.vue',
       code: `
         <script>
-          export default {
-            props: ['foo', 'bar', 'baz'],
-            setup (props) {
-              fn(props)
-            }
-          }
-
-          function fn(p) {
-            return fnUnknown(p)
-          }
-          function fn3(p2) {
-            const {...a} = p2
-          }
-        </script>
-      `,
-      errors: [
-        {
-          message: "'foo' of property found, but never used.",
-          line: 4,
-          column: 21,
-          endLine: 4,
-          endColumn: 26
-        },
-        {
-          message: "'bar' of property found, but never used.",
-          line: 4,
-          column: 28,
-          endLine: 4,
-          endColumn: 33
-        },
-        {
-          message: "'baz' of property found, but never used.",
-          line: 4,
-          column: 35,
-          endLine: 4,
-          endColumn: 40
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
           const fnVar = (p) => p.baz
           export default {
             props: ['foo', 'bar', 'baz'],
@@ -4336,6 +4370,30 @@ tester.run('no-unused-properties', rule, {
           column: 35,
           endLine: 7,
           endColumn: 40
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          import { useExample } from './example'
+
+          export default {
+            props: ['foo', 'bar'],
+            setup (props) {
+              useExample(props.foo)
+            }
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: "'bar' of property found, but never used.",
+          line: 6,
+          column: 28,
+          endLine: 6,
+          endColumn: 33
         }
       ]
     },
