@@ -2,6 +2,7 @@
  * @author Eduard Deisling
  * See LICENSE file in root directory for full license.
  */
+import type { TSESTree } from '@typescript-eslint/types'
 import utils from '../utils/index.js'
 
 const MACROS_EMITS = 'defineEmits'
@@ -20,6 +21,17 @@ const KNOWN_MACROS = new Set([
 ])
 const DEFAULT_ORDER = [MACROS_PROPS, MACROS_EMITS]
 
+/**
+ * Statement types that are always erased by the TypeScript compiler.
+ * Note that `TSEnumDeclaration` is intentionally missing, because enums
+ * (including `const enum`) can emit runtime code.
+ */
+const TYPE_ONLY_STATEMENTS = new Set([
+  'TSTypeAliasDeclaration',
+  'TSInterfaceDeclaration',
+  'TSDeclareFunction'
+])
+
 function isInScriptSetup(scriptSetup: VElement, node: ASTNode) {
   return (
     scriptSetup.range[0] <= node.range[0] &&
@@ -36,6 +48,57 @@ function isUseStrictStatement(node: ASTNode) {
     node.type === 'ExpressionStatement' &&
     node.expression.type === 'Literal' &&
     node.expression.value === 'use strict'
+  )
+}
+
+/**
+ * Checks whether the given node is TypeScript syntax that is fully erased at
+ * compile time, and therefore does not emit any runtime code.
+ */
+function isTypeOnlyStatement(node: ASTNode): boolean {
+  // `declare` makes a declaration ambient, so nothing is emitted for it.
+  // This covers `declare const`, `declare function`, `declare class`,
+  // `declare enum`, `declare module`, `declare namespace` and `declare global`.
+  if (isDeclareStatement(node) || TYPE_ONLY_STATEMENTS.has(node.type)) {
+    return true
+  }
+
+  if (node.type === 'ImportDeclaration') {
+    const importNode = node as TSESTree.ImportDeclaration
+    // `import type { Foo } from 'foo'` and `import { type Foo } from 'foo'`
+    return (
+      importNode.importKind === 'type' ||
+      (importNode.specifiers.length > 0 &&
+        importNode.specifiers.every(
+          (specifier) =>
+            specifier.type === 'ImportSpecifier' &&
+            specifier.importKind === 'type'
+        ))
+    )
+  }
+
+  if (node.type === 'ExportNamedDeclaration') {
+    const exportNode = node as TSESTree.ExportNamedDeclaration
+    // `export type { Foo }`
+    if (exportNode.exportKind === 'type') {
+      return true
+    }
+    const declaration = exportNode.declaration
+    return declaration
+      ? // `export type Foo = string`, `export interface Foo {}`, `export declare ...`
+        TYPE_ONLY_STATEMENTS.has(declaration.type) ||
+          ('declare' in declaration && declaration.declare === true)
+      : // `export { type Foo }`
+        exportNode.specifiers.length > 0 &&
+          exportNode.specifiers.every(
+            (specifier) => specifier.exportKind === 'type'
+          )
+  }
+
+  // `export type * from 'foo'`
+  return (
+    node.type === 'ExportAllDeclaration' &&
+    (node as TSESTree.ExportAllDeclaration).exportKind === 'type'
   )
 }
 
@@ -100,6 +163,8 @@ function create(context: RuleContext) {
       "`defineExpose` macro can't be in the `order` array if `defineExposeLast` is true."
     )
   }
+  const shouldAllowTypesBetweenMacros: boolean =
+    (options[0] && options[0].allowTypesBetweenMacros) || false
 
   const sourceCode = context.sourceCode
   const macrosNodes = new Map<string, ASTNode[]>()
@@ -151,6 +216,18 @@ function create(context: RuleContext) {
           scriptSetup,
           program
         )
+        // The statements the macros are compared against. When
+        // `allowTypesBetweenMacros` is enabled, statements that are erased at
+        // compile time are ignored, so they are allowed between the macros.
+        const targetStatements =
+          firstStatementIndex === -1
+            ? []
+            : program.body
+                .slice(firstStatementIndex)
+                .filter(
+                  (node) =>
+                    !shouldAllowTypesBetweenMacros || !isTypeOnlyStatement(node)
+                )
         const orderedList = order
           .flatMap((name) => {
             const nodes = macrosNodes.get(name) ?? []
@@ -167,7 +244,7 @@ function create(context: RuleContext) {
         }
 
         for (const [index, should] of orderedList.entries()) {
-          const targetStatement = program.body[firstStatementIndex + index]
+          const targetStatement = targetStatements[index]
 
           if (should.node !== targetStatement) {
             let moveTargetNodes = orderedList
@@ -348,6 +425,9 @@ export default {
             uniqueItems: true
           },
           defineExposeLast: {
+            type: 'boolean'
+          },
+          allowTypesBetweenMacros: {
             type: 'boolean'
           }
         },
