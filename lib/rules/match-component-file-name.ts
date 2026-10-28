@@ -6,17 +6,6 @@ import utils from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 import path from 'node:path'
 
-function canVerify(
-  node: Expression | SpreadElement
-): node is Literal | TemplateLiteral {
-  return (
-    node.type === 'Literal' ||
-    (node.type === 'TemplateLiteral' &&
-      node.expressions.length === 0 &&
-      node.quasis.length === 1)
-  )
-}
-
 export default {
   meta: {
     type: 'suggestion',
@@ -75,31 +64,23 @@ export default {
     }
 
     function verifyName(node: Literal | TemplateLiteral) {
-      let name
-      if (node.type === 'TemplateLiteral') {
-        const quasis = node.quasis[0]
-        name = quasis.value.cooked
-      } else {
-        name = String(node.value)
-      }
+      const name = utils.getStringLiteralValue(node)
+      if (name === null || areNamesEquivalent(name, filename)) return
 
-      if (!areNamesEquivalent(name, filename)) {
-        errors.push({
-          node,
-          messageId: 'shouldMatchFileName',
-          data: { filename, name },
-          suggest: [
-            {
-              desc: 'Rename component to match file name.',
-              fix(fixer) {
-                const quote =
-                  node.type === 'TemplateLiteral' ? '`' : node.raw[0]
-                return fixer.replaceText(node, `${quote}${filename}${quote}`)
-              }
+      errors.push({
+        node,
+        messageId: 'shouldMatchFileName',
+        data: { filename, name },
+        suggest: [
+          {
+            desc: 'Rename component to match file name.',
+            fix(fixer) {
+              const quote = node.type === 'TemplateLiteral' ? '`' : node.raw[0]
+              return fixer.replaceText(node, `${quote}${filename}${quote}`)
             }
-          ]
-        })
-      }
+          }
+        ]
+      })
     }
 
     return utils.compositingVisitors(
@@ -110,7 +91,7 @@ export default {
 
         const argument = node.arguments[0]
 
-        if (canVerify(argument)) {
+        if (utils.isStringLiteral(argument)) {
           verifyName(argument)
         }
       }),
@@ -119,17 +100,20 @@ export default {
 
         componentCount++
 
-        if (!node || !canVerify(node.value)) return
+        if (!node || !utils.isStringLiteral(node.value)) return
         verifyName(node.value)
       }),
       utils.defineScriptSetupVisitor(context, {
         onDefineOptionsEnter(node) {
           componentCount++
           if (node.arguments.length === 0) return
+
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
+
           const nameNode = utils.findProperty(define, 'name')
-          if (!nameNode || !canVerify(nameNode.value)) return
+          if (!nameNode || !utils.isStringLiteral(nameNode.value)) return
+
           verifyName(nameNode.value)
         }
       }),

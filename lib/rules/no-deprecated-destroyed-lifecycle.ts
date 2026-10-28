@@ -6,8 +6,7 @@ import utils from '../utils/index.js'
 
 function fix(fixer: RuleFixer, property: Property, newName: string) {
   if (property.computed) {
-    return property.key.type === 'Literal' ||
-      property.key.type === 'TemplateLiteral'
+    return utils.isStringLiteral(property.key)
       ? fixer.replaceTextRange(
           [property.key.range[0] + 1, property.key.range[1] - 1],
           newName
