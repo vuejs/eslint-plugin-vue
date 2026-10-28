@@ -7,8 +7,6 @@ import utils from '../utils/index.js'
 type PreferOption =
   'script-setup' | 'composition' | 'composition-vue2' | 'options'
 
-type UserPreferOption = PreferOption[]
-
 interface AllowsOption {
   scriptSetup?: boolean
   composition?: boolean
@@ -58,7 +56,7 @@ function applyPreferOption(opts: NormalizeOptions, prefer: PreferOption) {
 function parseOptions(options: any[]): NormalizeOptions {
   const opts: NormalizeOptions = { allowsSFC: {}, allowsOther: {} }
 
-  const preferOptions: UserPreferOption = options[0] || [
+  const preferOptions: PreferOption[] = options[0] || [
     'script-setup',
     'composition'
   ]
