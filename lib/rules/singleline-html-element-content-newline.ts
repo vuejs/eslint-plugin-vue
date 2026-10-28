@@ -22,10 +22,15 @@ function parseOptions(options: any) {
       ],
       externalIgnores: [],
       ignoreWhenNoAttributes: true,
-      ignoreWhenEmpty: true
+      ignoreWhenEmpty: true,
+      ignoreComments: false
     },
     options
   )
+}
+
+function isHTMLComment(token: Token) {
+  return token.type === 'HTMLComment'
 }
 
 /**
@@ -70,6 +75,9 @@ export default {
             type: 'array',
             items: { type: 'string' },
             uniqueItems: true
+          },
+          ignoreComments: {
+            type: 'boolean'
           }
         },
         additionalProperties: false
@@ -87,6 +95,7 @@ export default {
     const ignores = new Set([...options.ignores, ...options.externalIgnores])
     const ignoreWhenNoAttributes = options.ignoreWhenNoAttributes
     const ignoreWhenEmpty = options.ignoreWhenEmpty
+    const ignoreComments = options.ignoreComments
     const sourceCode = context.sourceCode
     const template =
       sourceCode.parserServices.getTemplateBodyTokenStore &&
@@ -130,31 +139,40 @@ export default {
           includeComments: true,
           filter: (token) => token.type !== 'HTMLWhitespace'
         }
+        const contentTokens = template.getTokensBetween(
+          elem.startTag,
+          elem.endTag,
+          getTokenOption
+        )
+        let startTagOrComment: VStartTag | Token = elem.startTag
+        let endTagOrComment: VEndTag | Token = elem.endTag
+        if (ignoreComments) {
+          // comments on the same line as a tag are not treated as content
+          while (contentTokens.length > 0 && isHTMLComment(contentTokens[0])) {
+            startTagOrComment = contentTokens.shift()!
+          }
+          while (
+            contentTokens.length > 0 &&
+            isHTMLComment(contentTokens.at(-1)!)
+          ) {
+            endTagOrComment = contentTokens.pop()!
+          }
+        }
         if (
           ignoreWhenEmpty &&
           elem.children.length === 0 &&
-          template.getFirstTokensBetween(
-            elem.startTag,
-            elem.endTag,
-            getTokenOption
-          ).length === 0
+          contentTokens.length === 0
         ) {
           return
         }
 
-        const contentFirst = template.getTokenAfter(
-          elem.startTag,
-          getTokenOption
-        )!
-        const contentLast = template.getTokenBefore(
-          elem.endTag,
-          getTokenOption
-        )!
+        const contentFirst = contentTokens[0] ?? endTagOrComment
+        const contentLast = contentTokens.at(-1) ?? startTagOrComment
 
         context.report({
           node: template.getLastToken(elem.startTag),
           loc: {
-            start: elem.startTag.loc.end,
+            start: startTagOrComment.loc.end,
             end: contentFirst.loc.start
           },
           messageId: 'unexpectedAfterClosingBracket',
@@ -162,12 +180,15 @@ export default {
             name: elem.rawName
           },
           fix(fixer) {
-            const range: Range = [elem.startTag.range[1], contentFirst.range[0]]
+            const range: Range = [
+              startTagOrComment.range[1],
+              contentFirst.range[0]
+            ]
             return fixer.replaceTextRange(range, '\n')
           }
         })
 
-        if (isEmpty(elem, sourceCode)) {
+        if (contentTokens.length === 0 || isEmpty(elem, sourceCode)) {
           return
         }
 
@@ -175,14 +196,17 @@ export default {
           node: template.getFirstToken(elem.endTag),
           loc: {
             start: contentLast.loc.end,
-            end: elem.endTag.loc.start
+            end: endTagOrComment.loc.start
           },
           messageId: 'unexpectedBeforeOpeningBracket',
           data: {
             name: elem.rawName
           },
           fix(fixer) {
-            const range: Range = [contentLast.range[1], elem.endTag.range[0]]
+            const range: Range = [
+              contentLast.range[1],
+              endTagOrComment.range[0]
+            ]
             return fixer.replaceTextRange(range, '\n')
           }
         })
