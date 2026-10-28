@@ -1005,6 +1005,7 @@ tester.run('no-undef-components', rule, {
       code: `
         <template>
           <component :is="'CustomComponent'" />
+          <component :is="\`UnknownComponent\`" />
         </template>
         <script>
         export default {
@@ -1022,6 +1023,14 @@ tester.run('no-undef-components', rule, {
           column: 22,
           endLine: 3,
           endColumn: 45
+        },
+        {
+          message:
+            "The '<UnknownComponent>' component has been used, but not defined.",
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 46
         }
       ]
     },

@@ -13,10 +13,7 @@ function getOptionsComponentName(node: Expression): string | null {
   if (node.type === 'Identifier') {
     return node.name
   }
-  if (node.type === 'Literal') {
-    return typeof node.value === 'string' ? node.value : null
-  }
-  return null
+  return utils.isStringLiteral(node) ? utils.getStringLiteralValue(node) : null
 }
 
 export default {

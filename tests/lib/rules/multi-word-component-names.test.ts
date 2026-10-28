@@ -256,6 +256,22 @@ tester.run('multi-word-component-names', rule, {
       filename: 'test.vue',
       code: `
         <script>
+        export default { name: \`test\` }
+        </script>`,
+      errors: [
+        {
+          message: 'Component name "test" should always be multi-word.',
+          line: 3,
+          column: 32,
+          endLine: 3,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
         Vue.component('test', {})
         </script>`,
       errors: [

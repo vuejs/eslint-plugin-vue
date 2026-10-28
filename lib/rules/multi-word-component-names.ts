@@ -57,17 +57,18 @@ export default {
     }
 
     function validateName(nameNode: Expression | SpreadElement) {
-      if (nameNode.type !== 'Literal') return
-      const componentName = String(nameNode.value)
-      if (!isValidComponentName(componentName)) {
-        context.report({
-          node: nameNode,
-          messageId: 'unexpected',
-          data: {
-            value: componentName
-          }
-        })
-      }
+      if (!utils.isStringLiteral(nameNode)) return
+
+      const componentName = utils.getStringLiteralValue(nameNode)
+      if (componentName === null || isValidComponentName(componentName)) return
+
+      context.report({
+        node: nameNode,
+        messageId: 'unexpected',
+        data: {
+          value: componentName
+        }
+      })
     }
 
     return utils.compositingVisitors(

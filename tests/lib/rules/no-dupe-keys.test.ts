@@ -1549,6 +1549,27 @@ ruleTester.run('no-dupe-keys', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
+      import {toRef} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const foo = toRef(props, \`bar\`)
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
       const props = defineProps(['foo', 'bar'])
       const foo = props.bar
       </script>
