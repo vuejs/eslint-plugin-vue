@@ -10,11 +10,7 @@ import type {
   ComponentInferTypeSlot,
   ComponentUnknownSlot
 } from '../index.ts'
-import tsAst from './ts-ast.js'
-import tsTypes from './ts-types.js'
-
-const {
-  isTypeNode,
+import {
   extractRuntimeProps,
   isTSTypeLiteral,
   isTSTypeLiteralOrTSFunctionType,
@@ -22,7 +18,9 @@ const {
   flattenTypeNodes,
   isTSInterfaceBody,
   extractRuntimeSlots
-} = tsAst
+} from './ts-ast.ts'
+import tsTypes from './ts-types.js'
+
 const {
   getComponentPropsFromTypeDefineTypes,
   getComponentEmitsFromTypeDefineTypes,
@@ -31,7 +29,8 @@ const {
   isRefObjectType
 } = tsTypes
 
-export { isTypeNode, isExhaustiveSwitch, isRefObjectType }
+export { isTypeNode } from './ts-ast.ts'
+export { isExhaustiveSwitch, isRefObjectType }
 
 /**
  * Get all props by looking at all component's properties
