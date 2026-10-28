@@ -55,10 +55,7 @@ export default {
 
     return utils.compositingVisitors(
       utils.executeOnVue(context, (node) => {
-        const propsNode = node.properties.find(
-          (p): p is Property =>
-            p.type === 'Property' && utils.getStaticPropertyName(p) === 'props'
-        )
+        const propsNode = utils.findProperty(node, 'props')
 
         if (!propsNode) return
 

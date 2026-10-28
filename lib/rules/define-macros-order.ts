@@ -20,13 +20,6 @@ const KNOWN_MACROS = new Set([
 ])
 const DEFAULT_ORDER = [MACROS_PROPS, MACROS_EMITS]
 
-function isInScriptSetup(scriptSetup: VElement, node: ASTNode) {
-  return (
-    scriptSetup.range[0] <= node.range[0] &&
-    node.range[1] <= scriptSetup.range[1]
-  )
-}
-
 function isDeclareStatement(node: ASTNode) {
   return 'declare' in node && node.declare === true
 }
@@ -57,7 +50,7 @@ function getTargetStatementPosition(scriptSetup: VElement, program: Program) {
 
   for (const [index, item] of program.body.entries()) {
     if (
-      isInScriptSetup(scriptSetup, item) &&
+      utils.isInRange(scriptSetup, item) &&
       !skipStatements.has(item.type) &&
       !isDeclareStatement(item) &&
       !isUseStrictStatement(item)

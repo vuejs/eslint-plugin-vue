@@ -40,17 +40,12 @@ export default {
       return null
     }
     function objectHasType(node: ObjectExpression) {
-      const typeProperty = node.properties.find(
-        (p) =>
-          p.type === 'Property' &&
-          utils.getStaticPropertyName(p) === 'type' &&
-          (p.value.type !== 'ArrayExpression' || p.value.elements.length > 0)
+      const typeProperty = utils.findProperty(
+        node,
+        'type',
+        (p) => p.value.type !== 'ArrayExpression' || p.value.elements.length > 0
       )
-      const validatorProperty = node.properties.find(
-        (p) =>
-          p.type === 'Property' &&
-          utils.getStaticPropertyName(p) === 'validator'
-      )
+      const validatorProperty = utils.findProperty(node, 'validator')
       return Boolean(typeProperty || validatorProperty)
     }
     function checkProperty(prop: ComponentProp) {

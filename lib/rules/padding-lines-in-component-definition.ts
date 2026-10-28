@@ -64,10 +64,8 @@ function shouldGroupSingleLineProperties(
   nextProperty: Property | SpreadElement,
   isGroupingEnabled: boolean
 ): boolean {
-  const isSingleCurrentProperty =
-    currentProperty.loc.start.line === currentProperty.loc.end.line
-  const isSingleNextProperty =
-    nextProperty.loc.start.line === nextProperty.loc.end.line
+  const isSingleCurrentProperty = utils.isSingleLine(currentProperty)
+  const isSingleNextProperty = utils.isSingleLine(nextProperty)
 
   return isSingleCurrentProperty && isSingleNextProperty && isGroupingEnabled
 }
