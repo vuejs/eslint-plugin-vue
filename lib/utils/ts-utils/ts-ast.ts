@@ -8,10 +8,9 @@ import type {
   ComponentTypeSlot,
   ComponentUnknownSlot
 } from '../index.ts'
-import scopeUtils from '../scope.js'
+import { getScope } from '../scope.ts'
 import tsTypes from './ts-types.js'
 
-const { getScope } = scopeUtils
 const { inferRuntimeTypeFromTypeNode } = tsTypes
 
 /**

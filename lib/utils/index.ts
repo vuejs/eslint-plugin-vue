@@ -29,7 +29,7 @@ import type {
   VueVisitor,
   ScriptSetupVisitor
 } from '../../typings/eslint-plugin-vue/util-types/utils.ts'
-import scopeUtils from './scope.js'
+import { getScope } from './scope.ts'
 import {
   getComponentPropsFromTypeDefine,
   getComponentEmitsFromTypeDefine,
@@ -136,7 +136,6 @@ const BUILTIN_DIRECTIVE_NAMES = new Set([
   'is'
 ])
 const { traverseNodes, getFallbackKeys, NS } = vueEslintParser.AST
-const { getScope } = scopeUtils
 
 const componentComments: WeakMap<RuleContext, Token[]> = new WeakMap()
 
