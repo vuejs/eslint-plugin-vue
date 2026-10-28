@@ -46,6 +46,8 @@ export default {
 
 </eslint-code-block>
 
+When `nextTick(() => { ... })` is the last statement of an `async` function and the callback is an arrow function without parameters, declarations, or `return` statements, the autofix replaces it with `await nextTick()` followed by the callback body. Otherwise, it uses `nextTick().then(() => { ... })`.
+
 ## :wrench: Options
 
 Default is set to `promise`.
