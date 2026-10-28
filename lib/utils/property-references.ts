@@ -501,10 +501,9 @@ export function definePropertyReferenceExtractor(
     return {
       hasProperty(_name, options) {
         return Boolean(
-          options &&
-          (options.unknownCallAsAny ||
-            (options.externalCallAsAny &&
-              isExternalCallee(context, node.callee)))
+          options?.unknownCallAsAny ||
+            (options?.externalCallAsAny &&
+              isExternalCallee(context, node.callee))
         )
       },
       allProperties: () => new Map(),
