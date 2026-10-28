@@ -174,7 +174,7 @@ export default {
             return
           }
           const setupScope = setupScopes.get(scopeStack.scopeNode)
-          if (!setupScope || !utils.inRange(setupScope.range, node)) {
+          if (!setupScope || !utils.isInRange(setupScope.range, node)) {
             return
           }
           setupScope.afterAwait = true
@@ -187,7 +187,7 @@ export default {
           if (
             !setupScope ||
             !setupScope.afterAwait ||
-            !utils.inRange(setupScope.range, node)
+            !utils.isInRange(setupScope.range, node)
           ) {
             return
           }

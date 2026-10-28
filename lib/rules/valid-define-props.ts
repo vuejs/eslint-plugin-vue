@@ -63,7 +63,7 @@ export default {
         },
         Identifier(node) {
           for (const defineProps of propsDefExpressions) {
-            if (!utils.inRange(defineProps.range, node)) {
+            if (!utils.isInRange(defineProps.range, node)) {
               continue
             }
 
@@ -75,10 +75,10 @@ export default {
               variable.defs.some(
                 (def) =>
                   def.type === 'ImportBinding' ||
-                  !utils.inRange(scriptSetup.range, def.name) ||
-                  utils.inRange(defineProps.range, def.name)
+                  !utils.isInRange(scriptSetup.range, def.name) ||
+                  utils.isInRange(defineProps.range, def.name)
               ) ||
-              utils.withinTypeNode(node)
+              utils.isWithinTypeNode(node)
             ) {
               continue
             }
@@ -92,7 +92,7 @@ export default {
       }),
       utils.defineVueVisitor(context, {
         onVueObjectEnter(node, { type }) {
-          if (type !== 'export' || utils.inRange(scriptSetup.range, node)) {
+          if (type !== 'export' || utils.isInRange(scriptSetup.range, node)) {
             return
           }
 
