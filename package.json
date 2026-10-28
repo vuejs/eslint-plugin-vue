@@ -76,7 +76,7 @@
     "@eslint-community/eslint-utils": "^4.9.1",
     "natural-compare": "^1.4.0",
     "nth-check": "^2.1.1",
-    "postcss-selector-parser": "^7.1.4",
+    "postcss-selector-parser": "^7.1.7",
     "semver": "^7.8.5",
     "xml-name-validator": "^5.0.0"
   },
