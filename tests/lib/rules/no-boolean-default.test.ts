@@ -844,6 +844,58 @@ ruleTester.run('no-boolean-default', rule, {
           endColumn: 24
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            enabled: {
+              type: [Number, Boolean],
+              default: false,
+            }
+          }
+        }
+      `,
+      errors: [
+        {
+          message:
+            'Boolean prop should not set a default (Vue defaults it to false).',
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo: number | boolean
+      }
+      withDefaults(defineProps<Props>(), {
+        foo: false
+      })
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message:
+            'Boolean prop should not set a default (Vue defaults it to false).',
+          line: 7,
+          column: 14,
+          endLine: 7,
+          endColumn: 19
+        }
+      ]
     }
   ]
 })

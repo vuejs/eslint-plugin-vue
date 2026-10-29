@@ -58,6 +58,10 @@ ruleTester.run('require-default-prop', rule, {
             k: [Boolean, String],
             l: {
               type: [Boolean, String]
+            },
+            m: [Number, Boolean],
+            n: {
+              type: [Number, Boolean]
             }
           }
         }
@@ -516,6 +520,7 @@ ruleTester.run('require-default-prop', rule, {
       withDefaults(defineProps<{
         foo?: string;
         bar?: boolean | string;
+        qux?: number | boolean;
       }>(), {
         foo: 'foo'
       })
