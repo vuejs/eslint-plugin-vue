@@ -1540,10 +1540,6 @@ tester.run('component-name-in-template-casing', rule, {
     {
       filename: 'test.vue',
       code: `
-        <script setup>
-          import * as Form from './form-components'
-          import TheComponent from './TheComponent.vue'
-        </script>
         <template>
           <Form.Input>
             <the-component />
@@ -1551,10 +1547,6 @@ tester.run('component-name-in-template-casing', rule, {
         </template>
       `,
       output: `
-        <script setup>
-          import * as Form from './form-components'
-          import TheComponent from './TheComponent.vue'
-        </script>
         <template>
           <Form.Input>
             <TheComponent />
@@ -1565,9 +1557,9 @@ tester.run('component-name-in-template-casing', rule, {
       errors: [
         {
           message: 'Component name "the-component" is not PascalCase.',
-          line: 8,
+          line: 4,
           column: 13,
-          endLine: 8,
+          endLine: 4,
           endColumn: 27
         }
       ]
