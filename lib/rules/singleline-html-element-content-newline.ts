@@ -148,12 +148,14 @@ export default {
         let end = tokens.length
         if (ignoreComments) {
           // comments on the same line as a tag are not treated as content
-          while (start < end && isHTMLComment(tokens[start])) {
-            start++
-          }
-          while (end > start && isHTMLComment(tokens[end - 1])) {
-            end--
-          }
+          const firstContentIndex = tokens.findIndex(
+            (token) => !isHTMLComment(token)
+          )
+          start = firstContentIndex === -1 ? tokens.length : firstContentIndex
+          const lastContentIndex = tokens.findLastIndex(
+            (token) => !isHTMLComment(token)
+          )
+          end = Math.max(start, lastContentIndex + 1)
         }
         const contentTokens = tokens.slice(start, end)
         if (

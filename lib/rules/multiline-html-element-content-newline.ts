@@ -154,22 +154,20 @@ export default {
         let end = tokens.length
         if (ignoreComments) {
           // comments on the same line as a tag are not treated as content
-          while (
-            start < end &&
-            isHTMLComment(tokens[start]) &&
-            tokens[start].loc.start.line ===
-              (tokens[start - 1] ?? element.startTag).loc.end.line
-          ) {
-            start++
-          }
-          while (
-            end > start &&
-            isHTMLComment(tokens[end - 1]) &&
-            tokens[end - 1].loc.end.line ===
-              (tokens[end] ?? element.endTag).loc.start.line
-          ) {
-            end--
-          }
+          const firstContentIndex = tokens.findIndex(
+            (token, index) =>
+              !isHTMLComment(token) ||
+              token.loc.start.line !==
+                (tokens[index - 1] ?? element.startTag).loc.end.line
+          )
+          start = firstContentIndex === -1 ? tokens.length : firstContentIndex
+          const lastContentIndex = tokens.findLastIndex(
+            (token, index) =>
+              !isHTMLComment(token) ||
+              token.loc.end.line !==
+                (tokens[index + 1] ?? element.endTag).loc.start.line
+          )
+          end = Math.max(start, lastContentIndex + 1)
         }
         const contentTokens = tokens.slice(start, end)
         if (
