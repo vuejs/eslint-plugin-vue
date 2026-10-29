@@ -65,6 +65,39 @@ tester.run('v-on-handler-style', rule, {
     },
     {
       filename: 'test.vue',
+      code: `<template>
+        <button @click="(a, b) => foo(a, b)" />
+        <button @click="function (a, b) { foo(a, b) }" />
+      </template>`,
+      options: ['inline']
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="foo" />
+        <template v-for="e in list">
+          <button @click="(a, b) => foo(a, b, e)" />
+        </template>
+      </template>`,
+      options: [['method', 'inline']]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="foo()" />
+        <button @click="count++" />
+        <button @click="(a) => foo(a)" />
+        <button @click="(a, b) => foo(a, b)" />
+        <button @click="function (a) { foo(a) }" />
+        <template v-for="e in list">
+          <button @click="foo(e)" />
+          <button @click="(a) => foo(a, e)" />
+        </template>
+      </template>`,
+      options: [['inline', 'inline-function']]
+    },
+    {
+      filename: 'test.vue',
       code: '<template><button @[foo()]="bar" /></template>'
     },
     {
@@ -1280,21 +1313,72 @@ tester.run('v-on-handler-style', rule, {
         }
       ]
     },
+    // ['inline', 'inline-function']
     {
       filename: 'test.vue',
       code: `<template>
-        <button @click="(a, b) => foo(a, b)" />
+        <button @click="foo" />
+        <button @click="foo($event)" />
+        <button @click="() => foo()" />
+        <button @click="() => { count++ }" />
+        <template v-for="e in list">
+          <button @click="foo($event, e)" />
+          <button @click="() => foo(e)" />
+        </template>
       </template>`,
-      output: null,
-      options: ['inline'],
+      output: `<template>
+        <button @click="foo" />
+        <button @click="foo($event)" />
+        <button @click="foo()" />
+        <button @click=" count++ " />
+        <template v-for="e in list">
+          <button @click="foo($event, e)" />
+          <button @click="foo(e)" />
+        </template>
+      </template>`,
+      options: [['inline', 'inline-function']],
       errors: [
         {
-          message:
-            'Prefer inline handler over inline function in v-on. Note that the custom event must be changed to a single payload.',
+          message: 'Prefer inline handler over method handler in v-on.',
           line: 2,
           column: 25,
           endLine: 2,
-          endColumn: 44
+          endColumn: 28
+        },
+        {
+          message: 'Prefer inline function over inline handler in v-on.',
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 36
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 36
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 5,
+          column: 25,
+          endLine: 5,
+          endColumn: 42
+        },
+        {
+          message: 'Prefer inline function over inline handler in v-on.',
+          line: 7,
+          column: 27,
+          endLine: 7,
+          endColumn: 41
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 8,
+          column: 27,
+          endLine: 8,
+          endColumn: 39
         }
       ]
     }
