@@ -73,6 +73,19 @@ tester.run('no-dollar-el', rule, {
         const view = new Backbone.View()
         view.$el.addClass('active')
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          mounted() {
+            const { $elements, el } = this
+          }
+        }
+        const { $el } = view
+        </script>
+      `
     }
   ],
   invalid: [
@@ -248,6 +261,43 @@ tester.run('no-dollar-el', rule, {
           column: 18,
           endLine: 5,
           endColumn: 21
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          mounted() {
+            const { $el: div } = this
+            const { $el } = this
+            ;({ ['$el']: this.root } = this)
+          }
+        }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected use of `$el`.',
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 24
+        },
+        {
+          message: 'Unexpected use of `$el`.',
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 24
+        },
+        {
+          message: 'Unexpected use of `$el`.',
+          line: 7,
+          column: 18,
+          endLine: 7,
+          endColumn: 23
         }
       ]
     }

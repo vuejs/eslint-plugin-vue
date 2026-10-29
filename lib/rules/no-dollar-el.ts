@@ -30,7 +30,17 @@ export default {
     }
 
     const scriptVisitor = {
-      MemberExpression: verifyMemberExpression
+      MemberExpression: verifyMemberExpression,
+      'ObjectPattern>Property'(node: AssignmentProperty) {
+        // `const { $el } = this`
+        if (utils.getStaticPropertyName(node) !== '$el') {
+          return
+        }
+        context.report({
+          node: node.key,
+          messageId: 'unexpected'
+        })
+      }
     }
 
     return utils.defineTemplateBodyVisitor(

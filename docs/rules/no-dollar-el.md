@@ -13,7 +13,7 @@ description: disallow using `$el`
 
 ## :book: Rule Details
 
-This rule reports uses of the `$el` component instance property, both on the current instance (`$el`, `this.$el`) and on other instances (`this.$refs.modal.$el`).
+This rule reports uses of the `$el` component instance property, both on the current instance (`$el`, `this.$el`, `const { $el } = this`) and on other instances (`this.$refs.modal.$el`).
 
 `$el` only points to the root DOM element while the component has a single root element. Once a component renders multiple root nodes, `$el` points to a placeholder text node instead, so code like `$el.querySelector(...)` silently breaks. Use [template refs](https://vuejs.org/guide/essentials/template-refs.html) to access DOM elements instead.
 
@@ -39,6 +39,7 @@ export default {
     /* ✗ BAD */
     this.$el.querySelector('input').focus()
     this.$refs.modal.$el.focus()
+    const { $el } = this
   }
 }
 </script>
