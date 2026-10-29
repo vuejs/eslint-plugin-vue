@@ -62,7 +62,7 @@ export default {
         },
         Identifier(node) {
           for (const defineEmits of emitsDefExpressions) {
-            if (!utils.inRange(defineEmits.range, node)) {
+            if (!utils.isInRange(defineEmits.range, node)) {
               continue
             }
 
@@ -74,10 +74,10 @@ export default {
               variable.defs.some(
                 (def) =>
                   def.type === 'ImportBinding' ||
-                  !utils.inRange(scriptSetup.range, def.name) ||
-                  utils.inRange(defineEmits.range, def.name)
+                  !utils.isInRange(scriptSetup.range, def.name) ||
+                  utils.isInRange(defineEmits.range, def.name)
               ) ||
-              utils.withinTypeNode(node)
+              utils.isWithinTypeNode(node)
             ) {
               continue
             }
@@ -91,7 +91,7 @@ export default {
       }),
       utils.defineVueVisitor(context, {
         onVueObjectEnter(node, { type }) {
-          if (type !== 'export' || utils.inRange(scriptSetup.range, node)) {
+          if (type !== 'export' || utils.isInRange(scriptSetup.range, node)) {
             return
           }
 

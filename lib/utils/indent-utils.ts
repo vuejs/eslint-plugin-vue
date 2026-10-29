@@ -73,9 +73,9 @@ export function isNotComment(
 }
 
 /**
- * Check whether the given node is not an empty text node.
+ * Check whether the given node or token is not an empty text node.
  */
-export function isNotEmptyTextNode(node: ASTNode): boolean {
+export function isNotEmptyTextNode(node: ASTNode | Token): boolean {
   return !(node.type === 'VText' && node.value.trim() === '')
 }
 

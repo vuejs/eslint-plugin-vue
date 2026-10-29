@@ -170,7 +170,7 @@ export default {
       propsReferences: ScopePropsReferences
     ) {
       for (const props of propsReferences.refs.props) {
-        const isPropsInExpressionRange = utils.inRange(node.range, props)
+        const isPropsInExpressionRange = utils.isInRange(node.range, props)
         const isPropsMemberExpression =
           props.parent.type === 'MemberExpression' &&
           props.parent.object === props
@@ -182,7 +182,7 @@ export default {
 
       // Checks for actual member access using prop destructuring.
       for (const prop of propsReferences.refs.prop) {
-        const isPropsInExpressionRange = utils.inRange(node.range, prop)
+        const isPropsInExpressionRange = utils.isInRange(node.range, prop)
         if (isPropsInExpressionRange) {
           return true
         }

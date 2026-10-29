@@ -94,10 +94,6 @@ export default {
       returnTypes: PropReturnType[]
     }
 
-    type ComponentObjectDefineProp = ComponentObjectProp & {
-      value: ObjectExpression
-    }
-
     interface PropReturnType {
       type: string
       node: Expression
@@ -381,6 +377,10 @@ export default {
       },
       utils.defineVueVisitor(context, {
         onVueObjectEnter(obj) {
+          type ComponentObjectDefineProp = ComponentObjectProp & {
+            value: ObjectExpression
+          }
+
           const props: ComponentObjectDefineProp[] = utils
             .getComponentPropsFromOptions(obj)
             .filter(

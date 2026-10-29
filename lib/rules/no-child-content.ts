@@ -3,13 +3,10 @@
  * See LICENSE file in root directory for full license.
  */
 import utils from '../utils/index.js'
+import { isNotEmptyTextNode } from '../utils/indent-utils.ts'
 
 interface RuleOption {
   additionalDirectives: string[]
-}
-
-function isWhitespaceTextNode(node: VNode | Token): boolean {
-  return node.type === 'VText' && node.value.trim() === ''
 }
 
 function comparePositions(
@@ -113,7 +110,7 @@ export default {
 
         const childNodes = [...elementNode.children, ...elementComments]
 
-        if (childNodes.some((childNode) => !isWhitespaceTextNode(childNode))) {
+        if (childNodes.some((childNode) => isNotEmptyTextNode(childNode))) {
           context.report({
             node: elementNode,
             loc: getLocationRange(childNodes),
