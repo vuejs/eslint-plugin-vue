@@ -139,25 +139,23 @@ export default {
           includeComments: true,
           filter: (token) => token.type !== 'HTMLWhitespace'
         }
-        const contentTokens = template.getTokensBetween(
+        const tokens = template.getTokensBetween(
           elem.startTag,
           elem.endTag,
           getTokenOption
         )
-        let startTagOrComment: VStartTag | Token = elem.startTag
-        let endTagOrComment: VEndTag | Token = elem.endTag
+        let start = 0
+        let end = tokens.length
         if (ignoreComments) {
           // comments on the same line as a tag are not treated as content
-          while (contentTokens.length > 0 && isHTMLComment(contentTokens[0])) {
-            startTagOrComment = contentTokens.shift()!
+          while (start < end && isHTMLComment(tokens[start])) {
+            start++
           }
-          while (
-            contentTokens.length > 0 &&
-            isHTMLComment(contentTokens.at(-1)!)
-          ) {
-            endTagOrComment = contentTokens.pop()!
+          while (end > start && isHTMLComment(tokens[end - 1])) {
+            end--
           }
         }
+        const contentTokens = tokens.slice(start, end)
         if (
           ignoreWhenEmpty &&
           elem.children.length === 0 &&
@@ -166,6 +164,9 @@ export default {
           return
         }
 
+        const startTagOrComment: VStartTag | Token =
+          tokens[start - 1] ?? elem.startTag
+        const endTagOrComment: VEndTag | Token = tokens[end] ?? elem.endTag
         const contentFirst = contentTokens[0] ?? endTagOrComment
         const contentLast = contentTokens.at(-1) ?? startTagOrComment
 

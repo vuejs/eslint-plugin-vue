@@ -145,31 +145,33 @@ export default {
           includeComments: true,
           filter: (token) => token.type !== 'HTMLWhitespace'
         }
-        const contentTokens = template.getTokensBetween(
+        const tokens = template.getTokensBetween(
           element.startTag,
           element.endTag,
           getTokenOption
         )
-        let startTagOrComment: VStartTag | Token = element.startTag
-        let endTagOrComment: VEndTag | Token = element.endTag
+        let start = 0
+        let end = tokens.length
         if (ignoreComments) {
           // comments on the same line as a tag are not treated as content
           while (
-            contentTokens.length > 0 &&
-            isHTMLComment(contentTokens[0]) &&
-            contentTokens[0].loc.start.line === startTagOrComment.loc.end.line
+            start < end &&
+            isHTMLComment(tokens[start]) &&
+            tokens[start].loc.start.line ===
+              (tokens[start - 1] ?? element.startTag).loc.end.line
           ) {
-            startTagOrComment = contentTokens.shift()!
+            start++
           }
           while (
-            contentTokens.length > 0 &&
-            isHTMLComment(contentTokens.at(-1)!) &&
-            contentTokens.at(-1)!.loc.end.line ===
-              endTagOrComment.loc.start.line
+            end > start &&
+            isHTMLComment(tokens[end - 1]) &&
+            tokens[end - 1].loc.end.line ===
+              (tokens[end] ?? element.endTag).loc.start.line
           ) {
-            endTagOrComment = contentTokens.pop()!
+            end--
           }
         }
+        const contentTokens = tokens.slice(start, end)
         if (
           ignoreWhenEmpty &&
           element.children.length === 0 &&
@@ -178,6 +180,9 @@ export default {
           return
         }
 
+        const startTagOrComment: VStartTag | Token =
+          tokens[start - 1] ?? element.startTag
+        const endTagOrComment: VEndTag | Token = tokens[end] ?? element.endTag
         const contentFirst = contentTokens[0] ?? endTagOrComment
         const contentLast = contentTokens.at(-1) ?? startTagOrComment
 
