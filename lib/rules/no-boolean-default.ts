@@ -14,17 +14,14 @@ function hasBooleanCasting(types: (string | null)[]): boolean {
 }
 
 function isValueNodeOfBooleanType(value: Expression | undefined): boolean {
-  return Boolean(
-    value &&
-    ((value.type === 'Identifier' && value.name === 'Boolean') ||
-      (value.type === 'ArrayExpression' &&
-        hasBooleanCasting(
-          value.elements.map((element) =>
-            element != null && element.type === 'Identifier'
-              ? element.name
-              : null
-          )
-        )))
+  return (
+    (value?.type === 'Identifier' && value.name === 'Boolean') ||
+    (value?.type === 'ArrayExpression' &&
+      hasBooleanCasting(
+        value.elements.map((element) =>
+          element?.type === 'Identifier' ? element.name : null
+        )
+      ))
   )
 }
 
