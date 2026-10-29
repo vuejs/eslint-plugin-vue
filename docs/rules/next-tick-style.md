@@ -11,6 +11,7 @@ since: v7.5.0
 > enforce Promise or callback style in `nextTick`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 
@@ -46,7 +47,7 @@ export default {
 
 </eslint-code-block>
 
-When `nextTick(() => { ... })` is the last statement of an `async` function and the callback is an arrow function without parameters, declarations, or `return` statements, the autofix replaces it with `await nextTick()` followed by the callback body. Otherwise, it uses `nextTick().then(() => { ... })`.
+When `nextTick(() => { ... })` is the last statement of an `async` function and the callback is an arrow function without parameters, declarations, or `return` statements, the autofix replaces it with `await nextTick()` followed by the callback body. Elsewhere in an `async` function, `await` would also delay the code after the call, so the rule only suggests `await nextTick()` (when the callback can be moved) or `nextTick().then(() => { ... })`. Outside `async` functions, the autofix uses `nextTick().then(() => { ... })`.
 
 ## :wrench: Options
 

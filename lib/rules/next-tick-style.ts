@@ -87,11 +87,35 @@ function getUpperFunction(
   return null
 }
 
+function getAsyncFunction(
+  node: ASTNode
+): FunctionDeclaration | FunctionExpression | ArrowFunctionExpression | null {
+  const upperFunction = getUpperFunction(node)
+  return upperFunction &&
+    upperFunction.type !== 'StaticBlock' &&
+    upperFunction.async
+    ? upperFunction
+    : null
+}
+
+/**
+ * Checks whether the call is the last statement of the given function, so
+ * nothing else in that function runs between the call and the callback.
+ */
+function isLastStatementOf(
+  callExpression: CallExpression,
+  func: FunctionDeclaration | FunctionExpression | ArrowFunctionExpression
+): boolean {
+  return (
+    func.body.type === 'BlockStatement' &&
+    func.body.body.at(-1) === callExpression.parent
+  )
+}
+
 /**
  * Returns the callback if its body can be moved after `await nextTick()`:
- * the call is the last statement of an `async` function, so nothing else in
- * that function runs between the call and the callback, and the callback is
- * a sync arrow function without parameters, declarations, `return` or labels.
+ * the call is a statement in a block, and the callback is a sync arrow
+ * function without parameters, declarations, `return` or labels.
  */
 function getMovableCallback(
   callExpression: CallExpression,
@@ -102,21 +126,10 @@ function getMovableCallback(
   if (
     statement.type !== 'ExpressionStatement' ||
     statement.parent.type !== 'BlockStatement' ||
-    statement.parent.body.at(-1) !== statement ||
     callExpression.arguments.length !== 1 ||
     callback.type !== 'ArrowFunctionExpression' ||
     callback.async ||
     sourceCode.scopeManager.acquire(callback)!.variables.length > 0
-  ) {
-    return null
-  }
-
-  const upperFunction = getUpperFunction(statement)
-  if (
-    !upperFunction ||
-    upperFunction.type === 'StaticBlock' ||
-    !upperFunction.async ||
-    upperFunction.body !== statement.parent
   ) {
     return null
   }
@@ -205,10 +218,13 @@ export default {
       url: 'https://eslint.vuejs.org/rules/next-tick-style.html'
     },
     fixable: 'code',
+    hasSuggestions: true,
     schema: [{ enum: ['promise', 'callback'] }],
     messages: {
       usePromise:
         'Use the Promise returned by `nextTick` instead of passing a callback function.',
+      useAwait: 'Use `await nextTick()`.',
+      useThen: 'Use `nextTick().then()`.',
       useCallback:
         'Pass a callback function to `nextTick` instead of using the returned Promise.'
     }
@@ -239,20 +255,46 @@ export default {
         }
 
         if (
-          callExpression.arguments.length > 0 ||
-          !isAwaitedPromise(callExpression)
+          callExpression.arguments.length === 0 &&
+          isAwaitedPromise(callExpression)
         ) {
+          return
+        }
+
+        const fixToThen = (fixer: RuleFixer) =>
+          fixer.insertTextAfter(node, '().then')
+        const asyncFunction = getAsyncFunction(callExpression)
+        if (!asyncFunction) {
           context.report({
             node,
             messageId: 'usePromise',
-            fix(fixer) {
-              const awaitText = getAwaitText(callExpression, context.sourceCode)
-              return awaitText
-                ? fixer.replaceText(callExpression.parent, awaitText)
-                : fixer.insertTextAfter(node, '().then')
-            }
+            fix: fixToThen
           })
+          return
         }
+
+        const awaitText = getAwaitText(callExpression, context.sourceCode)
+        const fixToAwait = (fixer: RuleFixer) =>
+          fixer.replaceText(callExpression.parent, awaitText!)
+        if (awaitText && isLastStatementOf(callExpression, asyncFunction)) {
+          context.report({
+            node,
+            messageId: 'usePromise',
+            fix: fixToAwait
+          })
+          return
+        }
+
+        // elsewhere in an `async` function, `await` would also delay the code
+        // after the call, so both styles are only suggested
+        context.report({
+          node,
+          messageId: 'usePromise',
+          suggest: [
+            ...(awaitText ? [{ messageId: 'useAwait', fix: fixToAwait }] : []),
+            { messageId: 'useThen', fix: fixToThen }
+          ]
+        })
       }
     })
   }

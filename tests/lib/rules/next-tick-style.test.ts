@@ -460,113 +460,38 @@ tester.run('next-tick-style', rule, {
         async mounted() {
           nt(() => foo());
           bar();
-        },
-        methods: {
-          async a() {
-            if (isOpen) {
-              nt(() => foo());
-            }
-          },
-          async b() {
-            for (const item of items) {
-              nt(() => foo(item));
-            }
-          },
-          async c() {
-            try {
-              nt(() => foo());
-            } finally {
-              bar();
-            }
-          },
-          async d(type) {
-            switch (type) {
-              case 'a':
-                nt(() => foo());
-            }
-          },
-          sync() {
-            nt(() => foo());
-          }
         }
       }</script>`,
-      output: `<script>import { nextTick as nt } from 'vue';
-      export default {
-        async mounted() {
-          nt().then(() => foo());
-          bar();
-        },
-        methods: {
-          async a() {
-            if (isOpen) {
-              nt().then(() => foo());
-            }
-          },
-          async b() {
-            for (const item of items) {
-              nt().then(() => foo(item));
-            }
-          },
-          async c() {
-            try {
-              nt().then(() => foo());
-            } finally {
-              bar();
-            }
-          },
-          async d(type) {
-            switch (type) {
-              case 'a':
-                nt().then(() => foo());
-            }
-          },
-          sync() {
-            nt().then(() => foo());
-          }
-        }
-      }</script>`,
+      output: null,
       errors: [
         {
           messageId: 'usePromise',
           line: 4,
           column: 11,
           endLine: 4,
-          endColumn: 13
-        },
-        {
-          messageId: 'usePromise',
-          line: 10,
-          column: 15,
-          endLine: 10,
-          endColumn: 17
-        },
-        {
-          messageId: 'usePromise',
-          line: 15,
-          column: 15,
-          endLine: 15,
-          endColumn: 17
-        },
-        {
-          messageId: 'usePromise',
-          line: 20,
-          column: 15,
-          endLine: 20,
-          endColumn: 17
-        },
-        {
-          messageId: 'usePromise',
-          line: 28,
-          column: 17,
-          endLine: 28,
-          endColumn: 19
-        },
-        {
-          messageId: 'usePromise',
-          line: 32,
-          column: 13,
-          endLine: 32,
-          endColumn: 15
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'useAwait',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          await nt(); foo();
+          bar();
+        }
+      }</script>`
+            },
+            {
+              messageId: 'useThen',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          nt().then(() => foo());
+          bar();
+        }
+      }</script>`
+            }
+          ]
         }
       ]
     },
@@ -574,46 +499,251 @@ tester.run('next-tick-style', rule, {
       filename: 'test.vue',
       code: `<script>import { nextTick as nt } from 'vue';
       export default {
+        async mounted() {
+          if (isOpen) {
+            nt(() => foo());
+          }
+        }
+      }</script>`,
+      output: null,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 15,
+          suggestions: [
+            {
+              messageId: 'useAwait',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          if (isOpen) {
+            await nt(); foo();
+          }
+        }
+      }</script>`
+            },
+            {
+              messageId: 'useThen',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          if (isOpen) {
+            nt().then(() => foo());
+          }
+        }
+      }</script>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          for (const item of items) {
+            nt(() => foo(item));
+          }
+        }
+      }</script>`,
+      output: null,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 15,
+          suggestions: [
+            {
+              messageId: 'useAwait',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          for (const item of items) {
+            await nt(); foo(item);
+          }
+        }
+      }</script>`
+            },
+            {
+              messageId: 'useThen',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          for (const item of items) {
+            nt().then(() => foo(item));
+          }
+        }
+      }</script>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          try {
+            nt(() => foo());
+          } finally {
+            bar();
+          }
+        }
+      }</script>`,
+      output: null,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 15,
+          suggestions: [
+            {
+              messageId: 'useAwait',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          try {
+            await nt(); foo();
+          } finally {
+            bar();
+          }
+        }
+      }</script>`
+            },
+            {
+              messageId: 'useThen',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          try {
+            nt().then(() => foo());
+          } finally {
+            bar();
+          }
+        }
+      }</script>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          switch (type) {
+            case 'a':
+              nt(() => foo());
+          }
+        }
+      }</script>`,
+      output: null,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 17,
+          suggestions: [
+            {
+              messageId: 'useThen',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          switch (type) {
+            case 'a':
+              nt().then(() => foo());
+          }
+        }
+      }</script>`
+            }
+          ]
+        }
+      ]
+    },
+    ...[
+      ['nt(() => { return foo() })', 'nt().then(() => { return foo() })'],
+      ['nt((value) => foo(value))', 'nt().then((value) => foo(value))'],
+      [
+        'nt(() => { const el = foo(); el.focus() })',
+        'nt().then(() => { const el = foo(); el.focus() })'
+      ],
+      [
+        'nt(() => { if (a) { var b = 1 } foo(b) })',
+        'nt().then(() => { if (a) { var b = 1 } foo(b) })'
+      ],
+      [
+        'nt(() => { loop: for (;;) { break loop } })',
+        'nt().then(() => { loop: for (;;) { break loop } })'
+      ],
+      [
+        'nt(async () => { await foo() })',
+        'nt().then(async () => { await foo() })'
+      ],
+      ['nt(function () { foo() })', 'nt().then(function () { foo() })'],
+      ['nt(callback)', 'nt().then(callback)'],
+      ['nt(() => foo(), ctx)', 'nt().then(() => foo(), ctx)'],
+      ['nt(/* comment */ () => foo())', 'nt().then(/* comment */ () => foo())'],
+      [
+        'nt(() => function () {}.call(this))',
+        'nt().then(() => function () {}.call(this))'
+      ],
+      [
+        'const promise = nt(() => foo())',
+        'const promise = nt().then(() => foo())'
+      ],
+      ['if (a) nt(() => foo())', 'if (a) nt().then(() => foo())'],
+      ['await nt(() => foo())', 'await nt().then(() => foo())'],
+      ['return nt(() => foo())', 'return nt().then(() => foo())']
+    ].map(([code, output]) => ({
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() { ${code} }
+      }</script>`,
+      output: null,
+      errors: [
+        {
+          messageId: 'usePromise',
+          suggestions: [
+            {
+              messageId: 'useThen',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() { ${output} }
+      }</script>`
+            }
+          ]
+        }
+      ]
+    })),
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
         methods: {
-          async a() { nt(() => { return foo() }) },
-          async b() { nt((value) => foo(value)) },
-          async c() { nt(() => { const el = foo(); el.focus() }) },
-          async d() { nt(() => { if (a) { var b = 1 } foo(b) }) },
-          async e() { nt(() => { loop: for (;;) { break loop } }) },
-          async f() { nt(async () => { await foo() }) },
-          async g() { nt(function () { foo() }) },
-          async h() { nt(callback) },
-          async i() { nt(() => foo(), ctx) },
-          async j() { nt(/* comment */ () => foo()) },
-          async k() { nt(() => function () {}.call(this)) },
-          async l() { const promise = nt(() => foo()) },
-          async m() { if (a) nt(() => foo()) },
-          async n() { await nt(() => foo()) },
-          async o() { return nt(() => foo()) },
-          async p() { const fn = () => { nt(() => foo()) } },
-          async q() { class A { static { nt(() => foo()) } } }
+          sync() { nt(() => foo()) },
+          async a() { const fn = () => { nt(() => foo()) } },
+          async b() { class A { static { nt(() => foo()) } } }
         }
       }</script>`,
       output: `<script>import { nextTick as nt } from 'vue';
       export default {
         methods: {
-          async a() { nt().then(() => { return foo() }) },
-          async b() { nt().then((value) => foo(value)) },
-          async c() { nt().then(() => { const el = foo(); el.focus() }) },
-          async d() { nt().then(() => { if (a) { var b = 1 } foo(b) }) },
-          async e() { nt().then(() => { loop: for (;;) { break loop } }) },
-          async f() { nt().then(async () => { await foo() }) },
-          async g() { nt().then(function () { foo() }) },
-          async h() { nt().then(callback) },
-          async i() { nt().then(() => foo(), ctx) },
-          async j() { nt().then(/* comment */ () => foo()) },
-          async k() { nt().then(() => function () {}.call(this)) },
-          async l() { const promise = nt().then(() => foo()) },
-          async m() { if (a) nt().then(() => foo()) },
-          async n() { await nt().then(() => foo()) },
-          async o() { return nt().then(() => foo()) },
-          async p() { const fn = () => { nt().then(() => foo()) } },
-          async q() { class A { static { nt().then(() => foo()) } } }
+          sync() { nt().then(() => foo()) },
+          async a() { const fn = () => { nt().then(() => foo()) } },
+          async b() { class A { static { nt().then(() => foo()) } } }
         }
       }</script>`,
       languageOptions: { ecmaVersion: 2022 },
@@ -621,120 +751,22 @@ tester.run('next-tick-style', rule, {
         {
           messageId: 'usePromise',
           line: 4,
-          column: 23,
+          column: 20,
           endLine: 4,
-          endColumn: 25
+          endColumn: 22
         },
         {
           messageId: 'usePromise',
           line: 5,
-          column: 23,
-          endLine: 5,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 6,
-          column: 23,
-          endLine: 6,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 7,
-          column: 23,
-          endLine: 7,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 8,
-          column: 23,
-          endLine: 8,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 9,
-          column: 23,
-          endLine: 9,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 10,
-          column: 23,
-          endLine: 10,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 11,
-          column: 23,
-          endLine: 11,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 12,
-          column: 23,
-          endLine: 12,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 13,
-          column: 23,
-          endLine: 13,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 14,
-          column: 23,
-          endLine: 14,
-          endColumn: 25
-        },
-        {
-          messageId: 'usePromise',
-          line: 15,
-          column: 39,
-          endLine: 15,
-          endColumn: 41
-        },
-        {
-          messageId: 'usePromise',
-          line: 16,
-          column: 30,
-          endLine: 16,
-          endColumn: 32
-        },
-        {
-          messageId: 'usePromise',
-          line: 17,
-          column: 29,
-          endLine: 17,
-          endColumn: 31
-        },
-        {
-          messageId: 'usePromise',
-          line: 18,
-          column: 30,
-          endLine: 18,
-          endColumn: 32
-        },
-        {
-          messageId: 'usePromise',
-          line: 19,
           column: 42,
-          endLine: 19,
+          endLine: 5,
           endColumn: 44
         },
         {
           messageId: 'usePromise',
-          line: 20,
+          line: 6,
           column: 42,
-          endLine: 20,
+          endLine: 6,
           endColumn: 44
         }
       ]
