@@ -36,7 +36,7 @@ function isValueNodeOfBooleanType(value: Expression): boolean {
     (value.type === 'ArrayExpression' &&
       hasBooleanCasting(
         value.elements.map((element) =>
-          element != null && element.type === 'Identifier' ? element.name : null
+          element?.type === 'Identifier' ? element.name : null
         )
       ))
   )
