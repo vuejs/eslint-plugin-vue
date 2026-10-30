@@ -132,6 +132,16 @@ export default {
       "VAttribute[directive=true] > VDirectiveKey[name.name='bind'][argument.name='class']"(
         directiveKeyNode: VDirectiveKey
       ) {
+        // `.attr` and `.prop` set the raw `class` attribute or DOM property,
+        // so the value is not a normalized class list
+        if (
+          directiveKeyNode.modifiers.some(
+            (modifier) => modifier.name === 'attr' || modifier.name === 'prop'
+          )
+        ) {
+          return
+        }
+
         const attributeNode = directiveKeyNode.parent
         if (!attributeNode.value || !attributeNode.value.expression) {
           return

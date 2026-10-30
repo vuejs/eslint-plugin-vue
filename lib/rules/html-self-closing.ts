@@ -149,7 +149,9 @@ export default {
                 return close.type === 'HTMLTagClose'
                   ? fixer.replaceTextRange(
                       [close.range[0], node.range[1]],
-                      '/>'
+                      /\s/u.test(sourceCode.text[close.range[0] - 1])
+                        ? '/>'
+                        : ' />'
                     )
                   : null
               }
