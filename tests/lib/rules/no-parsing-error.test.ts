@@ -213,6 +213,52 @@ tester.run('no-parsing-error', rule, {
         </div>
       </template>
       `
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2082
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { ref } from 'vue'
+      const value = ref<unknown>('')
+      </script>
+      <template>
+        <div>{{ (value as string).toUpperCase() }}</div>
+        <div>{{ user!.name }}</div>
+        <div>{{ value satisfies string }}</div>
+        <div>{{ format<string>(value) }}</div>
+        <button @click="(e: MouseEvent) => onClick(e)" />
+        <input @input="emit(($event.target as HTMLInputElement).value)" />
+        <input :value="(el as HTMLInputElement).value" />
+        <MyList v-slot="{ item }: { item: Item }">{{ item.id }}</MyList>
+      </template>
+      `,
+      languageOptions: {
+        sourceType: 'module',
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts">
+      export default {}
+      </script>
+      <template>
+        <div>{{ (value as string).toUpperCase() }}</div>
+        <div>{{ user!.name }}</div>
+        <button @click="(e: MouseEvent) => onClick(e)" />
+      </template>
+      `,
+      languageOptions: {
+        sourceType: 'module',
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
   invalid: [
@@ -1259,6 +1305,46 @@ tester.run('no-parsing-error', rule, {
           message: 'Parsing error: Unexpected token size.',
           line: 6,
           column: 37,
+          endLine: undefined,
+          endColumn: undefined
+        }
+      ]
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2082
+    // `lang="ts"` alone does not enable TypeScript in the template
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts">
+      export default {}
+      </script>
+      <template>
+        <div>{{ (value as string).toUpperCase() }}</div>
+        <div>{{ user!.name }}</div>
+        <button @click="(e: MouseEvent) => onClick(e)" />
+      </template>
+      `,
+      languageOptions: { sourceType: 'module' },
+      errors: [
+        {
+          message: 'Parsing error: Unexpected token as.',
+          line: 6,
+          column: 24,
+          endLine: undefined,
+          endColumn: undefined
+        },
+        {
+          message: 'Parsing error: Unexpected token !.',
+          line: 7,
+          column: 21,
+          endLine: undefined,
+          endColumn: undefined
+        },
+        {
+          message: 'Parsing error: Unexpected token :.',
+          line: 8,
+          column: 27,
           endLine: undefined,
           endColumn: undefined
         }

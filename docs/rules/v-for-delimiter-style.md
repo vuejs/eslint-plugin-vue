@@ -69,5 +69,5 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-for-delimiter-style.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-for-delimiter-style.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-for-delimiter-style.test.ts)

@@ -26,7 +26,7 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-template.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-template.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-template.test.ts)
 
 <sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/prefer-template)</sup>

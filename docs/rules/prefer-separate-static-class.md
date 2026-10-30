@@ -44,5 +44,5 @@ This rule was introduced in eslint-plugin-vue v8.2.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-separate-static-class.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-separate-static-class.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-separate-static-class.test.ts)

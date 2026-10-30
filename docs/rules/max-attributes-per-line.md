@@ -131,5 +131,5 @@ This rule was introduced in eslint-plugin-vue v3.12.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/max-attributes-per-line.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/max-attributes-per-line.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/max-attributes-per-line.test.ts)

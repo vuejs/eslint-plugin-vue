@@ -73,6 +73,14 @@ tester.run('singleline-html-element-content-newline', rule, {
         </form>
       </template>
     `,
+    `
+      <template>
+        <router-link to="/">Home</router-link>
+        <RouterLink to="/">Home</RouterLink>
+        <nuxt-link to="/">Home</nuxt-link>
+        <NuxtLink to="/">Home</NuxtLink>
+      </template>
+    `,
 
     // ignoreWhenNoAttributes: true
     `

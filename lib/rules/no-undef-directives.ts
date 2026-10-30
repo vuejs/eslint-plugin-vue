@@ -2,25 +2,20 @@
  * @author rzzf
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { camelCase, capitalize, kebabCase } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
 function getRegisteredDirectives(
   componentObject: ObjectExpression
 ): { node: Property; name: string }[] {
-  const directivesNode = componentObject.properties.find(
-    (p) =>
-      p.type === 'Property' &&
-      utils.getStaticPropertyName(p) === 'directives' &&
-      p.value.type === 'ObjectExpression'
+  const directivesNode = utils.findProperty(
+    componentObject,
+    'directives',
+    (p) => p.value.type === 'ObjectExpression'
   )
 
-  if (
-    !directivesNode ||
-    directivesNode.type !== 'Property' ||
-    directivesNode.value.type !== 'ObjectExpression'
-  ) {
+  if (!directivesNode || directivesNode.value.type !== 'ObjectExpression') {
     return []
   }
 

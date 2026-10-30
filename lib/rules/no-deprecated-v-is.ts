@@ -2,8 +2,8 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
-import vIs from './syntaxes/v-is.js'
+import utils from '../utils/index.ts'
+import vIs from './syntaxes/v-is.ts'
 
 export default {
   meta: {

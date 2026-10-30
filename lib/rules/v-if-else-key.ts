@@ -2,7 +2,7 @@
  * @author Felipe Melendez
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { kebabCase } from '../utils/casing.ts'
 
 /**
@@ -69,7 +69,11 @@ const checkForKey = (
 
   const conditionalFamily = conditionalFamilies.get(node.parent)
 
-  if (!conditionalFamily || utils.hasAttribute(node, 'key')) {
+  if (
+    !conditionalFamily ||
+    utils.hasAttribute(node, 'key') ||
+    utils.hasDirective(node, 'bind', 'key')
+  ) {
     return
   }
 

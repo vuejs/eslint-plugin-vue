@@ -54,5 +54,5 @@ This rule was introduced in eslint-plugin-vue v9.16.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-use-v-else-with-v-for.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-use-v-else-with-v-for.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-use-v-else-with-v-for.test.ts)

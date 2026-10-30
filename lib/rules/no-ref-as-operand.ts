@@ -2,14 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import type { VueObjectData } from '../utils/index.js'
+import type { VueObjectData } from '../utils/index.ts'
 import type {
   RefObjectReferences,
   RefObjectReferenceForIdentifier
 } from '../utils/ref-object-references.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
 import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
+import tsUtils from '../utils/ts-utils/index.js'
 
 /**
  * Checks whether the given identifier reference has been initialized with a ref object.
@@ -65,7 +66,9 @@ export default {
     schema: [],
     messages: {
       requireDotValue:
-        'Must use `.value` to read or write the value wrapped by `{{method}}()`.'
+        'Must use `.value` to read or write the value wrapped by `{{method}}()`.',
+      requireDotValueOfRef:
+        'Must use `.value` to read or write the value of a ref.'
     }
   },
   create(context: RuleContext) {
@@ -88,21 +91,28 @@ export default {
       }
     }
 
-    function reportIfRefWrapped(node: Identifier) {
+    function reportIfRefWrapped(node: Identifier, shouldCheckType = true) {
       const data = refReferences.get(node)
-      if (!isRefInit(data)) {
-        return
+      if (isRefInit(data)) {
+        context.report({
+          node,
+          messageId: 'requireDotValue',
+          data: {
+            method: data.method
+          },
+          fix(fixer) {
+            return fixer.insertTextAfter(node, '.value')
+          }
+        })
+      } else if (shouldCheckType && tsUtils.isRefObjectType(context, node)) {
+        context.report({
+          node,
+          messageId: 'requireDotValueOfRef',
+          fix(fixer) {
+            return fixer.insertTextAfter(node, '.value')
+          }
+        })
       }
-      context.report({
-        node,
-        messageId: 'requireDotValue',
-        data: {
-          method: data.method
-        },
-        fix(fixer) {
-          return fixer.insertTextAfter(node, '.value')
-        }
-      })
     }
 
     function reportWrappedIdentifiers(node: CallExpression) {
@@ -179,7 +189,12 @@ export default {
         'AssignmentExpression>Identifier'(
           node: Identifier & { parent: AssignmentExpression }
         ) {
-          if (node.parent.operator === '=' && node.parent.left !== node) {
+          if (node.parent.operator === '=') {
+            if (node.parent.left !== node) {
+              return
+            }
+            // Assigning another ref to a variable typed as a ref is valid
+            reportIfRefWrapped(node, false)
             return
           }
           reportIfRefWrapped(node)

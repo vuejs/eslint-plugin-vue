@@ -57,7 +57,7 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-restricted-syntax.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-restricted-syntax.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-restricted-syntax.test.ts)
 
 <sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/no-restricted-syntax)</sup>

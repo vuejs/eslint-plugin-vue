@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 import INLINE_ELEMENTS from '../utils/inline-non-void-elements.json' with { type: 'json' }
 
@@ -13,7 +13,13 @@ function isMultilineElement(element: VElement & { endTag: VEndTag }) {
 function parseOptions(options: any) {
   return Object.assign(
     {
-      ignores: ['pre', 'textarea', ...INLINE_ELEMENTS],
+      ignores: [
+        'pre',
+        'textarea',
+        'router-link',
+        'nuxt-link',
+        ...INLINE_ELEMENTS
+      ],
       ignoreWhenEmpty: true,
       allowEmptyLines: false
     },

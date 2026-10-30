@@ -3,7 +3,7 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * These strings wil be displayed in error messages.
@@ -44,7 +44,10 @@ function parseOptions(options: any): Options {
  * Get the elementType of the given element.
  */
 function getElementType(node: VElement): keyof Options {
-  if (utils.isCustomComponent(node)) {
+  if (
+    utils.isCustomComponent(node) ||
+    utils.isVueBuiltInElementName(node.rawName)
+  ) {
     return 'COMPONENT'
   }
   if (utils.isHtmlElementNode(node)) {
@@ -146,7 +149,9 @@ export default {
                 return close.type === 'HTMLTagClose'
                   ? fixer.replaceTextRange(
                       [close.range[0], node.range[1]],
-                      '/>'
+                      /\s/u.test(sourceCode.text[close.range[0] - 1])
+                        ? '/>'
+                        : ' />'
                     )
                   : null
               }

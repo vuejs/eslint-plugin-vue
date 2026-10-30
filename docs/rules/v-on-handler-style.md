@@ -11,6 +11,7 @@ since: v9.7.0
 > enforce writing style for handlers in `v-on` directives
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 
@@ -41,6 +42,8 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 ```
 
 </eslint-code-block>
+
+A method handler receives the event arguments, so the conversion to a method handler is only autofixed when the rule can find the method (in `methods` or as a top-level function in `<script setup>`) and it takes as many parameters as the handler passes. Otherwise, e.g. for imported functions, the fix is offered as a suggestion instead.
 
 ## :wrench: Options
 
@@ -221,5 +224,5 @@ This rule was introduced in eslint-plugin-vue v9.7.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-on-handler-style.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-on-handler-style.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-handler-style.test.ts)

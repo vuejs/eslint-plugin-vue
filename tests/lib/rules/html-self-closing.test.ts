@@ -91,6 +91,39 @@ tester.run('html-self-closing', rule as RuleModule, {
         </div>
       </template>
       `
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2190
+    '<template><slot/><MyComponent><template #foo/></MyComponent></template>',
+    {
+      code: `
+      <template>
+        <div></div>
+        <slot/>
+        <slot name="foo"/>
+        <MyComponent><template #foo/></MyComponent>
+        <component :is="foo"/>
+        <transition/>
+        <keep-alive/>
+      </template>
+      `,
+      options: [
+        { html: { void: 'never', normal: 'never', component: 'always' } }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div/>
+        <slot></slot>
+        <slot name="foo"></slot>
+        <MyComponent><template #foo></template></MyComponent>
+        <component :is="foo"></component>
+        <transition></transition>
+        <keep-alive></keep-alive>
+      </template>
+      `,
+      options: [{ html: { normal: 'always', component: 'never' } }]
     }
 
     // other cases are in `invalid` tests.
@@ -99,7 +132,7 @@ tester.run('html-self-closing', rule as RuleModule, {
     // default
     {
       code: '<template><div></div></template>',
-      output: '<template><div/></template>',
+      output: '<template><div /></template>',
       errors: [
         {
           message: 'Require self-closing on HTML elements (<div>).',
@@ -125,7 +158,7 @@ tester.run('html-self-closing', rule as RuleModule, {
     },
     {
       code: '<template><x-test></x-test></template>',
-      output: '<template><x-test/></template>',
+      output: '<template><x-test /></template>',
       errors: [
         {
           message:
@@ -138,8 +171,167 @@ tester.run('html-self-closing', rule as RuleModule, {
       ]
     },
     {
+      code: `<template>
+  <el-table-column prop="name" :show-overflow-tooltip=true></el-table-column>
+  <span @click=toggleShowTree></span>
+  <x-test v-bind=attrs></x-test>
+  <x-test size=16></x-test>
+  <x-test size="16"></x-test>
+  <x-test size=16 ></x-test>
+  <x-test :size></x-test>
+  <x-test disabled></x-test>
+</template>`,
+      output: `<template>
+  <el-table-column prop="name" :show-overflow-tooltip=true />
+  <span @click=toggleShowTree />
+  <x-test v-bind=attrs />
+  <x-test size=16 />
+  <x-test size="16" />
+  <x-test size=16 />
+  <x-test :size />
+  <x-test disabled />
+</template>`,
+      errors: [
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<el-table-column>).',
+          line: 2,
+          column: 60,
+          endLine: 2,
+          endColumn: 78
+        },
+        {
+          message: 'Require self-closing on HTML elements (<span>).',
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 38
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 4,
+          column: 24,
+          endLine: 4,
+          endColumn: 33
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 5,
+          column: 19,
+          endLine: 5,
+          endColumn: 28
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 30
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 7,
+          column: 20,
+          endLine: 7,
+          endColumn: 29
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 8,
+          column: 17,
+          endLine: 8,
+          endColumn: 26
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 9,
+          column: 20,
+          endLine: 9,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      code: '<template><img src=a.png></template>',
+      output: '<template><img src=a.png /></template>',
+      options: [{ html: { void: 'always' } }],
+      errors: [
+        {
+          message: 'Require self-closing on HTML void elements (<img>).',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
+    },
+    {
+      code: `<template>
+  <div ></div>
+  <div\t></div>
+  <div
+    class="a"
+  ></div>
+  <MyComponent :foo="bar"></MyComponent>
+  <svg><path d="M0 0"></path></svg>
+</template>`,
+      output: `<template>
+  <div />
+  <div\t/>
+  <div
+    class="a"
+  />
+  <MyComponent :foo="bar" />
+  <svg><path d="M0 0" /></svg>
+</template>`,
+      errors: [
+        {
+          message: 'Require self-closing on HTML elements (<div>).',
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 15
+        },
+        {
+          message: 'Require self-closing on HTML elements (<div>).',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 15
+        },
+        {
+          message: 'Require self-closing on HTML elements (<div>).',
+          line: 6,
+          column: 4,
+          endLine: 6,
+          endColumn: 10
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<MyComponent>).',
+          line: 7,
+          column: 27,
+          endLine: 7,
+          endColumn: 41
+        },
+        {
+          message: 'Require self-closing on SVG elements (<path>).',
+          line: 8,
+          column: 23,
+          endLine: 8,
+          endColumn: 30
+        }
+      ]
+    },
+    {
       code: '<template><svg><path></path></svg></template>',
-      output: '<template><svg><path/></svg></template>',
+      output: '<template><svg><path /></svg></template>',
       errors: [
         {
           message: 'Require self-closing on SVG elements (<path>).',
@@ -152,7 +344,7 @@ tester.run('html-self-closing', rule as RuleModule, {
     },
     {
       code: '<template><math><mspace></mspace></math></template>',
-      output: '<template><math><mspace/></math></template>',
+      output: '<template><math><mspace /></math></template>',
       errors: [
         {
           message: 'Require self-closing on MathML elements (<mspace>).',
@@ -168,7 +360,7 @@ tester.run('html-self-closing', rule as RuleModule, {
     {
       code: ALL_CODE,
       output: `<template>
-  <div/>
+  <div />
   <div/>
   <img>
   <img/>
@@ -220,7 +412,7 @@ tester.run('html-self-closing', rule as RuleModule, {
       output: `<template>
   <div></div>
   <div/>
-  <img/>
+  <img />
   <img/>
   <x-test></x-test>
   <x-test/>
@@ -272,7 +464,7 @@ tester.run('html-self-closing', rule as RuleModule, {
   <div/>
   <img>
   <img/>
-  <x-test/>
+  <x-test />
   <x-test/>
   <svg><path></path></svg>
   <svg><path/></svg>
@@ -326,7 +518,7 @@ tester.run('html-self-closing', rule as RuleModule, {
   <img/>
   <x-test></x-test>
   <x-test/>
-  <svg><path/></svg>
+  <svg><path /></svg>
   <svg><path/></svg>
   <math><mspace></mspace></math>
   <math><mspace/></math>
@@ -378,7 +570,7 @@ tester.run('html-self-closing', rule as RuleModule, {
   <x-test/>
   <svg><path></path></svg>
   <svg><path/></svg>
-  <math><mspace/></math>
+  <math><mspace /></math>
   <math><mspace/></math>
 </template>`,
       options: [anyWith({ math: 'always' })],
@@ -414,6 +606,106 @@ tester.run('html-self-closing', rule as RuleModule, {
           column: 16,
           endLine: 11,
           endColumn: 18
+        }
+      ]
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2190
+    {
+      code: '<template><slot></slot></template>',
+      output: '<template><slot /></template>',
+      errors: [
+        {
+          message: 'Require self-closing on Vue.js custom components (<slot>).',
+          line: 1,
+          column: 17,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div/>
+        <slot></slot>
+        <MyComponent><template #foo></template></MyComponent>
+      </template>
+      `,
+      output: `
+      <template>
+        <div></div>
+        <slot />
+        <MyComponent><template #foo /></MyComponent>
+      </template>
+      `,
+      options: [
+        { html: { void: 'never', normal: 'never', component: 'always' } }
+      ],
+      errors: [
+        {
+          message: 'Disallow self-closing on HTML elements (<div/>).',
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 15
+        },
+        {
+          message: 'Require self-closing on Vue.js custom components (<slot>).',
+          line: 4,
+          column: 15,
+          endLine: 4,
+          endColumn: 22
+        },
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<template>).',
+          line: 5,
+          column: 37,
+          endLine: 5,
+          endColumn: 48
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div></div>
+        <slot/>
+        <MyComponent><template #foo/></MyComponent>
+      </template>
+      `,
+      output: `
+      <template>
+        <div />
+        <slot></slot>
+        <MyComponent><template #foo></template></MyComponent>
+      </template>
+      `,
+      options: [{ html: { normal: 'always', component: 'never' } }],
+      errors: [
+        {
+          message: 'Require self-closing on HTML elements (<div>).',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 20
+        },
+        {
+          message:
+            'Disallow self-closing on Vue.js custom components (<slot/>).',
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 16
+        },
+        {
+          message:
+            'Disallow self-closing on Vue.js custom components (<template/>).',
+          line: 5,
+          column: 36,
+          endLine: 5,
+          endColumn: 38
         }
       ]
     }

@@ -2,8 +2,8 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
-import slotScopeAttribute from './syntaxes/slot-scope-attribute.js'
+import utils from '../utils/index.ts'
+import slotScopeAttribute from './syntaxes/slot-scope-attribute.ts'
 
 export default {
   meta: {

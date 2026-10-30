@@ -70,7 +70,7 @@ Self-closing is simple and shorter, but it's not supported in the HTML spec.
 
 - `html.void` (`"never"` by default) ... The style of well-known HTML void elements.
 - `html.normal` (`"always"` by default) ... The style of well-known HTML elements except void elements.
-- `html.component` (`"always"` by default) ... The style of Vue.js custom components.
+- `html.component` (`"always"` by default) ... The style of Vue.js custom components and Vue's special elements (`<component>`, `<slot>` and `<template>`).
 - `svg`(`"always"` by default) .... The style of well-known SVG elements.
 - `math`(`"always"` by default) .... The style of well-known MathML elements.
 

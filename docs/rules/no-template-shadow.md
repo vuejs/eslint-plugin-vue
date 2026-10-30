@@ -91,11 +91,15 @@ export default {
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/no-props-shadow](./no-props-shadow.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v5.0.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-template-shadow.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-template-shadow.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-template-shadow.test.ts)
