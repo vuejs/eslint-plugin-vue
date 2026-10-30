@@ -2,7 +2,7 @@
  * @author Valentin Yushkevich
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import deprecatedHtmlElements from '../utils/deprecated-html-elements.json' with { type: 'json' }
 
 const DEPRECATED_HTML_ELEMENTS = new Set<string>(deprecatedHtmlElements)
