@@ -332,6 +332,9 @@ export type Expression =
   | JSX.JSXElement
   | JSX.JSXFragment
   | TS.TSAsExpression
+  | TS.TSSatisfiesExpression
+  | TS.TSNonNullExpression
+  | TS.TSTypeAssertion
 
 export interface Identifier extends HasParentNode {
   type: 'Identifier'

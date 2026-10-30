@@ -153,6 +153,9 @@ declare global {
   // ---- TS Nodes ----
 
   type TSAsExpression = VAST.TSAsExpression
+  type TSSatisfiesExpression = VAST.TSSatisfiesExpression
+  type TSNonNullExpression = VAST.TSNonNullExpression
+  type TSTypeAssertion = VAST.TSTypeAssertion
   type TSTypeParameterInstantiation = VAST.TSTypeParameterInstantiation
   type TSPropertySignature = VAST.TSPropertySignature
   type TSMethodSignature = VAST.TSMethodSignature
