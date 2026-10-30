@@ -5,7 +5,7 @@
 import canConvertToVSlot from './utils/can-convert-to-v-slot.ts'
 import { toRegExpGroupMatcher } from '../../utils/regexp.ts'
 import { pascalCase, kebabCase } from '../../utils/casing.ts'
-import utils from '../../utils/index.js'
+import utils from '../../utils/index.ts'
 
 export default {
   deprecated: '2.6.0',
