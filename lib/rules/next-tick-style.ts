@@ -4,7 +4,7 @@
  * @copyright 2020 Flo Edelmann. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
 
 function getVueNextTickCallExpression(

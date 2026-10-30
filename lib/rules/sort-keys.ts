@@ -4,7 +4,7 @@
  * Original ESLint sort-keys by Toru Nagashima
  */
 import naturalCompare from 'natural-compare'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Gets the property name of the given `Property` node.

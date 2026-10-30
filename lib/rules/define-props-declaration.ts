@@ -4,7 +4,7 @@
  */
 import type { TSESTree } from '@typescript-eslint/types'
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 interface PropDeclaration {
   key: string
