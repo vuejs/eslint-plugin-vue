@@ -3034,7 +3034,7 @@ function getDirective(
 }
 
 /**
- * Check whether the given start tag has specific directive.
+ * Check whether the given start tag has specific attribute.
  */
 function hasAttribute(node: VElement, name: string, value?: string): boolean {
   return Boolean(getAttribute(node, name, value))
