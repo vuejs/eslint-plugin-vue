@@ -2,7 +2,7 @@
  * @author Toru Nagashima <https://github.com/mysticatea>
  */
 
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 interface Options {
   startTag?: 'always' | 'never'

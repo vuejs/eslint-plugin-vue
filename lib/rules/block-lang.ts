@@ -2,7 +2,7 @@
  * @fileoverview Disallow use other than available `lang`
  * @author Yosuke Ota
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 interface BlockOptions {
   lang: Set<string>

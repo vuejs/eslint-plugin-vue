@@ -2,7 +2,7 @@
  * @fileoverview disallow target="_blank" attribute without rel="noopener noreferrer"
  * @author Sosukesuzuki
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function isTargetBlank(node: VAttribute) {
   return (

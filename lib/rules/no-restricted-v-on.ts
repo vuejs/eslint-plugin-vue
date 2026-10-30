@@ -2,7 +2,7 @@
  * @author Kamogelo Moalusi <github.com/thesheppard>
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { toRegExp } from '../utils/regexp.ts'
 
 interface ParsedOption {

@@ -977,6 +977,29 @@ tester.run('require-explicit-slots', rule, {
           endColumn: 41
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot />
+        </div>
+      </template>
+      <script lang="ts">
+      export default {
+        slots: {} as any
+      }
+      </script>`,
+      errors: [
+        {
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 19
+        }
+      ]
     }
   ]
 })

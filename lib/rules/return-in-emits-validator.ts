@@ -2,8 +2,8 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import type { ComponentEmit, ComponentObjectEmit } from '../utils/index.js'
-import utils from '../utils/index.js'
+import type { ComponentEmit, ComponentObjectEmit } from '../utils/index.ts'
+import utils from '../utils/index.ts'
 
 /**
  * Checks if the given node value is falsy.

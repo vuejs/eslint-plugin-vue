@@ -215,6 +215,55 @@ tester.run('component-name-in-template-casing', rule, {
       options: ['kebab-case', { globals: ['/^c-/', 'other-component'] }]
     },
 
+    // namespaced components
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as Form from './form-components'
+        </script>
+        <template>
+          <Form.Input>
+            <Form.label>label</Form.label>
+          </Form.Input>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as Form from './form-components'
+        </script>
+        <template>
+          <form.Input>
+            <form.label>label</form.label>
+          </form.Input>
+        </template>
+      `,
+      options: ['kebab-case']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Input from './Input.vue'
+          const form = { Input }
+        </script>
+        <template>
+          <form.Input />
+        </template>
+      `
+    },
+    {
+      code: `
+        <template>
+          <Form.Input />
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['/^Form/'] }]
+    },
+
     // type-only imports
 
     {
@@ -1388,6 +1437,130 @@ tester.run('component-name-in-template-casing', rule, {
           column: 11,
           endLine: 18,
           endColumn: 24
+        }
+      ]
+    },
+    // namespaced components
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as Form from './form-components'
+        </script>
+        <template>
+          <form.input>label</form.input>
+          <form.Label />
+        </template>
+      `,
+      output: `
+        <script setup>
+          import * as Form from './form-components'
+        </script>
+        <template>
+          <Form.input>label</Form.input>
+          <Form.Label />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "form.input" is not PascalCase.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 22
+        },
+        {
+          message: 'Component name "form.Label" is not PascalCase.',
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 22
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as MyForm from './form-components'
+        </script>
+        <template>
+          <MyForm.Input>label</MyForm.Input>
+          <my-form.Label />
+        </template>
+      `,
+      output: `
+        <script setup>
+          import * as MyForm from './form-components'
+        </script>
+        <template>
+          <my-form.Input>label</my-form.Input>
+          <my-form.Label />
+        </template>
+      `,
+      options: ['kebab-case'],
+      errors: [
+        {
+          message: 'Component name "MyForm.Input" is not kebab-case.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 24
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import * as MyForm from './form-components'
+        </script>
+        <template>
+          <my-form.input />
+        </template>
+      `,
+      output: `
+        <script setup>
+          import * as MyForm from './form-components'
+        </script>
+        <template>
+          <MyForm.input />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "my-form.input" is not PascalCase.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Form.Input>
+            <the-component />
+          </Form.Input>
+        </template>
+      `,
+      output: `
+        <template>
+          <Form.Input>
+            <TheComponent />
+          </Form.Input>
+        </template>
+      `,
+      options: ['PascalCase', { registeredComponentsOnly: false }],
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 27
         }
       ]
     }

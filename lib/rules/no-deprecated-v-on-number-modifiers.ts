@@ -2,7 +2,7 @@
  * @fileoverview disallow using deprecated number (keycode) modifiers
  * @author yoyo930021
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import keyCodeToKey from '../utils/keycode-to-key.ts'
 
 export default {
