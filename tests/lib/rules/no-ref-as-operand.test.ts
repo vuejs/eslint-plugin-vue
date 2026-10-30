@@ -18,6 +18,28 @@ tester.run('no-ref-as-operand', rule, {
   valid: [
     `
     import { ref } from 'vue'
+    import { storeToRefs } from 'pinia'
+    const { current } = storeToRefs(store)
+    const selected = ref(null)
+    const options = { dependencyObject: current ?? ref(undefined) }
+    useRef(selected ?? ref(undefined))
+    const value = (selected ?? ref(undefined)).value
+    const nested = ready && (selected ?? ref(undefined))
+    `,
+
+    `
+    import { storeToRefs } from 'other-library'
+    const { loading } = storeToRefs(store)
+    if (loading) {}
+    `,
+    `
+    import { storeToRefs } from 'pinia'
+    const { loading } = storeToRefs(store)
+    if (loading.value) {}
+    `,
+
+    `
+    import { ref } from 'vue'
     const count = ref(0)
     console.log(count.value) // 0
 
@@ -322,6 +344,70 @@ tester.run('no-ref-as-operand', rule, {
     })
     </script>
     `,
+    ...[
+      ':loading="mutation.isLoading.value"',
+      ':loading="mutation.isLoading ?? fallback"',
+      ':loading="(mutation.isLoading ?? fallback).value"',
+      ':loading="isLoading"',
+      ':loading="!!isLoading"',
+      ':loading="isLoading ? 1 : 0"',
+      ':loading="isLoading && ready"',
+      ':loading="!!mutation.isLoading.value"',
+      '@click="delete mutation.isLoading"',
+      ':loading="!!mutation[key]"',
+      ':loading="!!optionalMutation?.isLoading"',
+      ':loading="!!unknownMutation.isLoading"',
+      'v-if="isLoading"',
+      ':loading="reactiveMutation.isLoading"',
+      ':loading="!!refMutation.isLoading"',
+      ':loading="mutation.isLoading"',
+      ':loading="!!maybeMutation.isLoading"',
+      'v-for="mutation in rows" :loading="!!mutation.isLoading"',
+      'v-slot="{ mutation }" :loading="!!mutation.isLoading"',
+      ':loading="((mutation) => !!mutation.isLoading)(plainMutation)"',
+      ':loading="unknownMutation.isLoading"',
+      ':loading="!!plainMutation.isLoading"'
+    ].map((binding) => ({
+      code: `
+      <script setup lang="ts">
+      import { ref, reactive } from 'vue'
+      import type { Ref, MaybeRef } from 'vue'
+      declare const mutation: { isLoading: Ref<boolean> }
+      declare const maybeMutation: { isLoading: MaybeRef<boolean> }
+      declare const optionalMutation: { isLoading: Ref<boolean> } | undefined
+      declare const plainMutation: { isLoading: boolean }
+      declare const rows: { isLoading: boolean }[]
+      const isLoading = ref(false)
+      const reactiveMutation = reactive({ isLoading })
+      const refMutation = ref({ isLoading: ref(false) })
+      </script>
+      <template><div ${binding} /></template>
+      `,
+      ...getTypeScriptFixtureTestOptions()
+    })),
+    {
+      code: `
+      <script setup lang="ts">
+      import type { Ref, MaybeRef } from 'vue'
+      declare let mutation: { isLoading: Ref<boolean>, maybe: MaybeRef<boolean> }
+      declare const other: Ref<boolean>
+      delete mutation.isLoading
+      mutation.isLoading = other
+      const loading = !!mutation.isLoading.value
+      const maybe = !!mutation.maybe
+      useRef(mutation.isLoading)
+      useRef(mutation.isLoading ?? other)
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    `
+    <script setup>
+    const mutation = useMutation()
+    const loading = !!mutation.isLoading
+    </script>
+    <template><div :loading="!!mutation.isLoading" /></template>
+    `,
     {
       // typescript-eslint parser without project service
       code: `
@@ -368,6 +454,254 @@ tester.run('no-ref-as-operand', rule, {
     }
   ],
   invalid: [
+    {
+      code: `
+      import { ref } from 'vue'
+      const selected = ref(null)
+      if (selected ?? fallback) {}
+      const active = !(ready && (selected ?? fallback))
+      `,
+      output: `
+      import { ref } from 'vue'
+      const selected = ref(null)
+      if (selected.value ?? fallback) {}
+      const active = !(ready && (selected.value ?? fallback))
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          data: { method: 'ref' },
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 19
+        },
+        {
+          messageId: 'requireDotValue',
+          data: { method: 'ref' },
+          line: 5,
+          column: 34,
+          endLine: 5,
+          endColumn: 42
+        }
+      ]
+    },
+
+    ...[
+      ['switch (state.count) {}', 'switch (state.count.value) {}'],
+      ['state.count++', 'state.count.value++'],
+      ['state.count += 1', 'state.count.value += 1'],
+      ['state.count + 1', 'state.count.value + 1'],
+      ['state.count && other', 'state.count.value && other'],
+      ['`count: ${state.count}`', '`count: ${state.count.value}`'],
+      ['state.count.other', 'state.count.value.other']
+    ].map(([statement, fixed]) => {
+      const prefix = `<script setup lang="ts">
+      import type { Ref } from 'vue'
+      declare const state: { count: Ref<number> }
+      `
+      return {
+        code: `${prefix}${statement}
+</script>`,
+        output: `${prefix}${fixed}
+</script>`,
+        ...getTypeScriptFixtureTestOptions(),
+        errors: [
+          {
+            messageId: 'requireDotValueOfRef',
+            line: 4,
+            column: 7 + statement.indexOf('state.count'),
+            endLine: 4,
+            endColumn: 18 + statement.indexOf('state.count')
+          }
+        ]
+      }
+    }),
+
+    {
+      code: `
+      import { storeToRefs as refs } from 'pinia'
+      import * as Pinia from 'pinia'
+      const { loading } = refs(store)
+      const { count } = Pinia.storeToRefs(store)
+      if (loading) {}
+      count + 1
+      `,
+      output: `
+      import { storeToRefs as refs } from 'pinia'
+      import * as Pinia from 'pinia'
+      const { loading } = refs(store)
+      const { count } = Pinia.storeToRefs(store)
+      if (loading.value) {}
+      count.value + 1
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          data: { method: 'storeToRefs' },
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 18
+        },
+        {
+          messageId: 'requireDotValue',
+          data: { method: 'storeToRefs' },
+          line: 7,
+          column: 7,
+          endLine: 7,
+          endColumn: 12
+        }
+      ]
+    },
+
+    ...[
+      [
+        '!!(mutation.isLoading ?? fallback)',
+        '!!(mutation.isLoading.value ?? fallback)',
+        'mutation.isLoading'
+      ],
+      [
+        '!!mutation.isLoading',
+        '!!mutation.isLoading.value',
+        'mutation.isLoading'
+      ],
+      [
+        '!!mutation.nested.isLoading',
+        '!!mutation.nested.isLoading.value',
+        'mutation.nested.isLoading'
+      ],
+      ['!!outer.isLoading', '!!outer.isLoading.value', 'outer.isLoading'],
+      [
+        'mutation.isLoading.other',
+        'mutation.isLoading.value.other',
+        'mutation.isLoading'
+      ],
+      [
+        'mutation.isLoading ? 1 : 0',
+        'mutation.isLoading.value ? 1 : 0',
+        'mutation.isLoading'
+      ],
+      [
+        'mutation.isLoading && ready',
+        'mutation.isLoading.value && ready',
+        'mutation.isLoading'
+      ],
+      [
+        'mutation.isLoading + 1',
+        'mutation.isLoading.value + 1',
+        'mutation.isLoading'
+      ],
+      [
+        'mutation["isLoading"] ? 1 : 0',
+        'mutation["isLoading"].value ? 1 : 0',
+        'mutation["isLoading"]'
+      ]
+    ].map(([expression, fixed, operand]) => {
+      const script = `
+      <script setup lang="ts">
+      import type { Ref, ShallowRef } from 'vue'
+      declare const mutation: { isLoading: Ref<boolean>, nested: { isLoading: Ref<boolean> } }
+      declare const outer: ShallowRef<{ isLoading: Ref<boolean> }>
+      </script>
+      `
+      return {
+        code: `${script}<template><div :loading="${expression.replaceAll('"', "'")}" /></template>`,
+        output: `${script}<template><div :loading="${fixed.replaceAll('"', "'")}" /></template>`,
+        ...getTypeScriptFixtureTestOptions(),
+        errors: [
+          {
+            messageId: 'requireDotValueOfRef',
+            line: 7,
+            column:
+              1 +
+              '      <template><div :loading="'.length +
+              expression.indexOf(operand),
+            endLine: 7,
+            endColumn:
+              1 +
+              '      <template><div :loading="'.length +
+              expression.indexOf(operand) +
+              operand.length
+          }
+        ]
+      }
+    }),
+    ...['if', 'else-if', 'show'].flatMap((directive) =>
+      [false, true].map((fallback) => ({
+        code: `
+      <script setup lang="ts">
+      import type { Ref } from 'vue'
+      declare const mutation: { isLoading: Ref<boolean> }
+      </script>
+      <template><div v-${directive}="mutation.isLoading${fallback ? ' ?? fallbackRef' : ''}" /></template>
+      `,
+        output: `
+      <script setup lang="ts">
+      import type { Ref } from 'vue'
+      declare const mutation: { isLoading: Ref<boolean> }
+      </script>
+      <template><div v-${directive}="mutation.isLoading.value${fallback ? ' ?? fallbackRef' : ''}" /></template>
+      `,
+        ...getTypeScriptFixtureTestOptions(),
+        errors: [
+          {
+            messageId: 'requireDotValueOfRef',
+            line: 6,
+            column: 1 + `      <template><div v-${directive}="`.length,
+            endLine: 6,
+            endColumn:
+              1 +
+              `      <template><div v-${directive}="mutation.isLoading`.length
+          }
+        ]
+      }))
+    ),
+    {
+      code: `
+      <script setup lang="ts">
+      import type { Ref } from 'vue'
+      declare const mutation: { isLoading: Ref<boolean> }
+      if (mutation.isLoading) {}
+      const loading = !!mutation.isLoading
+      const label = mutation.isLoading ? 'yes' : 'no'
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import type { Ref } from 'vue'
+      declare const mutation: { isLoading: Ref<boolean> }
+      if (mutation.isLoading.value) {}
+      const loading = !!mutation.isLoading.value
+      const label = mutation.isLoading.value ? 'yes' : 'no'
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          messageId: 'requireDotValueOfRef',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 29
+        },
+        {
+          messageId: 'requireDotValueOfRef',
+          line: 6,
+          column: 25,
+          endLine: 6,
+          endColumn: 43
+        },
+        {
+          messageId: 'requireDotValueOfRef',
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 39
+        }
+      ]
+    },
+
     {
       code: `
       import { ref } from 'vue'

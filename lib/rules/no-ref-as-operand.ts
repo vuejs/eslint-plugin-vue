@@ -23,6 +23,43 @@ function isRefInit(
 }
 
 /**
+ * A nullish fallback can pass a ref through unchanged. Only unwrap it when
+ * the surrounding expression actually consumes its value as an operand.
+ */
+function isLogicalExpressionUsedAsOperand(node: LogicalExpression): boolean {
+  let target: Expression = node
+  while (target.parent.type === 'LogicalExpression') {
+    target = target.parent
+  }
+  const parent = target.parent
+  switch (parent.type) {
+    case 'IfStatement':
+    case 'SwitchStatement':
+    case 'BinaryExpression': {
+      return true
+    }
+    case 'UnaryExpression': {
+      return parent.operator !== 'delete'
+    }
+    case 'ConditionalExpression': {
+      return parent.test === target
+    }
+    case 'TemplateLiteral': {
+      return parent.parent.type !== 'TaggedTemplateExpression'
+    }
+    case 'VExpressionContainer': {
+      const attribute = parent.parent
+      return (
+        attribute.type === 'VAttribute' &&
+        attribute.directive &&
+        ['if', 'else-if', 'show'].includes(attribute.key.name.name)
+      )
+    }
+  }
+  return false
+}
+
+/**
  * Get the callee member node from the given CallExpression
  */
 function getNameParamNode(node: CallExpression) {
@@ -91,8 +128,11 @@ export default {
       }
     }
 
-    function reportIfRefWrapped(node: Identifier, shouldCheckType = true) {
-      const data = refReferences.get(node)
+    function reportIfRefWrapped(
+      node: Identifier | MemberExpression,
+      shouldCheckType = true
+    ) {
+      const data = node.type === 'Identifier' ? refReferences.get(node) : null
       if (isRefInit(data)) {
         context.report({
           node,
@@ -120,6 +160,44 @@ export default {
       for (const node of nodes) {
         reportIfRefWrapped(node)
       }
+    }
+
+    function reportTemplateRef(node: MemberExpression) {
+      if (!utils.isScriptSetup(context)) return
+      const properties: string[] = []
+      let root: Expression | Super = node
+      while (root.type === 'MemberExpression') {
+        if (root.optional) return
+        const name = utils.getStaticPropertyName(root)
+        if (name == null) return
+        properties.unshift(name)
+        root = root.object
+      }
+      if (root.type !== 'Identifier') return
+
+      let container: ASTNode = node
+      while (container.type !== 'VExpressionContainer') {
+        if (!container.parent) return
+        container = container.parent
+      }
+      // Template locals and function parameters do not refer to setup bindings.
+      const reference = container.references.find((ref) => ref.id === root)
+      if (!reference || reference.variable) return
+      const globalScope = context.sourceCode.scopeManager.globalScope
+      const moduleScope = globalScope?.childScopes.find(
+        (scope) => scope.type === 'module'
+      )
+      const variable = moduleScope?.set.get(root.name)
+      const id = variable?.identifiers[0]
+      if (!id || !tsUtils.isRefObjectTypeInTemplate(context, id, properties))
+        return
+      context.report({
+        node,
+        messageId: 'requireDotValueOfRef',
+        fix(fixer) {
+          return fixer.insertTextAfter(node, '.value')
+        }
+      })
     }
 
     const programNode = context.sourceCode.ast
@@ -166,28 +244,40 @@ export default {
           refReferences = extractRefObjectReferences(context)
         },
         // if (refValue)
-        'IfStatement>Identifier'(node: Identifier) {
+        'IfStatement>:matches(Identifier, MemberExpression)'(
+          node: Identifier | MemberExpression
+        ) {
           reportIfRefWrapped(node)
         },
         // switch (refValue)
-        'SwitchStatement>Identifier'(node: Identifier) {
+        'SwitchStatement>:matches(Identifier, MemberExpression)'(
+          node: Identifier | MemberExpression
+        ) {
           reportIfRefWrapped(node)
         },
         // -refValue, +refValue, !refValue, ~refValue, typeof refValue
-        'UnaryExpression>Identifier'(node: Identifier) {
+        'UnaryExpression[operator!="delete"]>:matches(Identifier, MemberExpression)'(
+          node: Identifier | MemberExpression
+        ) {
           reportIfRefWrapped(node)
         },
         // refValue++, refValue--
-        'UpdateExpression>Identifier'(node: Identifier) {
+        'UpdateExpression>:matches(Identifier, MemberExpression)'(
+          node: Identifier | MemberExpression
+        ) {
           reportIfRefWrapped(node)
         },
         // refValue+1, refValue-1
-        'BinaryExpression>Identifier'(node: Identifier) {
+        'BinaryExpression>:matches(Identifier, MemberExpression)'(
+          node: Identifier | MemberExpression
+        ) {
           reportIfRefWrapped(node)
         },
         // refValue+=1, refValue-=1, foo+=refValue, foo-=refValue
-        'AssignmentExpression>Identifier'(
-          node: Identifier & { parent: AssignmentExpression }
+        'AssignmentExpression>:matches(Identifier, MemberExpression)'(
+          node: (Identifier | MemberExpression) & {
+            parent: AssignmentExpression
+          }
         ) {
           if (node.parent.operator === '=') {
             if (node.parent.left !== node) {
@@ -200,26 +290,34 @@ export default {
           reportIfRefWrapped(node)
         },
         // refValue || other, refValue && other. ignore: other || refValue
-        'LogicalExpression>Identifier'(
-          node: Identifier & { parent: LogicalExpression }
+        'LogicalExpression>:matches(Identifier, MemberExpression)'(
+          node: (Identifier | MemberExpression) & { parent: LogicalExpression }
         ) {
-          if (node.parent.left !== node) {
+          if (
+            node.parent.left !== node ||
+            (node.parent.operator === '??' &&
+              !isLogicalExpressionUsedAsOperand(node.parent))
+          ) {
             return
           }
-          // Report only constants.
-          const data = refReferences.get(node)
+          // Report only constant identifiers.
+          const data =
+            node.type === 'Identifier' ? refReferences.get(node) : null
           if (
-            !data ||
-            !data.variableDeclaration ||
-            data.variableDeclaration.kind !== 'const'
+            node.type === 'Identifier' &&
+            (!data ||
+              !data.variableDeclaration ||
+              data.variableDeclaration.kind !== 'const')
           ) {
             return
           }
           reportIfRefWrapped(node)
         },
         // refValue ? x : y
-        'ConditionalExpression>Identifier'(
-          node: Identifier & { parent: ConditionalExpression }
+        'ConditionalExpression>:matches(Identifier, MemberExpression)'(
+          node: (Identifier | MemberExpression) & {
+            parent: ConditionalExpression
+          }
         ) {
           if (node.parent.test !== node) {
             return
@@ -227,14 +325,14 @@ export default {
           reportIfRefWrapped(node)
         },
         // `${refValue}`
-        ':not(TaggedTemplateExpression)>TemplateLiteral>Identifier'(
-          node: Identifier
+        ':not(TaggedTemplateExpression)>TemplateLiteral>:matches(Identifier, MemberExpression)'(
+          node: Identifier | MemberExpression
         ) {
           reportIfRefWrapped(node)
         },
         // refValue.x
-        'MemberExpression>Identifier'(
-          node: Identifier & { parent: MemberExpression }
+        'MemberExpression>:matches(Identifier, MemberExpression)'(
+          node: (Identifier | MemberExpression) & { parent: MemberExpression }
         ) {
           if (node.parent.object !== node) {
             return
@@ -250,6 +348,41 @@ export default {
           reportIfRefWrapped(node)
         }
       },
+      utils.defineTemplateBodyVisitor(context, {
+        'UnaryExpression[operator!="delete"] > MemberExpression':
+          reportTemplateRef,
+        'BinaryExpression > MemberExpression': reportTemplateRef,
+        'ConditionalExpression > MemberExpression'(node: MemberExpression) {
+          if (
+            node.parent.type === 'ConditionalExpression' &&
+            node.parent.test === node
+          ) {
+            reportTemplateRef(node)
+          }
+        },
+        'LogicalExpression > MemberExpression'(node: MemberExpression) {
+          if (
+            node.parent.type === 'LogicalExpression' &&
+            node.parent.left === node &&
+            (node.parent.operator !== '??' ||
+              isLogicalExpressionUsedAsOperand(node.parent))
+          ) {
+            reportTemplateRef(node)
+          }
+        },
+        'MemberExpression > MemberExpression'(node: MemberExpression) {
+          if (
+            node.parent.type !== 'MemberExpression' ||
+            node.parent.object !== node
+          )
+            return
+          const name = utils.getStaticPropertyName(node.parent)
+          if (name != null && name !== 'value' && name !== 'effect')
+            reportTemplateRef(node)
+        },
+        'VAttribute[directive=true][key.name.name=/^(if|else-if|show)$/] > VExpressionContainer > MemberExpression':
+          reportTemplateRef
+      }),
       utils.defineScriptSetupVisitor(context, {
         onDefineEmitsEnter(node) {
           if (
