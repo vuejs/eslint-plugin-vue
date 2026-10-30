@@ -46,16 +46,19 @@ export default {
   },
   create(context: RuleContext) {
     const sourceCode = context.sourceCode
+    const validPropertyTypes = new Set([
+      'FunctionExpression',
+      'ArrowFunctionExpression',
+      'Identifier'
+    ])
 
-    return utils.executeOnVueComponent(context, (obj) => {
+    return utils.executeOnVueComponent(context, (objectExpression) => {
       const invalidData = utils.findProperty(
-        obj,
+        objectExpression,
         'data',
-        (p) =>
-          p.value.type !== 'FunctionExpression' &&
-          p.value.type !== 'ArrowFunctionExpression' &&
-          p.value.type !== 'Identifier'
+        (property) => !validPropertyTypes.has(property.value.type)
       )
+
       if (invalidData) {
         context.report({
           node: invalidData,

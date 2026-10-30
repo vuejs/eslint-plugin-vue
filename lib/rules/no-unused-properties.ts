@@ -303,8 +303,8 @@ export default {
     ) {
       if (
         (property.groupName === 'props' &&
-          propertyReferencesForProps.hasProperty(property.name)) ||
-        propertyReferences.hasProperty('$props') ||
+          (propertyReferencesForProps.hasProperty(property.name) ||
+            propertyReferences.hasProperty('$props'))) ||
         (property.groupName === 'setup' &&
           templatePropertiesContainer.refNames.has(property.name)) ||
         (shouldIgnorePublicMembers &&

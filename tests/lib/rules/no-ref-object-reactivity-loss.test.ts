@@ -79,61 +79,17 @@ tester.run('no-ref-object-reactivity-loss', rule, {
     let foo = ref(0)
     foo = foo
     `,
-    // Reactivity Transform
+    // Reactivity Transform is no longer supported.
     `
     const count = $ref(0)
-    const value1 = computed(() => count)
-    const value2 = fn($$(count))
-    const value3 = computed(() => fn(count))
-    `,
-    `
-    const count = $(foo)
-    const value1 = computed(() => count)
-    const value2 = fn($$(count))
-    const value3 = computed(() => fn(count))
+    const value1 = count
+    const value2 = fn(count)
+    let c = $computed(() => count)
+    console.log(count, c)
     `,
     `
     const { count } = $(foo)
-    const value1 = computed(() => count)
-    const value2 = fn($$(count))
-    const value3 = computed(() => fn(count))
-    `,
-    `
-    let count = $ref(0)
-    count = 42
-    `,
-    `
-    let count = $ref(0)
-    count++
-    `,
-    `
-    let count = $ref(0)
-    ;( { foo: count } = bar )
-    `,
-    `
-    const { v1, v2, v3, v4 } = $(foo)
-    fn($$({ v1, a: [v2], a: [...v3], ...v4}))
-    `,
-    `
-    let r = $ref(0)
-    let c = $computed(() => r)
-    let sr = $shallowRef({ count: 1 })
-    let cr = $customRef((track, trigger) => {
-      return {
-        get() { return sr },
-        set(newValue) { sr = newValue }
-      }
-    })
-    let tr = $toRef($$(sr), 'count')
-    function fn() {
-      console.log(
-        r.value,
-        c.value,
-        sr.value,
-        cr.value,
-        tr.value
-      )
-    }
+    const value1 = count
     `,
     // https://github.com/vuejs/eslint-plugin-vue/issues/3056
     // The body of an async function is not executed synchronously to the end.
@@ -251,6 +207,37 @@ tester.run('no-ref-object-reactivity-loss', rule, {
           column: 25,
           endLine: 6,
           endColumn: 30
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup>
+      import { useTemplateRef } from 'vue'
+      const modal = useTemplateRef('modal')
+      defineExpose({
+        modal,
+        open: modal.value?.open,
+        close: modal.value?.close
+      })
+      </script>`,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 20
+        },
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 8,
+          column: 16,
+          endLine: 8,
+          endColumn: 21
         }
       ]
     },
@@ -419,188 +406,6 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         }
       ]
     },
-    // Reactivity Transform
-    {
-      code: `
-      const count = $ref(0)
-      const value1 = count
-      const value2 = fn(count)
-      `,
-      errors: [
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 3,
-          column: 22,
-          endLine: 3,
-          endColumn: 27
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 4,
-          column: 25,
-          endLine: 4,
-          endColumn: 30
-        }
-      ]
-    },
-    {
-      code: `
-      const count = $(foo)
-      const value1 = count
-      const value2 = fn(count)
-      `,
-      errors: [
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 3,
-          column: 22,
-          endLine: 3,
-          endColumn: 27
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 4,
-          column: 25,
-          endLine: 4,
-          endColumn: 30
-        }
-      ]
-    },
-    {
-      code: `
-      const { count } = $(foo)
-      const value1 = count
-      const value2 = fn(count)
-      `,
-      errors: [
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 3,
-          column: 22,
-          endLine: 3,
-          endColumn: 27
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 4,
-          column: 25,
-          endLine: 4,
-          endColumn: 30
-        }
-      ]
-    },
-    {
-      code: `
-      const { v1, a: [v2 = 42], b: [...v3], ...v4 } = $(foo)
-      const value1 = v1
-      const value2 = v2
-      const value3 = v3
-      const value4 = v4
-      `,
-      errors: [
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 3,
-          column: 22,
-          endLine: 3,
-          endColumn: 24
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 4,
-          column: 22,
-          endLine: 4,
-          endColumn: 24
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 5,
-          column: 22,
-          endLine: 5,
-          endColumn: 24
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 6,
-          column: 22,
-          endLine: 6,
-          endColumn: 24
-        }
-      ]
-    },
-    {
-      code: `
-      let r = $ref(0)
-      let c = $computed(() => r)
-      let sr = $shallowRef({ count: 1 })
-      let cr = $customRef((track, trigger) => {
-        return {
-          get() { return sr },
-          set(newValue) { sr = newValue }
-        }
-      })
-      let tr = $toRef($$(sr), 'count')
-      console.log(
-        r.value,
-        c.value,
-        sr.value,
-        cr.value,
-        tr.value
-      )
-      `,
-      errors: [
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 13,
-          column: 9,
-          endLine: 13,
-          endColumn: 10
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 14,
-          column: 9,
-          endLine: 14,
-          endColumn: 10
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 15,
-          column: 9,
-          endLine: 15,
-          endColumn: 11
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 16,
-          column: 9,
-          endLine: 16,
-          endColumn: 11
-        },
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 17,
-          column: 9,
-          endLine: 17,
-          endColumn: 11
-        }
-      ]
-    },
     // https://github.com/vuejs/eslint-plugin-vue/issues/3056
     {
       code: `
@@ -650,25 +455,6 @@ tester.run('no-ref-object-reactivity-loss', rule, {
           column: 26,
           endLine: 6,
           endColumn: 31
-        }
-      ]
-    },
-    // Reactivity Transform
-    {
-      code: `
-      const count = $ref(0)
-      ;(() => {
-        const value1 = count
-      })()
-      `,
-      errors: [
-        {
-          message:
-            'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 4,
-          column: 24,
-          endLine: 4,
-          endColumn: 29
         }
       ]
     }

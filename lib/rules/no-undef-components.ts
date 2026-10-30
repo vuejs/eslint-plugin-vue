@@ -203,20 +203,33 @@ export default {
       const fileName = context.filename
       const selfComponentName = path.basename(fileName, path.extname(fileName))
       definedInSetupComponents.addName(selfComponentName)
-      scriptVisitor = utils.defineVueVisitor(context, {
-        onVueObjectEnter(node, { type }) {
-          if (type !== 'export') return
-          const nameProperty = utils.findProperty(node, 'name')
-          if (!nameProperty || !utils.isStringLiteral(nameProperty.value)) {
-            return
-          }
-
-          const name = utils.getStringLiteralValue(nameProperty.value)
-          if (name) {
-            definedInOptionComponents.addName(name)
-          }
+      function addSelfName(node: ObjectExpression) {
+        const nameProperty = utils.findProperty(node, 'name')
+        if (!nameProperty || !utils.isStringLiteral(nameProperty.value)) {
+          return
         }
-      })
+
+        const name = utils.getStringLiteralValue(nameProperty.value)
+        if (name) {
+          definedInOptionComponents.addName(name)
+        }
+      }
+      scriptVisitor = utils.compositingVisitors(
+        utils.defineVueVisitor(context, {
+          onVueObjectEnter(node, { type }) {
+            if (type !== 'export') return
+            addSelfName(node)
+          }
+        }),
+        utils.defineScriptSetupVisitor(context, {
+          onDefineOptionsEnter(node) {
+            if (node.arguments.length === 0) return
+            const define = node.arguments[0]
+            if (define.type !== 'ObjectExpression') return
+            addSelfName(define)
+          }
+        })
+      )
 
       verifyName = (rawName, reportNode) => {
         if (

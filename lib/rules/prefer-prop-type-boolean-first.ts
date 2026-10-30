@@ -68,15 +68,11 @@ export default {
       if (value.type === 'ArrayExpression') {
         checkArrayExpression(value, context)
       } else if (value.type === 'ObjectExpression') {
-        const type = value.properties.find(
-          (property): property is Property =>
-            property.type === 'Property' &&
-            utils.getStaticPropertyName(property) === 'type'
-        )
-        if (!type || type.value.type !== 'ArrayExpression') {
+        const typeProperty = utils.findProperty(value, 'type')
+        if (!typeProperty || typeProperty.value.type !== 'ArrayExpression') {
           return
         }
-        checkArrayExpression(type.value, context)
+        checkArrayExpression(typeProperty.value, context)
       }
     }
 

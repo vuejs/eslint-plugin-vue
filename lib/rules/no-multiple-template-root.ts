@@ -1,0 +1,121 @@
+/**
+ * @fileoverview disallow adding multiple root nodes to the template
+ * @author Przemyslaw Falowski (@przemkow)
+ */
+import utils from '../utils/index.js'
+
+export default {
+  meta: {
+    type: 'problem',
+    docs: {
+      description: 'disallow adding multiple root nodes to the template',
+      categories: ['vue2-essential'],
+      url: 'https://eslint.vuejs.org/rules/no-multiple-template-root.html'
+    },
+    fixable: null,
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          disallowComments: {
+            type: 'boolean'
+          }
+        },
+        additionalProperties: false
+      }
+    ],
+    messages: {
+      commentRoot: 'The template root disallows comments.',
+      multipleRoot: 'The template root requires exactly one element.',
+      textRoot: 'The template root requires an element rather than texts.',
+      disallowedElement: "The template root disallows '<{{name}}>' elements.",
+      disallowedDirective: "The template root disallows 'v-for' directives."
+    }
+  },
+  create(context: RuleContext): RuleListener {
+    const options = context.options[0] || {}
+    const disallowComments = options.disallowComments
+    const sourceCode = context.sourceCode
+
+    return {
+      Program(program) {
+        const element = program.templateBody
+        if (element == null) {
+          return
+        }
+
+        const reportComments = element.comments.filter(
+          (comment) =>
+            utils.isInRange(element, comment) &&
+            element.children.every((child) => !utils.isInRange(child, comment))
+        )
+        if (disallowComments) {
+          for (const comment of reportComments) {
+            context.report({
+              node: comment,
+              loc: comment.loc,
+              messageId: 'commentRoot'
+            })
+          }
+        }
+
+        const rootElements = []
+        let extraText = null
+        let extraElement = null
+        let isVIf = false
+        for (const child of element.children) {
+          if (child.type === 'VElement') {
+            if (rootElements.length === 0) {
+              rootElements.push(child)
+              isVIf = utils.hasDirective(child, 'if')
+            } else if (isVIf && utils.hasDirective(child, 'else-if')) {
+              rootElements.push(child)
+            } else if (isVIf && utils.hasDirective(child, 'else')) {
+              rootElements.push(child)
+              isVIf = false
+            } else {
+              extraElement = child
+            }
+          } else if (sourceCode.getText(child).trim() !== '') {
+            extraText = child
+          }
+        }
+
+        if (extraText != null) {
+          context.report({
+            node: extraText,
+            loc: extraText.loc,
+            messageId: 'textRoot'
+          })
+        } else if (extraElement == null) {
+          for (const element of rootElements) {
+            const tag = element.startTag
+            const name = element.name
+
+            if (name === 'template' || name === 'slot') {
+              context.report({
+                node: tag,
+                loc: tag.loc,
+                messageId: 'disallowedElement',
+                data: { name }
+              })
+            }
+            if (utils.hasDirective(element, 'for')) {
+              context.report({
+                node: tag,
+                loc: tag.loc,
+                messageId: 'disallowedDirective'
+              })
+            }
+          }
+        } else {
+          context.report({
+            node: extraElement,
+            loc: extraElement.loc,
+            messageId: 'multipleRoot'
+          })
+        }
+      }
+    }
+  }
+}
