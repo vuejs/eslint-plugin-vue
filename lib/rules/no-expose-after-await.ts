@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Get the callee member node from the given CallExpression
@@ -89,7 +89,7 @@ export default {
             return
           }
           const setupScope = setupScopes.get(scopeStack.scopeNode)
-          if (!setupScope || !utils.inRange(setupScope.range, node)) {
+          if (!setupScope || !utils.isInRange(setupScope.range, node)) {
             return
           }
           setupScope.afterAwait = true
@@ -102,7 +102,7 @@ export default {
           if (
             !setupScope ||
             !setupScope.afterAwait ||
-            !utils.inRange(setupScope.range, node)
+            !utils.isInRange(setupScope.range, node)
           ) {
             return
           }

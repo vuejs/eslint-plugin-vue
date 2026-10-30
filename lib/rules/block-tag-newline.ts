@@ -2,7 +2,7 @@
  * @fileoverview Enforce line breaks style after opening and before closing block-level tags.
  * @author Yosuke Ota
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 type OptionType = 'always' | 'never' | 'consistent' | 'ignore'
 interface ContentsOptions {
@@ -10,10 +10,6 @@ interface ContentsOptions {
   multiline?: OptionType
   maxEmptyLines?: number
 }
-type Options = ContentsOptions & {
-  blocks?: { [element: string]: ContentsOptions }
-}
-type ArgsOptions = Required<ContentsOptions>
 
 function getLinebreakCount(text: string): number {
   return text.split(/\r\n|[\r\n\u{2028}\u{2029}]/gu).length - 1
@@ -79,6 +75,11 @@ export default {
     }
   },
   create(context: RuleContext) {
+    type ArgsOptions = Required<ContentsOptions>
+    type Options = ContentsOptions & {
+      blocks?: { [element: string]: ContentsOptions }
+    }
+
     const sourceCode = context.sourceCode
     const df =
       sourceCode.parserServices.getDocumentFragment &&

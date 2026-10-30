@@ -2,12 +2,10 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 type PreferOption =
   'script-setup' | 'composition' | 'composition-vue2' | 'options'
-
-type UserPreferOption = PreferOption[]
 
 interface AllowsOption {
   scriptSetup?: boolean
@@ -58,7 +56,7 @@ function applyPreferOption(opts: NormalizeOptions, prefer: PreferOption) {
 function parseOptions(options: any[]): NormalizeOptions {
   const opts: NormalizeOptions = { allowsSFC: {}, allowsOther: {} }
 
-  const preferOptions: UserPreferOption = options[0] || [
+  const preferOptions: PreferOption[] = options[0] || [
     'script-setup',
     'composition'
   ]

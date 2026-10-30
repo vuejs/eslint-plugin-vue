@@ -2,8 +2,8 @@
  * @fileoverview Requires specific casing for the Prop name in Vue components
  * @author Yu Kimura
  */
-import type { ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import type { ComponentProp } from '../utils/index.ts'
+import utils from '../utils/index.ts'
 import { getChecker } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 

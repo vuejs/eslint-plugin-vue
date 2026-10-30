@@ -4,7 +4,7 @@
  */
 import { ReferenceTracker } from '@eslint-community/eslint-utils'
 import type { TYPES } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const LIFECYCLE_HOOKS = [
   'onBeforeMount',
@@ -95,7 +95,7 @@ export default {
             return
           }
           const setupScope = setupScopes.get(scopeStack.scopeNode)
-          if (!setupScope || !utils.inRange(setupScope.range, node)) {
+          if (!setupScope || !utils.isInRange(setupScope.range, node)) {
             return
           }
           setupScope.afterAwait = true
@@ -107,7 +107,7 @@ export default {
           const setupScope = setupScopes.get(scopeStack.scopeNode)
           if (
             !setupScope?.afterAwait ||
-            !utils.inRange(setupScope.range, node) ||
+            !utils.isInRange(setupScope.range, node) ||
             !lifecycleHookCallNodes.has(node) ||
             node.arguments.length >= 2 // Has target instance. e.g. `onMounted(() => {}, instance)`
           ) {

@@ -2,7 +2,7 @@
  * @fileoverview Disallow usage of button without an explicit type attribute
  * @author Jonathan Santerre <jonathan@santerre.dev>
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function isButtonType(type: string): type is 'button' | 'submit' | 'reset' {
   return ['button', 'submit', 'reset'].includes(type)
