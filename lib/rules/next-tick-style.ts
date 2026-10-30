@@ -5,7 +5,7 @@
  * See LICENSE file in root directory for full license.
  */
 import vueEslintParser from 'vue-eslint-parser'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { findVariable, isArrowToken } from '@eslint-community/eslint-utils'
 
 const traverseNodes = vueEslintParser.AST.traverseNodes

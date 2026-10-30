@@ -8,8 +8,8 @@ import type {
   ComponentTypeProp,
   ComponentInferTypeProp,
   VueObjectData
-} from '../utils/index.js'
-import utils from '../utils/index.js'
+} from '../utils/index.ts'
+import utils from '../utils/index.ts'
 import { capitalize } from '../utils/casing.ts'
 import tsAST from '../utils/ts-utils/ts-ast.js'
 

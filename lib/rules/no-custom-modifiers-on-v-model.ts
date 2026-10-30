@@ -2,7 +2,7 @@
  * @author Przemyslaw Falowski (@przemkow)
  * @fileoverview This rule checks whether v-model used on the component do not have custom modifiers
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const VALID_MODIFIERS = new Set(['lazy', 'number', 'trim'])
 

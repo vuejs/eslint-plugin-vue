@@ -2,7 +2,7 @@
  * @fileoverview enforce usage of `exact` modifier on `v-on`.
  * @author Armano
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 interface EventDirective {
   name: string

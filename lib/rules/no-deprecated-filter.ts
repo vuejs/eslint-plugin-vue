@@ -2,7 +2,7 @@
  * @author Przemyslaw Falowski (@przemkow)
  * @fileoverview disallow using deprecated filters syntax
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

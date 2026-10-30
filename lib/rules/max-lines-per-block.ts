@@ -3,7 +3,7 @@
  * @fileoverview Rule for checking the maximum number of lines in Vue SFC blocks.
  */
 import { SourceCode } from 'eslint'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function isEmptyLine(text: string) {
   return !text.trim()

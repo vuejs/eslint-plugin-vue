@@ -2,9 +2,9 @@
  * @author ItMaga
  * See LICENSE file in root directory for full license.
  */
-import type { ComponentEmit, VueObjectData } from '../utils/index.js'
+import type { ComponentEmit, VueObjectData } from '../utils/index.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 interface SetupContext {
   contextReferenceIds: Set<Identifier>
