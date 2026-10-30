@@ -3,68 +3,114 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { Rule, Scope } from 'eslint'
+import { Linter } from 'eslint'
+import { builtinRules } from 'eslint/use-at-your-own-risk'
+import nodeModule from 'node:module'
+import path from 'node:path'
+import vueEslintParser from 'vue-eslint-parser'
+import { findVariable, ReferenceTracker } from '@eslint-community/eslint-utils'
+import type { TYPES } from '@eslint-community/eslint-utils'
+import type {
+  ComponentArrayProp,
+  ComponentObjectProp,
+  ComponentUnknownProp,
+  ComponentProp,
+  ComponentArrayEmit,
+  ComponentObjectEmit,
+  ComponentUnknownEmit,
+  ComponentEmit,
+  NameWithLoc,
+  ComponentSlot,
+  ComponentModelName,
+  ComponentModel,
+  VueObjectType,
+  VueObjectData,
+  VueVisitor,
+  ScriptSetupVisitor
+} from '../../typings/eslint-plugin-vue/util-types/utils.ts'
+import scopeUtils from './scope.js'
+import tsUtils from './ts-utils/index.js'
+import htmlElements from './html-elements.json' with { type: 'json' }
+import svgElements from './svg-elements.json' with { type: 'json' }
+import mathElements from './math-elements.json' with { type: 'json' }
+import voidElements from './void-elements.json' with { type: 'json' }
+import vue2BuiltinComponents from './vue2-builtin-components.ts'
+import vue3BuiltinComponents from './vue3-builtin-components.ts'
+import vueBuiltinElements from './vue-builtin-elements.ts'
 
-const { getScope } = require('./scope')
+export type {
+  ComponentArrayProp,
+  ComponentObjectProp,
+  ComponentTypeProp,
+  ComponentInferTypeProp,
+  ComponentUnknownProp,
+  ComponentProp,
+  ComponentArrayEmit,
+  ComponentObjectEmit,
+  ComponentTypeEmit,
+  ComponentInferTypeEmit,
+  ComponentUnknownEmit,
+  ComponentEmit,
+  NameWithLoc,
+  ComponentTypeSlot,
+  ComponentInferTypeSlot,
+  ComponentUnknownSlot,
+  ComponentSlot,
+  ComponentModelName,
+  ComponentModel,
+  VueObjectType,
+  VueObjectData,
+  VueVisitor,
+  ScriptSetupVisitor
+} from '../../typings/eslint-plugin-vue/util-types/utils.ts'
 
-/**
- * @typedef {import('eslint').Rule.RuleModule} RuleModule
- * @typedef {import('estree').Position} Position
- * @typedef {import('eslint').Rule.CodePath} CodePath
- * @typedef {import('eslint').Rule.CodePathSegment} CodePathSegment
- */
-/**
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentArrayProp} ComponentArrayProp
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentObjectProp} ComponentObjectProp
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentTypeProp} ComponentTypeProp
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentInferTypeProp} ComponentInferTypeProp
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentUnknownProp} ComponentUnknownProp
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentProp} ComponentProp
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentArrayEmit} ComponentArrayEmit
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentObjectEmit} ComponentObjectEmit
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentTypeEmit} ComponentTypeEmit
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentInferTypeEmit} ComponentInferTypeEmit
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentUnknownEmit} ComponentUnknownEmit
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentEmit} ComponentEmit
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').NameWithLoc} NameWithLoc
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentTypeSlot} ComponentTypeSlot
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentInferTypeSlot} ComponentInferTypeSlot
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentUnknownSlot} ComponentUnknownSlot
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentSlot} ComponentSlot
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentModelName} ComponentModelName
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ComponentModel} ComponentModel
- */
-/**
- * @typedef { {key: string | null, value: BlockStatement | null} } ComponentComputedProperty
- */
-/**
- * @typedef { 'props' | 'asyncData' | 'data' | 'computed' | 'setup' | 'watch' | 'methods' | 'provide' | 'inject' | 'expose' } GroupName
- * @typedef { { type: 'array',  name: string, groupName: GroupName, node: Literal | TemplateLiteral } } ComponentArrayPropertyData
- * @typedef { { type: 'object', name: string, groupName: GroupName, node: Identifier | Literal | TemplateLiteral, property: Property } } ComponentObjectPropertyData
- * @typedef { ComponentArrayPropertyData | ComponentObjectPropertyData } ComponentPropertyData
- */
-/**
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').VueObjectType} VueObjectType
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').VueObjectData} VueObjectData
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').VueVisitor} VueVisitor
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/utils').ScriptSetupVisitor} ScriptSetupVisitor
- */
+export interface ComponentComputedProperty {
+  key: string | null
+  value: BlockStatement | null
+}
+
+export type GroupName =
+  | 'props'
+  | 'asyncData'
+  | 'data'
+  | 'computed'
+  | 'setup'
+  | 'watch'
+  | 'methods'
+  | 'provide'
+  | 'inject'
+  | 'expose'
+
+export interface ComponentArrayPropertyData {
+  type: 'array'
+  name: string
+  groupName: GroupName
+  node: Literal | TemplateLiteral
+}
+
+export interface ComponentObjectPropertyData {
+  type: 'object'
+  name: string
+  groupName: GroupName
+  node: Identifier | Literal | TemplateLiteral
+  property: Property
+}
+
+export type ComponentPropertyData =
+  ComponentArrayPropertyData | ComponentObjectPropertyData
 
 // ------------------------------------------------------------------------------
 // Helpers
 // ------------------------------------------------------------------------------
 
-const HTML_ELEMENT_NAMES = new Set(require('./html-elements.json'))
-const SVG_ELEMENT_NAMES = new Set(require('./svg-elements.json'))
-const MATH_ELEMENT_NAMES = new Set(require('./math-elements.json'))
-const VOID_ELEMENT_NAMES = new Set(require('./void-elements.json'))
-const VUE2_BUILTIN_COMPONENT_NAMES = new Set(
-  require('./vue2-builtin-components')
-)
-const VUE3_BUILTIN_COMPONENT_NAMES = new Set(
-  require('./vue3-builtin-components')
-)
-const VUE_BUILTIN_ELEMENT_NAMES = new Set(require('./vue-builtin-elements'))
+const HTML_ELEMENT_NAMES = new Set(htmlElements)
+const SVG_ELEMENT_NAMES = new Set(svgElements)
+const MATH_ELEMENT_NAMES = new Set(mathElements)
+const VOID_ELEMENT_NAMES = new Set(voidElements)
+const VUE2_BUILTIN_COMPONENT_NAMES = new Set(vue2BuiltinComponents)
+const VUE3_BUILTIN_COMPONENT_NAMES = new Set(vue3BuiltinComponents)
+const VUE_BUILTIN_ELEMENT_NAMES = new Set(vueBuiltinElements)
 const BUILTIN_DIRECTIVE_NAMES = new Set([
   'bind',
   'on',
@@ -83,56 +129,44 @@ const BUILTIN_DIRECTIVE_NAMES = new Set([
   'memo',
   'is'
 ])
-const { createRequire } = require('node:module')
-const path = require('node:path')
-const vueEslintParser = require('vue-eslint-parser')
 const { traverseNodes, getFallbackKeys, NS } = vueEslintParser.AST
-const {
-  findVariable,
-  ReferenceTracker
-} = require('@eslint-community/eslint-utils')
 const {
   getComponentPropsFromTypeDefine,
   getComponentEmitsFromTypeDefine,
   getComponentSlotsFromTypeDefine,
   isExhaustiveSwitch,
   isTypeNode
-} = require('./ts-utils')
+} = tsUtils
+const { getScope } = scopeUtils
 
-/**
- * @type { WeakMap<RuleContext, Token[]> }
- */
-const componentComments = new WeakMap()
+const componentComments: WeakMap<RuleContext, Token[]> = new WeakMap()
 
-/** @type { Map<string, RuleModule> | null } */
-let coreRuleMap = null
-/** @type { Map<string, RuleModule> } */
-const stylisticRuleMap = new Map()
+let coreRuleMap: Map<string, RuleModule> | null = null
+const stylisticRuleMap: Map<string, RuleModule> = new Map()
 /**
  * Get the core rule implementation from the rule name
- * @param {string} name
- * @returns {RuleModule | null}
  */
-function getCoreRule(name) {
-  const eslint = require('eslint')
+export function getCoreRule(name: string): RuleModule | null {
   try {
     // eslint-disable-next-line unicorn/no-top-level-assignment-in-function -- lazily cache the core rule map
-    coreRuleMap ||= new eslint.Linter().getRules()
+    coreRuleMap ||= new Linter().getRules()
     return coreRuleMap.get(name) || null
   } catch {
     // getRules() is no longer available in flat config.
   }
 
-  const { builtinRules } = require('eslint/use-at-your-own-risk')
-  return /** @type {any} */ (builtinRules.get(name) || null)
+  return (builtinRules.get(name) || null) as any
 }
 /**
  * Get ESLint Stylistic rule implementation from the rule name
- * @param {string} name
- * @param {'@stylistic/eslint-plugin' | '@stylistic/eslint-plugin-ts' | '@stylistic/eslint-plugin-js'} [preferModule]
- * @returns {RuleModule | null}
  */
-function getStylisticRule(name, preferModule) {
+function getStylisticRule(
+  name: string,
+  preferModule?:
+    | '@stylistic/eslint-plugin'
+    | '@stylistic/eslint-plugin-ts'
+    | '@stylistic/eslint-plugin-js'
+): RuleModule | null {
   if (!preferModule) {
     const cached = stylisticRuleMap.get(name)
     if (cached) {
@@ -149,9 +183,9 @@ function getStylisticRule(name, preferModule) {
   }
   for (const stylisticPluginName of stylisticPluginNames) {
     try {
-      const plugin = createRequire(`${process.cwd()}/__placeholder__.js`)(
-        stylisticPluginName
-      )
+      const plugin = nodeModule.createRequire(
+        `${process.cwd()}/__placeholder__.js`
+      )(stylisticPluginName)
       const rule = plugin?.rules?.[name]
       if (!preferModule) stylisticRuleMap.set(name, rule)
       return rule
@@ -162,24 +196,18 @@ function getStylisticRule(name, preferModule) {
   return null
 }
 
-/**
- * @template {object} T
- * @param {T} target
- * @param {Partial<T>[]} propsArray
- * @returns {T}
- */
-function newProxy(target, ...propsArray) {
+function newProxy<T extends object>(target: T, ...propsArray: Partial<T>[]): T {
   const result = new Proxy(
     {},
     {
       get(_object, key) {
         for (const props of propsArray) {
           if (key in props) {
-            // @ts-expect-error
+            // @ts-expect-error -- `key` is not known to be a key of `props`
             return props[key]
           }
         }
-        // @ts-expect-error
+        // @ts-expect-error -- `key` is not known to be a key of `target`
         return target[key]
       },
 
@@ -194,25 +222,23 @@ function newProxy(target, ...propsArray) {
       }
     }
   )
-  return /** @type {T} */ (result)
+  return result as T
 }
 
 /**
  * Wrap the rule context object to override methods which access to tokens (such as getTokenAfter).
- * @param {RuleContext} context The rule context object.
- * @param {ParserServices.TokenStore} tokenStore The token store object for template.
- * @param {Object} options The option of this rule.
- * @param {boolean} [options.applyDocument] If `true`, apply check to document fragment.
- * @returns {RuleContext}
  */
-function wrapContextToOverrideTokenMethods(context, tokenStore, options) {
+function wrapContextToOverrideTokenMethods(
+  context: RuleContext,
+  tokenStore: ParserServices.TokenStore,
+  options: { applyDocument?: boolean }
+): RuleContext {
   const eslintSourceCode = context.sourceCode
   const rootNode = options.applyDocument
     ? eslintSourceCode.parserServices.getDocumentFragment &&
       eslintSourceCode.parserServices.getDocumentFragment()
     : eslintSourceCode.ast.templateBody
-  /** @type {Token[] | null} */
-  let tokensAndComments = null
+  let tokensAndComments: Token[] | null = null
   function getTokensAndComments() {
     if (tokensAndComments) {
       return tokensAndComments
@@ -225,16 +251,13 @@ function wrapContextToOverrideTokenMethods(context, tokenStore, options) {
     return tokensAndComments
   }
 
-  /** @param {number} index */
-  function getNodeByRangeIndex(index) {
+  function getNodeByRangeIndex(index: number) {
     if (!rootNode) {
       return eslintSourceCode.ast
     }
 
-    /** @type {ASTNode} */
-    let result = eslintSourceCode.ast
-    /** @type {ASTNode[]} */
-    const skipNodes = []
+    let result: ASTNode = eslintSourceCode.ast
+    const skipNodes: ASTNode[] = []
     let shouldBreak = false
 
     traverseNodes(rootNode, {
@@ -278,14 +301,9 @@ function wrapContextToOverrideTokenMethods(context, tokenStore, options) {
     tokenStore
   )
 
-  /** @type {WeakMap<ASTNode, import('eslint').Scope.ScopeManager>} */
-  const containerScopes = new WeakMap()
+  const containerScopes: WeakMap<ASTNode, Scope.ScopeManager> = new WeakMap()
 
-  /**
-   * @param {ASTNode} node
-   * @returns {import('eslint').Scope.ScopeManager|null}
-   */
-  function getContainerScope(node) {
+  function getContainerScope(node: ASTNode): Scope.ScopeManager | null {
     const exprContainer = getVExpressionContainer(node)
     if (!exprContainer) {
       return null
@@ -302,15 +320,15 @@ function wrapContextToOverrideTokenMethods(context, tokenStore, options) {
       context.languageOptions?.ecmaVersion ?? parserOptions.ecmaVersion ?? 2020
     const sourceType = programNode.sourceType
     try {
-      const eslintScope = createRequire(require.resolve('eslint'))(
+      const eslintScope = nodeModule.createRequire(require.resolve('eslint'))(
         'eslint-scope'
       )
       const expStmt = newProxy(exprContainer, {
-        // @ts-expect-error
+        // @ts-expect-error -- the proxy turns the expression container into a statement
         type: 'ExpressionStatement'
       })
       const scopeProgram = newProxy(programNode, {
-        // @ts-expect-error
+        // @ts-expect-error -- the proxy replaces the body of the program
         body: [expStmt]
       })
       const scope = eslintScope.analyze(scopeProgram, {
@@ -340,11 +358,7 @@ function wrapContextToOverrideTokenMethods(context, tokenStore, options) {
     getDeclaredVariables
   })
 
-  /**
-   * @param {ESNode} node
-   * @returns {Variable[]}
-   */
-  function getDeclaredVariables(node) {
+  function getDeclaredVariables(node: ESNode): Variable[] {
     const scope = getContainerScope(node)
     return scope?.getDeclaredVariables(node) ?? []
   }
@@ -352,17 +366,16 @@ function wrapContextToOverrideTokenMethods(context, tokenStore, options) {
 
 /**
  * Wrap the rule context object to override report method to skip the dynamic argument.
- * @param {RuleContext} context The rule context object.
- * @returns {RuleContext}
  */
-function wrapContextToOverrideReportMethodToSkipDynamicArgument(context) {
+function wrapContextToOverrideReportMethodToSkipDynamicArgument(
+  context: RuleContext
+): RuleContext {
   const sourceCode = context.sourceCode
   const templateBody = sourceCode.ast.templateBody
   if (!templateBody) {
     return context
   }
-  /** @type {Range[]} */
-  const directiveKeyRanges = []
+  const directiveKeyRanges: Range[] = []
   traverseNodes(templateBody, {
     enterNode(node, parent) {
       if (
@@ -404,42 +417,52 @@ function wrapContextToOverrideReportMethodToSkipDynamicArgument(context) {
   })
 }
 
-/**
- * @callback WrapRuleCreate
- * @param {RuleContext} ruleContext
- * @param {WrapRuleCreateContext} wrapContext
- * @returns {TemplateListener}
- *
- * @typedef {object} WrapRuleCreateContext
- * @property {RuleListener} baseHandlers
- */
-/**
- * @callback WrapRulePreprocess
- * @param {RuleContext} ruleContext
- * @param {WrapRulePreprocessContext} wrapContext
- * @returns {void}
- *
- * @typedef {object} WrapRulePreprocessContext
- * @property { (override: Partial<RuleContext>) => RuleContext } wrapContextToOverrideProperties Wrap the rule context object to override
- * @property { (visitor: TemplateListener) => void } defineVisitor Define template body visitor
- */
-/**
- * @typedef {object} WrapRuleOptions
- * @property {string[]} [categories] The categories of this rule.
- * @property {boolean} [skipDynamicArguments] If `true`, skip validation within dynamic arguments.
- * @property {boolean} [skipDynamicArgumentsReport] If `true`, skip report within dynamic arguments.
- * @property {boolean} [applyDocument] If `true`, apply check to document fragment.
- * @property {boolean} [skipBaseHandlers] If `true`, skip base rule handlers.
- * @property {WrapRulePreprocess} [preprocess] Preprocess to calling create of base rule.
- * @property {WrapRuleCreate} [create] If define, extend base rule.
- */
+type WrapRuleCreate = (
+  ruleContext: RuleContext,
+  wrapContext: WrapRuleCreateContext
+) => TemplateListener
+
+interface WrapRuleCreateContext {
+  baseHandlers: RuleListener
+}
+
+type WrapRulePreprocess = (
+  ruleContext: RuleContext,
+  wrapContext: WrapRulePreprocessContext
+) => void
+
+interface WrapRulePreprocessContext {
+  /** Wrap the rule context object to override */
+  wrapContextToOverrideProperties: (
+    override: Partial<RuleContext>
+  ) => RuleContext
+  /** Define template body visitor */
+  defineVisitor: (visitor: TemplateListener) => void
+}
+
+interface WrapRuleOptions {
+  /** The categories of this rule. */
+  categories?: string[]
+  /** If `true`, skip validation within dynamic arguments. */
+  skipDynamicArguments?: boolean
+  /** If `true`, skip report within dynamic arguments. */
+  skipDynamicArgumentsReport?: boolean
+  /** If `true`, apply check to document fragment. */
+  applyDocument?: boolean
+  /** If `true`, skip base rule handlers. */
+  skipBaseHandlers?: boolean
+  /** Preprocess to calling create of base rule. */
+  preprocess?: WrapRulePreprocess
+  /** If define, extend base rule. */
+  create?: WrapRuleCreate
+}
 /**
  * Wrap a given core rule to apply it to Vue.js template.
- * @param {string} coreRuleName The name of the core rule implementation to wrap.
- * @param {WrapRuleOptions} [options] The option of this rule.
- * @returns {RuleModule} The wrapped rule implementation.
  */
-function wrapCoreRule(coreRuleName, options) {
+export function wrapCoreRule(
+  coreRuleName: string,
+  options?: WrapRuleOptions
+): RuleModule {
   const coreRule = getCoreRule(coreRuleName)
   if (!coreRule) {
     return {
@@ -477,19 +500,21 @@ function wrapCoreRule(coreRuleName, options) {
     meta
   }
 }
-/**
- * @typedef {object} RuleNames
- * @property {string} core The name of the core rule implementation to wrap.
- * @property {string} stylistic The name of ESLint Stylistic rule implementation to wrap.
- * @property {string} vue The name of the wrapped rule
- */
+interface RuleNames {
+  /** The name of the core rule implementation to wrap. */
+  core: string
+  /** The name of ESLint Stylistic rule implementation to wrap. */
+  stylistic: string
+  /** The name of the wrapped rule */
+  vue: string
+}
 /**
  * Wrap a core rule or ESLint Stylistic rule to apply it to Vue.js template.
- * @param {RuleNames|string} ruleNames The names of the rule implementation to wrap.
- * @param {WrapRuleOptions} [options] The option of this rule.
- * @returns {RuleModule} The wrapped rule implementation.
  */
-function wrapStylisticOrCoreRule(ruleNames, options) {
+function wrapStylisticOrCoreRule(
+  ruleNames: RuleNames | string,
+  options?: WrapRuleOptions
+): RuleModule {
   const stylisticRuleName =
     typeof ruleNames === 'string' ? ruleNames : ruleNames.stylistic
   const coreRuleName =
@@ -545,12 +570,12 @@ function wrapStylisticOrCoreRule(ruleNames, options) {
 }
 /**
  * Wrap a given rule to apply it to Vue.js template.
- * @param {RuleModule} baseRule The rule implementation to wrap.
- * @param {string} ruleName The name of the wrapped rule.
- * @param {WrapRuleOptions} [options] The option of this rule.
- * @returns {RuleModule} The wrapped rule implementation.
  */
-function wrapRuleModule(baseRule, ruleName, options) {
+function wrapRuleModule(
+  baseRule: RuleModule,
+  ruleName: string,
+  options?: WrapRuleOptions
+): RuleModule {
   let description = baseRule.meta.docs.description
   if (description) {
     description += ' in `<template>`'
@@ -585,8 +610,7 @@ function wrapRuleModule(baseRule, ruleName, options) {
           wrapContextToOverrideReportMethodToSkipDynamicArgument(context)
       }
 
-      /** @type {TemplateListener} */
-      const handlers = {}
+      const handlers: TemplateListener = {}
 
       if (preprocess) {
         preprocess(context, {
@@ -611,7 +635,7 @@ function wrapRuleModule(baseRule, ruleName, options) {
           applyDocument
             ? 'VDocumentFragment'
             : "VElement[parent.type!='VElement']"
-        ] = /** @type {any} */ (handlers.Program)
+        ] = handlers.Program as any
         delete handlers.Program
       }
       if (handlers['Program:exit']) {
@@ -619,7 +643,7 @@ function wrapRuleModule(baseRule, ruleName, options) {
           applyDocument
             ? 'VDocumentFragment:exit'
             : "VElement[parent.type!='VElement']:exit"
-        ] = /** @type {any} */ (handlers['Program:exit'])
+        ] = handlers['Program:exit'] as any
         delete handlers['Program:exit']
       }
 
@@ -627,10 +651,9 @@ function wrapRuleModule(baseRule, ruleName, options) {
         let isWithinDynamicArguments = false
         for (const name of Object.keys(handlers)) {
           const original = handlers[name]
-          /** @param {any[]} args */
-          handlers[name] = (...args) => {
+          handlers[name] = (...args: any[]) => {
             if (isWithinDynamicArguments) return
-            // @ts-expect-error
+            // @ts-expect-error -- the handlers have different signatures
             original(...args)
           }
         }
@@ -666,17 +689,11 @@ function wrapRuleModule(baseRule, ruleName, options) {
 // Exports
 // ------------------------------------------------------------------------------
 
-module.exports = {
+const utils = {
   /**
    * Register the given visitor to parser services.
    * If the parser service of `vue-eslint-parser` was not found,
    * this generates a warning.
-   *
-   * @param {RuleContext} context The rule context to use parser services.
-   * @param {TemplateListener} templateBodyVisitor The visitor to traverse the template body.
-   * @param {RuleListener} [scriptVisitor] The visitor to traverse the script.
-   * @param { { templateBodyTriggerSelector: "Program" | "Program:exit" } } [options] The options.
-   * @returns {RuleListener} The merged visitor.
    */
   defineTemplateBodyVisitor,
 
@@ -684,40 +701,26 @@ module.exports = {
    * Register the given visitor to parser services.
    * If the parser service of `vue-eslint-parser` was not found,
    * this generates a warning.
-   *
-   * @param {RuleContext} context The rule context to use parser services.
-   * @param {TemplateListener} documentVisitor The visitor to traverse the document.
-   * @param { { triggerSelector: "Program" | "Program:exit" } } [options] The options.
-   * @returns {RuleListener} The merged visitor.
    */
   defineDocumentVisitor,
   /**
    * Wrap a given core rule to apply it to Vue.js template.
-   * @type {typeof wrapCoreRule}
    */
   wrapCoreRule,
   wrapStylisticOrCoreRule,
   getCoreRule,
   /**
    * Checks whether the given value is defined.
-   * @template T
-   * @param {T | null | undefined} v
-   * @returns {v is T}
    */
   isDef,
   /**
    * Flattens arrays, objects and iterable objects.
-   * @template T
-   * @param {T | Iterable<T> | null | undefined} v
-   * @returns {T[]}
    */
   flatten,
   /**
    * Get the previous sibling element of the given element.
-   * @param {VElement} node The element node to get the previous sibling element.
-   * @returns {VElement|null} The previous sibling element.
    */
-  prevSibling(node) {
+  prevSibling(node: VElement): VElement | null {
     let prevElement = null
 
     const siblings = (node.parent && node.parent.children) || []
@@ -735,11 +738,8 @@ module.exports = {
 
   /**
    * Check whether the given directive attribute has their empty value (`=""`).
-   * @param {VDirective} node The directive attribute node to check.
-   * @param {RuleContext} context The rule context to use parser services.
-   * @returns {boolean} `true` if the directive attribute has their empty value (`=""`).
    */
-  isEmptyValueDirective(node, context) {
+  isEmptyValueDirective(node: VDirective, context: RuleContext): boolean {
     if (node.value == null || node.value.expression != null) {
       return false
     }
@@ -758,11 +758,11 @@ module.exports = {
 
   /**
    * Check whether the given directive attribute has their empty expression value (e.g. `=" "`, `="/* &ast;/"`).
-   * @param {VDirective} node The directive attribute node to check.
-   * @param {RuleContext} context The rule context to use parser services.
-   * @returns {boolean} `true` if the directive attribute has their empty expression value.
    */
-  isEmptyExpressionValueDirective(node, context) {
+  isEmptyExpressionValueDirective(
+    node: VDirective,
+    context: RuleContext
+  ): boolean {
     if (node.value == null || node.value.expression != null) {
       return false
     }
@@ -806,44 +806,25 @@ module.exports = {
 
   /**
    * Get the attribute which has the given name.
-   * @param {VElement} node The start tag node to check.
-   * @param {string} name The attribute name to check.
-   * @param {string} [value] The attribute value to check.
-   * @returns {VAttribute | null} The found attribute.
    */
   getAttribute,
 
   /**
    * Check whether the given start tag has specific directive.
-   * @param {VElement} node The start tag node to check.
-   * @param {string} name The attribute name to check.
-   * @param {string} [value] The attribute value to check.
-   * @returns {boolean} `true` if the start tag has the attribute.
    */
   hasAttribute,
 
   /**
    * Get the directive list which has the given name.
-   * @param {VElement | VStartTag} node The start tag node to check.
-   * @param {string} name The directive name to check.
-   * @returns {VDirective[]} The array of `v-slot` directives.
    */
   getDirectives,
   /**
    * Get the directive which has the given name.
-   * @param {VElement} node The start tag node to check.
-   * @param {string} name The directive name to check.
-   * @param {string} [argument] The directive argument to check.
-   * @returns {VDirective | null} The found directive.
    */
   getDirective,
 
   /**
    * Check whether the given start tag has specific directive.
-   * @param {VElement} node The start tag node to check.
-   * @param {string} name The directive name to check.
-   * @param {string} [argument] The directive argument to check.
-   * @returns {boolean} `true` if the start tag has the directive.
    */
   hasDirective,
 
@@ -851,22 +832,17 @@ module.exports = {
 
   /**
    * Returns the list of all registered components
-   * @param {ObjectExpression} componentObject
-   * @returns { { node: Property, name: string }[] } Array of ASTNodes
    */
-  getRegisteredComponents(componentObject) {
-    const componentsNode = componentObject.properties.find(
-      /**
-       * @param {ESNode} p
-       * @returns {p is (Property & { key: Identifier & {name: 'components'}, value: ObjectExpression })}
-       */
-      (p) =>
-        p.type === 'Property' &&
-        getStaticPropertyName(p) === 'components' &&
-        p.value.type === 'ObjectExpression'
+  getRegisteredComponents(
+    componentObject: ObjectExpression
+  ): { node: Property; name: string }[] {
+    const componentsNode = findProperty(
+      componentObject,
+      'components',
+      (p) => p.value.type === 'ObjectExpression'
     )
 
-    if (!componentsNode) {
+    if (!componentsNode || componentsNode.value.type !== 'ObjectExpression') {
       return []
     }
 
@@ -881,10 +857,8 @@ module.exports = {
 
   /**
    * Check whether the previous sibling element has `if` or `else-if` directive.
-   * @param {VElement} node The element node to check.
-   * @returns {boolean} `true` if the previous sibling element has `if` or `else-if` directive.
    */
-  prevElementHasIf(node) {
+  prevElementHasIf(node: VElement): boolean {
     const prev = this.prevSibling(node)
     return (
       prev != null &&
@@ -898,13 +872,10 @@ module.exports = {
 
   /**
    * Returns a generator with all child element v-if chains of the given element.
-   * @param {VElement} node The element node to check.
-   * @returns {IterableIterator<VElement[]>}
    */
-  *iterateChildElementsChains(node) {
+  *iterateChildElementsChains(node: VElement): IterableIterator<VElement[]> {
     let isVIf = false
-    /** @type {VElement[]} */
-    let elementChain = []
+    let elementChain: VElement[] = []
     for (const childNode of node.children) {
       if (childNode.type === 'VElement') {
         let connected
@@ -943,11 +914,11 @@ module.exports = {
 
   /**
    * Check whether the given node is a custom component or not.
-   * @param {VElement} node The start tag node to check.
-   * @param {boolean} [shouldIgnoreElementNamespaces=false] If `true`, ignore element namespaces.
-   * @returns {boolean} `true` if the node is a custom component.
    */
-  isCustomComponent(node, shouldIgnoreElementNamespaces = false) {
+  isCustomComponent(
+    node: VElement,
+    shouldIgnoreElementNamespaces: boolean = false
+  ): boolean {
     if (
       hasAttribute(node, 'is') ||
       hasDirective(node, 'bind', 'is') ||
@@ -969,28 +940,22 @@ module.exports = {
 
   /**
    * Check whether the given node is a HTML element or not.
-   * @param {VElement} node The node to check.
-   * @returns {boolean} `true` if the node is a HTML element.
    */
-  isHtmlElementNode(node) {
+  isHtmlElementNode(node: VElement): boolean {
     return node.namespace === NS.HTML
   },
 
   /**
    * Check whether the given node is a SVG element or not.
-   * @param {VElement} node The node to check.
-   * @returns {boolean} `true` if the name is a SVG element.
    */
-  isSvgElementNode(node) {
+  isSvgElementNode(node: VElement): boolean {
     return node.namespace === NS.SVG
   },
 
   /**
    * Check whether the given name is a MathML element or not.
-   * @param {VElement} node The node to check.
-   * @returns {boolean} `true` if the node is a MathML element.
    */
-  isMathElementNode(node) {
+  isMathElementNode(node: VElement): boolean {
     return node.namespace === NS.MathML
   },
 
@@ -999,46 +964,36 @@ module.exports = {
 
   /**
    * Check whether the given name is an well-known element or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is an well-known element name.
    */
-  isHtmlWellKnownElementName(name) {
+  isHtmlWellKnownElementName(name: string): boolean {
     return HTML_ELEMENT_NAMES.has(name)
   },
 
   /**
    * Check whether the given name is an well-known SVG element or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is an well-known SVG element name.
    */
-  isSvgWellKnownElementName(name) {
+  isSvgWellKnownElementName(name: string): boolean {
     return SVG_ELEMENT_NAMES.has(name)
   },
 
   /**
    * Check whether the given name is a well-known MathML element or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a well-known MathML element name.
    */
-  isMathWellKnownElementName(name) {
+  isMathWellKnownElementName(name: string): boolean {
     return MATH_ELEMENT_NAMES.has(name)
   },
 
   /**
    * Check whether the given name is a void element name or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a void element name.
    */
-  isHtmlVoidElementName(name) {
+  isHtmlVoidElementName(name: string): boolean {
     return VOID_ELEMENT_NAMES.has(name)
   },
 
   /**
    * Check whether the given name is Vue builtin component name or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a builtin component name
    */
-  isBuiltInComponentName(name) {
+  isBuiltInComponentName(name: string): boolean {
     return (
       VUE3_BUILTIN_COMPONENT_NAMES.has(name) ||
       VUE2_BUILTIN_COMPONENT_NAMES.has(name)
@@ -1047,71 +1002,55 @@ module.exports = {
 
   /**
    * Check whether the given name is Vue builtin element name or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a builtin Vue element name
    */
-  isVueBuiltInElementName(name) {
+  isVueBuiltInElementName(name: string): boolean {
     return VUE_BUILTIN_ELEMENT_NAMES.has(name.toLowerCase())
   },
 
   /**
    * Check whether the given name is Vue builtin directive name or not.
-   * @param {string} name The name to check.
-   * @returns {boolean} `true` if the name is a builtin Directive name
    */
-  isBuiltInDirectiveName(name) {
+  isBuiltInDirectiveName(name: string): boolean {
     return BUILTIN_DIRECTIVE_NAMES.has(name)
   },
 
   /**
    * Gets the property name of a given node.
-   * @param {Property|AssignmentProperty|MethodDefinition|MemberExpression} node - The node to get.
-   * @return {string|null} The property name if static. Otherwise, null.
    */
   getStaticPropertyName,
   /**
    * Gets the string of a given node.
-   * @param {Literal|TemplateLiteral} node - The node to get.
-   * @return {string|null} The string if static. Otherwise, null.
    */
   getStringLiteralValue,
   /**
    * Gets the name parameter from the given call expression.
-   * @param {CallExpression} node - The call expression to get.
-   * @returns {NameWithLoc|null} The name and location if static.
    */
   getNameParamNode,
   /**
    * Get all props by looking at all component's properties
-   * @param {ObjectExpression} componentObject Object with component definition
-   * @return {(ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp)[]} Array of component props
    */
   getComponentPropsFromOptions,
   /**
    * Get all emits by looking at all component's properties
-   * @param {ObjectExpression} componentObject Object with component definition
-   * @return {(ComponentArrayEmit | ComponentObjectEmit | ComponentUnknownEmit)[]} Array of component emits
    */
   getComponentEmitsFromOptions,
 
   /**
    * Get all computed properties by looking at all component's properties
-   * @param {ObjectExpression} componentObject Object with component definition
-   * @return {ComponentComputedProperty[]} Array of computed properties in format: [{key: String, value: ASTNode}]
    */
-  getComputedProperties(componentObject) {
-    const computedPropertiesNode = componentObject.properties.find(
-      /**
-       * @param {ESNode} p
-       * @returns {p is (Property & { key: Identifier & {name: 'computed'}, value: ObjectExpression })}
-       */
-      (p) =>
-        p.type === 'Property' &&
-        getStaticPropertyName(p) === 'computed' &&
-        p.value.type === 'ObjectExpression'
+  getComputedProperties(
+    componentObject: ObjectExpression
+  ): ComponentComputedProperty[] {
+    const computedPropertiesNode = findProperty(
+      componentObject,
+      'computed',
+      (p) => p.value.type === 'ObjectExpression'
     )
 
-    if (!computedPropertiesNode) {
+    if (
+      !computedPropertiesNode ||
+      computedPropertiesNode.value.type !== 'ObjectExpression'
+    ) {
       return []
     }
 
@@ -1119,22 +1058,17 @@ module.exports = {
       .filter(isProperty)
       .map((cp) => {
         const key = getStaticPropertyName(cp)
-        /** @type {Expression} */
-        const propValue = skipTSAsExpression(cp.value)
-        /** @type {BlockStatement | null} */
-        let value = null
+        const propValue: Expression = skipTSAsExpression(cp.value)
+        let value: BlockStatement | null = null
 
         if (propValue.type === 'FunctionExpression') {
           value = propValue.body
         } else if (propValue.type === 'ObjectExpression') {
-          const get =
-            /** @type {(Property & { value: FunctionExpression }) | null} */ (
-              findProperty(
-                propValue,
-                'get',
-                (p) => p.value.type === 'FunctionExpression'
-              )
-            )
+          const get = findProperty(
+            propValue,
+            'get',
+            (p) => p.value.type === 'FunctionExpression'
+          ) as (Property & { value: FunctionExpression }) | null
           value = get ? get.value.body : null
         }
 
@@ -1144,10 +1078,10 @@ module.exports = {
 
   /**
    * Get getter body from computed function
-   * @param {CallExpression} callExpression call of computed function
-   * @return {FunctionExpression | ArrowFunctionExpression | null} getter function
    */
-  getGetterBodyFromComputedFunction(callExpression) {
+  getGetterBodyFromComputedFunction(
+    callExpression: CallExpression
+  ): FunctionExpression | ArrowFunctionExpression | null {
     if (callExpression.arguments.length === 0) {
       return null
     }
@@ -1162,16 +1096,15 @@ module.exports = {
     }
 
     if (arg.type === 'ObjectExpression') {
-      const getProperty =
-        /** @type {(Property & { value: FunctionExpression | ArrowFunctionExpression }) | null} */ (
-          findProperty(
-            arg,
-            'get',
-            (p) =>
-              p.value.type === 'FunctionExpression' ||
-              p.value.type === 'ArrowFunctionExpression'
-          )
-        )
+      const getProperty = findProperty(
+        arg,
+        'get',
+        (p) =>
+          p.value.type === 'FunctionExpression' ||
+          p.value.type === 'ArrowFunctionExpression'
+      ) as
+        | (Property & { value: FunctionExpression | ArrowFunctionExpression })
+        | null
       return getProperty ? getProperty.value : null
     }
 
@@ -1184,22 +1117,20 @@ module.exports = {
 
   /**
    * Checks whether the current file is uses `<script setup>`
-   * @param {RuleContext} context The ESLint rule context object.
    */
   isScriptSetup,
   /**
    * Gets the element of `<script setup>`
-   * @param {RuleContext} context The ESLint rule context object.
-   * @returns {VElement | null} the element of `<script setup>`
    */
   getScriptSetupElement,
 
   /**
    * Check if current file is a Vue instance or component and call callback
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param { (node: ObjectExpression, type: VueObjectType) => void } cb Callback function
    */
-  executeOnVue(context, cb) {
+  executeOnVue(
+    context: RuleContext,
+    cb: (node: ObjectExpression, type: VueObjectType) => void
+  ) {
     return compositingVisitors(
       this.executeOnVueComponent(context, cb),
       this.executeOnVueInstance(context, cb)
@@ -1214,35 +1145,23 @@ module.exports = {
    * - `onVueObjectExit` ... Event when Vue Object visit ends.
    * - `onSetupFunctionEnter` ... Event when setup function found.
    * - `onRenderFunctionEnter` ... Event when render function found.
-   *
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param {VueVisitor} visitor The visitor to traverse the Vue Objects.
    */
-  defineVueVisitor(context, visitor) {
-    /** @type {VueObjectData | null} */
-    let vueStack = null
+  defineVueVisitor(context: RuleContext, visitor: VueVisitor) {
+    let vueStack: VueObjectData | null = null
 
-    /**
-     * @param {string} key
-     * @param {ESNode} node
-     */
-    function callVisitor(key, node) {
+    function callVisitor(key: string, node: ESNode) {
       if (vueStack && visitor[key]) {
-        // @ts-expect-error
+        // @ts-expect-error -- the visitor key is not narrowed to a listener
         visitor[key](node, vueStack)
       }
     }
 
-    /** @type {NodeListener} */
-    const vueVisitor = {}
+    const vueVisitor: NodeListener = {}
     for (const key in visitor) {
       vueVisitor[key] = (node) => callVisitor(key, node)
     }
 
-    /**
-     * @param {ObjectExpression} node
-     */
-    vueVisitor.ObjectExpression = (node) => {
+    vueVisitor.ObjectExpression = (node: ObjectExpression) => {
       const type = getVueObjectType(context, node)
       if (type) {
         vueStack = {
@@ -1250,17 +1169,9 @@ module.exports = {
           type,
           parent: vueStack,
           get functional() {
-            const functional = node.properties.find(
-              /**
-               * @param {Property | SpreadElement} p
-               * @returns {p is Property}
-               */
-              (p) =>
-                p.type === 'Property' &&
-                getStaticPropertyName(p) === 'functional'
-            )
+            const functional = findProperty(node, 'functional')
             return (
-              functional !== undefined &&
+              functional !== null &&
               (functional.value.type !== 'Literal' ||
                 functional.value.value !== false)
             )
@@ -1284,12 +1195,14 @@ module.exports = {
       visitor.onRenderFunctionEnter
     ) {
       const setups = new Set()
-      /** @param { (FunctionExpression | ArrowFunctionExpression) & { parent: Property } } node */
       vueVisitor[
         'Property[value.type=/^(Arrow)?FunctionExpression$/] > :function'
-      ] = (node) => {
-        /** @type {Property} */
-        const prop = node.parent
+      ] = (
+        node: (FunctionExpression | ArrowFunctionExpression) & {
+          parent: Property
+        }
+      ) => {
+        const prop: Property = node.parent
         if (vueStack && prop.parent === vueStack.node && prop.value === node) {
           const name = getStaticPropertyName(prop)
           if (name === 'setup') {
@@ -1305,10 +1218,13 @@ module.exports = {
         )
       }
       if (visitor.onSetupFunctionExit) {
-        /** @param { (FunctionExpression | ArrowFunctionExpression) & { parent: Property } } node */
         vueVisitor[
           'Property[value.type=/^(Arrow)?FunctionExpression$/] > :function:exit'
-        ] = (node) => {
+        ] = (
+          node: (FunctionExpression | ArrowFunctionExpression) & {
+            parent: Property
+          }
+        ) => {
           if (!setups.has(node)) {
             return
           }
@@ -1338,53 +1254,54 @@ module.exports = {
    * - `onDefineExposeExit` ... Event when defineExpose visit ends.
    * - `onDefineModelEnter` ... Event when defineModel is found.
    * - `onDefineModelExit` ... Event when defineModel visit ends.
-   *
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param {ScriptSetupVisitor} visitor The visitor to traverse the AST nodes.
    */
-  defineScriptSetupVisitor(context, visitor) {
+  defineScriptSetupVisitor(context: RuleContext, visitor: ScriptSetupVisitor) {
     const scriptSetup = getScriptSetupElement(context)
     if (scriptSetup == null) {
       return {}
     }
     const scriptSetupRange = scriptSetup.range
 
-    /**
-     * @param {ESNode} node
-     */
-    function isInScriptSetup(node) {
+    function isInScriptSetup(node: ESNode) {
       return (
         scriptSetupRange[0] <= node.range[0] &&
         node.range[1] <= scriptSetupRange[1]
       )
     }
-    /**
-     * @param {string} key
-     * @param {ESNode} node
-     * @param {any[]} args
-     */
-    function callVisitor(key, node, ...args) {
+    function callVisitor(key: string, node: ESNode, ...args: any[]) {
       if (visitor[key] && (node.type === 'Program' || isInScriptSetup(node))) {
-        // @ts-expect-error
+        // @ts-expect-error -- the visitor key is not narrowed to a listener
         visitor[key](node, ...args)
       }
     }
 
-    /** @type {NodeListener} */
-    const scriptSetupVisitor = {}
+    const scriptSetupVisitor: NodeListener = {}
     for (const key in visitor) {
       scriptSetupVisitor[key] = (node) => callVisitor(key, node)
     }
 
     class MacroListener {
-      /**
-       * @param {string} name
-       * @param {string} enterName
-       * @param {string} exitName
-       * @param {(candidateMacro: Expression | null, node: CallExpression) => boolean} isMacroNode
-       * @param {(context: RuleContext, node: CallExpression) => unknown} buildParam
-       */
-      constructor(name, enterName, exitName, isMacroNode, buildParam) {
+      name: string
+      enterName: string
+      exitName: string
+      isMacroNode: (
+        candidateMacro: Expression | null,
+        node: CallExpression
+      ) => boolean
+      buildParam: (context: RuleContext, node: CallExpression) => unknown
+      hasListener: boolean
+      paramsMap: Map<CallExpression, unknown>
+
+      constructor(
+        name: string,
+        enterName: string,
+        exitName: string,
+        isMacroNode: (
+          candidateMacro: Expression | null,
+          node: CallExpression
+        ) => boolean,
+        buildParam: (context: RuleContext, node: CallExpression) => unknown
+      ) {
         this.name = name
         this.enterName = enterName
         this.exitName = exitName
@@ -1442,21 +1359,18 @@ module.exports = {
       )
     ].filter((m) => m.hasListener)
     if (macroListenerList.length > 0) {
-      /** @type {Expression | null} */
-      let candidateMacro = null
-      /** @param {VariableDeclarator|ExpressionStatement} node */
+      let candidateMacro: Expression | null = null
       scriptSetupVisitor[
         'Program > VariableDeclaration > VariableDeclarator, Program > ExpressionStatement'
-      ] = (node) => {
+      ] = (node: VariableDeclarator | ExpressionStatement) => {
         if (!candidateMacro) {
           candidateMacro =
             node.type === 'VariableDeclarator' ? node.init : node.expression
         }
       }
-      /** @param {VariableDeclarator|ExpressionStatement} node */
       scriptSetupVisitor[
         'Program > VariableDeclaration > VariableDeclarator, Program > ExpressionStatement:exit'
-      ] = (node) => {
+      ] = (node: VariableDeclarator | ExpressionStatement) => {
         if (
           candidateMacro ===
           (node.type === 'VariableDeclarator' ? node.init : node.expression)
@@ -1464,10 +1378,7 @@ module.exports = {
           candidateMacro = null
         }
       }
-      /**
-       * @param {CallExpression} node
-       */
-      scriptSetupVisitor.CallExpression = (node) => {
+      scriptSetupVisitor.CallExpression = (node: CallExpression) => {
         if (
           candidateMacro &&
           isInScriptSetup(node) &&
@@ -1510,8 +1421,6 @@ module.exports = {
 
   /**
    * Checks whether given defineProps call node has withDefaults.
-   * @param {CallExpression} node The node of defineProps
-   * @returns {node is CallExpression & { parent: CallExpression }}
    */
   hasWithDefaults,
 
@@ -1523,40 +1432,29 @@ module.exports = {
    * spread elements are resolved, but anything that cannot be determined
    * statically sets `hasUnknown`, which means that props missing from `props`
    * may still have a default value.
-   * @param {RuleContext} context The rule context object.
-   * @param {CallExpression} node The node of defineProps
-   * @returns { { props: { [key: string]: Expression | undefined }, hasUnknown: boolean } }
    */
   getWithDefaultsPropExpressions,
   /**
    * Gets a map of the property nodes defined in withDefaults.
    * Only an inline object literal is looked at, because the returned nodes are
    * used as edit targets by fixers.
-   * @param {CallExpression} node The node of defineProps
-   * @returns { { [key: string]: Property | undefined } }
    */
   getWithDefaultsProps,
   /**
    * Gets the default definition nodes for defineProp
    * using the props destructure with assignment pattern.
-   * @param {CallExpression} node The node of defineProps
-   * @returns { Record<string, {prop: AssignmentProperty , expression: Expression} | undefined> }
    */
   getDefaultPropExpressionsForPropsDestructure,
   getLeftOfDefineProps,
   /**
    * Checks whether the given defineProps node is using Props Destructure.
-   * @param {CallExpression} node The node of defineProps
-   * @returns {boolean}
    */
-  isUsingPropsDestructure(node) {
+  isUsingPropsDestructure(node: CallExpression): boolean {
     const left = getLeftOfDefineProps(node)
     return left?.type === 'ObjectPattern'
   },
   /**
    * Gets the props destructure property nodes for defineProp.
-   * @param {CallExpression} node The node of defineProps
-   * @returns { Record<string, AssignmentProperty | undefined> }
    */
   getPropsDestructure,
 
@@ -1565,22 +1463,19 @@ module.exports = {
   getVueComponentDefinitionType,
   /**
    * Checks whether the given object is an SFC definition.
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param {ObjectExpression} node Node to check
-   * @returns { boolean } `true`, the given object is an SFC definition.
    */
   isSFCObject,
   compositingVisitors,
 
   /**
    * Check if current file is a Vue instance (new Vue) and call callback
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param { (node: ObjectExpression, type: VueObjectType) => void } cb Callback function
    */
-  executeOnVueInstance(context, cb) {
+  executeOnVueInstance(
+    context: RuleContext,
+    cb: (node: ObjectExpression, type: VueObjectType) => void
+  ) {
     return {
-      /** @param {ObjectExpression} node */
-      'ObjectExpression:exit'(node) {
+      'ObjectExpression:exit'(node: ObjectExpression) {
         const type = getVueObjectType(context, node)
         if (!type || type !== 'instance') return
         cb(node, type)
@@ -1590,34 +1485,34 @@ module.exports = {
 
   /**
    * Check if current file is a Vue component and call callback
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param { (node: ObjectExpression, type: VueObjectType) => void } cb Callback function
    */
-  executeOnVueComponent(context, cb) {
+  executeOnVueComponent(
+    context: RuleContext,
+    cb: (node: ObjectExpression, type: VueObjectType) => void
+  ) {
+    const types = new Set(['mark', 'export', 'definition'])
     return {
-      /** @param {ObjectExpression} node */
-      'ObjectExpression:exit'(node) {
+      'ObjectExpression:exit'(node: ObjectExpression) {
         const type = getVueObjectType(context, node)
-        if (
-          !type ||
-          (type !== 'mark' && type !== 'export' && type !== 'definition')
-        )
-          return
-        cb(node, type)
+        if (type && types.has(type)) {
+          cb(node, type)
+        }
       }
     }
   },
 
   /**
    * Check call `Vue.component` and call callback.
-   * @param {RuleContext} _context The ESLint rule context object.
-   * @param { (node: CallExpression) => void } cb Callback function
    */
-  executeOnCallVueComponent(_context, cb) {
+  executeOnCallVueComponent(
+    _context: RuleContext,
+    cb: (node: CallExpression) => void
+  ) {
     return {
-      /** @param {Identifier & { parent: MemberExpression & { parent: CallExpression } } } node */
       "CallExpression > MemberExpression > Identifier[name='component']": (
-        node
+        node: Identifier & {
+          parent: MemberExpression & { parent: CallExpression }
+        }
       ) => {
         const callExpr = node.parent.parent
         const callee = callExpr.callee
@@ -1641,17 +1536,17 @@ module.exports = {
   },
   /**
    * Return generator with all properties
-   * @param {ObjectExpression} node Node to check
-   * @param {Set<GroupName>} groups Name of parent group
-   * @returns {IterableIterator<ComponentPropertyData>}
    */
-  *iterateProperties(node, groups) {
+  *iterateProperties(
+    node: ObjectExpression,
+    groups: Set<GroupName>
+  ): IterableIterator<ComponentPropertyData> {
     for (const item of node.properties) {
       if (item.type !== 'Property') {
         continue
       }
 
-      const name = /** @type {GroupName | null} */ (getStaticPropertyName(item))
+      const name = getStaticPropertyName(item) as GroupName | null
       if (!name || !groups.has(name)) continue
 
       yield* this.iteratePropertyValue(item.value, name)
@@ -1659,11 +1554,11 @@ module.exports = {
   },
   /**
    * Return generator with all properties defined by the given property value.
-   * @param {Expression} value Property value node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentPropertyData>}
    */
-  *iteratePropertyValue(value, groupName) {
+  *iteratePropertyValue(
+    value: Expression,
+    groupName: GroupName
+  ): IterableIterator<ComponentPropertyData> {
     switch (value.type) {
       case 'ArrayExpression': {
         yield* this.iterateArrayExpression(value, groupName)
@@ -1686,11 +1581,11 @@ module.exports = {
 
   /**
    * Return generator with all elements inside ArrayExpression
-   * @param {ArrayExpression} node Node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentArrayPropertyData>}
    */
-  *iterateArrayExpression(node, groupName) {
+  *iterateArrayExpression(
+    node: ArrayExpression,
+    groupName: GroupName
+  ): IterableIterator<ComponentArrayPropertyData> {
     for (const item of node.elements) {
       if (
         !item ||
@@ -1708,13 +1603,12 @@ module.exports = {
 
   /**
    * Return generator with all elements inside ObjectExpression
-   * @param {ObjectExpression} node Node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentObjectPropertyData>}
    */
-  *iterateObjectExpression(node, groupName) {
-    /** @type {Set<Property> | undefined} */
-    let usedGetter
+  *iterateObjectExpression(
+    node: ObjectExpression,
+    groupName: GroupName
+  ): IterableIterator<ComponentObjectPropertyData> {
+    let usedGetter: Set<Property> | undefined
     for (const item of node.properties) {
       if (item.type !== 'Property') {
         continue
@@ -1722,6 +1616,7 @@ module.exports = {
 
       const key = item.key
       if (
+        // eslint-disable-next-line unicorn/prefer-includes-over-repeated-comparisons -- needed for type narrowing
         key.type !== 'Identifier' &&
         key.type !== 'Literal' &&
         key.type !== 'TemplateLiteral'
@@ -1766,11 +1661,11 @@ module.exports = {
 
   /**
    * Return generator with all elements inside FunctionExpression
-   * @param {FunctionExpression} node Node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentObjectPropertyData>}
    */
-  *iterateFunctionExpression(node, groupName) {
+  *iterateFunctionExpression(
+    node: FunctionExpression,
+    groupName: GroupName
+  ): IterableIterator<ComponentObjectPropertyData> {
     if (node.body.type === 'BlockStatement') {
       for (const item of node.body.body) {
         if (
@@ -1786,11 +1681,11 @@ module.exports = {
 
   /**
    * Return generator with all elements inside ArrowFunctionExpression
-   * @param {ArrowFunctionExpression} node Node to check
-   * @param {GroupName} groupName Name of parent group
-   * @returns {IterableIterator<ComponentObjectPropertyData>}
    */
-  *iterateArrowFunctionExpression(node, groupName) {
+  *iterateArrowFunctionExpression(
+    node: ArrowFunctionExpression,
+    groupName: GroupName
+  ): IterableIterator<ComponentObjectPropertyData> {
     const body = node.body
     if (body.type === 'BlockStatement') {
       for (const item of body.body) {
@@ -1809,43 +1704,43 @@ module.exports = {
 
   /**
    * Find all functions which do not always return values
-   * @param {RuleContext} context The ESLint rule context object.
-   * @param {boolean} treatUndefinedAsUnspecified
-   * @param { (node: ArrowFunctionExpression | FunctionExpression | FunctionDeclaration) => void } cb Callback function
-   * @returns {RuleListener}
    */
-  executeOnFunctionsWithoutReturn(context, treatUndefinedAsUnspecified, cb) {
-    /**
-     * @typedef {object} FuncInfo
-     * @property {FuncInfo | null} funcInfo
-     * @property {CodePath} codePath
-     * @property {boolean} hasReturn
-     * @property {boolean} hasReturnValue
-     * @property {ArrowFunctionExpression | FunctionExpression | FunctionDeclaration} node
-     * @property {CodePathSegment[]} currentSegments
-     */
+  executeOnFunctionsWithoutReturn(
+    context: RuleContext,
+    shouldTreatUndefinedAsUnspecified: boolean,
+    cb: (
+      node: ArrowFunctionExpression | FunctionExpression | FunctionDeclaration
+    ) => void
+  ): RuleListener {
+    type CodePath = Rule.CodePath
+    type CodePathSegment = Rule.CodePathSegment
 
-    /** @type {FuncInfo | null} */
-    let funcInfo = null
+    interface FuncInfo {
+      funcInfo: FuncInfo | null
+      codePath: CodePath
+      hasReturn: boolean
+      hasReturnValue: boolean
+      node: ArrowFunctionExpression | FunctionExpression | FunctionDeclaration
+      currentSegments: CodePathSegment[]
+    }
+
+    let funcInfo: FuncInfo | null = null
 
     // "Spurious" = ESLint sees the segment as reachable, but TypeScript proves
     // it can't actually execute (the phantom no-match edge of a type-exhaustive
     // switch with no default).
-    /** @type {WeakSet<CodePathSegment>} */
-    const spuriousSegments = new WeakSet()
+    const spuriousSegments: WeakSet<CodePathSegment> = new WeakSet()
 
     // Segments started inside a switch case body. Lets us distinguish post-switch
     // reachability via a real path (break, fall-through) from the phantom no-match
     // path. Depth is a counter to support nested switches.
-    /** @type {WeakSet<CodePathSegment>} */
-    const caseBodySegments = new WeakSet()
+    const caseBodySegments: WeakSet<CodePathSegment> = new WeakSet()
     let caseBodyDepth = 0
 
     /**
      * Treat spurious segments the same as unreachable.
-     * @param {CodePathSegment} segment
      */
-    function isEffectivelyUnreachable(segment) {
+    function isEffectivelyUnreachable(segment: CodePathSegment) {
       return !segment.reachable || spuriousSegments.has(segment)
     }
 
@@ -1855,16 +1750,12 @@ module.exports = {
         (funcInfo.currentSegments.every((segment) =>
           isEffectivelyUnreachable(segment)
         ) &&
-          (!treatUndefinedAsUnspecified || funcInfo.hasReturnValue))
+          (!shouldTreatUndefinedAsUnspecified || funcInfo.hasReturnValue))
       )
     }
 
     return {
-      /**
-       * @param {CodePath} codePath
-       * @param {ESNode} node
-       */
-      onCodePathStart(codePath, node) {
+      onCodePathStart(codePath: CodePath, node: ESNode) {
         if (
           // eslint-disable-next-line unicorn/prefer-includes-over-repeated-comparisons -- narrows `node`'s type for `funcInfo` below
           node.type === 'ArrowFunctionExpression' ||
@@ -1881,8 +1772,7 @@ module.exports = {
           }
         }
       },
-      /** @param {CodePathSegment} segment */
-      onCodePathSegmentStart(segment) {
+      onCodePathSegmentStart(segment: CodePathSegment) {
         funcInfo?.currentSegments.push(segment)
         // Spurious propagates: if every reachable predecessor is spurious, so is this segment.
         if (
@@ -1901,8 +1791,7 @@ module.exports = {
       onCodePathEnd() {
         funcInfo &&= funcInfo.funcInfo
       },
-      /** @param {ReturnStatement} node */
-      ReturnStatement(node) {
+      ReturnStatement(node: ReturnStatement) {
         if (!funcInfo) {
           return
         }
@@ -1916,8 +1805,7 @@ module.exports = {
       'SwitchCase:exit'() {
         caseBodyDepth--
       },
-      /** @param {SwitchStatement} node */
-      'SwitchStatement:exit'(node) {
+      'SwitchStatement:exit'(node: SwitchStatement) {
         if (
           !funcInfo ||
           node.cases.some((switchCase) => switchCase.test === null) ||
@@ -1942,8 +1830,7 @@ module.exports = {
           spuriousSegments.add(segment)
         }
       },
-      /** @param {ArrowFunctionExpression} node */
-      'ArrowFunctionExpression:exit'(node) {
+      'ArrowFunctionExpression:exit'(node: ArrowFunctionExpression) {
         if (funcInfo && !isValidReturn() && !node.expression) {
           cb(funcInfo.node)
         }
@@ -1958,19 +1845,15 @@ module.exports = {
 
   /**
    * Check whether the component is declared in a single line or not.
-   * @param {ASTNode} node
-   * @returns {boolean}
    */
-  isSingleLine(node) {
+  isSingleLine(node: ASTNode): boolean {
     return node.loc.start.line === node.loc.end.line
   },
 
   /**
    * Check whether the templateBody of the program has invalid EOF or not.
-   * @param {Program} node The program node to check.
-   * @returns {boolean} `true` if it has invalid EOF.
    */
-  hasInvalidEOF(node) {
+  hasInvalidEOF(node: Program): boolean {
     const body = node.templateBody
     return (
       body != null &&
@@ -1984,13 +1867,9 @@ module.exports = {
 
   /**
    * Get the chaining nodes of MemberExpression.
-   *
-   * @param  {ESNode} node The node to parse
-   * @return {[ESNode, ...MemberExpression[]]} The chaining nodes
    */
-  getMemberChaining(node) {
-    /** @type {MemberExpression[]} */
-    const nodes = []
+  getMemberChaining(node: ESNode): [ESNode, ...MemberExpression[]] {
+    const nodes: MemberExpression[] = []
     let n = skipChainExpression(node)
 
     while (n.type === 'MemberExpression') {
@@ -2002,11 +1881,8 @@ module.exports = {
   },
   /**
    * return two string editdistance
-   * @param {string} a string a to compare
-   * @param {string} b string b to compare
-   * @returns {number}
    */
-  editDistance(a, b) {
+  editDistance(a: string, b: string): number {
     if (a === b) {
       return 0
     }
@@ -2033,10 +1909,11 @@ module.exports = {
   },
   /**
    * Checks whether the target node is within the given range.
-   * @param { [number, number] | ASTNode | Token } rangeOrNode
-   * @param {ASTNode | Token} target
    */
-  inRange(rangeOrNode, target) {
+  isInRange(
+    rangeOrNode: [number, number] | ASTNode | Token,
+    target: ASTNode | Token
+  ) {
     const range = Array.isArray(rangeOrNode) ? rangeOrNode : rangeOrNode.range
     return range[0] <= target.range[0] && target.range[1] <= range[1]
   },
@@ -2062,8 +1939,6 @@ module.exports = {
   findAssignmentProperty,
   /**
    * Checks if the given node is a property value.
-   * @param {Property} prop
-   * @param {Expression} node
    */
   isPropertyChain,
   /**
@@ -2081,23 +1956,18 @@ module.exports = {
   /**
    * Checks whether the given node is in a type annotation.
    */
-  withinTypeNode,
+  isWithinTypeNode,
   findVariableByIdentifier,
   getScope,
   /**
    * Checks whether the given node is in export default.
-   * @param {ASTNode} node
-   * @returns {boolean}
    */
   isInExportDefault,
 
   /**
    * Check whether the given node is `this` or variable that stores `this`.
-   * @param  {ESNode} node The node to check
-   * @param {RuleContext} context The rule context to use parser services.
-   * @returns {boolean} `true` if the given node is `this`.
    */
-  isThis(node, context) {
+  isThis(node: ESNode, context: RuleContext): boolean {
     if (node.type === 'ThisExpression') {
       return true
     }
@@ -2131,11 +2001,8 @@ module.exports = {
 
   /**
    * Check if a call expression is Object.assign with the given node as first argument
-   * @param {CallExpression} callExpr
-   * @param {ASTNode} targetNode
-   * @returns {boolean}
    */
-  isObjectAssignCall(callExpr, targetNode) {
+  isObjectAssignCall(callExpr: CallExpression, targetNode: ASTNode): boolean {
     const { callee, arguments: args } = callExpr
 
     return (
@@ -2149,15 +2016,13 @@ module.exports = {
     )
   },
 
-  /**
-   * @param {MemberExpression|Identifier} props
-   * @returns { { kind: 'assignment' | 'update' | 'call' , node: ESNode, pathNodes: MemberExpression[] } | null }
-   */
-  findMutating(props) {
-    /** @type {MemberExpression[]} */
-    const pathNodes = []
-    /** @type {MemberExpression | Identifier | ChainExpression} */
-    let node = props
+  findMutating(props: MemberExpression | Identifier): {
+    kind: 'assignment' | 'update' | 'call'
+    node: ESNode
+    pathNodes: MemberExpression[]
+  } | null {
+    const pathNodes: MemberExpression[] = []
+    let node: MemberExpression | Identifier | ChainExpression = props
     let target = node.parent
     while (true) {
       const step = this.findMutatingStep(node, target, pathNodes)
@@ -2171,12 +2036,25 @@ module.exports = {
 
   /**
    * Resolve a single step of the parent chain walk in `findMutating`.
-   * @param {MemberExpression | Identifier | ChainExpression} node
-   * @param {ASTNode} target
-   * @param {MemberExpression[]} pathNodes
-   * @returns {{ done: true, result: { kind: 'assignment' | 'update' | 'call', node: ESNode, pathNodes: MemberExpression[] } | null } | { done: false, node: MemberExpression | ChainExpression, target: ASTNode }}
    */
-  findMutatingStep(node, target, pathNodes) {
+  findMutatingStep(
+    node: MemberExpression | Identifier | ChainExpression,
+    target: ASTNode,
+    pathNodes: MemberExpression[]
+  ):
+    | {
+        done: true
+        result: {
+          kind: 'assignment' | 'update' | 'call'
+          node: ESNode
+          pathNodes: MemberExpression[]
+        } | null
+      }
+    | {
+        done: false
+        node: MemberExpression | ChainExpression
+        target: ASTNode
+      } {
     switch (target.type) {
       case 'AssignmentExpression': {
         if (target.left === node) {
@@ -2249,26 +2127,22 @@ module.exports = {
 
   /**
    * Return generator with the all handler nodes defined in the given watcher property.
-   * @param {Property|Expression} property
-   * @returns {IterableIterator<Expression>}
    */
   iterateWatchHandlerValues,
 
   /**
    * Wraps composition API trace map in 'vue', '@vue/composition-api' and '@nuxtjs/composition-api' imports, or '#imports' from unimport
-   * @param {import('@eslint-community/eslint-utils').TYPES.TraceMap} map
    */
   createCompositionApiTraceMap,
 
   /**
    * Iterates all references in the given trace map.
    * Take the third argument option to detect auto-imported references.
-   *
-   * @param {import('@eslint-community/eslint-utils').ReferenceTracker} tracker
-   * @param {import('@eslint-community/eslint-utils').TYPES.TraceMap} map
-   * @returns {ReturnType<import('@eslint-community/eslint-utils').ReferenceTracker['iterateEsmReferences']>}
    */
-  *iterateReferencesTraceMap(tracker, map) {
+  *iterateReferencesTraceMap(
+    tracker: ReferenceTracker,
+    map: TYPES.TraceMap
+  ): ReturnType<ReferenceTracker['iterateEsmReferences']> {
     const esmTraceMap = this.createCompositionApiTraceMap({
       ...map,
       [ReferenceTracker.ESM]: true
@@ -2285,12 +2159,12 @@ module.exports = {
 
   /**
    * Checks whether or not the tokens of two given nodes are same.
-   * @param {ASTNode} left A node 1 to compare.
-   * @param {ASTNode} right A node 2 to compare.
-   * @param {ParserServices.TokenStore | SourceCode} sourceCode The ESLint source code object.
-   * @returns {boolean} the source code for the given node.
    */
-  equalTokens(left, right, sourceCode) {
+  equalTokens(
+    left: ASTNode,
+    right: ASTNode,
+    sourceCode: ParserServices.TokenStore | SourceCode
+  ): boolean {
     const tokensL = sourceCode.getTokens(left)
     const tokensR = sourceCode.getTokens(right)
 
@@ -2304,29 +2178,33 @@ module.exports = {
   }
 }
 
+export default utils
+
+export const {
+  defineScriptSetupVisitor,
+  editDistance,
+  executeOnVueComponent,
+  getComputedProperties,
+  getMemberChaining,
+  getRegisteredComponents
+} = utils
+
 // ------------------------------------------------------------------------------
 // Standard Helpers
 // ------------------------------------------------------------------------------
 
 /**
  * Checks whether the given value is defined.
- * @template T
- * @param {T | null | undefined} v
- * @returns {v is T}
  */
-function isDef(v) {
+function isDef<T>(v: T | null | undefined): v is T {
   return v != null
 }
 
 /**
  * Flattens arrays, objects and iterable objects.
- * @template T
- * @param {T | Iterable<T> | null | undefined} v
- * @returns {T[]}
  */
-function flatten(v) {
-  /** @type {T[]} */
-  const result = []
+function flatten<T>(v: T | Iterable<T> | null | undefined): T[] {
+  const result: T[] = []
   if (v) {
     if (isIterable(v)) {
       result.push(...v)
@@ -2337,11 +2215,7 @@ function flatten(v) {
   return result
 }
 
-/**
- * @param {*} v
- * @returns {v is Iterable<any>}
- */
-function isIterable(v) {
+function isIterable(v: any): v is Iterable<any> {
   return v && Symbol.iterator in v
 }
 
@@ -2353,19 +2227,13 @@ function isIterable(v) {
  * Register the given visitor to parser services.
  * If the parser service of `vue-eslint-parser` was not found,
  * this generates a warning.
- *
- * @param {RuleContext} context The rule context to use parser services.
- * @param {TemplateListener} templateBodyVisitor The visitor to traverse the template body.
- * @param {RuleListener} [scriptVisitor] The visitor to traverse the script.
- * @param { { templateBodyTriggerSelector: "Program" | "Program:exit" } } [options] The options.
- * @returns {RuleListener} The merged visitor.
  */
 function defineTemplateBodyVisitor(
-  context,
-  templateBodyVisitor,
-  scriptVisitor,
-  options
-) {
+  context: RuleContext,
+  templateBodyVisitor: TemplateListener,
+  scriptVisitor?: RuleListener,
+  options?: { templateBodyTriggerSelector: 'Program' | 'Program:exit' }
+): RuleListener {
   const sourceCode = context.sourceCode
   if (sourceCode.parserServices.defineTemplateBodyVisitor == null) {
     const filename = context.filename
@@ -2388,13 +2256,12 @@ function defineTemplateBodyVisitor(
  * Register the given visitor to parser services.
  * If the parser service of `vue-eslint-parser` was not found,
  * this generates a warning.
- *
- * @param {RuleContext} context The rule context to use parser services.
- * @param {TemplateListener} documentVisitor The visitor to traverse the document.
- * @param { { triggerSelector: "Program" | "Program:exit" } } [options] The options.
- * @returns {RuleListener} The merged visitor.
  */
-function defineDocumentVisitor(context, documentVisitor, options) {
+export function defineDocumentVisitor(
+  context: RuleContext,
+  documentVisitor: TemplateListener,
+  options?: { triggerSelector: 'Program' | 'Program:exit' }
+): RuleListener {
   const sourceCode = context.sourceCode
   if (sourceCode.parserServices.defineDocumentVisitor == null) {
     const filename = context.filename
@@ -2413,27 +2280,24 @@ function defineDocumentVisitor(context, documentVisitor, options) {
   )
 }
 
-/**
- * @template T
- * @param {T} visitor
- * @param {...(TemplateListener | RuleListener | NodeListener)} visitors
- * @returns {T}
- */
-function compositingVisitors(visitor, ...visitors) {
+function compositingVisitors<T>(
+  visitor: T,
+  ...visitors: (TemplateListener | RuleListener | NodeListener)[]
+): T {
   for (const v of visitors) {
     for (const key in v) {
-      // @ts-expect-error
+      // @ts-expect-error -- the visitors are indexed by arbitrary keys
       if (visitor[key]) {
-        // @ts-expect-error
+        // @ts-expect-error -- the visitors are indexed by arbitrary keys
         const o = visitor[key]
-        // @ts-expect-error
+        // @ts-expect-error -- the visitors are indexed by arbitrary keys
         visitor[key] = (...args) => {
           o(...args)
-          // @ts-expect-error
+          // @ts-expect-error -- the visitors are indexed by arbitrary keys
           v[key](...args)
         }
       } else {
-        // @ts-expect-error
+        // @ts-expect-error -- the visitors are indexed by arbitrary keys
         visitor[key] = v[key]
       }
     }
@@ -2447,69 +2311,56 @@ function compositingVisitors(visitor, ...visitors) {
 
 /**
  * Find the variable of a given identifier.
- * @param {RuleContext} context The rule context
- * @param {Identifier} node The variable name to find.
- * @returns {Variable|null} The found variable or null.
  */
-function findVariableByIdentifier(context, node) {
+function findVariableByIdentifier(
+  context: RuleContext,
+  node: Identifier
+): Variable | null {
   return findVariable(getScope(context, node), node)
 }
 
 /**
  * Finds the property with the given name from the given ObjectExpression node.
- * @param {ObjectExpression} node
- * @param {string} name
- * @param { (p: Property) => boolean } [filter]
- * @returns { (Property) | null}
  */
-function findProperty(node, name, filter) {
-  const predicate = filter
-    ? /**
-       * @param {Property | SpreadElement} prop
-       * @returns {prop is Property}
-       */
-      (prop) =>
-        isProperty(prop) && getStaticPropertyName(prop) === name && filter(prop)
-    : /**
-       * @param {Property | SpreadElement} prop
-       * @returns {prop is Property}
-       */
-      (prop) => isProperty(prop) && getStaticPropertyName(prop) === name
-  return node.properties.find(predicate) || null
+function findProperty(
+  node: ObjectExpression,
+  name: string,
+  isMatching?: (p: Property) => boolean
+): Property | null {
+  return (
+    node.properties.find(
+      (prop: Property | SpreadElement): prop is Property =>
+        isProperty(prop) &&
+        getStaticPropertyName(prop) === name &&
+        (isMatching?.(prop) ?? true)
+    ) ?? null
+  )
 }
 
 /**
  * Finds the assignment property with the given name from the given ObjectPattern node.
- * @param {ObjectPattern} node
- * @param {string} name
- * @param { (p: AssignmentProperty) => boolean } [filter]
- * @returns { (AssignmentProperty) | null}
  */
-function findAssignmentProperty(node, name, filter) {
-  const predicate = filter
-    ? /**
-       * @param {AssignmentProperty | RestElement} prop
-       * @returns {prop is AssignmentProperty}
-       */
-      (prop) =>
+function findAssignmentProperty(
+  node: ObjectPattern,
+  name: string,
+  isMatching?: (p: AssignmentProperty) => boolean
+): AssignmentProperty | null {
+  return (
+    node.properties.find(
+      (prop: AssignmentProperty | RestElement): prop is AssignmentProperty =>
         isAssignmentProperty(prop) &&
         getStaticPropertyName(prop) === name &&
-        filter(prop)
-    : /**
-       * @param {AssignmentProperty | RestElement} prop
-       * @returns {prop is AssignmentProperty}
-       */
-      (prop) =>
-        isAssignmentProperty(prop) && getStaticPropertyName(prop) === name
-  return node.properties.find(predicate) || null
+        (isMatching?.(prop) ?? true)
+    ) ?? null
+  )
 }
 
 /**
  * Checks whether the given node is Property.
- * @param {Property | SpreadElement | AssignmentProperty} node
- * @returns {node is Property}
  */
-function isProperty(node) {
+function isProperty(
+  node: Property | SpreadElement | AssignmentProperty
+): node is Property {
   return (
     node.type === 'Property' &&
     (!node.parent || node.parent.type === 'ObjectExpression')
@@ -2517,29 +2368,26 @@ function isProperty(node) {
 }
 /**
  * Checks whether the given node is AssignmentProperty.
- * @param {AssignmentProperty | RestElement} node
- * @returns {node is AssignmentProperty}
  */
-function isAssignmentProperty(node) {
+function isAssignmentProperty(
+  node: AssignmentProperty | RestElement
+): node is AssignmentProperty {
   return node.type === 'Property'
 }
 /**
  * Checks whether the given node is VElement.
- * @param {VElement | VExpressionContainer | VText | VDocumentFragment} node
- * @returns {node is VElement}
  */
-function isVElement(node) {
+function isVElement(
+  node: VElement | VExpressionContainer | VText | VDocumentFragment
+): node is VElement {
   return node.type === 'VElement'
 }
 
 /**
  * Checks whether the given node is in export default.
- * @param {ASTNode} node
- * @returns {boolean}
  */
-function isInExportDefault(node) {
-  /** @type {ASTNode | null} */
-  let parent = node.parent
+function isInExportDefault(node: ASTNode): boolean {
+  let parent: ASTNode | null = node.parent
   while (parent) {
     if (parent.type === 'ExportDefaultDeclaration') {
       return true
@@ -2551,28 +2399,23 @@ function isInExportDefault(node) {
 
 /**
  * Retrieve `TSAsExpression#expression` value if the given node a `TSAsExpression` node. Otherwise, pass through it.
- * @template T Node type
- * @param {T | TSAsExpression} node The node to address.
- * @returns {T} The `TSAsExpression#expression` value if the node is a `TSAsExpression` node. Otherwise, the node.
  */
-function skipTSAsExpression(node) {
+function skipTSAsExpression<T>(node: T | TSAsExpression): T {
   if (!node) {
     return node
   }
-  // @ts-expect-error
+  // @ts-expect-error -- `node` is not narrowed to `T`
   return node.type === 'TSAsExpression'
-    ? // @ts-expect-error
+    ? // @ts-expect-error -- `node` is not narrowed to `T`
       skipTSAsExpression(node.expression)
-    : // @ts-expect-error
+    : // @ts-expect-error -- `node` is not narrowed to `T`
       node
 }
 
 /**
  * Gets the parent node of the given node. This method returns a value ignoring `X as F`.
- * @param {Expression} node
- * @returns {ASTNode}
  */
-function getParent(node) {
+function getParent(node: Expression): ASTNode {
   let parent = node.parent
   while (parent.type === 'TSAsExpression') {
     parent = parent.parent
@@ -2582,10 +2425,8 @@ function getParent(node) {
 
 /**
  * Checks if the given node is a property value.
- * @param {Property} prop
- * @param {Expression} node
  */
-function isPropertyChain(prop, node) {
+function isPropertyChain(prop: Property, node: Expression) {
   let value = node
   while (value.parent.type === 'TSAsExpression') {
     value = value.parent
@@ -2595,48 +2436,39 @@ function isPropertyChain(prop, node) {
 
 /**
  * Retrieve `AssignmentPattern#left` value if the given node a `AssignmentPattern` node. Otherwise, pass through it.
- * @template T Node type
- * @param {T | AssignmentPattern} node The node to address.
- * @return {T} The `AssignmentPattern#left` value if the node is a `AssignmentPattern` node. Otherwise, the node.
  */
-function skipDefaultParamValue(node) {
+function skipDefaultParamValue<T>(node: T | AssignmentPattern): T {
   if (!node) {
     return node
   }
-  // @ts-expect-error
+  // @ts-expect-error -- `node` is not narrowed to `T`
   return node.type === 'AssignmentPattern'
-    ? // @ts-expect-error
+    ? // @ts-expect-error -- `node` is not narrowed to `T`
       skipDefaultParamValue(node.left)
-    : // @ts-expect-error
+    : // @ts-expect-error -- `node` is not narrowed to `T`
       node
 }
 
 /**
  * Retrieve `ChainExpression#expression` value if the given node a `ChainExpression` node. Otherwise, pass through it.
- * @template T Node type
- * @param {T | ChainExpression} node The node to address.
- * @returns {T} The `ChainExpression#expression` value if the node is a `ChainExpression` node. Otherwise, the node.
  */
-function skipChainExpression(node) {
+function skipChainExpression<T>(node: T | ChainExpression): T {
   if (!node) {
     return node
   }
-  // @ts-expect-error
+  // @ts-expect-error -- `node` is not narrowed to `T`
   return node.type === 'ChainExpression'
-    ? // @ts-expect-error
+    ? // @ts-expect-error -- `node` is not narrowed to `T`
       skipChainExpression(node.expression)
-    : // @ts-expect-error
+    : // @ts-expect-error -- `node` is not narrowed to `T`
       node
 }
 
 /**
  * Checks whether the given node is in a type annotation.
- * @param {ESNode} node
- * @returns {boolean}
  */
-function withinTypeNode(node) {
-  /** @type {ASTNode | null} */
-  let target = node
+function isWithinTypeNode(node: ESNode): boolean {
+  let target: ASTNode | null = node
   while (target) {
     if (isTypeNode(target)) {
       return true
@@ -2648,10 +2480,10 @@ function withinTypeNode(node) {
 
 /**
  * Gets the property name of a given node.
- * @param {Property|AssignmentProperty|MethodDefinition|MemberExpression} node - The node to get.
- * @return {string|null} The property name if static. Otherwise, null.
  */
-function getStaticPropertyName(node) {
+export function getStaticPropertyName(
+  node: Property | AssignmentProperty | MethodDefinition | MemberExpression
+): string | null {
   if (node.type === 'Property' || node.type === 'MethodDefinition') {
     if (!node.computed) {
       const key = node.key
@@ -2660,7 +2492,7 @@ function getStaticPropertyName(node) {
       }
     }
     const key = node.key
-    // @ts-expect-error
+    // @ts-expect-error -- other key nodes make `getStringLiteralValue` return `null`
     return getStringLiteralValue(key)
   }
   if (node.type === 'MemberExpression') {
@@ -2669,7 +2501,7 @@ function getStaticPropertyName(node) {
       return property.type === 'Identifier' ? property.name : null
     }
     const property = node.property
-    // @ts-expect-error
+    // @ts-expect-error -- other property nodes make `getStringLiteralValue` return `null`
     return getStringLiteralValue(property)
   }
   return null
@@ -2677,19 +2509,19 @@ function getStaticPropertyName(node) {
 
 /**
  * Gets the string of a given node.
- * @param {Literal|TemplateLiteral} node - The node to get.
- * @param {boolean} [stringOnly]
- * @return {string|null} The string if static. Otherwise, null.
  */
-function getStringLiteralValue(node, stringOnly) {
+export function getStringLiteralValue(
+  node: Literal | TemplateLiteral,
+  shouldOnlyAcceptStrings = false
+): string | null {
   if (node.type === 'Literal') {
     if (node.value == null) {
-      return stringOnly || node.bigint == null ? null : node.bigint
+      return shouldOnlyAcceptStrings || node.bigint == null ? null : node.bigint
     }
     if (typeof node.value === 'string') {
       return node.value
     }
-    return stringOnly ? null : String(node.value)
+    return shouldOnlyAcceptStrings ? null : String(node.value)
   }
   return node.type === 'TemplateLiteral' &&
     node.expressions.length === 0 &&
@@ -2700,10 +2532,8 @@ function getStringLiteralValue(node, stringOnly) {
 
 /**
  * Gets the name parameter from the given call expression.
- * @param {CallExpression} node - The call expression to get.
- * @returns {NameWithLoc|null} The name and location if static.
  */
-function getNameParamNode(node) {
+function getNameParamNode(node: CallExpression): NameWithLoc | null {
   const nameLiteralNode = node.arguments[0]
   if (nameLiteralNode && isStringLiteral(nameLiteralNode)) {
     const name = getStringLiteralValue(nameLiteralNode)
@@ -2715,22 +2545,16 @@ function getNameParamNode(node) {
 }
 /**
  * Gets the VExpressionContainer of a given node.
- * @param {ASTNode} node - The node to get.
- * @return {VExpressionContainer|null}
  */
-function getVExpressionContainer(node) {
-  /** @type {ASTNode | null} */
-  let n = node
+function getVExpressionContainer(node: ASTNode): VExpressionContainer | null {
+  let n: ASTNode | null = node
   while (n && n.type !== 'VExpressionContainer') {
     n = n.parent
   }
   return n
 }
 
-/**
- * @param {string} path
- */
-function isTypeScriptFile(path) {
+function isTypeScriptFile(path: string) {
   return path.endsWith('.ts') || path.endsWith('.tsx') || path.endsWith('.mts')
 }
 
@@ -2738,26 +2562,20 @@ function isTypeScriptFile(path) {
 // Vue Helpers
 // ------------------------------------------------------------------------------
 
-/**
- * @param {string} path
- */
-function isVueFile(path) {
+function isVueFile(path: string) {
   return path.endsWith('.vue') || path.endsWith('.jsx') || path.endsWith('.tsx')
 }
 
 /**
  * Checks whether the current file is uses `<script setup>`
- * @param {RuleContext} context The ESLint rule context object.
  */
-function isScriptSetup(context) {
+function isScriptSetup(context: RuleContext) {
   return Boolean(getScriptSetupElement(context))
 }
 /**
  * Gets the element of `<script setup>`
- * @param {RuleContext} context The ESLint rule context object.
- * @returns {VElement | null} the element of `<script setup>`
  */
-function getScriptSetupElement(context) {
+function getScriptSetupElement(context: RuleContext): VElement | null {
   const sourceCode = context.sourceCode
   const df =
     sourceCode.parserServices.getDocumentFragment &&
@@ -2766,8 +2584,7 @@ function getScriptSetupElement(context) {
     return null
   }
   const scripts = df.children.filter(
-    /** @returns {e is VElement} */
-    (e) => isVElement(e) && e.name === 'script'
+    (e): e is VElement => isVElement(e) && e.name === 'script'
   )
   if (scripts.length === 2) {
     return scripts.find((e) => hasAttribute(e, 'setup')) || null
@@ -2780,11 +2597,8 @@ function getScriptSetupElement(context) {
  * Check whether the given node is a Vue component based
  * on the filename and default export type
  * export default {} in .vue || .jsx
- * @param {ESNode} node Node to check
- * @param {string} path File name with extension
- * @returns {boolean}
  */
-function isVueComponentFile(node, path) {
+function isVueComponentFile(node: ESNode, path: string): boolean {
   return (
     isVueFile(path) &&
     node.type === 'ExportDefaultDeclaration' &&
@@ -2794,11 +2608,11 @@ function isVueComponentFile(node, path) {
 
 /**
  * Whether the given callee refers to a symbol exported by Vue.
- * @param {Identifier} callee Node to check.
- * @param {RuleContext} context The rule context to use parser services.
- * @returns {boolean}
  */
-function isGlobalOrImportedFromVue(callee, context) {
+function isGlobalOrImportedFromVue(
+  callee: Identifier,
+  context: RuleContext
+): boolean {
   const globalScope = context.sourceCode.scopeManager.globalScope
 
   if (globalScope === null) {
@@ -2840,8 +2654,7 @@ function isGlobalOrImportedFromVue(callee, context) {
 
   if (variable !== null && variable.defs.length === 1) {
     const def = variable.defs[0]
-    /** @type {Set<string | null>} */
-    const vueLikePackageNames = new Set([
+    const vueLikePackageNames: Set<string | null> = new Set([
       'vue',
       '@vue/composition-api',
       '@nuxtjs/composition-api'
@@ -2900,11 +2713,18 @@ function isGlobalOrImportedFromVue(callee, context) {
 /**
  * Get the Vue component definition type from given node
  * Vue.component('xxx', {}) || component('xxx', {})
- * @param {RuleContext} context The rule context to use parser services.
- * @param {ObjectExpression} node Node to check
- * @returns {'component' | 'mixin' | 'extend' | 'createApp' | 'defineComponent' | 'defineNuxtComponent' | null}
  */
-function getVueComponentDefinitionType(context, node) {
+function getVueComponentDefinitionType(
+  context: RuleContext,
+  node: ObjectExpression
+):
+  | 'component'
+  | 'mixin'
+  | 'extend'
+  | 'createApp'
+  | 'defineComponent'
+  | 'defineNuxtComponent'
+  | null {
   const parent = getParent(node)
   if (parent.type === 'CallExpression') {
     const callee = parent.callee
@@ -2967,8 +2787,7 @@ function getVueComponentDefinitionType(context, node) {
   return null
 }
 
-/** @param {CallExpression} node */
-function isObjectArgument(node) {
+function isObjectArgument(node: CallExpression) {
   const lastArgument = node.arguments.at(-1)
   return (
     lastArgument && skipTSAsExpression(lastArgument).type === 'ObjectExpression'
@@ -2978,10 +2797,8 @@ function isObjectArgument(node) {
 /**
  * Check whether given node is new Vue instance
  * new Vue({})
- * @param {NewExpression} node Node to check
- * @returns {boolean}
  */
-function isVueInstance(node) {
+function isVueInstance(node: NewExpression): boolean {
   const callee = node.callee
   return (
     node.type === 'NewExpression' &&
@@ -2994,11 +2811,11 @@ function isVueInstance(node) {
 
 /**
  * If the given object is a Vue component or instance, returns the Vue definition type.
- * @param {RuleContext} context The ESLint rule context object.
- * @param {ObjectExpression} node Node to check
- * @returns { VueObjectType | null } The Vue definition type.
  */
-function getVueObjectType(context, node) {
+function getVueObjectType(
+  context: RuleContext,
+  node: ObjectExpression
+): VueObjectType | null {
   if (node.type !== 'ObjectExpression') {
     return null
   }
@@ -3054,11 +2871,8 @@ function getVueObjectType(context, node) {
 
 /**
  * Checks whether the given object is an SFC definition.
- * @param {RuleContext} context The ESLint rule context object.
- * @param {ObjectExpression} node Node to check
- * @returns { boolean } `true`, the given object is an SFC definition.
  */
-function isSFCObject(context, node) {
+function isSFCObject(context: RuleContext, node: ObjectExpression): boolean {
   if (node.type !== 'ObjectExpression') {
     return false
   }
@@ -3066,11 +2880,7 @@ function isSFCObject(context, node) {
   const ext = path.extname(filePath)
   return (ext === '.vue' || !ext) && isSFC(node)
 
-  /**
-   * @param {Expression} node
-   * @returns {boolean}
-   */
-  function isSFC(node) {
+  function isSFC(node: Expression): boolean {
     const parent = getParent(node)
     switch (parent.type) {
       case 'ExportDefaultDeclaration': {
@@ -3123,10 +2933,8 @@ function isSFCObject(context, node) {
 
 /**
  * Gets the component comments of a given context.
- * @param {RuleContext} context The ESLint rule context object.
- * @return {Token[]} The the component comments.
  */
-function getComponentComments(context) {
+function getComponentComments(context: RuleContext): Token[] {
   let tokens = componentComments.get(context)
   if (tokens) {
     return tokens
@@ -3141,10 +2949,10 @@ function getComponentComments(context) {
 
 /**
  * Return generator with the all handler nodes defined in the given watcher property.
- * @param {Property|Expression} property
- * @returns {IterableIterator<Expression>}
  */
-function* iterateWatchHandlerValues(property) {
+function* iterateWatchHandlerValues(
+  property: Property | Expression
+): IterableIterator<Expression> {
   const value = property.type === 'Property' ? property.value : property
   if (value.type === 'ObjectExpression') {
     const handler = findProperty(value, 'handler')
@@ -3164,9 +2972,8 @@ function* iterateWatchHandlerValues(property) {
 
 /**
  * Wraps composition API trace map in 'vue', '@vue/composition-api' and '@nuxtjs/composition-api' imports, or '#imports' from unimport
- * @param {import('@eslint-community/eslint-utils').TYPES.TraceMap} map
  */
-function createCompositionApiTraceMap(map) {
+function createCompositionApiTraceMap(map: TYPES.TraceMap) {
   return {
     vue: map,
     '@vue/composition-api': map,
@@ -3177,19 +2984,15 @@ function createCompositionApiTraceMap(map) {
 
 /**
  * Get the attribute which has the given name.
- * @param {VElement} node The start tag node to check.
- * @param {string} name The attribute name to check.
- * @param {string} [value] The attribute value to check.
- * @returns {VAttribute | null} The found attribute.
  */
-function getAttribute(node, name, value) {
+function getAttribute(
+  node: VElement,
+  name: string,
+  value?: string
+): VAttribute | null {
   return (
     node.startTag.attributes.find(
-      /**
-       * @param {VAttribute | VDirective} node
-       * @returns {node is VAttribute}
-       */
-      (node) =>
+      (node: VAttribute | VDirective): node is VAttribute =>
         !node.directive &&
         node.key.name === name &&
         (value === undefined ||
@@ -3200,36 +3003,26 @@ function getAttribute(node, name, value) {
 
 /**
  * Get the directive list which has the given name.
- * @param {VElement | VStartTag} node The start tag node to check.
- * @param {string} name The directive name to check.
- * @returns {VDirective[]} The array of `v-slot` directives.
  */
-function getDirectives(node, name) {
+function getDirectives(node: VElement | VStartTag, name: string): VDirective[] {
   const attributes = (node.type === 'VElement' ? node.startTag : node)
     .attributes
   return attributes.filter(
-    /**
-     * @param {VAttribute | VDirective} node
-     * @returns {node is VDirective}
-     */
-    (node) => node.directive && node.key.name.name === name
+    (node: VAttribute | VDirective): node is VDirective =>
+      node.directive && node.key.name.name === name
   )
 }
 /**
  * Get the directive which has the given name.
- * @param {VElement} node The start tag node to check.
- * @param {string} name The directive name to check.
- * @param {string} [argument] The directive argument to check.
- * @returns {VDirective | null} The found directive.
  */
-function getDirective(node, name, argument) {
+function getDirective(
+  node: VElement,
+  name: string,
+  argument?: string
+): VDirective | null {
   return (
     node.startTag.attributes.find(
-      /**
-       * @param {VAttribute | VDirective} node
-       * @returns {node is VDirective}
-       */
-      (node) =>
+      (node: VAttribute | VDirective): node is VDirective =>
         node.directive &&
         node.key.name.name === name &&
         (argument === undefined ||
@@ -3241,33 +3034,31 @@ function getDirective(node, name, argument) {
 }
 
 /**
- * Check whether the given start tag has specific directive.
- * @param {VElement} node The start tag node to check.
- * @param {string} name The attribute name to check.
- * @param {string} [value] The attribute value to check.
- * @returns {boolean} `true` if the start tag has the attribute.
+ * Check whether the given start tag has specific attribute.
  */
-function hasAttribute(node, name, value) {
+function hasAttribute(node: VElement, name: string, value?: string): boolean {
   return Boolean(getAttribute(node, name, value))
 }
 
 /**
  * Check whether the given start tag has specific directive.
- * @param {VElement} node The start tag node to check.
- * @param {string} name The directive name to check.
- * @param {string} [argument] The directive argument to check.
- * @returns {boolean} `true` if the start tag has the directive.
  */
-function hasDirective(node, name, argument) {
+function hasDirective(
+  node: VElement,
+  name: string,
+  argument?: string
+): boolean {
   return Boolean(getDirective(node, name, argument))
 }
 
 /**
  * Check whether the given directive node is v-bind same-name shorthand.
- * @param {VAttribute | VDirective} node The directive node to check.
- * @returns {node is VDirective & { value: VExpressionContainer & { expression: Identifier } }} `true` if the directive node is v-bind same-name shorthand.
  */
-function isVBindSameNameShorthand(node) {
+function isVBindSameNameShorthand(
+  node: VAttribute | VDirective
+): node is VDirective & {
+  value: VExpressionContainer & { expression: Identifier }
+} {
   return (
     node.directive &&
     node.key.name.name === 'bind' &&
@@ -3277,11 +3068,7 @@ function isVBindSameNameShorthand(node) {
   )
 }
 
-/**
- * @param {ASTNode} node
- * @returns {node is Literal | TemplateLiteral}
- */
-function isStringLiteral(node) {
+function isStringLiteral(node: ASTNode): node is Literal | TemplateLiteral {
   return (
     (node.type === 'Literal' && typeof node.value === 'string') ||
     (node.type === 'TemplateLiteral' && node.expressions.length === 0)
@@ -3290,10 +3077,10 @@ function isStringLiteral(node) {
 
 /**
  * Checks whether given defineProps call node has withDefaults.
- * @param {CallExpression} node The node of defineProps
- * @returns {node is CallExpression & { parent: CallExpression }}
  */
-function hasWithDefaults(node) {
+function hasWithDefaults(
+  node: CallExpression
+): node is CallExpression & { parent: CallExpression } {
   return (
     node.parent &&
     node.parent.type === 'CallExpression' &&
@@ -3305,19 +3092,17 @@ function hasWithDefaults(node) {
 
 /**
  * Get the withDefaults call node from given defineProps call node.
- * @param {CallExpression} node The node of defineProps
- * @returns {CallExpression | null}
  */
-function getWithDefaults(node) {
+function getWithDefaults(node: CallExpression): CallExpression | null {
   return hasWithDefaults(node) ? node.parent : null
 }
 
 /**
  * Gets a map of the property nodes defined in withDefaults.
- * @param {CallExpression} node The node of defineProps
- * @returns { { [key: string]: Property | undefined } }
  */
-function getWithDefaultsProps(node) {
+function getWithDefaultsProps(node: CallExpression): {
+  [key: string]: Property | undefined
+} {
   if (!hasWithDefaults(node)) {
     return {}
   }
@@ -3326,8 +3111,7 @@ function getWithDefaultsProps(node) {
     return {}
   }
 
-  /** @type {Record<string, Property>} */
-  const result = {}
+  const result: Record<string, Property> = {}
 
   for (const prop of param.properties) {
     if (prop.type !== 'Property') {
@@ -3346,13 +3130,15 @@ function getWithDefaultsProps(node) {
  * Collects the property expressions of the object that the given node refers
  * to, following `const` references and spread elements. Properties are
  * collected in source order, so a later definition overrides an earlier one.
- * @param {RuleContext} context The rule context object.
- * @param {ESNode} node
- * @param {Record<string, Expression | undefined>} result
- * @param {Set<ObjectExpression>} visited
- * @returns {boolean} `false` if the object cannot be determined statically.
+ * Returns `false` if the object cannot be determined statically.
  */
-function collectPropExpressions(context, node, result, visited) {
+// eslint-disable-next-line unicorn/consistent-boolean-name -- returning a boolean is not the primary purpose
+function collectPropExpressions(
+  context: RuleContext,
+  node: ESNode,
+  result: Record<string, Expression | undefined>,
+  visited: Set<ObjectExpression>
+): boolean {
   const object = getObjectOrArray(context, node)
   if (object?.type !== 'ObjectExpression') {
     return false
@@ -3386,13 +3172,12 @@ function collectPropExpressions(context, node, result, visited) {
 
 /**
  * Gets a map of the expressions defined in withDefaults.
- * @param {RuleContext} context The rule context object.
- * @param {CallExpression} node The node of defineProps
- * @returns { { props: { [key: string]: Expression | undefined }, hasUnknown: boolean } }
  */
-function getWithDefaultsPropExpressions(context, node) {
-  /** @type {Record<string, Expression | undefined>} */
-  const props = {}
+function getWithDefaultsPropExpressions(
+  context: RuleContext,
+  node: CallExpression
+): { props: { [key: string]: Expression | undefined }; hasUnknown: boolean } {
+  const props: Record<string, Expression | undefined> = {}
   if (!hasWithDefaults(node)) {
     return { props, hasUnknown: false }
   }
@@ -3409,12 +3194,12 @@ function getWithDefaultsPropExpressions(context, node) {
 
 /**
  * Gets the props destructure property nodes for defineProp.
- * @param {CallExpression} node The node of defineProps
- * @returns { Record<string, AssignmentProperty | undefined> }
  */
-function getPropsDestructure(node) {
-  /** @type {ReturnType<typeof getPropsDestructure>} */
-  const result = Object.create(null)
+function getPropsDestructure(
+  node: CallExpression
+): Record<string, AssignmentProperty | undefined> {
+  const result: Record<string, AssignmentProperty | undefined> =
+    Object.create(null)
   const left = getLeftOfDefineProps(node)
   if (!left || left.type !== 'ObjectPattern') {
     return result
@@ -3432,12 +3217,17 @@ function getPropsDestructure(node) {
 /**
  * Gets the default definition nodes for defineProp
  * using the props destructure with assignment pattern.
- * @param {CallExpression} node The node of defineProps
- * @returns { Record<string, {prop: AssignmentProperty , expression: Expression} | undefined> }
  */
-function getDefaultPropExpressionsForPropsDestructure(node) {
-  /** @type {ReturnType<typeof getDefaultPropExpressionsForPropsDestructure>} */
-  const result = Object.create(null)
+function getDefaultPropExpressionsForPropsDestructure(
+  node: CallExpression
+): Record<
+  string,
+  { prop: AssignmentProperty; expression: Expression } | undefined
+> {
+  const result: Record<
+    string,
+    { prop: AssignmentProperty; expression: Expression } | undefined
+  > = Object.create(null)
   const propsDestructureEntries = Object.entries(getPropsDestructure(node))
   for (const [name, prop] of propsDestructureEntries) {
     if (!prop) continue
@@ -3450,10 +3240,8 @@ function getDefaultPropExpressionsForPropsDestructure(node) {
 
 /**
  * Gets the pattern of the left operand of defineProps.
- * @param {CallExpression} node The node of defineProps
- * @returns {Pattern | null} The pattern of the left operand of defineProps
  */
-function getLeftOfDefineProps(node) {
+function getLeftOfDefineProps(node: CallExpression): Pattern | null {
   let target = node
   if (hasWithDefaults(target)) {
     target = target.parent
@@ -3469,17 +3257,11 @@ function getLeftOfDefineProps(node) {
 
 /**
  * Get all props from component options object.
- * @param {ObjectExpression} componentObject Object with component definition
- * @return {(ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp)[]} Array of component props
  */
-function getComponentPropsFromOptions(componentObject) {
-  const propsNode = componentObject.properties.find(
-    /**
-     * @param {ESNode} p
-     * @returns {p is (Property & { key: Identifier & {name: 'props'} })}
-     */
-    (p) => p.type === 'Property' && getStaticPropertyName(p) === 'props'
-  )
+export function getComponentPropsFromOptions(
+  componentObject: ObjectExpression
+): (ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp)[] {
+  const propsNode = findProperty(componentObject, 'props')
 
   if (!propsNode) {
     return []
@@ -3502,17 +3284,11 @@ function getComponentPropsFromOptions(componentObject) {
 
 /**
  * Get all emits from component options object.
- * @param {ObjectExpression} componentObject Object with component definition
- * @return {(ComponentArrayEmit | ComponentObjectEmit | ComponentUnknownEmit)[]} Array of component emits
  */
-function getComponentEmitsFromOptions(componentObject) {
-  const emitsNode = componentObject.properties.find(
-    /**
-     * @param {ESNode} p
-     * @returns {p is (Property & { key: Identifier & {name: 'emits'} })}
-     */
-    (p) => p.type === 'Property' && getStaticPropertyName(p) === 'emits'
-  )
+function getComponentEmitsFromOptions(
+  componentObject: ObjectExpression
+): (ComponentArrayEmit | ComponentObjectEmit | ComponentUnknownEmit)[] {
+  const emitsNode = findProperty(componentObject, 'emits')
 
   if (!emitsNode) {
     return []
@@ -3535,11 +3311,11 @@ function getComponentEmitsFromOptions(componentObject) {
 
 /**
  * Get all props from `defineProps` call expression.
- * @param {RuleContext} context The rule context object.
- * @param {CallExpression} node `defineProps` call expression
- * @return {ComponentProp[]} Array of component props
  */
-function getComponentPropsFromDefineProps(context, node) {
+function getComponentPropsFromDefineProps(
+  context: RuleContext,
+  node: CallExpression
+): ComponentProp[] {
   if (node.arguments.length > 0) {
     const defNode = getObjectOrArray(context, node.arguments[0])
     if (defNode) {
@@ -3569,11 +3345,11 @@ function getComponentPropsFromDefineProps(context, node) {
 
 /**
  * Get all emits from `defineEmits` call expression.
- * @param {RuleContext} context The rule context object.
- * @param {CallExpression} node `defineEmits` call expression
- * @return {ComponentEmit[]} Array of component emits
  */
-function getComponentEmitsFromDefineEmits(context, node) {
+function getComponentEmitsFromDefineEmits(
+  context: RuleContext,
+  node: CallExpression
+): ComponentEmit[] {
   if (node.arguments.length > 0) {
     const defNode = getObjectOrArray(context, node.arguments[0])
     if (defNode) {
@@ -3603,11 +3379,11 @@ function getComponentEmitsFromDefineEmits(context, node) {
 
 /**
  * Get all slots from `defineSlots` call expression.
- * @param {RuleContext} context The rule context object.
- * @param {CallExpression} node `defineSlots` call expression
- * @return {ComponentSlot[]} Array of component slots
  */
-function getComponentSlotsFromDefineSlots(context, node) {
+function getComponentSlotsFromDefineSlots(
+  context: RuleContext,
+  node: CallExpression
+): ComponentSlot[] {
   const typeArguments =
     'typeArguments' in node ? node.typeArguments : node.typeParameters
   if (typeArguments && typeArguments.params.length > 0) {
@@ -3624,18 +3400,16 @@ function getComponentSlotsFromDefineSlots(context, node) {
 
 /**
  * Get model info from `defineModel` call expression.
- * @param {RuleContext} _context The rule context object.
- * @param {CallExpression} node `defineModel` call expression
- * @return {ComponentModel} Object of component model
  */
-function getComponentModelFromDefineModel(_context, node) {
-  /** @type {ComponentModelName} */
-  let name = {
+function getComponentModelFromDefineModel(
+  _context: RuleContext,
+  node: CallExpression
+): ComponentModel {
+  let name: ComponentModelName = {
     modelName: 'modelValue',
     node: null
   }
-  /** @type {Expression|null} */
-  let options =
+  let options: Expression | null =
     node.arguments[0]?.type === 'SpreadElement' ? null : node.arguments[0]
   if (node.arguments.length > 0) {
     const nameNodeCandidate = skipTSAsExpression(node.arguments[0])
@@ -3667,14 +3441,15 @@ function getComponentModelFromDefineModel(_context, node) {
 
 /**
  * Get all props by looking at all component's properties
- * @param {ObjectExpression|ArrayExpression} propsNode Object with props definition
- * @return {(ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp)[]} Array of component props
  */
-function getComponentPropsFromDefine(propsNode) {
+function getComponentPropsFromDefine(
+  propsNode: ObjectExpression | ArrayExpression
+): (ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp)[] {
   if (propsNode.type === 'ObjectExpression') {
     return propsNode.properties.map(
-      /** @returns {ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp} */
-      (prop) => {
+      (
+        prop
+      ): ComponentArrayProp | ComponentObjectProp | ComponentUnknownProp => {
         if (!isProperty(prop)) {
           return {
             type: 'unknown',
@@ -3728,10 +3503,10 @@ function getComponentPropsFromDefine(propsNode) {
 
 /**
  * Get all emits by looking at all component's properties
- * @param {ObjectExpression|ArrayExpression} emitsNode Object with emits definition
- * @return {(ComponentArrayEmit | ComponentObjectEmit | ComponentUnknownEmit)[]} Array of component emits.
  */
-function getComponentEmitsFromDefine(emitsNode) {
+function getComponentEmitsFromDefine(
+  emitsNode: ObjectExpression | ArrayExpression
+): (ComponentArrayEmit | ComponentObjectEmit | ComponentUnknownEmit)[] {
   if (emitsNode.type === 'ObjectExpression') {
     return emitsNode.properties.map((prop) => {
       if (!isProperty(prop)) {
@@ -3786,12 +3561,10 @@ function getComponentEmitsFromDefine(emitsNode) {
   })
 }
 
-/**
- * @param {RuleContext} context The rule context object.
- * @param {ESNode} node
- * @returns {ObjectExpression | ArrayExpression | null}
- */
-function getObjectOrArray(context, node) {
+function getObjectOrArray(
+  context: RuleContext,
+  node: ESNode
+): ObjectExpression | ArrayExpression | null {
   if (node.type === 'ObjectExpression' || node.type === 'ArrayExpression') {
     return node
   }

@@ -5,7 +5,7 @@
 import canConvertToVSlot from './utils/can-convert-to-v-slot.ts'
 import { toRegExpGroupMatcher } from '../../utils/regexp.ts'
 import { pascalCase, kebabCase } from '../../utils/casing.ts'
-import utils from '../../utils/index.js'
+import utils from '../../utils/index.ts'
 
 export default {
   deprecated: '2.6.0',
@@ -103,9 +103,9 @@ export default {
       }
     }
     /**
-     * Reports `slot` node
+     * Checks whether the element with the given slot attribute or its parent is ignored.
      */
-    function reportSlot(slotAttr: VAttribute): void {
+    function isIgnored(slotAttr: VAttribute | VDirective): boolean {
       const component = slotAttr.parent.parent
       const componentName = component.rawName
 
@@ -116,12 +116,17 @@ export default {
           kebabCase(componentName)
         )
       ) {
-        return
+        return true
       }
 
       const parent = component.parent
-      const parentName = utils.isVElement(parent) ? parent.rawName : null
-      if (parentName && isParentIgnored(parentName)) {
+      return utils.isVElement(parent) && isParentIgnored(parent.rawName)
+    }
+    /**
+     * Reports `slot` node
+     */
+    function reportSlot(slotAttr: VAttribute): void {
+      if (isIgnored(slotAttr)) {
         return
       }
 
@@ -142,6 +147,10 @@ export default {
      * Reports `v-bind:slot` node
      */
     function reportVBindSlot(slotAttr: VDirective): void {
+      if (isIgnored(slotAttr)) {
+        return
+      }
+
       context.report({
         node: slotAttr.key,
         messageId: 'forbiddenSlotAttribute',

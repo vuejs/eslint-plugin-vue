@@ -2,7 +2,7 @@
  * @fileoverview enforce valid `.sync` modifier on `v-bind` directives
  * @author Yosuke Ota
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Check whether the given node is valid or not.

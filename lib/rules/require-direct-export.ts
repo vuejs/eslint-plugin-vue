@@ -2,7 +2,7 @@
  * @fileoverview require the component to be directly exported
  * @author Hiroki Osame <hiroki.osame@gmail.com>
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

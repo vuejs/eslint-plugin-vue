@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import type { TSESTree } from '@typescript-eslint/types'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

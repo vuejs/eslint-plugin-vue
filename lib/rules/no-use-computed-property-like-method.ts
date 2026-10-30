@@ -3,8 +3,8 @@
  * See LICENSE file in root directory for full license.
  */
 import eslintUtils from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
-import type { ComponentObjectPropertyData, GroupName } from '../utils/index.js'
+import utils from '../utils/index.ts'
+import type { ComponentObjectPropertyData, GroupName } from '../utils/index.ts'
 
 interface CallMember {
   name: string

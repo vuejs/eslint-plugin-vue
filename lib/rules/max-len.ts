@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * @fileoverview Rule to check for max length on a line of Vue file.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const OPTIONS_SCHEMA = {
   type: 'object',
