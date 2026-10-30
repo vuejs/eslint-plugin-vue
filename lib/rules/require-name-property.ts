@@ -47,15 +47,49 @@ export default {
     },
     fixable: null,
     hasSuggestions: true,
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: { checkScriptSetup: { type: 'boolean' } },
+        additionalProperties: false
+      }
+    ],
     messages: {
       missingName: 'Required name property is not set.',
       addName: 'Add name property to component.'
     }
   },
   create(context: RuleContext) {
-    if (utils.isScriptSetup(context)) {
-      return {}
+    const scriptSetup = utils.getScriptSetupElement(context)
+    if (scriptSetup) {
+      if (!context.options[0]?.checkScriptSetup) {
+        return {}
+      }
+      let defineOptions: CallExpression | null = null
+      let hasName = false
+      return utils.compositingVisitors(
+        utils.executeOnVue(context, (component) => {
+          hasName ||= component.properties.some(isNameProperty)
+        }),
+        utils.defineScriptSetupVisitor(context, {
+          onDefineOptionsEnter(node) {
+            defineOptions = node
+            const define = node.arguments[0]
+            hasName ||=
+              define?.type === 'ObjectExpression' &&
+              define.properties.some(isNameProperty)
+          }
+        }),
+        {
+          'Program:exit'() {
+            if (hasName) return
+            context.report({
+              loc: (defineOptions ?? scriptSetup.startTag).loc,
+              messageId: 'missingName'
+            })
+          }
+        }
+      )
     }
     return utils.executeOnVue(context, (component, type) => {
       if (type === 'definition') {
