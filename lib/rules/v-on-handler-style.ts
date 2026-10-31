@@ -114,7 +114,7 @@ export default {
           {
             type: 'array',
             items: [
-              { const: 'method' },
+              { enum: ['method', 'inline'] },
               { enum: ['inline', 'inline-function'] }
             ],
             uniqueItems: true,
@@ -147,8 +147,6 @@ export default {
         'Prefer inline handler over method handler in v-on.',
       preferInlineOverInlineFunction:
         'Prefer inline handler over inline function in v-on.',
-      preferInlineOverInlineFunctionWithMultipleParams:
-        'Prefer inline handler over inline function in v-on. Note that the custom event must be changed to a single payload.',
       preferInlineFunctionOverMethod:
         'Prefer inline function over method handler in v-on.',
       preferInlineFunctionOverInline:
@@ -160,6 +158,10 @@ export default {
   create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const { allows, shouldIgnoreIncludesComment } = parseOptions(context)
+    // With `["inline", "inline-function"]`, inline functions with parameters
+    // are used instead of inline handlers with `$event`.
+    const shouldUseInlineFunctionForPayload =
+      allows[0] === 'inline' && allows.includes('inline-function')
 
     const upperElements = new Set<VElement>()
     const methodParamCountMap = new Map<string, number>()
@@ -221,8 +223,7 @@ export default {
           return verifyCanUseMethodHandlerForInlineFunction(node)
         }
         case 'inline': {
-          reportCanUseInlineHandlerForInlineFunction(node)
-          return true
+          return verifyCanUseInlineHandlerForInlineFunction(node)
         }
       }
       return false
@@ -404,6 +405,14 @@ export default {
       }
     }
     /**
+     * Checks whether the given inline handler uses `$event`.
+     */
+    function hasEventIdentifier(node: VOnExpression): boolean {
+      return $eventIdentifiers.some(
+        ({ range }) => node.range[0] <= range[0] && range[1] <= node.range[1]
+      )
+    }
+    /**
      * Report `v-on:click="foo()"` can be converted to `v-on:click="()=>foo()"`.
      */
     function reportCanUseInlineFunctionForInlineHandler(
@@ -413,12 +422,7 @@ export default {
         node,
         messageId: 'preferInlineFunctionOverInline',
         *fix(fixer) {
-          // eslint-disable-next-line unicorn/consistent-boolean-name -- `has` prefix is present; the `$` refers to the `$event` argument
-          const has$Event = $eventIdentifiers.some(
-            ({ range }) =>
-              node.range[0] <= range[0] && range[1] <= node.range[1]
-          )
-          if (has$Event) {
+          if (hasEventIdentifier(node)) {
             /* The statements contains $event and cannot be fixed. */
             return
           }
@@ -448,22 +452,27 @@ export default {
       })
     }
     /**
-     * Report `v-on:click="() => foo()"` can be converted to `v-on:click="foo()"`.
+     * Check if `v-on:click="() => foo()"` can be converted to `v-on:click="foo()"` and report if it can.
+     * Returns `true` if reported.
      */
-    function reportCanUseInlineHandlerForInlineFunction(
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- reports and returns whether it did
+    function verifyCanUseInlineHandlerForInlineFunction(
       node: ArrowFunctionExpression | FunctionExpression
-    ): void {
+    ): boolean {
       // If a function has one parameter, you can turn it into an inline handler using $event.
-      // If a function has two or more parameters, it cannot be easily converted to an inline handler.
-      // However, users can use inline handlers by changing the payload of the component's custom event.
-      // So we report it regardless of the number of parameters.
+      // If a function has two or more parameters, it cannot be converted to an inline handler,
+      // because $event only holds the first payload. Custom events with multiple payloads
+      // are reported on the emitting side by `vue/prefer-single-event-payload` instead.
+      if (
+        node.params.length > 1 ||
+        (shouldUseInlineFunctionForPayload && node.params.length > 0)
+      ) {
+        return false
+      }
 
       context.report({
         node,
-        messageId:
-          node.params.length > 1
-            ? 'preferInlineOverInlineFunctionWithMultipleParams'
-            : 'preferInlineOverInlineFunction',
+        messageId: 'preferInlineOverInlineFunction',
         fix:
           node.params.length > 0
             ? null /* The function has parameters and cannot be fixed. */
@@ -475,6 +484,7 @@ export default {
                 return fixer.replaceText(node, text)
               }
       })
+      return true
     }
 
     return utils.defineTemplateBodyVisitor(
@@ -497,6 +507,13 @@ export default {
             case 'VOnExpression': {
               // e.g. v-on:click="foo()"
               if (allows[0] === 'inline') {
+                if (
+                  shouldUseInlineFunctionForPayload &&
+                  hasEventIdentifier(expression)
+                ) {
+                  // e.g. v-on:click="foo($event)"
+                  reportCanUseInlineFunctionForInlineHandler(expression)
+                }
                 return
               }
               for (const allow of allows) {
