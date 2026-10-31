@@ -937,6 +937,76 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           endColumn: 61
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { computed, ref } from 'vue'
+      const arr = ref<number[]>([])
+      const foo = computed(() => {
+        (arr.value as number[]).push(1)
+        arr.value!.push(2)
+        return arr.value.length
+      })
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: { parser: tsEslintParser }
+      },
+      errors: [
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 40
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 27
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts">
+      export default {
+        computed: {
+          foo() {
+            (this.arr as number[]).push(1)
+            this.count!++
+            return this.arr.length
+          }
+        }
+      }
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: { parser: tsEslintParser }
+      },
+      errors: [
+        {
+          message: 'Unexpected side effect in "foo" computed property.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 43
+        },
+        {
+          message: 'Unexpected side effect in "foo" computed property.',
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 26
+        }
+      ]
     }
   ]
 })
