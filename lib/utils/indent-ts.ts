@@ -13,7 +13,7 @@ import {
   isClosingBracketToken,
   isOpeningBracketToken
 } from '@eslint-community/eslint-utils'
-import utils from './ts-utils/index.js'
+import { isTypeNode } from './ts-utils/index.ts'
 
 type MaybeNode = { type: string } & HasLocation
 
@@ -188,7 +188,7 @@ export function defineVisitor({
     },
     '*[type=/^TS/]'(node: ASTNode) {
       if (
-        !utils.isTypeNode(node) ||
+        !isTypeNode(node) ||
         (node.parent as any).type === 'TSParenthesizedType'
       ) {
         return

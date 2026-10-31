@@ -29,8 +29,14 @@ import type {
   VueVisitor,
   ScriptSetupVisitor
 } from '../../typings/eslint-plugin-vue/util-types/utils.ts'
-import scopeUtils from './scope.js'
-import tsUtils from './ts-utils/index.js'
+import { getScope } from './scope.ts'
+import {
+  getComponentPropsFromTypeDefine,
+  getComponentEmitsFromTypeDefine,
+  getComponentSlotsFromTypeDefine,
+  isExhaustiveSwitch,
+  isTypeNode
+} from './ts-utils/index.ts'
 import htmlElements from './html-elements.json' with { type: 'json' }
 import svgElements from './svg-elements.json' with { type: 'json' }
 import mathElements from './math-elements.json' with { type: 'json' }
@@ -130,14 +136,6 @@ const BUILTIN_DIRECTIVE_NAMES = new Set([
   'is'
 ])
 const { traverseNodes, getFallbackKeys, NS } = vueEslintParser.AST
-const {
-  getComponentPropsFromTypeDefine,
-  getComponentEmitsFromTypeDefine,
-  getComponentSlotsFromTypeDefine,
-  isExhaustiveSwitch,
-  isTypeNode
-} = tsUtils
-const { getScope } = scopeUtils
 
 const componentComments: WeakMap<RuleContext, Token[]> = new WeakMap()
 

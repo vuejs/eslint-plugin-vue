@@ -10,7 +10,7 @@ import type {
 import { findVariable } from '@eslint-community/eslint-utils'
 import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
 import utils from '../utils/index.ts'
-import tsUtils from '../utils/ts-utils/index.js'
+import { isRefObjectType } from '../utils/ts-utils/index.ts'
 
 /**
  * Checks whether the given identifier reference has been initialized with a ref object.
@@ -104,7 +104,7 @@ export default {
             return fixer.insertTextAfter(node, '.value')
           }
         })
-      } else if (shouldCheckType && tsUtils.isRefObjectType(context, node)) {
+      } else if (shouldCheckType && isRefObjectType(context, node)) {
         context.report({
           node,
           messageId: 'requireDotValueOfRef',
