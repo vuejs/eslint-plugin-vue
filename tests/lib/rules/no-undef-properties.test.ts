@@ -849,6 +849,56 @@ tester.run('no-undef-properties', rule, {
       };
       </script>
       `
+    },
+    {
+      // both <script> and <script setup>
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>{{ myData }} {{ myComputed }} {{ myMethod() }} {{ count }}</div>
+      </template>
+      <script>
+      export default {
+        data: () => ({ myData: 1 }),
+        computed: {
+          myComputed() {
+            return 1
+          }
+        },
+        methods: {
+          myMethod() {}
+        }
+      }
+      </script>
+      <script setup>
+      const count = 1
+      </script>
+      `
+    },
+    {
+      // both <script> and <script setup>
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>{{ myData }} {{ myComputed }} {{ myMethod() }} {{ count }}</div>
+      </template>
+      <script setup>
+      const count = 1
+      </script>
+      <script>
+      export default {
+        data: () => ({ myData: 1 }),
+        computed: {
+          myComputed() {
+            return 1
+          }
+        },
+        methods: {
+          myMethod() {}
+        }
+      }
+      </script>
+      `
     }
   ],
 
@@ -2013,6 +2063,74 @@ tester.run('no-undef-properties', rule, {
           column: 33,
           endLine: 3,
           endColumn: 34
+        }
+      ]
+    },
+    {
+      // both <script> and <script setup>
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>{{ myComputed }} {{ cnt }}</div>
+      </template>
+      <script>
+      export default {
+        data: () => ({ myData: 1 }),
+        computed: {
+          myComputed() {
+            return 1
+          }
+        },
+        methods: {
+          myMethod() {}
+        }
+      }
+      </script>
+      <script setup>
+      const count = 1
+      </script>
+      `,
+      errors: [
+        {
+          message: "'cnt' is not defined.",
+          line: 3,
+          column: 34,
+          endLine: 3,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      // both <script> and <script setup>
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>{{ myComputed }} {{ cnt }}</div>
+      </template>
+      <script setup>
+      const count = 1
+      </script>
+      <script>
+      export default {
+        data: () => ({ myData: 1 }),
+        computed: {
+          myComputed() {
+            return 1
+          }
+        },
+        methods: {
+          myMethod() {}
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message: "'cnt' is not defined.",
+          line: 3,
+          column: 34,
+          endLine: 3,
+          endColumn: 37
         }
       ]
     }
