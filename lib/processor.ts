@@ -27,6 +27,8 @@ export default {
         disableRuleKeys: new Map<string, string[]>()
       } satisfies GroupState
     }
+    // Rules enabled by `<!-- eslint-enable rule -->` while `<!-- eslint-disable -->` is active.
+    const blockEnabledRules = new Set<string>()
     const usedDisableDirectiveKeys: string[] = []
     const unusedDisableDirectiveReports = new Map<string, LintMessage>()
 
@@ -38,6 +40,7 @@ export default {
         switch (directiveType) {
           case 'disableBlock': {
             state.block.disableAllKeys.add(data[1])
+            blockEnabledRules.clear()
             break
           }
           case 'disableLine': {
@@ -46,6 +49,8 @@ export default {
           }
           case 'enableBlock': {
             state.block.disableAllKeys.clear()
+            state.block.disableRuleKeys.clear()
+            blockEnabledRules.clear()
             break
           }
           case 'enableLine': {
@@ -62,6 +67,9 @@ export default {
           }
           case 'enableBlockRule': {
             state.block.disableRuleKeys.delete(data[1])
+            if (state.block.disableAllKeys.size > 0) {
+              blockEnabledRules.add(data[1])
+            }
             break
           }
           case 'enableLineRule': {
@@ -73,6 +81,7 @@ export default {
             state.block.disableRuleKeys.clear()
             state.line.disableAllKeys.clear()
             state.line.disableRuleKeys.clear()
+            blockEnabledRules.clear()
             break
           }
           default: {
@@ -84,7 +93,10 @@ export default {
         return false
       }
       const disableDirectiveKeys = []
-      if (state.block.disableAllKeys.size > 0) {
+      if (
+        state.block.disableAllKeys.size > 0 &&
+        !(message.ruleId && blockEnabledRules.has(message.ruleId))
+      ) {
         disableDirectiveKeys.push(...state.block.disableAllKeys)
       }
       if (state.line.disableAllKeys.size > 0) {
