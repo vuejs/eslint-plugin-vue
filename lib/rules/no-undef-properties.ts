@@ -101,6 +101,51 @@ export default {
      */
     const propertiesDefinedByStoreHelpers = new Set<string>()
 
+    /**
+     * Collect property names defined by a Vuex or Pinia `map*` helper call.
+     */
+    function addPropertiesDefinedByStoreHelper(node: CallExpression) {
+      if (node.callee.type !== 'Identifier') return
+      let groupName: 'methods' | 'computed' | null = null
+      if (/^mapMutations|mapActions$/u.test(node.callee.name)) {
+        groupName = GROUP_METHODS
+      } else if (
+        /^mapState|mapGetters|mapWritableState$/u.test(node.callee.name)
+      ) {
+        groupName = GROUP_COMPUTED_PROPERTY
+      }
+
+      if (!groupName || node.arguments.length === 0) return
+      // On Pinia the store is always the first argument
+      const arg =
+        node.arguments.length === 2 ? node.arguments[1] : node.arguments[0]
+      if (arg.type === 'ObjectExpression') {
+        // e.g.
+        // `mapMutations({ add: 'increment' })`
+        // `mapState({ count: state => state.todosCount })`
+        for (const prop of arg.properties) {
+          const name =
+            prop.type === 'SpreadElement'
+              ? null
+              : utils.getStaticPropertyName(prop)
+          if (name) {
+            propertiesDefinedByStoreHelpers.add(name)
+          }
+        }
+      } else if (arg.type === 'ArrayExpression') {
+        // e.g. `mapMutations(['add'])`
+        for (const element of arg.elements) {
+          if (!element || !utils.isStringLiteral(element)) {
+            continue
+          }
+          const name = utils.getStringLiteralValue(element)
+          if (name) {
+            propertiesDefinedByStoreHelpers.add(name)
+          }
+        }
+      }
+    }
+
     let reactiveApiNodes: {
       reactive: Set<ESNode>
       toRefs: Set<ESNode>
@@ -432,48 +477,28 @@ export default {
       }),
       utils.defineVueVisitor(context, {
         CallExpression(node) {
-          if (node.callee.type !== 'Identifier') return
-          let groupName: 'methods' | 'computed' | null = null
-          if (/^mapMutations|mapActions$/u.test(node.callee.name)) {
-            groupName = GROUP_METHODS
-          } else if (
-            /^mapState|mapGetters|mapWritableState$/u.test(node.callee.name)
-          ) {
-            groupName = GROUP_COMPUTED_PROPERTY
-          }
-
-          if (!groupName || node.arguments.length === 0) return
-          // On Pinia the store is always the first argument
-          const arg =
-            node.arguments.length === 2 ? node.arguments[1] : node.arguments[0]
-          if (arg.type === 'ObjectExpression') {
-            // e.g.
-            // `mapMutations({ add: 'increment' })`
-            // `mapState({ count: state => state.todosCount })`
-            for (const prop of arg.properties) {
-              const name =
-                prop.type === 'SpreadElement'
-                  ? null
-                  : utils.getStaticPropertyName(prop)
-              if (name) {
-                propertiesDefinedByStoreHelpers.add(name)
-              }
-            }
-          } else if (arg.type === 'ArrayExpression') {
-            // e.g. `mapMutations(['add'])`
-            for (const element of arg.elements) {
-              if (!element || !utils.isStringLiteral(element)) {
-                continue
-              }
-              const name = utils.getStringLiteralValue(element)
-              if (name) {
-                propertiesDefinedByStoreHelpers.add(name)
-              }
-            }
-          }
+          addPropertiesDefinedByStoreHelper(node)
         },
         onVueObjectEnter(node) {
           const ctx = getVueComponentContext(node)
+
+          // Collect store helpers before any reference is verified,
+          // so that the order of component options does not matter.
+          for (const groupName of [GROUP_COMPUTED_PROPERTY, GROUP_METHODS]) {
+            const group = utils.findProperty(node, groupName)
+            if (!group) continue
+            const values =
+              group.value.type === 'ObjectExpression'
+                ? group.value.properties.map((p) =>
+                    p.type === 'SpreadElement' ? p.argument : null
+                  )
+                : [group.value]
+            for (const value of values) {
+              if (value && value.type === 'CallExpression') {
+                addPropertiesDefinedByStoreHelper(value)
+              }
+            }
+          }
 
           const properties = utils.iterateProperties(
             node,
