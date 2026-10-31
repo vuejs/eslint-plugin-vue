@@ -571,6 +571,31 @@ tester.run('no-unused-components', rule, {
         }
       ]
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component :is="\`OtherComponent\`" />
+        </template>
+        <script>
+          export default {
+            components: {
+              TheButton
+            }
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "TheButton" component has been registered but not used.',
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 24
+        }
+      ]
+    },
     // Setting: ignoreWhenBindingPresent
     {
       filename: 'test.vue',

@@ -174,6 +174,7 @@ tester.run('no-bare-strings-in-template', rule, {
         <img alt="Lorem ipsum">
         <input placeholder="Lorem ipsum">
         <h1 v-text="'Lorem ipsum'" />
+        <h1 v-text="\`Lorem ipsum\`" />
       </template>
       `,
       errors: [
@@ -240,6 +241,13 @@ tester.run('no-bare-strings-in-template', rule, {
           line: 13,
           column: 20,
           endLine: 13,
+          endColumn: 35
+        },
+        {
+          message: 'Unexpected non-translated string used in `v-text`.',
+          line: 14,
+          column: 20,
+          endLine: 14,
           endColumn: 35
         }
       ]
