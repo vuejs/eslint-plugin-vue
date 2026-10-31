@@ -21,7 +21,8 @@ function parseOptions(options: any) {
         ...INLINE_ELEMENTS
       ],
       ignoreWhenEmpty: true,
-      allowEmptyLines: false
+      allowEmptyLines: false,
+      ignoreComments: false
     },
     options
   )
@@ -37,6 +38,11 @@ function getPhrase(lineBreaks: number) {
     }
   }
 }
+
+function isHTMLComment(token: Token) {
+  return token.type === 'HTMLComment'
+}
+
 /**
  * Check whether the given element is empty or not.
  * This ignores whitespaces, doesn't ignore comments.
@@ -74,6 +80,9 @@ export default {
           },
           allowEmptyLines: {
             type: 'boolean'
+          },
+          ignoreComments: {
+            type: 'boolean'
           }
         },
         additionalProperties: false
@@ -91,6 +100,7 @@ export default {
     const ignores = options.ignores
     const ignoreWhenEmpty = options.ignoreWhenEmpty
     const allowEmptyLines = options.allowEmptyLines
+    const ignoreComments = options.ignoreComments
     const sourceCode = context.sourceCode
     const template =
       sourceCode.parserServices.getTemplateBodyTokenStore &&
@@ -135,36 +145,54 @@ export default {
           includeComments: true,
           filter: (token) => token.type !== 'HTMLWhitespace'
         }
+        const tokens = template.getTokensBetween(
+          element.startTag,
+          element.endTag,
+          getTokenOption
+        )
+        let start = 0
+        let end = tokens.length
+        if (ignoreComments) {
+          // comments on the same line as a tag are not treated as content
+          const firstContentIndex = tokens.findIndex(
+            (token, index) =>
+              !isHTMLComment(token) ||
+              token.loc.start.line !==
+                (tokens[index - 1] ?? element.startTag).loc.end.line
+          )
+          start = firstContentIndex === -1 ? tokens.length : firstContentIndex
+          const lastContentIndex = tokens.findLastIndex(
+            (token, index) =>
+              !isHTMLComment(token) ||
+              token.loc.end.line !==
+                (tokens[index + 1] ?? element.endTag).loc.start.line
+          )
+          end = Math.max(start, lastContentIndex + 1)
+        }
+        const contentTokens = tokens.slice(start, end)
         if (
           ignoreWhenEmpty &&
           element.children.length === 0 &&
-          template.getFirstTokensBetween(
-            element.startTag,
-            element.endTag,
-            getTokenOption
-          ).length === 0
+          contentTokens.length === 0
         ) {
           return
         }
 
-        const contentFirst = template.getTokenAfter(
-          element.startTag,
-          getTokenOption
-        )!
-        const contentLast = template.getTokenBefore(
-          element.endTag,
-          getTokenOption
-        )!
+        const startTagOrComment: VStartTag | Token =
+          tokens[start - 1] ?? element.startTag
+        const endTagOrComment: VEndTag | Token = tokens[end] ?? element.endTag
+        const contentFirst = contentTokens[0] ?? endTagOrComment
+        const contentLast = contentTokens.at(-1) ?? startTagOrComment
 
         const beforeLineBreaks =
-          contentFirst.loc.start.line - element.startTag.loc.end.line
+          contentFirst.loc.start.line - startTagOrComment.loc.end.line
         const afterLineBreaks =
-          element.endTag.loc.start.line - contentLast.loc.end.line
+          endTagOrComment.loc.start.line - contentLast.loc.end.line
         if (isInvalidLineBreaks(beforeLineBreaks)) {
           context.report({
             node: template.getLastToken(element.startTag),
             loc: {
-              start: element.startTag.loc.end,
+              start: startTagOrComment.loc.end,
               end: contentFirst.loc.start
             },
             messageId: 'unexpectedAfterClosingBracket',
@@ -174,7 +202,7 @@ export default {
             },
             fix(fixer) {
               const range: Range = [
-                element.startTag.range[1],
+                startTagOrComment.range[1],
                 contentFirst.range[0]
               ]
               return fixer.replaceTextRange(range, '\n')
@@ -182,7 +210,7 @@ export default {
           })
         }
 
-        if (isEmpty(element, sourceCode)) {
+        if (contentTokens.length === 0 || isEmpty(element, sourceCode)) {
           return
         }
 
@@ -191,7 +219,7 @@ export default {
             node: template.getFirstToken(element.endTag),
             loc: {
               start: contentLast.loc.end,
-              end: element.endTag.loc.start
+              end: endTagOrComment.loc.start
             },
             messageId: 'unexpectedBeforeOpeningBracket',
             data: {
@@ -201,7 +229,7 @@ export default {
             fix(fixer) {
               const range: Range = [
                 contentLast.range[1],
-                element.endTag.range[0]
+                endTagOrComment.range[0]
               ]
               return fixer.replaceTextRange(range, '\n')
             }

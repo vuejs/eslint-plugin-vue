@@ -275,7 +275,64 @@ tester.run('multiline-html-element-content-newline', rule, {
         <div
           id=
           ""
-    `
+    `,
+
+    // ignoreComments
+    {
+      code: `
+        <template>
+          <div class="something">  <!-- or use class="other" -->
+            <Component />
+          </div>
+        </template>`,
+      options: [{ ignoreComments: true }]
+    },
+    {
+      code: `
+        <template>
+          <!-- comment on its own line before the element -->
+          <div class="red">  <!-- or "blue" -->
+            content
+          </div>
+        </template>`,
+      options: [{ ignoreComments: true }]
+    },
+    {
+      code: `
+        <template>
+          <div> <!-- a --> <!-- b
+            continues -->
+            <!-- own line -->
+            content
+            <!-- own line -->
+          <!-- c --> </div>
+        </template>`,
+      options: [{ ignoreComments: true }]
+    },
+    {
+      code: `
+        <template>
+          <div> <!-- comment -->
+
+            content
+
+          </div>
+        </template>`,
+      options: [{ ignoreComments: true, allowEmptyLines: true }]
+    },
+    {
+      code: `
+        <template>
+          <div
+            attr
+          ><!-- comment --></div>
+          <div> <!-- comment -->
+          </div>
+          <div>
+          <!-- comment --></div>
+        </template>`,
+      options: [{ ignoreComments: true }]
+    }
   ],
   invalid: [
     {
@@ -939,6 +996,135 @@ content
           column: 14,
           endLine: 4,
           endColumn: 14
+        }
+      ]
+    },
+
+    // ignoreComments
+    {
+      code: `
+        <template>
+          <div class="something">  <!-- or use class="other" -->
+            <Component />
+          </div>
+        </template>`,
+      output: `
+        <template>
+          <div class="something">
+<!-- or use class="other" -->
+            <Component />
+          </div>
+        </template>`,
+      errors: [
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 34,
+          endLine: 3,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div> <!-- comment --> content
+          </div>
+        </template>`,
+      output: `
+        <template>
+          <div> <!-- comment -->
+content
+          </div>
+        </template>`,
+      options: [{ ignoreComments: true }],
+      errors: [
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 33,
+          endLine: 3,
+          endColumn: 34
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <!-- comment on its own line before the element -->
+          <div class="red">  <!-- or "blue" -->
+
+            content
+          </div>
+        </template>`,
+      output: `
+        <template>
+          <!-- comment on its own line before the element -->
+          <div class="red">  <!-- or "blue" -->
+content
+          </div>
+        </template>`,
+      options: [{ ignoreComments: true }],
+      errors: [
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but 2 line breaks found.',
+          line: 4,
+          column: 48,
+          endLine: 6,
+          endColumn: 13
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div>
+            content <!-- comment --></div>
+        </template>`,
+      output: `
+        <template>
+          <div>
+            content
+<!-- comment --></div>
+        </template>`,
+      options: [{ ignoreComments: true }],
+      errors: [
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 4,
+          column: 20,
+          endLine: 4,
+          endColumn: 21
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div
+            attr
+          > <!-- comment --></div>
+        </template>`,
+      output: `
+        <template>
+          <div
+            attr
+          > <!-- comment -->
+</div>
+        </template>`,
+      options: [{ ignoreComments: true, ignoreWhenEmpty: false }],
+      errors: [
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 5,
+          column: 29,
+          endLine: 5,
+          endColumn: 29
         }
       ]
     }
