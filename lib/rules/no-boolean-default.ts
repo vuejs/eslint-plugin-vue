@@ -5,8 +5,24 @@
 import utils from '../utils/index.ts'
 import type { ComponentProp, ComponentObjectProp } from '../utils/index.ts'
 
-function isBooleanIdentifier(node: Expression | undefined) {
-  return Boolean(node && node.type === 'Identifier' && node.name === 'Boolean')
+function hasBooleanCasting(types: (string | null)[]): boolean {
+  const booleanIndex = types.indexOf('Boolean')
+  const stringIndex = types.indexOf('String')
+  return (
+    booleanIndex !== -1 && (stringIndex === -1 || booleanIndex < stringIndex)
+  )
+}
+
+function isValueNodeOfBooleanType(value: Expression | undefined): boolean {
+  return (
+    (value?.type === 'Identifier' && value.name === 'Boolean') ||
+    (value?.type === 'ArrayExpression' &&
+      hasBooleanCasting(
+        value.elements.map((element) =>
+          element?.type === 'Identifier' ? element.name : null
+        )
+      ))
+  )
 }
 
 /**
@@ -15,9 +31,9 @@ function isBooleanIdentifier(node: Expression | undefined) {
 function isBooleanProp(prop: ComponentObjectProp): boolean {
   const value = utils.skipTSAsExpression(prop.value)
   return (
-    isBooleanIdentifier(value) ||
+    isValueNodeOfBooleanType(value) ||
     (value.type === 'ObjectExpression' &&
-      isBooleanIdentifier(utils.findProperty(value, 'type')?.value))
+      isValueNodeOfBooleanType(utils.findProperty(value, 'type')?.value))
   )
 }
 
@@ -67,7 +83,7 @@ export default {
           }
         }
       } else if (prop.type === 'type') {
-        if (prop.types.length !== 1 || prop.types[0] !== 'Boolean') {
+        if (!hasBooleanCasting(prop.types)) {
           return
         }
         for (const defaultNode of otherDefaultProvider(prop.propName)) {
