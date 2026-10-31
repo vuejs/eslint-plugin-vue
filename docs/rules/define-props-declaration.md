@@ -10,13 +10,17 @@ since: v9.5.0
 
 > enforce declaration style of `defineProps`
 
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
+
 ## :book: Rule Details
 
 This rule enforces `defineProps` typing style which you should use `type-based` or `runtime` declaration.
 
 This rule only works in setup script and `lang="ts"`.
 
-<eslint-code-block :rules="{'vue/define-props-declaration': ['error']}">
+The autofix converts a runtime declaration to a type-based one only when this does not change how the props behave: each prop must be declared with native constructors (`String`, `Number`, `Boolean`, `Object`, `Array`, `Function`, `Symbol`, `Date`) or a `PropType` cast, and use no options other than `type`, `required` and `default`. Default values are moved to `withDefaults()`.
+
+<eslint-code-block fix :rules="{'vue/define-props-declaration': ['error']}">
 
 ```vue
 <script setup lang="ts">
@@ -47,7 +51,7 @@ const props = defineProps({
 
 ### `"runtime"`
 
-<eslint-code-block :rules="{'vue/define-props-declaration': ['error', 'runtime']}">
+<eslint-code-block fix :rules="{'vue/define-props-declaration': ['error', 'runtime']}">
 
 ```vue
 <script setup lang="ts">
