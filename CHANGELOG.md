@@ -1,5 +1,25 @@
 # eslint-plugin-vue
 
+## 10.12.1
+
+### Patch Changes
+
+- Fixed [`vue/component-name-in-template-casing`](https://eslint.vuejs.org/rules/component-name-in-template-casing.html) to check and autofix only the part before the dot of namespaced components such as `<Form.Input>` ([#3207](https://github.com/vuejs/eslint-plugin-vue/pull/3207))
+
+- Changed [`vue/html-self-closing`](https://eslint.vuejs.org/rules/html-self-closing.html) autofix to always add a space before `/>`, which also stops it from breaking elements whose last attribute has an unquoted value ([#3159](https://github.com/vuejs/eslint-plugin-vue/pull/3159))
+
+- Fixed [`vue/no-deprecated-slot-attribute`](https://eslint.vuejs.org/rules/no-deprecated-slot-attribute.html) to apply the `ignore` and `ignoreParents` options to `v-bind:slot` ([#3211](https://github.com/vuejs/eslint-plugin-vue/pull/3211))
+
+- Fixed [`vue/no-undef-components`](https://eslint.vuejs.org/rules/no-undef-components.html) reporting a `<script setup>` component that references itself by the name set with `defineOptions({ name })` ([#3206](https://github.com/vuejs/eslint-plugin-vue/pull/3206))
+
+- Fixed [`vue/no-useless-mustaches`](https://eslint.vuejs.org/rules/no-useless-mustaches.html) autofix changing the rendered text when the result would start a new mustache interpolation (`{{ '{{' }}`) or join the surrounding text into a different character reference (`{{ '&' }}copy;`) ([#3193](https://github.com/vuejs/eslint-plugin-vue/pull/3193))
+
+- Fixed [`vue/prefer-separate-static-class`](https://eslint.vuejs.org/rules/prefer-separate-static-class.html) to ignore `:class` bindings with the `.attr` or `.prop` modifier ([#3219](https://github.com/vuejs/eslint-plugin-vue/pull/3219))
+
+- Fixed [`vue/require-explicit-slots`](https://eslint.vuejs.org/rules/require-explicit-slots.html) crashing when the `slots` option uses a type assertion other than `SlotsType<...>`, such as `slots: {} as any` ([#3195](https://github.com/vuejs/eslint-plugin-vue/pull/3195))
+
+- Changed [`vue/v-on-handler-style`](https://eslint.vuejs.org/rules/v-on-handler-style.html) to suggest instead of autofix when it can't tell how many parameters the handler takes ([#3227](https://github.com/vuejs/eslint-plugin-vue/pull/3227))
+
 ## 10.12.0
 
 ### New rules
