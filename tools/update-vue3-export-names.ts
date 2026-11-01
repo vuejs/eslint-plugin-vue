@@ -1,32 +1,31 @@
-'use strict'
-
 /*
  This script updates `lib/utils/vue3-export-names.json` file from vue type.
  */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const tsParser = require('@typescript-eslint/parser')
-const { httpGet } = require('./lib/http')
+import fs from 'node:fs'
+import path from 'node:path'
+import tsParser from '@typescript-eslint/parser'
+import type { TSESTree } from '@typescript-eslint/types'
+import { httpGet } from './lib/http.ts'
 
 main()
 
 async function main() {
-  const names = new Set()
+  const names = new Set<string>()
 
   for await (const name of extractExportNames('vue@^3')) {
     names.add(name)
   }
   // Update file.
   const filePath = path.resolve(
-    __dirname,
+    import.meta.dirname,
     '../lib/utils/vue3-export-names.json'
   )
 
   fs.writeFileSync(filePath, `${JSON.stringify([...names], null, 2)}\n`)
 }
 
-async function* extractExportNames(m) {
+async function* extractExportNames(m: string): AsyncGenerator<string> {
   const rootNode = tsParser.parse(await resolveTypeContents(m), {
     loc: true,
     range: true
@@ -36,10 +35,9 @@ async function* extractExportNames(m) {
   }
 }
 
-/**
- * @param {import('@typescript-eslint/types').TSESTree.ProgramStatement} node
- */
-async function* extractNamesFromNode(node) {
+async function* extractNamesFromNode(
+  node: TSESTree.ProgramStatement
+): AsyncGenerator<string> {
   switch (node.type) {
     case 'ExportAllDeclaration': {
       if (node.exported) {
@@ -55,13 +53,12 @@ async function* extractNamesFromNode(node) {
       if (node.declaration) {
         switch (node.declaration.type) {
           case 'ClassDeclaration':
-          case 'ClassExpression':
           case 'FunctionDeclaration':
           case 'TSDeclareFunction':
           case 'TSEnumDeclaration':
           case 'TSInterfaceDeclaration':
           case 'TSTypeAliasDeclaration': {
-            yield node.declaration.id.name
+            yield node.declaration.id!.name
             break
           }
           case 'VariableDeclaration': {
@@ -77,7 +74,9 @@ async function* extractNamesFromNode(node) {
         }
       }
       for (const spec of node.specifiers) {
-        yield spec.exported.name
+        yield spec.exported.type === 'Identifier'
+          ? spec.exported.name
+          : spec.exported.value
       }
       break
     }
@@ -88,19 +87,15 @@ async function* extractNamesFromNode(node) {
   }
 }
 
-/**
- * @typedef {import('@typescript-eslint/types').TSESTree.ArrayPattern} ArrayPattern
- * @typedef {import('@typescript-eslint/types').TSESTree.ObjectPattern} ObjectPattern
- * @typedef {import('@typescript-eslint/types').TSESTree.Identifier} Identifier
- * @typedef {import('@typescript-eslint/types').TSESTree.AssignmentPattern} AssignmentPattern
- * @typedef {import('@typescript-eslint/types').TSESTree.MemberExpression} MemberExpression
- * @typedef {import('@typescript-eslint/types').TSESTree.RestElement} RestElement
- */
-
-/**
- * @param {Identifier|ArrayPattern|ObjectPattern|AssignmentPattern|MemberExpression|RestElement} node
- */
-function* extractNamesFromPattern(node) {
+function* extractNamesFromPattern(
+  node:
+    | TSESTree.Identifier
+    | TSESTree.ArrayPattern
+    | TSESTree.ObjectPattern
+    | TSESTree.AssignmentPattern
+    | TSESTree.MemberExpression
+    | TSESTree.RestElement
+): Generator<string> {
   switch (node.type) {
     case 'Identifier': {
       yield node.name
@@ -108,14 +103,16 @@ function* extractNamesFromPattern(node) {
     }
     case 'ArrayPattern': {
       for (const element of node.elements) {
-        yield* extractNamesFromPattern(element)
+        yield* extractNamesFromPattern(element!)
       }
       break
     }
     case 'ObjectPattern': {
       for (const prop of node.properties) {
         if (prop.type === 'Property') {
-          yield prop.key.name
+          if (prop.key.type === 'Identifier') {
+            yield prop.key.name
+          }
         } else if (prop.type === 'RestElement') {
           yield* extractNamesFromPattern(prop)
         }
@@ -136,7 +133,7 @@ function* extractNamesFromPattern(node) {
     }
   }
 }
-async function resolveTypeContents(m) {
+async function resolveTypeContents(m: string) {
   const packageJsonText = await httpGet(`https://unpkg.com/${m}/package.json`)
   const packageJson = JSON.parse(packageJsonText)
 

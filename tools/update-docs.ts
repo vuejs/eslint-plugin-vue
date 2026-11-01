@@ -3,7 +3,6 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
 /*
 This script updates the header of `docs/rules/*.md` from rule's meta data.
@@ -18,16 +17,26 @@ For example:
 ```
 */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const rules = require('./lib/rules')
-const removedRules = require('../lib/removed-rules.ts').default
-const { getPresetIds, formatItems } = require('./lib/utils')
-const { getPresetNames } = require('./lib/categories')
+import fs from 'node:fs'
+import path from 'node:path'
+import rules from './lib/rules.ts'
+import type { RuleMeta } from './lib/rules.ts'
+import removedRules from '../lib/removed-rules.ts'
+import { getPresetIds, formatItems } from './lib/utils.ts'
+import { getPresetNames } from './lib/categories.ts'
+import pkg from '../package.json' with { type: 'json' }
 
-const ROOT = path.resolve(__dirname, '../docs/rules')
+const ROOT = path.resolve(import.meta.dirname, '../docs/rules')
 
-function pickSince(content) {
+/** A rule, or a removed rule that only has a doc file left */
+interface DocRule {
+  name: string
+  ruleId: string
+  ext?: string
+  meta: Partial<RuleMeta> & { removedInVersion?: string }
+}
+
+function pickSince(content: string) {
   const fileIntro = /^---\n(.*\n)+---\n*/g.exec(content)
   if (fileIntro) {
     const since = /since: (v\d+\.\d+\.\d+)/.exec(fileIntro[0])
@@ -35,17 +44,20 @@ function pickSince(content) {
       return since[1]
     }
   }
-  return process.env.IN_VERSION_SCRIPT
-    ? `v${require('../package.json').version}`
-    : null
+  return process.env.IN_VERSION_SCRIPT ? `v${pkg.version}` : null
 }
 
 class DocFile {
-  static read(rule) {
+  static read(rule: DocRule) {
     return new DocFile(rule)
   }
 
-  constructor(rule) {
+  rule: DocRule
+  filePath: string
+  content: string
+  since: string | null
+
+  constructor(rule: DocRule) {
     this.rule = rule
     this.filePath = path.join(ROOT, `${rule.name}.md`)
     this.content = fs.readFileSync(this.filePath, 'utf8')
@@ -65,7 +77,7 @@ class DocFile {
       pageClass: 'rule-details',
       sidebarDepth: 0,
       title: ruleId,
-      description: meta.docs.description,
+      description: meta.docs!.description,
       ...(this.since ? { since: this.since } : {})
     }
     const computed = `---\n${Object.entries(fileIntro)
@@ -85,7 +97,7 @@ class DocFile {
     const { ruleId, meta } = this.rule
     const description = meta.docs
       ? meta.docs.description
-      : this.content.match(/^description: (.*)$/m)[1]
+      : this.content.match(/^description: (.*)$/m)![1]
     const escapedDescription = description
       .replaceAll('*', String.raw`\*`)
       .replaceAll('_', String.raw`\_`)
@@ -93,8 +105,8 @@ class DocFile {
     const notes = []
 
     if (meta.removedInVersion) {
-      if (meta.replacedBy.length > 0) {
-        const replacedRules = meta.replacedBy.map(
+      if (meta.replacedBy!.length > 0) {
+        const replacedRules = meta.replacedBy!.map(
           (name) => `[vue/${name}](${name}.md) rule`
         )
         notes.push(
@@ -184,6 +196,7 @@ class DocFile {
 
   updateFooter() {
     const { name, ext, meta } = this.rule
+    const { extensionSource } = meta.docs!
     const footerPattern = /## (?::mag: Implementation|:rocket: Version).+$/s
     const footer = `${
       this.since
@@ -198,9 +211,9 @@ This rule was introduced in eslint-plugin-vue ${this.since}
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/${name}${ext})
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/${name}.test.ts)
 ${
-  meta.docs.extensionSource
+  extensionSource
     ? `
-<sup>Taken with ❤️ [from ${meta.docs.extensionSource.name}](${meta.docs.extensionSource.url})</sup>
+<sup>Taken with ❤️ [from ${extensionSource.name}](${extensionSource.url})</sup>
 `
     : ''
 }`
