@@ -14,7 +14,7 @@ import vueEslintParser from 'vue-eslint-parser'
 import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
 import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
 import requireEslintCommunity from './eslint-internal-rules/require-eslint-community.js'
-import rules from './tools/lib/rules.js'
+import rules from './tools/lib/rules.ts'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 

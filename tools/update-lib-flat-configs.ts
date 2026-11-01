@@ -3,20 +3,21 @@
  * @copyright 2023- 唯然. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
 /*
 This script updates `lib/configs/flat/*.js` files from rule's meta data.
 */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const { ESLint } = require('eslint')
-const { categories } = require('./lib/categories')
+import fs from 'node:fs'
+import path from 'node:path'
+import { ESLint } from 'eslint'
+import { categories } from './lib/categories.ts'
+import type { Category } from './lib/categories.ts'
+import type { RuleInfo } from './lib/rules.ts'
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
 
-const extendsCategories = {
+const extendsCategories: Record<string, string | null> = {
   base: null,
   'vue2-essential': 'base',
   'vue3-essential': 'base',
@@ -28,10 +29,14 @@ const extendsCategories = {
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatRules(rules, categoryId, shouldAlwaysError) {
+function formatRules(
+  rules: RuleInfo[],
+  categoryId: string,
+  shouldAlwaysError: boolean
+) {
   const obj = Object.fromEntries(
     rules.map((rule) => {
-      let options =
+      let options: string | unknown[] =
         shouldAlwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
       const defaultOptions =
         rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
@@ -48,7 +53,7 @@ function formatRules(rules, categoryId, shouldAlwaysError) {
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory(category, shouldAlwaysError = false) {
+function formatCategory(category: Category, shouldAlwaysError = false) {
   if (category.categoryId === 'base') {
     return `/*
  * IMPORTANT!
@@ -89,7 +94,7 @@ export default [
 `
   }
 
-  let extendsCategoryId = extendsCategories[category.categoryId]
+  let extendsCategoryId = extendsCategories[category.categoryId]!
 
   if (shouldAlwaysError && !errorCategories.has(extendsCategoryId)) {
     extendsCategoryId += '-error'
@@ -113,7 +118,7 @@ export default [
 }
 
 // Update files.
-const ROOT = path.resolve(__dirname, '../lib/configs/flat/')
+const ROOT = path.resolve(import.meta.dirname, '../lib/configs/flat/')
 for (const category of categories) {
   const filePath = path.join(ROOT, `${category.categoryId}.ts`)
   const content = formatCategory(category)
