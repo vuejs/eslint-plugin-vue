@@ -3,19 +3,20 @@
  * @author Vitor Balocco
  */
 
-'use strict'
-
 /**
  * Gets the property of the Object node passed in that has the name specified.
- *
- * @param {string} propertyName Name of the property to return.
- * @param {ASTNode} node The ObjectExpression node.
- * @returns {ASTNode} The Property node or null if not found.
  */
-function getPropertyFromObject(propertyName, node) {
+function getPropertyFromObject(
+  propertyName: string,
+  node: ASTNode | undefined
+): Property | null {
   if (node && node.type === 'ObjectExpression') {
     for (const property of node.properties) {
-      if (property.type === 'Property' && property.key.name === propertyName) {
+      if (
+        property.type === 'Property' &&
+        property.key.type === 'Identifier' &&
+        property.key.name === propertyName
+      ) {
         return property
       }
     }
@@ -25,17 +26,15 @@ function getPropertyFromObject(propertyName, node) {
 
 /**
  * Checks the validity of the meta definition of this rule and reports any errors found.
- *
- * @param {RuleContext} context The ESLint rule context.
- * @param {ASTNode} exportsNode ObjectExpression node that the rule exports.
- * @param {boolean} ruleIsFixable whether the rule is fixable or not.
- * @returns {void}
  */
-function checkMetaValidity(context, exportsNode) {
+function checkMetaValidity(
+  context: RuleContext,
+  exportsNode: ASTNode | undefined
+) {
   const metaProperty = getPropertyFromObject('meta', exportsNode)
   if (!metaProperty) {
     context.report({
-      node: exportsNode,
+      node: exportsNode!,
       messageId: 'missingMeta'
     })
     return
@@ -73,7 +72,7 @@ function checkMetaValidity(context, exportsNode) {
   })
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -92,27 +91,29 @@ module.exports = {
     languages: ['js/js']
   },
 
-  create(context) {
-    let exportsNode
+  create(context: RuleContext) {
+    let exportsNode: ASTNode | undefined
 
     return {
-      AssignmentExpression(node) {
+      AssignmentExpression(node: AssignmentExpression) {
         if (
           node.left &&
           node.right &&
           node.left.type === 'MemberExpression' &&
+          node.left.object.type === 'Identifier' &&
           node.left.object.name === 'module' &&
+          node.left.property.type === 'Identifier' &&
           node.left.property.name === 'exports'
         ) {
           exportsNode = node.right
         }
       },
 
-      ExportDefaultDeclaration(node) {
+      ExportDefaultDeclaration(node: ExportDefaultDeclaration) {
         exportsNode = node.declaration
       },
 
-      'Program:exit'(programNode) {
+      'Program:exit'() {
         checkMetaValidity(context, exportsNode)
       }
     }
