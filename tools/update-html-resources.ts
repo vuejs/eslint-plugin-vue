@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-// @ts-expect-error -- jsdom has no type declarations installed
+// @ts-expect-error -- `@types/jsdom` would add the DOM globals to the whole project
 import jsdom from 'jsdom'
 import { httpGet } from './lib/http.ts'
 
