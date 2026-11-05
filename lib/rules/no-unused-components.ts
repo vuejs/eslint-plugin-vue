@@ -70,8 +70,12 @@ export default {
           )
             return
 
-          if (node.value.expression.type === 'Literal') {
-            usedComponents.add(node.value.expression.value as string)
+          const expression = node.value.expression
+          const name = utils.isStringLiteral(expression)
+            ? utils.getStringLiteralValue(expression)
+            : null
+          if (name !== null) {
+            usedComponents.add(name)
           } else if (ignoreWhenBindingPresent) {
             shouldIgnoreReporting = true
           }
