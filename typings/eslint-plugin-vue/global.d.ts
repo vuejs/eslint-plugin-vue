@@ -4,6 +4,31 @@ import * as parserServices from './util-types/parser-services'
 import * as eslint from 'eslint'
 
 declare global {
+  // **** ES2023 array methods ****
+  // `lib` stays at ES2022 for Node.js 18, which already supports these methods
+  interface Array<T> {
+    findLast<S extends T>(
+      isMatching: (value: T, index: number, array: T[]) => value is S
+    ): S | undefined
+    findLast(
+      isMatching: (value: T, index: number, array: T[]) => unknown
+    ): T | undefined
+    findLastIndex(
+      isMatching: (value: T, index: number, array: T[]) => unknown
+    ): number
+  }
+  interface ReadonlyArray<T> {
+    findLast<S extends T>(
+      isMatching: (value: T, index: number, array: readonly T[]) => value is S
+    ): S | undefined
+    findLast(
+      isMatching: (value: T, index: number, array: readonly T[]) => unknown
+    ): T | undefined
+    findLastIndex(
+      isMatching: (value: T, index: number, array: readonly T[]) => unknown
+    ): number
+  }
+
   // **** Rule Helpers ****
   type RuleModule = eslint.Rule.RuleModule
   type RuleContext = eslint.Rule.RuleContext
