@@ -365,6 +365,20 @@ tester.run('no-ref-as-operand', rule, {
       </script>
       `,
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import type { Ref } from 'vue'
+      interface ManualResetRefReturn<T> extends Ref<T> {
+        reset(): void
+      }
+      declare function refManualReset<T>(value: T): ManualResetRefReturn<T>
+      const message = refManualReset('default message')
+      message.reset()
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
   invalid: [
@@ -1427,6 +1441,34 @@ tester.run('no-ref-as-operand', rule, {
           column: 23,
           endLine: 12,
           endColumn: 27
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import type { Ref } from 'vue'
+      declare function useObj(): Ref<{ reset(): void }>
+      const o = useObj()
+      o.reset()
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import type { Ref } from 'vue'
+      declare function useObj(): Ref<{ reset(): void }>
+      const o = useObj()
+      o.value.reset()
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Must use `.value` to read or write the value of a ref.',
+          line: 6,
+          column: 7,
+          endLine: 6,
+          endColumn: 8
         }
       ]
     }
