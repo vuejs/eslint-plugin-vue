@@ -298,6 +298,7 @@ For example:
 | [vue/slot-name-casing] | enforce specific casing for slot names |  | :hammer: |
 | [vue/sort-keys] | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order] | enforce static class names order | :wrench: | :hammer: |
+| [vue/template-wrapper-directive-style] | enforce or disallow `v-if`, `v-else-if`, `v-else` and `v-for` on `<template>` wrappers |  | :lipstick: |
 | [vue/v-for-delimiter-style] | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-if-else-key] | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
 | [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench::bulb: | :hammer: |
@@ -609,6 +610,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/space-unary-ops]: ./space-unary-ops.md
 [vue/static-class-names-order]: ./static-class-names-order.md
 [vue/template-curly-spacing]: ./template-curly-spacing.md
+[vue/template-wrapper-directive-style]: ./template-wrapper-directive-style.md
 [vue/this-in-template]: ./this-in-template.md
 [vue/use-v-on-exact]: ./use-v-on-exact.md
 [vue/v-bind-style]: ./v-bind-style.md
