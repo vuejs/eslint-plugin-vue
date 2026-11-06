@@ -63,7 +63,7 @@ function bundle(entryPoint: string, externals: string[]) {
     bundle: true,
     external: externals,
     write: false,
-    inject: [path.join(dirname, './src/process-shim.mjs')]
+    inject: [path.join(dirname, './src/process-shim.ts')]
   })
 
   return result.outputFiles[0].text
