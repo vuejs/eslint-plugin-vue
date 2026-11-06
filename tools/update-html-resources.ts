@@ -1,8 +1,17 @@
-'use strict'
+import fs from 'node:fs'
+import path from 'node:path'
+// @ts-expect-error -- `@types/jsdom` would add the DOM globals to the whole project
+import jsdom from 'jsdom'
+import { httpGet } from './lib/http.ts'
 
-const fs = require('node:fs')
-const jsdom = require('jsdom')
-const { httpGet } = require('./lib/http')
+interface CompatData {
+  __compat: { status: { deprecated: boolean } }
+}
+
+const DEPRECATED_HTML_ELEMENTS_PATH = path.resolve(
+  import.meta.dirname,
+  '../lib/utils/deprecated-html-elements.json'
+)
 
 main()
 
@@ -11,7 +20,10 @@ async function main() {
     httpGet('https://unpkg.com/@mdn/browser-compat-data/data.json'),
     httpGet('https://html.spec.whatwg.org/multipage/obsolete.html')
   ])
-  const bcd = JSON.parse(bcdJson)
+  const bcd: {
+    html: { elements: Record<string, CompatData> }
+    svg: { elements: Record<string, CompatData> }
+  } = JSON.parse(bcdJson)
 
   updateDeprecatedHTMLElements()
   updateHTMLElements()
@@ -21,9 +33,7 @@ async function main() {
   // Update deprecated-html-elements.json
   // ------------------------------------------------------------------------------
   function updateDeprecatedHTMLElements() {
-    const DEPRECATED_HTML_ELEMENTS_PATH =
-      require.resolve('../lib/utils/deprecated-html-elements.json')
-    const elements = new Set()
+    const elements = new Set<string>()
 
     // `:scope` never matches a `DocumentFragment`, so `obsoleteHtml` has to be
     // parsed as a document rather than with `jsdom.JSDOM.fragment()`.
@@ -60,11 +70,14 @@ async function main() {
   // Update html-elements.json
   // ------------------------------------------------------------------------------
   function updateHTMLElements() {
-    const HTML_ELEMENTS_PATH =
-      require.resolve('../lib/utils/html-elements.json')
-    const elements = new Set()
-    const deprecatedHtmlElements = new Set(
-      require('../lib/utils/deprecated-html-elements.json')
+    const HTML_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/html-elements.json'
+    )
+    const elements = new Set<string>()
+    // Read the file only now, after `updateDeprecatedHTMLElements()` has rewritten it.
+    const deprecatedHtmlElements = new Set<string>(
+      JSON.parse(fs.readFileSync(DEPRECATED_HTML_ELEMENTS_PATH, 'utf8'))
     )
 
     for (const [name, element] of Object.entries(bcd.html.elements)) {
@@ -96,8 +109,11 @@ async function main() {
   // Update svg-elements.json
   // ------------------------------------------------------------------------------
   function updateSVGElements() {
-    const SVG_ELEMENTS_PATH = require.resolve('../lib/utils/svg-elements.json')
-    const elements = new Set()
+    const SVG_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/svg-elements.json'
+    )
+    const elements = new Set<string>()
 
     for (const [name, element] of Object.entries(bcd.svg.elements)) {
       if (element.__compat.status.deprecated) {

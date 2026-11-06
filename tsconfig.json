@@ -31,6 +31,7 @@
     "tests/**/*.ts",
     "typings/eslint-plugin-vue/global.d.ts",
     "docs/.vitepress/**/*.ts",
-    "docs/.vitepress/**/*.mts"
+    "docs/.vitepress/**/*.mts",
+    "tools/**/*"
   ]
 }
