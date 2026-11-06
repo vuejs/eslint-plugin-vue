@@ -35,6 +35,42 @@ export default {
 
 </eslint-code-block>
 
+## :wrench: Options
+
+```json
+{
+  "vue/match-component-import-name": ["error", {
+    "ignoreConflictingNames": false
+  }]
+}
+```
+
+- `"ignoreConflictingNames"` (`boolean`) If `true`, components registered under a name that is already declared in the file (e.g. by a type or another import) are not reported. Default is `false`.
+
+### `"ignoreConflictingNames": true`
+
+<eslint-code-block :rules="{'vue/match-component-import-name': ['error', {ignoreConflictingNames: true}]}">
+
+```vue
+<script>
+import { AppButton } from './store'
+import AppButtonComponent from './AppButton.vue'
+import OtherComponent from './Other.vue'
+
+export default {
+  components: {
+    /* ✓ GOOD */
+    AppButton: AppButtonComponent,
+
+    /* ✗ BAD */
+    SomeOtherName: OtherComponent
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
 ## :couple: Related Rules
 
 - [vue/component-definition-name-casing](./component-definition-name-casing.md)
