@@ -3,6 +3,7 @@
  * @author Erin Depew
  */
 import utils from '../utils/index.ts'
+import { kebabCase } from '../utils/casing.ts'
 
 type VBindDirective = VDirective & {
   key: VDirectiveKey & { name: VIdentifier & { name: 'bind' } }
@@ -25,6 +26,10 @@ const ATTRS = {
   EVENTS: 'EVENTS',
   CONTENT: 'CONTENT'
 }
+
+// An attribute name in `order`. Strings spelled like a group name are not allowed,
+// so that a typo such as `OTHER_ATTRS` is still reported.
+const ATTRIBUTE_NAME_SCHEMA = { type: 'string', pattern: '[^A-Z_]' }
 
 /**
  * Check whether the given attribute is `v-bind` directive.
@@ -202,12 +207,34 @@ function getAttributeType(attribute: VAttribute | VDirective) {
 }
 
 /**
+ * Get the name that is matched against the attribute names in `order`:
+ * the name of a plain attribute or the static argument of `v-bind`.
+ */
+function getAttributeNameForOrder(
+  attribute: VAttribute | VDirective
+): string | null {
+  if (isVAttribute(attribute)) {
+    return attribute.key.rawName
+  }
+  return isVBind(attribute) && attribute.key.argument?.type === 'VIdentifier'
+    ? attribute.key.argument.rawName
+    : null
+}
+
+/**
  * Returns `null` if the order of the attribute is omitted, so it is not enforced.
  */
 function getPosition(
   attribute: VAttribute | VDirective,
-  attributePosition: { [key: string]: number }
+  attributePosition: { [key: string]: number },
+  attributeNamePosition: Map<string, number>
 ): number | null {
+  const name = getAttributeNameForOrder(attribute)
+  const namePosition =
+    name == null ? undefined : attributeNamePosition.get(kebabCase(name))
+  if (namePosition != null) {
+    return namePosition
+  }
   const attributeType = getAttributeType(attribute)
   return attributePosition[attributeType] ?? null
 }
@@ -285,12 +312,17 @@ function create(context: RuleContext): RuleListener {
   )
 
   const attributePosition: { [key: string]: number } = {}
+  // positions of the attribute names given in `order`, keyed in kebab-case
+  const attributeNamePosition = new Map<string, number>()
   for (const [i, item] of attributeOrder.entries()) {
-    if (Array.isArray(item)) {
-      for (const attr of item) {
+    const attrs = Array.isArray(item) ? item : [item]
+    for (const attr of attrs) {
+      if (Object.values(ATTRS).includes(attr)) {
         attributePosition[attr] = i
+      } else {
+        attributeNamePosition.set(kebabCase(attr), i)
       }
-    } else attributePosition[item] = i
+    }
   }
 
   function reportIssue(
@@ -435,7 +467,7 @@ function create(context: RuleContext): RuleListener {
           }
         }
       }
-      return getPosition(node, attributePosition)
+      return getPosition(node, attributePosition, attributeNamePosition)
     }
   }
 }
@@ -459,10 +491,14 @@ export default {
             items: {
               oneOf: [
                 { enum: Object.values(ATTRS) },
+                ATTRIBUTE_NAME_SCHEMA,
                 {
                   type: 'array',
                   items: {
-                    enum: Object.values(ATTRS),
+                    oneOf: [
+                      { enum: Object.values(ATTRS) },
+                      ATTRIBUTE_NAME_SCHEMA
+                    ],
                     uniqueItems: true,
                     additionalItems: false
                   }
