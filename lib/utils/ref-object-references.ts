@@ -94,6 +94,15 @@ export function* iterateDefineRefs(
       name: path.at(-1)!
     }
   }
+  const piniaTraceMap = {
+    pinia: {
+      [ReferenceTracker.ESM]: true,
+      storeToRefs: { [ReferenceTracker.CALL]: true }
+    }
+  }
+  for (const { node } of tracker.iterateEsmReferences(piniaTraceMap)) {
+    yield { node: node as CallExpression, name: 'storeToRefs' }
+  }
 }
 
 /**
@@ -198,7 +207,7 @@ class RefObjectReferenceExtractor implements RefObjectReferences {
     ) {
       pattern = parent.left
     } else {
-      if (method !== 'toRefs') {
+      if (method !== 'toRefs' && method !== 'storeToRefs') {
         this.references.set(node, {
           type: 'expression',
           node,
@@ -216,7 +225,7 @@ class RefObjectReferenceExtractor implements RefObjectReferences {
       defineChain: [node]
     }
 
-    if (method === 'toRefs') {
+    if (method === 'toRefs' || method === 'storeToRefs') {
       const propertyReferenceExtractor = definePropertyReferenceExtractor(
         this.context
       )
