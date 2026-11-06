@@ -2,7 +2,7 @@
  * @fileoverview disallow usage of `this` in template.
  * @author Armano
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import jsReserved from '../utils/js-reserved.json' with { type: 'json' }
 
 const RESERVED_NAMES = new Set(jsReserved)

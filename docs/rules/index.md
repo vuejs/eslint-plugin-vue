@@ -300,7 +300,7 @@ For example:
 | [vue/static-class-names-order] | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style] | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-if-else-key] | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
-| [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
+| [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench::bulb: | :hammer: |
 
 </rules-table>
 

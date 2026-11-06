@@ -29,7 +29,7 @@ const logger = console
  * @author ${authorName}
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

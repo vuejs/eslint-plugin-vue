@@ -2,7 +2,7 @@
  * @author Valentin Yushkevich
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Checks whether the given variable only exists in the type space.

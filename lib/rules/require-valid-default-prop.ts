@@ -8,10 +8,10 @@ import type {
   ComponentTypeProp,
   ComponentInferTypeProp,
   VueObjectData
-} from '../utils/index.js'
-import utils from '../utils/index.js'
+} from '../utils/index.ts'
+import utils from '../utils/index.ts'
 import { capitalize } from '../utils/casing.ts'
-import tsAST from '../utils/ts-utils/ts-ast.js'
+import { inferRuntimeType } from '../utils/ts-utils/ts-ast.ts'
 
 const NATIVE_TYPES = new Set([
   'String',
@@ -92,10 +92,6 @@ export default {
       expression: false
       functionBody: BlockStatement
       returnTypes: PropReturnType[]
-    }
-
-    type ComponentObjectDefineProp = ComponentObjectProp & {
-      value: ObjectExpression
     }
 
     interface PropReturnType {
@@ -381,6 +377,10 @@ export default {
       },
       utils.defineVueVisitor(context, {
         onVueObjectEnter(obj) {
+          type ComponentObjectDefineProp = ComponentObjectProp & {
+            value: ObjectExpression
+          }
+
           const props: ComponentObjectDefineProp[] = utils
             .getComponentPropsFromOptions(obj)
             .filter(
@@ -496,7 +496,7 @@ export default {
               propName: model.name.modelName,
               node: model.typeNode,
               required: false,
-              types: tsAST.inferRuntimeType(
+              types: inferRuntimeType(
                 context,
                 model.typeNode as TSESTree.TypeNode
               )

@@ -2,7 +2,7 @@
  * @fileoverview enforce that each component should be in its own file
  * @author Armano
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

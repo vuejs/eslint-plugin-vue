@@ -2,8 +2,8 @@
  * @fileoverview Disallow variable declarations from shadowing variables declared in the outer scope.
  * @author Armano
  */
-import utils from '../utils/index.js'
-import type { GroupName } from '../utils/index.js'
+import utils from '../utils/index.ts'
+import type { GroupName } from '../utils/index.ts'
 
 const GROUP_NAMES: GroupName[] = [
   'props',

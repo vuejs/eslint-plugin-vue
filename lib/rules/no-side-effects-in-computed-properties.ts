@@ -3,11 +3,11 @@
  * @author Michał Sajnóg
  */
 import { ReferenceTracker, findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import type {
   ComponentComputedProperty,
   VueObjectData
-} from '../utils/index.js'
+} from '../utils/index.ts'
 
 export default {
   meta: {
@@ -73,8 +73,7 @@ export default {
         ).find(
           (cp) =>
             cp.value &&
-            cp.value.range[0] <= node.range[0] &&
-            node.range[1] <= cp.value.range[1] &&
+            utils.isInRange(cp.value, node) &&
             targetBody === cp.value
         )
         if (computedProperty) {
@@ -112,10 +111,7 @@ export default {
         }
 
         const computedFunction = computedCallNodes.find(
-          (c) =>
-            c.range[0] <= node.range[0] &&
-            node.range[1] <= c.range[1] &&
-            targetBody === c.body
+          (c) => utils.isInRange(c, node) && targetBody === c.body
         )
         if (!computedFunction) {
           return
@@ -138,15 +134,13 @@ export default {
           return
         }
 
-        const isDeclaredInsideSetup = setupRanges.some(
-          ([start, end]) =>
-            start <= def.node.range[0] && def.node.range[1] <= end
+        const isDeclaredInsideSetup = setupRanges.some(([start, end]) =>
+          utils.isInRange([start, end], def.node)
         )
         if (
           !isDeclaredInsideSetup ||
           // mutating local variables are accepted
-          (computedFunction.range[0] <= def.node.range[0] &&
-            def.node.range[1] <= computedFunction.range[1])
+          utils.isInRange(computedFunction, def.node)
         ) {
           return
         }
