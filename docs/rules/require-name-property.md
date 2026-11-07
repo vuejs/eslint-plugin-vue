@@ -71,6 +71,17 @@ export default {
 
 ```vue
 <script setup>
+/* ✓ GOOD */
+defineOptions({ name: 'OurButton' })
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/require-name-property': ['error', {checkScriptSetup: true}]}">
+
+```vue
+<script setup>
 /* ✗ BAD */
 defineOptions({})
 </script>

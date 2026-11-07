@@ -69,6 +69,7 @@ export default {
       let hasName = false
       return utils.compositingVisitors(
         utils.executeOnVue(context, (component) => {
+          if (utils.inRange(scriptSetup.range, component)) return
           hasName ||= component.properties.some(isNameProperty)
         }),
         utils.defineScriptSetupVisitor(context, {

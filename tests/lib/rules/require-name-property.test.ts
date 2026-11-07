@@ -338,6 +338,24 @@ ruleTester.run('require-name-property', rule, {
           endColumn: 15
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup>
+import { defineComponent } from 'vue'
+const Child = defineComponent({ name: 'Child' })
+</script>`,
+      options: [{ checkScriptSetup: true }],
+      languageOptions: { parser: vueEslintParser, ...languageOptions },
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 15
+        }
+      ]
     }
   ]
 })
