@@ -95,6 +95,72 @@ describe('comment-directive', () => {
       assert.deepEqual(messages[0].line, 6)
     })
 
+    it('enable specific disabled rules if <!-- eslint-enable -->', async () => {
+      const code = `
+        <template>
+          <!-- eslint-disable vue/no-duplicate-attributes -->
+          <div id id="a">Hello</div>
+          <!-- eslint-enable -->
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = await lintMessages(code)
+
+      assert.deepEqual(messages.length, 3)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
+      assert.deepEqual(messages[0].line, 4)
+      assert.deepEqual(messages[1].ruleId, 'vue/no-parsing-error')
+      assert.deepEqual(messages[1].line, 6)
+      assert.deepEqual(messages[2].ruleId, 'vue/no-duplicate-attributes')
+      assert.deepEqual(messages[2].line, 6)
+    })
+
+    it('enable specific rules after <!-- eslint-disable --> if <!-- eslint-enable vue/no-duplicate-attributes -->', async () => {
+      const code = `
+        <template>
+          <!-- eslint-disable -->
+          <div id id="a">Hello</div>
+          <!-- eslint-enable vue/no-duplicate-attributes -->
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = await lintMessages(code)
+
+      assert.deepEqual(messages.length, 1)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
+      assert.deepEqual(messages[0].line, 6)
+    })
+
+    it('enable specific rules disabled by both <!-- eslint-disable vue/no-duplicate-attributes --> and <!-- eslint-disable -->', async () => {
+      const code = `
+        <template>
+          <!-- eslint-disable vue/no-duplicate-attributes -->
+          <!-- eslint-disable -->
+          <!-- eslint-enable vue/no-duplicate-attributes -->
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = await lintMessages(code)
+
+      assert.deepEqual(messages.length, 1)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
+      assert.deepEqual(messages[0].line, 6)
+    })
+
+    it('disable re-enabled rules again if <!-- eslint-disable -->', async () => {
+      const code = `
+        <template>
+          <!-- eslint-disable -->
+          <!-- eslint-enable vue/no-duplicate-attributes -->
+          <!-- eslint-disable -->
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = await lintMessages(code)
+
+      assert.deepStrictEqual(messages, [])
+    })
+
     it('should not affect to the code in <script>.', async () => {
       const code = `
         <template>
