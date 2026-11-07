@@ -11,6 +11,11 @@ interface GroupState {
   disableRuleKeys: Map<string, string[]>
 }
 
+interface BlockGroupState extends GroupState {
+  /** Rules enabled by `<!-- eslint-enable rule -->` while `<!-- eslint-disable -->` is active. */
+  enabledRules: Set<string>
+}
+
 export default {
   preprocess(code: string): string[] {
     return [code]
@@ -20,15 +25,14 @@ export default {
     const state = {
       block: {
         disableAllKeys: new Set<string>(),
-        disableRuleKeys: new Map<string, string[]>()
-      } satisfies GroupState,
+        disableRuleKeys: new Map<string, string[]>(),
+        enabledRules: new Set<string>()
+      } satisfies BlockGroupState,
       line: {
         disableAllKeys: new Set<string>(),
         disableRuleKeys: new Map<string, string[]>()
       } satisfies GroupState
     }
-    // Rules enabled by `<!-- eslint-enable rule -->` while `<!-- eslint-disable -->` is active.
-    const blockEnabledRules = new Set<string>()
     const usedDisableDirectiveKeys: string[] = []
     const unusedDisableDirectiveReports = new Map<string, LintMessage>()
 
@@ -40,7 +44,7 @@ export default {
         switch (directiveType) {
           case 'disableBlock': {
             state.block.disableAllKeys.add(data[1])
-            blockEnabledRules.clear()
+            state.block.enabledRules.clear()
             break
           }
           case 'disableLine': {
@@ -50,7 +54,7 @@ export default {
           case 'enableBlock': {
             state.block.disableAllKeys.clear()
             state.block.disableRuleKeys.clear()
-            blockEnabledRules.clear()
+            state.block.enabledRules.clear()
             break
           }
           case 'enableLine': {
@@ -68,7 +72,7 @@ export default {
           case 'enableBlockRule': {
             state.block.disableRuleKeys.delete(data[1])
             if (state.block.disableAllKeys.size > 0) {
-              blockEnabledRules.add(data[1])
+              state.block.enabledRules.add(data[1])
             }
             break
           }
@@ -81,7 +85,7 @@ export default {
             state.block.disableRuleKeys.clear()
             state.line.disableAllKeys.clear()
             state.line.disableRuleKeys.clear()
-            blockEnabledRules.clear()
+            state.block.enabledRules.clear()
             break
           }
           default: {
@@ -95,7 +99,7 @@ export default {
       const disableDirectiveKeys = []
       if (
         state.block.disableAllKeys.size > 0 &&
-        !(message.ruleId && blockEnabledRules.has(message.ruleId))
+        !(message.ruleId && state.block.enabledRules.has(message.ruleId))
       ) {
         disableDirectiveKeys.push(...state.block.disableAllKeys)
       }
