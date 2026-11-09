@@ -9,6 +9,69 @@ import type {
   VueObjectData
 } from '../utils/index.ts'
 
+const ITERATION_METHODS = new Set([
+  'forEach',
+  'each',
+  'map',
+  'flatMap',
+  'filter',
+  'find',
+  'findIndex',
+  'findLast',
+  'findLastIndex',
+  'some',
+  'every',
+  'reduce',
+  'reduceRight'
+])
+
+/**
+ * Checks whether the value of the given expression is discarded,
+ * e.g. `foo()` as a statement, `void foo()` or `a && foo()` as a statement.
+ */
+function isResultUnused(node: Expression): boolean {
+  const parent = node.parent
+  switch (parent.type) {
+    case 'ExpressionStatement': {
+      return true
+    }
+    case 'ChainExpression': {
+      return isResultUnused(parent)
+    }
+    case 'UnaryExpression': {
+      return parent.operator === 'void'
+    }
+    case 'SequenceExpression': {
+      return parent.expressions.at(-1) !== node || isResultUnused(parent)
+    }
+    case 'LogicalExpression': {
+      return parent.right === node && isResultUnused(parent)
+    }
+    case 'ConditionalExpression': {
+      return parent.test !== node && isResultUnused(parent)
+    }
+    default: {
+      return false
+    }
+  }
+}
+
+/**
+ * Iteration calls such as `forEach()` only run their callback,
+ * and callbacks are not checked by this rule.
+ */
+function isIterationCall(node: CallExpression): boolean {
+  const callee = utils.skipChainExpression(node.callee)
+  if (callee.type === 'Identifier') {
+    return ITERATION_METHODS.has(callee.name)
+  }
+  if (callee.type !== 'MemberExpression') {
+    return false
+  }
+  const name = utils.getStaticPropertyName(callee)
+  return Boolean(name && ITERATION_METHODS.has(name))
+}
+
 export default {
   meta: {
     type: 'problem',
@@ -35,6 +98,7 @@ export default {
       FunctionExpression | ArrowFunctionExpression
     > = []
     const setupRanges: [number, number][] = []
+    const reportedNodes = new Set<ASTNode>()
 
     interface ScopeStack {
       upper: ScopeStack | null
@@ -55,9 +119,79 @@ export default {
       scopeStack &&= scopeStack.upper
     }
 
+    /**
+     * Checks whether the given call only changes a variable declared inside
+     * the computed getter, e.g. `list.push(x)` or `Object.assign(obj, x)`
+     * with `const list = []` and `const obj = {}`.
+     */
+    function isCalledOnLocalVariable(
+      node: CallExpression,
+      getterBody: BlockStatement | Expression
+    ): boolean {
+      let target: ESNode = utils.isObjectAssignCall(node, node.arguments[0])
+        ? node.arguments[0]
+        : node.callee
+      while (true) {
+        target = utils.skipChainExpression(target)
+        if (target.type === 'MemberExpression') {
+          target = target.object
+        } else if (target.type === 'CallExpression') {
+          target = target.callee
+        } else {
+          break
+        }
+      }
+      if (target.type !== 'Identifier') {
+        return false
+      }
+      const variable = findVariable(utils.getScope(context, target), target)
+      return Boolean(
+        variable &&
+        variable.defs.some((def) => utils.isInRange(getterBody, def.node))
+      )
+    }
+
     const nodeVisitor = {
       ':function': onFunctionEnter,
       ':function:exit': onFunctionExit,
+
+      'CallExpression:exit'(
+        node: CallExpression,
+        info?: VueObjectData | undefined
+      ) {
+        const targetBody = scopeStack?.body
+        if (
+          !targetBody ||
+          reportedNodes.has(node) ||
+          !isResultUnused(node) ||
+          isIterationCall(node)
+        ) {
+          return
+        }
+
+        const computedProperty = (
+          info ? computedPropertiesMap.get(info.node) || [] : []
+        ).find((cp) => targetBody === cp.value)
+        const isComputedFunction = computedCallNodes.some(
+          (c) => targetBody === c.body
+        )
+        if (
+          (!computedProperty && !isComputedFunction) ||
+          isCalledOnLocalVariable(node, targetBody)
+        ) {
+          return
+        }
+
+        context.report(
+          computedProperty
+            ? {
+                node,
+                messageId: 'unexpectedSideEffectInProperty',
+                data: { key: computedProperty.key || 'Unknown' }
+              }
+            : { node, messageId: 'unexpectedSideEffectInFunction' }
+        )
+      },
 
       'MemberExpression > :matches(Identifier, ThisExpression)'(
         node: (Identifier | ThisExpression) & { parent: MemberExpression },
@@ -96,6 +230,7 @@ export default {
             : isThis && utils.findMutating(mem)
 
           if (invalid) {
+            reportedNodes.add(isVueSet ? mem.parent : invalid.node)
             context.report({
               node: invalid.node,
               messageId: 'unexpectedSideEffectInProperty',
@@ -146,12 +281,14 @@ export default {
         }
 
         const invalid = utils.findMutating(node)
-        if (invalid) {
-          context.report({
-            node: invalid.node,
-            messageId: 'unexpectedSideEffectInFunction'
-          })
+        if (!invalid) {
+          return
         }
+        reportedNodes.add(invalid.node)
+        context.report({
+          node: invalid.node,
+          messageId: 'unexpectedSideEffectInFunction'
+        })
       }
     }
     const scriptSetupNode = utils.getScriptSetupElement(context)
