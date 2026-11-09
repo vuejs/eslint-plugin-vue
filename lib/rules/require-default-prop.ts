@@ -19,14 +19,6 @@ const NATIVE_TYPES = new Set([
   'Symbol'
 ])
 
-function hasBooleanCasting(types: (string | null)[]): boolean {
-  const booleanIndex = types.indexOf('Boolean')
-  const stringIndex = types.indexOf('String')
-  return (
-    booleanIndex !== -1 && (stringIndex === -1 || booleanIndex < stringIndex)
-  )
-}
-
 /**
  * Detects whether given value node is a Boolean type
  */
@@ -34,10 +26,9 @@ function isValueNodeOfBooleanType(value: Expression): boolean {
   return (
     (value.type === 'Identifier' && value.name === 'Boolean') ||
     (value.type === 'ArrayExpression' &&
-      hasBooleanCasting(
-        value.elements.map((element) =>
-          element?.type === 'Identifier' ? element.name : null
-        )
+      value.elements.some(
+        (element) =>
+          element?.type === 'Identifier' && element.name === 'Boolean'
       ))
   )
 }
@@ -147,7 +138,7 @@ export default {
         } else if (prop.type === 'type') {
           if (
             prop.required ||
-            hasBooleanCasting(prop.types) ||
+            prop.types.includes('Boolean') ||
             shouldIgnore?.(prop)
           ) {
             continue
