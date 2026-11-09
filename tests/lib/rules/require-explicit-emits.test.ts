@@ -676,9 +676,77 @@ tester.run('require-explicit-emits', rule, {
       emit('baz')
       </script>`,
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input @input="$emit('update:modelValue', $event)"/>
+      </template>
+      <script setup lang="ts">
+      defineModel<string>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('update:visible', false)"/>
+      </template>
+      <script setup lang="ts">
+      defineModel<boolean>('visible')
+      defineEmits(['foo'])
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div/>
+      </template>
+      <script setup lang="ts">
+      const emit = defineEmits(['foo'])
+      defineModel()
+      emit('update:modelValue', 'a')
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ],
   invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup lang="ts">
+      defineModel<string>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          messageId: 'missing',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `
