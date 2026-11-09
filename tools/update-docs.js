@@ -21,7 +21,7 @@ For example:
 const fs = require('node:fs')
 const path = require('node:path')
 const rules = require('./lib/rules')
-const removedRules = require('../lib/removed-rules')
+const removedRules = require('../lib/removed-rules.ts').default
 const { getPresetIds, formatItems } = require('./lib/utils')
 const { getPresetNames } = require('./lib/categories')
 
