@@ -4,27 +4,17 @@
 
 ### Patch Changes
 
-- Fixed [`vue/component-name-in-template-casing`](https://eslint.vuejs.org/rules/component-name-in-template-casing.html) to check and autofix only the part before the dot of namespaced components such as `<Form.Input>` ([#3207](https://github.com/vuejs/eslint-plugin-vue/pull/3207))
-
 - Changed [`vue/html-self-closing`](https://eslint.vuejs.org/rules/html-self-closing.html) autofix to always add a space before `/>`, which also stops it from breaking elements whose last attribute has an unquoted value ([#3159](https://github.com/vuejs/eslint-plugin-vue/pull/3159))
-
-- Fixed [`vue/no-deprecated-slot-attribute`](https://eslint.vuejs.org/rules/no-deprecated-slot-attribute.html) to apply the `ignore` and `ignoreParents` options to `v-bind:slot` ([#3211](https://github.com/vuejs/eslint-plugin-vue/pull/3211))
-
-- Fixed [`vue/no-undef-components`](https://eslint.vuejs.org/rules/no-undef-components.html) reporting a `<script setup>` component that references itself by the name set with `defineOptions({ name })` ([#3206](https://github.com/vuejs/eslint-plugin-vue/pull/3206))
-
-- Fixed [`vue/no-undef-properties`](https://eslint.vuejs.org/rules/no-undef-properties.html) false positives for properties from Vuex/Pinia `map*` helpers that are used before the helper call (e.g. in `watch` or `created`) ([#3217](https://github.com/vuejs/eslint-plugin-vue/pull/3217))
-
-- Fixed false positives in [`vue/no-unused-properties`](https://eslint.vuejs.org/rules/no-unused-properties.html) when the props object is passed to a function that is imported or otherwise not declared in the same file ([#3223](https://github.com/vuejs/eslint-plugin-vue/pull/3223))
-
-- Fixed [`vue/no-useless-mustaches`](https://eslint.vuejs.org/rules/no-useless-mustaches.html) autofix changing the rendered text when the result would start a new mustache interpolation (`{{ '{{' }}`) or join the surrounding text into a different character reference (`{{ '&' }}copy;`) ([#3193](https://github.com/vuejs/eslint-plugin-vue/pull/3193))
-
-- Fixed [`vue/prefer-separate-static-class`](https://eslint.vuejs.org/rules/prefer-separate-static-class.html) to ignore `:class` bindings with the `.attr` or `.prop` modifier ([#3219](https://github.com/vuejs/eslint-plugin-vue/pull/3219))
-
-- Fixed false positives for `update:<model>` events declared by `defineModel()` in [`vue/require-explicit-emits`](https://eslint.vuejs.org/rules/require-explicit-emits.html) rule ([#3232](https://github.com/vuejs/eslint-plugin-vue/pull/3232))
-
-- Fixed [`vue/require-explicit-slots`](https://eslint.vuejs.org/rules/require-explicit-slots.html) crashing when the `slots` option uses a type assertion other than `SlotsType<...>`, such as `slots: {} as any` ([#3195](https://github.com/vuejs/eslint-plugin-vue/pull/3195))
-
 - Changed [`vue/v-on-handler-style`](https://eslint.vuejs.org/rules/v-on-handler-style.html) to suggest instead of autofix when it can't tell how many parameters the handler takes ([#3227](https://github.com/vuejs/eslint-plugin-vue/pull/3227))
+- Fixed [`vue/component-name-in-template-casing`](https://eslint.vuejs.org/rules/component-name-in-template-casing.html) to check and autofix only the part before the dot of namespaced components such as `<Form.Input>` ([#3207](https://github.com/vuejs/eslint-plugin-vue/pull/3207))
+- Fixed [`vue/no-deprecated-slot-attribute`](https://eslint.vuejs.org/rules/no-deprecated-slot-attribute.html) to apply the `ignore` and `ignoreParents` options to `v-bind:slot` ([#3211](https://github.com/vuejs/eslint-plugin-vue/pull/3211))
+- Fixed [`vue/no-undef-components`](https://eslint.vuejs.org/rules/no-undef-components.html) reporting a `<script setup>` component that references itself by the name set with `defineOptions({ name })` ([#3206](https://github.com/vuejs/eslint-plugin-vue/pull/3206))
+- Fixed [`vue/no-undef-properties`](https://eslint.vuejs.org/rules/no-undef-properties.html) false positives for properties from Vuex/Pinia `map*` helpers that are used before the helper call (e.g. in `watch` or `created`) ([#3217](https://github.com/vuejs/eslint-plugin-vue/pull/3217))
+- Fixed [`vue/no-unused-properties`](https://eslint.vuejs.org/rules/no-unused-properties.html) false positives when the props object is passed to a function that is imported or otherwise not declared in the same file ([#3223](https://github.com/vuejs/eslint-plugin-vue/pull/3223))
+- Fixed [`vue/no-useless-mustaches`](https://eslint.vuejs.org/rules/no-useless-mustaches.html) autofix changing the rendered text when the result would start a new mustache interpolation (`{{ '{{' }}`) or join the surrounding text into a different character reference (`{{ '&' }}copy;`) ([#3193](https://github.com/vuejs/eslint-plugin-vue/pull/3193))
+- Fixed [`vue/prefer-separate-static-class`](https://eslint.vuejs.org/rules/prefer-separate-static-class.html) to ignore `:class` bindings with the `.attr` or `.prop` modifier ([#3219](https://github.com/vuejs/eslint-plugin-vue/pull/3219))
+- Fixed [`vue/require-explicit-emits`](https://eslint.vuejs.org/rules/require-explicit-emits.html) rule false positives for `update:<model>` events declared by `defineModel()` ([#3232](https://github.com/vuejs/eslint-plugin-vue/pull/3232))
+- Fixed [`vue/require-explicit-slots`](https://eslint.vuejs.org/rules/require-explicit-slots.html) crashing when the `slots` option uses a type assertion other than `SlotsType<...>`, such as `slots: {} as any` ([#3195](https://github.com/vuejs/eslint-plugin-vue/pull/3195))
 
 ## 10.12.0
 
