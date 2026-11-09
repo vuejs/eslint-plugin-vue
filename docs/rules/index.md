@@ -71,7 +71,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-dupe-keys] | disallow duplication of field names |  | :three::two::warning: |
 | [vue/no-dupe-v-else-if] | disallow duplicate conditions in `v-if` / `v-else-if` chains |  | :three::two::warning: |
 | [vue/no-duplicate-attributes] | disallow duplication of attributes |  | :three::two::warning: |
-| [vue/no-export-in-script-setup] | disallow `export` in `<script setup>` |  | :three::two::warning: |
+| [vue/no-export-in-script-setup] | disallow `export` in `<script setup>` | :bulb: | :three::two::warning: |
 | [vue/no-expose-after-await] | disallow asynchronously registered `expose` |  | :three::warning: |
 | [vue/no-lifecycle-after-await] | disallow asynchronously registered lifecycle hooks |  | :three::hammer: |
 | [vue/no-multiple-template-root] | disallow adding multiple root nodes to the template |  | :two::warning: |
