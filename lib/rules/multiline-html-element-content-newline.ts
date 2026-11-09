@@ -44,15 +44,16 @@ function isHTMLComment(token: Token) {
 }
 
 /**
- * Check whether the given element is empty or not.
+ * Check whether the content between the given start and end is empty or not.
  * This ignores whitespaces, doesn't ignore comments.
  */
 function isEmpty(
-  node: VElement & { endTag: VEndTag },
+  startTagOrComment: VStartTag | Token,
+  endTagOrComment: VEndTag | Token,
   sourceCode: SourceCode
 ): boolean {
-  const start = node.startTag.range[1]
-  const end = node.endTag.range[0]
+  const start = startTagOrComment.range[1]
+  const end = endTagOrComment.range[0]
   return sourceCode.text.slice(start, end).trim() === ''
 }
 
@@ -145,44 +146,44 @@ export default {
           includeComments: true,
           filter: (token) => token.type !== 'HTMLWhitespace'
         }
-        const tokens = template.getTokensBetween(
-          element.startTag,
-          element.endTag,
+        let startTagOrComment: VStartTag | Token = element.startTag
+        let endTagOrComment: VEndTag | Token = element.endTag
+        let contentFirst = template.getTokenAfter(
+          startTagOrComment,
           getTokenOption
-        )
-        let start = 0
-        let end = tokens.length
+        )!
+        let contentLast = template.getTokenBefore(
+          endTagOrComment,
+          getTokenOption
+        )!
         if (ignoreComments) {
           // comments on the same line as a tag are not treated as content
-          const firstContentIndex = tokens.findIndex(
-            (token, index) =>
-              !isHTMLComment(token) ||
-              token.loc.start.line !==
-                (tokens[index - 1] ?? element.startTag).loc.end.line
-          )
-          start = firstContentIndex === -1 ? tokens.length : firstContentIndex
-          const lastContentIndex = tokens.findLastIndex(
-            (token, index) =>
-              !isHTMLComment(token) ||
-              token.loc.end.line !==
-                (tokens[index + 1] ?? element.endTag).loc.start.line
-          )
-          end = Math.max(start, lastContentIndex + 1)
+          while (
+            isHTMLComment(contentFirst) &&
+            contentFirst.loc.start.line === startTagOrComment.loc.end.line
+          ) {
+            startTagOrComment = contentFirst
+            contentFirst = template.getTokenAfter(contentFirst, getTokenOption)!
+          }
+          while (
+            isHTMLComment(contentLast) &&
+            contentLast.loc.end.line === endTagOrComment.loc.start.line
+          ) {
+            endTagOrComment = contentLast
+            contentLast = template.getTokenBefore(contentLast, getTokenOption)!
+          }
         }
-        const contentTokens = tokens.slice(start, end)
         if (
           ignoreWhenEmpty &&
           element.children.length === 0 &&
-          contentTokens.length === 0
+          template.getFirstTokensBetween(
+            startTagOrComment,
+            endTagOrComment,
+            getTokenOption
+          ).length === 0
         ) {
           return
         }
-
-        const startTagOrComment: VStartTag | Token =
-          tokens[start - 1] ?? element.startTag
-        const endTagOrComment: VEndTag | Token = tokens[end] ?? element.endTag
-        const contentFirst = contentTokens[0] ?? endTagOrComment
-        const contentLast = contentTokens.at(-1) ?? startTagOrComment
 
         const beforeLineBreaks =
           contentFirst.loc.start.line - startTagOrComment.loc.end.line
@@ -210,7 +211,7 @@ export default {
           })
         }
 
-        if (contentTokens.length === 0 || isEmpty(element, sourceCode)) {
+        if (isEmpty(startTagOrComment, endTagOrComment, sourceCode)) {
           return
         }
 
