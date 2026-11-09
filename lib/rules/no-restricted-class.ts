@@ -2,7 +2,7 @@
  * @fileoverview Forbid certain classes from being used
  * @author Tao Bojlen
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
 const reportForbiddenClass = (

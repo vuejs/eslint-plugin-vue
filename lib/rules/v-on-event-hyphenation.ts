@@ -1,4 +1,4 @@
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { getConverter } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 

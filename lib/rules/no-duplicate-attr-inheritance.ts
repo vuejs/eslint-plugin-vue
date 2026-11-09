@@ -2,7 +2,7 @@
  * @fileoverview Disable inheritAttrs when using v-bind="$attrs"
  * @author Hiroki Osame
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function isConditionalGroup(elements: VElement[]) {
   const firstElement = elements[0]

@@ -2,7 +2,7 @@
  * @fileoverview disallow mutation component props
  * @author 2018 Armano
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
 
 interface PropsInfo {

@@ -3,7 +3,7 @@
  * @author LukeeeeBennett
  */
 import path from 'node:path'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const { getVueComponentDefinitionType } = utils
 /**

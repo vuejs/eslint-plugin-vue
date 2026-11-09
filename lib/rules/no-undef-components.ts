@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import path from 'node:path'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import {
   capitalize,
   isPascalCase,

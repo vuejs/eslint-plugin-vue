@@ -2,8 +2,8 @@
  * @fileoverview Prevent overwrite reserved keys
  * @author Armano
  */
-import utils from '../utils/index.js'
-import type { GroupName } from '../utils/index.js'
+import utils from '../utils/index.ts'
+import type { GroupName } from '../utils/index.ts'
 import RESERVED_KEYS from '../utils/vue-reserved.json' with { type: 'json' }
 
 const GROUP_NAMES: GroupName[] = [

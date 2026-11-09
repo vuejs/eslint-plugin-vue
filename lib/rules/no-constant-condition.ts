@@ -1,7 +1,7 @@
 /**
  * @author Flo Edelmann
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const conditionalDirectiveNames = new Set(['v-show', 'v-if', 'v-else-if'])
 

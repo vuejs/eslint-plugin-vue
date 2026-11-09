@@ -2,7 +2,7 @@
  * @fileoverview disallow using deprecated object declaration on data
  * @author yoyo930021
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function isOpenParen(token: Token) {
   return token.type === 'Punctuator' && token.value === '('

@@ -3,7 +3,7 @@
  * @author Armano
  */
 import path from 'node:path'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const isProperty = (context: RuleContext, node: Token) => {
   const sourceCode = context.sourceCode

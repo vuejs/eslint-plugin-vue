@@ -3,11 +3,11 @@
  * @author Michał Sajnóg
  */
 import { ReferenceTracker, findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import type {
   ComponentComputedProperty,
   VueObjectData
-} from '../utils/index.js'
+} from '../utils/index.ts'
 
 export default {
   meta: {

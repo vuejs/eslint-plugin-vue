@@ -2,8 +2,8 @@
  * @author kevsommer Kevin Sommer
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
-import type { ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.ts'
+import type { ComponentProp } from '../utils/index.ts'
 
 export default {
   meta: {
