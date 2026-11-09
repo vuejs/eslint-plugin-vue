@@ -8,7 +8,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const rules = require('./lib/rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
-const removedRules = require('../lib/removed-rules')
+const removedRules = require('../lib/removed-rules.ts').default
 const { getPresetNames } = require('./lib/categories')
 
 const VUE3_EMOJI = ':three:'
