@@ -1246,7 +1246,8 @@ tester.run('v-on-handler-style', rule, {
       options: ['inline-function'],
       errors: [
         {
-          message: 'Prefer inline function over inline handler in v-on.',
+          message:
+            'Prefer inline function over inline handler in v-on. Note that `$event` must be replaced with a parameter of the inline function.',
           line: 1,
           column: 24,
           endLine: 1,
@@ -2102,7 +2103,8 @@ tester.run('v-on-handler-style', rule, {
           endColumn: 28
         },
         {
-          message: 'Prefer inline function over inline handler in v-on.',
+          message:
+            'Prefer inline function over inline handler in v-on. Note that `$event` must be replaced with a parameter of the inline function.',
           line: 3,
           column: 25,
           endLine: 3,
@@ -2123,7 +2125,8 @@ tester.run('v-on-handler-style', rule, {
           endColumn: 42
         },
         {
-          message: 'Prefer inline function over inline handler in v-on.',
+          message:
+            'Prefer inline function over inline handler in v-on. Note that `$event` must be replaced with a parameter of the inline function.',
           line: 7,
           column: 27,
           endLine: 7,

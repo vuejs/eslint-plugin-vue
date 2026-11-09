@@ -154,7 +154,9 @@ export default {
       preferInlineFunctionOverInline:
         'Prefer inline function over inline handler in v-on.',
       replaceWithMethodHandler:
-        'Replace with method handler. Note that the method will receive the event arguments.'
+        'Replace with method handler. Note that the method will receive the event arguments.',
+      preferInlineFunctionOverInlineWithEvent:
+        'Prefer inline function over inline handler in v-on. Note that `$event` must be replaced with a parameter of the inline function.'
     }
   },
   create(context: RuleContext) {
@@ -420,11 +422,14 @@ export default {
     function reportCanUseInlineFunctionForInlineHandler(
       node: VOnExpression
     ): void {
+      const hasEvent = hasEventIdentifier(node)
       context.report({
         node,
-        messageId: 'preferInlineFunctionOverInline',
+        messageId: hasEvent
+          ? 'preferInlineFunctionOverInlineWithEvent'
+          : 'preferInlineFunctionOverInline',
         *fix(fixer) {
-          if (hasEventIdentifier(node)) {
+          if (hasEvent) {
             /* The statements contains $event and cannot be fixed. */
             return
           }
