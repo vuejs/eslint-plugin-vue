@@ -159,11 +159,11 @@ export default async () => {
           ),
 
           tslib: path.join(dirname, '../../node_modules/tslib/tslib.es6.js'),
-          globby: path.join(dirname, './build-system/shim/empty.mjs'),
-          'fast-glob': path.join(dirname, './build-system/shim/empty.mjs'),
-          tinyglobby: path.join(dirname, './build-system/shim/empty.mjs'),
-          module: path.join(dirname, './build-system/shim/empty.mjs'),
-          'node:module': path.join(dirname, './build-system/shim/empty.mjs')
+          globby: path.join(dirname, './build-system/shim/empty.ts'),
+          'fast-glob': path.join(dirname, './build-system/shim/empty.ts'),
+          tinyglobby: path.join(dirname, './build-system/shim/empty.ts'),
+          module: path.join(dirname, './build-system/shim/empty.ts'),
+          'node:module': path.join(dirname, './build-system/shim/empty.ts')
         }
       },
       define: {
