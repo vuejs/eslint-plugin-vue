@@ -63,7 +63,7 @@ A method handler receives the event arguments, so the conversion to a method han
   - `["method", "inline"]` ... Allow handlers by method binding. e.g. `v-on:click="handler"`. Allow inline handlers where method handlers cannot be used. e.g. `v-on:click="handler(listItem)"`.
   - `["inline", "inline-function"]` ... Allow inline handlers. e.g. `v-on:click="handler()"`. Disallow `$event` and allow inline functions with parameters instead. e.g. `v-on:click="(value) => handler(value)"`.
   - `"inline-function"` ... Allow inline functions. e.g. `v-on:click="() => handler()"`
-  - `"inline"` ... Allow inline handlers. e.g. `v-on:click="handler()"`. Inline functions with two or more parameters are still allowed, because they cannot be written as inline handlers. Use [vue/prefer-single-event-payload](./prefer-single-event-payload.md) to report custom events with multiple payloads instead.
+  - `"inline"` ... Allow inline handlers. e.g. `v-on:click="handler()"`
 - Second option
   - `ignoreIncludesComment` ... If `true`, do not report inline handlers or inline functions containing comments, even if the preferred style is `"method"`. Default is `false`.
 
@@ -155,12 +155,12 @@ A method handler receives the event arguments, so the conversion to a method han
   <button v-on:click="handler()" />
   <button v-on:click="handler($event)" />
   <button v-on:click="count++" />
-  <button v-on:click="(foo, bar) => handler(foo, bar)" />
 
   <!-- ✗ BAD -->
   <button v-on:click="handler" />
   <button v-on:click="() => handler()" />
   <button v-on:click="(foo) => handler(foo)" />
+  <button v-on:click="(foo, bar) => handler(foo, bar)" />
   <button v-on:click="() => count++" />
 </template>
 ```

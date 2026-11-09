@@ -66,24 +66,6 @@ tester.run('v-on-handler-style', rule, {
     {
       filename: 'test.vue',
       code: `<template>
-        <button @click="(a, b) => foo(a, b)" />
-        <button @click="function (a, b) { foo(a, b) }" />
-      </template>`,
-      options: ['inline']
-    },
-    {
-      filename: 'test.vue',
-      code: `<template>
-        <button @click="foo" />
-        <template v-for="e in list">
-          <button @click="(a, b) => foo(a, b, e)" />
-        </template>
-      </template>`,
-      options: [['method', 'inline']]
-    },
-    {
-      filename: 'test.vue',
-      code: `<template>
         <button @click="foo()" />
         <button @click="count++" />
         <button @click="(a) => foo(a)" />
@@ -2066,6 +2048,24 @@ tester.run('v-on-handler-style', rule, {
           column: 25,
           endLine: 2,
           endColumn: 41
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="(a, b) => foo(a, b)" />
+      </template>`,
+      output: null,
+      options: ['inline'],
+      errors: [
+        {
+          message:
+            'Prefer inline handler over inline function in v-on. Note that the custom event must be changed to a single payload.',
+          line: 2,
+          column: 25,
+          endLine: 2,
+          endColumn: 44
         }
       ]
     },

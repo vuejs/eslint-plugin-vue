@@ -147,6 +147,8 @@ export default {
         'Prefer inline handler over method handler in v-on.',
       preferInlineOverInlineFunction:
         'Prefer inline handler over inline function in v-on.',
+      preferInlineOverInlineFunctionWithMultipleParams:
+        'Prefer inline handler over inline function in v-on. Note that the custom event must be changed to a single payload.',
       preferInlineFunctionOverMethod:
         'Prefer inline function over method handler in v-on.',
       preferInlineFunctionOverInline:
@@ -459,20 +461,21 @@ export default {
     function verifyCanUseInlineHandlerForInlineFunction(
       node: ArrowFunctionExpression | FunctionExpression
     ): boolean {
-      // If a function has one parameter, you can turn it into an inline handler using $event.
-      // If a function has two or more parameters, it cannot be converted to an inline handler,
-      // because $event only holds the first payload. Custom events with multiple payloads
-      // are reported on the emitting side by `vue/prefer-single-event-payload` instead.
-      if (
-        node.params.length > 1 ||
-        (shouldUseInlineFunctionForPayload && node.params.length > 0)
-      ) {
+      if (shouldUseInlineFunctionForPayload && node.params.length > 0) {
+        // With `["inline", "inline-function"]`, inline functions with parameters are allowed.
         return false
       }
+      // If a function has one parameter, you can turn it into an inline handler using $event.
+      // If a function has two or more parameters, it cannot be easily converted to an inline handler.
+      // However, users can use inline handlers by changing the payload of the component's custom event.
+      // So we report it regardless of the number of parameters.
 
       context.report({
         node,
-        messageId: 'preferInlineOverInlineFunction',
+        messageId:
+          node.params.length > 1
+            ? 'preferInlineOverInlineFunctionWithMultipleParams'
+            : 'preferInlineOverInlineFunction',
         fix:
           node.params.length > 0
             ? null /* The function has parameters and cannot be fixed. */
