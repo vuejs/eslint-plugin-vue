@@ -2,8 +2,8 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-import type { ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import type { ComponentProp } from '../utils/index.ts'
+import utils from '../utils/index.ts'
 
 function checkArrayExpression(node: ArrayExpression, context: RuleContext) {
   const booleanType = node.elements.find(
@@ -68,15 +68,11 @@ export default {
       if (value.type === 'ArrayExpression') {
         checkArrayExpression(value, context)
       } else if (value.type === 'ObjectExpression') {
-        const type = value.properties.find(
-          (property): property is Property =>
-            property.type === 'Property' &&
-            utils.getStaticPropertyName(property) === 'type'
-        )
-        if (!type || type.value.type !== 'ArrayExpression') {
+        const typeProperty = utils.findProperty(value, 'type')
+        if (!typeProperty || typeProperty.value.type !== 'ArrayExpression') {
           return
         }
-        checkArrayExpression(type.value, context)
+        checkArrayExpression(typeProperty.value, context)
       }
     }
 

@@ -800,6 +800,115 @@ tester.run('no-undef-properties', rule, {
       </template>
       `
     },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2600
+      filename: 'test.js',
+      code: `
+      import Vue from 'vue';
+      import { mapGetters, mapMutations } from 'vuex';
+
+      new Vue({
+        computed: {
+          ...mapGetters(['getCountryMap']),
+        },
+        watch: {
+          getCountryMap() {
+            this.updatePrefix();
+          },
+        },
+        created() {
+          this.setCountries([]);
+        },
+        methods: {
+          ...mapMutations(['setCountries']),
+          updatePrefix() {},
+        },
+      });
+      `
+    },
+    {
+      // Vuex helpers spread after the properties are used
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+
+      export default {
+        watch: {
+          a() {},
+          b: 'c',
+        },
+        data() {
+          return { x: this.a }
+        },
+        created() {
+          this.c();
+          this.d();
+        },
+        computed: {
+          e() { return this.a + this.b },
+          ...mapState(['a']),
+          ...mapGetters({ b: 'getB' }),
+        },
+        methods: {
+          f() { this.c(); this.d() },
+          ...mapMutations(['c']),
+          ...mapActions({ d: 'doD' }),
+        }
+      }
+      </script>
+      `
+    },
+    {
+      // Pinia helpers spread after the properties are used
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapState, mapWritableState, mapActions } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        watch: {
+          a() {
+            this.b = this.a
+          },
+        },
+        setup() {
+          return { s: 1 }
+        },
+        created() {
+          this.c(this.s);
+        },
+        computed: {
+          ...mapState(useStore, ['a']),
+          ...mapWritableState(useStore, ['b']),
+        },
+        methods: {
+          ...mapActions(useStore, ['c']),
+        },
+      }
+      </script>
+      `
+    },
+    {
+      // Vuex helper used as the whole `computed` / `methods` object
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapGetters, mapActions } from 'vuex';
+
+      export default {
+        watch: {
+          a() {
+            this.b();
+          },
+        },
+        computed: mapGetters(['a']),
+        methods: mapActions(['b']),
+      }
+      </script>
+      `
+    },
     `
     <script setup>
     const model = defineModel();
@@ -1980,6 +2089,48 @@ tester.run('no-undef-properties', rule, {
           column: 28,
           endLine: 11,
           endColumn: 29
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2600
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapGetters, mapMutations } from 'vuex';
+
+      export default {
+        watch: {
+          a() {},
+          x() {},
+        },
+        created() {
+          this.b();
+          this.y();
+        },
+        computed: {
+          ...mapGetters(['a']),
+        },
+        methods: {
+          ...mapMutations(['b']),
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message: "'x' is not defined.",
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 12
+        },
+        {
+          message: "'y' is not defined.",
+          line: 12,
+          column: 16,
+          endLine: 12,
+          endColumn: 17
         }
       ]
     },

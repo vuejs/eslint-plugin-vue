@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-define-model-default
 description: disallow default values in `defineModel`
+since: v10.12.0
 ---
 
 # vue/no-define-model-default
 
 > disallow default values in `defineModel`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -40,6 +39,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Guide - Component v-model / Under the Hood](https://vuejs.org/guide/components/v-model.html#under-the-hood)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.12.0
 
 ## :mag: Implementation
 

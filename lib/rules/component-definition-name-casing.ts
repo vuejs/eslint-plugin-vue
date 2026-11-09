@@ -2,21 +2,10 @@
  * @fileoverview enforce specific casing for component definition name
  * @author Armano
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { getChecker, getExactConverter } from '../utils/casing.ts'
 
 const allowedCaseOptions = ['PascalCase', 'kebab-case']
-
-function canConvert(
-  node: Expression | SpreadElement
-): node is Literal | TemplateLiteral {
-  return (
-    node.type === 'Literal' ||
-    (node.type === 'TemplateLiteral' &&
-      node.expressions.length === 0 &&
-      node.quasis.length === 1)
-  )
-}
 
 export default {
   meta: {
@@ -43,32 +32,22 @@ export default {
       : 'PascalCase'
 
     function convertName(node: Literal | TemplateLiteral) {
-      let nodeValue: string
-      let range: Range
-      if (node.type === 'TemplateLiteral') {
-        const quasis = node.quasis[0]
-        nodeValue = quasis.value.cooked
-        range = quasis.range
-      } else {
-        nodeValue = String(node.value)
-        range = node.range
-      }
+      const nodeValue = utils.getStringLiteralValue(node)
+      if (nodeValue === null || getChecker(caseType)(nodeValue)) return
 
-      if (!getChecker(caseType)(nodeValue)) {
-        context.report({
-          node,
-          messageId: 'incorrectCase',
-          data: {
-            value: nodeValue,
-            caseType
-          },
-          fix: (fixer) =>
-            fixer.replaceTextRange(
-              [range[0] + 1, range[1] - 1],
-              getExactConverter(caseType)(nodeValue)
-            )
-        })
-      }
+      context.report({
+        node,
+        messageId: 'incorrectCase',
+        data: {
+          value: nodeValue,
+          caseType
+        },
+        fix: (fixer) =>
+          fixer.replaceTextRange(
+            [node.range[0] + 1, node.range[1] - 1],
+            getExactConverter(caseType)(nodeValue)
+          )
+      })
     }
 
     return utils.compositingVisitors(
@@ -79,14 +58,14 @@ export default {
 
         const argument = node.arguments[0]
 
-        if (canConvert(argument)) {
+        if (utils.isStringLiteral(argument)) {
           convertName(argument)
         }
       }),
       utils.executeOnVue(context, (obj) => {
         const node = utils.findProperty(obj, 'name')
 
-        if (!node || !canConvert(node.value)) return
+        if (!node || !utils.isStringLiteral(node.value)) return
         convertName(node.value)
       }),
       utils.defineScriptSetupVisitor(context, {
@@ -95,7 +74,7 @@ export default {
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
           const nameNode = utils.findProperty(define, 'name')
-          if (!nameNode || !canConvert(nameNode.value)) return
+          if (!nameNode || !utils.isStringLiteral(nameNode.value)) return
           convertName(nameNode.value)
         }
       })

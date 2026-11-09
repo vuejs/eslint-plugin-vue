@@ -2,9 +2,9 @@
  * @fileoverview Prevents duplication of field names.
  * @author Armano
  */
-import type { GroupName } from '../utils/index.js'
+import type { ComponentModel, GroupName } from '../utils/index.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const GROUP_NAMES: GroupName[] = [
   'props',
@@ -40,12 +40,7 @@ function getPropsPattern(node: CallExpression): Pattern | null {
  */
 function isInsideInitializer(node: VariableDeclarator, references: ESNode[]) {
   const init = node.init
-  return (
-    init !== null &&
-    references.some(
-      (id) => init.range[0] <= id.range[0] && id.range[1] <= init.range[1]
-    )
-  )
+  return init !== null && references.some((id) => utils.isInRange(init, id))
 }
 
 /**
@@ -186,6 +181,10 @@ export default {
   create(context: RuleContext) {
     const options = context.options[0] || {}
     const groups = new Set([...GROUP_NAMES, ...(options.groups || [])])
+    let propReferences: ESNode[] = []
+    const propNames = new Set<string>()
+    const models: { node: CallExpression; model: ComponentModel }[] = []
+    const reportedDeclarations = new Set<ASTNode>()
 
     return utils.compositingVisitors(
       utils.executeOnVue(context, (obj) => {
@@ -208,7 +207,7 @@ export default {
       utils.defineScriptSetupVisitor(context, {
         onDefinePropsEnter(node, props) {
           const propsNode = getPropsPattern(node)
-          const propReferences = [
+          propReferences = [
             ...(propsNode ? extractReferences(propsNode) : []),
             node
           ]
@@ -217,7 +216,12 @@ export default {
 
           for (const prop of props) {
             const propName = prop.propName
-            if (!propName || renamedProps.has(propName)) {
+            if (!propName) {
+              continue
+            }
+            propNames.add(propName)
+
+            if (renamedProps.has(propName)) {
               continue
             }
 
@@ -240,12 +244,59 @@ export default {
               continue
             }
 
+            reportedDeclarations.add(variable.defs[0].node)
             context.report({
               node: variable.defs[0].node,
               messageId: 'duplicateKey',
               data: {
                 name: propName
               }
+            })
+          }
+        },
+        onDefineModelEnter(node, model) {
+          models.push({ node, model })
+        },
+        'Program:exit'() {
+          const usedNames = new Set(propNames)
+          for (const { node, model } of models) {
+            const name = model.name.modelName
+            if (usedNames.has(name)) {
+              // `const foo = defineModel('foo')` next to a `foo` prop
+              // is already reported on the declaration by the props check
+              if (reportedDeclarations.has(node.parent)) continue
+              context.report({
+                node: model.name.node || node,
+                messageId: 'duplicateKey',
+                data: { name }
+              })
+              continue
+            }
+            usedNames.add(name)
+
+            const variable = findVariable(utils.getScope(context, node), name)
+            if (!variable || variable.defs.length === 0) continue
+
+            const modelPattern = getPropsPattern(node)
+            const modelReferences = [
+              ...propReferences,
+              ...(modelPattern ? extractReferences(modelPattern) : []),
+              node
+            ]
+            if (
+              variable.defs.some(
+                (def) =>
+                  def.type === 'Variable' &&
+                  isInsideInitializer(def.node, modelReferences)
+              )
+            ) {
+              continue
+            }
+
+            context.report({
+              node: variable.defs[0].node,
+              messageId: 'duplicateKey',
+              data: { name }
             })
           }
         }

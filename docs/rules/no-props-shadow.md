@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-props-shadow
 description: disallow declarations that shadow props in `<script setup>`
+since: v10.12.0
 ---
 
 # vue/no-props-shadow
 
 > disallow declarations that shadow props in `<script setup>`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -112,6 +111,10 @@ Nothing.
 
 - [Guide - SFC `<script setup>`](https://vuejs.org/api/sfc-script-setup.html)
 - [Guide - Props / Reactive Props Destructure](https://vuejs.org/guide/components/props.html#reactive-props-destructure)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.12.0
 
 ## :mag: Implementation
 

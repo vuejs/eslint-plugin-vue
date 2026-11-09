@@ -3,13 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-content-outside-block
 description: disallow content outside of the top-level blocks
+since: v10.12.0
 ---
 
 # vue/no-content-outside-block
 
 > disallow content outside of the top-level blocks
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -65,6 +65,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Vue Single-File Component Spec](https://vuejs.org/api/sfc-spec.html)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.12.0
 
 ## :mag: Implementation
 

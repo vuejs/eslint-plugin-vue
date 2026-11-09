@@ -1,15 +1,11 @@
-'use strict'
+export interface RemovedRule {
+  ruleName: string
+  replacedBy: string[]
+  deprecatedInVersion: string
+  removedInVersion: string
+}
 
-/**
- * @typedef {object} RemovedRule
- * @property {string} ruleName
- * @property {string[]} replacedBy
- * @property {string} deprecatedInVersion
- * @property {string} removedInVersion
- */
-
-/** @type {RemovedRule[]} */
-module.exports = [
+const removedRules: RemovedRule[] = [
   {
     ruleName: 'component-tags-order',
     replacedBy: ['block-order'],
@@ -71,3 +67,5 @@ module.exports = [
     removedInVersion: 'v10.0.0'
   }
 ]
+
+export default removedRules

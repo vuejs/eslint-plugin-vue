@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import type { TSESTree } from '@typescript-eslint/types'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const MACROS_EMITS = 'defineEmits'
 const MACROS_PROPS = 'defineProps'
@@ -31,13 +31,6 @@ const TYPE_ONLY_STATEMENTS = new Set([
   'TSInterfaceDeclaration',
   'TSDeclareFunction'
 ])
-
-function isInScriptSetup(scriptSetup: VElement, node: ASTNode) {
-  return (
-    scriptSetup.range[0] <= node.range[0] &&
-    node.range[1] <= scriptSetup.range[1]
-  )
-}
 
 function isDeclareStatement(node: ASTNode) {
   return 'declare' in node && node.declare === true
@@ -120,7 +113,7 @@ function getTargetStatementPosition(scriptSetup: VElement, program: Program) {
 
   for (const [index, item] of program.body.entries()) {
     if (
-      isInScriptSetup(scriptSetup, item) &&
+      utils.isInRange(scriptSetup, item) &&
       !skipStatements.has(item.type) &&
       !isDeclareStatement(item) &&
       !isUseStrictStatement(item)

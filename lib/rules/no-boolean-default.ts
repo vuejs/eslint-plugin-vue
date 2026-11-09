@@ -2,8 +2,8 @@
  * @fileoverview Prevents boolean defaults from being set
  * @author Hiroki Osame
  */
-import utils from '../utils/index.js'
-import type { ComponentProp, ComponentObjectProp } from '../utils/index.js'
+import utils from '../utils/index.ts'
+import type { ComponentProp, ComponentObjectProp } from '../utils/index.ts'
 
 function isBooleanIdentifier(node: Expression | undefined) {
   return Boolean(node && node.type === 'Identifier' && node.name === 'Boolean')

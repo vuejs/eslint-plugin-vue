@@ -3,7 +3,7 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Check whether the given attribute is using the variables which are defined by `v-for` directives.

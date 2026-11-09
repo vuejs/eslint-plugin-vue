@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { camelCase } from '../utils/casing.ts'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Get the static argument name of a directive, or `null` for dynamic arguments.

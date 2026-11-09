@@ -6,8 +6,8 @@ import type {
   ComponentProp,
   ComponentObjectProp,
   ComponentTypeProp
-} from '../utils/index.js'
-import utils from '../utils/index.js'
+} from '../utils/index.ts'
+import utils from '../utils/index.ts'
 
 const NATIVE_TYPES = new Set([
   'String',

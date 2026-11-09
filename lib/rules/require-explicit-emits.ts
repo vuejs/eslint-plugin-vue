@@ -14,7 +14,7 @@ import {
   isClosingBraceToken,
   isOpeningBracketToken
 } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { capitalize } from '../utils/casing.ts'
 
 const FIX_EMITS_AFTER_OPTIONS = new Set([
@@ -98,6 +98,7 @@ export default {
       ObjectExpression | Program,
       ComponentProp[]
     >()
+    const modelEventNames = new Set<string>()
     let emitParamName = ''
 
     interface VueTemplateDefineData {
@@ -117,7 +118,10 @@ export default {
       vueDefineNode: ObjectExpression | Program
     ) {
       const name = nameWithLoc.name
-      if (emits.some((e) => e.emitName === name || e.emitName == null)) {
+      if (
+        modelEventNames.has(name) ||
+        emits.some((e) => e.emitName === name || e.emitName == null)
+      ) {
         return
       }
       if (shouldAllowProps) {
@@ -290,6 +294,9 @@ export default {
               contextReferenceIds: new Set<Identifier>(),
               emitReferenceIds
             })
+          },
+          onDefineModelEnter(_node, model) {
+            modelEventNames.add(`update:${model.name.modelName}`)
           },
           onDefinePropsEnter(_node, props) {
             if (!shouldAllowProps) {

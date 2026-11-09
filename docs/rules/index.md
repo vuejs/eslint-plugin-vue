@@ -179,7 +179,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
-| [vue/attributes-order] | enforce order of attributes | :wrench: | :three::two::hammer: |
+| [vue/attributes-order] | enforce order of attributes | :wrench::bulb: | :three::two::hammer: |
 | [vue/block-order] | enforce order of component top-level elements | :wrench: | :three::two::hammer: |
 | [vue/no-lone-template] | disallow unnecessary `<template>` |  | :three::two::warning: |
 | [vue/no-multiple-slot-args] | disallow passing multiple arguments to scoped slots |  | :three::two::warning: |
@@ -300,7 +300,7 @@ For example:
 | [vue/static-class-names-order] | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style] | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-if-else-key] | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
-| [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
+| [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench::bulb: | :hammer: |
 
 </rules-table>
 

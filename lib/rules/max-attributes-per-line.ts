@@ -2,7 +2,7 @@
  * @fileoverview Define the number of attributes allows per line
  * @author Filipa Lacerda
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function parseOptions(options: any) {
   const defaults = {
