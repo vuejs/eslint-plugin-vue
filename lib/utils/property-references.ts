@@ -9,6 +9,7 @@ import { ReferenceTracker } from '@eslint-community/eslint-utils'
 
 interface IHasPropertyOption {
   unknownCallAsAny?: boolean
+  externalCallAsAny?: boolean
 }
 
 interface NestPropertyNodeForExpression {
@@ -75,6 +76,25 @@ function findFunction(
     }
   }
   return null
+}
+
+/**
+ * Checks whether the given callee is a function that is not declared in the
+ * current file, i.e. an import (or a member of one) or a global.
+ */
+function isExternalCallee(
+  context: RuleContext,
+  callee: Expression | Super
+): boolean {
+  let node = callee
+  while (node.type === 'MemberExpression') {
+    node = node.object
+  }
+  if (node.type !== 'Identifier') {
+    return false
+  }
+  const variable = utils.findVariableByIdentifier(context, node)
+  return !variable || variable.defs.every((def) => def.type === 'ImportBinding')
 }
 
 interface IPropertyReferenceExtractorOptions {
@@ -455,14 +475,7 @@ export function definePropertyReferenceExtractor(
     argIndex: number
   ): IPropertyReferences {
     if (node.callee.type !== 'Identifier') {
-      return {
-        hasProperty(_name, options) {
-          return Boolean(options && options.unknownCallAsAny)
-        },
-        allProperties: () => new Map(),
-        getNest: () => ANY,
-        getNestNodes: () => []
-      } satisfies IPropertyReferences
+      return extractFromUnknownCall(node)
     }
 
     const fnNode = findFunction(context, node.callee)
@@ -475,17 +488,27 @@ export function definePropertyReferenceExtractor(
           return extractFromToRefs(node)
         }
       }
-      return {
-        hasProperty(_name, options) {
-          return Boolean(options && options.unknownCallAsAny)
-        },
-        allProperties: () => new Map(),
-        getNest: () => ANY,
-        getNestNodes: () => []
-      } satisfies IPropertyReferences
+      return extractFromUnknownCall(node)
     }
 
     return extractFromFunctionParam(fnNode, argIndex)
+  }
+
+  /**
+   * Extract the property references from a call whose callee cannot be traced.
+   */
+  function extractFromUnknownCall(node: CallExpression): IPropertyReferences {
+    return {
+      hasProperty(_name, options) {
+        return Boolean(
+          options?.unknownCallAsAny ||
+          (options?.externalCallAsAny && isExternalCallee(context, node.callee))
+        )
+      },
+      allProperties: () => new Map(),
+      getNest: () => ANY,
+      getNestNodes: () => []
+    } satisfies IPropertyReferences
   }
 
   /**
