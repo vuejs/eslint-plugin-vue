@@ -5,7 +5,7 @@
  */
 
 /*
- * This script updates `lib/configs/prettier.js`,
+ * This script updates `lib/configs/no-layout-rules.ts`,
  * and disables all layout rules
  */
 

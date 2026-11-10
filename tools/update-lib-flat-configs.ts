@@ -5,7 +5,7 @@
  */
 
 /*
-This script updates `lib/configs/flat/*.js` files from rule's meta data.
+This script updates `lib/configs/flat/*.ts` files from rule's meta data.
 */
 
 import fs from 'node:fs'

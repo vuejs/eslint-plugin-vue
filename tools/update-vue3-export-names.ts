@@ -109,10 +109,8 @@ function* extractNamesFromPattern(
     }
     case 'ObjectPattern': {
       for (const prop of node.properties) {
-        if (prop.type === 'Property') {
-          if (prop.key.type === 'Identifier') {
-            yield prop.key.name
-          }
+        if (prop.type === 'Property' && prop.key.type === 'Identifier') {
+          yield prop.key.name
         } else if (prop.type === 'RestElement') {
           yield* extractNamesFromPattern(prop)
         }

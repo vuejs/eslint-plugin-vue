@@ -8,11 +8,6 @@ interface CompatData {
   __compat: { status: { deprecated: boolean } }
 }
 
-const DEPRECATED_HTML_ELEMENTS_PATH = path.resolve(
-  import.meta.dirname,
-  '../lib/utils/deprecated-html-elements.json'
-)
-
 main()
 
 async function main() {
@@ -33,6 +28,10 @@ async function main() {
   // Update deprecated-html-elements.json
   // ------------------------------------------------------------------------------
   function updateDeprecatedHTMLElements() {
+    const DEPRECATED_HTML_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/deprecated-html-elements.json'
+    )
     const elements = new Set<string>()
 
     // `:scope` never matches a `DocumentFragment`, so `obsoleteHtml` has to be
@@ -73,6 +72,10 @@ async function main() {
     const HTML_ELEMENTS_PATH = path.resolve(
       import.meta.dirname,
       '../lib/utils/html-elements.json'
+    )
+    const DEPRECATED_HTML_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/deprecated-html-elements.json'
     )
     const elements = new Set<string>()
     // Read the file only now, after `updateDeprecatedHTMLElements()` has rewritten it.

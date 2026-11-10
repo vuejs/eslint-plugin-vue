@@ -5,7 +5,7 @@
  */
 
 /*
-This script updates `lib/plugin.js` file from rule's meta data.
+This script updates `lib/plugin.ts` file from rule's meta data.
 */
 
 import fs from 'node:fs'
