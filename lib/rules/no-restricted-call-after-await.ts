@@ -6,7 +6,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { ReferenceTracker } from '@eslint-community/eslint-utils'
 import type { TYPES } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function safeRequireResolve(id: string) {
   try {
@@ -174,7 +174,7 @@ export default {
             return
           }
           const setupScope = setupScopes.get(scopeStack.scopeNode)
-          if (!setupScope || !utils.inRange(setupScope.range, node)) {
+          if (!setupScope || !utils.isInRange(setupScope.range, node)) {
             return
           }
           setupScope.afterAwait = true
@@ -187,7 +187,7 @@ export default {
           if (
             !setupScope ||
             !setupScope.afterAwait ||
-            !utils.inRange(setupScope.range, node)
+            !utils.isInRange(setupScope.range, node)
           ) {
             return
           }

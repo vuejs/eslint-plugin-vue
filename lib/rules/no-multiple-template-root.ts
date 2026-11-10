@@ -2,7 +2,7 @@
  * @fileoverview disallow adding multiple root nodes to the template
  * @author Przemyslaw Falowski (@przemkow)
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -46,8 +46,8 @@ export default {
 
         const reportComments = element.comments.filter(
           (comment) =>
-            utils.inRange(element, comment) &&
-            element.children.every((child) => !utils.inRange(child, comment))
+            utils.isInRange(element, comment) &&
+            element.children.every((child) => !utils.isInRange(child, comment))
         )
         if (disallowComments) {
           for (const comment of reportComments) {

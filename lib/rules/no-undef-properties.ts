@@ -3,7 +3,7 @@
  * @author Yosuke Ota
  */
 import type { IPropertyReferences } from '../utils/property-references.ts'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import reserved from '../utils/vue-reserved.json' with { type: 'json' }
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import { getStyleVariablesContext } from '../utils/style-variables/index.ts'

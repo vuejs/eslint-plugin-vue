@@ -2,7 +2,7 @@
  * @fileoverview Don't use this in a beforeRouteEnter method
  * @author Przemyslaw Jan Beigert
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

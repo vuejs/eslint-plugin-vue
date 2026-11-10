@@ -2,7 +2,7 @@
  * @author tyankatsu <https://github.com/tyankatsu0105>
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * check whether has attribute `src`
@@ -58,15 +58,14 @@ export default {
       return {}
     }
 
+    const blockNamesToCheck = new Set(['template', 'script', 'style'])
     const componentBlocks = documentFragment.children.filter(utils.isVElement)
 
     return {
       Program() {
         for (const componentBlock of componentBlocks) {
           if (
-            (componentBlock.name !== 'template' &&
-              componentBlock.name !== 'script' &&
-              componentBlock.name !== 'style') ||
+            !blockNamesToCheck.has(componentBlock.name) ||
             hasAttributeSrc(componentBlock) // https://vue-loader.vuejs.org/spec.html#src-imports
           ) {
             continue

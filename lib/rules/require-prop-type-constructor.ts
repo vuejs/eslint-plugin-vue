@@ -2,8 +2,8 @@
  * @fileoverview require prop type to be a constructor
  * @author Michał Sajnóg
  */
-import type { ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import type { ComponentProp } from '../utils/index.ts'
+import utils from '../utils/index.ts'
 
 const forbiddenTypes = new Set([
   'Literal',

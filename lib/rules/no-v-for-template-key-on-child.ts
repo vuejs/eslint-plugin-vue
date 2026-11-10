@@ -3,7 +3,7 @@
  * This rule is based on X_V_FOR_TEMPLATE_KEY_PLACEMENT error of Vue 3.
  * see https://github.com/vuejs/vue-next/blob/b0d01e9db9ffe5781cce5a2d62c8552db3d615b0/packages/compiler-core/src/errors.ts#L70
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Check whether the given attribute is using the variables which are defined by `v-for` directives.

@@ -2,7 +2,7 @@
  * @fileoverview Enforce new lines between multi-line properties in Vue components.
  * @author IWANABETHATGUY
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function isComma(node: Token) {
   return node.type === 'Punctuator' && node.value === ','

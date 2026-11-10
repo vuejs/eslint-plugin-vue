@@ -2,7 +2,7 @@
  * @author Flo Edelmann
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const allowedPropNames = new Set(['modelValue', 'model-value'])
 const allowedEventNames = new Set(['update:modelValue', 'update:model-value'])

@@ -80,11 +80,7 @@ tester.run('v-on-handler-style', rule, {
         <button @click="foo()" />
         <button @click="() => foo()" />
       </template>`,
-      output: `<template>
-        <button @click="foo" />
-        <button @click="foo" />
-        <button @click="foo" />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -92,14 +88,34 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 25,
           endLine: 3,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="foo" />
+        <button @click="() => foo()" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
           column: 25,
           endLine: 4,
-          endColumn: 36
+          endColumn: 36,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="foo()" />
+        <button @click="foo" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -110,25 +126,41 @@ tester.run('v-on-handler-style', rule, {
         <button @click="foo()" />
         <button @click="() => foo()" />
       </template>`,
-      output: `<template>
-        <button @click="foo" />
-        <button @click="foo" />
-        <button @click="foo" />
-      </template>`,
+      output: null,
       errors: [
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
           column: 25,
           endLine: 3,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="foo" />
+        <button @click="() => foo()" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
           column: 25,
           endLine: 4,
-          endColumn: 36
+          endColumn: 36,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="foo()" />
+        <button @click="foo" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -196,7 +228,7 @@ tester.run('v-on-handler-style', rule, {
     {
       filename: 'test.vue',
       code: '<template><div @click="foo( )" /></template>',
-      output: `<template><div @click="foo" /></template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -204,7 +236,13 @@ tester.run('v-on-handler-style', rule, {
           line: 1,
           column: 24,
           endLine: 1,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template><div @click="foo" /></template>`
+            }
+          ]
         }
       ]
     },
@@ -295,13 +333,7 @@ tester.run('v-on-handler-style', rule, {
         <button @click="{ fn(); }" />
         <button @click="{(fn());;;}" />
       </template>`,
-      output: `
-      <template>
-        <button @click="fn" />
-        <button @click="fn" />
-        <button @click="fn" />
-        <button @click="fn" />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -309,28 +341,76 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 25,
           endLine: 3,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="fn" />
+        <button @click="fn();;" />
+        <button @click="{ fn(); }" />
+        <button @click="{(fn());;;}" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
           column: 25,
           endLine: 4,
-          endColumn: 31
+          endColumn: 31,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="fn();" />
+        <button @click="fn" />
+        <button @click="{ fn(); }" />
+        <button @click="{(fn());;;}" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 5,
           column: 25,
           endLine: 5,
-          endColumn: 34
+          endColumn: 34,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="fn();" />
+        <button @click="fn();;" />
+        <button @click="fn" />
+        <button @click="{(fn());;;}" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 6,
           column: 25,
           endLine: 6,
-          endColumn: 36
+          endColumn: 36,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="fn();" />
+        <button @click="fn();;" />
+        <button @click="{ fn(); }" />
+        <button @click="fn" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -341,11 +421,7 @@ tester.run('v-on-handler-style', rule, {
         <div @click=" beforeSpace()" />
         <div @click='afterSpace() ' />
       </template>`,
-      output: `
-      <template>
-        <div @click="beforeSpace" />
-        <div @click='afterSpace' />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -353,14 +429,34 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 23,
           endLine: 3,
-          endColumn: 36
+          endColumn: 36,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <div @click="beforeSpace" />
+        <div @click='afterSpace() ' />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
           column: 22,
           endLine: 4,
-          endColumn: 34
+          endColumn: 34,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <div @click=" beforeSpace()" />
+        <div @click='afterSpace' />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -370,10 +466,7 @@ tester.run('v-on-handler-style', rule, {
       <template>
         <button @click=" &#x66;oo ( ) " />
       </template>`,
-      output: `
-      <template>
-        <button @click="&#x66;oo" />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -381,7 +474,16 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 26,
           endLine: 3,
-          endColumn: 38
+          endColumn: 38,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="&#x66;oo" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -444,6 +546,277 @@ tester.run('v-on-handler-style', rule, {
           column: 33,
           endLine: 2,
           endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="changeFunc()" />
+        <button @click="() => changeFunc()" />
+      </template>
+      <script setup>
+      import { changeFunc } from './utils'
+      </script>`,
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 37,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="changeFunc" />
+        <button @click="() => changeFunc()" />
+      </template>
+      <script setup>
+      import { changeFunc } from './utils'
+      </script>`
+            }
+          ]
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 43,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="changeFunc()" />
+        <button @click="changeFunc" />
+      </template>
+      <script setup>
+      import { changeFunc } from './utils'
+      </script>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="toggle()" />
+        <button @click="reset()" />
+      </template>
+      <script setup>
+      const { toggle } = useStore()
+      let reset = () => {}
+      </script>`,
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="toggle" />
+        <button @click="reset()" />
+      </template>
+      <script setup>
+      const { toggle } = useStore()
+      let reset = () => {}
+      </script>`
+            }
+          ]
+        },
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 32,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="toggle()" />
+        <button @click="reset" />
+      </template>
+      <script setup>
+      const { toggle } = useStore()
+      let reset = () => {}
+      </script>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template><button @click="toggle()" /></template>
+      <script>
+      export default {
+        setup() {
+          return { toggle: (isOpen) => {} }
+        }
+      }
+      </script>`,
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 2,
+          column: 33,
+          endLine: 2,
+          endColumn: 41,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template><button @click="toggle" /></template>
+      <script>
+      export default {
+        setup() {
+          return { toggle: (isOpen) => {} }
+        }
+      }
+      </script>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="toggle()" />
+        <button @click="() => toggle()" />
+        <button @click="(isOpen) => toggle(isOpen)" />
+      </template>
+      <script setup>
+      function toggle(isOpen) {}
+      </script>`,
+      output: `
+      <template>
+        <button @click="toggle()" />
+        <button @click="() => toggle()" />
+        <button @click="toggle" />
+      </template>
+      <script setup>
+      function toggle(isOpen) {}
+      </script>`,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="toggle" />
+        <button @click="() => toggle()" />
+        <button @click="(isOpen) => toggle(isOpen)" />
+      </template>
+      <script setup>
+      function toggle(isOpen) {}
+      </script>`
+            }
+          ]
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 39,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="toggle()" />
+        <button @click="toggle" />
+        <button @click="(isOpen) => toggle(isOpen)" />
+      </template>
+      <script setup>
+      function toggle(isOpen) {}
+      </script>`
+            }
+          ]
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 5,
+          column: 25,
+          endLine: 5,
+          endColumn: 51,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="foo()" />
+        <button @click="() => bar()" />
+        <button @click="(a) => baz(a)" />
+      </template>
+      <script setup>
+      function foo() {}
+      const bar = () => {}
+      const baz = function (a) {}
+      </script>`,
+      output: `
+      <template>
+        <button @click="foo" />
+        <button @click="bar" />
+        <button @click="baz" />
+      </template>
+      <script setup>
+      function foo() {}
+      const bar = () => {}
+      const baz = function (a) {}
+      </script>`,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 30,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 36,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 5,
+          column: 25,
+          endLine: 5,
+          endColumn: 38,
+          suggestions: []
         }
       ]
     },
@@ -519,7 +892,21 @@ tester.run('v-on-handler-style', rule, {
           line: 2,
           column: 33,
           endLine: 2,
-          endColumn: 38
+          endColumn: 38,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template><button @click="foo" /></template>
+      <script>
+      export default {
+        methods: {
+          foo(a) {}
+        }
+      }
+      </script>`
+            }
+          ]
         }
       ]
     },
@@ -548,21 +935,81 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 25,
           endLine: 3,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="foo" />
+        <button @click="bar()" />
+        <button @click="baz()" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo(a, b) {},
+          bar(...a) {},
+          baz(a = 42) {},
+        }
+      }
+      </script>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
           column: 25,
           endLine: 4,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="foo()" />
+        <button @click="bar" />
+        <button @click="baz()" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo(a, b) {},
+          bar(...a) {},
+          baz(a = 42) {},
+        }
+      }
+      </script>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 5,
           column: 25,
           endLine: 5,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="foo()" />
+        <button @click="bar()" />
+        <button @click="baz" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo(a, b) {},
+          bar(...a) {},
+          baz(a = 42) {},
+        }
+      }
+      </script>`
+            }
+          ]
         }
       ]
     },
@@ -591,21 +1038,81 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 25,
           endLine: 3,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="foo" />
+        <button @click="bar()" />
+        <button @click="baz()" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo: (a, b) => {},
+          bar: (...a) => {},
+          baz: (a = 42) => {},
+        }
+      }
+      </script>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
           column: 25,
           endLine: 4,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="foo()" />
+        <button @click="bar" />
+        <button @click="baz()" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo: (a, b) => {},
+          bar: (...a) => {},
+          baz: (a = 42) => {},
+        }
+      }
+      </script>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 5,
           column: 25,
           endLine: 5,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="foo()" />
+        <button @click="bar()" />
+        <button @click="baz" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo: (a, b) => {},
+          bar: (...a) => {},
+          baz: (a = 42) => {},
+        }
+      }
+      </script>`
+            }
+          ]
         }
       ]
     },
@@ -616,11 +1123,7 @@ tester.run('v-on-handler-style', rule, {
           <button @click="e()" />
         </template>
       </template>`,
-      output: `<template>
-        <template v-for="e in list">
-          <button @click="e" />
-        </template>
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -628,7 +1131,17 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 27,
           endLine: 3,
-          endColumn: 30
+          endColumn: 30,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <template v-for="e in list">
+          <button @click="e" />
+        </template>
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -812,11 +1325,7 @@ tester.run('v-on-handler-style', rule, {
         <button @click="(a, b) => foo(a, b)" />
         <button @click="() => { foo() }" />
       </template>`,
-      output: `<template>
-        <button @click="foo" />
-        <button @click="foo" />
-        <button @click="foo" />
-      </template>`,
+      output: null,
       options: [['method', 'inline']],
       errors: [
         {
@@ -824,21 +1333,51 @@ tester.run('v-on-handler-style', rule, {
           line: 2,
           column: 25,
           endLine: 2,
-          endColumn: 36
+          endColumn: 36,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="(a, b) => foo(a, b)" />
+        <button @click="() => { foo() }" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 3,
           column: 25,
           endLine: 3,
-          endColumn: 44
+          endColumn: 44,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <button @click="() => foo()" />
+        <button @click="foo" />
+        <button @click="() => { foo() }" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
           column: 25,
           endLine: 4,
-          endColumn: 40
+          endColumn: 40,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <button @click="() => foo()" />
+        <button @click="(a, b) => foo(a, b)" />
+        <button @click="foo" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -923,7 +1462,19 @@ tester.run('v-on-handler-style', rule, {
         }
       }
       </script>`,
-      output: `<template>
+      output: null,
+      options: [['method', 'inline']],
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 2,
+          column: 25,
+          endLine: 2,
+          endColumn: 44,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
         <button @click="foo" />
       </template>
       <script>
@@ -932,15 +1483,70 @@ tester.run('v-on-handler-style', rule, {
           foo
         }
       }
+      </script>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <MyButton @click="(a) => fn1(a)" />
+        <MyButton @click="(a, b) => fn2(a, b)" />
+        <MyButton @click="(a) => fn2(a)" />
+      </template>
+      <script setup>
+      function fn1(a) {}
+      function fn2(a, b) {}
+      </script>`,
+      output: `<template>
+        <MyButton @click="fn1" />
+        <MyButton @click="fn2" />
+        <MyButton @click="(a) => fn2(a)" />
+      </template>
+      <script setup>
+      function fn1(a) {}
+      function fn2(a, b) {}
       </script>`,
       options: [['method', 'inline']],
       errors: [
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 2,
-          column: 25,
+          column: 27,
           endLine: 2,
-          endColumn: 44
+          endColumn: 40,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 46,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 40,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <MyButton @click="(a) => fn1(a)" />
+        <MyButton @click="(a, b) => fn2(a, b)" />
+        <MyButton @click="fn2" />
+      </template>
+      <script setup>
+      function fn1(a) {}
+      function fn2(a, b) {}
+      </script>`
+            }
+          ]
         }
       ]
     },
@@ -1073,21 +1679,81 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 25,
           endLine: 3,
-          endColumn: 38
+          endColumn: 38,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="foo" />
+        <button @click="(a) => bar(a)" />
+        <button @click="(a, b) => baz(a, b)" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo(a, b) {},
+          bar(...a) {},
+          baz(a = 42) {},
+        }
+      }
+      </script>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
           column: 25,
           endLine: 4,
-          endColumn: 38
+          endColumn: 38,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="(a) => foo(a)" />
+        <button @click="bar" />
+        <button @click="(a, b) => baz(a, b)" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo(a, b) {},
+          bar(...a) {},
+          baz(a = 42) {},
+        }
+      }
+      </script>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 5,
           column: 25,
           endLine: 5,
-          endColumn: 44
+          endColumn: 44,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="(a) => foo(a)" />
+        <button @click="(a) => bar(a)" />
+        <button @click="baz" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo(a, b) {},
+          bar(...a) {},
+          baz(a = 42) {},
+        }
+      }
+      </script>`
+            }
+          ]
         }
       ]
     },
@@ -1116,21 +1782,81 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 25,
           endLine: 3,
-          endColumn: 38
+          endColumn: 38,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="foo" />
+        <button @click="(a) => bar(a)" />
+        <button @click="(a, b) => baz(a, b)" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo: (a, b) => {},
+          bar: (...a) => {},
+          baz: (a = 42) => {},
+        }
+      }
+      </script>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
           column: 25,
           endLine: 4,
-          endColumn: 38
+          endColumn: 38,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="(a) => foo(a)" />
+        <button @click="bar" />
+        <button @click="(a, b) => baz(a, b)" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo: (a, b) => {},
+          bar: (...a) => {},
+          baz: (a = 42) => {},
+        }
+      }
+      </script>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 5,
           column: 25,
           endLine: 5,
-          endColumn: 44
+          endColumn: 44,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `
+      <template>
+        <button @click="(a) => foo(a)" />
+        <button @click="(a) => bar(a)" />
+        <button @click="baz" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo: (a, b) => {},
+          bar: (...a) => {},
+          baz: (a = 42) => {},
+        }
+      }
+      </script>`
+            }
+          ]
         }
       ]
     },
@@ -1143,13 +1869,7 @@ tester.run('v-on-handler-style', rule, {
           <button @click="(a, b) => e(a, b)" />
         </template>
       </template>`,
-      output: `<template>
-        <template v-for="e in list">
-          <button @click="e" />
-          <button @click="e" />
-          <button @click="e" />
-        </template>
-      </template>`,
+      output: null,
       options: [['method', 'inline']],
       errors: [
         {
@@ -1157,21 +1877,57 @@ tester.run('v-on-handler-style', rule, {
           line: 3,
           column: 27,
           endLine: 3,
-          endColumn: 36
+          endColumn: 36,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <template v-for="e in list">
+          <button @click="e" />
+          <button @click="(a) => e(a)" />
+          <button @click="(a, b) => e(a, b)" />
+        </template>
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
           column: 27,
           endLine: 4,
-          endColumn: 38
+          endColumn: 38,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <template v-for="e in list">
+          <button @click="() => e()" />
+          <button @click="e" />
+          <button @click="(a, b) => e(a, b)" />
+        </template>
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 5,
           column: 27,
           endLine: 5,
-          endColumn: 44
+          endColumn: 44,
+          suggestions: [
+            {
+              messageId: 'replaceWithMethodHandler',
+              output: `<template>
+        <template v-for="e in list">
+          <button @click="() => e()" />
+          <button @click="(a) => e(a)" />
+          <button @click="e" />
+        </template>
+      </template>`
+            }
+          ]
         }
       ]
     },

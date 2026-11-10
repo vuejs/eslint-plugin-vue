@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import type { TSESTree } from '@typescript-eslint/types'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function getSlotsName(node: TSESTree.TypeElement): string | null {
   if (
@@ -101,7 +101,9 @@ export default {
 
         const slotsTypeHelper =
           slotsProperty.value.type === 'TSAsExpression' &&
-          slotsProperty.value.typeAnnotation?.typeName.name === 'SlotsType' &&
+          slotsProperty.value.typeAnnotation?.type === 'TSTypeReference' &&
+          slotsProperty.value.typeAnnotation.typeName.type === 'Identifier' &&
+          slotsProperty.value.typeAnnotation.typeName.name === 'SlotsType' &&
           slotsProperty.value.typeAnnotation
         if (!slotsTypeHelper) return
 

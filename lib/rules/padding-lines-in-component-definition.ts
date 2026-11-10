@@ -2,8 +2,8 @@
  * @author ItMaga <https://github.com/ItMaga>
  * See LICENSE file in root directory for full license.
  */
-import type { ComponentEmit, ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import type { ComponentEmit, ComponentProp } from '../utils/index.ts'
+import utils from '../utils/index.ts'
 import { isCommentToken } from '@eslint-community/eslint-utils'
 
 const AvailablePaddingOptions = {
@@ -64,10 +64,8 @@ function shouldGroupSingleLineProperties(
   nextProperty: Property | SpreadElement,
   isGroupingEnabled: boolean
 ): boolean {
-  const isSingleCurrentProperty =
-    currentProperty.loc.start.line === currentProperty.loc.end.line
-  const isSingleNextProperty =
-    nextProperty.loc.start.line === nextProperty.loc.end.line
+  const isSingleCurrentProperty = utils.isSingleLine(currentProperty)
+  const isSingleNextProperty = utils.isSingleLine(nextProperty)
 
   return isSingleCurrentProperty && isSingleNextProperty && isGroupingEnabled
 }

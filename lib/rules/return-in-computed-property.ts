@@ -3,8 +3,8 @@
  * @author Armano
  */
 import { ReferenceTracker } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
-import type { ComponentComputedProperty } from '../utils/index.js'
+import utils from '../utils/index.ts'
+import type { ComponentComputedProperty } from '../utils/index.ts'
 
 export default {
   meta: {

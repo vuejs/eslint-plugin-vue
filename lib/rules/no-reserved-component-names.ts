@@ -2,7 +2,7 @@
  * @fileoverview disallow the use of reserved names in component definitions
  * @author Jake Hassel <https://github.com/shadskii>
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { capitalize, pascalCase } from '../utils/casing.ts'
 import htmlElements from '../utils/html-elements.json' with { type: 'json' }
 import deprecatedHtmlElements from '../utils/deprecated-html-elements.json' with { type: 'json' }
@@ -21,17 +21,6 @@ const kebabCaseElements = [
 
 function isLowercase(word: string) {
   return /^[a-z]*$/.test(word)
-}
-
-function canVerify(
-  node: Expression | SpreadElement
-): node is Literal | TemplateLiteral {
-  return (
-    node.type === 'Literal' ||
-    (node.type === 'TemplateLiteral' &&
-      node.expressions.length === 0 &&
-      node.quasis.length === 1)
-  )
 }
 
 const RESERVED_NAMES_IN_HTML = new Set<string>(htmlElements)
@@ -115,14 +104,8 @@ export default {
     }
 
     function reportIfInvalid(node: Literal | TemplateLiteral) {
-      let name
-      if (node.type === 'TemplateLiteral') {
-        const quasis = node.quasis[0]
-        name = quasis.value.cooked
-      } else {
-        name = String(node.value)
-      }
-      if (isReserved(name)) {
+      const name = utils.getStringLiteralValue(node)
+      if (name !== null && isReserved(name)) {
         report(node, name)
       }
     }
@@ -145,7 +128,7 @@ export default {
 
         const argument = node.arguments[0]
 
-        if (canVerify(argument)) {
+        if (utils.isStringLiteral(argument)) {
           reportIfInvalid(argument)
         }
       }),
@@ -159,16 +142,17 @@ export default {
 
         const node = utils.findProperty(obj, 'name')
 
-        if (!node || !canVerify(node.value)) return
+        if (!node || !utils.isStringLiteral(node.value)) return
         reportIfInvalid(node.value)
       }),
       utils.defineScriptSetupVisitor(context, {
         onDefineOptionsEnter(node) {
-          if (node.arguments.length === 0) return
           const define = node.arguments[0]
-          if (define.type !== 'ObjectExpression') return
+          if (define?.type !== 'ObjectExpression') return
+
           const nameNode = utils.findProperty(define, 'name')
-          if (!nameNode || !canVerify(nameNode.value)) return
+          if (!nameNode || !utils.isStringLiteral(nameNode.value)) return
+
           reportIfInvalid(nameNode.value)
         }
       })

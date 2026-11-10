@@ -301,7 +301,7 @@ For example:
 | [vue/template-wrapper-directive-style] | enforce or disallow `v-if`, `v-else-if`, `v-else` and `v-for` on `<template>` wrappers |  | :lipstick: |
 | [vue/v-for-delimiter-style] | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-if-else-key] | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
-| [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
+| [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench::bulb: | :hammer: |
 
 </rules-table>
 
