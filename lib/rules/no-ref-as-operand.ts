@@ -26,8 +26,8 @@ function isRefInit(
 }
 
 /**
- * A nullish fallback can pass a ref through unchanged. Only unwrap it when
- * the surrounding expression actually consumes its value as an operand.
+ * Checks whether the result of the given logical expression is used as an operand,
+ * e.g. `if (a && b)` or `!(a || b)`, where any ref it evaluates to would be a mistake.
  */
 function isLogicalExpressionUsedAsOperand(node: LogicalExpression): boolean {
   let target: Expression = node
@@ -291,14 +291,14 @@ export default {
           }
           reportIfRefWrapped(node)
         },
-        // refValue || other, refValue && other. ignore: other || refValue
+        // refValue || other, refValue && other, if (other && refValue)
+        // ignore: var foo = other || refValue, var bar = refValue ?? other
         'LogicalExpression>:matches(Identifier, MemberExpression)'(
           node: (Identifier | MemberExpression) & { parent: LogicalExpression }
         ) {
           if (
-            node.parent.left !== node ||
-            (node.parent.operator === '??' &&
-              !isLogicalExpressionUsedAsOperand(node.parent))
+            (node.parent.left !== node || node.parent.operator === '??') &&
+            !isLogicalExpressionUsedAsOperand(node.parent)
           ) {
             return
           }
@@ -365,8 +365,7 @@ export default {
         'LogicalExpression > MemberExpression'(node: MemberExpression) {
           if (
             node.parent.type === 'LogicalExpression' &&
-            node.parent.left === node &&
-            (node.parent.operator !== '??' ||
+            ((node.parent.left === node && node.parent.operator !== '??') ||
               isLogicalExpressionUsedAsOperand(node.parent))
           ) {
             reportTemplateRef(node)

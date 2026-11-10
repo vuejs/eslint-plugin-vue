@@ -112,6 +112,18 @@ tester.run('no-ref-as-operand', rule, {
     `,
     `
     import { ref } from 'vue'
+    const foo = ref(true)
+    var a = x ? other || foo : other && foo
+    var b = (other ?? foo).value
+    if ((other || foo).value) {}
+    bar(other || foo)
+    tag\`\${other || foo}\`
+
+    let baz = ref(true)
+    if (other && baz) {}
+    `,
+    `
+    import { ref } from 'vue'
     let count = not_ref(0)
 
     count++
@@ -347,6 +359,8 @@ tester.run('no-ref-as-operand', rule, {
     ...[
       ':loading="mutation.isLoading.value"',
       ':loading="mutation.isLoading ?? fallback"',
+      ':loading="ready && mutation.isLoading"',
+      ':loading="ready ?? mutation.isLoading"',
       ':loading="(mutation.isLoading ?? fallback).value"',
       ':loading="isLoading"',
       ':loading="!!isLoading"',
@@ -493,6 +507,8 @@ tester.run('no-ref-as-operand', rule, {
       ['state.count += 1', 'state.count.value += 1'],
       ['state.count + 1', 'state.count.value + 1'],
       ['state.count && other', 'state.count.value && other'],
+      ['if (other && state.count) {}', 'if (other && state.count.value) {}'],
+      ['!(other ?? state.count)', '!(other ?? state.count.value)'],
       ['`count: ${state.count}`', '`count: ${state.count.value}`'],
       ['state.count.other', 'state.count.value.other']
     ].map(([statement, fixed]) => {
@@ -559,6 +575,16 @@ tester.run('no-ref-as-operand', rule, {
       [
         '!!(mutation.isLoading ?? fallback)',
         '!!(mutation.isLoading.value ?? fallback)',
+        'mutation.isLoading'
+      ],
+      [
+        '!!(ready && mutation.isLoading)',
+        '!!(ready && mutation.isLoading.value)',
+        'mutation.isLoading'
+      ],
+      [
+        '!!(ready ?? mutation.isLoading)',
+        '!!(ready ?? mutation.isLoading.value)',
         'mutation.isLoading'
       ],
       [
@@ -1037,6 +1063,81 @@ tester.run('no-ref-as-operand', rule, {
           column: 15,
           endLine: 5,
           endColumn: 18
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+      const foo = ref(true)
+      if (other && foo) {}
+      if (a || (b && foo)) {}
+      var c = !(other ?? foo)
+      var d = other || foo ? x : y
+      switch (other || foo) {}
+      var e = (other || foo) + 1
+      var f = \`\${other || foo}\`
+      `,
+      output: `
+      import { ref } from 'vue'
+      const foo = ref(true)
+      if (other && foo.value) {}
+      if (a || (b && foo.value)) {}
+      var c = !(other ?? foo.value)
+      var d = other || foo.value ? x : y
+      switch (other || foo.value) {}
+      var e = (other || foo.value) + 1
+      var f = \`\${other || foo.value}\`
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          line: 4,
+          column: 20,
+          endLine: 4,
+          endColumn: 23
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 25
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 6,
+          column: 26,
+          endLine: 6,
+          endColumn: 29
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 7,
+          column: 24,
+          endLine: 7,
+          endColumn: 27
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 8,
+          column: 24,
+          endLine: 8,
+          endColumn: 27
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 9,
+          column: 25,
+          endLine: 9,
+          endColumn: 28
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 10,
+          column: 27,
+          endLine: 10,
+          endColumn: 30
         }
       ]
     },

@@ -1,6 +1,4 @@
-'use strict'
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -16,14 +14,10 @@ module.exports = {
     languages: ['js/js']
   },
 
-  /** @param {import('eslint').Rule.RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return {
-      /**
-       * @param {import("../typings/eslint-plugin-vue/util-types/ast").Literal} node
-       */
       'CallExpression > Literal.arguments[value=/^(?:eslint-utils|regexpp)$/u]'(
-        node
+        node: Literal & { value: string }
       ) {
         context.report({
           node,
