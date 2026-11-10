@@ -21,6 +21,7 @@ export default {
     ],
     messages: {
       hasArg: 'Use type-based declaration instead of runtime declaration.',
+      hasNoTypeArg: 'Use type-based declaration with a type argument.',
       hasTypeArg: 'Use runtime declaration instead of type-based declaration.'
     }
   },
@@ -63,7 +64,7 @@ export default {
             if (!model.typeNode) {
               context.report({
                 node,
-                messageId: 'hasArg'
+                messageId: model.options ? 'hasArg' : 'hasNoTypeArg'
               })
             }
             break

@@ -205,11 +205,28 @@ tester.run('define-props-declaration', rule, {
       `,
       errors: [
         {
-          messageId: 'hasArg',
+          messageId: 'hasNoTypeArg',
           line: 3,
           column: 21,
           endLine: 3,
           endColumn: 34
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const namedModel = defineModel('count')
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'hasNoTypeArg',
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 46
         }
       ]
     },
