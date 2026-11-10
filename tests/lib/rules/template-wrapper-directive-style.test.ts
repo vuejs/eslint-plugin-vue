@@ -137,6 +137,42 @@ tester.run('template-wrapper-directive-style', rule, {
       filename: 'test.vue',
       code: '<template><template v-if="a"></template></template>',
       options: [{ style: 'never' }]
+    },
+    // "never": the only element already has a checked directive, so the wrapper cannot be removed
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <template v-for="todo in todos" :key="todo.id">
+          <li v-if="!todo.isComplete">{{ todo.name }}</li>
+        </template>
+      </template>`,
+      options: [{ style: 'never' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-if="a"><li v-for="x in xs" :key="x" /></template></template>',
+      options: [{ style: 'never' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-if="a" /><template v-else><p v-if="b" /></template></template>',
+      options: [{ style: 'never' }]
+    },
+    // "ignoreRootElements": Vue 2 does not allow `<template>` as the component root
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-if="loaded">...</div>
+        <div v-else>Loading...</div>
+      </template>`,
+      options: [{ ignoreRootElements: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyItem v-for="item in items" :key="item.id" /></template>',
+      options: [{ style: 'always', ignoreRootElements: true }]
     }
   ],
   invalid: [
@@ -154,19 +190,13 @@ tester.run('template-wrapper-directive-style', rule, {
         }
       ]
     },
-    // "never": nested wrappers are both reported
+    // "never": with nested wrappers only the inner one is reported, because the outer one
+    // wraps an element that already has `v-if`
     {
       filename: 'test.vue',
       code: '<template><template v-if="a"><template v-if="b"><div /></template></template></template>',
       options: [{ style: 'never' }],
       errors: [
-        {
-          messageId: 'disallowTemplate',
-          line: 1,
-          column: 21,
-          endLine: 1,
-          endColumn: 29
-        },
         {
           messageId: 'disallowTemplate',
           line: 1,
@@ -229,6 +259,36 @@ tester.run('template-wrapper-directive-style', rule, {
           column: 28,
           endLine: 1,
           endColumn: 39
+        }
+      ]
+    },
+    // "ignoreRootElements": elements below the root are still reported
+    {
+      filename: 'test.vue',
+      code: '<template><div v-if="a"><p v-if="b" /></div></template>',
+      options: [{ ignoreRootElements: true }],
+      errors: [
+        {
+          messageId: 'requireTemplate',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
+    },
+    // "ignoreRootElements" is false by default
+    {
+      filename: 'test.vue',
+      code: '<template><div v-if="a" /></template>',
+      options: [{ ignoreRootElements: false }],
+      errors: [
+        {
+          messageId: 'requireTemplate',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },

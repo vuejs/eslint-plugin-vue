@@ -298,7 +298,7 @@ For example:
 | [vue/slot-name-casing] | enforce specific casing for slot names |  | :hammer: |
 | [vue/sort-keys] | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order] | enforce static class names order | :wrench: | :hammer: |
-| [vue/template-wrapper-directive-style] | enforce or disallow `v-if`, `v-else-if`, `v-else` and `v-for` on `<template>` wrappers |  | :lipstick: |
+| [vue/template-wrapper-directive-style] | enforce or disallow `v-if`, `v-else-if`, `v-else` and `v-for` on `<template>` wrappers |  | :hammer: |
 | [vue/v-for-delimiter-style] | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-if-else-key] | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
 | [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench::bulb: | :hammer: |

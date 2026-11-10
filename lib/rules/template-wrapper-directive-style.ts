@@ -2,7 +2,7 @@
  * @author Dominik Ivanov
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /** Directives whose placement this rule checks. */
 const CHECKED_DIRECTIVES = new Set(['if', 'else-if', 'else', 'for'])
@@ -13,8 +13,6 @@ const CHECKED_DIRECTIVES = new Set(['if', 'else-if', 'else', 'for'])
  * Same list as `vue/no-lone-template` (`slot-scope` and `scope` are deprecated, but still valid).
  */
 const SLOT_DIRECTIVES = new Set(['slot', 'slot-scope', 'scope'])
-
-type Style = 'always' | 'never'
 
 function isSlotTemplate(element: VElement): boolean {
   return element.startTag.attributes.some((attr) => {
@@ -35,20 +33,23 @@ function isSlotTemplate(element: VElement): boolean {
 }
 
 /**
- * Whether the directives of a `<template>` wrapper could be moved to its content, which is the case
- * only when it contains exactly one element and nothing else (whitespace aside). With several
- * elements, text or interpolations there is no single element to move the directives to.
+ * The only element inside a `<template>` wrapper, or `null` when it contains anything else
+ * (whitespace aside). With several elements, text or interpolations there is no single element
+ * to move the directives to.
  */
-function hasSingleElementChild(element: VElement): boolean {
-  let elements = 0
+function getSingleElementChild(element: VElement): VElement | null {
+  let single: VElement | null = null
   for (const child of element.children) {
     if (child.type === 'VElement') {
-      elements++
+      if (single) {
+        return null
+      }
+      single = child
     } else if (child.type === 'VExpressionContainer' || child.value.trim()) {
-      return false
+      return null
     }
   }
-  return elements === 1
+  return single
 }
 
 /** The checked directives of an element, in source order. */
@@ -61,7 +62,7 @@ function getCheckedDirectives(element: VElement): VDirective[] {
 
 export default {
   meta: {
-    type: 'layout',
+    type: 'suggestion',
     docs: {
       description:
         'enforce or disallow `v-if`, `v-else-if`, `v-else` and `v-for` on `<template>` wrappers',
@@ -75,6 +76,9 @@ export default {
         properties: {
           style: {
             enum: ['always', 'never']
+          },
+          ignoreRootElements: {
+            type: 'boolean'
           }
         },
         additionalProperties: false
@@ -88,7 +92,10 @@ export default {
     }
   },
   create(context: RuleContext) {
+    type Style = 'always' | 'never'
     const style: Style = context.options[0]?.style ?? 'always'
+    const shouldIgnoreRootElements: boolean =
+      context.options[0]?.ignoreRootElements ?? false
 
     return utils.defineTemplateBodyVisitor(context, {
       VElement(element: VElement) {
@@ -105,6 +112,14 @@ export default {
         const isTemplate = element.name === 'template'
 
         if (style === 'always' && !isTemplate) {
+          // Vue 2 does not allow `<template>` as the component root, so root elements
+          // cannot be wrapped there.
+          if (
+            shouldIgnoreRootElements &&
+            element.parent.parent.type !== 'VElement'
+          ) {
+            return
+          }
           for (const directive of directives) {
             context.report({
               node: directive,
@@ -118,12 +133,14 @@ export default {
           return
         }
 
-        if (
-          style === 'never' &&
-          isTemplate &&
-          !isSlotTemplate(element) &&
-          hasSingleElementChild(element)
-        ) {
+        if (style !== 'never' || !isTemplate || isSlotTemplate(element)) {
+          return
+        }
+
+        // The directives can only be moved to a single element that has none of them yet,
+        // e.g. not in `<template v-for="..."><li v-if="..." /></template>`.
+        const child = getSingleElementChild(element)
+        if (child && getCheckedDirectives(child).length === 0) {
           for (const directive of directives) {
             context.report({
               node: directive,

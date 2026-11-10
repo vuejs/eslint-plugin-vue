@@ -52,13 +52,19 @@ child is not allowed inside `<Transition>`; Vue reports that error on its own.
 
 ```json
 {
-  "vue/template-wrapper-directive-style": ["error", { "style": "always" }]
+  "vue/template-wrapper-directive-style": [
+    "error",
+    { "style": "always", "ignoreRootElements": false }
+  ]
 }
 ```
 
 - `style` ... `"always"` (default) or `"never"`.
   - `"always"` ... requires the directives to be on a `<template>` wrapper.
   - `"never"` ... disallows the directives on a `<template>` wrapper.
+- `ignoreRootElements` ... if `true`, the directives on the root elements of the template are not reported
+  with `"always"`. Default is `false`. Use it with Vue.js 2, which does not allow `<template>` as the component
+  root.
 
 ### `{ "style": "never" }`
 
@@ -77,6 +83,9 @@ child is not allowed inside `<Transition>`; Vue reports that error on its own.
     <p>Loading…</p>
   </template>
   <template v-if="user">Hello {{ user.name }}</template>
+  <template v-for="todo in todos" :key="todo.id">
+    <li v-if="!todo.isComplete">{{ todo.name }}</li>
+  </template>
 
   <!-- ✗ BAD -->
   <template v-if="loading">
@@ -91,8 +100,28 @@ child is not allowed inside `<Transition>`; Vue reports that error on its own.
 </eslint-code-block>
 
 With `"never"`, a `<template>` wrapper is only reported when it contains exactly one element and nothing
-else, because only then can the directives be moved to that element. Wrappers with several elements,
-text or interpolations are not reported.
+else, and that element has no `v-if`, `v-else-if`, `v-else` or `v-for` of its own, because only then can
+the directives be moved to that element. Wrappers with several elements, text or interpolations are not
+reported, and neither is the pattern recommended for
+[`v-for` with `v-if`](https://vuejs.org/guide/essentials/list.html#v-for-with-v-if), which
+[vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) would otherwise disallow.
+
+### `{ "ignoreRootElements": true }`
+
+<eslint-code-block :rules="{'vue/template-wrapper-directive-style': ['error', { ignoreRootElements: true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD: root elements are ignored -->
+  <div v-if="loaded">
+    <!-- ✗ BAD -->
+    <Item v-for="item in items" :key="item.id" :item="item" />
+  </div>
+  <div v-else>Loading...</div>
+</template>
+```
+
+</eslint-code-block>
 
 ## :couple: Related Rules
 
