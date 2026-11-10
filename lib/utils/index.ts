@@ -148,38 +148,20 @@ export function getCoreRule(name: string): RuleModule | null {
 /**
  * Get ESLint Stylistic rule implementation from the rule name
  */
-function getStylisticRule(
-  name: string,
-  preferModule?:
-    | '@stylistic/eslint-plugin'
-    | '@stylistic/eslint-plugin-ts'
-    | '@stylistic/eslint-plugin-js'
-): RuleModule | null {
-  if (!preferModule) {
-    const cached = stylisticRuleMap.get(name)
-    if (cached) {
-      return cached
-    }
+function getStylisticRule(name: string): RuleModule | null {
+  const cached = stylisticRuleMap.get(name)
+  if (cached) {
+    return cached
   }
-  const stylisticPluginNames = [
-    '@stylistic/eslint-plugin',
-    '@stylistic/eslint-plugin-ts',
-    '@stylistic/eslint-plugin-js'
-  ]
-  if (preferModule) {
-    stylisticPluginNames.unshift(preferModule)
-  }
-  for (const stylisticPluginName of stylisticPluginNames) {
-    try {
-      const plugin = nodeModule.createRequire(
-        `${process.cwd()}/__placeholder__.js`
-      )(stylisticPluginName)
-      const rule = plugin?.rules?.[name]
-      if (!preferModule) stylisticRuleMap.set(name, rule)
-      return rule
-    } catch {
-      // ignore
-    }
+  try {
+    const plugin = nodeModule.createRequire(
+      `${process.cwd()}/__placeholder__.js`
+    )('@stylistic/eslint-plugin')
+    const rule = plugin?.rules?.[name]
+    stylisticRuleMap.set(name, rule)
+    return rule
+  } catch {
+    // ignore
   }
   return null
 }
@@ -525,18 +507,10 @@ function wrapStylisticOrCoreRule(
     }
   }
   const rule = wrapRuleModule(baseRule, vueRuleName, options)
-  const jsRule = getStylisticRule(
-    stylisticRuleName,
-    '@stylistic/eslint-plugin-js'
-  )
-  const description = stylisticRule
-    ? `${jsRule?.meta.docs.description} in \`<template>\``
-    : rule.meta.docs.description
   const meta = {
     ...rule.meta,
     docs: {
       ...rule.meta.docs,
-      description,
       extensionSource: {
         url: baseRule.meta.docs.url,
         name: stylisticRule ? 'ESLint Stylistic' : 'ESLint core'
