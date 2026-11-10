@@ -1875,7 +1875,7 @@ const utils = {
       n = skipChainExpression(n.object)
     }
 
-    return [n, ...nodes.reverse()]
+    return [n, ...nodes.toReversed()]
   },
   /**
    * return two string editdistance
