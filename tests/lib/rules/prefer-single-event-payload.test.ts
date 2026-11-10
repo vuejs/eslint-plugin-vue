@@ -2,7 +2,7 @@
  * @author Flo Edelmann
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/prefer-single-event-payload'
 import vueEslintParser from 'vue-eslint-parser'
 import tsParser from '@typescript-eslint/parser'

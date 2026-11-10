@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  */
 import semver from 'semver'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/comma-style'
 import { eslintStylisticVersion } from '../../test-utils/eslint-stylistic'
 import vueEslintParser from 'vue-eslint-parser'

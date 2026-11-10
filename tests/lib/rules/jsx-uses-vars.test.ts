@@ -2,7 +2,7 @@
  * @fileoverview Prevent variables used in JSX to be marked as unused
  * @author Michał Sajnóg
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/jsx-uses-vars'
 import { getCoreRule } from '../../../lib/utils'
 

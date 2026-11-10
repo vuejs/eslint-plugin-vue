@@ -99,7 +99,6 @@
     "env-cmd": "^11.0.0",
     "esbuild": "^0.28.1",
     "eslint": "^10.13.0",
-    "eslint-compat-utils": "^0.6.5",
     "eslint-config-flat-gitignore": "^2.3.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-eslint-plugin": "^7.4.1",

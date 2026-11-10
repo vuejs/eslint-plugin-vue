@@ -4,7 +4,7 @@
  */
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-deprecated-events-api'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 
 const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2020,

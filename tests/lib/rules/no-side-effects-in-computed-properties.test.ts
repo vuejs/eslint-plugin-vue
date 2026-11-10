@@ -3,7 +3,7 @@
  * @author Michał Sajnóg
  */
 import rule from '../../../lib/rules/no-side-effects-in-computed-properties'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import vueEslintParser from 'vue-eslint-parser'
 import tsEslintParser from '@typescript-eslint/parser'
 

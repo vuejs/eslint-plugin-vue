@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import vueESLintParser from 'vue-eslint-parser'
-import { RuleTester } from '../../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../../lib/rules/no-unsupported-features'
 import { optionsBuilder } from './utils.ts'
 

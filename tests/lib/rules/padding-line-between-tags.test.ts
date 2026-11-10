@@ -2,7 +2,7 @@
  * @author dev1437
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/padding-line-between-tags'
 import vueEslintParser from 'vue-eslint-parser'
 

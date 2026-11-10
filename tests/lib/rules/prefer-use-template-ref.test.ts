@@ -2,7 +2,7 @@
  * @author Thomasan1999
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/prefer-use-template-ref'
 import vueEslintParser from 'vue-eslint-parser'
 

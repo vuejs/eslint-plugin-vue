@@ -2,8 +2,7 @@
  * @author Toru Nagashima <https://github.com/mysticatea>
  * See LICENSE file in root directory for full license.
  */
-import type { Linter as ESLintLinter } from 'eslint'
-import { Linter } from '../eslint-compat'
+import { Linter } from 'eslint'
 import { rules } from '../..'
 import assert from 'node:assert'
 
@@ -15,7 +14,7 @@ describe("Don't crash even if without vue-eslint-parser.", () => {
 
     it(ruleId, () => {
       const linter = new Linter()
-      const config: ESLintLinter.Config = {
+      const config: Linter.Config = {
         files: ['*.vue', '*.js'],
         languageOptions: {
           ecmaVersion: 2015,

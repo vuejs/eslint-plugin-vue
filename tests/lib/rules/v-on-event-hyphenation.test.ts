@@ -1,4 +1,4 @@
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/v-on-event-hyphenation'
 import vueEslintParser from 'vue-eslint-parser'
 

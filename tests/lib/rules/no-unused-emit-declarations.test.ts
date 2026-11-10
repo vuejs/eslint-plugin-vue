@@ -2,7 +2,7 @@
  * @author ItMaga
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-unused-emit-declarations'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'
