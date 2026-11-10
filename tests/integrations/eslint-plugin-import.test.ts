@@ -15,7 +15,7 @@ let eslintNodeVersion = ''
 
 describe('Integration with eslint-plugin-import', () => {
   beforeAll(() => {
-    execSync('npm i', { cwd: PLUGIN_DIR, stdio: 'inherit' })
+    execSync('npm i -f', { cwd: PLUGIN_DIR, stdio: 'inherit' })
     const eslintPackagePath = path.join(
       PLUGIN_DIR,
       'node_modules/eslint/package.json'

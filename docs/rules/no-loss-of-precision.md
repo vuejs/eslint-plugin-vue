@@ -12,10 +12,6 @@ since: v8.0.0
 
 This rule is the same rule as core [no-loss-of-precision] rule but it applies to the expressions in `<template>`.
 
-:::warning
-You must be using ESLint v7.1.0 or later to use this rule.
-:::
-
 ## :books: Further Reading
 
 - [no-loss-of-precision]

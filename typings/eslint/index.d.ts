@@ -333,36 +333,11 @@ export namespace Rule {
     id: string
     options: ESLintRule.RuleContext['options']
     settings: { [name: string]: any }
-    /** @deprecated removed in ESLint v10 */
-    parserPath?: string
-    /** @deprecated removed in ESLint v10 */
-    parserOptions?: ESLintLinter.ParserOptions
-    /** For flat config  */
-    languageOptions?: ESLintLinter.FlatConfig['languageOptions']
-    /** @deprecated removed in ESLint v9 */
-    parserServices?: parserServices.ParserServices
-
-    /** @deprecated removed in ESLint v9 */
-    getAncestors?(): VAST.ESNode[]
-    /** @deprecated removed in ESLint v9 */
-    getDeclaredVariables?(node: VAST.ESNode): Scope.Variable[]
-    /** @deprecated removed in ESLint v10 */
-    getFilename?(): string
+    languageOptions: ESLintLinter.LanguageOptions
     filename: string
-    /** @deprecated removed in ESLint v10 */
-    getPhysicalFilename?(): string
     physicalFilename: string
-    /** @deprecated removed in ESLint v9 */
-    getScope?(): Scope.Scope
-    /** @deprecated removed in ESLint v10 */
-    getSourceCode?(): SourceCode
     sourceCode: SourceCode
-    /** @deprecated removed in ESLint v9 */
-    markVariableAsUsed?(name: string): boolean
     report(descriptor: ReportDescriptor): void
-
-    /** @deprecated removed in ESLint v10 */
-    getCwd?: () => string
     cwd: string
   }
 

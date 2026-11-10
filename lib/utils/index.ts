@@ -4,7 +4,6 @@
  * See LICENSE file in root directory for full license.
  */
 import type { Rule, Scope } from 'eslint'
-import { Linter } from 'eslint'
 import { builtinRules } from 'eslint/use-at-your-own-risk'
 import nodeModule from 'node:module'
 import path from 'node:path'
@@ -139,20 +138,11 @@ const { traverseNodes, getFallbackKeys, NS } = vueEslintParser.AST
 
 const componentComments: WeakMap<RuleContext, Token[]> = new WeakMap()
 
-let coreRuleMap: Map<string, RuleModule> | null = null
 const stylisticRuleMap: Map<string, RuleModule> = new Map()
 /**
  * Get the core rule implementation from the rule name
  */
 export function getCoreRule(name: string): RuleModule | null {
-  try {
-    // eslint-disable-next-line unicorn/no-top-level-assignment-in-function -- lazily cache the core rule map
-    coreRuleMap ||= new Linter().getRules()
-    return coreRuleMap.get(name) || null
-  } catch {
-    // getRules() is no longer available in flat config.
-  }
-
   return (builtinRules.get(name) || null) as any
 }
 /**
@@ -311,11 +301,9 @@ function wrapContextToOverrideTokenMethods(
       return cache
     }
     const programNode = eslintSourceCode.ast
-    const parserOptions =
-      context.languageOptions?.parserOptions ?? context.parserOptions ?? {}
+    const parserOptions = context.languageOptions.parserOptions ?? {}
     const ecmaFeatures = parserOptions.ecmaFeatures || {}
-    const ecmaVersion =
-      context.languageOptions?.ecmaVersion ?? parserOptions.ecmaVersion ?? 2020
+    const ecmaVersion = context.languageOptions.ecmaVersion
     const sourceType = programNode.sourceType
     try {
       const eslintScope = nodeModule.createRequire(require.resolve('eslint'))(
@@ -347,13 +335,9 @@ function wrapContextToOverrideTokenMethods(
     return null
   }
   return newProxy(context, {
-    getSourceCode() {
-      return sourceCode
-    },
     get sourceCode() {
       return sourceCode
-    },
-    getDeclaredVariables
+    }
   })
 
   function getDeclaredVariables(node: ESNode): Variable[] {

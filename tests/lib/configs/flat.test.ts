@@ -3,10 +3,9 @@
  * @author 唯然<weiran.zsd@outlook.com>
  */
 
-import { Linter } from 'eslint'
+import { ESLint, Linter } from 'eslint'
 import plugin from '../../../dist'
 import { strict as assert } from 'node:assert'
-import { FlatESLint } from '../../eslint-compat'
 
 function mergeConfig(configs: Linter.FlatConfig[]): Linter.FlatConfig {
   let config: Linter.FlatConfig = { rules: {}, plugins: {} }
@@ -223,9 +222,8 @@ describe('flat configs', () => {
   })
 
   it('should work the suppress comments with base config', async () => {
-    if (!FlatESLint) return
     const base = plugin.configs['flat/base']
-    const eslint = new FlatESLint({
+    const eslint = new ESLint({
       overrideConfigFile: true,
       overrideConfig: [
         ...base,
@@ -248,9 +246,8 @@ describe('flat configs', () => {
   })
 
   it('should work the suppress comments with recommended config', async () => {
-    if (!FlatESLint) return
     const recommended = plugin.configs['flat/recommended']
-    const eslint = new FlatESLint({
+    const eslint = new ESLint({
       overrideConfigFile: true,
       overrideConfig: recommended
     })
@@ -266,9 +263,8 @@ describe('flat configs', () => {
   })
 
   it('should error with recommended config', async () => {
-    if (!FlatESLint) return
     const recommended = plugin.configs['flat/recommended']
-    const eslint = new FlatESLint({
+    const eslint = new ESLint({
       overrideConfigFile: true,
       overrideConfig: recommended
     })
