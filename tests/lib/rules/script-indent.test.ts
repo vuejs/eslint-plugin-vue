@@ -6,7 +6,6 @@
 import type { RuleTester as ESLintRuleTester } from 'eslint'
 import fs from 'node:fs'
 import path from 'node:path'
-import semver from 'semver'
 import { createRequire } from 'node:module'
 import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/script-indent'
@@ -43,20 +42,6 @@ function loadPatterns(
         (_match, open, _content, close) => `${open}${filename}${close}`
       )
       const baseObj = JSON.parse(commentPattern.exec(code0)![2])
-
-      if (baseObj.requirements) {
-        if (
-          Object.entries(baseObj.requirements as Record<string, string>).some(
-            ([pkgName, pkgVersion]) => {
-              const pkg = nodeRequire(`${pkgName}/package.json`)
-              return !semver.satisfies(pkg.version, pkgVersion)
-            }
-          )
-        ) {
-          return []
-        }
-        delete baseObj.requirements
-      }
 
       if ('parser' in baseObj) {
         baseObj.parser = nodeRequire.resolve(baseObj.parser)
