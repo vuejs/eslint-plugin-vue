@@ -89,7 +89,7 @@ export default {
 </eslint-code-block>
 
 ::: warning Note
-Components registered under `PascalCase` or `camelCase` names have may be called however you like, except using `snake_case`. Otherwise, they will need to be called directly under the specified name.
+A component counts as used when Vue can resolve it from the template, the same way Vue does at runtime: by the used name itself, its `camelCase` form, or its `PascalCase` form. So a component registered as `TheButton` may be used as `<TheButton>`, `<theButton>` or `<the-button>`, but a component registered as `theButton` may not be used as `<TheButton>`.
 :::
 
 ## :wrench: Options

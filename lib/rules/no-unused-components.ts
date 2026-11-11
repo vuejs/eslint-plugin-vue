@@ -3,12 +3,19 @@
  * @author Michał Sajnóg
  */
 import utils from '../utils/index.ts'
-import {
-  isPascalCase,
-  isCamelCase,
-  pascalCase,
-  camelCase
-} from '../utils/casing.ts'
+import { capitalize } from '../utils/casing.ts'
+
+/**
+ * Get the registered names that Vue tries, in order, to resolve a component used as `name`.
+ * Like Vue's `resolveAsset`: the name itself, its camelized form, and its capitalized camelized form.
+ * e.g. `<my-comp>` and `<MyComp>` find a `MyComp` registration, but `<MyComp>` does not find `myComp`.
+ */
+function getResolvableNames(name: string): string[] {
+  const camelized = name.replaceAll(/-(\w)/gu, (_, c: string) =>
+    c.toUpperCase()
+  )
+  return [name, camelized, capitalize(camelized)]
+}
 
 export default {
   meta: {
@@ -71,7 +78,10 @@ export default {
             return
 
           if (node.value.expression.type === 'Literal') {
-            usedComponents.add(node.value.expression.value as string)
+            // `:is="null"` renders nothing, so only a string names a component
+            if (typeof node.value.expression.value === 'string') {
+              usedComponents.add(node.value.expression.value)
+            }
           } else if (ignoreWhenBindingPresent) {
             shouldIgnoreReporting = true
           }
@@ -96,27 +106,12 @@ export default {
           )
             return
 
+          const resolvableNames = new Set(
+            [...usedComponents].flatMap(getResolvableNames)
+          )
           for (const { node, name } of registeredComponents) {
-            // If the component name is PascalCase or camelCase
-            // it can be used in various of ways inside template,
-            // like "theComponent", "The-component" etc.
-            // but except snake_case
-            if (isPascalCase(name) || isCamelCase(name)) {
-              if (
-                [...usedComponents].some(
-                  (n) =>
-                    !n.includes('_') &&
-                    (name === pascalCase(n) || name === camelCase(n))
-                )
-              ) {
-                continue
-              }
-            } else {
-              // In any other case the used component name must exactly match
-              // the registered name
-              if (usedComponents.has(name)) {
-                continue
-              }
+            if (resolvableNames.has(name)) {
+              continue
             }
 
             context.report({
