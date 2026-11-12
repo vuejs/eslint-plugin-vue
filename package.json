@@ -18,6 +18,13 @@
     "./dist/*": "./dist/*.js",
     "./package.json": "./package.json"
   },
+  "typesVersions": {
+    "*": {
+      "types": [
+        "./dist/eslint-typegen.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "new": "node tools/new-rule.ts",
     "start": "npm run test:base -- --watch",
