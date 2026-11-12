@@ -12,7 +12,10 @@
     "./types": {
       "types": "./dist/eslint-typegen.d.ts"
     },
-    "./dist/*": "./dist/*",
+    "./dist/utils": "./dist/utils/index.js",
+    "./dist/*.d.ts": "./dist/*.d.ts",
+    "./dist/*.js": "./dist/*.js",
+    "./dist/*": "./dist/*.js",
     "./package.json": "./package.json"
   },
   "scripts": {
