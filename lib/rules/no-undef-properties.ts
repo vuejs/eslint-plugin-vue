@@ -362,7 +362,8 @@ export default {
         }
         return templateContext
       }
-      return setupCtx || exportedCtx
+      templateContext = setupCtx || exportedCtx
+      return templateContext
     }
 
     function getParentProperty(node: Expression): Property | null {
