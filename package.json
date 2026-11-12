@@ -62,7 +62,7 @@
     "@stylistic/eslint-plugin": "^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0",
     "@typescript-eslint/parser": "^7.0.0 || ^8.0.0",
     "eslint": "^8.57.0 || ^9.0.0 || ^10.0.0",
-    "vue-eslint-parser": "^10.3.0"
+    "vue-eslint-parser": "^10.4.2"
   },
   "peerDependenciesMeta": {
     "@stylistic/eslint-plugin": {
@@ -123,6 +123,6 @@
     "vite-plugin-eslint4b": "^0.9.0",
     "vitepress": "^1.6.4",
     "vitest": "^4.1.9",
-    "vue-eslint-parser": "^10.4.1"
+    "vue-eslint-parser": "^10.4.2"
   }
 }
