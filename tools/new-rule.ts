@@ -1,10 +1,10 @@
-const path = require('node:path')
-const fs = require('node:fs')
-const cp = require('node:child_process')
+import path from 'node:path'
+import fs from 'node:fs'
+import cp from 'node:child_process'
 const logger = console
 
 // main
-;((ruleName, authorName) => {
+;((ruleName: string, authorName: string) => {
   if (!ruleName || !authorName) {
     logger.error('Usage: npm run new <rule name> <author name>')
     process.exitCode = 1
@@ -16,12 +16,18 @@ const logger = console
     return
   }
 
-  const ruleFile = path.resolve(__dirname, `../lib/rules/${ruleName}.ts`)
+  const ruleFile = path.resolve(
+    import.meta.dirname,
+    `../lib/rules/${ruleName}.ts`
+  )
   const testFile = path.resolve(
-    __dirname,
+    import.meta.dirname,
     `../tests/lib/rules/${ruleName}.test.ts`
   )
-  const docFile = path.resolve(__dirname, `../docs/rules/${ruleName}.md`)
+  const docFile = path.resolve(
+    import.meta.dirname,
+    `../docs/rules/${ruleName}.md`
+  )
 
   fs.writeFileSync(
     ruleFile,
