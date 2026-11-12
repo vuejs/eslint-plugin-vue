@@ -8,11 +8,24 @@ import * as VAST from '../eslint-plugin-vue/util-types/ast'
 import * as VNODE from '../eslint-plugin-vue/util-types/node'
 import * as parserServices from '../eslint-plugin-vue/util-types/parser-services'
 
-export class ESLint extends RawESLint {}
+export class ESLint extends RawESLint {
+  constructor(options?: ESLint.Options)
+}
 
 export namespace ESLint {
-  interface Plugin extends Omit<RawESLint.Plugin, 'rules'> {
+  interface Plugin extends Omit<RawESLint.Plugin, 'rules' | 'configs'> {
     rules?: Record<string, Rule.RuleModule>
+    configs?: Record<
+      string,
+      Linter.LegacyConfig | Linter.Config | Linter.Config[]
+    >
+  }
+  interface Options extends Omit<
+    RawESLint.Options,
+    'overrideConfig' | 'plugins'
+  > {
+    overrideConfig?: Linter.Config | Linter.Config[] | null
+    plugins?: Record<string, Plugin> | null
   }
 }
 
@@ -439,7 +452,7 @@ export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage
   type LintOptions = ESLintLinter.LintOptions
   type LegacyConfig = ESLintLinter.LegacyConfig
-  type FlatConfig = ESLintLinter.FlatConfig
+  type FlatConfig = Config
   type LanguageOptions = ESLintLinter.LanguageOptions
   interface Config extends Omit<ESLintLinter.Config, 'plugins'> {
     plugins?: Record<string, ESLint.Plugin>
