@@ -1,5 +1,15 @@
 # eslint-plugin-vue
 
+## 10.13.0
+
+### Minor Changes
+
+- Fixed [`vue/no-ref-as-operand`](https://eslint.vuejs.org/rules/no-ref-as-operand.html) false negatives for refs on the right side of a logical expression whose result is used as an operand, e.g. `if (a && ref)` ([#3148](https://github.com/vuejs/eslint-plugin-vue/pull/3148))
+
+- Updated the [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) peer dependency from `^10.3.0` to `^10.4.2`, see [vue-eslint-parser release notes](https://github.com/vuejs/vue-eslint-parser/releases) ([#3249](https://github.com/vuejs/eslint-plugin-vue/pull/3249))
+
+- Added `["inline", "inline-function"]` option to [`vue/v-on-handler-style`](https://eslint.vuejs.org/rules/v-on-handler-style.html) ([#3234](https://github.com/vuejs/eslint-plugin-vue/pull/3234))
+
 ## 10.12.1
 
 ### Patch Changes
