@@ -67,7 +67,13 @@ A configuration is an object which has 3 required properties; `blankLine`, `prev
 
 ### Disallow blank lines between all tags
 
-`{ blankLine: 'never', prev: '*', next: '*' }`
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "never", "prev": "*", "next": "*" }
+  ]]
+}
+```
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'never', prev: '*', next: '*' }
@@ -88,7 +94,13 @@ A configuration is an object which has 3 required properties; `blankLine`, `prev
 
 ### Require newlines after `<br>`
 
-`{ blankLine: 'always', prev: 'br', next: '*' }`
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "always", "prev": "br", "next": "*" }
+  ]]
+}
+```
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'always', prev: 'br', next: '*' }
@@ -113,7 +125,13 @@ A configuration is an object which has 3 required properties; `blankLine`, `prev
 
 ### Require newlines between `<br>` and `<img>`
 
-`{ blankLine: 'always', prev: 'br', next: 'img' }`
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "always", "prev": "br", "next": "img" }
+  ]]
+}
+```
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'always', prev: 'br', next: 'img' }
@@ -139,7 +157,13 @@ A configuration is an object which has 3 required properties; `blankLine`, `prev
 
 ### Require consistent newlines
 
-`{ blankLine: 'consistent', prev: '*', next: '*' }`
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "consistent", "prev": "*", "next": "*" }
+  ]]
+}
+```
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'consistent', prev: '*', next: '*' }
