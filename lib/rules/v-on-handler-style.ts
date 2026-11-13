@@ -412,9 +412,7 @@ export default {
      * Checks whether the given inline handler uses `$event`.
      */
     function hasEventIdentifier(node: VOnExpression): boolean {
-      return $eventIdentifiers.some(
-        ({ range }) => node.range[0] <= range[0] && range[1] <= node.range[1]
-      )
+      return $eventIdentifiers.some((id) => utils.isInRange(node, id))
     }
     /**
      * Report `v-on:click="foo()"` can be converted to `v-on:click="()=>foo()"`.
