@@ -59,6 +59,15 @@ export function isSnakeCase(str: string): boolean {
 }
 
 /**
+ * Camelize a string the way Vue does when it resolves components and props:
+ * only `-x` becomes `X`. Unlike `camelCase`, the first letter keeps its case
+ * (`MyComp` stays `MyComp`) and `_` is left as is.
+ */
+export function camelize(str: string): string {
+  return str.replaceAll(/-(\w)/gu, (_, c: string) => c.toUpperCase())
+}
+
+/**
  * Convert text to camelCase
  */
 export function camelCase(str: string): string {
