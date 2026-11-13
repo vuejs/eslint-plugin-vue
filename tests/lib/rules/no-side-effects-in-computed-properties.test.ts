@@ -256,9 +256,159 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             class C {}
             C.name = 'D'
           })
-          const test18 = computed(() => (console.log('a'), true))
           const test19 = computed(() => utils.reverse(foo.array))
           const test20 = computed(() => Object.assign({}, foo.data, { extra: 'value' }))
+        }
+      }
+      </script>`
+    },
+    {
+      // calls whose result is used are not side effects
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            return this.$store.getters.foo(this.id)
+          },
+          test2() {
+            const value = this.compute()
+            return format(this.fetch(), value)
+          },
+          test3() {
+            return this.items.map((item) => item.id).filter(Boolean)
+          },
+          test4() {
+            return this.a ? this.b() : this.c()
+          },
+          test5() {
+            return this.a && this.b()
+          },
+          test6() {
+            return (() => this.a)()
+          },
+          test7: {
+            get() {
+              return this.load()
+            },
+            set(value) {
+              this.save(value)
+            }
+          }
+        },
+        methods: {
+          test8() {
+            this.$router.push('/')
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      // calls on variables declared in the getter only change local state
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            const list = []
+            list.push(this.a)
+            const map = new Map()
+            map.set('a', this.b)
+            list.filter(Boolean).forEach((x) => map.set(x, x))
+            return [list, map]
+          },
+          test3() {
+            const style = {}
+            Object.assign(style, this.style, { width: this.width })
+            return style
+          },
+          test2() {
+            const add = (x) => x + this.a
+            add(1)
+            return add
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      // nested functions are not checked, and iteration calls only run their callback
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            return this.items.map((item) => {
+              log(item)
+              return item.id
+            })
+          },
+          test2() {
+            const go = () => {
+              this.$router.push('/')
+            }
+            return go
+          },
+          test3() {
+            const result = {}
+            this.items.forEach((item) => {
+              result[item.id] = item
+            })
+            return result
+          },
+          test4() {
+            const ids = []
+            this.items.map((item) => {
+              ids.push(item.id)
+            })
+            forEach(this.groups, (group) => {
+              ids.push(group.id)
+            })
+            return ids
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { computed } from 'vue'
+      const props = defineProps(['a', 'items'])
+      const emit = defineEmits(['update'])
+      const test1 = computed(() => fetchSomething(props.a))
+      const test2 = computed(() => {
+        const result = []
+        result.push(props.a)
+        return result
+      })
+      const test3 = computed({
+        get: () => props.a,
+        set: (value) => {
+          emit('update', value)
+        }
+      })
+      function onClick() {
+        doSomething()
+      }
+      </script>`
+    },
+    {
+      // `await` is reported by `vue/no-async-in-computed-properties`
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          async test1() {
+            await this.load()
+            return 1
+          }
         }
       }
       </script>`
@@ -935,6 +1085,236 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           column: 15,
           endLine: 14,
           endColumn: 61
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          foo() {
+            this.$store.commit({})
+            this.$store.dispatch('', {})
+            return true
+          },
+          bar() {
+            this.$router.go(-1)
+            this.$router.push({})
+            this.$router.replace({})
+            return true
+          },
+          baz: {
+            get() {
+              console.log(this.a)
+              return this.a
+            }
+          }
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in "foo" computed property.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 35
+        },
+        {
+          message: 'Unexpected side effect in "foo" computed property.',
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 41
+        },
+        {
+          message: 'Unexpected side effect in "bar" computed property.',
+          line: 11,
+          column: 13,
+          endLine: 11,
+          endColumn: 32
+        },
+        {
+          message: 'Unexpected side effect in "bar" computed property.',
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 34
+        },
+        {
+          message: 'Unexpected side effect in "bar" computed property.',
+          line: 13,
+          column: 13,
+          endLine: 13,
+          endColumn: 37
+        },
+        {
+          message: 'Unexpected side effect in "baz" computed property.',
+          line: 18,
+          column: 15,
+          endLine: 18,
+          endColumn: 34
+        }
+      ]
+    },
+    {
+      // the result of the call is discarded
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            this.load?.()
+            void this.load()
+            this.a && this.load()
+            this.a ? this.load() : this.reset()
+            return (this.load(), this.a)
+          },
+          test2() {
+            ;(() => {
+              this.a = 1
+            })()
+            return this.a
+          }
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 26
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 7,
+          column: 18,
+          endLine: 7,
+          endColumn: 29
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 8,
+          column: 23,
+          endLine: 8,
+          endColumn: 34
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 9,
+          column: 22,
+          endLine: 9,
+          endColumn: 33
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 9,
+          column: 36,
+          endLine: 9,
+          endColumn: 48
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 10,
+          column: 21,
+          endLine: 10,
+          endColumn: 32
+        },
+        {
+          message: 'Unexpected side effect in "test2" computed property.',
+          line: 13,
+          column: 14,
+          endLine: 15,
+          endColumn: 17
+        }
+      ]
+    },
+    {
+      // mutating calls are reported once
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            this.list.push(1)
+            this.$set(this.obj, 'a', 1)
+            return this.list
+          }
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 30
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 7,
+          column: 18,
+          endLine: 7,
+          endColumn: 22
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { computed } from 'vue'
+      import { useStore } from 'vuex'
+      const store = useStore()
+      const list = []
+
+      const test1 = computed(() => {
+        callSomething()
+      })
+      const test2 = computed(() => (console.log('a'), true))
+      const test3 = computed({
+        get() {
+          store.dispatch('load')
+          list.push(1)
+          return list
+        }
+      })
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 24
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 11,
+          column: 37,
+          endLine: 11,
+          endColumn: 53
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 14,
+          column: 11,
+          endLine: 14,
+          endColumn: 33
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 15,
+          column: 11,
+          endLine: 15,
+          endColumn: 23
         }
       ]
     }
