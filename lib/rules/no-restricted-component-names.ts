@@ -96,11 +96,15 @@ export default {
       if (!property) return
 
       const propertyName = utils.getStaticPropertyName(property)
-      if (propertyName !== 'name' || property.value.type !== 'Literal') {
+      if (
+        propertyName !== 'name' ||
+        (property.value.type !== 'Literal' &&
+          !utils.isStringLiteral(property.value))
+      ) {
         return
       }
 
-      const componentName = property.value.value?.toString()
+      const componentName = utils.getStringLiteralValue(property.value)
       if (!componentName) {
         return
       }

@@ -127,6 +127,20 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
     },
     {
       filename: 'test.vue',
+      code: '<script>export default { name: `Disallow` }</script>',
+      options: ['Disallow'],
+      errors: [
+        {
+          message: 'Using component name `Disallow` is not allowed.',
+          line: 1,
+          column: 32,
+          endLine: 1,
+          endColumn: 42
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
       code: `
       <script setup>
       defineOptions({

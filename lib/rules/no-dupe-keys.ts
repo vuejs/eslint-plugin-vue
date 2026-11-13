@@ -68,8 +68,8 @@ function getAliasedPropName(
     propReferences.includes(expression.arguments[0])
   ) {
     const key = expression.arguments[1]
-    return key?.type === 'Literal' && typeof key.value === 'string'
-      ? key.value
+    return key && utils.isStringLiteral(key)
+      ? utils.getStringLiteralValue(key)
       : null
   }
 

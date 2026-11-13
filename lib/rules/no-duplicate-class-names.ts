@@ -11,7 +11,7 @@ function* extractClassNodes(
   isUnconditional = true,
   parentExpr?: Expression
 ): IterableIterator<{
-  node: Literal | TemplateElement
+  node: Literal | TemplateLiteral | TemplateElement
   isUnconditional: boolean
   parentExpr?: Expression
 }> {
@@ -25,11 +25,7 @@ function* extractClassNodes(
     }
     case 'ObjectExpression': {
       for (const prop of nodeExpression.properties) {
-        if (
-          prop.type === 'Property' &&
-          prop.key?.type === 'Literal' &&
-          typeof prop.key.value === 'string'
-        ) {
+        if (prop.type === 'Property' && utils.isStringLiteral(prop.key)) {
           yield {
             node: prop.key,
             isUnconditional: false,
@@ -178,8 +174,14 @@ function removeDuplicateClassNames(raw: string): string {
   return quote + kept.join('') + quote
 }
 
-function getRawValue(node: VLiteral | Literal | TemplateElement | null) {
-  if (!node?.value) return null
+function getRawValue(
+  node: VLiteral | Literal | TemplateLiteral | TemplateElement | null
+) {
+  if (!node) return null
+  if (node.type === 'TemplateLiteral') {
+    return node.quasis[0].value.raw
+  }
+  if (!node.value) return null
   return typeof node.value === 'object' && 'raw' in node.value
     ? node.value.raw
     : node.value
@@ -201,10 +203,9 @@ export default {
   },
   create: (context: RuleContext) => {
     function reportDuplicateClasses(
-      node: VLiteral | Literal | TemplateElement | null
+      node: VLiteral | Literal | TemplateLiteral | TemplateElement | null
     ) {
-      if (!node?.value) return
-
+      if (!node) return
       const classList = getRawValue(node)
       if (typeof classList !== 'string') return
 
@@ -279,7 +280,7 @@ export default {
 
         function collectClassName(
           className: string,
-          reportNode: Literal | TemplateElement,
+          reportNode: Literal | TemplateLiteral | TemplateElement,
           isUnconditional: boolean,
           parentExpr?: Expression
         ) {
