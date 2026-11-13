@@ -56,7 +56,7 @@ jobs:
     name: Test
     strategy:
       matrix:
-        node: [20, 22, 24, 'lts/*']
+        node: [22, 24, 'lts/*']
     runs-on: ubuntu-latest
     needs:
       - build
@@ -85,10 +85,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Install Node.js v18
+      - name: Install Node.js v22
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 18
+          node-version: 22
       - name: Install Packages
         run: npm install --legacy-peer-deps
       - name: Install ESLint v8
@@ -109,10 +109,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Install Node.js v18
+      - name: Install Node.js v22
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 18
+          node-version: 22
       - name: Install Packages
         run: npm install --legacy-peer-deps
       - name: Install ESLint v9

@@ -170,8 +170,7 @@ tester.run('comma-style', rule, {
 
 if (
   eslintStylisticVersion === undefined ||
-  semver.lt(eslintStylisticVersion, '3.0.0') ||
-  semver.satisfies(process.version, '<19.0.0 || ^21.0.0')
+  semver.lt(eslintStylisticVersion, '3.0.0')
 ) {
   tester.run('comma-style', rule, {
     valid: [
