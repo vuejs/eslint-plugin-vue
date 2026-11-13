@@ -185,6 +185,7 @@ import orderInComponents from './rules/order-in-components.ts'
 import paddingLineBetweenBlocks from './rules/padding-line-between-blocks.ts'
 import paddingLineBetweenTags from './rules/padding-line-between-tags.ts'
 import paddingLinesInComponentDefinition from './rules/padding-lines-in-component-definition.ts'
+import preferDefineComponent from './rules/prefer-define-component.ts'
 import preferDefineOptions from './rules/prefer-define-options.ts'
 import preferImportFromVue from './rules/prefer-import-from-vue.ts'
 import preferPropTypeBooleanFirst from './rules/prefer-prop-type-boolean-first.ts'
@@ -447,6 +448,7 @@ export default {
     'padding-line-between-blocks': paddingLineBetweenBlocks,
     'padding-line-between-tags': paddingLineBetweenTags,
     'padding-lines-in-component-definition': paddingLinesInComponentDefinition,
+    'prefer-define-component': preferDefineComponent,
     'prefer-define-options': preferDefineOptions,
     'prefer-import-from-vue': preferImportFromVue,
     'prefer-prop-type-boolean-first': preferPropTypeBooleanFirst,
