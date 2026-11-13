@@ -14,7 +14,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule disallows using `target="_blank"` attribute without `rel="noopener noreferrer"` to avoid a security vulnerability([see here for more details](https://mathiasbynens.github.io/rel-noopener/)).
+This rule disallows using `target="_blank"` attribute without `rel="noopener noreferrer"` to avoid a security vulnerability ([see here for more details](https://mathiasbynens.github.io/rel-noopener/)).
 
 <eslint-code-block :rules="{'vue/no-template-target-blank': ['error']}">
 

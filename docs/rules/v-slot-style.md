@@ -23,7 +23,7 @@ since: v6.0.0
 
 ## :book: Rule Details
 
-This rule enforces `v-slot` directive style which you should use shorthand or long form.
+This rule enforces which `v-slot` directive style you should use: shorthand or long form.
 
 <eslint-code-block fix :rules="{'vue/v-slot-style': ['error']}">
 

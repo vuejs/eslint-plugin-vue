@@ -26,7 +26,7 @@ since: v3.0.0
 
 ## :book: Rule Details
 
-This rule reports the elements which have `v-for` and do not have `v-bind:key` with exception to custom components.
+This rule reports the elements which have `v-for` and do not have `v-bind:key` with the exception of custom components.
 
 <eslint-code-block :rules="{'vue/require-v-for-key': ['error']}">
 

@@ -26,7 +26,7 @@ since: v8.0.0
 
 ## :book: Rule Details
 
-This rule disallow reserved names to be used in props.
+This rule disallows reserved names to be used in props.
 
 <eslint-code-block :rules="{'vue/no-reserved-props': ['error']}">
 

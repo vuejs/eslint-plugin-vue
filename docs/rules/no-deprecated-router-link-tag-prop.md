@@ -20,7 +20,7 @@ since: v7.20.0
 
 ## :book: Rule Details
 
-This rule reports deprecated the `tag` attribute on `RouterLink` elements (removed in Vue.js v3.0.0+).
+This rule reports the deprecated `tag` attribute on `RouterLink` elements (removed in Vue.js v3.0.0+).
 
 <eslint-code-block :rules="{'vue/no-deprecated-router-link-tag-prop': ['error']}">
 

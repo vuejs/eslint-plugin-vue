@@ -16,7 +16,7 @@ This rule allows you to specify `v-bind` argument names that you don't want to u
 
 ## :wrench: Options
 
-This rule takes a list of strings, where each string is a argument name or pattern to be restricted:
+This rule takes a list of strings, where each string is an argument name or pattern to be restricted:
 
 ```json
 {

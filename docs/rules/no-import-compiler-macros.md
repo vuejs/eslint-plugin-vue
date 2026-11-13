@@ -14,7 +14,7 @@ since: v10.0.0
 
 ## :book: Rule Details
 
-This rule disallow importing vue compiler macros.
+This rule disallows importing Vue compiler macros.
 
 <eslint-code-block fix :rules="{'vue/no-import-compiler-macros': ['error']}">
 

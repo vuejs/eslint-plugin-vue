@@ -14,7 +14,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule disallow a potential typo in your component options
+This rule disallows potential typos in your component options
 
 ### Here is the config
 

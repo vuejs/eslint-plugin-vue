@@ -27,7 +27,7 @@ since: v3.14.0
 
 ## :book: Rule Details
 
-This rule report variable definitions of v-for directives or scope attributes if those are not used.
+This rule reports variable definitions of v-for directives or scope attributes if those are not used.
 
 <eslint-code-block :rules="{'vue/no-unused-vars': ['error']}">
 

@@ -26,7 +26,7 @@ since: v3.13.0
 
 ## :book: Rule Details
 
-This rule checks whether the default value of each prop is valid for the given type. It should report an error when default value for type `Array` or `Object` is not returned using function.
+This rule checks whether the default value of each prop is valid for the given type. It should report an error when the default value for type `Array` or `Object` is not returned using a function.
 
 <eslint-code-block :rules="{'vue/require-valid-default-prop': ['error']}">
 

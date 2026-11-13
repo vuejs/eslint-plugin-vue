@@ -26,7 +26,7 @@ since: v7.20.0
 
 ## :book: Rule Details
 
-This rule require component names to be always multi-word, except for root `App`
+This rule requires component names to be always multi-word, except for root `App`
 components, and built-in components provided by Vue, such as `<transition>` or
 `<component>`. This prevents conflicts with existing and future HTML elements,
 since all HTML elements are single words.

@@ -14,7 +14,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule will enforce consistency of line break after the `<!--` and before the `-->` of comment. It also provides several exceptions for various documentation styles.
+This rule will enforce consistent line breaks after the `<!--` and before the `-->` of comments. It also provides several exceptions for various documentation styles.
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-newline': ['error']}">
 

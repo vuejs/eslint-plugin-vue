@@ -14,7 +14,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule will enforce consistency of spacing after the `<!--` and before the `-->` of comment. It also provides several exceptions for various documentation styles.
+This rule will enforce consistent spacing after the `<!--` and before the `-->` of comments. It also provides several exceptions for various documentation styles.
 
 Whitespace after the `<!--` and before the `-->` makes it easier to read text in comments.
 

@@ -20,7 +20,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports deprecated the `is` attribute on HTML elements (removed in Vue.js v3.0.0+).
+This rule reports the deprecated `is` attribute on HTML elements (removed in Vue.js v3.0.0+).
 
 See [Migration Guide - Custom Elements Interop](https://v3-migration.vuejs.org/breaking-changes/custom-elements-interop.html#customized-built-in-elements) for more details.
 

@@ -39,7 +39,7 @@ This rule enforces a line break (or no line break) before tag's closing brackets
 
 ## :book: Rule Details
 
-This rule aims to warn the right angle brackets which are at the location other than the configured location.
+This rule reports right angle brackets that are not at the configured location.
 
 <eslint-code-block fix :rules="{'vue/html-closing-bracket-newline': ['error']}">
 
