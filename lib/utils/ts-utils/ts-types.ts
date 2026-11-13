@@ -343,6 +343,26 @@ export function isRefObjectType(context: RuleContext, node: ESNode): boolean {
 }
 
 /**
+ * Check whether the given expression's type declares a property with the
+ * given name.
+ */
+export function hasTypeProperty(
+  context: RuleContext,
+  node: ESNode,
+  propertyName: string
+): boolean {
+  const services = getTSParserServices(context)
+  const tsNode = services && services.tsNodeMap.get(node)
+  if (!tsNode) return false
+
+  const { checker } = services
+  const type = checker.getTypeAtLocation(tsNode)
+  return checker
+    .getPropertiesOfType(type)
+    .some((property) => property.getName() === propertyName)
+}
+
+/**
  * Check whether a switch statement's discriminant is a finite union of literal
  * types and every union member is covered by a case clause.
  * Does NOT verify that case bodies terminate — callers can use ESLint's code

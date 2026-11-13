@@ -10,7 +10,7 @@ import type {
 import { findVariable } from '@eslint-community/eslint-utils'
 import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
 import utils from '../utils/index.ts'
-import { isRefObjectType } from '../utils/ts-utils/index.ts'
+import { hasTypeProperty, isRefObjectType } from '../utils/ts-utils/index.ts'
 
 /**
  * Checks whether the given identifier reference has been initialized with a ref object.
@@ -118,7 +118,11 @@ export default {
       }
     }
 
-    function reportIfRefWrapped(node: Identifier, shouldCheckType = true) {
+    function reportIfRefWrapped(
+      node: Identifier,
+      propertyName?: string,
+      shouldCheckType = true
+    ) {
       const data = refReferences.get(node)
       if (isRefInit(data)) {
         context.report({
@@ -131,7 +135,11 @@ export default {
             return fixer.insertTextAfter(node, '.value')
           }
         })
-      } else if (shouldCheckType && isRefObjectType(context, node)) {
+      } else if (
+        shouldCheckType &&
+        isRefObjectType(context, node) &&
+        (propertyName == null || !hasTypeProperty(context, node, propertyName))
+      ) {
         context.report({
           node,
           messageId: 'requireDotValueOfRef',
@@ -221,7 +229,7 @@ export default {
               return
             }
             // Assigning another ref to a variable typed as a ref is valid
-            reportIfRefWrapped(node, false)
+            reportIfRefWrapped(node, undefined, false)
             return
           }
           reportIfRefWrapped(node)
@@ -278,7 +286,7 @@ export default {
           ) {
             return
           }
-          reportIfRefWrapped(node)
+          reportIfRefWrapped(node, name)
         }
       },
       utils.defineScriptSetupVisitor(context, {
