@@ -33,7 +33,7 @@ interface Services {
 /**
  * Get TypeScript parser services.
  */
-function getTSParserServices(context: RuleContext): Services | null {
+export function getTSParserServices(context: RuleContext): Services | null {
   const sourceCode = context.sourceCode
   const tsNodeMap = sourceCode.parserServices.esTreeNodeToTSNodeMap
   if (!tsNodeMap) return null
