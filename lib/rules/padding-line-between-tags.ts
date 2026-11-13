@@ -117,14 +117,37 @@ function isSelectorMatchingTag(selector: string, element: VElement): boolean {
 }
 
 /**
- * Check if the configuration matches the given elements
+ * Check if the next element continues the conditional chain (`v-if`,
+ * `v-else-if`, `v-else`) that the previous element belongs to.
  */
-function isConfigurationMatchingElements(
-  configure: { blankLine: string; prev: string; next: string },
+function isConditionalTagPair(
   prevElement: VElement,
   nextElement: VElement
 ): boolean {
   return (
+    (utils.hasDirective(prevElement, 'if') ||
+      utils.hasDirective(prevElement, 'else-if')) &&
+    (utils.hasDirective(nextElement, 'else-if') ||
+      utils.hasDirective(nextElement, 'else'))
+  )
+}
+
+/**
+ * Check if the configuration matches the given elements
+ */
+function isConfigurationMatchingElements(
+  configure: {
+    blankLine: string
+    prev: string
+    next: string
+    betweenConditionalTags?: boolean
+  },
+  prevElement: VElement,
+  nextElement: VElement
+): boolean {
+  return (
+    (!configure.betweenConditionalTags ||
+      isConditionalTagPair(prevElement, nextElement)) &&
     isSelectorMatchingTag(configure.prev, prevElement) &&
     isSelectorMatchingTag(configure.next, nextElement)
   )
@@ -135,14 +158,21 @@ function checkNewline(context: RuleContext) {
     blankLine: 'always' | 'never' | 'consistent'
     prev: string
     next: string
+    betweenConditionalTags?: boolean
   }> = context.options[0] || [{ blankLine: 'always', prev: '*', next: '*' }]
 
   const reverseConfigureList = [...configureList].reverse()
 
   /**
    * It has the style of the first `blankLine="consistent"`.
+   * Conditional tag pairs configured with `betweenConditionalTags` are tracked
+   * separately from the other tags.
    */
   const firstConsistentBlankLines = new Map<VElement, 'always' | 'never'>()
+  const firstConsistentConditionalBlankLines = new Map<
+    VElement,
+    'always' | 'never'
+  >()
 
   return (block: VElement) => {
     if (!block.parent.parent) {
@@ -174,11 +204,12 @@ function checkNewline(context: RuleContext) {
 
     let blankLine = configure.blankLine
     if (blankLine === 'consistent') {
-      const firstConsistentBlankLine = firstConsistentBlankLines.get(
-        block.parent
-      )
+      const consistentBlankLines = configure.betweenConditionalTags
+        ? firstConsistentConditionalBlankLines
+        : firstConsistentBlankLines
+      const firstConsistentBlankLine = consistentBlankLines.get(block.parent)
       if (firstConsistentBlankLine == null) {
-        firstConsistentBlankLines.set(
+        consistentBlankLines.set(
           block.parent,
           lineDifference > 1 ? 'always' : 'never'
         )
@@ -214,7 +245,8 @@ export default {
           properties: {
             blankLine: { enum: ['always', 'never', 'consistent'] },
             prev: { type: 'string' },
-            next: { type: 'string' }
+            next: { type: 'string' },
+            betweenConditionalTags: { type: 'boolean' }
           },
           additionalProperties: false,
           required: ['blankLine', 'prev', 'next']
