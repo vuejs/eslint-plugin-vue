@@ -9,7 +9,10 @@ import type {
   ComponentUnknownSlot
 } from '../index.ts'
 import { getScope } from '../scope.ts'
-import { inferRuntimeTypeFromTypeNode } from './ts-types.ts'
+import {
+  inferRuntimeTypeFromTypeNode,
+  getTSParserServices
+} from './ts-types.ts'
 
 /**
  * All type node types. Typed as `Record<TypeNode['type'], true>` so that the
@@ -69,25 +72,31 @@ export function isTypeNode(node: ASTNode): node is TypeNode {
 }
 
 export function isTSInterfaceBody(
-  node: TSESTree.TypeNode | TSESTree.TSInterfaceBody
+  node: TSESTree.BaseNode
 ): node is TSESTree.TSInterfaceBody {
   return node.type === 'TSInterfaceBody'
 }
 
+export function isTSInterfaceHeritage(
+  node: TSESTree.BaseNode
+): node is TSESTree.TSInterfaceHeritage {
+  return node.type === 'TSInterfaceHeritage'
+}
+
 export function isTSTypeLiteral(
-  node: TSESTree.TypeNode
+  node: TSESTree.BaseNode
 ): node is TSESTree.TSTypeLiteral {
   return node.type === 'TSTypeLiteral'
 }
 
 function isTSFunctionType(
-  node: TSESTree.TypeNode
+  node: TSESTree.BaseNode
 ): node is TSESTree.TSFunctionType {
   return node.type === 'TSFunctionType'
 }
 
 export function isTSTypeLiteralOrTSFunctionType(
-  node: TSESTree.TypeNode
+  node: TSESTree.BaseNode
 ): node is TSESTree.TSTypeLiteral | TSESTree.TSFunctionType {
   return isTSTypeLiteral(node) || isTSFunctionType(node)
 }
@@ -251,21 +260,24 @@ function* extractEventNames(
   }
 }
 
+type FlattenTypeNodeItem =
+  TSESTree.TypeNode | TSESTree.TSInterfaceBody | TSESTree.TSInterfaceHeritage
+
 export function flattenTypeNodes(
   context: RuleContext,
   node: TSESTree.TypeNode
-): (TSESTree.TypeNode | TSESTree.TSInterfaceBody)[] {
+): FlattenTypeNodeItem[] {
   interface TraversedData {
-    nodes: Set<TSESTree.TypeNode | TSESTree.TSInterfaceBody>
+    nodes: Set<FlattenTypeNodeItem>
     finished: boolean
   }
   const traversed: Map<TSESTree.TypeNode, TraversedData> = new Map()
 
+  const hasTSParserServices = Boolean(getTSParserServices(context))
+
   return [...flattenImpl(node)]
 
-  function* flattenImpl(
-    node: TSESTree.TypeNode
-  ): Iterable<TSESTree.TypeNode | TSESTree.TSInterfaceBody> {
+  function* flattenImpl(node: TSESTree.TypeNode): Iterable<FlattenTypeNodeItem> {
     if (node.type === 'TSUnionType' || node.type === 'TSIntersectionType') {
       for (const typeNode of node.types) {
         yield* flattenImpl(typeNode)
@@ -282,6 +294,9 @@ export function flattenTypeNodes(
         const defNode = variable.defs[0].node as TSESTree.Node
         if (defNode.type === 'TSInterfaceDeclaration') {
           yield defNode.body
+          if (hasTSParserServices) {
+            yield* defNode.extends
+          }
           return
         }
         if (defNode.type === 'TSTypeAliasDeclaration') {
