@@ -212,7 +212,14 @@ You can use the `:single-line` and `:multi-line` pseudo-classes in `prev`/`next`
 
 ### Group conditional tags together
 
-`{ blankLine: 'never', prev: '*', next: '*', betweenConditionalTags: true }`
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "always", "prev": "*", "next": "*" },
+    { "blankLine": "never", "prev": "*", "next": "*", "betweenConditionalTags": true }
+  ]]
+}
+```
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'always', prev: '*', next: '*' },
