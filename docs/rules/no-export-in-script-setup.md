@@ -23,6 +23,7 @@ since: v7.13.0
   - `"plugin:vue/vue2-strongly-recommended"`
   - `"plugin:vue/recommended"`
   - `"plugin:vue/vue2-recommended"`
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 
