@@ -28,10 +28,7 @@ function getErrorPosition(
     }
   }
 
-  if (
-    eslintStylisticVersion === undefined ||
-    semver.satisfies(process.version, '<19.0.0 || ^21.0.0')
-  ) {
+  if (eslintStylisticVersion === undefined) {
     return {
       line,
       column: errorType === 'unexpected' ? column : column - 1,
