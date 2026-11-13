@@ -505,6 +505,118 @@ tester.run('next-tick-style', rule, {
           }
         }
       }</script>`,
+      output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          if (isOpen) {
+            await nt(); foo();
+          }
+        }
+      }</script>`,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 15
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        methods: {
+          async a() {
+            if (isOpen) {
+              open()
+            } else {
+              nt(() => {
+                this.$refs.input.focus()
+                this.isReady = true
+              })
+            }
+          },
+          async b() {
+            if (a) {
+              open()
+            } else if (b) {
+              nt(() => foo())
+            }
+          },
+          async c() {
+            if (isOpen) {
+              {
+                nt(() => foo())
+              }
+            }
+          }
+        }
+      }</script>`,
+      output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        methods: {
+          async a() {
+            if (isOpen) {
+              open()
+            } else {
+              await nt();
+              this.$refs.input.focus()
+              this.isReady = true
+            }
+          },
+          async b() {
+            if (a) {
+              open()
+            } else if (b) {
+              await nt(); foo()
+            }
+          },
+          async c() {
+            if (isOpen) {
+              {
+                await nt(); foo()
+              }
+            }
+          }
+        }
+      }</script>`,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 17
+        },
+        {
+          messageId: 'usePromise',
+          line: 18,
+          column: 15,
+          endLine: 18,
+          endColumn: 17
+        },
+        {
+          messageId: 'usePromise',
+          line: 24,
+          column: 17,
+          endLine: 24,
+          endColumn: 19
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          if (isOpen) {
+            nt(() => foo());
+          }
+          bar();
+        }
+      }</script>`,
       output: null,
       errors: [
         {
@@ -522,6 +634,7 @@ tester.run('next-tick-style', rule, {
           if (isOpen) {
             await nt(); foo();
           }
+          bar();
         }
       }</script>`
             },
@@ -533,6 +646,7 @@ tester.run('next-tick-style', rule, {
           if (isOpen) {
             nt().then(() => foo());
           }
+          bar();
         }
       }</script>`
             }
@@ -628,6 +742,57 @@ tester.run('next-tick-style', rule, {
             nt().then(() => foo());
           } finally {
             bar();
+          }
+        }
+      }</script>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          try {
+            nt(() => foo());
+          } catch (error) {
+            bar(error);
+          }
+        }
+      }</script>`,
+      output: null,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 15,
+          suggestions: [
+            {
+              messageId: 'useAwait',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          try {
+            await nt(); foo();
+          } catch (error) {
+            bar(error);
+          }
+        }
+      }</script>`
+            },
+            {
+              messageId: 'useThen',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          try {
+            nt().then(() => foo());
+          } catch (error) {
+            bar(error);
           }
         }
       }</script>`

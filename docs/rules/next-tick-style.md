@@ -47,7 +47,7 @@ export default {
 
 </eslint-code-block>
 
-When `nextTick(() => { ... })` is the last statement of an `async` function and the callback is an arrow function without parameters, declarations, or `return` statements, the autofix replaces it with `await nextTick()` followed by the callback body. Elsewhere in an `async` function, `await` would also delay the code after the call, so the rule only suggests `await nextTick()` (when the callback can be moved) or `nextTick().then(() => { ... })`. Outside `async` functions, the autofix uses `nextTick().then(() => { ... })`.
+When `nextTick(() => { ... })` is the last statement of an `async` function (directly or inside `if`/`else` branches or nested blocks that are themselves last, so nothing runs after it) and the callback is an arrow function without parameters, declarations, or `return` statements, the autofix replaces it with `await nextTick()` followed by the callback body. Elsewhere in an `async` function, `await` would also delay the code after the call, so the rule only suggests `await nextTick()` (when the callback can be moved) or `nextTick().then(() => { ... })`. Outside `async` functions, the autofix uses `nextTick().then(() => { ... })`.
 
 ## :wrench: Options
 

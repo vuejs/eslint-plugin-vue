@@ -99,17 +99,28 @@ function getAsyncFunction(
 }
 
 /**
- * Checks whether the call is the last statement of the given function, so
- * nothing else in that function runs between the call and the callback.
+ * Checks whether nothing else in the given function runs after the call:
+ * the call and every enclosing statement up to the function body are the
+ * last statement of their block, and the only enclosing statements are
+ * blocks and `if` statements (no loops, `try`, `switch` or labels).
  */
 function isLastStatementOf(
   callExpression: CallExpression,
   func: FunctionDeclaration | FunctionExpression | ArrowFunctionExpression
 ): boolean {
-  return (
-    func.body.type === 'BlockStatement' &&
-    func.body.body.at(-1) === callExpression.parent
-  )
+  let node: ASTNode = callExpression.parent
+  while (node !== func.body) {
+    const parent = node.parent
+    if (parent?.type === 'BlockStatement') {
+      if (parent.body.at(-1) !== node) {
+        return false
+      }
+    } else if (parent?.type !== 'IfStatement') {
+      return false
+    }
+    node = parent
+  }
+  return true
 }
 
 /**
