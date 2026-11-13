@@ -67,6 +67,32 @@ export default {
 
 If type information is available (e.g. [`parserOptions.projectService`](https://typescript-eslint.io/packages/parser#projectservice) of [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser) is enabled), this rule also reports values whose type is a ref, such as refs returned from composables.
 
+Refs destructured from `storeToRefs()` imported from Pinia are also recognized, without requiring type information.
+
+With type information, the rule also checks ref-valued member expressions in scripts and static member paths rooted in `<script setup>` bindings in templates:
+
+```vue
+<script setup lang="ts">
+import { useMutation } from './mutations'
+
+const mutation = useMutation() // returns { isLoading: Ref<boolean> }
+const { isLoading } = mutation
+</script>
+
+<template>
+  <!-- ✓ GOOD: top-level refs are automatically unwrapped -->
+  <button :disabled="isLoading" />
+  <!-- ✓ GOOD: nested refs require explicit access -->
+  <button :disabled="mutation.isLoading.value" />
+  <!-- ✗ BAD: the ref object is always truthy -->
+  <button :disabled="!!mutation.isLoading" />
+</template>
+```
+
+Template checks respect the binding's type, including ref unwrapping by `reactive()`. Template-local variables such as `v-for` aliases and slot props, dynamic member paths and bindings without type information are not checked. Passing a nested ref directly as a prop or function argument remains allowed, as does displaying it through text interpolation.
+
+Nullish fallback expressions that pass a ref through unchanged, such as `useRef(state.loading ?? fallbackRef)`, remain allowed. The rule still reports the ref when that expression is used as a condition or another value operand, such as `if (state.loading ?? fallbackRef)`.
+
 ## :wrench: Options
 
 Nothing.
