@@ -21,7 +21,8 @@ function parseOptions(options: any) {
         ...INLINE_ELEMENTS
       ],
       ignoreWhenEmpty: true,
-      allowEmptyLines: false
+      allowEmptyLines: false,
+      ignoreComments: false
     },
     options
   )
@@ -37,16 +38,22 @@ function getPhrase(lineBreaks: number) {
     }
   }
 }
+
+function isHTMLComment(token: Token) {
+  return token.type === 'HTMLComment'
+}
+
 /**
- * Check whether the given element is empty or not.
+ * Check whether the content between the given start and end is empty or not.
  * This ignores whitespaces, doesn't ignore comments.
  */
 function isEmpty(
-  node: VElement & { endTag: VEndTag },
+  startTagOrComment: VStartTag | Token,
+  endTagOrComment: VEndTag | Token,
   sourceCode: SourceCode
 ): boolean {
-  const start = node.startTag.range[1]
-  const end = node.endTag.range[0]
+  const start = startTagOrComment.range[1]
+  const end = endTagOrComment.range[0]
   return sourceCode.text.slice(start, end).trim() === ''
 }
 
@@ -74,6 +81,9 @@ export default {
           },
           allowEmptyLines: {
             type: 'boolean'
+          },
+          ignoreComments: {
+            type: 'boolean'
           }
         },
         additionalProperties: false
@@ -91,6 +101,7 @@ export default {
     const ignores = options.ignores
     const ignoreWhenEmpty = options.ignoreWhenEmpty
     const allowEmptyLines = options.allowEmptyLines
+    const ignoreComments = options.ignoreComments
     const sourceCode = context.sourceCode
     const template =
       sourceCode.parserServices.getTemplateBodyTokenStore &&
@@ -135,36 +146,54 @@ export default {
           includeComments: true,
           filter: (token) => token.type !== 'HTMLWhitespace'
         }
+        let startTagOrComment: VStartTag | Token = element.startTag
+        let endTagOrComment: VEndTag | Token = element.endTag
+        let contentFirst = template.getTokenAfter(
+          startTagOrComment,
+          getTokenOption
+        )!
+        let contentLast = template.getTokenBefore(
+          endTagOrComment,
+          getTokenOption
+        )!
+        if (ignoreComments) {
+          // comments on the same line as a tag are not treated as content
+          while (
+            isHTMLComment(contentFirst) &&
+            contentFirst.loc.start.line === startTagOrComment.loc.end.line
+          ) {
+            startTagOrComment = contentFirst
+            contentFirst = template.getTokenAfter(contentFirst, getTokenOption)!
+          }
+          while (
+            isHTMLComment(contentLast) &&
+            contentLast.loc.end.line === endTagOrComment.loc.start.line
+          ) {
+            endTagOrComment = contentLast
+            contentLast = template.getTokenBefore(contentLast, getTokenOption)!
+          }
+        }
         if (
           ignoreWhenEmpty &&
           element.children.length === 0 &&
           template.getFirstTokensBetween(
-            element.startTag,
-            element.endTag,
+            startTagOrComment,
+            endTagOrComment,
             getTokenOption
           ).length === 0
         ) {
           return
         }
 
-        const contentFirst = template.getTokenAfter(
-          element.startTag,
-          getTokenOption
-        )!
-        const contentLast = template.getTokenBefore(
-          element.endTag,
-          getTokenOption
-        )!
-
         const beforeLineBreaks =
-          contentFirst.loc.start.line - element.startTag.loc.end.line
+          contentFirst.loc.start.line - startTagOrComment.loc.end.line
         const afterLineBreaks =
-          element.endTag.loc.start.line - contentLast.loc.end.line
+          endTagOrComment.loc.start.line - contentLast.loc.end.line
         if (isInvalidLineBreaks(beforeLineBreaks)) {
           context.report({
             node: template.getLastToken(element.startTag),
             loc: {
-              start: element.startTag.loc.end,
+              start: startTagOrComment.loc.end,
               end: contentFirst.loc.start
             },
             messageId: 'unexpectedAfterClosingBracket',
@@ -174,7 +203,7 @@ export default {
             },
             fix(fixer) {
               const range: Range = [
-                element.startTag.range[1],
+                startTagOrComment.range[1],
                 contentFirst.range[0]
               ]
               return fixer.replaceTextRange(range, '\n')
@@ -182,7 +211,7 @@ export default {
           })
         }
 
-        if (isEmpty(element, sourceCode)) {
+        if (isEmpty(startTagOrComment, endTagOrComment, sourceCode)) {
           return
         }
 
@@ -191,7 +220,7 @@ export default {
             node: template.getFirstToken(element.endTag),
             loc: {
               start: contentLast.loc.end,
-              end: element.endTag.loc.start
+              end: endTagOrComment.loc.start
             },
             messageId: 'unexpectedBeforeOpeningBracket',
             data: {
@@ -201,7 +230,7 @@ export default {
             fix(fixer) {
               const range: Range = [
                 contentLast.range[1],
-                element.endTag.range[0]
+                endTagOrComment.range[0]
               ]
               return fixer.replaceTextRange(range, '\n')
             }
