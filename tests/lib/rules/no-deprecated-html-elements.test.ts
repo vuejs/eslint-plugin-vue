@@ -81,6 +81,30 @@ tester.run('no-deprecated-html-elements', rule, {
       }
       </script>
       `
+    },
+    // `ignores` with plain names
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <center>
+          <font>text</font>
+        </center>
+      </template>
+      `,
+      options: [{ ignores: ['center', 'font'] }]
+    },
+    // `ignores` with a regexp
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <center>
+          <font>text</font>
+        </center>
+      </template>
+      `,
+      options: [{ ignores: ['/^(font|center)$/'] }]
     }
   ],
   invalid: [
@@ -203,6 +227,35 @@ tester.run('no-deprecated-html-elements', rule, {
           column: 26,
           endLine: 7,
           endColumn: 34
+        }
+      ]
+    },
+    // `ignores` only skips the matching names
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <center>
+          <font>text</font>
+          <strike>old price</strike>
+        </center>
+      </template>
+      `,
+      options: [{ ignores: ['center', '/^marq/'] }],
+      errors: [
+        {
+          message: 'The `<font>` element is deprecated.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 17
+        },
+        {
+          message: 'The `<strike>` element is deprecated.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 19
         }
       ]
     }

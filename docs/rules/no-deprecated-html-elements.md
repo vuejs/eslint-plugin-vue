@@ -17,7 +17,7 @@ This rule reports HTML elements that the HTML Standard lists as [non-conforming 
 
 Besides being obsolete, all of these elements except `<param>` are unknown to Vue 3's template compiler, which resolves them as components first and warns about it in development.
 
-Components with the same names, such as `<Center>` or `<Font>`, and elements that render a component through `is`, `:is` or `v-is` are not reported.
+The rule goes by the tag name as written in the template, not by component registration. PascalCase tags such as `<Center>` or `<Font>` are not reported. Lowercase deprecated tag names such as `<center>` are reported even if a component with that name is registered; use the `ignores` option for those. Elements that render a component through `is`, `:is` or `v-is` are skipped.
 
 <eslint-code-block :rules="{'vue/no-deprecated-html-elements': ['error']}">
 
@@ -41,7 +41,33 @@ Components with the same names, such as `<Center>` or `<Font>`, and elements tha
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-deprecated-html-elements": ["error", {
+    "ignores": []
+  }]
+}
+```
+
+- `ignores` (`string[]`) ... The element names to ignore, matched against the tag name as written in the template. You can set the regexp by writing it like `"/^name/"`.
+
+### `ignores: ["center", "/^(font|marquee)$/"]`
+
+<eslint-code-block :rules="{'vue/no-deprecated-html-elements': ['error', {ignores: ['center', '/^(font|marquee)$/']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <center>registered component</center>
+  <font>registered component</font>
+  <marquee>registered component</marquee>
+
+  <!-- ✗ BAD -->
+  <strike>old price</strike>
+</template>
+```
+
+</eslint-code-block>
 
 ## :couple: Related Rules
 
