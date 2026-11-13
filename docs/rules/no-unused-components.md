@@ -89,7 +89,7 @@ export default {
 </eslint-code-block>
 
 ::: warning Note
-A component counts as used when Vue can resolve it from the template, the same way Vue does at runtime: by the used name itself, its `camelCase` form, or its `PascalCase` form. So a component registered as `TheButton` may be used as `<TheButton>`, `<theButton>` or `<the-button>`, but a component registered as `theButton` may not be used as `<TheButton>`.
+A component counts as used when Vue can resolve it from the template, the same way Vue does at runtime. For a tag in the template, Vue looks for a registration named exactly like the tag, then like the tag in `camelCase`, then like the tag in `PascalCase`. So a component registered as `TheButton` is found by `<TheButton>`, `<the-button>` and `<theButton>`. But a component registered as `theButton` is not found by `<TheButton>`, because Vue never lowercases the first letter of a tag.
 :::
 
 ## :wrench: Options

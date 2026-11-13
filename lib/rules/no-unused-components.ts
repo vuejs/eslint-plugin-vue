@@ -3,7 +3,7 @@
  * @author Michał Sajnóg
  */
 import utils from '../utils/index.ts'
-import { capitalize } from '../utils/casing.ts'
+import { camelize, capitalize } from '../utils/casing.ts'
 
 /**
  * Get the registered names that Vue tries, in order, to resolve a component used as `name`.
@@ -11,9 +11,7 @@ import { capitalize } from '../utils/casing.ts'
  * e.g. `<my-comp>` and `<MyComp>` find a `MyComp` registration, but `<MyComp>` does not find `myComp`.
  */
 function getResolvableNames(name: string): string[] {
-  const camelized = name.replaceAll(/-(\w)/gu, (_, c: string) =>
-    c.toUpperCase()
-  )
+  const camelized = camelize(name)
   return [name, camelized, capitalize(camelized)]
 }
 

@@ -1,4 +1,4 @@
-import { getConverter, getChecker } from '../../../lib/utils/casing'
+import { camelize, getConverter, getChecker } from '../../../lib/utils/casing'
 import assert from 'node:assert'
 
 describe('getConverter()', () => {
@@ -213,5 +213,15 @@ describe('getChecker()', () => {
 
     assert.equal(checker('_valid_snake_case'), true)
     assert.equal(checker('invalid__snake_case'), false)
+  })
+})
+
+describe('camelize()', () => {
+  it('should camelize string the way Vue does', () => {
+    assert.equal(camelize('foo-bar'), 'fooBar')
+    assert.equal(camelize('foo-bar-baz'), 'fooBarBaz')
+    assert.equal(camelize('FooBar'), 'FooBar')
+    assert.equal(camelize('fooBar'), 'fooBar')
+    assert.equal(camelize('foo_bar'), 'foo_bar')
   })
 })
