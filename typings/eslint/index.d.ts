@@ -452,7 +452,6 @@ export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage
   type LintOptions = ESLintLinter.LintOptions
   type LegacyConfig = ESLintLinter.LegacyConfig
-  type FlatConfig = Config
   type LanguageOptions = ESLintLinter.LanguageOptions
   interface Config extends Omit<ESLintLinter.Config, 'plugins'> {
     plugins?: Record<string, ESLint.Plugin>
