@@ -4,6 +4,27 @@
   "description": "Official ESLint plugin for Vue.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/eslint-typegen.d.ts"
+    },
+    "./dist/utils": "./dist/utils/index.js",
+    "./dist/*.d.ts": "./dist/*.d.ts",
+    "./dist/*.js": "./dist/*.js",
+    "./dist/*": "./dist/*.js",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "types": [
+        "./dist/eslint-typegen.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "new": "node tools/new-rule.ts",
     "start": "npm run test:base -- --watch",
