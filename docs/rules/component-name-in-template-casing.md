@@ -16,7 +16,7 @@ Define a style for the component name in template casing for consistency purpose
 
 ## :book: Rule Details
 
-This rule aims to warn the tag names other than the configured casing in Vue.js template.
+This rule reports tag names that do not match the configured casing in Vue.js templates.
 For namespaced components such as `<Form.Input>`, only the part before the dot is checked, because the part after it has to match the object key.
 
 ## :wrench: Options

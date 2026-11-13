@@ -14,7 +14,7 @@ since: v7.10.0
 
 ## :book: Rule Details
 
-This rule enforces that a `emits` statement contains type definition.
+This rule enforces that an `emits` statement contains a type definition.
 
 Declaring `emits` with types can bring better maintenance.
 Even if using with TypeScript, this can provide better type inference when annotating parameters with types.

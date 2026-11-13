@@ -14,7 +14,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule enforces a consistent indentation style in HTML comment (`<!-- ... -->`). The default style is 2 spaces.
+This rule enforces a consistent indentation style in HTML comments (`<!-- ... -->`). The default style is 2 spaces.
 
 <eslint-code-block fix :rules="{'vue/html-comment-indent': ['error']}">
 

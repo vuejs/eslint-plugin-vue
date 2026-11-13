@@ -20,7 +20,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports use of deprecated `$on`, `$off` `$once` api. (in Vue.js 3.0.0+).
+This rule reports use of deprecated `$on`, `$off` and `$once` API. (in Vue.js 3.0.0+).
 
 See [Migration Guide - Events API](https://v3-migration.vuejs.org/breaking-changes/events-api.html) for more details.
 

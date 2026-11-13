@@ -19,7 +19,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports event triggers not declared with the `emits` option. (The `emits` option is a new in Vue.js 3.0.0+)
+This rule reports event triggers not declared with the `emits` option. (The `emits` option is new in Vue.js 3.0.0+)
 
 Explicit `emits` declaration serves as self-documenting code. This can be useful for other developers to instantly understand what events the component is supposed to emit.
 Also, with attribute fallthrough changes in Vue.js 3.0.0+, `v-on` listeners on components will fallthrough as native listeners by default. Declare it as a component-only event in `emits` to avoid unnecessary registration of native listeners.

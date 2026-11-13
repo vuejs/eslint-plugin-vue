@@ -23,7 +23,7 @@ since: v3.0.0
 
 ## :book: Rule Details
 
-This rule enforces `v-bind` directive style which you should use shorthand or long form.
+This rule enforces which `v-bind` directive style you should use: shorthand or long form.
 
 <eslint-code-block fix :rules="{'vue/v-bind-style': ['error']}">
 

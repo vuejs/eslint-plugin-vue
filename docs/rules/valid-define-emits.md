@@ -24,7 +24,7 @@ since: v7.13.0
   - `"plugin:vue/recommended"`
   - `"plugin:vue/vue2-recommended"`
 
-This rule checks whether `defineEmits` compiler macro is valid.
+This rule checks whether the `defineEmits` compiler macro is valid.
 
 ## :book: Rule Details
 

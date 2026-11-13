@@ -31,7 +31,7 @@ This rule enforces the quotes style of HTML attributes.
 
 ## :book: Rule Details
 
-This rule reports the quotes of attributes if it is different to configured quotes.
+This rule reports attribute quotes that are different from the configured quotes.
 
 <eslint-code-block fix :rules="{'vue/html-quotes': ['error']}">
 

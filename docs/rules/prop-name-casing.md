@@ -22,7 +22,7 @@ since: v4.3.0
 
 ## :book: Rule Details
 
-This rule enforce proper casing of props in vue components(camelCase).
+This rule enforces proper casing of props in Vue components (camelCase).
 
 <eslint-code-block :rules="{'vue/prop-name-casing': ['error']}">
 

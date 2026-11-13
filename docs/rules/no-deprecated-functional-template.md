@@ -20,7 +20,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports deprecated the `functional` template (in Vue.js 3.0.0+).
+This rule reports the deprecated `functional` template (in Vue.js 3.0.0+).
 
 See [Migration Guide - Functional Components](https://v3-migration.vuejs.org/breaking-changes/functional-components.html) for more details.
 

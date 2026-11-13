@@ -16,7 +16,7 @@ This rule allows you to specify `v-on` argument names that you don't want to use
 
 ## :wrench: Options
 
-This rule takes a list of strings, where each string is a argument name or pattern to be restricted:
+This rule takes a list of strings, where each string is an argument name or pattern to be restricted:
 
 ```json
 {

@@ -14,7 +14,7 @@ since: v9.9.0
 
 ## :book: Rule Details
 
-This rule requires or disallows blank lines in the component definition. Properly blank lines help developers improve code readability and code style flexibility.
+This rule requires or disallows blank lines in the component definition. Properly placed blank lines help developers improve code readability and code style flexibility.
 
 <eslint-code-block fix :rules="{'vue/padding-lines-in-component-definition': ['error']}">
 
