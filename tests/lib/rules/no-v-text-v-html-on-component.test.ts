@@ -90,7 +90,8 @@ tester.run('no-v-text-v-html-on-component', rule, {
       `,
       errors: [
         {
-          message: "Using v-text on component may break component's content.",
+          message:
+            "Using v-text on a component may break the component's content.",
           line: 3,
           column: 22,
           endLine: 3,
@@ -107,7 +108,8 @@ tester.run('no-v-text-v-html-on-component', rule, {
       `,
       errors: [
         {
-          message: "Using v-html on component may break component's content.",
+          message:
+            "Using v-html on a component may break the component's content.",
           line: 3,
           column: 22,
           endLine: 3,
@@ -124,7 +126,8 @@ tester.run('no-v-text-v-html-on-component', rule, {
       `,
       errors: [
         {
-          message: "Using v-text on component may break component's content.",
+          message:
+            "Using v-text on a component may break the component's content.",
           line: 3,
           column: 36,
           endLine: 3,
@@ -141,7 +144,8 @@ tester.run('no-v-text-v-html-on-component', rule, {
       `,
       errors: [
         {
-          message: "Using v-html on component may break component's content.",
+          message:
+            "Using v-html on a component may break the component's content.",
           line: 3,
           column: 36,
           endLine: 3,
@@ -158,7 +162,8 @@ tester.run('no-v-text-v-html-on-component', rule, {
       `,
       errors: [
         {
-          message: "Using v-text on component may break component's content.",
+          message:
+            "Using v-text on a component may break the component's content.",
           line: 3,
           column: 30,
           endLine: 3,
@@ -175,7 +180,8 @@ tester.run('no-v-text-v-html-on-component', rule, {
       `,
       errors: [
         {
-          message: "Using v-html on component may break component's content.",
+          message:
+            "Using v-html on a component may break the component's content.",
           line: 3,
           column: 30,
           endLine: 3,
@@ -193,7 +199,8 @@ tester.run('no-v-text-v-html-on-component', rule, {
       options: [{ allow: ['nuxt-link'] }],
       errors: [
         {
-          message: "Using v-html on component may break component's content.",
+          message:
+            "Using v-html on a component may break the component's content.",
           line: 3,
           column: 22,
           endLine: 3,
@@ -212,14 +219,16 @@ tester.run('no-v-text-v-html-on-component', rule, {
       options: [{ ignoreElementNamespaces: false }],
       errors: [
         {
-          message: "Using v-text on component may break component's content.",
+          message:
+            "Using v-text on a component may break the component's content.",
           line: 3,
           column: 12,
           endLine: 3,
           endColumn: 28
         },
         {
-          message: "Using v-text on component may break component's content.",
+          message:
+            "Using v-text on a component may break the component's content.",
           line: 4,
           column: 13,
           endLine: 4,

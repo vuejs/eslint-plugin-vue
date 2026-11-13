@@ -45,7 +45,7 @@ tester.run('no-unsupported-features/v-memo', rule, {
       options: buildOptions(),
       errors: [
         {
-          message: '`v-memo` are not supported until Vue.js "3.2.0".',
+          message: '`v-memo` is not supported until Vue.js "3.2.0".',
           line: 3,
           column: 14,
           endLine: 3,

@@ -152,7 +152,7 @@ return {
       errors: [
         {
           message:
-            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+            "Object declaration on 'data' property is deprecated. Use a function declaration instead.",
           line: 4,
           column: 11,
           endLine: 6,
@@ -182,7 +182,7 @@ return {
       errors: [
         {
           message:
-            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+            "Object declaration on 'data' property is deprecated. Use a function declaration instead.",
           line: 3,
           column: 11,
           endLine: 5,
@@ -212,7 +212,7 @@ return {
       errors: [
         {
           message:
-            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+            "Object declaration on 'data' property is deprecated. Use a function declaration instead.",
           line: 3,
           column: 11,
           endLine: 5,
@@ -242,7 +242,7 @@ return (/*b*/{
       errors: [
         {
           message:
-            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+            "Object declaration on 'data' property is deprecated. Use a function declaration instead.",
           line: 3,
           column: 11,
           endLine: 5,
@@ -272,7 +272,7 @@ return {
       errors: [
         {
           message:
-            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+            "Object declaration on 'data' property is deprecated. Use a function declaration instead.",
           line: 3,
           column: 11,
           endLine: 5,
@@ -302,7 +302,7 @@ return {
       errors: [
         {
           message:
-            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+            "Object declaration on 'data' property is deprecated. Use a function declaration instead.",
           line: 3,
           column: 11,
           endLine: 5,

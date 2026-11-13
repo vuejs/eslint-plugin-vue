@@ -63,7 +63,7 @@ tester.run('no-unsupported-features/v-bind-prop-modifier-shorthand', rule, {
       options: buildOptions(),
       errors: [
         {
-          message: '`.prop` shorthand are not supported until Vue.js "3.2.0".',
+          message: '`.prop` shorthand is not supported until Vue.js "3.2.0".',
           line: 3,
           column: 12,
           endLine: 3,
@@ -83,7 +83,7 @@ tester.run('no-unsupported-features/v-bind-prop-modifier-shorthand', rule, {
       options: buildOptions({ version: '2.5.99' }),
       errors: [
         {
-          message: '`.prop` shorthand are not supported until Vue.js "3.2.0".',
+          message: '`.prop` shorthand is not supported until Vue.js "3.2.0".',
           line: 3,
           column: 12,
           endLine: 3,
@@ -103,7 +103,7 @@ tester.run('no-unsupported-features/v-bind-prop-modifier-shorthand', rule, {
       options: buildOptions({ version: '3.1.0' }),
       errors: [
         {
-          message: '`.prop` shorthand are not supported until Vue.js "3.2.0".',
+          message: '`.prop` shorthand is not supported until Vue.js "3.2.0".',
           line: 3,
           column: 12,
           endLine: 3,

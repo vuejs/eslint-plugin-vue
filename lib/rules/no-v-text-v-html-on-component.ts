@@ -34,7 +34,7 @@ export default {
     ],
     messages: {
       disallow:
-        "Using {{directiveName}} on component may break component's content."
+        "Using {{directiveName}} on a component may break the component's content."
     }
   },
   create(context: RuleContext) {

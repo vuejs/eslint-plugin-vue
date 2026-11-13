@@ -18,7 +18,7 @@ export default {
     schema: [],
     messages: {
       numberModifierIsDeprecated:
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead."
     }
   },
   create(context: RuleContext) {

@@ -54,7 +54,7 @@ tester.run('no-unsupported-features', rule, {
       options: [{ version: '^2.5.0' }],
       errors: [
         {
-          message: '`v-slot` are not supported until Vue.js "2.6.0".',
+          message: '`v-slot` is not supported until Vue.js "2.6.0".',
           line: 4,
           column: 21,
           endLine: 4,

@@ -48,7 +48,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      missingDefault: `Prop '{{propName}}' requires default value to be set.`
+      missingDefault: `Prop '{{propName}}' requires a default value to be set.`
     }
   },
   create(context: RuleContext) {

@@ -96,7 +96,7 @@ export default {
       }
     ],
     messages: {
-      forbiddenStaticInlineStyle: 'Static inline `style` are forbidden.',
+      forbiddenStaticInlineStyle: 'Static inline `style` is forbidden.',
       forbiddenStyleAttr: '`style` attributes are forbidden.'
     }
   },

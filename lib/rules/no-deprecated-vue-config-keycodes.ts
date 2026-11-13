@@ -16,7 +16,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      unexpected: '`Vue.config.keyCodes` are deprecated.'
+      unexpected: '`Vue.config.keyCodes` is deprecated.'
     }
   },
   create(context: RuleContext): RuleListener {

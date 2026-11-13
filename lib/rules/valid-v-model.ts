@@ -126,7 +126,7 @@ export default {
       unexpectedArgument: "'v-model' directives require no argument.",
       unexpectedModifier:
         "'v-model' directives don't support the modifier '{{name}}'.",
-      missingValue: "'v-model' directives require that attribute value.",
+      missingValue: "'v-model' directives require an attribute value.",
       unexpectedOptionalChaining:
         "Optional chaining cannot appear in 'v-model' directives.",
       unexpectedNonLhsExpression:

@@ -92,7 +92,7 @@ tester.run('valid-v-if', rule, {
       code: '<template><div><div v-if></div></div></template>',
       errors: [
         {
-          message: "'v-if' directives require that attribute value.",
+          message: "'v-if' directives require an attribute value.",
           line: 1,
           column: 21,
           endLine: 1,
@@ -106,7 +106,7 @@ tester.run('valid-v-if', rule, {
       code: '<template><div><div v-if=""></div></div></template>',
       errors: [
         {
-          message: "'v-if' directives require that attribute value.",
+          message: "'v-if' directives require an attribute value.",
           line: 1,
           column: 21,
           endLine: 1,

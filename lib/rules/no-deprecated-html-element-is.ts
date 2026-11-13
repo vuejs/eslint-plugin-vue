@@ -16,7 +16,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      unexpected: 'The `is` attribute on HTML element are deprecated.'
+      unexpected: 'The `is` attribute on HTML elements is deprecated.'
     }
   },
   create(context: RuleContext) {

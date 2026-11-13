@@ -80,7 +80,7 @@ tester.run('valid-v-memo', rule, {
       code: '<template><div v-memo></div></template>',
       errors: [
         {
-          message: "'v-memo' directives require that attribute value.",
+          message: "'v-memo' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,
@@ -94,7 +94,7 @@ tester.run('valid-v-memo', rule, {
       code: '<template><div v-memo="" /></template>',
       errors: [
         {
-          message: "'v-memo' directives require that attribute value.",
+          message: "'v-memo' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,

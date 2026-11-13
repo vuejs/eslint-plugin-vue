@@ -147,7 +147,7 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message:
-            "The 'list' variable inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
+            "The 'list' variable inside 'v-for' directive should be replaced with a computed property that returns a filtered array instead. You should not mix 'v-for' with 'v-if'.",
           line: 1,
           column: 39,
           endLine: 1,
@@ -173,7 +173,7 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message:
-            "The 'users' variable inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
+            "The 'users' variable inside 'v-for' directive should be replaced with a computed property that returns a filtered array instead. You should not mix 'v-for' with 'v-if'.",
           line: 6,
           column: 15,
           endLine: 6,
@@ -212,7 +212,7 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message:
-            "The 'list' variable inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
+            "The 'list' variable inside 'v-for' directive should be replaced with a computed property that returns a filtered array instead. You should not mix 'v-for' with 'v-if'.",
           line: 1,
           column: 45,
           endLine: 1,
@@ -238,7 +238,7 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message:
-            "The 'users' variable inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
+            "The 'users' variable inside 'v-for' directive should be replaced with a computed property that returns a filtered array instead. You should not mix 'v-for' with 'v-if'.",
           line: 6,
           column: 15,
           endLine: 6,
@@ -277,7 +277,7 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message:
-            "The 'list()' expression inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
+            "The 'list()' expression inside 'v-for' directive should be replaced with a computed property that returns a filtered array instead. You should not mix 'v-for' with 'v-if'.",
           line: 1,
           column: 43,
           endLine: 1,
@@ -291,7 +291,7 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message:
-            "The '5' expression inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
+            "The '5' expression inside 'v-for' directive should be replaced with a computed property that returns a filtered array instead. You should not mix 'v-for' with 'v-if'.",
           line: 1,
           column: 36,
           endLine: 1,

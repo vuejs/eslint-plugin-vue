@@ -64,7 +64,7 @@ tester.run('valid-v-html', rule, {
       code: '<template><div v-html></div></template>',
       errors: [
         {
-          message: "'v-html' directives require that attribute value.",
+          message: "'v-html' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,
@@ -78,7 +78,7 @@ tester.run('valid-v-html', rule, {
       code: '<template><div v-html=""></div></template>',
       errors: [
         {
-          message: "'v-html' directives require that attribute value.",
+          message: "'v-html' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,
