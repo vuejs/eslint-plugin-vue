@@ -64,7 +64,7 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       </template>`,
       errors: [
         {
-          message: '`slot-scope` are deprecated.',
+          message: '`slot-scope` attributes are deprecated.',
           line: 4,
           column: 21,
           endLine: 4,
@@ -87,7 +87,7 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       </template>`,
       errors: [
         {
-          message: '`slot-scope` are deprecated.',
+          message: '`slot-scope` attributes are deprecated.',
           line: 4,
           column: 21,
           endLine: 4,
@@ -110,7 +110,7 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       </template>`,
       errors: [
         {
-          message: '`slot-scope` are deprecated.',
+          message: '`slot-scope` attributes are deprecated.',
           line: 4,
           column: 14,
           endLine: 4,
@@ -128,7 +128,7 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       output: null,
       errors: [
         {
-          message: '`slot-scope` are deprecated.',
+          message: '`slot-scope` attributes are deprecated.',
           line: 4,
           column: 21,
           endLine: 4,
@@ -146,7 +146,7 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       output: null,
       errors: [
         {
-          message: '`slot-scope` are deprecated.',
+          message: '`slot-scope` attributes are deprecated.',
           line: 4,
           column: 21,
           endLine: 4,
@@ -166,7 +166,7 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       output: null,
       errors: [
         {
-          message: '`slot-scope` are deprecated.',
+          message: '`slot-scope` attributes are deprecated.',
           line: 4,
           column: 37,
           endLine: 4,
@@ -187,7 +187,7 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       output: null,
       errors: [
         {
-          message: '`slot-scope` are deprecated.',
+          message: '`slot-scope` attributes are deprecated.',
           line: 4,
           column: 21,
           endLine: 4,

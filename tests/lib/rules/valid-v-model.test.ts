@@ -234,7 +234,7 @@ tester.run('valid-v-model', rule, {
       code: '<template><input v-model></template>',
       errors: [
         {
-          message: "'v-model' directives require that attribute value.",
+          message: "'v-model' directives require an attribute value.",
           line: 1,
           column: 18,
           endLine: 1,
@@ -331,7 +331,7 @@ tester.run('valid-v-model', rule, {
       code: '<template><MyComponent v-model="" /></template>',
       errors: [
         {
-          message: "'v-model' directives require that attribute value.",
+          message: "'v-model' directives require an attribute value.",
           line: 1,
           column: 24,
           endLine: 1,

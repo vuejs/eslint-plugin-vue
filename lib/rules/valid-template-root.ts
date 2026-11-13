@@ -18,7 +18,7 @@ export default {
     messages: {
       emptySrc:
         "The template root with 'src' attribute is required to be empty.",
-      noChild: 'The template requires child element.'
+      noChild: 'The template requires a child element.'
     }
   },
   create(context: RuleContext) {

@@ -136,7 +136,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
       errors: [
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 4,
           column: 18,
           endLine: 4,
@@ -157,7 +157,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
       errors: [
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 4,
           column: 18,
           endLine: 4,
@@ -180,7 +180,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
       errors: [
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 4,
           column: 18,
           endLine: 4,
@@ -204,7 +204,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
       errors: [
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 5,
           column: 16,
           endLine: 5,
@@ -227,7 +227,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
       errors: [
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 4,
           column: 19,
           endLine: 4,
@@ -235,7 +235,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
         },
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 5,
           column: 19,
           endLine: 5,
@@ -243,7 +243,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
         },
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 6,
           column: 19,
           endLine: 6,
@@ -266,7 +266,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
       errors: [
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 4,
           column: 21,
           endLine: 4,
@@ -274,7 +274,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
         },
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 5,
           column: 21,
           endLine: 5,
@@ -282,7 +282,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
         },
         {
           message:
-            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+            'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.',
           line: 6,
           column: 21,
           endLine: 6,

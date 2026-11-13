@@ -219,7 +219,7 @@ tester.run('valid-v-for', rule, {
       code: '<template><div><div v-for></div></div></template>',
       errors: [
         {
-          message: "'v-for' directives require that attribute value.",
+          message: "'v-for' directives require an attribute value.",
           line: 1,
           column: 21,
           endLine: 1,
@@ -510,7 +510,7 @@ tester.run('valid-v-for', rule, {
       code: '<template><div v-for=""></div></template>',
       errors: [
         {
-          message: "'v-for' directives require that attribute value.",
+          message: "'v-for' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,

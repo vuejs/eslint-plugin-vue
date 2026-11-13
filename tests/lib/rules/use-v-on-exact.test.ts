@@ -124,7 +124,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 3,
           column: 11,
           endLine: 3,
@@ -141,7 +141,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 3,
           column: 11,
           endLine: 3,
@@ -158,7 +158,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 3,
           column: 11,
           endLine: 3,
@@ -175,7 +175,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 3,
           column: 11,
           endLine: 3,
@@ -192,7 +192,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 4,
           column: 11,
           endLine: 4,
@@ -210,7 +210,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 4,
           column: 11,
           endLine: 4,
@@ -228,14 +228,14 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 3,
           column: 11,
           endLine: 3,
           endColumn: 17
         },
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 4,
           column: 11,
           endLine: 4,
@@ -252,7 +252,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 3,
           column: 11,
           endLine: 3,
@@ -270,7 +270,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 4,
           column: 11,
           endLine: 4,
@@ -288,7 +288,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 4,
           column: 11,
           endLine: 4,
@@ -305,7 +305,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 3,
           column: 11,
           endLine: 3,
@@ -323,14 +323,14 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 3,
           column: 11,
           endLine: 3,
           endColumn: 24
         },
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 4,
           column: 11,
           endLine: 4,
@@ -347,7 +347,7 @@ ruleTester.run('use-v-on-exact', rule, {
       </template>`,
       errors: [
         {
-          message: "Consider to use '.exact' modifier.",
+          message: "Consider using the '.exact' modifier.",
           line: 3,
           column: 11,
           endLine: 3,

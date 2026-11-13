@@ -52,7 +52,7 @@ export default {
     messages: {
       movedToWrapper: "This 'v-if' should be moved to the wrapper element.",
       shouldUseComputed:
-        "The '{{iteratorName}}' {{kind}} inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'."
+        "The '{{iteratorName}}' {{kind}} inside 'v-for' directive should be replaced with a computed property that returns a filtered array instead. You should not mix 'v-for' with 'v-if'."
     }
   },
   create(context: RuleContext) {

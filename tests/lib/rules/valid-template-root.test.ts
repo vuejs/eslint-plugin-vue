@@ -104,7 +104,7 @@ tester.run('valid-template-root', rule, {
       code: '<template>\n</template>',
       errors: [
         {
-          message: 'The template requires child element.',
+          message: 'The template requires a child element.',
           line: 1,
           column: 1,
           endLine: 2,

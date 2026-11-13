@@ -81,7 +81,7 @@ tester.run('html-end-tags', rule, {
       output: '<template><div><div></div></div></template>',
       errors: [
         {
-          message: "'<div>' should have end tag.",
+          message: "'<div>' should have an end tag.",
           line: 1,
           column: 11,
           endLine: 1,
@@ -95,7 +95,7 @@ tester.run('html-end-tags', rule, {
       output: '<template><div><p></p></div></template>',
       errors: [
         {
-          message: "'<p>' should have end tag.",
+          message: "'<p>' should have an end tag.",
           line: 1,
           column: 16,
           endLine: 1,

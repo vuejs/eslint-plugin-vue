@@ -32,7 +32,7 @@ ruleTester.run('no-deprecated-vue-config-keycodes', rule, {
       code: 'Vue.config.keyCodes = {}',
       errors: [
         {
-          message: '`Vue.config.keyCodes` are deprecated.',
+          message: '`Vue.config.keyCodes` is deprecated.',
           line: 1,
           column: 1,
           // messageId: 'unexpected',
@@ -46,7 +46,7 @@ ruleTester.run('no-deprecated-vue-config-keycodes', rule, {
       code: 'Vue?.config?.keyCodes',
       errors: [
         {
-          message: '`Vue.config.keyCodes` are deprecated.',
+          message: '`Vue.config.keyCodes` is deprecated.',
           line: 1,
           column: 1,
           endLine: 1,
@@ -59,7 +59,7 @@ ruleTester.run('no-deprecated-vue-config-keycodes', rule, {
       code: '(Vue?.config)?.keyCodes',
       errors: [
         {
-          message: '`Vue.config.keyCodes` are deprecated.',
+          message: '`Vue.config.keyCodes` is deprecated.',
           line: 1,
           column: 1,
           endLine: 1,

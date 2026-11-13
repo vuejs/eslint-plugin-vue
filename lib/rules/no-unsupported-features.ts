@@ -108,11 +108,11 @@ export default {
     messages: {
       // Vue.js 2.5.0+
       forbiddenSlotScopeAttribute:
-        '`slot-scope` are not supported except Vue.js ">=2.5.0 <3.0.0".',
+        '`slot-scope` is not supported except Vue.js ">=2.5.0 <3.0.0".',
       // Vue.js 2.6.0+
       forbiddenDynamicDirectiveArguments:
         'Dynamic arguments are not supported until Vue.js "2.6.0".',
-      forbiddenVSlot: '`v-slot` are not supported until Vue.js "2.6.0".',
+      forbiddenVSlot: '`v-slot` is not supported until Vue.js "2.6.0".',
       // Vue.js 2.7.0+
       forbiddenScriptSetup:
         '`<script setup>` is not supported until Vue.js "2.7.0".',
@@ -123,14 +123,14 @@ export default {
         'Argument on `v-model` is not supported until Vue.js "3.0.0".',
       forbiddenVModelCustomModifiers:
         'Custom modifiers on `v-model` are not supported until Vue.js "3.0.0".',
-      forbiddenVIs: '`v-is` are not supported until Vue.js "3.0.0".',
+      forbiddenVIs: '`v-is` is not supported until Vue.js "3.0.0".',
       // Vue.js 3.1.0+
       forbiddenIsAttributeWithVuePrefix:
-        '`is="vue:"` are not supported until Vue.js "3.1.0".',
+        '`is="vue:"` is not supported until Vue.js "3.1.0".',
       // Vue.js 3.2.0+
-      forbiddenVMemo: '`v-memo` are not supported until Vue.js "3.2.0".',
+      forbiddenVMemo: '`v-memo` is not supported until Vue.js "3.2.0".',
       forbiddenVBindPropModifierShorthand:
-        '`.prop` shorthand are not supported until Vue.js "3.2.0".',
+        '`.prop` shorthand is not supported until Vue.js "3.2.0".',
       forbiddenVBindAttrModifier:
         '`.attr` modifiers on `v-bind` are not supported until Vue.js "3.2.0".',
       // Vue.js 3.3.0+

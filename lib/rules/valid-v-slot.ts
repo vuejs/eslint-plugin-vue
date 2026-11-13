@@ -236,7 +236,7 @@ export default {
         "Dynamic argument of 'v-slot' directive cannot use that slot parameter.",
       disallowAnyModifier: "'v-slot' directive doesn't support any modifier.",
       requireAttributeValue:
-        "'v-slot' directive on a custom element requires that attribute value."
+        "'v-slot' directive on a custom element requires an attribute value."
     }
   },
   create(context: RuleContext) {
