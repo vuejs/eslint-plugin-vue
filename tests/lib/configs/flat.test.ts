@@ -8,8 +8,8 @@ import plugin from '../../../dist'
 import { strict as assert } from 'node:assert'
 import { FlatESLint } from '../../eslint-compat'
 
-function mergeConfig(configs: Linter.FlatConfig[]): Linter.FlatConfig {
-  let config: Linter.FlatConfig = { rules: {}, plugins: {} }
+function mergeConfig(configs: Linter.Config[]): Linter.Config {
+  let config: Linter.Config = { rules: {}, plugins: {} }
   for (const item of configs) {
     config = {
       ...config,
