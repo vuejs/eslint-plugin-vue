@@ -230,7 +230,7 @@ For example:
 | [vue/max-props] | enforce maximum number of props in Vue component |  | :warning: |
 | [vue/max-template-depth] | enforce maximum depth of template |  | :warning: |
 | [vue/new-line-between-multi-line-property] | enforce new lines between multi-line properties in Vue components | :wrench: | :lipstick: |
-| [vue/next-tick-style] | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
+| [vue/next-tick-style] | enforce Promise or callback style in `nextTick` | :wrench::bulb: | :hammer: |
 | [vue/no-bare-strings-in-template] | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
 | [vue/no-content-outside-block] | disallow content outside of the top-level blocks | :bulb: | :warning: |
