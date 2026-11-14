@@ -3,25 +3,25 @@
  * @copyright 2018 Michał Sajnóg. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
 /*
- * This script updates `lib/configs/prettier.js`,
+ * This script updates `lib/configs/no-layout-rules.ts`,
  * and disables all layout rules
  */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const rules = require('./lib/rules')
+import fs from 'node:fs'
+import path from 'node:path'
+import rules from './lib/rules.ts'
+import type { RuleInfo } from './lib/rules.ts'
 
 const rulesToDisable = rules.filter(({ meta }) => meta.type === 'layout')
 
-function formatRules(rules) {
+function formatRules(rules: RuleInfo[]) {
   const obj = Object.fromEntries(rules.map((rule) => [rule.ruleId, 'off']))
   return JSON.stringify(obj, null, 2)
 }
 
-function generateConfig(rules) {
+function generateConfig(rules: RuleInfo[]) {
   return `/*
  * IMPORTANT!
  * This file has been automatically generated,
@@ -34,6 +34,9 @@ export default {
 }
 
 // Update files.
-const filePath = path.resolve(__dirname, '../lib/configs/no-layout-rules.ts')
+const filePath = path.resolve(
+  import.meta.dirname,
+  '../lib/configs/no-layout-rules.ts'
+)
 const content = generateConfig(rulesToDisable)
 fs.writeFileSync(filePath, content)

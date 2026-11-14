@@ -1,22 +1,23 @@
 /**
- * @author Toru Nagashima
- * @copyright 2017 Toru Nagashima. All rights reserved.
+ * @author 唯然<weiran.zsd@outlook.com>
+ * @copyright 2023- 唯然. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
 /*
-This script updates `lib/configs/*.js` files from rule's meta data.
+This script updates `lib/configs/flat/*.ts` files from rule's meta data.
 */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const { ESLint } = require('eslint')
-const { categories } = require('./lib/categories')
+import fs from 'node:fs'
+import path from 'node:path'
+import { ESLint } from 'eslint'
+import { categories } from './lib/categories.ts'
+import type { Category } from './lib/categories.ts'
+import type { RuleInfo } from './lib/rules.ts'
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
 
-const extendsCategories = {
+const extendsCategories: Record<string, string | null> = {
   base: null,
   'vue2-essential': 'base',
   'vue3-essential': 'base',
@@ -28,10 +29,14 @@ const extendsCategories = {
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatRules(rules, categoryId, shouldAlwaysError) {
+function formatRules(
+  rules: RuleInfo[],
+  categoryId: string,
+  shouldAlwaysError: boolean
+) {
   const obj = Object.fromEntries(
     rules.map((rule) => {
-      let options =
+      let options: string | unknown[] =
         shouldAlwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
       const defaultOptions =
         rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
@@ -48,32 +53,49 @@ function formatRules(rules, categoryId, shouldAlwaysError) {
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory(category, shouldAlwaysError = false) {
-  let extendsCategoryId = extendsCategories[category.categoryId]
-  if (extendsCategoryId == null) {
+function formatCategory(category: Category, shouldAlwaysError = false) {
+  if (category.categoryId === 'base') {
     return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-export default {
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
-  },
-  plugins: [
-    'vue'
-  ],
-  rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)},
-  overrides: [
-    {
-      files: '*.vue',
-      parser: require.resolve('vue-eslint-parser')
+import plugin from '../../plugin.ts'
+import vueParser from 'vue-eslint-parser'
+
+export default [
+  {
+    name: 'vue/base/setup',
+    plugins: {
+      get vue() {
+        return plugin
+      }
+    },
+    languageOptions: {
+      sourceType: 'module',
     }
-  ]
-}
+  },
+  {
+    name: 'vue/base/setup-for-vue',
+    files: ['*.vue', '**/*.vue'],
+    plugins: {
+      get vue() {
+        return plugin
+      }
+    },
+    languageOptions: {
+      parser: vueParser,
+      sourceType: 'module',
+    },
+    rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)},
+    processor: 'vue/vue'
+  }
+]
 `
   }
+
+  let extendsCategoryId = extendsCategories[category.categoryId]!
+
   if (shouldAlwaysError && !errorCategories.has(extendsCategoryId)) {
     extendsCategoryId += '-error'
   }
@@ -83,15 +105,20 @@ export default {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-export default {
-  extends: require.resolve('./${extendsCategoryId}'),
-  rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)}
-}
+import config from './${extendsCategoryId}.ts'
+
+export default [
+  ...config,
+  {
+    name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}${shouldAlwaysError ? '-error' : ''}/rules',
+    rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)},
+  }
+]
 `
 }
 
 // Update files.
-const ROOT = path.resolve(__dirname, '../lib/configs/')
+const ROOT = path.resolve(import.meta.dirname, '../lib/configs/flat/')
 for (const category of categories) {
   const filePath = path.join(ROOT, `${category.categoryId}.ts`)
   const content = formatCategory(category)

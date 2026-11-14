@@ -1,10 +1,11 @@
 import fs from 'node:fs/promises'
+import type { ESLint } from 'eslint'
 import { pluginsToRulesDTS } from 'eslint-typegen/core'
 import plugin from '../lib/plugin.ts'
 
 const dts = await pluginsToRulesDTS(
   {
-    vue: plugin
+    vue: plugin as ESLint.Plugin
   },
   {
     includeAugmentation: false

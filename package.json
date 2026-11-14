@@ -1,11 +1,11 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "10.12.0",
+  "version": "10.12.1",
   "description": "Official ESLint plugin for Vue.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "new": "node tools/new-rule.js",
+    "new": "node tools/new-rule.ts",
     "start": "npm run test:base -- --watch",
     "test:base": "vitest run --reporter=dot tests/lib",
     "test": "vitest run",
@@ -19,9 +19,9 @@
     "tsc": "tsc",
     "preversion": "npm test && git add .",
     "version": "npm run generate:version && git add .",
-    "update": "node ./tools/update.js",
-    "update-resources": "node ./tools/update-resources.js",
-    "typegen": "node ./tools/generate-typegen.mjs",
+    "update": "node ./tools/update.ts",
+    "update-resources": "node ./tools/update-resources.ts",
+    "typegen": "node ./tools/generate-typegen.ts",
     "build": "npm run typegen && tsdown",
     "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
@@ -62,7 +62,7 @@
     "@stylistic/eslint-plugin": "^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0",
     "@typescript-eslint/parser": "^7.0.0 || ^8.0.0",
     "eslint": "^8.57.0 || ^9.0.0 || ^10.0.0",
-    "vue-eslint-parser": "^10.3.0"
+    "vue-eslint-parser": "^10.4.2"
   },
   "peerDependenciesMeta": {
     "@stylistic/eslint-plugin": {
@@ -123,6 +123,6 @@
     "vite-plugin-eslint4b": "^0.9.0",
     "vitepress": "^1.6.4",
     "vitest": "^4.1.9",
-    "vue-eslint-parser": "^10.4.1"
+    "vue-eslint-parser": "^10.4.2"
   }
 }
