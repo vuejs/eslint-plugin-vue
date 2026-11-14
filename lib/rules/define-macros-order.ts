@@ -77,6 +77,159 @@ function getDefineMacrosStatement(node: ASTNode): ASTNode {
     : getDefineMacrosStatement(node.parent)
 }
 
+/**
+ * Find the top-level statement in `body` that contains the given node.
+ */
+function findTopLevelStatement(
+  body: Program['body'],
+  node: ASTNode
+): ASTNode | null {
+  let low = 0
+  let high = body.length - 1
+  while (low <= high) {
+    const middle = (low + high) >> 1
+    const statement = body[middle]
+    if (node.range[1] <= statement.range[0]) {
+      high = middle - 1
+    } else if (node.range[0] >= statement.range[1]) {
+      low = middle + 1
+    } else {
+      return statement
+    }
+  }
+  return null
+}
+
+function isAmbientStatement(node: ASTNode) {
+  return (
+    isDeclareStatement(node) ||
+    (node.type === 'ExportNamedDeclaration' &&
+      node.declaration != null &&
+      isDeclareStatement(node.declaration))
+  )
+}
+
+interface StatementDependencies {
+  /** Statements that declare values or types the statement references */
+  all: Set<ASTNode>
+  /** Statements that declare runtime values the statement references */
+  runtime: Set<ASTNode>
+}
+
+type DependencyGetter = (
+  statement: ASTNode
+) => StatementDependencies | undefined
+
+/**
+ * Map each top-level statement to the top-level statements that declare the
+ * variables and types it references.
+ */
+function getStatementDependencies(
+  sourceCode: SourceCode,
+  program: Program
+): Map<ASTNode, StatementDependencies> {
+  const dependencies = new Map<ASTNode, StatementDependencies>()
+  const variables = sourceCode.scopeManager.scopes
+    .filter((scope) => scope.block === program)
+    .flatMap((scope) => scope.variables)
+
+  for (const variable of variables) {
+    for (const def of variable.defs) {
+      const declaration = findTopLevelStatement(program.body, def.node)
+      // Imports are hoisted, and they belong at the top anyway
+      if (!declaration || declaration.type === 'ImportDeclaration') {
+        continue
+      }
+      const isRuntimeDeclaration = !isAmbientStatement(declaration)
+
+      for (const reference of variable.references) {
+        const statement = findTopLevelStatement(
+          program.body,
+          reference.identifier
+        )
+        if (!statement || statement === declaration) {
+          continue
+        }
+        let statementDependencies = dependencies.get(statement)
+        if (!statementDependencies) {
+          statementDependencies = { all: new Set(), runtime: new Set() }
+          dependencies.set(statement, statementDependencies)
+        }
+        statementDependencies.all.add(declaration)
+        // `isValueReference` is only set by `@typescript-eslint/scope-manager`,
+        // other scope managers only create value references.
+        const isValueReference =
+          (reference as { isValueReference?: boolean }).isValueReference !==
+          false
+        if (isRuntimeDeclaration && isValueReference) {
+          statementDependencies.runtime.add(declaration)
+        }
+      }
+    }
+  }
+
+  return dependencies
+}
+
+/**
+ * Get the statements in `region` that `macro` references, either directly or
+ * through other statements in `region`, in source order.
+ */
+function getReferencedChain(
+  macro: ASTNode,
+  region: ASTNode[],
+  getDependencies: DependencyGetter
+): ASTNode[] {
+  if (region.length === 0) {
+    return []
+  }
+  const regionStatements = new Set(region)
+  const chain = new Set<ASTNode>()
+  const queue = [macro]
+  let statement = queue.pop()
+  while (statement) {
+    const dependencies = getDependencies(statement)?.all ?? []
+    for (const dependency of dependencies) {
+      if (!regionStatements.has(dependency) || chain.has(dependency)) {
+        continue
+      }
+      chain.add(dependency)
+      queue.push(dependency)
+    }
+    statement = queue.pop()
+  }
+  return region.filter((node) => chain.has(node))
+}
+
+/**
+ * Check that moving `nodes` (in this order) before `target` does not place
+ * any of them above a runtime declaration it references, which would break
+ * the code.
+ */
+function canMoveBefore(
+  nodes: ASTNode[],
+  target: ASTNode,
+  getDependencies: DependencyGetter
+): boolean {
+  return nodes.every((node, index) => {
+    const dependencies = getDependencies(node)?.runtime ?? []
+    for (const dependency of dependencies) {
+      const dependencyIndex = nodes.indexOf(dependency)
+      const isBrokenDependency =
+        dependencyIndex === -1
+          ? // a declaration that stays between `target` and `node`
+            dependency.range[0] >= target.range[0] &&
+            dependency.range[0] < node.range[0]
+          : // a declaration that is moved below `node`
+            dependencyIndex > index
+      if (isBrokenDependency) {
+        return false
+      }
+    }
+    return true
+  })
+}
+
 function create(context: RuleContext) {
   const scriptSetup = utils.getScriptSetupElement(context)
 
@@ -93,6 +246,8 @@ function create(context: RuleContext) {
       "`defineExpose` macro can't be in the `order` array if `defineExposeLast` is true."
     )
   }
+  const shouldAllowReferencedAbove: boolean =
+    !options[0] || options[0].allowReferencedAbove !== false
 
   const sourceCode = context.sourceCode
   const macrosNodes = new Map<string, ASTNode[]>()
@@ -151,6 +306,79 @@ function create(context: RuleContext) {
           })
           .filter((data): data is OrderedData => utils.isDef(data.node))
 
+        let dependencies: Map<ASTNode, StatementDependencies> | undefined
+        const getDependencies: DependencyGetter = (statement) => {
+          dependencies ??= getStatementDependencies(sourceCode, program)
+          return dependencies.get(statement)
+        }
+
+        const statements =
+          firstStatementIndex === -1
+            ? []
+            : program.body.slice(firstStatementIndex)
+
+        const macroStatements = new Set(orderedList.map(({ node }) => node))
+
+        // With `allowReferencedAbove`, the statements between a macro and the
+        // previous one (or the start) that the macro references, directly or
+        // through each other, are allowed there.
+        const allowedStatements = new Set<ASTNode>()
+        if (shouldAllowReferencedAbove) {
+          let region: ASTNode[] = []
+          for (const statement of statements) {
+            if (!macroStatements.has(statement)) {
+              region.push(statement)
+              continue
+            }
+            for (const referenced of getReferencedChain(
+              statement,
+              region,
+              getDependencies
+            )) {
+              allowedStatements.add(referenced)
+            }
+            region = []
+          }
+        }
+        // The statements the macros are compared against
+        const targetStatements = statements.filter(
+          (statement) => !allowedStatements.has(statement)
+        )
+
+        /**
+         * Get the statements to move before `before` to fix the order of the
+         * given macros, or `null` if that would break the code.
+         */
+        const getNodesToMove = (
+          nodes: ASTNode[],
+          before: ASTNode
+        ): ASTNode[] | null => {
+          const movedNodes: ASTNode[] = []
+          for (const node of nodes) {
+            if (shouldAllowReferencedAbove) {
+              // Move the declarations that the macro references along with
+              // it, so that they stay above it.
+              const passedOver = statements.filter(
+                (statement) =>
+                  statement.range[0] >= before.range[0] &&
+                  statement.range[0] < node.range[0] &&
+                  !macroStatements.has(statement) &&
+                  !movedNodes.includes(statement)
+              )
+              movedNodes.push(
+                ...getReferencedChain(node, passedOver, getDependencies)
+              )
+            }
+            movedNodes.push(node)
+          }
+          // Don't move a macro above a declaration it uses. This includes
+          // `before` itself, if a moved macro references it.
+          return !movedNodes.includes(before) &&
+            canMoveBefore(movedNodes, before, getDependencies)
+            ? movedNodes
+            : null
+        }
+
         // check last node
         if (shouldDefineExposeBeLast) {
           const lastNode = program.body.at(-1)
@@ -160,7 +388,7 @@ function create(context: RuleContext) {
         }
 
         for (const [index, should] of orderedList.entries()) {
-          const targetStatement = program.body[firstStatementIndex + index]
+          const targetStatement = targetStatements[index]
 
           if (should.node !== targetStatement) {
             let moveTargetNodes = orderedList
@@ -172,7 +400,12 @@ function create(context: RuleContext) {
             if (targetStatementIndex !== -1) {
               moveTargetNodes = moveTargetNodes.slice(0, targetStatementIndex)
             }
-            reportNotOnTop(should.name, moveTargetNodes, targetStatement)
+            reportNotOnTop(
+              should.name,
+              moveTargetNodes,
+              targetStatement,
+              getNodesToMove(moveTargetNodes, targetStatement)
+            )
             return
           }
         }
@@ -180,7 +413,12 @@ function create(context: RuleContext) {
     }
   )
 
-  function reportNotOnTop(macro: string, nodes: ASTNode[], before: ASTNode) {
+  function reportNotOnTop(
+    macro: string,
+    nodes: ASTNode[],
+    before: ASTNode,
+    movedNodes: ASTNode[] | null
+  ) {
     // Determine if 'before' is a macro from the order list
     const beforeMacro = order.find((macroName) =>
       (macrosNodes.get(macroName) ?? []).includes(before)
@@ -195,11 +433,13 @@ function create(context: RuleContext) {
       loc: nodes[0].loc,
       messageId,
       data,
-      *fix(fixer) {
-        for (const node of nodes) {
-          yield* moveNodeBefore(fixer, node, before)
-        }
-      }
+      fix: movedNodes
+        ? function* (fixer) {
+            for (const node of movedNodes) {
+              yield* moveNodeBefore(fixer, node, before)
+            }
+          }
+        : null
     })
   }
 
@@ -341,6 +581,9 @@ export default {
             uniqueItems: true
           },
           defineExposeLast: {
+            type: 'boolean'
+          },
+          allowReferencedAbove: {
             type: 'boolean'
           }
         },
