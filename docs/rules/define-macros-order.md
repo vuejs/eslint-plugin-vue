@@ -24,14 +24,14 @@ This rule reports compiler macros (like `defineProps` or `defineEmits` but also 
   "vue/define-macros-order": ["error", {
     "order": ["defineProps", "defineEmits"],
     "defineExposeLast": false,
-    "allowTypesBetweenMacros": false
+    "allowReferencedAbove": true
   }]
 }
 ```
 
 - `order` (`string[]`) ... The order in which the macros should appear. The default is `["defineProps", "defineEmits"]`.
 - `defineExposeLast` (`boolean`) ... Force `defineExpose` at the end.
-- `allowTypesBetweenMacros` (`boolean`) ... Allow TypeScript code that is erased at compile time (e.g. `type` and `interface` declarations, `declare` statements, `import type`) between the macros. Anything that emits runtime code, such as an `enum` or a non-`declare`d `namespace`, is still reported. Default is `false`.
+- `allowReferencedAbove` (`boolean`) ... Allow declarations that a macro references to be placed right above it, below the previous macro. This includes types, interfaces, enums, `declare`d declarations, variables and functions, also when they are only referenced through other such declarations. Any other statement between the macros is still reported. The autofix moves the referenced declarations together with their macro, and doesn't fix the order if that would place a macro above a declaration it uses. Default is `true`.
 
 ### `{ "order": ["defineProps", "defineEmits"] }` (default)
 
@@ -183,33 +183,61 @@ const slots = defineSlots()
 
 </eslint-code-block>
 
-### `{ "allowTypesBetweenMacros": true }`
+### `{ "allowReferencedAbove": true }` (default)
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowTypesBetweenMacros: true}]}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineModel', 'defineProps', 'defineEmits']}]}">
 
 ```vue
 <!-- ✓ GOOD -->
 <script setup lang="ts">
-defineProps(/* ... */)
+import { ref } from 'vue'
+
+const lastValue = ref<string>()
+const model = defineModel<string>({
+  get: (value) => lastValue.value ?? value
+})
+
+interface Item { id: number }
+interface Props { items: Item[] }
+defineProps<Props>()
 
 type Foo = 'bar'
+defineEmits<{ (e: Foo): void }>()
+</script>
+```
 
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineModel', 'defineProps', 'defineEmits']}]}">
+
+```vue
+<!-- ✗ BAD -->
+<script setup lang="ts">
+const model = defineModel<string>()
+
+interface Props { foo: string }
+console.log('unrelated')
+defineProps<Props>()
+
+type Unused = string
 defineEmits(/* ... */)
 </script>
 ```
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowTypesBetweenMacros: true}]}">
+### `{ "allowReferencedAbove": false }`
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowReferencedAbove: false}]}">
 
 ```vue
 <!-- ✗ BAD -->
 <script setup lang="ts">
 defineProps(/* ... */)
 
-enum Foo { Bar = 'bar' }
+type Foo = 'bar'
 
-defineEmits(/* ... */)
+defineEmits<{ (e: Foo): void }>()
 </script>
 ```
 
