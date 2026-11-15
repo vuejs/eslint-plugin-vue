@@ -31,8 +31,8 @@ about: Create a report to help us improve
 - **Operating System:** 
 
 **Please show your full configuration:**
-<!-- Paste content of your .eslintrc file -->
-```json5
+<!-- Paste content of your eslint.config.js file -->
+```js
 
 ```
 
