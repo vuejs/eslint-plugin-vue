@@ -17,12 +17,6 @@ since: v3.0.0
   - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/recommended"]`
   - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/recommended"`
-  - `"plugin:vue/vue2-recommended"`
 
 When there are multiple attributes with the same name on a component, only the last one is used and the rest are ignored, so this is usually a mistake.
 

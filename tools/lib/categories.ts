@@ -59,24 +59,11 @@ const presetConfigNames: Record<string, string> = {
   'vue3-recommended': 'flat/recommended',
   'vue2-recommended': 'flat/vue2-recommended'
 }
-const legacyPresetConfigNames: Record<string, string> = {
-  base: 'base',
-  'vue3-essential': 'essential',
-  'vue2-essential': 'vue2-essential',
-  'vue3-strongly-recommended': 'strongly-recommended',
-  'vue2-strongly-recommended': 'vue2-strongly-recommended',
-  'vue3-recommended': 'recommended',
-  'vue2-recommended': 'vue2-recommended'
-}
 
-export const getPresetNames = (presetIds: string[]) => [
-  ...presetIds.map(
+export const getPresetNames = (presetIds: string[]) =>
+  presetIds.map(
     (categoryId) => `\`*.configs["${presetConfigNames[categoryId]}"]\``
-  ),
-  ...presetIds.map(
-    (categoryId) => `\`"plugin:vue/${legacyPresetConfigNames[categoryId]}"\``
   )
-]
 
 export interface Category {
   categoryId: string
