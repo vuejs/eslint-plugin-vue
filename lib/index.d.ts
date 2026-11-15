@@ -22,7 +22,6 @@ declare const vue: {
   }
   rules: Record<string, any>
   processors: {
-    '.vue': any
     vue: any
   }
 }
