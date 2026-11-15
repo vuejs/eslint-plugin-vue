@@ -15,10 +15,7 @@ export class ESLint extends RawESLint {
 export namespace ESLint {
   interface Plugin extends Omit<RawESLint.Plugin, 'rules' | 'configs'> {
     rules?: Record<string, Rule.RuleModule>
-    configs?: Record<
-      string,
-      Linter.LegacyConfig | Linter.Config | Linter.Config[]
-    >
+    configs?: Record<string, Linter.Config | Linter.Config[]>
   }
   interface Options extends Omit<
     RawESLint.Options,
@@ -403,22 +400,22 @@ export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
   verify(
     code: SourceCode | string,
-    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    config: Linter.Config | Linter.Config[],
     filename?: string
   ): Linter.LintMessage[]
   verify(
     code: SourceCode | string,
-    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    config: Linter.Config | Linter.Config[],
     options: Linter.LintOptions
   ): Linter.LintMessage[]
   verifyAndFix(
     code: string,
-    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    config: Linter.Config | Linter.Config[],
     filename?: string
   ): Linter.FixReport
   verifyAndFix(
     code: string,
-    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    config: Linter.Config | Linter.Config[],
     options: Linter.FixOptions
   ): Linter.FixReport
 }
@@ -426,7 +423,6 @@ export class Linter extends ESLintLinter {
 export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage
   type LintOptions = ESLintLinter.LintOptions
-  type LegacyConfig = ESLintLinter.LegacyConfig
   type LanguageOptions = ESLintLinter.LanguageOptions
   interface Config extends Omit<ESLintLinter.Config, 'plugins'> {
     plugins?: Record<string, ESLint.Plugin>
