@@ -18,13 +18,6 @@ since: v4.1.0
   - `*.configs["flat/strongly-recommended"]`
   - `*.configs["flat/vue2-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `"plugin:vue/base"`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-recommended"`
-  - `"plugin:vue/recommended"`
 
 Sole purpose of this rule is to provide `eslint-disable` functionality in the `<template>` and in the block level.
 It supports usage of the following comments:
