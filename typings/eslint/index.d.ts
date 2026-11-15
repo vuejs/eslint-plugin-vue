@@ -390,22 +390,22 @@ export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
   verify(
     code: SourceCode | string,
-    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    config: Linter.Config | Linter.Config[],
     filename?: string
   ): Linter.LintMessage[]
   verify(
     code: SourceCode | string,
-    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    config: Linter.Config | Linter.Config[],
     options: Linter.LintOptions
   ): Linter.LintMessage[]
   verifyAndFix(
     code: string,
-    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    config: Linter.Config | Linter.Config[],
     filename?: string
   ): Linter.FixReport
   verifyAndFix(
     code: string,
-    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    config: Linter.Config | Linter.Config[],
     options: Linter.FixOptions
   ): Linter.FixReport
 }
@@ -413,7 +413,6 @@ export class Linter extends ESLintLinter {
 export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage
   type LintOptions = ESLintLinter.LintOptions
-  type LegacyConfig = ESLintLinter.LegacyConfig
   type FlatConfig = ESLintLinter.FlatConfig
   type LanguageOptions = ESLintLinter.LanguageOptions
   interface Config extends Omit<ESLintLinter.Config, 'plugins'> {

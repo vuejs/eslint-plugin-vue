@@ -27,6 +27,15 @@ function mergeConfig(configs: Linter.FlatConfig[]): Linter.FlatConfig {
 }
 
 describe('flat configs', () => {
+  it('should not export eslintrc configs', () => {
+    for (const name of Object.keys(plugin.configs)) {
+      assert.ok(
+        name.startsWith('flat/') || name === 'no-layout-rules',
+        `unexpected config "${name}"`
+      )
+    }
+  })
+
   it('should export base config', () => {
     const base = plugin.configs['flat/base']
     assert.ok(base)
