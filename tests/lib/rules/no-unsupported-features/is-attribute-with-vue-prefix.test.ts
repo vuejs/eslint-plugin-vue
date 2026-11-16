@@ -48,7 +48,7 @@ tester.run('no-unsupported-features/is-attribute-with-vue-prefix', rule, {
       options: buildOptions({ version: '^3.0.0' }),
       errors: [
         {
-          message: '`is="vue:"` are not supported until Vue.js "3.1.0".',
+          message: '`is="vue:"` is not supported until Vue.js "3.1.0".',
           line: 3,
           column: 17,
           endLine: 3,

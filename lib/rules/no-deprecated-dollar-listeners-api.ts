@@ -15,7 +15,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      deprecated: 'The `$listeners` is deprecated.'
+      deprecated: '`$listeners` is deprecated.'
     }
   },
   create(context: RuleContext) {
