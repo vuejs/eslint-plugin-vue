@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  */
 import rule from '../../../lib/rules/multiline-html-element-content-newline'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

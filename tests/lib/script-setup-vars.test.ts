@@ -1,5 +1,4 @@
-import semver from 'semver'
-import { RuleTester, ESLint } from '../eslint-compat'
+import { RuleTester } from 'eslint'
 import { getCoreRule } from '../../lib/utils'
 import vueEslintParser from 'vue-eslint-parser'
 
@@ -225,11 +224,10 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
             column: 18,
             endLine: 5,
             endColumn: 21,
-            suggestions: semver.gte(ESLint.version, '9.17.0')
-              ? [
-                  {
-                    desc: "Remove unused variable 'Bar'.",
-                    output: `
+            suggestions: [
+              {
+                desc: "Remove unused variable 'Bar'.",
+                output: `
         <script setup>
           // imported components are also directly usable in template
           import Foo from './Foo.vue'
@@ -253,9 +251,8 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           <Foo :count="count" @click="inc" />
         </template>
         `
-                  }
-                ]
-              : []
+              }
+            ]
           },
           {
             message: "'baz' is assigned a value but never used.",
@@ -286,11 +283,10 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
             column: 18,
             endLine: 3,
             endColumn: 27,
-            suggestions: semver.gte(ESLint.version, '9.17.0')
-              ? [
-                  {
-                    desc: "Remove unused variable 'camelCase'.",
-                    output: `
+            suggestions: [
+              {
+                desc: "Remove unused variable 'camelCase'.",
+                output: `
         <script setup>
           import './component.vue'
         </script>
@@ -299,9 +295,8 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           <CamelCase />
         </template>
         `
-                  }
-                ]
-              : []
+              }
+            ]
           }
         ]
       },
@@ -327,11 +322,10 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
             column: 19,
             endLine: 4,
             endColumn: 22,
-            suggestions: semver.gte(ESLint.version, '9.17.0')
-              ? [
-                  {
-                    desc: "Remove unused variable 'msg'.",
-                    output: `
+            suggestions: [
+              {
+                desc: "Remove unused variable 'msg'.",
+                output: `
         <script setup>
           if (a) {
             
@@ -342,9 +336,8 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           <div>{{ msg }}</div>
         </template>
         `
-                  }
-                ]
-              : []
+              }
+            ]
           }
         ]
       },

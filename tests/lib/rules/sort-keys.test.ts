@@ -4,7 +4,7 @@
  */
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/sort-keys'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 
 const ruleTester = new RuleTester()
 

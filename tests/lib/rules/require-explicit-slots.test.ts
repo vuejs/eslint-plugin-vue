@@ -2,7 +2,7 @@
  * @author Mussin Benarbia
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/require-explicit-slots'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'

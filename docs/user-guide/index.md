@@ -16,7 +16,7 @@ yarn add -D eslint eslint-plugin-vue vue-eslint-parser globals
 
 ::: tip Requirements
 
-- ESLint: `^8.57.0 || ^9.0.0 || ^10.0.0`
+- ESLint: `^10.0.0`
 - Node.js: `^22.19.0 || ^24.11.0 || >=26.0.0`
 
 :::
@@ -25,7 +25,7 @@ yarn add -D eslint eslint-plugin-vue vue-eslint-parser globals
 
 ### Configuration (`eslint.config.js`)
 
-Use `eslint.config.js` file to configure rules. This is the default in ESLint v9, but can be used starting from ESLint v8.57.0. See also: <https://eslint.org/docs/latest/use/configure/configuration-files-new>.
+Use `eslint.config.js` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/configuration-files-new>.
 
 Example **eslint.config.js**:
 
@@ -129,24 +129,6 @@ module.exports = {
 :::
 
 `extends` combines your `files` with the patterns each config in the array already declares, instead of replacing them. The entries this plugin restricts to `.vue` files — [vue-eslint-parser] and the SFC processor — therefore stay restricted to `.vue` files even when your own patterns also match `.ts` or `.js` files.
-
-:::warning Requires ESLint v9.22.0 or later
-`defineConfig()` and the `extends` key were added in ESLint v9.22.0; `extends` is not a plain flat config key and does not work without the helper.
-
-On earlier versions you can spread the array and set `files` on every entry, but note that this **replaces** the plugin's own `.vue` patterns, so [vue-eslint-parser] and the SFC processor get applied to every file your patterns match. Keep such patterns limited to `.vue` files:
-
-```js
-import pluginVue from 'eslint-plugin-vue'
-
-export default [
-  ...pluginVue.configs['flat/strongly-recommended'].map((config) => ({
-    ...config,
-    files: ['packages/client/src/components/**/*.vue', 'stories/**/*.vue']
-  }))
-]
-```
-
-:::
 
 #### Specifying Globals (`eslint.config.js`)
 

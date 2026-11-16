@@ -9,7 +9,8 @@ const eslintStylisticPackagePath = path.join(
   'eslint-plugin',
   'package.json'
 )
-export const eslintStylisticVersion = existsSync(eslintStylisticPackagePath)
+export const isESLintStylisticInstalled = existsSync(eslintStylisticPackagePath)
+export const eslintStylisticVersion = isESLintStylisticInstalled
   ? (JSON.parse(readFileSync(eslintStylisticPackagePath, 'utf8'))
       .version as string)
   : undefined

@@ -1,4 +1,4 @@
-<!--{"languageOptions": {"parserOptions": {"parser":"@typescript-eslint/parser"}}, "requirements": { "@typescript-eslint/parser": ">=5.4.0 || ^5.4.1-0" } }-->
+<!--{"languageOptions": {"parserOptions": {"parser":"@typescript-eslint/parser"}}}-->
 <script lang="ts">
 import
 {

@@ -5,7 +5,7 @@
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/return-in-computed-property'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 
 const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 6,

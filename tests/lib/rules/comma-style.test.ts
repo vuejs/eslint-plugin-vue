@@ -1,10 +1,9 @@
 /**
  * @author Yosuke Ota
  */
-import semver from 'semver'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/comma-style'
-import { eslintStylisticVersion } from '../../test-utils/eslint-stylistic'
+import { isESLintStylisticInstalled } from '../../test-utils/eslint-stylistic'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
@@ -168,23 +167,7 @@ tester.run('comma-style', rule, {
   ]
 })
 
-if (
-  eslintStylisticVersion === undefined ||
-  semver.lt(eslintStylisticVersion, '3.0.0')
-) {
-  tester.run('comma-style', rule, {
-    valid: [
-      `
-      <template>
-        <CustomButton v-slot="a,
-          b
-          ,c" />
-      </template>
-    `
-    ],
-    invalid: []
-  })
-} else {
+if (isESLintStylisticInstalled) {
   tester.run('comma-style', rule, {
     valid: [],
     invalid: [
@@ -214,5 +197,18 @@ if (
         ]
       }
     ]
+  })
+} else {
+  tester.run('comma-style', rule, {
+    valid: [
+      `
+      <template>
+        <CustomButton v-slot="a,
+          b
+          ,c" />
+      </template>
+    `
+    ],
+    invalid: []
   })
 }
