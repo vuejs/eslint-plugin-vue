@@ -20,7 +20,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'disallow overwriting reserved keys',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-reserved-keys.html'
     },
     fixable: null,

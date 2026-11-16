@@ -29,7 +29,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'enforce order of component top-level elements',
-      categories: ['vue3-recommended', 'vue2-recommended'],
+      categories: ['vue3-recommended'],
       url: 'https://eslint.vuejs.org/rules/block-order.html'
     },
     fixable: 'code',

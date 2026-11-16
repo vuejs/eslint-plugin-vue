@@ -1,12 +1,8 @@
 const presetCategories: Record<string, string | null> = {
   base: null,
-  'vue2-essential': 'base',
   'vue3-essential': 'base',
-  'vue2-strongly-recommended': 'vue2-essential',
   'vue3-strongly-recommended': 'vue3-essential',
-  'vue2-recommended': 'vue2-strongly-recommended',
   'vue3-recommended': 'vue3-strongly-recommended'
-  // 'use-with-caution': 'recommended',
   // 'vue3-use-with-caution': 'vue3-recommended'
 }
 

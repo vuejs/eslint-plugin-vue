@@ -12,7 +12,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'enforce specific casing for component definition name',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/component-definition-name-casing.html'
     },
     fixable: 'code',

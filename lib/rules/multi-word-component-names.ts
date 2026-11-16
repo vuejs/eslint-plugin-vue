@@ -11,7 +11,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'require component names to be always multi-word',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/multi-word-component-names.html'
     },
     schema: [

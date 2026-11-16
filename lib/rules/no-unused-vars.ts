@@ -54,7 +54,7 @@ export default {
     docs: {
       description:
         'disallow unused variable definitions of v-for directives or scope attributes',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-unused-vars.html'
     },
     fixable: null,

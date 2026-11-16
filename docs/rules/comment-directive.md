@@ -12,11 +12,8 @@ since: v4.1.0
 
 - :gear: This rule is included in the following preset configs:
   - `*.configs["flat/base"]`
-  - `*.configs["flat/vue2-essential"]`
   - `*.configs["flat/essential"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/strongly-recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
   - `*.configs["flat/recommended"]`
 
 Sole purpose of this rule is to provide `eslint-disable` functionality in the `<template>` and in the block level.

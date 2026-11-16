@@ -12,11 +12,8 @@ since: v2.0.0
 
 - :gear: This rule is included in the following preset configs:
   - `*.configs["flat/base"]`
-  - `*.configs["flat/vue2-essential"]`
   - `*.configs["flat/essential"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/strongly-recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
   - `*.configs["flat/recommended"]`
 
 Since 0.17.0 the ESLint `no-unused-vars` rule does not detect variables used in JSX ([see details](https://eslint.org/blog/2015/03/eslint-0.17.0-released#changes-to-jsxreact-handling)).

@@ -21,18 +21,6 @@ const categoryTitles: Record<string, { text: string }> = {
   },
   'vue3-use-with-caution': {
     text: 'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 3.x'
-  },
-  'vue2-essential': {
-    text: 'Priority A: Essential (Error Prevention) for Vue.js 2.x'
-  },
-  'vue2-strongly-recommended': {
-    text: 'Priority B: Strongly Recommended (Improving Readability) for Vue.js 2.x'
-  },
-  'vue2-recommended': {
-    text: 'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead) for Vue.js 2.x'
-  },
-  'vue2-use-with-caution': {
-    text: 'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 2.x'
   }
 }
 const categoryIds = Object.keys(categoryTitles)
@@ -53,11 +41,8 @@ for (const rule of rules) {
 const presetConfigNames: Record<string, string> = {
   base: 'flat/base',
   'vue3-essential': 'flat/essential',
-  'vue2-essential': 'flat/vue2-essential',
   'vue3-strongly-recommended': 'flat/strongly-recommended',
-  'vue2-strongly-recommended': 'flat/vue2-strongly-recommended',
-  'vue3-recommended': 'flat/recommended',
-  'vue2-recommended': 'flat/vue2-recommended'
+  'vue3-recommended': 'flat/recommended'
 }
 
 export const getPresetNames = (presetIds: string[]) =>

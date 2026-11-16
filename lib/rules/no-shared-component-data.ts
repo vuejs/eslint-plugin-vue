@@ -34,7 +34,7 @@ export default {
     type: 'problem',
     docs: {
       description: "enforce component's data property to be a function",
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-shared-component-data.html'
     },
     fixable: 'code',

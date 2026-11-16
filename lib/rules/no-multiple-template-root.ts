@@ -9,7 +9,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow adding multiple root nodes to the template',
-      categories: ['vue2-essential'],
+      categories: undefined,
       url: 'https://eslint.vuejs.org/rules/no-multiple-template-root.html'
     },
     fixable: null,
