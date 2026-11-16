@@ -238,7 +238,7 @@ ${
       '## :mag: Implementation'
     ]
 
-    const foundHeadings = [...this.content.matchAll(headingPattern)]
+    const foundHeadings = this.content.matchAll(headingPattern).toArray()
 
     let previousHeadingIndex = -1
     for (const [heading] of foundHeadings) {

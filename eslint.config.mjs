@@ -84,8 +84,6 @@ export default typegen([
       'unicorn/filename-case': 'off',
       'unicorn/name-replacements': 'off',
       'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
-      'unicorn/no-array-reverse': 'off', // enable when the minimum supported Node.js version is v20
-      'unicorn/no-array-sort': 'off', // enable when the minimum supported Node.js version is v20
       'unicorn/no-asterisk-prefix-in-documentation-comments': 'off', // prefer standard style
       'unicorn/no-computed-property-existence-check': 'off', // the dynamic `obj[key]` checks here are intentional truthiness/`in` checks, not `Object.hasOwn` existence checks
       'unicorn/no-null': 'off',
@@ -94,8 +92,6 @@ export default typegen([
       'unicorn/no-useless-recursion': 'off', // tail recursion is often clearer than a manual loop for the AST/tree helpers here
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
-      'unicorn/prefer-group-by': 'off', // `Object.groupBy()` requires Node.js v22
-      'unicorn/prefer-iterator-to-array': 'off', // `Iterator#toArray()` requires Node.js v22
       'unicorn/prefer-module': 'off',
       'unicorn/prefer-top-level-await': 'off', // only available in ESM modules
       'unicorn/single-line-block-comment-style': 'off' // too verbose while we still have type annotations in JSDoc comments

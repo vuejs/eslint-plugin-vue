@@ -98,7 +98,7 @@ export default {
         const potentialTypoList = candidateOptionList
           .map((o) => ({ option: o, distance: utils.editDistance(o, name) }))
           .filter(({ distance }) => distance <= threshold && distance > 0)
-          .sort((a, b) => a.distance - b.distance)
+          .toSorted((a, b) => a.distance - b.distance)
         if (potentialTypoList.length > 0) {
           context.report({
             node: id,

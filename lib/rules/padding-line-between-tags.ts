@@ -137,7 +137,7 @@ function checkNewline(context: RuleContext) {
     next: string
   }> = context.options[0] || [{ blankLine: 'always', prev: '*', next: '*' }]
 
-  const reverseConfigureList = [...configureList].reverse()
+  const reverseConfigureList = configureList.toReversed()
 
   /**
    * It has the style of the first `blankLine="consistent"`.

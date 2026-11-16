@@ -157,7 +157,7 @@ export default {
         ? new RegExp(
             stringAllowlist
               .map((w) => escape(w))
-              .sort((a, b) => b.length - a.length)
+              .toSorted((a, b) => b.length - a.length)
               .join('|'),
             'gu'
           )

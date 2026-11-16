@@ -150,7 +150,7 @@ export default {
             (token) => token.type !== 'HTMLWhitespace'
           ),
           ...documentFragment.comments
-        ].sort((a, b) => a.range[0] - b.range[0])
+        ].toSorted((a, b) => a.range[0] - b.range[0])
       }
 
       let token = tokens.shift()
