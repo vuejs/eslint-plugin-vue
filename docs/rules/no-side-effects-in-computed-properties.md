@@ -30,6 +30,8 @@ This rule is aimed at preventing the code which makes side effects in computed p
 
 It is considered a very bad practice to introduce side effects inside computed properties and functions. It makes the code not predictable and hard to understand.
 
+Besides mutations, this rule reports function calls whose result is not used, such as `this.$emit()` or `console.log()`, because they are only made for their side effects. Calls on variables declared inside the getter (e.g. `list.push()`) and iteration calls like `forEach()` are allowed.
+
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
 
 ```vue
@@ -63,6 +65,10 @@ export default {
     },
     reversedArray() {
       return this.array.reverse() // <- side effect - orginal array is being mutated
+    },
+    doubleCount() {
+      this.$emit('change') // <- side effect - the result of the call is not used
+      return this.count * 2
     }
   }
 }
@@ -108,6 +114,10 @@ export default {
     })
     const reversedArray = computed(() => {
       return foo.array.reverse() // <- side effect - orginal array is being mutated
+    })
+    const doubleCount = computed(() => {
+      foo.fetchCount() // <- side effect - the result of the call is not used
+      return foo.count * 2
     })
   }
 }
