@@ -10,11 +10,7 @@ since: v7.0.0
 
 > enforce valid `.sync` modifier on `v-bind` directives
 
-- :no_entry_sign: This rule was **deprecated**.
-- :gear: This rule is included in the following preset configs:
-  - `*.configs["flat/vue2-essential"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
+- :no_entry: This rule was **removed** in eslint-plugin-vue v11.0.0.
 
 This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
 

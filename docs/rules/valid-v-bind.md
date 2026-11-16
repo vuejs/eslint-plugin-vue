@@ -59,11 +59,9 @@ Nothing.
 
 - [vue/no-parsing-error]
 - [vue/no-deprecated-v-bind-sync]
-- [vue/valid-v-bind-sync]
 
 [vue/no-parsing-error]: ./no-parsing-error.md
 [vue/no-deprecated-v-bind-sync]: ./no-deprecated-v-bind-sync.md
-[vue/valid-v-bind-sync]: ./valid-v-bind-sync.md
 
 ## :rocket: Version
 

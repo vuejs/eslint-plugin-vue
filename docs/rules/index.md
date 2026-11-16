@@ -91,8 +91,6 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-use-v-if-with-v-for] | disallow using `v-if` on the same element as `v-for` |  | :three::two::hammer: |
 | [vue/no-useless-template-attributes] | disallow useless attribute on `<template>` |  | :three::two::warning: |
 | [vue/no-v-for-template-key-on-child] | disallow key of `<template v-for>` placed on child elements |  | :three::warning: |
-| [vue/no-v-for-template-key] | disallow `key` attribute on `<template v-for>` | :no_entry_sign: | :two::warning: |
-| [vue/no-v-model-argument] | disallow adding an argument to `v-model` used in custom component | :no_entry_sign: | :two::warning: |
 | [vue/no-v-text-v-html-on-component] | disallow v-text / v-html on component |  | :three::two::warning: |
 | [vue/no-watch-after-await] | disallow asynchronously registered `watch` |  | :three::hammer: |
 | [vue/prefer-import-from-vue] | enforce import from 'vue' instead of import from '@vue/*' | :wrench: | :three::hammer: |
@@ -110,10 +108,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/valid-define-emits] | enforce valid `defineEmits` compiler macro |  | :three::two::warning: |
 | [vue/valid-define-options] | enforce valid `defineOptions` compiler macro |  | :three::warning: |
 | [vue/valid-define-props] | enforce valid `defineProps` compiler macro |  | :three::two::warning: |
-| [vue/valid-model-definition] | require valid keys in model option | :no_entry_sign: | :two::warning: |
 | [vue/valid-next-tick] | enforce valid `nextTick` function calls | :wrench::bulb: | :three::two::warning: |
 | [vue/valid-template-root] | enforce valid template root |  | :three::two::warning: |
-| [vue/valid-v-bind-sync] | enforce valid `.sync` modifier on `v-bind` directives | :no_entry_sign: | :two::warning: |
 | [vue/valid-v-bind] | enforce valid `v-bind` directives |  | :three::two::warning: |
 | [vue/valid-v-cloak] | enforce valid `v-cloak` directives |  | :three::two::warning: |
 | [vue/valid-v-else-if] | enforce valid `v-else-if` directives |  | :three::two::warning: |
@@ -355,18 +351,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 </rules-table>
 
-## Deprecated
-
-- :no_entry_sign: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
-- :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
-
-| Rule ID | Replaced by |
-|:--------|:------------|
-| [vue/no-v-for-template-key] | (no replacement) |
-| [vue/no-v-model-argument] | (no replacement) |
-| [vue/valid-model-definition] | (no replacement) |
-| [vue/valid-v-bind-sync] | (no replacement) |
-
 ## Removed
 
 - :no_entry: These rules have been removed in a previous major release, after they have been deprecated for a while.
@@ -381,8 +365,12 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-ref-object-destructure] | [vue/no-ref-object-reactivity-loss] | [v9.17.0] | [v10.0.0] |
 | [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] | [v9.17.0] | [v10.0.0] |
 | [vue/no-unregistered-components] | [vue/no-undef-components] | [v8.4.0] | [v9.0.0] |
+| [vue/no-v-for-template-key] | (no replacement) | [v10.0.0] | [v11.0.0] |
+| [vue/no-v-model-argument] | (no replacement) | [v10.0.0] | [v11.0.0] |
 | [vue/script-setup-uses-vars] | (no replacement) | [v9.0.0] | [v10.0.0] |
 | [vue/v-on-function-call] | [vue/v-on-handler-style] | [v9.7.0] | [v10.0.0] |
+| [vue/valid-model-definition] | (no replacement) | [v10.0.0] | [v11.0.0] |
+| [vue/valid-v-bind-sync] | (no replacement) | [v10.0.0] | [v11.0.0] |
 
 <!-- link definitions for rules -->
 
@@ -550,9 +538,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-useless-template-attributes]: ./no-useless-template-attributes.md
 [vue/no-useless-v-bind]: ./no-useless-v-bind.md
 [vue/no-v-for-template-key-on-child]: ./no-v-for-template-key-on-child.md
-[vue/no-v-for-template-key]: ./no-v-for-template-key.md
 [vue/no-v-html]: ./no-v-html.md
-[vue/no-v-model-argument]: ./no-v-model-argument.md
 [vue/no-v-text-v-html-on-component]: ./no-v-text-v-html-on-component.md
 [vue/no-v-text]: ./no-v-text.md
 [vue/no-watch-after-await]: ./no-watch-after-await.md
@@ -622,10 +608,8 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/valid-define-emits]: ./valid-define-emits.md
 [vue/valid-define-options]: ./valid-define-options.md
 [vue/valid-define-props]: ./valid-define-props.md
-[vue/valid-model-definition]: ./valid-model-definition.md
 [vue/valid-next-tick]: ./valid-next-tick.md
 [vue/valid-template-root]: ./valid-template-root.md
-[vue/valid-v-bind-sync]: ./valid-v-bind-sync.md
 [vue/valid-v-bind]: ./valid-v-bind.md
 [vue/valid-v-cloak]: ./valid-v-cloak.md
 [vue/valid-v-else-if]: ./valid-v-else-if.md
@@ -653,12 +637,17 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-ref-object-destructure]: ./no-ref-object-destructure.md
 [vue/no-setup-props-destructure]: ./no-setup-props-destructure.md
 [vue/no-unregistered-components]: ./no-unregistered-components.md
+[vue/no-v-for-template-key]: ./no-v-for-template-key.md
+[vue/no-v-model-argument]: ./no-v-model-argument.md
 [vue/script-setup-uses-vars]: ./script-setup-uses-vars.md
 [vue/v-on-function-call]: ./v-on-function-call.md
+[vue/valid-model-definition]: ./valid-model-definition.md
+[vue/valid-v-bind-sync]: ./valid-v-bind-sync.md
 
 <!-- link definitions for releases -->
 
 [v10.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v10.0.0
+[v11.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v11.0.0
 [v5.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v5.0.0
 [v7.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.0.0
 [v7.13.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.13.0
