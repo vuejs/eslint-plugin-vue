@@ -1,7 +1,7 @@
 /**
  * @author Yosuke Ota
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/template-curly-spacing'
 import vueEslintParser from 'vue-eslint-parser'
 

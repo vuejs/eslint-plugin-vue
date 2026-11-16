@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-loss-of-precision'
 import vueEslintParser from 'vue-eslint-parser'
 

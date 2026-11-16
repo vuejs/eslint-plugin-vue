@@ -102,8 +102,8 @@ export default {
     const allowsPlain = allowedAttrs.includes('plain')
     const allowsScoped = allowedAttrs.includes('scoped')
     const allowsModule = allowedAttrs.includes('module')
-    const allowedAttrsString = [...allowedAttrs]
-      .sort((a, b) => a.localeCompare(b))
+    const allowedAttrsString = allowedAttrs
+      .toSorted((a: string, b: string) => a.localeCompare(b))
       .join(', ')
 
     return {

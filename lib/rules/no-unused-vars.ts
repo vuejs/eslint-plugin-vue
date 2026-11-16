@@ -4,23 +4,6 @@
  */
 import utils from '../utils/index.ts'
 
-type VariableKind = VVariable['kind']
-
-/**
- * Groups variables by directive kind.
- */
-function groupingVariables(node: VElement): {
-  [kind in VariableKind]?: VVariable[]
-} {
-  const result: { [kind in VariableKind]?: VVariable[] } = {}
-  for (const variable of node.variables) {
-    const kind = variable.kind
-    result[kind] ||= []
-    result[kind].push(variable)
-  }
-  return result
-}
-
 /**
  * Checks if the given variable was defined by destructuring.
  */
@@ -150,7 +133,7 @@ export default {
 
     return utils.defineTemplateBodyVisitor(context, {
       VElement(node: VElement) {
-        const vars = groupingVariables(node)
+        const vars = Object.groupBy(node.variables, (variable) => variable.kind)
         for (const variables of Object.values(vars)) {
           if (variables) {
             checkVariableGroup(variables, node)

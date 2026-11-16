@@ -2,8 +2,7 @@
  * @fileoverview Prevent variables used in JSX to be marked as unused
  * @author Michał Sajnóg
  */
-import semver from 'semver'
-import { RuleTester, ESLint } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/jsx-uses-vars'
 import { getCoreRule } from '../../../lib/utils'
 
@@ -112,11 +111,10 @@ describe('jsx-uses-vars', () => {
             column: 16,
             endLine: 3,
             endColumn: 29,
-            suggestions: semver.gte(ESLint.version, '9.17.0')
-              ? [
-                  {
-                    desc: "Remove unused variable 'SomeComponent'.",
-                    output: `
+            suggestions: [
+              {
+                desc: "Remove unused variable 'SomeComponent'.",
+                output: `
         /* eslint vue/jsx-uses-vars: 1 */
         import './SomeComponent.jsx';
         export default {
@@ -125,9 +123,8 @@ describe('jsx-uses-vars', () => {
           },
         };
       `
-                  }
-                ]
-              : []
+              }
+            ]
           }
         ]
       },
@@ -152,11 +149,10 @@ describe('jsx-uses-vars', () => {
             column: 15,
             endLine: 4,
             endColumn: 22,
-            suggestions: semver.gte(ESLint.version, '9.17.0')
-              ? [
-                  {
-                    desc: "Remove unused variable 'wrapper'.",
-                    output: `
+            suggestions: [
+              {
+                desc: "Remove unused variable 'wrapper'.",
+                output: `
         /* eslint vue/jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
         
@@ -167,9 +163,8 @@ describe('jsx-uses-vars', () => {
           },
         };
       `
-                  }
-                ]
-              : []
+              }
+            ]
           }
         ]
       }

@@ -4,7 +4,7 @@ import type {
 } from '../../../lib/utils/html-comments'
 import fs from 'node:fs'
 import path from 'node:path'
-import { Linter } from '../../eslint-compat'
+import { Linter } from 'eslint'
 import { defineVisitor } from '../../../lib/utils/html-comments'
 import vueEslintParser from 'vue-eslint-parser'
 

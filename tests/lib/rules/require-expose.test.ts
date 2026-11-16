@@ -3,7 +3,7 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  */
 import rule from '../../../lib/rules/require-expose'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

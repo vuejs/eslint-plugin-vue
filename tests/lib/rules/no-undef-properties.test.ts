@@ -2,7 +2,7 @@
  * @fileoverview Disallow undefined properties.
  * @author Yosuke Ota
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-undef-properties'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'

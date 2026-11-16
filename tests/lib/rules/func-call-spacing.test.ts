@@ -1,10 +1,9 @@
 /**
  * @author Yosuke Ota
  */
-import semver from 'semver'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/func-call-spacing'
-import { eslintStylisticVersion } from '../../test-utils/eslint-stylistic'
+import { isESLintStylisticInstalled } from '../../test-utils/eslint-stylistic'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
@@ -16,22 +15,7 @@ function getErrorPosition(
   column: number,
   errorType: 'unexpected' | 'missing'
 ) {
-  if (
-    eslintStylisticVersion !== undefined &&
-    semver.lt(eslintStylisticVersion, '3.0.0')
-  ) {
-    return {
-      line,
-      column: column - 3,
-      endLine: undefined,
-      endColumn: undefined
-    }
-  }
-
-  if (
-    eslintStylisticVersion === undefined ||
-    semver.satisfies(process.version, '<19.0.0 || ^21.0.0')
-  ) {
+  if (!isESLintStylisticInstalled) {
     return {
       line,
       column: errorType === 'unexpected' ? column : column - 1,

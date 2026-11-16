@@ -1,7 +1,7 @@
 /**
  * @author Yosuke Ota
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-use-v-if-with-v-for'
 import vueEslintParser from 'vue-eslint-parser'
 

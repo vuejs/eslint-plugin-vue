@@ -7,7 +7,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import assert from 'node:assert'
 import vueESLintParser from 'vue-eslint-parser'
-import { Linter } from '../../eslint-compat'
+import { Linter } from 'eslint'
 import { extractRefObjectReferences } from '../../../lib/utils/ref-object-references'
 
 const FIXTURE_ROOT = path.resolve(

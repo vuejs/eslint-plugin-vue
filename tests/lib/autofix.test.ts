@@ -2,13 +2,12 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-import type { Linter as ESLintLinter } from 'eslint'
-import { Linter } from '../eslint-compat'
+import { Linter } from 'eslint'
 import parser from 'vue-eslint-parser'
 import assert from 'node:assert'
 import { rules } from '../..'
 
-const baseConfig: ESLintLinter.Config = {
+const baseConfig: Linter.Config = {
   files: ['*.vue'],
   plugins: { vue: { rules } },
   languageOptions: {
@@ -28,7 +27,7 @@ describe('Complex autofix test cases', () => {
 
   // https://github.com/vuejs/eslint-plugin-vue/issues/566
   describe('Autofix of `vue/order-in-components` and `comma-dangle` should not conflict.', () => {
-    const config: ESLintLinter.Config = Object.assign({}, baseConfig, {
+    const config: Linter.Config = Object.assign({}, baseConfig, {
       rules: {
         'vue/order-in-components': ['error'],
         'comma-dangle': ['error', 'always']

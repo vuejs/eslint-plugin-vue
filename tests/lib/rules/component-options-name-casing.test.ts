@@ -2,7 +2,7 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/component-options-name-casing'
 
 const tester = new RuleTester({

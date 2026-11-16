@@ -3,7 +3,7 @@
  */
 import type { Linter } from 'eslint'
 import { executeOnVueComponent } from '../../../lib/utils/index'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import tsEslintParser from '@typescript-eslint/parser'
 
 const rule: RuleModule = {

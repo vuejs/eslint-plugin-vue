@@ -1,4 +1,4 @@
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-use-v-else-with-v-for'
 import vueEslintParser from 'vue-eslint-parser'
 

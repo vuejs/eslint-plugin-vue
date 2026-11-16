@@ -2,7 +2,7 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/v-on-handler-style'
 import vueEslintParser from 'vue-eslint-parser'
 
