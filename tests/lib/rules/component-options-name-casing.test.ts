@@ -531,6 +531,7 @@ tester.run('component-options-name-casing', rule, {
         export default {
           components: {
             FooBar,
+            [\`BazQux\`]: BazQux,
             'my-component': MyComponent
           }
         }
@@ -556,6 +557,33 @@ tester.run('component-options-name-casing', rule, {
         export default {
           components: {
             'foo-bar': FooBar,
+            [\`BazQux\`]: BazQux,
+            'my-component': MyComponent
+          }
+        }
+      `
+            }
+          ]
+        },
+        {
+          messageId: 'caseNotMatched',
+          data: {
+            component: 'BazQux',
+            caseType: 'kebab-case'
+          },
+          line: 5,
+          column: 14,
+          endLine: 5,
+          endColumn: 22,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'kebab-case' },
+              output: `
+        export default {
+          components: {
+            FooBar,
+            ['baz-qux']: BazQux,
             'my-component': MyComponent
           }
         }
