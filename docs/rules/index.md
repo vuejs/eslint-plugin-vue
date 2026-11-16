@@ -234,6 +234,7 @@ For example:
 | [vue/no-bare-strings-in-template] | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
 | [vue/no-content-outside-block] | disallow content outside of the top-level blocks | :bulb: | :warning: |
+| [vue/no-deep-mutating-computed-ref] | disallow mutating nested properties of computed refs whose getter returns a new object |  | :warning: |
 | [vue/no-define-model-default] | disallow default values in `defineModel` |  | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-duplicate-class-names] | disallow duplication of class names in class attributes | :wrench: | :hammer: |
@@ -453,6 +454,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-constant-condition]: ./no-constant-condition.md
 [vue/no-content-outside-block]: ./no-content-outside-block.md
 [vue/no-custom-modifiers-on-v-model]: ./no-custom-modifiers-on-v-model.md
+[vue/no-deep-mutating-computed-ref]: ./no-deep-mutating-computed-ref.md
 [vue/no-define-model-default]: ./no-define-model-default.md
 [vue/no-deprecated-data-object-declaration]: ./no-deprecated-data-object-declaration.md
 [vue/no-deprecated-delete-set]: ./no-deprecated-delete-set.md
