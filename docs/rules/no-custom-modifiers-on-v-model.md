@@ -11,6 +11,7 @@ since: v7.0.0
 > disallow custom modifiers on v-model used on the component
 
 This rule checks whether `v-model` used on the component do not have custom modifiers.
+Vue.js 3 supports [custom `v-model` modifiers](https://vuejs.org/guide/components/v-model.html#handling-v-model-modifiers); enable this rule if you want to disallow them.
 
 ## :book: Rule Details
 
