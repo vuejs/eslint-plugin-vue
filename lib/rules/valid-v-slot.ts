@@ -225,7 +225,7 @@ export default {
       ownerMustBeCustomElement:
         "'v-slot' directive must be owned by a custom element, but '{{name}}' is not.",
       namedSlotMustBeOnTemplate:
-        "Named slots must use '<template>' on a custom element.",
+        "Named slot must use '<template>' on a custom element when there are other slots.",
       defaultSlotMustBeOnTemplate:
         "Default slot must use '<template>' on a custom element when there are other named slots.",
       disallowDuplicateSlotsOnElement:
@@ -271,16 +271,13 @@ export default {
             data: { name: ownerElement.rawName }
           })
         }
-        if (!isDefaultSlot && element.name !== 'template') {
-          context.report({
-            node,
-            messageId: 'namedSlotMustBeOnTemplate'
-          })
-        }
         if (ownerElement === element && vSlotGroupsOnChildren.length > 0) {
+          // E.g., <my-component #one><template #two></template></my-component>
           context.report({
             node,
-            messageId: 'defaultSlotMustBeOnTemplate'
+            messageId: isDefaultSlot
+              ? 'defaultSlotMustBeOnTemplate'
+              : 'namedSlotMustBeOnTemplate'
           })
         }
 
