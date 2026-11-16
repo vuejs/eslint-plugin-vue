@@ -96,7 +96,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'disallow mutation of component props',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-mutating-props.html'
     },
     fixable: null,

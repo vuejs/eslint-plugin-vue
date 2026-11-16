@@ -10,11 +10,6 @@ since: v7.0.0
 
 > disallow adding multiple root nodes to the template
 
-- :gear: This rule is included in the following preset configs:
-  - `*.configs["flat/vue2-essential"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
-
 ## :book: Rule Details
 
 This rule checks whether template contains single root element valid for Vue 2.

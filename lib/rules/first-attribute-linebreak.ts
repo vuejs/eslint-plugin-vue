@@ -9,7 +9,7 @@ export default {
     type: 'layout',
     docs: {
       description: 'enforce the location of first attribute',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/first-attribute-linebreak.html'
     },
     fixable: 'whitespace',

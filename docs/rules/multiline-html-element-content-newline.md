@@ -12,9 +12,7 @@ since: v5.0.0
 
 - :gear: This rule is included in the following preset configs:
   - `*.configs["flat/strongly-recommended"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details

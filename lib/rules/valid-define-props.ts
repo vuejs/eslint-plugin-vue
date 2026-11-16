@@ -10,7 +10,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'enforce valid `defineProps` compiler macro',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/valid-define-props.html'
     },
     fixable: null,

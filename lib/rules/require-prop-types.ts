@@ -10,7 +10,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'require type definitions in props',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/require-prop-types.html'
     },
     fixable: null,

@@ -12,7 +12,6 @@ since: v4.7.0
 
 - :gear: This rule is included in the following preset configs:
   - `*.configs["flat/recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
 
 ## :book: Rule Details
 

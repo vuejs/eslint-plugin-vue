@@ -25,7 +25,7 @@ export default {
     docs: {
       description:
         'enforce attribute naming style on custom components in template',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/attribute-hyphenation.html'
     },
     fixable: 'code',

@@ -29,7 +29,7 @@ export default {
     docs: {
       description:
         'enforce that a return statement is present in emits validator',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/return-in-emits-validator.html'
     },
     fixable: null,

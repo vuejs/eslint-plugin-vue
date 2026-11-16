@@ -44,7 +44,7 @@ export default {
     docs: {
       description:
         'disallow the use of reserved names in component definitions',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-reserved-component-names.html'
     },
     fixable: null,

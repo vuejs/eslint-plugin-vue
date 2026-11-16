@@ -75,7 +75,7 @@ export default {
     type: 'layout',
     docs: {
       description: 'enforce self-closing style',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/html-self-closing.html'
     },
     fixable: 'code',

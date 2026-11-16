@@ -29,7 +29,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow unnecessary `<template>`',
-      categories: ['vue3-recommended', 'vue2-recommended'],
+      categories: ['vue3-recommended'],
       url: 'https://eslint.vuejs.org/rules/no-lone-template.html'
     },
     fixable: null,

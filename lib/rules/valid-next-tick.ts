@@ -95,7 +95,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'enforce valid `nextTick` function calls',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/valid-next-tick.html'
     },
     fixable: 'code',

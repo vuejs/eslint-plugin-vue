@@ -11,9 +11,6 @@ import removedRules from '../lib/removed-rules.ts'
 import type { RemovedRule } from '../lib/removed-rules.ts'
 import { getPresetNames } from './lib/categories.ts'
 
-const VUE3_EMOJI = ':three:'
-const VUE2_EMOJI = ':two:'
-
 // -----------------------------------------------------------------------------
 const categorizedRules = rules.filter(
   (rule) => rule.meta.docs.categories && !rule.meta.docs.extensionSource
@@ -38,13 +35,13 @@ const TYPE_MARK: Record<string, string> = {
   layout: ':lipstick:'
 }
 
-function toRuleRow(rule: RuleInfo, kindMarks: string[] = []) {
+function toRuleRow(rule: RuleInfo) {
   const mark = [
     rule.meta.fixable ? ':wrench:' : '',
     rule.meta.hasSuggestions ? ':bulb:' : '',
     rule.meta.deprecated ? ':no_entry_sign:' : ''
   ].join('')
-  const kindMark = [...kindMarks, TYPE_MARK[rule.meta.type]].join('')
+  const kindMark = TYPE_MARK[rule.meta.type]
   const link = `[${rule.ruleId}]`
   const description = rule.meta.docs.description || '(no description)'
 
@@ -79,91 +76,48 @@ const categoryGroups = [
     title: 'Base Rules (Enabling Correct ESLint Parsing)',
     description:
       'Rules in this category are enabled for all presets provided by eslint-plugin-vue.',
-    categoryIdForVue3: 'base',
-    categoryIdForVue2: 'base',
-    useMark: false
+    categoryId: 'base'
   },
   {
     title: 'Priority A: Essential (Error Prevention)',
-    categoryIdForVue3: 'vue3-essential',
-    categoryIdForVue2: 'vue2-essential',
-    useMark: true
+    categoryId: 'vue3-essential'
   },
   {
     title: 'Priority B: Strongly Recommended (Improving Readability)',
-    categoryIdForVue3: 'vue3-strongly-recommended',
-    categoryIdForVue2: 'vue2-strongly-recommended',
-    useMark: true
+    categoryId: 'vue3-strongly-recommended'
   },
   {
     title: 'Priority C: Recommended (Potentially Dangerous Patterns)',
-    categoryIdForVue3: 'vue3-recommended',
-    categoryIdForVue2: 'vue2-recommended',
-    useMark: true
+    categoryId: 'vue3-recommended'
   }
 ]
 
 // -----------------------------------------------------------------------------
 let rulesTableContent = categoryGroups
   .map((group) => {
-    const rules = categorizedRules.filter(
-      (rule) =>
-        rule.meta.docs.categories!.includes(group.categoryIdForVue3) ||
-        rule.meta.docs.categories!.includes(group.categoryIdForVue2)
+    const rules = categorizedRules.filter((rule) =>
+      rule.meta.docs.categories!.includes(group.categoryId)
     )
-    let content = `
+    const description =
+      group.description ??
+      `Rules in this category are included in ${formatItems(
+        getPresetNames(getPresetIds([group.categoryId])),
+        ['preset', 'presets']
+      )}.`
+
+    return `
 ## ${group.title}
-`
 
-    if (group.description) {
-      content += `
-${group.description}
-`
-    }
-    if (group.useMark) {
-      const presetsForVue3 = getPresetNames(
-        getPresetIds([group.categoryIdForVue3])
-      )
-      const presetsForVue2 = getPresetNames(
-        getPresetIds([group.categoryIdForVue2])
-      )
-      content += `
-- ${VUE3_EMOJI} Indicates that the rule is for Vue 3 and is included in ${formatItems(
-        presetsForVue3,
-        ['preset', 'presets']
-      )}.
-- ${VUE2_EMOJI} Indicates that the rule is for Vue 2 and is included in ${formatItems(
-        presetsForVue2,
-        ['preset', 'presets']
-      )}.
-`
-    }
+${description}
 
-    content += `
 <rules-table>
 
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
-${rules
-  .map((rule) => {
-    const mark = group.useMark
-      ? [
-          rule.meta.docs.categories!.includes(group.categoryIdForVue3)
-            ? [VUE3_EMOJI]
-            : [],
-          rule.meta.docs.categories!.includes(group.categoryIdForVue2)
-            ? [VUE2_EMOJI]
-            : []
-        ].flat()
-      : []
-    return toRuleRow(rule, mark)
-  })
-  .join('\n')}
+${rules.map((rule) => toRuleRow(rule)).join('\n')}
 
 </rules-table>
 `
-
-    return content
   })
   .join('')
 

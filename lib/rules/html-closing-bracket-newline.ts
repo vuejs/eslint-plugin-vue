@@ -59,7 +59,7 @@ export default {
     docs: {
       description:
         "require or disallow a line break before tag's closing brackets",
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/html-closing-bracket-newline.html'
     },
     fixable: 'whitespace',

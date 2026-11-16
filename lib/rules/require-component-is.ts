@@ -10,7 +10,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'require `v-bind:is` of `<component>` elements',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/require-component-is.html'
     },
     fixable: null,

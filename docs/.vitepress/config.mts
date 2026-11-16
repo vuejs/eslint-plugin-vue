@@ -31,63 +31,23 @@ export default async () => {
   const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
 
   const sidebarCategories = [
-    { title: 'Base Rules', categoryIds: ['base'] },
-    {
-      title: 'Priority A: Essential',
-      categoryIds: ['vue3-essential', 'vue2-essential']
-    },
-    {
-      title: 'Priority A: Essential for Vue.js 3.x',
-      categoryIds: ['vue3-essential']
-    },
-    {
-      title: 'Priority A: Essential for Vue.js 2.x',
-      categoryIds: ['vue2-essential']
-    },
+    { title: 'Base Rules', categoryId: 'base' },
+    { title: 'Priority A: Essential', categoryId: 'vue3-essential' },
     {
       title: 'Priority B: Strongly Recommended',
-      categoryIds: ['vue3-strongly-recommended', 'vue2-strongly-recommended']
+      categoryId: 'vue3-strongly-recommended'
     },
-    {
-      title: 'Priority B: Strongly Recommended for Vue.js 3.x',
-      categoryIds: ['vue3-strongly-recommended']
-    },
-    {
-      title: 'Priority B: Strongly Recommended for Vue.js 2.x',
-      categoryIds: ['vue2-strongly-recommended']
-    },
-    {
-      title: 'Priority C: Recommended',
-      categoryIds: ['vue3-recommended', 'vue2-recommended']
-    },
-    {
-      title: 'Priority C: Recommended for Vue.js 3.x',
-      categoryIds: ['vue3-recommended']
-    },
-    {
-      title: 'Priority C: Recommended for Vue.js 2.x',
-      categoryIds: ['vue2-recommended']
-    }
+    { title: 'Priority C: Recommended', categoryId: 'vue3-recommended' }
   ]
 
   const categorizedRules: DefaultTheme.SidebarItem[] = []
-  for (const { title, categoryIds } of sidebarCategories) {
-    const categoryRules = rules
-      .filter((rule) => rule.meta.docs.categories && !rule.meta.deprecated)
-      .filter((rule) =>
-        categoryIds.every((categoryId) =>
-          rule.meta.docs.categories!.includes(categoryId)
-        )
+  for (const { title, categoryId } of sidebarCategories) {
+    const children: DefaultTheme.SidebarItem[] = rules
+      .filter(
+        (rule) =>
+          rule.meta.docs.categories?.includes(categoryId) &&
+          !rule.meta.deprecated
       )
-    const children: DefaultTheme.SidebarItem[] = categoryRules
-      .filter(({ ruleId }) => {
-        const isAlreadyListed = categorizedRules.some(
-          ({ items }) =>
-            items &&
-            items.some(({ text: alreadyRuleId }) => alreadyRuleId === ruleId)
-        )
-        return !isAlreadyListed
-      })
       .map(({ ruleId, name }) => ({
         text: ruleId,
         link: `/rules/${name}`

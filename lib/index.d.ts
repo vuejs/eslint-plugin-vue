@@ -6,12 +6,6 @@ declare const vue: {
   configs: {
     'flat/base': Linter.FlatConfig[]
 
-    'flat/vue2-essential': Linter.FlatConfig[]
-    'flat/vue2-strongly-recommended': Linter.FlatConfig[]
-    'flat/vue2-strongly-recommended-error': Linter.FlatConfig[]
-    'flat/vue2-recommended': Linter.FlatConfig[]
-    'flat/vue2-recommended-error': Linter.FlatConfig[]
-
     'flat/essential': Linter.FlatConfig[]
     'flat/strongly-recommended': Linter.FlatConfig[]
     'flat/strongly-recommended-error': Linter.FlatConfig[]

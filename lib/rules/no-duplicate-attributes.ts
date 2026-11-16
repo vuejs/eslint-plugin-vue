@@ -22,7 +22,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow duplication of attributes',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-duplicate-attributes.html'
     },
     fixable: null,

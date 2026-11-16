@@ -168,7 +168,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'enforce usage of `exact` modifier on `v-on`',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/use-v-on-exact.html'
     },
     fixable: null,

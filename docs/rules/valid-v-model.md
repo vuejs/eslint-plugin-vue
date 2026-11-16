@@ -12,11 +12,8 @@ since: v3.11.0
 
 - :gear: This rule is included in the following preset configs:
   - `*.configs["flat/essential"]`
-  - `*.configs["flat/vue2-essential"]`
   - `*.configs["flat/strongly-recommended"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
 
 This rule checks whether every `v-model` directive is valid.
 

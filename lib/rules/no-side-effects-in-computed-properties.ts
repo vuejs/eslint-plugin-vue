@@ -14,7 +14,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow side effects in computed properties',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-side-effects-in-computed-properties.html'
     },
     fixable: null,
