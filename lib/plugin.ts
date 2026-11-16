@@ -169,9 +169,7 @@ import noUselessMustaches from './rules/no-useless-mustaches.ts'
 import noUselessTemplateAttributes from './rules/no-useless-template-attributes.ts'
 import noUselessVBind from './rules/no-useless-v-bind.ts'
 import noVForTemplateKeyOnChild from './rules/no-v-for-template-key-on-child.ts'
-import noVForTemplateKey from './rules/no-v-for-template-key.ts'
 import noVHtml from './rules/no-v-html.ts'
-import noVModelArgument from './rules/no-v-model-argument.ts'
 import noVTextVHtmlOnComponent from './rules/no-v-text-v-html-on-component.ts'
 import noVText from './rules/no-v-text.ts'
 import noWatchAfterAwait from './rules/no-watch-after-await.ts'
@@ -241,10 +239,8 @@ import validAttributeName from './rules/valid-attribute-name.ts'
 import validDefineEmits from './rules/valid-define-emits.ts'
 import validDefineOptions from './rules/valid-define-options.ts'
 import validDefineProps from './rules/valid-define-props.ts'
-import validModelDefinition from './rules/valid-model-definition.ts'
 import validNextTick from './rules/valid-next-tick.ts'
 import validTemplateRoot from './rules/valid-template-root.ts'
-import validVBindSync from './rules/valid-v-bind-sync.ts'
 import validVBind from './rules/valid-v-bind.ts'
 import validVCloak from './rules/valid-v-cloak.ts'
 import validVElseIf from './rules/valid-v-else-if.ts'
@@ -431,9 +427,7 @@ export default {
     'no-useless-template-attributes': noUselessTemplateAttributes,
     'no-useless-v-bind': noUselessVBind,
     'no-v-for-template-key-on-child': noVForTemplateKeyOnChild,
-    'no-v-for-template-key': noVForTemplateKey,
     'no-v-html': noVHtml,
-    'no-v-model-argument': noVModelArgument,
     'no-v-text-v-html-on-component': noVTextVHtmlOnComponent,
     'no-v-text': noVText,
     'no-watch-after-await': noWatchAfterAwait,
@@ -504,10 +498,8 @@ export default {
     'valid-define-emits': validDefineEmits,
     'valid-define-options': validDefineOptions,
     'valid-define-props': validDefineProps,
-    'valid-model-definition': validModelDefinition,
     'valid-next-tick': validNextTick,
     'valid-template-root': validTemplateRoot,
-    'valid-v-bind-sync': validVBindSync,
     'valid-v-bind': validVBind,
     'valid-v-cloak': validVCloak,
     'valid-v-else-if': validVElseIf,
@@ -526,7 +518,6 @@ export default {
     'valid-v-text': validVText
   },
   processors: {
-    '.vue': processor,
     vue: processor
   }
 }

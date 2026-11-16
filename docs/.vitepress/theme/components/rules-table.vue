@@ -14,7 +14,7 @@
 </template>
 
 <script>
-const emojis = ['3️⃣', '2️⃣', '⚠️']
+const emojis = ['⚠️']
 
 export default {
   data() {

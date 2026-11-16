@@ -16,7 +16,7 @@ export default {
     docs: {
       description:
         'disallow registering components that are not used inside templates',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-unused-components.html'
     },
     fixable: null,

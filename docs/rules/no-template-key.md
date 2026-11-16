@@ -12,17 +12,8 @@ since: v3.4.0
 
 - :gear: This rule is included in the following preset configs:
   - `*.configs["flat/essential"]`
-  - `*.configs["flat/vue2-essential"]`
   - `*.configs["flat/strongly-recommended"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/recommended"`
-  - `"plugin:vue/vue2-recommended"`
 
 Vue.js disallows `key` attribute on `<template>` elements.
 
@@ -51,18 +42,12 @@ This rule reports the `<template>` elements which have `key` attribute.
 </eslint-code-block>
 
 ::: tip Note
-This rule does not report keys placed on `<template v-for>`. It's valid for Vue.js 3.x. If you want to report keys placed on `<template v-for>` invalid for Vue.js 2.x, use [vue/no-v-for-template-key] rule.
+This rule does not report keys placed on `<template v-for>`. It's valid for Vue.js 3.x.
 :::
 
 ## :wrench: Options
 
 Nothing.
-
-## :couple: Related Rules
-
-- [vue/no-v-for-template-key]
-
-[vue/no-v-for-template-key]: ./no-v-for-template-key.md
 
 ## :books: Further Reading
 

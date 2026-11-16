@@ -61,7 +61,7 @@ export default {
     docs: {
       description:
         'disallow duplicate conditions in `v-if` / `v-else-if` chains',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-dupe-v-else-if.html'
     },
     fixable: null,

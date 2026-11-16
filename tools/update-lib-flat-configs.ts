@@ -15,17 +15,13 @@ import { categories } from './lib/categories.ts'
 import type { Category } from './lib/categories.ts'
 import type { RuleInfo } from './lib/rules.ts'
 
-const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
+const errorCategories = new Set(['base', 'vue3-essential'])
 
 const extendsCategories: Record<string, string | null> = {
   base: null,
-  'vue2-essential': 'base',
   'vue3-essential': 'base',
-  'vue2-strongly-recommended': 'vue2-essential',
   'vue3-strongly-recommended': 'vue3-essential',
-  'vue2-recommended': 'vue2-strongly-recommended',
   'vue3-recommended': 'vue3-strongly-recommended',
-  'vue2-use-with-caution': 'vue2-recommended',
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
@@ -38,14 +34,9 @@ function formatRules(
     rules.map((rule) => {
       let options: string | unknown[] =
         shouldAlwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
-      const defaultOptions =
-        rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
-      if (defaultOptions) {
-        const v = categoryId.startsWith('vue3') ? 3 : 2
-        const defaultOption = defaultOptions[`vue${v}`]
-        if (defaultOption) {
-          options = [options, ...defaultOption]
-        }
+      const defaultOption = rule.meta.docs.defaultOptions?.vue3
+      if (defaultOption) {
+        options = [options, ...defaultOption]
       }
       return [rule.ruleId, options]
     })

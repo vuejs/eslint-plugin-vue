@@ -10,7 +10,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'enforce `v-on` directive style',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/v-on-style.html'
     },
     fixable: 'code',

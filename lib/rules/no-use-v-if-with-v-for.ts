@@ -34,7 +34,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'disallow using `v-if` on the same element as `v-for`',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-use-v-if-with-v-for.html'
     },
     fixable: null,

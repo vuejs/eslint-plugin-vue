@@ -50,7 +50,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow parsing errors in `<template>`',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-parsing-error.html'
     },
     fixable: null,

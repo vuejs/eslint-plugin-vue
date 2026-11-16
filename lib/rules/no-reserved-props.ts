@@ -16,11 +16,8 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow reserved names in props',
-      categories: ['vue3-essential', 'vue2-essential'],
-      url: 'https://eslint.vuejs.org/rules/no-reserved-props.html',
-      defaultOptions: {
-        vue2: [{ vueVersion: 2 }]
-      }
+      categories: ['vue3-essential'],
+      url: 'https://eslint.vuejs.org/rules/no-reserved-props.html'
     },
     fixable: null,
     schema: [

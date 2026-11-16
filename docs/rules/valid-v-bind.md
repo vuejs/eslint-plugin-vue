@@ -12,17 +12,8 @@ since: v3.11.0
 
 - :gear: This rule is included in the following preset configs:
   - `*.configs["flat/essential"]`
-  - `*.configs["flat/vue2-essential"]`
   - `*.configs["flat/strongly-recommended"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/recommended"`
-  - `"plugin:vue/vue2-recommended"`
 
 This rule checks whether every `v-bind` directive is valid.
 
@@ -65,11 +56,9 @@ Nothing.
 
 - [vue/no-parsing-error]
 - [vue/no-deprecated-v-bind-sync]
-- [vue/valid-v-bind-sync]
 
 [vue/no-parsing-error]: ./no-parsing-error.md
 [vue/no-deprecated-v-bind-sync]: ./no-deprecated-v-bind-sync.md
-[vue/valid-v-bind-sync]: ./valid-v-bind-sync.md
 
 ## :rocket: Version
 

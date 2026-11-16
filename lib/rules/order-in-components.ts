@@ -203,7 +203,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'enforce order of properties in components',
-      categories: ['vue3-recommended', 'vue2-recommended'],
+      categories: ['vue3-recommended'],
       url: 'https://eslint.vuejs.org/rules/order-in-components.html'
     },
     fixable: 'code', // null or "code" or "whitespace"

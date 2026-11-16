@@ -9,7 +9,7 @@ export default {
     type: 'layout',
     docs: {
       description: 'disallow spaces around equal signs in attribute',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/no-spaces-around-equal-signs-in-attribute.html'
     },
     fixable: 'whitespace',

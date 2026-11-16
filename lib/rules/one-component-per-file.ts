@@ -9,7 +9,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'enforce that each component should be in its own file',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/one-component-per-file.html'
     },
     fixable: null,

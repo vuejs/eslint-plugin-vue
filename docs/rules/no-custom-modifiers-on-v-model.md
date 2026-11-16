@@ -10,15 +10,8 @@ since: v7.0.0
 
 > disallow custom modifiers on v-model used on the component
 
-- :gear: This rule is included in the following preset configs:
-  - `*.configs["flat/vue2-essential"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/vue2-recommended"`
-
 This rule checks whether `v-model` used on the component do not have custom modifiers.
+Vue.js 3 supports [custom `v-model` modifiers](https://vuejs.org/guide/components/v-model.html#handling-v-model-modifiers); enable this rule if you want to disallow them.
 
 ## :book: Rule Details
 

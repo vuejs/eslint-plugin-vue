@@ -8,7 +8,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow using arrow functions to define watcher',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-arrow-functions-in-watch.html'
     },
     fixable: null,

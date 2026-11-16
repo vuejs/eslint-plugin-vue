@@ -12,17 +12,8 @@ since: v3.14.0
 
 - :gear: This rule is included in the following preset configs:
   - `*.configs["flat/essential"]`
-  - `*.configs["flat/vue2-essential"]`
   - `*.configs["flat/strongly-recommended"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/recommended"`
-  - `"plugin:vue/vue2-recommended"`
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details

@@ -11,7 +11,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow custom modifiers on v-model used on the component',
-      categories: ['vue2-essential'],
+      categories: undefined,
       url: 'https://eslint.vuejs.org/rules/no-custom-modifiers-on-v-model.html'
     },
     fixable: null,

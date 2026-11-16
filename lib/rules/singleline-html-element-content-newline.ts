@@ -47,7 +47,7 @@ export default {
     docs: {
       description:
         'require a line break before and after the contents of a singleline element',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/singleline-html-element-content-newline.html'
     },
     fixable: 'whitespace',

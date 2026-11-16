@@ -10,7 +10,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'enforce props with default values to be optional',
-      categories: ['vue2-recommended', 'vue3-recommended'],
+      categories: ['vue3-recommended'],
       url: 'https://eslint.vuejs.org/rules/no-required-prop-with-default.html'
     },
     fixable: 'code',
