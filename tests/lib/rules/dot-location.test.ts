@@ -3,6 +3,7 @@
  */
 import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/dot-location'
+import { isESLintStylisticInstalled } from '../../test-utils/eslint-stylistic'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
@@ -11,12 +12,15 @@ const tester = new RuleTester({
 
 tester.run('dot-location', rule, {
   valid: [
-    `<template>
+    {
+      code: `<template>
       <div
         :attr="foo.
           bar"
       />
     </template>`,
+      options: ['object']
+    },
     {
       code: `
       <template>
@@ -44,6 +48,7 @@ tester.run('dot-location', rule, {
             bar"
         />
       </template>`,
+      options: ['object'],
       errors: [
         {
           message: 'Expected dot to be on same line as object.',
@@ -81,4 +86,27 @@ tester.run('dot-location', rule, {
       ]
     }
   ]
+})
+
+// ESLint Stylistic v6 changed the default option from `object` to `property`,
+// while the ESLint core rule still defaults to `object`.
+tester.run('dot-location', rule, {
+  valid: [
+    isESLintStylisticInstalled
+      ? `
+      <template>
+        <div
+          :attr="foo
+            .bar"
+        />
+      </template>`
+      : `
+      <template>
+        <div
+          :attr="foo.
+            bar"
+        />
+      </template>`
+  ],
+  invalid: []
 })

@@ -59,7 +59,7 @@
     "node": "^22.19.0 || ^24.11.0 || >=26.0.0"
   },
   "peerDependencies": {
-    "@stylistic/eslint-plugin": "^5.0.0",
+    "@stylistic/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^10.0.0",
     "vue-eslint-parser": "^10.4.2"
@@ -84,7 +84,7 @@
     "@changesets/cli": "^3.0.3",
     "@eslint/markdown": "^8.0.3",
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.2.4",
-    "@stylistic/eslint-plugin": "^5.10.0",
+    "@stylistic/eslint-plugin": "^6.0.1",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "@types/eslint": "^9.6.1",
     "@types/natural-compare": "^1.4.3",
