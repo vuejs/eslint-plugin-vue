@@ -3,7 +3,7 @@
  * @author Armano
  */
 import rule from '../../../lib/rules/attribute-hyphenation'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({

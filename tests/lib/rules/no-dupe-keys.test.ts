@@ -3,7 +3,7 @@
  * @author Armano
  */
 import rule from '../../../lib/rules/no-dupe-keys'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'
 

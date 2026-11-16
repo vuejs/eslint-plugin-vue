@@ -2,7 +2,7 @@
  * @author kevsommer Kevin Sommer
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/max-template-depth'
 import vueEslintParser from 'vue-eslint-parser'
 

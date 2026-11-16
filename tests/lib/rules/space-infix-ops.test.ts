@@ -1,7 +1,7 @@
 /**
  * @author Toru Nagashima
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/space-infix-ops'
 import vueEslintParser from 'vue-eslint-parser'
 

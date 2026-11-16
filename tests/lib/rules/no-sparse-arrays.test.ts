@@ -1,8 +1,7 @@
 /**
  * @author Yosuke Ota
  */
-import { RuleTester, ESLint } from '../../eslint-compat'
-import semver from 'semver'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-sparse-arrays'
 import vueEslintParser from 'vue-eslint-parser'
 
@@ -26,14 +25,12 @@ tester.run('no-sparse-arrays', rule, {
         <div :class="[, 'foo', 'bar']" />
       </template>`,
       errors: [
-        // eslint-disable-next-line eslint-plugin/require-test-error-positions -- set via ternary
         {
           message: 'Unexpected comma in middle of array.',
           line: 3,
+          column: 23,
           endLine: 3,
-          ...(semver.gte(ESLint.version, '9.5.0')
-            ? { column: 23, endColumn: 24 }
-            : { column: 22, endColumn: 38 })
+          endColumn: 24
         }
       ]
     },
@@ -43,14 +40,12 @@ tester.run('no-sparse-arrays', rule, {
         <div v-bind:[[,'foo'][1]]="bar" />
       </template>`,
       errors: [
-        // eslint-disable-next-line eslint-plugin/require-test-error-positions -- set via ternary
         {
           message: 'Unexpected comma in middle of array.',
           line: 3,
+          column: 23,
           endLine: 3,
-          ...(semver.gte(ESLint.version, '9.5.0')
-            ? { column: 23, endColumn: 24 }
-            : { column: 22, endColumn: 30 })
+          endColumn: 24
         }
       ]
     }

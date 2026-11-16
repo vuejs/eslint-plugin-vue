@@ -2,15 +2,12 @@
  * @author lozinsky <https://github.com/lozinsky>
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester, ESLint } from '../../eslint-compat'
-import semver from 'semver'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-implicit-coercion'
 import vueEslintParser from 'vue-eslint-parser'
 
 function getExpectedErrorMessage(suggestedCode: string): string {
-  return semver.gte(ESLint.version, '9.0.0')
-    ? `Unexpected implicit coercion encountered. Use \`${suggestedCode}\` instead.`
-    : `use \`${suggestedCode}\` instead.`
+  return `Unexpected implicit coercion encountered. Use \`${suggestedCode}\` instead.`
 }
 
 const tester = new RuleTester({
@@ -134,9 +131,7 @@ tester.run('no-implicit-coercion', rule, {
     {
       filename: 'test.vue',
       code: `<template><div :data-foo="+foo" /></template>`,
-      output: semver.gte(ESLint.version, '9.0.0')
-        ? null
-        : `<template><div :data-foo="Number(foo)" /></template>`,
+      output: null,
       errors: [
         {
           message: getExpectedErrorMessage('Number(foo)'),
@@ -144,24 +139,20 @@ tester.run('no-implicit-coercion', rule, {
           column: 27,
           endLine: 1,
           endColumn: 31,
-          suggestions: semver.gte(ESLint.version, '9.0.0')
-            ? [
-                {
-                  messageId: 'useRecommendation',
-                  data: { recommendation: 'Number(foo)' },
-                  output: '<template><div :data-foo="Number(foo)" /></template>'
-                }
-              ]
-            : []
+          suggestions: [
+            {
+              messageId: 'useRecommendation',
+              data: { recommendation: 'Number(foo)' },
+              output: '<template><div :data-foo="Number(foo)" /></template>'
+            }
+          ]
         }
       ]
     },
     {
       filename: 'test.vue',
       code: `<template><div :data-foo="1 * foo" /></template>`,
-      output: semver.gte(ESLint.version, '9.0.0')
-        ? null
-        : `<template><div :data-foo="Number(foo)" /></template>`,
+      output: null,
       errors: [
         {
           message: getExpectedErrorMessage('Number(foo)'),
@@ -169,24 +160,20 @@ tester.run('no-implicit-coercion', rule, {
           column: 27,
           endLine: 1,
           endColumn: 34,
-          suggestions: semver.gte(ESLint.version, '9.0.0')
-            ? [
-                {
-                  messageId: 'useRecommendation',
-                  data: { recommendation: 'Number(foo)' },
-                  output: '<template><div :data-foo="Number(foo)" /></template>'
-                }
-              ]
-            : []
+          suggestions: [
+            {
+              messageId: 'useRecommendation',
+              data: { recommendation: 'Number(foo)' },
+              output: '<template><div :data-foo="Number(foo)" /></template>'
+            }
+          ]
         }
       ]
     },
     {
       filename: 'test.vue',
       code: `<template><div :data-foo="'' + foo" /></template>`,
-      output: semver.gte(ESLint.version, '9.0.0')
-        ? null
-        : `<template><div :data-foo="String(foo)" /></template>`,
+      output: null,
       errors: [
         {
           message: getExpectedErrorMessage('String(foo)'),
@@ -194,24 +181,20 @@ tester.run('no-implicit-coercion', rule, {
           column: 27,
           endLine: 1,
           endColumn: 35,
-          suggestions: semver.gte(ESLint.version, '9.0.0')
-            ? [
-                {
-                  messageId: 'useRecommendation',
-                  data: { recommendation: 'String(foo)' },
-                  output: '<template><div :data-foo="String(foo)" /></template>'
-                }
-              ]
-            : []
+          suggestions: [
+            {
+              messageId: 'useRecommendation',
+              data: { recommendation: 'String(foo)' },
+              output: '<template><div :data-foo="String(foo)" /></template>'
+            }
+          ]
         }
       ]
     },
     {
       filename: 'test.vue',
       code: `<template><div :data-foo="\`\` + foo" /></template>`,
-      output: semver.gte(ESLint.version, '9.0.0')
-        ? null
-        : `<template><div :data-foo="String(foo)" /></template>`,
+      output: null,
       errors: [
         {
           message: getExpectedErrorMessage('String(foo)'),
@@ -219,24 +202,20 @@ tester.run('no-implicit-coercion', rule, {
           column: 27,
           endLine: 1,
           endColumn: 35,
-          suggestions: semver.gte(ESLint.version, '9.0.0')
-            ? [
-                {
-                  messageId: 'useRecommendation',
-                  data: { recommendation: 'String(foo)' },
-                  output: '<template><div :data-foo="String(foo)" /></template>'
-                }
-              ]
-            : []
+          suggestions: [
+            {
+              messageId: 'useRecommendation',
+              data: { recommendation: 'String(foo)' },
+              output: '<template><div :data-foo="String(foo)" /></template>'
+            }
+          ]
         }
       ]
     },
     {
       filename: 'test.vue',
       code: `<template><div :data-foo="\`\${foo}\`" /></template>`,
-      output: semver.gte(ESLint.version, '9.0.0')
-        ? null
-        : `<template><div :data-foo="String(foo)" /></template>`,
+      output: null,
       options: [
         {
           disallowTemplateShorthand: true
@@ -249,15 +228,13 @@ tester.run('no-implicit-coercion', rule, {
           column: 27,
           endLine: 1,
           endColumn: 35,
-          suggestions: semver.gte(ESLint.version, '9.0.0')
-            ? [
-                {
-                  messageId: 'useRecommendation',
-                  data: { recommendation: 'String(foo)' },
-                  output: '<template><div :data-foo="String(foo)" /></template>'
-                }
-              ]
-            : []
+          suggestions: [
+            {
+              messageId: 'useRecommendation',
+              data: { recommendation: 'String(foo)' },
+              output: '<template><div :data-foo="String(foo)" /></template>'
+            }
+          ]
         }
       ]
     }

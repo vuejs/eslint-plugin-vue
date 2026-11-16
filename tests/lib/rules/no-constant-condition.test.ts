@@ -1,7 +1,7 @@
 /**
  * @author Flo Edelmann
  */
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-constant-condition'
 import vueEslintParser from 'vue-eslint-parser'
 

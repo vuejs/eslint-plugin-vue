@@ -4,7 +4,7 @@
  */
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-shared-component-data'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 
 const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
