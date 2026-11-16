@@ -371,15 +371,15 @@ export default {
             verifyPropVariable(prop, path)
           }
         },
-        'MemberExpression > :matches(Identifier, ThisExpression)'(
-          node: (Identifier | ThisExpression) & { parent: MemberExpression },
+        ':matches(MemberExpression, TSAsExpression, TSSatisfiesExpression, TSNonNullExpression, TSTypeAssertion) > :matches(Identifier, ThisExpression)'(
+          node: Identifier | ThisExpression,
           { node: vueNode }
         ) {
           if (!utils.isThis(node, context)) {
             return
           }
-          const mem = node.parent
-          if (mem.object !== node) {
+          const mem = utils.getParentMemberExpression(node)
+          if (!mem) {
             return
           }
           const name = utils.getStaticPropertyName(mem)
@@ -389,14 +389,14 @@ export default {
         }
       }),
       utils.defineTemplateBodyVisitor(context, {
-        'VExpressionContainer MemberExpression > ThisExpression'(
-          node: ThisExpression & { parent: MemberExpression }
+        'VExpressionContainer :matches(MemberExpression, TSAsExpression, TSSatisfiesExpression, TSNonNullExpression, TSTypeAssertion) > ThisExpression'(
+          node: ThisExpression
         ) {
           if (!vueObjectData) {
             return
           }
-          const mem = node.parent
-          if (mem.object !== node) {
+          const mem = utils.getParentMemberExpression(node)
+          if (!mem) {
             return
           }
           const name = utils.getStaticPropertyName(mem)
@@ -413,11 +413,9 @@ export default {
           }
           const propsInfo = propsMap.get(vueObjectData.object) as PropsInfo
           const isRootProps = propsInfo.name === node.name
-          const parent = node.parent
+          const mem = utils.getParentMemberExpression(node)
           const name =
-            (isRootProps &&
-              parent.type === 'MemberExpression' &&
-              utils.getStaticPropertyName(parent)) ||
+            (isRootProps && mem && utils.getStaticPropertyName(mem)) ||
             node.name
           if (name && (isRootProps || propsInfo.set.has(name))) {
             verifyMutating(node, name, isRootProps)
