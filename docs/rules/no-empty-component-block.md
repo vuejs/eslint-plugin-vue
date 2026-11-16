@@ -16,7 +16,7 @@ since: v7.0.0
 
 This rule disallows the `<template>` `<script>` `<style>` block to be empty.
 
-This rule also checks block what has attribute `src`.
+This rule also checks blocks that have a `src` attribute.
 See [Vue Single-File Component (SFC) Spec](https://vue-loader.vuejs.org/spec.html#src-imports).
 
 <eslint-code-block fix :rules="{'vue/no-empty-component-block': ['error']}">

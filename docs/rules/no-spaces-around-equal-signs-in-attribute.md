@@ -23,7 +23,7 @@ since: v5.0.0
 
 ## :book: Rule Details
 
-This rule disallow spaces around equal signs in attribute.
+This rule disallows spaces around equal signs in attributes.
 
 <eslint-code-block fix :rules="{'vue/no-spaces-around-equal-signs-in-attribute': ['error']}">
 

@@ -18,7 +18,7 @@ since: v7.0.0
   - `"plugin:vue/vue2-strongly-recommended"`
   - `"plugin:vue/vue2-recommended"`
 
-This rule checks whether `v-model` used on the component do not have custom modifiers.
+This rule checks whether `v-model` used on a component does not have custom modifiers.
 
 ## :book: Rule Details
 

@@ -19,7 +19,7 @@ since: v7.0.0
   - `"plugin:vue/vue2-strongly-recommended"`
   - `"plugin:vue/vue2-recommended"`
 
-This rule checks whether `v-model` used on custom component do not have an argument.
+This rule checks whether `v-model` used on a custom component does not have an argument.
 
 ## :book: Rule Details
 

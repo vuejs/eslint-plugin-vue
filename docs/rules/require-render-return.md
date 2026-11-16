@@ -26,7 +26,7 @@ since: v3.10.0
 
 ## :book: Rule Details
 
-This rule aims to enforce render function to always return value
+This rule aims to enforce that the render function always returns a value
 
 <eslint-code-block :rules="{'vue/require-render-return': ['error']}">
 

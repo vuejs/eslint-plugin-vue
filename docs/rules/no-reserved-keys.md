@@ -26,7 +26,7 @@ since: v3.9.0
 
 ## :book: Rule Details
 
-This rule prevents to use [reserved names](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/vue-reserved.json) to avoid conflicts and unexpected behavior.
+This rule prevents using [reserved names](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/vue-reserved.json) to avoid conflicts and unexpected behavior.
 
 <eslint-code-block :rules="{'vue/no-reserved-keys': ['error']}">
 

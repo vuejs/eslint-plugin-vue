@@ -16,7 +16,7 @@ This rule is aimed at eliminating unused refs.
 This rule reports refs that are defined using the `ref` attribute in `<template>` but are not used via `$refs`.
 
 ::: warning Note
-This rule cannot be checked for use in other components (e.g. `mixins`, Access via `$refs.x.$refs`).
+This rule cannot check for use in other components (e.g. `mixins`, access via `$refs.x.$refs`).
 :::
 
 <eslint-code-block :rules="{'vue/no-unused-refs': ['error']}">

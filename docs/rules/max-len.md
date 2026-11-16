@@ -13,7 +13,7 @@ since: v6.1.0
 ## :book: Rule Details
 
 This rule enforces a maximum line length to increase code readability and maintainability.
-This rule is the similar rule as core [max-len] rule but it applies to the source code in `.vue`.
+This rule is similar to the core [max-len] rule but it applies to the source code in `.vue`.
 
 <eslint-code-block :rules="{'vue/max-len': ['error']}">
 

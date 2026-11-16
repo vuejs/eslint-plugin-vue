@@ -26,7 +26,7 @@ since: v3.6.0
 
 ## :book: Rule Details
 
-This rule is aimed at preventing the code which makes side effects in computed properties and functions.
+This rule is aimed at preventing code that causes side effects in computed properties and functions.
 
 It is considered a very bad practice to introduce side effects inside computed properties and functions. It makes the code not predictable and hard to understand.
 
