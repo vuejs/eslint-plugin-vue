@@ -66,11 +66,6 @@ export default defineComponent({
 
 </eslint-code-block>
 
-## :couple: Related Rules
-
-- [vue/valid-model-definition](./valid-model-definition.md) (for Vue.js 2.x)
-- [vue/no-v-model-argument](./no-v-model-argument.md) (for Vue.js 2.x)
-
 ## :books: Further Reading
 
 - [Migration Guide – `v-model`](https://v3-migration.vuejs.org/breaking-changes/v-model.html)

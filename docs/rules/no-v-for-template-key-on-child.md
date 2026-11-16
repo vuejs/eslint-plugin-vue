@@ -25,7 +25,6 @@ See [Migration Guide - `key` attribute > With `<template v-for>`](https://v3-mig
 
 ::: warning Note
 This rule is targeted at Vue.js 3.x.
-If you are using Vue.js 2.x, enable the [vue/no-v-for-template-key] rule instead. Don't enable both rules together; they are conflicting.
 :::
 
 <eslint-code-block :rules="{'vue/no-v-for-template-key-on-child': ['error']}">
@@ -49,12 +48,6 @@ If you are using Vue.js 2.x, enable the [vue/no-v-for-template-key] rule instead
 ## :wrench: Options
 
 Nothing.
-
-## :couple: Related Rules
-
-- [vue/no-v-for-template-key]
-
-[vue/no-v-for-template-key]: ./no-v-for-template-key.md
 
 ## :books: Further Reading
 
