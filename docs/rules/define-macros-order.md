@@ -15,7 +15,7 @@ since: v8.7.0
 
 ## :book: Rule Details
 
-This rule reports compiler macros (like `defineProps` or `defineEmits` but also custom ones) when they are not the first statements in `<script setup>` (after any potential import statements or type definitions) or when they are not in the correct order.
+This rule reports compiler macros (like `defineProps` or `defineEmits` but also custom ones) when they are not the first statements in `<script setup>` (after any potential import statements, type definitions or, with `allowReferencedAbove`, declarations they reference) or when they are not in the correct order.
 
 ## :wrench: Options
 
@@ -31,7 +31,7 @@ This rule reports compiler macros (like `defineProps` or `defineEmits` but also 
 
 - `order` (`string[]`) ... The order in which the macros should appear. The default is `["defineProps", "defineEmits"]`.
 - `defineExposeLast` (`boolean`) ... Force `defineExpose` at the end.
-- `allowReferencedAbove` (`boolean`) ... Allow declarations that a macro references to be placed right above it, below the previous macro. This includes types, interfaces, enums, `declare`d declarations, variables and functions, also when they are only referenced through other such declarations. Any other statement between the macros is still reported. The autofix moves the referenced declarations together with their macro, and doesn't fix the order if that would place a macro above a declaration it uses. Default is `true`.
+- `allowReferencedAbove` (`boolean`) ... Allow declarations that a macro references, directly or through other such declarations, to be placed right above it, below the previous macro: types, interfaces, enums, ambient (`declare`) declarations, variables, functions and classes. Any other statement between the macros is still reported. The autofix moves referenced declarations together with their macro, and offers no fix if a macro would end up above a runtime declaration it uses. The default is `true`.
 
 ### `{ "order": ["defineProps", "defineEmits"] }` (default)
 
@@ -185,42 +185,42 @@ const slots = defineSlots()
 
 ### `{ "allowReferencedAbove": true }` (default)
 
-These examples also set `order` to include `defineModel`, so that the variable referenced by `defineModel` is checked too.
-
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineModel', 'defineProps', 'defineEmits'], allowReferencedAbove: true}]}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowReferencedAbove: true}]}">
 
 ```vue
 <!-- ✓ GOOD -->
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const lastValue = ref<string>()
-const model = defineModel<string>({
-  get: (value) => lastValue.value ?? value
-})
+const defaultSize = 'medium'
+interface Props { size?: string }
+withDefaults(defineProps<Props>(), { size: defaultSize })
 
 interface Item { id: number }
-interface Props { items: Item[] }
-defineProps<Props>()
-
-type Foo = 'bar'
-defineEmits<{ (e: Foo): void }>()
+type Emits = { select: [item: Item] }
+defineEmits<Emits>()
 </script>
 ```
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineModel', 'defineProps', 'defineEmits'], allowReferencedAbove: true}]}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowReferencedAbove: true}]}">
+
+```vue
+<!-- ✗ BAD -->
+<script setup>
+defineProps(/* ... */)
+console.log('unrelated')
+defineEmits(/* ... */)
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowReferencedAbove: true}]}">
 
 ```vue
 <!-- ✗ BAD -->
 <script setup lang="ts">
-const model = defineModel<string>()
-
-interface Props { foo: string }
-console.log('unrelated')
-defineProps<Props>()
-
+defineProps(/* ... */)
 type Unused = string
 defineEmits(/* ... */)
 </script>
@@ -229,6 +229,20 @@ defineEmits(/* ... */)
 </eslint-code-block>
 
 ### `{ "allowReferencedAbove": false }`
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowReferencedAbove: false}]}">
+
+```vue
+<!-- ✓ GOOD -->
+<script setup lang="ts">
+type Foo = 'bar'
+
+defineProps(/* ... */)
+defineEmits<{ (e: Foo): void }>()
+</script>
+```
+
+</eslint-code-block>
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowReferencedAbove: false}]}">
 
