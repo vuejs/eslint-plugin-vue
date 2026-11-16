@@ -248,6 +248,9 @@ function create(context: RuleContext) {
   }
   const shouldAllowReferencedAbove: boolean =
     !options[0] || options[0].allowReferencedAbove !== false
+  const notAtTopMessageId = shouldAllowReferencedAbove
+    ? 'macrosNotAtTopOrReferenced'
+    : 'macrosNotAtTop'
 
   const sourceCode = context.sourceCode
   const macrosNodes = new Map<string, ASTNode[]>()
@@ -425,7 +428,7 @@ function create(context: RuleContext) {
     )
 
     // Decide which message to use
-    const messageId = beforeMacro ? 'macrosUnordered' : 'macrosNotAtTop'
+    const messageId = beforeMacro ? 'macrosUnordered' : notAtTopMessageId
     const data = { macro, ...(beforeMacro ? { before: beforeMacro } : {}) }
 
     context.report({
@@ -593,6 +596,8 @@ export default {
     messages: {
       macrosNotAtTop:
         '{{macro}} should be placed at the top of `<script setup>` (after any potential import statements or type definitions).',
+      macrosNotAtTopOrReferenced:
+        '{{macro}} should be placed at the top of `<script setup>` (after any potential import statements, type definitions or declarations it references).',
       macrosUnordered: '{{macro}} should be above {{before}}.',
       defineExposeNotTheLast:
         '`defineExpose` should be the last statement in `<script setup>`.',

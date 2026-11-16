@@ -33,6 +33,11 @@ const optionsExposeLast = [
 ]
 
 function notAtTopMessage(macro: string): string {
+  return `${macro} should be placed at the top of \`<script setup>\` (after any potential import statements, type definitions or declarations it references).`
+}
+
+/** The message with `allowReferencedAbove: false` */
+function notAtTopStrictMessage(macro: string): string {
   return `${macro} should be placed at the top of \`<script setup>\` (after any potential import statements or type definitions).`
 }
 
@@ -1634,7 +1639,7 @@ tester.run('define-macros-order', rule, {
       },
       errors: [
         {
-          message: notAtTopMessage('defineModel'),
+          message: notAtTopStrictMessage('defineModel'),
           line: 6,
           column: 11,
           endLine: 8,
@@ -1685,7 +1690,7 @@ tester.run('define-macros-order', rule, {
       },
       errors: [
         {
-          message: notAtTopMessage('defineEmits'),
+          message: notAtTopStrictMessage('defineEmits'),
           line: 13,
           column: 11,
           endLine: 13,
