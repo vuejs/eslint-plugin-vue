@@ -157,6 +157,8 @@ In Vue 3, a binding that comes after `v-bind="object"` overrides the same key in
 }
 ```
 
+Besides the group names, `order` accepts attribute names, on their own or together with group names in an array. A name matches the attribute and its `v-bind` form, regardless of camelCase or kebab-case (`row-key` matches `row-key="id"`, `:row-key="id"` and `:rowKey="id"`), and such an attribute is ordered by its name instead of its group.
+
 ### `"alphabetical": true`
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error', {alphabetical: true}]}">
@@ -348,6 +350,55 @@ When set to `true`, the `v-bind="object"` directive will be excluded from the at
     prop-one="prop"
     prop-two="prop">
   </div>
+</template>
+```
+
+</eslint-code-block>
+
+#### `['DEFINITION', 'LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', ['UNIQUE', 'SLOT'], 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', ['data-test', 'data-testid'], 'EVENTS', 'CONTENT']`
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {order: ['DEFINITION', 'LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', ['UNIQUE', 'SLOT'], 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', ['data-test', 'data-testid'], 'EVENTS', 'CONTENT']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <MyInput
+    :label="label"
+    name="password"
+    data-testid="password"
+    @input="onInput">
+  </MyInput>
+
+  <!-- ✗ BAD -->
+  <MyInput
+    data-testid="password"
+    :label="label"
+    name="password">
+  </MyInput>
+</template>
+```
+
+</eslint-code-block>
+
+#### `['DEFINITION', 'LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', ['UNIQUE', 'row-key'], 'SLOT', 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']`
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {order: ['DEFINITION', 'LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', ['UNIQUE', 'row-key'], 'SLOT', 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <q-table
+    row-key="id"
+    v-model="selected"
+    :rows="rows">
+  </q-table>
+
+  <!-- ✗ BAD -->
+  <q-table
+    v-model="selected"
+    row-key="id"
+    :rows="rows">
+  </q-table>
 </template>
 ```
 
