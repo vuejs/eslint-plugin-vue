@@ -37,7 +37,6 @@ export default [
   // add more generic rulesets here, such as:
   // js.configs.recommended,
   ...pluginVue.configs['flat/recommended'],
-  // ...pluginVue.configs['flat/vue2-recommended'], // Use this if you are using Vue.js 2.x.
   {
     rules: {
       // override/add rules settings here, such as:
@@ -62,18 +61,13 @@ You can use the following configs by adding them to `eslint.config.js`.
 (All flat configs in this plugin are provided as arrays, so spread syntax is required when combining them with other configs.)
 
 - `*.configs["flat/base"]` ... Settings and rules to enable correct ESLint parsing.
-- Configurations for using Vue.js 3.x:
-  - `*.configs["flat/essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `*.configs["flat/strongly-recommended"]` ... `essential`, plus rules to considerably improve code readability and/or dev experience.
-  - `*.configs["flat/strongly-recommended-error"]` ... Same as `strongly-recommended`, except with all rules configured to error instead of warn.
-  - `*.configs["flat/recommended"]` ... `strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
-  - `*.configs["flat/recommended-error"]` ... Same as `recommended`, except with all rules configured to error instead of warn.
-- Configurations for using Vue.js 2.x:
-  - `*.configs["flat/vue2-essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `*.configs["flat/vue2-strongly-recommended"]` ... `vue2-essential`, plus rules to considerably improve code readability and/or dev experience.
-  - `*.configs["flat/vue2-strongly-recommended-error"]` ... Same as `vue2-strongly-recommended`, except with all rules configured to error instead of warn.
-  - `*.configs["flat/vue2-recommended"]` ... `vue2-strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
-  - `*.configs["flat/vue2-recommended-error"]` ... Same as `vue2-recommended`, except with all rules configured to error instead of warn.
+- `*.configs["flat/essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
+- `*.configs["flat/strongly-recommended"]` ... `essential`, plus rules to considerably improve code readability and/or dev experience.
+- `*.configs["flat/strongly-recommended-error"]` ... Same as `strongly-recommended`, except with all rules configured to error instead of warn.
+- `*.configs["flat/recommended"]` ... `strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
+- `*.configs["flat/recommended-error"]` ... Same as `recommended`, except with all rules configured to error instead of warn.
+
+These configs are for Vue.js 3.x. The configs for Vue.js 2.x (`flat/vue2-*`) have been removed in eslint-plugin-vue v11.
 
 :::warning Reporting rules
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
