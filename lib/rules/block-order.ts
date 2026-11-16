@@ -114,7 +114,7 @@ export default {
           const firstUnordered = elementsWithOrder
             .slice(0, index)
             .filter(({ order }) => expected.index < order.index)
-            .sort((e1, e2) => e1.order.index - e2.order.index)[0]
+            .toSorted((e1, e2) => e1.order.index - e2.order.index)[0]
           if (!firstUnordered) {
             continue
           }

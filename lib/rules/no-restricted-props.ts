@@ -179,7 +179,7 @@ function createSuggest(
         if (fixPropInOtherPlaces) {
           fixes.push(...fixPropInOtherPlaces(fixer, replaceText))
         }
-        return fixes.sort((a, b) => a.range[0] - b.range[0])
+        return fixes.toSorted((a, b) => a.range[0] - b.range[0])
       },
       messageId: 'instead',
       data: { suggest: option.suggest }

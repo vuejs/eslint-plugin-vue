@@ -98,7 +98,7 @@ function groupEvents(events: EventDirective[]): {
 function getSystemModifiersString(modifiers: string[]): string {
   return modifiers
     .filter(isSystemModifier)
-    .sort((a, b) => a.localeCompare(b))
+    .toSorted((a, b) => a.localeCompare(b))
     .join(',')
 }
 
@@ -108,7 +108,7 @@ function getSystemModifiersString(modifiers: string[]): string {
 function getKeyModifiersString(modifiers: string[]): string {
   return modifiers
     .filter(isKeyModifier)
-    .sort((a, b) => a.localeCompare(b))
+    .toSorted((a, b) => a.localeCompare(b))
     .join(',')
 }
 

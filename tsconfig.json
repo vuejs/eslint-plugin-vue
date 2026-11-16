@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "preserve",
     "moduleResolution": "bundler",
-    "lib": ["es2022"],
+    "lib": ["es2024", "es2025.collection", "es2025.iterator"],
     "types": ["vitest/globals"],
     "allowJs": true,
     "checkJs": true,

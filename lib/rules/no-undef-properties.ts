@@ -384,7 +384,7 @@ export default {
     }
     function getVueComponentContextForTemplate():
       VueComponentContext | undefined {
-      const keys = [...vueComponentContextMap.keys()]
+      const keys = vueComponentContextMap.keys().toArray()
       const exported =
         keys.find(isScriptSetupProgram) || keys.find(utils.isInExportDefault)
       return exported && vueComponentContextMap.get(exported)
