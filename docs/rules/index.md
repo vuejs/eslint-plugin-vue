@@ -276,6 +276,7 @@ For example:
 | [vue/padding-line-between-blocks] | require or disallow padding lines between blocks | :wrench: | :lipstick: |
 | [vue/padding-line-between-tags] | require or disallow newlines between sibling tags in template | :wrench: | :lipstick: |
 | [vue/padding-lines-in-component-definition] | require or disallow padding lines in component definition | :wrench: | :lipstick: |
+| [vue/prefer-define-component] | require components to be defined using `defineComponent` |  | :hammer: |
 | [vue/prefer-define-options] | enforce use of `defineOptions` instead of default export | :wrench: | :hammer: |
 | [vue/prefer-prop-type-boolean-first] | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class] | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
@@ -566,6 +567,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/padding-line-between-blocks]: ./padding-line-between-blocks.md
 [vue/padding-line-between-tags]: ./padding-line-between-tags.md
 [vue/padding-lines-in-component-definition]: ./padding-lines-in-component-definition.md
+[vue/prefer-define-component]: ./prefer-define-component.md
 [vue/prefer-define-options]: ./prefer-define-options.md
 [vue/prefer-import-from-vue]: ./prefer-import-from-vue.md
 [vue/prefer-prop-type-boolean-first]: ./prefer-prop-type-boolean-first.md
