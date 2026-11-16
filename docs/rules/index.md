@@ -237,6 +237,7 @@ For example:
 | [vue/no-define-model-default] | disallow default values in `defineModel` |  | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-duplicate-class-names] | disallow duplication of class names in class attributes | :wrench: | :hammer: |
+| [vue/no-early-return] | disallow early `return` in `setup`, `data` and `asyncData` functions |  | :warning: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-import-compiler-macros] | disallow importing Vue compiler macros | :wrench: | :warning: |
 | [vue/no-literals-in-template] | disallow object, array, and function literals in template |  | :hammer: |
@@ -480,6 +481,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-duplicate-attr-inheritance]: ./no-duplicate-attr-inheritance.md
 [vue/no-duplicate-attributes]: ./no-duplicate-attributes.md
 [vue/no-duplicate-class-names]: ./no-duplicate-class-names.md
+[vue/no-early-return]: ./no-early-return.md
 [vue/no-empty-component-block]: ./no-empty-component-block.md
 [vue/no-empty-pattern]: ./no-empty-pattern.md
 [vue/no-export-in-script-setup]: ./no-export-in-script-setup.md
