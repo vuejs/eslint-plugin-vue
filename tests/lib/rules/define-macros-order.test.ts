@@ -484,6 +484,148 @@ tester.run('define-macros-order', rule, {
         </script>
       `,
       options: [{ order: ['defineProps', 'defineModel'] }]
+    },
+    {
+      // with `allowReferencedAbove: false`, types above all macros are allowed
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          type Foo = 'bar'
+          defineProps<{ foo: string }>()
+          defineEmits<{ (e: Foo): void }>()
+        </script>
+      `,
+      options: [{ allowReferencedAbove: false }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // referenced function declaration
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          function getFallback() {
+            return ''
+          }
+          const model = defineModel({ get: (value) => value ?? getFallback() })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }]
+    },
+    {
+      // referenced class
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          class Item {}
+          const model = defineModel({ default: () => new Item() })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }]
+    },
+    {
+      // referenced exported type
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          export interface Emits {
+            (e: 'update'): void
+          }
+          defineEmits<Emits>()
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // directly referenced `declare`d variable
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          declare const fallback: string
+          const model = defineModel<string>({ default: fallback })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // several `defineModel`s, each with its own variable
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const lastFirst = ref()
+          const first = defineModel('first', {
+            get: (value) => lastFirst.value ?? value
+          })
+          const lastSecond = ref()
+          const second = defineModel('second', {
+            get: (value) => lastSecond.value ?? value
+          })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }]
+    },
+    {
+      // custom macro referencing a variable
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const meta = { title: 'Home' }
+          definePage({ meta })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'definePage'] }]
+    },
+    {
+      // combined with `defineExposeLast`
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+          const count = ref(0)
+          defineExpose({ count })
+        </script>
+      `,
+      options: [
+        { order: ['defineProps', 'defineModel'], defineExposeLast: true }
+      ]
+    },
+    {
+      // variable referenced by `withDefaults`
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const defaultSize = 'medium'
+          interface Props {
+            size?: string
+          }
+          withDefaults(defineProps<Props>(), { size: defaultSize })
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
   invalid: [
@@ -1613,7 +1755,8 @@ tester.run('define-macros-order', rule, {
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/2746
       // with `allowReferencedAbove: false`, the macro is reported, but not
-      // fixed, as it can't be moved above the variable it uses
+      // fixed, as moving it above the variable it reads at runtime would
+      // break the code
       filename: 'test.vue',
       code: `
         <script setup lang="ts">
@@ -1801,7 +1944,8 @@ tester.run('define-macros-order', rule, {
     },
     {
       // a type referenced by a later macro is not allowed above an earlier one,
-      // and no fix is offered, as the later macro can't be moved above it
+      // so only the earlier macro is moved, and the type stays above the
+      // macro that references it
       filename: 'test.vue',
       code: `
         <script setup lang="ts">
@@ -1811,7 +1955,14 @@ tester.run('define-macros-order', rule, {
           const model = defineModel<Value>()
         </script>
       `,
-      output: null,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<{ (e: 'change'): void }>()
+          type Value = string
+          const model = defineModel<Value>()
+        </script>
+      `,
       options: [{ order: ['defineProps', 'defineEmits', 'defineModel'] }],
       languageOptions: {
         parserOptions: {
@@ -1825,6 +1976,241 @@ tester.run('define-macros-order', rule, {
           column: 11,
           endLine: 5,
           endColumn: 49
+        }
+      ]
+    },
+    {
+      // a variable referenced by a later macro is not allowed above an earlier
+      // one, so only the earlier macro is moved
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const last = ref()
+          defineProps({ foo: String })
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineProps'),
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 39
+        }
+      ]
+    },
+    {
+      // types can be used above their declaration, so the macro is moved
+      // above the type it references
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineEmits()
+          type Size = 'small' | 'large'
+          const model = defineModel()
+          defineProps<{ size: Size }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineEmits()
+          defineProps<{ size: Size }>()
+          const model = defineModel()
+          type Size = 'small' | 'large'
+        </script>
+      `,
+      options: [{ order: ['defineEmits', 'defineProps', 'defineModel'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineProps'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 40
+        }
+      ]
+    },
+    {
+      // with `allowReferencedAbove: false`, no fix is offered when the macro
+      // would be moved above a variable it reads at runtime, as that would
+      // break the code
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      output: null,
+      options: [
+        { order: ['defineModel', 'defineProps'], allowReferencedAbove: false }
+      ],
+      errors: [
+        {
+          message: unorderedMessage('defineModel', 'defineProps'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 77
+        }
+      ]
+    },
+    {
+      // with `allowReferencedAbove: false`, referenced variables are reported
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const defaultSize = 'medium'
+          interface Props { size?: string }
+          withDefaults(defineProps<Props>(), { size: defaultSize })
+        </script>
+      `,
+      output: null,
+      options: [{ allowReferencedAbove: false }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopStrictMessage('defineProps'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 68
+        }
+      ]
+    },
+    {
+      // a `var` declared inside another statement is not a declaration that
+      // is allowed above the macro
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          if (Math.random()) { var last = 1; console.log(last) }
+          const model = defineModel({ get: () => last })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps({ foo: String })
+          const model = defineModel({ get: () => last })
+          if (Math.random()) { var last = 1; console.log(last) }
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineModel'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 57
+        }
+      ]
+    },
+    {
+      // a `var` declared in a loop is not allowed above the macro
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          for (var i = 0; i < 3; i++) console.log(i)
+          const model = defineModel({ get: () => i })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps({ foo: String })
+          const model = defineModel({ get: () => i })
+          for (var i = 0; i < 3; i++) console.log(i)
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineModel'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 54
+        }
+      ]
+    },
+    {
+      // `import ... =` belongs at the top, like other imports
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          import Emits = Types.Emits
+          defineEmits<Emits>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<Emits>()
+          import Emits = Types.Emits
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      // the parameter shadows the variable, so the variable is not referenced
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (last) => last })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps({ foo: String })
+          const model = defineModel({ get: (last) => last })
+          const last = ref()
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineModel'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 61
         }
       ]
     }

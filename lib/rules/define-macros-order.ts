@@ -78,34 +78,61 @@ function getDefineMacrosStatement(node: ASTNode): ASTNode {
 }
 
 /**
- * Find the top-level statement in `body` that contains the given node.
+ * Find the top-level statement that contains the given node.
  */
-function findTopLevelStatement(
-  body: Program['body'],
-  node: ASTNode
-): ASTNode | null {
-  let low = 0
-  let high = body.length - 1
-  while (low <= high) {
-    const middle = (low + high) >> 1
-    const statement = body[middle]
-    if (node.range[1] <= statement.range[0]) {
-      high = middle - 1
-    } else if (node.range[0] >= statement.range[1]) {
-      low = middle + 1
-    } else {
-      return statement
+function findTopLevelStatement(node: ASTNode): ASTNode | null {
+  let current = node
+  while (current.parent) {
+    if (current.parent.type === 'Program') {
+      return current
     }
+    current = current.parent
   }
   return null
 }
 
-function isAmbientStatement(node: ASTNode) {
+/** Declarations that are erased by the TypeScript compiler */
+const TYPE_ONLY_DECLARATIONS = new Set([
+  'TSInterfaceDeclaration',
+  'TSTypeAliasDeclaration',
+  'TSDeclareFunction'
+])
+
+/** Declarations that can emit runtime code */
+const RUNTIME_DECLARATIONS = new Set([
+  'VariableDeclaration',
+  'FunctionDeclaration',
+  'ClassDeclaration',
+  'TSEnumDeclaration',
+  'TSModuleDeclaration'
+])
+
+/**
+ * Get the declaration of a top-level statement, looking through `export`,
+ * or `null` if the statement is not a declaration.
+ */
+function getDeclaration(statement: ASTNode): ASTNode | null {
+  const declaration =
+    statement.type === 'ExportNamedDeclaration'
+      ? statement.declaration
+      : statement
+  return declaration &&
+    (TYPE_ONLY_DECLARATIONS.has(declaration.type) ||
+      RUNTIME_DECLARATIONS.has(declaration.type))
+    ? declaration
+    : null
+}
+
+/**
+ * Check whether the given top-level statement only declares types or ambient
+ * values, so its position doesn't matter at runtime.
+ */
+function isTypeOnlyDeclaration(statement: ASTNode): boolean {
+  const declaration = getDeclaration(statement)
   return (
-    isDeclareStatement(node) ||
-    (node.type === 'ExportNamedDeclaration' &&
-      node.declaration != null &&
-      isDeclareStatement(node.declaration))
+    declaration != null &&
+    (TYPE_ONLY_DECLARATIONS.has(declaration.type) ||
+      isDeclareStatement(declaration))
   )
 }
 
@@ -135,18 +162,17 @@ function getStatementDependencies(
 
   for (const variable of variables) {
     for (const def of variable.defs) {
-      const declaration = findTopLevelStatement(program.body, def.node)
-      // Imports are hoisted, and they belong at the top anyway
-      if (!declaration || declaration.type === 'ImportDeclaration') {
+      const declaration = findTopLevelStatement(def.node)
+      // Only declarations can be allowed above a macro. This skips imports
+      // (they are hoisted and belong at the top anyway), as well as `var`s
+      // declared inside other statements.
+      if (!declaration || !getDeclaration(declaration)) {
         continue
       }
-      const isRuntimeDeclaration = !isAmbientStatement(declaration)
+      const isRuntimeDeclaration = !isTypeOnlyDeclaration(declaration)
 
       for (const reference of variable.references) {
-        const statement = findTopLevelStatement(
-          program.body,
-          reference.identifier
-        )
+        const statement = findTopLevelStatement(reference.identifier)
         if (!statement || statement === declaration) {
           continue
         }
@@ -158,10 +184,10 @@ function getStatementDependencies(
         statementDependencies.all.add(declaration)
         // `isValueReference` is only set by `@typescript-eslint/scope-manager`,
         // other scope managers only create value references.
-        const isValueReference =
-          (reference as { isValueReference?: boolean }).isValueReference !==
-          false
-        if (isRuntimeDeclaration && isValueReference) {
+        const isTypeReference =
+          'isValueReference' in reference &&
+          reference.isValueReference === false
+        if (isRuntimeDeclaration && !isTypeReference) {
           statementDependencies.runtime.add(declaration)
         }
       }
@@ -185,19 +211,17 @@ function getReferencedChain(
   }
   const regionStatements = new Set(region)
   const chain = new Set<ASTNode>()
-  const queue = [macro]
-  let statement = queue.pop()
-  while (statement) {
+  const addDependencies = (statement: ASTNode) => {
     const dependencies = getDependencies(statement)?.all ?? []
     for (const dependency of dependencies) {
       if (!regionStatements.has(dependency) || chain.has(dependency)) {
         continue
       }
       chain.add(dependency)
-      queue.push(dependency)
+      addDependencies(dependency)
     }
-    statement = queue.pop()
   }
+  addDependencies(macro)
   return region.filter((node) => chain.has(node))
 }
 
@@ -358,9 +382,10 @@ function create(context: RuleContext) {
         ): ASTNode[] | null => {
           const movedNodes: ASTNode[] = []
           for (const node of nodes) {
+            // Move the declarations that the macro references along with it,
+            // so that they stay above it.
+            let referenced: ASTNode[] = []
             if (shouldAllowReferencedAbove) {
-              // Move the declarations that the macro references along with
-              // it, so that they stay above it.
               const passedOver = statements.filter(
                 (statement) =>
                   statement.range[0] >= before.range[0] &&
@@ -368,16 +393,27 @@ function create(context: RuleContext) {
                   !macroStatements.has(statement) &&
                   !movedNodes.includes(statement)
               )
-              movedNodes.push(
-                ...getReferencedChain(node, passedOver, getDependencies)
+              referenced = getReferencedChain(node, passedOver, getDependencies)
+            }
+            if (referenced.includes(before)) {
+              if (movedNodes.length > 0) {
+                // Move only the previous macros, this one can stay below the
+                // declaration it references.
+                break
+              }
+              if (!isTypeOnlyDeclaration(before)) {
+                // Don't move the macro above a runtime declaration it uses
+                return null
+              }
+              // Types can be used above their declaration, so leave it
+              referenced = referenced.filter(
+                (statement) => statement !== before
               )
             }
-            movedNodes.push(node)
+            movedNodes.push(...referenced, node)
           }
-          // Don't move a macro above a declaration it uses. This includes
-          // `before` itself, if a moved macro references it.
-          return !movedNodes.includes(before) &&
-            canMoveBefore(movedNodes, before, getDependencies)
+          // Don't move a macro above a runtime declaration it uses
+          return canMoveBefore(movedNodes, before, getDependencies)
             ? movedNodes
             : null
         }
