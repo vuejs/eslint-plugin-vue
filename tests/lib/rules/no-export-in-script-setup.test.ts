@@ -87,49 +87,164 @@ ruleTester.run('no-export-in-script-setup', rule, {
           line: 3,
           column: 7,
           endLine: 3,
-          endColumn: 26
+          endColumn: 26,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script setup>
+      export default {}
+      export class A {}
+      export const test = '123'
+      export function foo() {}
+      const a = 1
+      export { a }
+      export { fao } from 'bar'
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 4,
           column: 7,
           endLine: 4,
-          endColumn: 24
+          endColumn: 24,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script setup>
+      export * from 'foo'
+      export class A {}
+      export const test = '123'
+      export function foo() {}
+      const a = 1
+      export { a }
+      export { fao } from 'bar'
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 5,
           column: 7,
           endLine: 5,
-          endColumn: 13
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'removeExportKeyword',
+              output: `
+      <script setup>
+      export * from 'foo'
+      export default {}
+      class A {}
+      export const test = '123'
+      export function foo() {}
+      const a = 1
+      export { a }
+      export { fao } from 'bar'
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 6,
           column: 7,
           endLine: 6,
-          endColumn: 13
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'removeExportKeyword',
+              output: `
+      <script setup>
+      export * from 'foo'
+      export default {}
+      export class A {}
+      const test = '123'
+      export function foo() {}
+      const a = 1
+      export { a }
+      export { fao } from 'bar'
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 7,
           column: 7,
           endLine: 7,
-          endColumn: 13
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'removeExportKeyword',
+              output: `
+      <script setup>
+      export * from 'foo'
+      export default {}
+      export class A {}
+      export const test = '123'
+      function foo() {}
+      const a = 1
+      export { a }
+      export { fao } from 'bar'
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 9,
           column: 7,
           endLine: 9,
-          endColumn: 19
+          endColumn: 19,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script setup>
+      export * from 'foo'
+      export default {}
+      export class A {}
+      export const test = '123'
+      export function foo() {}
+      const a = 1
+      export { fao } from 'bar'
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 10,
           column: 7,
           endLine: 10,
-          endColumn: 32
+          endColumn: 32,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script setup>
+      export * from 'foo'
+      export default {}
+      export class A {}
+      export const test = '123'
+      export function foo() {}
+      const a = 1
+      export { a }
+      </script>
+      `
+            }
+          ]
         }
       ]
     },
@@ -151,21 +266,64 @@ ruleTester.run('no-export-in-script-setup', rule, {
           line: 6,
           column: 7,
           endLine: 6,
-          endColumn: 26
+          endColumn: 26,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script>
+      let foo;
+      </script>
+      <script setup>
+      export default {}
+      export class A {}
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 7,
           column: 7,
           endLine: 7,
-          endColumn: 24
+          endColumn: 24,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script>
+      let foo;
+      </script>
+      <script setup>
+      export * from 'foo'
+      export class A {}
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 8,
           column: 7,
           endLine: 8,
-          endColumn: 13
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'removeExportKeyword',
+              output: `
+      <script>
+      let foo;
+      </script>
+      <script setup>
+      export * from 'foo'
+      export default {}
+      class A {}
+      </script>
+      `
+            }
+          ]
         }
       ]
     },
@@ -190,21 +348,236 @@ ruleTester.run('no-export-in-script-setup', rule, {
           line: 3,
           column: 7,
           endLine: 3,
-          endColumn: 13
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'removeExportKeyword',
+              output: `
+      <script setup lang="ts">
+      const Foo = {}
+      export enum Bar {}
+      export {}
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 4,
           column: 7,
           endLine: 4,
-          endColumn: 13
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'removeExportKeyword',
+              output: `
+      <script setup lang="ts">
+      export const Foo = {}
+      enum Bar {}
+      export {}
+      </script>
+      `
+            }
+          ]
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 5,
           column: 7,
           endLine: 5,
-          endColumn: 16
+          endColumn: 16,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script setup lang="ts">
+      export const Foo = {}
+      export enum Bar {}
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      export * from 'foo'
+      </script>
+      `,
+      errors: [
+        {
+          message: '`<script setup>` cannot contain ES module exports.',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 26,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script setup>
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      export const test = '123'
+      export class A {}
+      </script>
+      `,
+      errors: [
+        {
+          message: '`<script setup>` cannot contain ES module exports.',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'removeExportKeyword',
+              output: `
+      <script setup>
+      const test = '123'
+      export class A {}
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message: '`<script setup>` cannot contain ES module exports.',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'removeExportKeyword',
+              output: `
+      <script setup>
+      export const test = '123'
+      class A {}
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      export default {}
+      </script>
+      `,
+      errors: [
+        {
+          message: '`<script setup>` cannot contain ES module exports.',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 24,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script setup>
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const a = 1
+      export { a }
+      export { fao } from 'bar'
+      </script>
+      `,
+      errors: [
+        {
+          message: '`<script setup>` cannot contain ES module exports.',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 19,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script setup>
+      const a = 1
+      export { fao } from 'bar'
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message: '`<script setup>` cannot contain ES module exports.',
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 32,
+          suggestions: [
+            {
+              messageId: 'removeExportStatement',
+              output: `
+      <script setup>
+      const a = 1
+      export { a }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      export enum Bar {}
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: '`<script setup>` cannot contain ES module exports.',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'removeExportKeyword',
+              output: `
+      <script setup lang="ts">
+      enum Bar {}
+      </script>
+      `
+            }
+          ]
         }
       ]
     }
