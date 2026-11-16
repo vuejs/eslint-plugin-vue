@@ -15,7 +15,8 @@ let eslintNodeVersion = ''
 
 describe('Integration with eslint-plugin-import', () => {
   beforeAll(() => {
-    execSync('npm i -f', { cwd: PLUGIN_DIR, stdio: 'inherit' })
+    // `--force` is needed because eslint-plugin-import doesn't list ESLint v10 in its peer dependencies yet
+    execSync('npm install --force', { cwd: PLUGIN_DIR, stdio: 'inherit' })
     const eslintPackagePath = path.join(
       PLUGIN_DIR,
       'node_modules/eslint/package.json'
