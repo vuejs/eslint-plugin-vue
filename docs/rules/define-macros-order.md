@@ -185,11 +185,20 @@ const slots = defineSlots()
 
 ### `{ "allowReferencedAbove": true }` (default)
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowReferencedAbove: true}]}">
+These examples also set `order` to include `defineModel`, so that the variable referenced by `defineModel` is checked too.
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineModel', 'defineProps', 'defineEmits'], allowReferencedAbove: true}]}">
 
 ```vue
 <!-- ✓ GOOD -->
 <script setup lang="ts">
+import { ref } from 'vue'
+
+const lastValue = ref<string>()
+const model = defineModel<string>({
+  get: (value) => lastValue.value ?? value
+})
+
 interface Item { id: number }
 interface Props { items: Item[] }
 defineProps<Props>()
@@ -201,11 +210,13 @@ defineEmits<{ (e: Foo): void }>()
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {allowReferencedAbove: true}]}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineModel', 'defineProps', 'defineEmits'], allowReferencedAbove: true}]}">
 
 ```vue
 <!-- ✗ BAD -->
 <script setup lang="ts">
+const model = defineModel<string>()
+
 interface Props { foo: string }
 console.log('unrelated')
 defineProps<Props>()
