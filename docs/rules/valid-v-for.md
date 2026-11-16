@@ -17,12 +17,6 @@ since: v3.11.0
   - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/recommended"]`
   - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/recommended"`
-  - `"plugin:vue/vue2-recommended"`
 
 This rule checks whether every `v-for` directive is valid.
 

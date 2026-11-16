@@ -17,12 +17,6 @@ since: v8.4.0
   - `*.configs["flat/strongly-recommended"]`
   - `*.configs["flat/vue2-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-recommended"`
-  - `"plugin:vue/recommended"`
 
 ## :book: Rule Details
 

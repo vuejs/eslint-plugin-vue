@@ -36,7 +36,6 @@ export default {
     ${rules.map((rule) => `'${rule.name}': ${camelCase(rule.name)}`).join(',\n')}
   },
   processors: {
-    '.vue': processor,
     vue: processor
   }
 }

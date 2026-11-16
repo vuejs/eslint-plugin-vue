@@ -526,7 +526,6 @@ export default {
     'valid-v-text': validVText
   },
   processors: {
-    '.vue': processor,
     vue: processor
   }
 }
