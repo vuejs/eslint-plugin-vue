@@ -296,6 +296,48 @@ ruleTester.run('no-template-shadow', rule, {
     {
       filename: 'test.vue',
       code: `<template>
+        <my-widget v-slot="{ foo }" />
+      </template>
+      <script>
+        export default {
+          inject: ['foo']
+        }
+      </script>`,
+      errors: [
+        {
+          message: "Variable 'foo' is already declared in the upper scope.",
+          line: 2,
+          column: 30,
+          endLine: 2,
+          endColumn: 33
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div v-for="bar in 5"></div>
+      </template>
+      <script>
+        export default {
+          inject: {
+            bar: { from: 'baz' }
+          }
+        }
+      </script>`,
+      errors: [
+        {
+          message: "Variable 'bar' is already declared in the upper scope.",
+          line: 2,
+          column: 21,
+          endLine: 2,
+          endColumn: 24
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
         <div v-for="i in 5"></div>
         <div v-for="f in 5"></div>
       </template>
