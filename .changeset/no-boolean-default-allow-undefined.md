@@ -2,4 +2,4 @@
 "eslint-plugin-vue": minor
 ---
 
-Added `allowUndefined` option to `vue/no-boolean-default`
+Changed `vue/no-boolean-default` to allow `default: undefined`

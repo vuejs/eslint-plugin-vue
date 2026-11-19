@@ -41,15 +41,6 @@ export default {
     schema: [
       {
         enum: ['default-false', 'no-default']
-      },
-      {
-        type: 'object',
-        properties: {
-          allowUndefined: {
-            type: 'boolean'
-          }
-        },
-        additionalProperties: false
       }
     ],
     messages: {
@@ -60,7 +51,6 @@ export default {
   },
   create(context: RuleContext) {
     const booleanType = context.options[0] || 'no-default'
-    const shouldAllowUndefined = context.options[1]?.allowUndefined === true
     function processProp(
       prop: ComponentProp,
       otherDefaultProvider: (propName: string) => Expression[]
@@ -99,7 +89,7 @@ export default {
     }
 
     function verifyDefaultExpression(defaultNode: Expression) {
-      if (shouldAllowUndefined && isUndefinedIdentifier(defaultNode)) {
+      if (isUndefinedIdentifier(defaultNode)) {
         return
       }
       switch (booleanType) {

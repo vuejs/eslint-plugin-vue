@@ -10,7 +10,7 @@ since: v7.0.0
 
 > disallow boolean defaults
 
-The rule prevents Boolean props from having a default value.
+The rule prevents Boolean props from having a default value, except `undefined`.
 
 ## :book: Rule Details
 
@@ -36,30 +36,11 @@ export default {
 
 </eslint-code-block>
 
-## :wrench: Options
+The rule always allows `default: undefined` for both `"no-default"` and `"default-false"`.
 
-```json
-{
-  "vue/no-boolean-default": ["error",
-    "no-default", // "no-default" | "default-false"
-    {
-      "allowUndefined": false
-    }
-  ]
-}
-```
+If the parent does not pass a Boolean prop, Vue casts the prop to `false`. Vue does not cast the prop when the prop has a `default` key. With `default: undefined`, the prop stays `undefined`. As a result, the component can tell "not passed" from "passed `false`". For example, the component is controlled when the parent passes the prop, and uncontrolled when the parent does not.
 
-- First option
-  - `"no-default"` (default) allows a prop definition object, but enforces that the `default` property not be defined.
-  - `"default-false"` enforces that the default can be set but must be set to `false`.
-- Second option
-  - `allowUndefined` ... If `true`, allow `undefined` as the default. Default is `false`.
-
-### `"default-false", { "allowUndefined": true }`
-
-If the parent does not pass a Boolean prop, Vue casts the prop to `false`. Vue does this only when the prop has no `default` key. With `default: undefined`, the prop stays `undefined`. As a result, the component can tell "not passed" from "passed `false`". For example, a component can be controlled when the parent passes the prop, and uncontrolled when it does not.
-
-<eslint-code-block :rules="{'vue/no-boolean-default': ['error', 'default-false', { allowUndefined: true }]}">
+<eslint-code-block :rules="{'vue/no-boolean-default': ['error', 'default-false']}">
 
 ```vue
 <script>
@@ -85,6 +66,15 @@ export default {
 ```
 
 </eslint-code-block>
+
+## :wrench: Options
+
+- `'no-default'` (default) allows a prop definition object, but enforces that the `default` property not be defined.
+- `'default-false'` enforces that the default can be set but must be set to `false`.
+
+```json
+  "vue/no-boolean-default": ["error", "no-default|default-false"]
+```
 
 ## :couple: Related Rules
 
