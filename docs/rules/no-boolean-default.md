@@ -10,7 +10,7 @@ since: v7.0.0
 
 > disallow boolean defaults
 
-The rule prevents Boolean props from having a default value.
+The rule prevents Boolean props from having a default value, except `undefined`.
 
 ## :book: Rule Details
 
@@ -28,6 +28,37 @@ export default {
     },
     bar: {
       type: Boolean
+    }
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+The rule always allows `default: undefined` for both `"no-default"` and `"default-false"`.
+
+If the parent does not pass a Boolean prop, Vue casts the prop to `false`. Vue does not cast the prop when the prop has a `default` key. With `default: undefined`, the prop stays `undefined`. As a result, the component can tell "not passed" from "passed `false`". For example, the component is controlled when the parent passes the prop, and uncontrolled when the parent does not.
+
+<eslint-code-block :rules="{'vue/no-boolean-default': ['error', 'default-false']}">
+
+```vue
+<script>
+export default {
+  props: {
+    /* ✓ GOOD */
+    open: {
+      type: Boolean,
+      default: undefined
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    /* ✗ BAD */
+    visible: {
+      type: Boolean,
+      default: true
     }
   }
 }
