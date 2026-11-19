@@ -335,6 +335,66 @@ ruleTester.run('no-boolean-default', rule, {
       languageOptions: {
         parser: vueEslintParser
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              default: undefined
+            }
+          }
+        }
+      `,
+      options: ['default-false', { allowUndefined: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              default: undefined
+            }
+          }
+        }
+      `,
+      options: ['no-default', { allowUndefined: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo?: boolean
+      }
+      withDefaults(defineProps<Props>(), {
+        foo: undefined
+      })
+      </script>
+      `,
+      options: ['default-false', { allowUndefined: true }],
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo = undefined} = defineProps({foo: Boolean})
+      </script>
+      `,
+      options: ['no-default', { allowUndefined: true }],
+      languageOptions: {
+        parser: vueEslintParser
+      }
     }
   ],
 
@@ -606,6 +666,128 @@ ruleTester.run('no-boolean-default', rule, {
           column: 20,
           endLine: 3,
           endColumn: 24
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              default: undefined
+            }
+          }
+        }
+      `,
+      options: ['default-false'],
+      errors: [
+        {
+          message: 'Boolean prop should only be defaulted to false.',
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 33
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo?: boolean
+      }
+      withDefaults(defineProps<Props>(), {
+        foo: undefined
+      })
+      </script>
+      `,
+      options: ['no-default'],
+      languageOptions: {
+        parser: vueEslintParser,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message:
+            'Boolean prop should not set a default (Vue defaults it to false).',
+          line: 7,
+          column: 14,
+          endLine: 7,
+          endColumn: 23
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              default: true
+            }
+          }
+        }
+      `,
+      options: ['default-false', { allowUndefined: true }],
+      errors: [
+        {
+          message: 'Boolean prop should only be defaulted to false.',
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const DEFAULT_OPEN = true
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              default: DEFAULT_OPEN
+            }
+          }
+        }
+      `,
+      options: ['default-false', { allowUndefined: true }],
+      errors: [
+        {
+          message: 'Boolean prop should only be defaulted to false.',
+          line: 7,
+          column: 24,
+          endLine: 7,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo = false} = defineProps({foo: Boolean})
+      </script>
+      `,
+      options: ['no-default', { allowUndefined: true }],
+      languageOptions: {
+        parser: vueEslintParser
+      },
+      errors: [
+        {
+          message:
+            'Boolean prop should not set a default (Vue defaults it to false).',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     }
