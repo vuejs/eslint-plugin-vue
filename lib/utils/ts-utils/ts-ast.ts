@@ -277,7 +277,9 @@ export function flattenTypeNodes(
 
   return [...flattenImpl(node)]
 
-  function* flattenImpl(node: TSESTree.TypeNode): Iterable<FlattenTypeNodeItem> {
+  function* flattenImpl(
+    node: TSESTree.TypeNode
+  ): Iterable<FlattenTypeNodeItem> {
     if (node.type === 'TSUnionType' || node.type === 'TSIntersectionType') {
       for (const typeNode of node.types) {
         yield* flattenImpl(typeNode)
