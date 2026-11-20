@@ -2,7 +2,7 @@
  * @fileoverview disallow using deprecated events api
  * @author yoyo930021
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

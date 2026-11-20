@@ -9,7 +9,7 @@ import utils, {
   type NameWithLoc,
   type VueObjectData,
   type VueObjectType
-} from '../utils/index.js'
+} from '../utils/index.ts'
 
 interface VueTemplateDefineData {
   type: VueObjectType | 'setup'

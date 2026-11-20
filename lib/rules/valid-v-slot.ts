@@ -2,7 +2,7 @@
  * @author Toru Nagashima
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 interface VSlotVForVariables {
   expr: VForExpression
@@ -105,12 +105,8 @@ function areVSlotVForVariablesEqual(
     const aPtn = a.expr.left[index]
     const bPtn = b.expr.left[index]
 
-    const aVar = a.variables.find(
-      (v) => aPtn.range[0] <= v.id.range[0] && v.id.range[1] <= aPtn.range[1]
-    )
-    const bVar = b.variables.find(
-      (v) => bPtn.range[0] <= v.id.range[0] && v.id.range[1] <= bPtn.range[1]
-    )
+    const aVar = a.variables.find((v) => utils.isInRange(aPtn, v.id))
+    const bVar = b.variables.find((v) => utils.isInRange(bPtn, v.id))
     if (aVar && bVar) {
       if (aVar.id.name !== bVar.id.name || !isEqual(aPtn, bPtn)) {
         return false

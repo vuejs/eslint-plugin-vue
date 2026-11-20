@@ -1,4 +1,4 @@
-import utils from './index.js'
+import utils from './index.ts'
 
 export interface CommentParserConfig {
   exceptions?: string[]

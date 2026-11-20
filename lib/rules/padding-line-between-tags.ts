@@ -2,7 +2,7 @@
  * @author dev1437
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Split the source code into multiple lines based on the line delimiters.

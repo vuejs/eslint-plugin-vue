@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const DOUBLE_QUOTES_RE = /"/gu
 const SINGLE_QUOTES_RE = /'/gu
@@ -49,26 +49,17 @@ export default {
         return
       }
       const { expression } = value
-      if (!expression) {
+      if (!expression || !utils.isStringLiteral(expression)) {
         return
       }
-      let strValue: string
-      let rawValue: string
-      if (expression.type === 'Literal') {
-        if (typeof expression.value !== 'string') {
-          return
-        }
-        strValue = expression.value
-        rawValue = sourceCode.getText(expression).slice(1, -1)
-      } else if (expression.type === 'TemplateLiteral') {
-        if (expression.expressions.length > 0) {
-          return
-        }
-        strValue = expression.quasis[0].value.cooked
-        rawValue = expression.quasis[0].value.raw
-      } else {
+      const strValue = utils.getStringLiteralValue(expression)
+      if (strValue == null) {
         return
       }
+      const rawValue =
+        expression.type === 'Literal'
+          ? sourceCode.getText(expression).slice(1, -1)
+          : expression.quasis[0].value.raw
 
       const tokenStore = sourceCode.parserServices.getTemplateBodyTokenStore()
       const hasComment = tokenStore

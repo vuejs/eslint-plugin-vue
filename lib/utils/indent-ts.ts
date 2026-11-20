@@ -13,18 +13,9 @@ import {
   isClosingBracketToken,
   isOpeningBracketToken
 } from '@eslint-community/eslint-utils'
-import utils from './ts-utils/index.js'
+import { isTypeNode } from './ts-utils/index.ts'
 
 type MaybeNode = { type: string } & HasLocation
-
-/**
- * Deprecated in @typescript-eslint/parser v5
- */
-type ClassProperty = TSESTree.PropertyDefinition
-/**
- * Deprecated in @typescript-eslint/parser v5
- */
-type TSAbstractClassProperty = TSESTree.TSAbstractPropertyDefinition
 
 /**
  * Process the given node list.
@@ -92,6 +83,15 @@ export function defineVisitor({
   processSemicolons,
   getFirstAndLastTokens
 }: DefineVisitorParam): TSNodeListener {
+  /**
+   * Deprecated in @typescript-eslint/parser v5
+   */
+  type ClassProperty = TSESTree.PropertyDefinition
+  /**
+   * Deprecated in @typescript-eslint/parser v5
+   */
+  type TSAbstractClassProperty = TSESTree.TSAbstractPropertyDefinition
+
   /**
    * Check whether a given token is the first token of:
    *
@@ -188,7 +188,7 @@ export function defineVisitor({
     },
     '*[type=/^TS/]'(node: ASTNode) {
       if (
-        !utils.isTypeNode(node) ||
+        !isTypeNode(node) ||
         (node.parent as any).type === 'TSParenthesizedType'
       ) {
         return

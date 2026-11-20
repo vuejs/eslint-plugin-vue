@@ -2,7 +2,7 @@
  * @fileoverview disallow unused variable definitions of v-for directives or scope attributes.
  * @author 薛定谔的猫<hh_2013@foxmail.com>
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 type VariableKind = VVariable['kind']
 

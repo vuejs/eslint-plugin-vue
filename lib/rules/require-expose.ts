@@ -7,7 +7,7 @@ import {
   isOpeningBraceToken,
   isClosingBraceToken
 } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const { getVueComponentDefinitionType } = utils
 

@@ -11,6 +11,7 @@ since: v9.7.0
 > enforce writing style for handlers in `v-on` directives
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 
@@ -42,12 +43,14 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 </eslint-code-block>
 
+A method handler receives the event arguments, so the conversion to a method handler is only autofixed when the rule can find the method (in `methods` or as a top-level function in `<script setup>`) and it takes as many parameters as the handler passes. Otherwise, e.g. for imported functions, the fix is offered as a suggestion instead.
+
 ## :wrench: Options
 
 ```json
 {
   "vue/v-on-handler-style": ["error",
-    ["method", "inline-function"], // ["method", "inline-function"] | ["method", "inline"] | "inline-function" | "inline"
+    ["method", "inline-function"], // ["method", "inline-function"] | ["method", "inline"] | ["inline", "inline-function"] | "inline-function" | "inline"
     {
       "ignoreIncludesComment": false
     }
@@ -58,6 +61,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 - First option ... Specifies the name of an allowed style. Default is `["method", "inline-function"]`.
   - `["method", "inline-function"]` ... Allow handlers by method binding. e.g. `v-on:click="handler"`. Allow inline functions where method handlers cannot be used. e.g. `v-on:click="() => handler(listItem)"`.
   - `["method", "inline"]` ... Allow handlers by method binding. e.g. `v-on:click="handler"`. Allow inline handlers where method handlers cannot be used. e.g. `v-on:click="handler(listItem)"`.
+  - `["inline", "inline-function"]` ... Allow inline handlers. e.g. `v-on:click="handler()"`. Disallow `$event` and allow inline functions with parameters instead. e.g. `v-on:click="(value) => handler(value)"`.
   - `"inline-function"` ... Allow inline functions. e.g. `v-on:click="() => handler()"`
   - `"inline"` ... Allow inline handlers. e.g. `v-on:click="handler()"`
 - Second option
@@ -157,6 +161,28 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
   <button v-on:click="() => handler()" />
   <button v-on:click="(foo) => handler(foo)" />
   <button v-on:click="(foo, bar) => handler(foo, bar)" />
+  <button v-on:click="() => count++" />
+</template>
+```
+
+</eslint-code-block>
+
+### `["inline", "inline-function"]`
+
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['inline', 'inline-function']]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <button v-on:click="handler()" />
+  <button v-on:click="count++" />
+  <button v-on:click="(foo) => handler(foo)" />
+  <button v-on:click="(foo, bar) => handler(foo, bar)" />
+
+  <!-- ✗ BAD -->
+  <button v-on:click="handler" />
+  <button v-on:click="handler($event)" />
+  <button v-on:click="() => handler()" />
   <button v-on:click="() => count++" />
 </template>
 ```

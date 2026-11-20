@@ -4,7 +4,7 @@
  */
 import { findVariable } from '@eslint-community/eslint-utils'
 import { iterateDefineRefs } from '../utils/ref-object-references.ts'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 type FunctionNode =
   FunctionDeclaration | FunctionExpression | ArrowFunctionExpression

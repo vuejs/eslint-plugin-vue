@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -78,7 +78,7 @@ export default {
         },
         Identifier(node) {
           for (const defineOptions of optionsDefExpressions) {
-            if (!utils.inRange(defineOptions.range, node)) {
+            if (!utils.isInRange(defineOptions.range, node)) {
               continue
             }
 
@@ -90,14 +90,14 @@ export default {
               variable.defs.some(
                 (def) =>
                   def.type === 'ImportBinding' ||
-                  !utils.inRange(scriptSetup.range, def.name) ||
-                  utils.inRange(defineOptions.range, def.name) ||
+                  !utils.isInRange(scriptSetup.range, def.name) ||
+                  utils.isInRange(defineOptions.range, def.name) ||
                   (def.type === 'Variable' &&
                     def.parent.kind === 'const' &&
                     def.node.init &&
                     def.node.init.type === 'Literal')
               ) ||
-              utils.withinTypeNode(node)
+              utils.isWithinTypeNode(node)
             ) {
               continue
             }

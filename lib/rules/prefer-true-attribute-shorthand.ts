@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 type PreferOption = 'always' | 'never'
 

@@ -15,7 +15,7 @@ since: v7.0.0
 This rule is aimed at eliminating unused properties.
 
 ::: warning Note
-This rule cannot check for use of properties by other components (e.g., `mixins`, property access via `$refs`) and use in places where the scope cannot be determined. Some access to properties might be implied, for example, accessing data or computed via a variable such as `this[varName]`. In this case, the default is to assume all properties, methods, etc. are 'used'. See the `unreferencedOptions` for a more strict interpretation of 'use' in these cases.
+This rule cannot check for use of properties by other components (e.g., `mixins`, property access via `$refs`) and use in places where the scope cannot be determined. Some access to properties might be implied, for example, accessing data or computed via a variable such as `this[varName]`. In this case, the default is to assume all properties, methods, etc. are 'used'. See the `unreferencedOptions` for a more strict interpretation of 'use' in these cases. All props are also considered used when the props object is passed to a function that is not declared in the same file (e.g. an imported composable), because that function may read any of them.
 :::
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error']}">

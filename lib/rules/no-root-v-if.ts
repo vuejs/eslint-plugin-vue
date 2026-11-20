@@ -3,7 +3,7 @@
  * @copyright 2023 Perry Song. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

@@ -2,9 +2,9 @@
  * @fileoverview Prevents duplication of field names.
  * @author Armano
  */
-import type { ComponentModel, GroupName } from '../utils/index.js'
+import type { ComponentModel, GroupName } from '../utils/index.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const GROUP_NAMES: GroupName[] = [
   'props',
@@ -40,12 +40,7 @@ function getPropsPattern(node: CallExpression): Pattern | null {
  */
 function isInsideInitializer(node: VariableDeclarator, references: ESNode[]) {
   const init = node.init
-  return (
-    init !== null &&
-    references.some(
-      (id) => init.range[0] <= id.range[0] && id.range[1] <= init.range[1]
-    )
-  )
+  return init !== null && references.some((id) => utils.isInRange(init, id))
 }
 
 /**

@@ -2,7 +2,7 @@
  * @author Doug Wade <douglas.b.wade@gmail.com>
  */
 
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

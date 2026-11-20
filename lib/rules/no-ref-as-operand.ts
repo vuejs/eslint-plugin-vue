@@ -2,15 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import type { VueObjectData } from '../utils/index.js'
+import type { VueObjectData } from '../utils/index.ts'
 import type {
   RefObjectReferences,
   RefObjectReferenceForIdentifier
 } from '../utils/ref-object-references.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
 import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
-import utils from '../utils/index.js'
-import tsUtils from '../utils/ts-utils/index.js'
+import utils from '../utils/index.ts'
+import { isRefObjectType } from '../utils/ts-utils/index.ts'
 
 /**
  * Checks whether the given identifier reference has been initialized with a ref object.
@@ -20,6 +20,33 @@ function isRefInit(
 ): data is RefObjectReferenceForIdentifier {
   const init = data && data.variableDeclarator && data.variableDeclarator.init
   return init ? data.defineChain.includes(init as any) : false
+}
+
+/**
+ * Checks whether the result of the given logical expression is used as an operand,
+ * e.g. `if (a && b)` or `!(a || b)`, where any ref it evaluates to would be a mistake.
+ */
+function isLogicalExpressionUsedAsOperand(node: LogicalExpression): boolean {
+  let target: Expression = node
+  while (target.parent.type === 'LogicalExpression') {
+    target = target.parent
+  }
+  const parent = target.parent
+  switch (parent.type) {
+    case 'IfStatement':
+    case 'SwitchStatement':
+    case 'UnaryExpression':
+    case 'BinaryExpression': {
+      return true
+    }
+    case 'ConditionalExpression': {
+      return parent.test === target
+    }
+    case 'TemplateLiteral': {
+      return parent.parent.type !== 'TaggedTemplateExpression'
+    }
+  }
+  return false
 }
 
 /**
@@ -104,7 +131,7 @@ export default {
             return fixer.insertTextAfter(node, '.value')
           }
         })
-      } else if (shouldCheckType && tsUtils.isRefObjectType(context, node)) {
+      } else if (shouldCheckType && isRefObjectType(context, node)) {
         context.report({
           node,
           messageId: 'requireDotValueOfRef',
@@ -199,11 +226,15 @@ export default {
           }
           reportIfRefWrapped(node)
         },
-        // refValue || other, refValue && other. ignore: other || refValue
+        // refValue || other, refValue && other, if (other && refValue)
+        // ignore: var foo = other || refValue
         'LogicalExpression>Identifier'(
           node: Identifier & { parent: LogicalExpression }
         ) {
-          if (node.parent.left !== node) {
+          if (
+            node.parent.left !== node &&
+            !isLogicalExpressionUsedAsOperand(node.parent)
+          ) {
             return
           }
           // Report only constants.

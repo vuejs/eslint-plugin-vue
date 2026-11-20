@@ -2,7 +2,7 @@
  * @fileoverview Requires valid keys in model option.
  * @author Alex Sokolov
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const VALID_MODEL_KEYS = new Set(['prop', 'event'])
 
