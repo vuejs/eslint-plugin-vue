@@ -1,6 +1,4 @@
-module.exports = { getPresetIds, formatItems }
-
-const presetCategories = {
+const presetCategories: Record<string, string | null> = {
   base: null,
   'vue2-essential': 'base',
   'vue3-essential': 'base',
@@ -12,7 +10,7 @@ const presetCategories = {
   // 'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatItems(items, suffix) {
+export function formatItems(items: string[], suffix?: [string, string]) {
   if (items.length === 1) {
     return `${items[0]}${suffix ? ` ${suffix[0]}` : ''}`
   }
@@ -24,8 +22,8 @@ function formatItems(items, suffix) {
   }`
 }
 
-function getPresetIds(categoryIds) {
-  const subsetCategoryIds = []
+export function getPresetIds(categoryIds: string[]): string[] {
+  const subsetCategoryIds: string[] = []
   for (const categoryId of categoryIds) {
     for (const [subsetCategoryId, supersetCategoryId] of Object.entries(
       presetCategories

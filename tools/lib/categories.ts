@@ -3,11 +3,10 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import rules from './rules.ts'
+import type { RuleInfo } from './rules.ts'
 
-const rules = require('./rules')
-
-const categoryTitles = {
+const categoryTitles: Record<string, { text: string }> = {
   base: {
     text: 'Base Rules (Enabling Correct ESLint Parsing)'
   },
@@ -37,7 +36,7 @@ const categoryTitles = {
   }
 }
 const categoryIds = Object.keys(categoryTitles)
-const categoryRules = {}
+const categoryRules: Record<string, RuleInfo[]> = {}
 
 for (const rule of rules) {
   const categories = rule.meta.docs.categories || ['uncategorized']
@@ -51,7 +50,7 @@ for (const rule of rules) {
   }
 }
 
-const presetConfigNames = {
+const presetConfigNames: Record<string, string> = {
   base: 'flat/base',
   'vue3-essential': 'flat/essential',
   'vue2-essential': 'flat/vue2-essential',
@@ -60,7 +59,7 @@ const presetConfigNames = {
   'vue3-recommended': 'flat/recommended',
   'vue2-recommended': 'flat/vue2-recommended'
 }
-const legacyPresetConfigNames = {
+const legacyPresetConfigNames: Record<string, string> = {
   base: 'base',
   'vue3-essential': 'essential',
   'vue2-essential': 'vue2-essential',
@@ -70,7 +69,7 @@ const legacyPresetConfigNames = {
   'vue2-recommended': 'vue2-recommended'
 }
 
-const getPresetNames = (presetIds) => [
+export const getPresetNames = (presetIds: string[]) => [
   ...presetIds.map(
     (categoryId) => `\`*.configs["${presetConfigNames[categoryId]}"]\``
   ),
@@ -79,13 +78,16 @@ const getPresetNames = (presetIds) => [
   )
 ]
 
-module.exports = {
-  getPresetNames,
-  categories: categoryIds
-    .map((categoryId) => ({
-      categoryId,
-      title: categoryTitles[categoryId],
-      rules: categoryRules[categoryId] || []
-    }))
-    .filter((category) => category.rules.length > 0)
+export interface Category {
+  categoryId: string
+  title: { text: string }
+  rules: RuleInfo[]
 }
+
+export const categories: Category[] = categoryIds
+  .map((categoryId) => ({
+    categoryId,
+    title: categoryTitles[categoryId],
+    rules: categoryRules[categoryId] || []
+  }))
+  .filter((category) => category.rules.length > 0)
