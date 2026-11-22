@@ -162,6 +162,44 @@ tester.run('no-bare-strings-in-template', rule, {
     }
   ],
   invalid: [
+    ...['\r', '\u{2028}', '\u{2029}'].flatMap((whitespace) => [
+      {
+        code: `<template><div>${whitespace}word</div></template>`,
+        errors: [
+          {
+            messageId: 'unexpected',
+            line: 1,
+            column: 17,
+            endLine: 1,
+            endColumn: 21
+          }
+        ]
+      },
+      {
+        code: `<template>${whitespace}<div>word</div></template>`,
+        errors: [
+          {
+            messageId: 'unexpected',
+            line: 1,
+            column: 17,
+            endLine: 1,
+            endColumn: 21
+          }
+        ]
+      },
+      {
+        code: `<template>${whitespace}<div>\n\t${whitespace}word\n</div></template>`,
+        errors: [
+          {
+            messageId: 'unexpected',
+            line: 2,
+            column: 3,
+            endLine: 3,
+            endColumn: 1
+          }
+        ]
+      }
+    ]),
     {
       code: '<template>\n  <div>\n\n    test\n  </div>\n</template>',
       errors: [
@@ -425,6 +463,21 @@ describe('no-bare-strings-in-template with comment directives', () => {
       { rules: { 'vue/no-bare-strings-in-template': 'error' } }
     ]
   })
+
+  for (const [name, whitespace] of [
+    ['CR', '\r'],
+    ['line separator', '\u{2028}'],
+    ['paragraph separator', '\u{2029}'],
+    ['LF', '\n'],
+    ['CRLF', '\r\n']
+  ]) {
+    it(`keeps block-disabled text suppressed after ${name}`, async () => {
+      const code = `<template><!-- eslint-disable vue/no-bare-strings-in-template --><div>${whitespace}word</div></template>`
+      const [result] = await eslint.lintText(code, { filePath: 'test.vue' })
+
+      assert.deepStrictEqual(result.messages, [])
+    })
+  }
 
   it('suppresses indented text on the same line', async () => {
     const code = `<template>
