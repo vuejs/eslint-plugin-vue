@@ -311,15 +311,7 @@ tester.run('prefer-use-template-ref', rule, {
         const root = ref();
       </script>
       `,
-      output: `
-      <template>
-          <div ref="root"/>
-      </template>
-      <script setup>
-        import { ref, useTemplateRef } from 'vue';
-        const root = useTemplateRef('root');
-      </script>
-      `,
+      output: null,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -346,17 +338,7 @@ tester.run('prefer-use-template-ref', rule, {
         const link = ref();
       </script>
       `,
-      output: `
-      <template>
-          <button ref="button">Content</button>
-          <a href="" ref="link">Link</a>
-      </template>
-      <script setup>
-        import { ref, useTemplateRef } from 'vue';
-        const buttonRef = ref();
-        const link = useTemplateRef('link');
-      </script>
-      `,
+      output: null,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -383,18 +365,7 @@ tester.run('prefer-use-template-ref', rule, {
         const link = ref();
       </script>
       `,
-      // The second fix overlaps the added import, so ESLint applies it in the next pass.
-      output: `
-      <template>
-          <h1 ref="heading">Heading</h1>
-          <a href="" ref="link">Link</a>
-      </template>
-      <script setup>
-        import { ref, useTemplateRef } from 'vue';
-        const heading = useTemplateRef('heading');
-        const link = ref();
-      </script>
-      `,
+      output: null,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -436,22 +407,7 @@ tester.run('prefer-use-template-ref', rule, {
         }
       </script>
       `,
-      output: `
-      <template>
-        <p>Button clicked {{counter}} times.</p>
-        <button ref="button">Click</button>
-      </template>
-      <script>
-        import { ref, useTemplateRef } from 'vue';
-        export default {
-          name: 'Counter',
-          setup() {
-            const counter = ref(0);
-            const button = useTemplateRef('button');
-          }
-        }
-      </script>
-      `,
+      output: null,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -476,15 +432,7 @@ tester.run('prefer-use-template-ref', rule, {
         const root = shallowRef();
       </script>
       `,
-      output: `
-      <template>
-          <div ref="root"/>
-      </template>
-      <script setup>
-        import { shallowRef, useTemplateRef } from 'vue';
-        const root = useTemplateRef('root');
-      </script>
-      `,
+      output: null,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -513,19 +461,7 @@ tester.run('prefer-use-template-ref', rule, {
         }
       </script>
       `,
-      output: `
-      <template>
-        <button ref="button">Click</button>
-      </template>
-      <script>
-        import { ref, useTemplateRef } from 'vue';
-        export default {
-          setup: () => {
-            const button = useTemplateRef('button');
-          }
-        }
-      </script>
-      `,
+      output: null,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -555,20 +491,7 @@ tester.run('prefer-use-template-ref', rule, {
       const A = 'foo'
       </script>
       `,
-      output: `
-      <template>
-        <div ref="root" :data-a="A" />
-      </template>
-
-      <script setup>
-      import { ref, useTemplateRef } from 'vue'
-      const root = useTemplateRef('root')
-      </script>
-
-      <script>
-      const A = 'foo'
-      </script>
-      `,
+      output: null,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -598,20 +521,7 @@ tester.run('prefer-use-template-ref', rule, {
       const root = ref()
       </script>
       `,
-      output: `
-      <template>
-        <div ref="root" :data-a="A" />
-      </template>
-
-      <script>
-      const A = 'foo'
-      </script>
-
-      <script setup>
-      import { ref, useTemplateRef } from 'vue'
-      const root = useTemplateRef('root')
-      </script>
-      `,
+      output: null,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -633,7 +543,7 @@ tester.run('prefer-use-template-ref', rule, {
       </template>
       <script setup lang="ts">
         import { ref } from 'vue';
-        const root = ref<HTMLDivElement>();
+        const root = ref<HTMLDivElement | null>(null);
       </script>
       `,
       output: `
@@ -642,7 +552,7 @@ tester.run('prefer-use-template-ref', rule, {
       </template>
       <script setup lang="ts">
         import { ref, useTemplateRef } from 'vue';
-        const root = useTemplateRef<HTMLDivElement>('root');
+        const root = useTemplateRef<HTMLDivElement | null>('root');
       </script>
       `,
       languageOptions: {
@@ -659,7 +569,127 @@ tester.run('prefer-use-template-ref', rule, {
           line: 7,
           column: 22,
           endLine: 7,
+          endColumn: 54
+        }
+      ]
+    },
+    {
+      // `ref<T>()` starts as `undefined` (`T | undefined`), `useTemplateRef<T>()` as `null`
+      filename: 'ref-with-type-arguments-without-initial-value.vue',
+      code: `
+      <template>
+        <div ref="root" />
+      </template>
+      <script setup lang="ts">
+        import { ref } from 'vue';
+        const root = ref<HTMLDivElement>();
+      </script>
+      `,
+      output: null,
+      languageOptions: {
+        parserOptions: {
+          parser: tsEslintParser
+        }
+      },
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 7,
+          column: 22,
+          endLine: 7,
           endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'shallowRef-with-null.vue',
+      code: `
+      <template>
+        <div ref="root" />
+      </template>
+      <script setup>
+        import { shallowRef } from 'vue';
+        const root = shallowRef(null);
+      </script>
+      `,
+      output: `
+      <template>
+        <div ref="root" />
+      </template>
+      <script setup>
+        import { shallowRef, useTemplateRef } from 'vue';
+        const root = useTemplateRef('root');
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'shallowRef'
+          },
+          line: 7,
+          column: 22,
+          endLine: 7,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'multiple-refs-with-null.vue',
+      code: `
+      <template>
+        <h1 ref="heading">Heading</h1>
+        <a href="" ref="link">Link</a>
+      </template>
+      <script>
+        import { ref } from 'vue';
+        export default {
+          setup() {
+            const heading = ref(null);
+            const link = ref(null);
+          }
+        }
+      </script>
+      `,
+      // The second fix overlaps the added import, so ESLint applies it in the next pass.
+      output: `
+      <template>
+        <h1 ref="heading">Heading</h1>
+        <a href="" ref="link">Link</a>
+      </template>
+      <script>
+        import { ref, useTemplateRef } from 'vue';
+        export default {
+          setup() {
+            const heading = useTemplateRef('heading');
+            const link = ref(null);
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 10,
+          column: 29,
+          endLine: 10,
+          endColumn: 38
+        },
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 11,
+          column: 26,
+          endLine: 11,
+          endColumn: 35
         }
       ]
     },
@@ -706,7 +736,7 @@ tester.run('prefer-use-template-ref', rule, {
         import {
           ref,
         } from 'vue';
-        const root = ref();
+        const root = ref(null);
       </script>
       `,
       output: `
@@ -729,7 +759,7 @@ tester.run('prefer-use-template-ref', rule, {
           line: 9,
           column: 22,
           endLine: 9,
-          endColumn: 27
+          endColumn: 31
         }
       ]
     },
@@ -742,7 +772,7 @@ tester.run('prefer-use-template-ref', rule, {
       <script setup lang="ts">
         import type { Ref } from 'vue';
         import { useFoo } from './foo';
-        const root = ref();
+        const root = ref(null);
       </script>
       `,
       output: `
@@ -770,7 +800,7 @@ tester.run('prefer-use-template-ref', rule, {
           line: 8,
           column: 22,
           endLine: 8,
-          endColumn: 27
+          endColumn: 31
         }
       ]
     },
@@ -784,7 +814,7 @@ tester.run('prefer-use-template-ref', rule, {
         const A = 'foo';
       </script>
       <script setup>
-        const root = ref();
+        const root = ref(null);
       </script>
       `,
       output: `
@@ -808,7 +838,7 @@ tester.run('prefer-use-template-ref', rule, {
           line: 9,
           column: 22,
           endLine: 9,
-          endColumn: 27
+          endColumn: 31
         }
       ]
     },
@@ -819,7 +849,7 @@ tester.run('prefer-use-template-ref', rule, {
         <div ref="root" />
       </template>
       <script setup>
-        const root = ref();
+        const root = ref(null);
       </script>
       `,
       output: `
@@ -845,7 +875,7 @@ tester.run('prefer-use-template-ref', rule, {
           line: 6,
           column: 22,
           endLine: 6,
-          endColumn: 27
+          endColumn: 31
         }
       ]
     },
@@ -882,7 +912,7 @@ tester.run('prefer-use-template-ref', rule, {
       </template>
       <script setup>
         import { ref } from 'vue';
-        const root = ref();
+        const root = ref(null);
         function reset() {
           root.value = null;
         }
@@ -898,7 +928,7 @@ tester.run('prefer-use-template-ref', rule, {
           line: 7,
           column: 22,
           endLine: 7,
-          endColumn: 27
+          endColumn: 31
         }
       ]
     },
@@ -910,7 +940,7 @@ tester.run('prefer-use-template-ref', rule, {
       </template>
       <script setup>
         import { ref, shallowRef } from 'vue';
-        let root = ref();
+        let root = ref(null);
         root = shallowRef();
       </script>
       `,
@@ -924,7 +954,7 @@ tester.run('prefer-use-template-ref', rule, {
           line: 7,
           column: 20,
           endLine: 7,
-          endColumn: 25
+          endColumn: 29
         }
       ]
     },
@@ -936,7 +966,7 @@ tester.run('prefer-use-template-ref', rule, {
       </template>
       <script setup>
         import { ref } from 'vue';
-        const root = ref();
+        const root = ref(null);
       </script>
       `,
       output: null,
@@ -949,7 +979,7 @@ tester.run('prefer-use-template-ref', rule, {
           line: 7,
           column: 22,
           endLine: 7,
-          endColumn: 27
+          endColumn: 31
         }
       ]
     },
@@ -961,7 +991,7 @@ tester.run('prefer-use-template-ref', rule, {
       </template>
       <script setup>
         import { ref } from 'vue';
-        const root = ref();
+        const root = ref(null);
       </script>
       `,
       output: null,
@@ -974,7 +1004,7 @@ tester.run('prefer-use-template-ref', rule, {
           line: 7,
           column: 22,
           endLine: 7,
-          endColumn: 27
+          endColumn: 31
         }
       ]
     },
@@ -987,7 +1017,7 @@ tester.run('prefer-use-template-ref', rule, {
       <script setup>
         import { ref } from 'vue';
         const useTemplateRef = (name) => name;
-        const root = ref();
+        const root = ref(null);
       </script>
       `,
       output: null,
@@ -1000,7 +1030,7 @@ tester.run('prefer-use-template-ref', rule, {
           line: 8,
           column: 22,
           endLine: 8,
-          endColumn: 27
+          endColumn: 31
         }
       ]
     },
@@ -1012,7 +1042,7 @@ tester.run('prefer-use-template-ref', rule, {
       </template>
       <script setup lang="ts">
         import { ref, type Ref } from 'vue';
-        const root: Ref<HTMLDivElement | undefined> = ref();
+        const root: Ref<HTMLDivElement | null> = ref(null);
       </script>
       `,
       output: null,
@@ -1028,9 +1058,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 7,
-          column: 55,
+          column: 50,
           endLine: 7,
-          endColumn: 60
+          endColumn: 59
         }
       ]
     }

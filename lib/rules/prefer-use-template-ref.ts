@@ -29,11 +29,14 @@ function getScriptRefsFromSetupFunction(
 
 const USE_TEMPLATE_REF_IMPORT = "import { useTemplateRef } from 'vue';"
 
-function hasNoInitialValue(node: CallExpression): boolean {
+/**
+ * `ref()` without an argument starts as `undefined`, but `useTemplateRef()` as `null`,
+ * so only `ref(null)` can be replaced without changing the value.
+ */
+function hasNullInitialValue(node: CallExpression): boolean {
   const args = node.arguments
   return (
-    args.length === 0 ||
-    (args.length === 1 && args[0].type === 'Literal' && args[0].raw === 'null')
+    args.length === 1 && args[0].type === 'Literal' && args[0].raw === 'null'
   )
 }
 
@@ -164,7 +167,7 @@ export default {
     function canFix(node: CallExpression, name: string): boolean {
       const { id } = node.parent as VariableDeclarator
       if (
-        !hasNoInitialValue(node) ||
+        !hasNullInitialValue(node) ||
         // the annotation was written for `ref()` and may not match
         (id.type === 'Identifier' && id.typeAnnotation) ||
         templateWrites.has(name)
