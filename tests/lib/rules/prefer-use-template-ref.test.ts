@@ -694,6 +694,114 @@ tester.run('prefer-use-template-ref', rule, {
       ]
     },
     {
+      filename: 'block-arrow-setup-function-with-null.vue',
+      code: `
+      <template>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        import { ref } from 'vue';
+        export default {
+          setup: () => {
+            const button = ref(null);
+          }
+        }
+      </script>
+      `,
+      output: `
+      <template>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        import { ref, useTemplateRef } from 'vue';
+        export default {
+          setup: () => {
+            const button = useTemplateRef('button');
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 9,
+          column: 28,
+          endLine: 9,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      filename: 'multiple-scripts-setup-first-without-imports.vue',
+      code: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script setup>
+      const root = ref(null)
+      </script>
+
+      <script>
+      const A = 'foo'
+      </script>
+      `,
+      output: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script setup>
+      import { useTemplateRef } from 'vue';
+      const root = useTemplateRef('root')
+      </script>
+
+      <script>
+      const A = 'foo'
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 7,
+          column: 20,
+          endLine: 7,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      filename: 'ref-with-undefined.vue',
+      code: `
+      <template>
+        <div ref="root" />
+      </template>
+      <script setup>
+        import { ref } from 'vue';
+        const root = ref(undefined);
+      </script>
+      `,
+      output: null,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 7,
+          column: 22,
+          endLine: 7,
+          endColumn: 36
+        }
+      ]
+    },
+    {
       filename: 'use-template-ref-already-imported.vue',
       code: `
       <template>
