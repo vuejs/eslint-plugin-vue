@@ -626,6 +626,24 @@ tester.run('define-macros-order', rule, {
           parser: require.resolve('@typescript-eslint/parser')
         }
       }
+    },
+    {
+      // enum referenced through a type, between macros
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          interface Item { id: number }
+          enum Reason { Click = 'click', Keyboard = 'keyboard' }
+          type Emits = { select: [item: Item, reason: Reason] }
+          defineEmits<Emits>()
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
   invalid: [
@@ -2211,6 +2229,40 @@ tester.run('define-macros-order', rule, {
           column: 11,
           endLine: 5,
           endColumn: 61
+        }
+      ]
+    },
+    {
+      // with `allowReferencedAbove: false`, a referenced enum between macros
+      // is reported
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          enum Reason { Click = 'click', Keyboard = 'keyboard' }
+          defineEmits<{ select: [reason: Reason] }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<{ select: [reason: Reason] }>()
+          enum Reason { Click = 'click', Keyboard = 'keyboard' }
+        </script>
+      `,
+      options: [{ allowReferencedAbove: false }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopStrictMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 54
         }
       ]
     }

@@ -195,7 +195,8 @@ interface Props { size?: string }
 withDefaults(defineProps<Props>(), { size: defaultSize })
 
 interface Item { id: number }
-type Emits = { select: [item: Item] }
+enum Reason { Click = 'click', Keyboard = 'keyboard' }
+type Emits = { select: [item: Item, reason: Reason] }
 defineEmits<Emits>()
 </script>
 ```
