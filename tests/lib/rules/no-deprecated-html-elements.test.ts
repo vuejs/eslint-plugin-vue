@@ -117,7 +117,8 @@ tester.run('no-deprecated-html-elements', rule, {
       `,
       errors: [
         {
-          message: 'The `<strike>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'strike' },
           line: 3,
           column: 9,
           endLine: 3,
@@ -138,21 +139,24 @@ tester.run('no-deprecated-html-elements', rule, {
       `,
       errors: [
         {
-          message: 'The `<center>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'center' },
           line: 3,
           column: 9,
           endLine: 3,
           endColumn: 17
         },
         {
-          message: 'The `<font>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'font' },
           line: 4,
           column: 11,
           endLine: 4,
           endColumn: 29
         },
         {
-          message: 'The `<strike>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'strike' },
           line: 5,
           column: 13,
           endLine: 5,
@@ -171,28 +175,32 @@ tester.run('no-deprecated-html-elements', rule, {
       `,
       errors: [
         {
-          message: 'The `<marquee>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'marquee' },
           line: 3,
           column: 9,
           endLine: 3,
           endColumn: 57
         },
         {
-          message: 'The `<tt>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'tt' },
           line: 4,
           column: 12,
           endLine: 4,
           endColumn: 16
         },
         {
-          message: 'The `<big>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'big' },
           line: 4,
           column: 30,
           endLine: 4,
           endColumn: 35
         },
         {
-          message: 'The `<param>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'param' },
           line: 5,
           column: 34,
           endLine: 5,
@@ -215,14 +223,16 @@ tester.run('no-deprecated-html-elements', rule, {
       `,
       errors: [
         {
-          message: 'The `<blink>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'blink' },
           line: 4,
           column: 28,
           endLine: 4,
           endColumn: 35
         },
         {
-          message: 'The `<center>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'center' },
           line: 7,
           column: 26,
           endLine: 7,
@@ -244,14 +254,16 @@ tester.run('no-deprecated-html-elements', rule, {
       options: [{ ignores: ['center', '/^marq/'] }],
       errors: [
         {
-          message: 'The `<font>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'font' },
           line: 4,
           column: 11,
           endLine: 4,
           endColumn: 17
         },
         {
-          message: 'The `<strike>` element is deprecated.',
+          messageId: 'unexpected',
+          data: { name: 'strike' },
           line: 5,
           column: 11,
           endLine: 5,
