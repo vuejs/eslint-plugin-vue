@@ -52,6 +52,23 @@ export default {
 <eslint-code-block :rules="{'vue/prefer-define-component': ['error']}">
 
 ```vue
+<script lang="ts">
+import type { Component } from 'vue'
+
+/* ✗ BAD */
+export default {
+  props: {
+    message: String
+  }
+} satisfies Component
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/prefer-define-component': ['error']}">
+
+```vue
 <script>
 import Vue from 'vue'
 

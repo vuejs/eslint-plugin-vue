@@ -187,7 +187,7 @@ tester.run('prefer-define-component', rule, {
       `,
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 3,
           column: 7,
           endLine: 5,
@@ -207,7 +207,7 @@ tester.run('prefer-define-component', rule, {
       languageOptions: { parserOptions: { parser: tsParser } },
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 3,
           column: 7,
           endLine: 5,
@@ -228,7 +228,7 @@ tester.run('prefer-define-component', rule, {
       languageOptions: { parserOptions: { parser: tsParser } },
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 4,
           column: 7,
           endLine: 6,
@@ -249,7 +249,7 @@ tester.run('prefer-define-component', rule, {
       languageOptions: { parserOptions: { parser: tsParser } },
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 4,
           column: 7,
           endLine: 6,
@@ -270,7 +270,7 @@ tester.run('prefer-define-component', rule, {
       languageOptions: { parserOptions: { parser: tsParser } },
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 4,
           column: 7,
           endLine: 6,
@@ -291,7 +291,7 @@ tester.run('prefer-define-component', rule, {
       languageOptions: { parserOptions: { parser: tsParser } },
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 4,
           column: 7,
           endLine: 6,
@@ -312,7 +312,7 @@ tester.run('prefer-define-component', rule, {
       languageOptions: { parserOptions: { parser: tsParser } },
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 4,
           column: 7,
           endLine: 6,
@@ -334,7 +334,7 @@ tester.run('prefer-define-component', rule, {
       languageOptions: { parserOptions: { parser: tsParser } },
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 5,
           column: 7,
           endLine: 7,
@@ -356,7 +356,7 @@ tester.run('prefer-define-component', rule, {
       languageOptions: { parserOptions: { parser: tsParser } },
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 5,
           column: 7,
           endLine: 7,
@@ -376,7 +376,7 @@ tester.run('prefer-define-component', rule, {
       `,
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 6,
           column: 7,
           endLine: 6,
@@ -396,7 +396,7 @@ tester.run('prefer-define-component', rule, {
       `,
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 4,
           column: 7,
           endLine: 6,
@@ -419,7 +419,7 @@ tester.run('prefer-define-component', rule, {
       `,
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 7,
           column: 7,
           endLine: 9,
@@ -441,7 +441,7 @@ tester.run('prefer-define-component', rule, {
       },
       errors: [
         {
-          message: 'Use `defineComponent` to define the component.',
+          messageId: 'preferDefineComponent',
           line: 2,
           column: 7,
           endLine: 6,

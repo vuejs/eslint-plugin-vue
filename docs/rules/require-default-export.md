@@ -49,6 +49,7 @@ Nothing.
 ## :couple: Related Rules
 
 - [vue/one-component-per-file](./one-component-per-file.md)
+- [vue/prefer-define-component](./prefer-define-component.md)
 
 ## :rocket: Version
 
