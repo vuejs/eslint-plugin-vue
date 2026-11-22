@@ -881,6 +881,10 @@ tester.run('next-tick-style', rule, {
       errors: [
         {
           messageId: 'usePromise',
+          line: 3,
+          column: 27 + code.indexOf('nt('),
+          endLine: 3,
+          endColumn: 29 + code.indexOf('nt('),
           suggestions: [
             {
               messageId: 'useThen',
