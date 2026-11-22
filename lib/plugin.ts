@@ -202,6 +202,7 @@ import requireDefaultProp from './rules/require-default-prop.ts'
 import requireDirectExport from './rules/require-direct-export.ts'
 import requireEmitValidator from './rules/require-emit-validator.ts'
 import requireExplicitEmits from './rules/require-explicit-emits.ts'
+import requireExplicitPropRequiredness from './rules/require-explicit-prop-requiredness.ts'
 import requireExplicitSlots from './rules/require-explicit-slots.ts'
 import requireExpose from './rules/require-expose.ts'
 import requireMacroVariableName from './rules/require-macro-variable-name.ts'
@@ -464,6 +465,7 @@ export default {
     'require-direct-export': requireDirectExport,
     'require-emit-validator': requireEmitValidator,
     'require-explicit-emits': requireExplicitEmits,
+    'require-explicit-prop-requiredness': requireExplicitPropRequiredness,
     'require-explicit-slots': requireExplicitSlots,
     'require-expose': requireExpose,
     'require-macro-variable-name': requireMacroVariableName,

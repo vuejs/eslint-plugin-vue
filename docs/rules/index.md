@@ -286,6 +286,7 @@ For example:
 | [vue/require-default-export] | require components to be the default export |  | :warning: |
 | [vue/require-direct-export] | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator] | require type definitions in emits | :bulb: | :hammer: |
+| [vue/require-explicit-prop-requiredness] | require an explicit required option in object-form props |  | :hammer: |
 | [vue/require-explicit-slots] | require slots to be explicitly defined |  | :warning: |
 | [vue/require-expose] | require declare public properties using `expose` | :bulb: | :hammer: |
 | [vue/require-macro-variable-name] | require a certain macro variable name | :bulb: | :hammer: |
@@ -583,6 +584,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/require-direct-export]: ./require-direct-export.md
 [vue/require-emit-validator]: ./require-emit-validator.md
 [vue/require-explicit-emits]: ./require-explicit-emits.md
+[vue/require-explicit-prop-requiredness]: ./require-explicit-prop-requiredness.md
 [vue/require-explicit-slots]: ./require-explicit-slots.md
 [vue/require-expose]: ./require-expose.md
 [vue/require-macro-variable-name]: ./require-macro-variable-name.md
