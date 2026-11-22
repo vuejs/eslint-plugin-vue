@@ -67,7 +67,7 @@ You can use the following configs by adding them to `eslint.config.js`.
 - `*.configs["flat/recommended"]` ... `strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
 - `*.configs["flat/recommended-error"]` ... Same as `recommended`, except with all rules configured to error instead of warn.
 
-These configs are for Vue.js 3.x. The configs for Vue.js 2.x (`flat/vue2-*`) have been removed in eslint-plugin-vue v11.
+These configs are for Vue.js 3.x. The configs for Vue.js 2.x (`flat/vue2-*`) have been removed in eslint-plugin-vue v11. Vue.js 2.x projects can keep using eslint-plugin-vue v10.
 
 :::warning Reporting rules
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).

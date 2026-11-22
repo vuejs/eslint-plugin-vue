@@ -32,6 +32,7 @@ const removedRules: RemovedRule[] = [
   },
   {
     ruleName: 'no-invalid-model-keys',
+    // `valid-model-definition` was removed in turn in v11.0.0
     replacedBy: ['valid-model-definition'],
     deprecatedInVersion: 'v9.0.0',
     removedInVersion: 'v10.0.0'
