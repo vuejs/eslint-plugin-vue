@@ -211,12 +211,19 @@ export default {
 
     return utils.defineTemplateBodyVisitor(context, {
       VText(node: VText) {
-        if (getBareString(node.value)) {
-          context.report({
-            node,
-            messageId: 'unexpected'
-          })
+        if (!getBareString(node.value)) {
+          return
         }
+        const sourceCode = context.sourceCode
+        const start = node.range[0] + sourceCode.getText(node).search(/\S/u)
+        context.report({
+          node,
+          loc: {
+            start: sourceCode.getLocFromIndex(start),
+            end: node.loc.end
+          },
+          messageId: 'unexpected'
+        })
       },
       VElement(node: VElement) {
         elementStack = {
