@@ -59,7 +59,7 @@
     "node": "^22.19.0 || ^24.11.0 || >=26.0.0"
   },
   "peerDependencies": {
-    "@stylistic/eslint-plugin": "^5.0.0 || ^6.0.0",
+    "@stylistic/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^10.0.0",
     "vue-eslint-parser": "^10.4.2"
@@ -75,7 +75,7 @@
   "dependencies": {
     "@eslint-community/eslint-utils": "^4.9.1",
     "natural-compare": "^1.4.0",
-    "nth-check": "^2.1.1",
+    "nth-check": "^3.0.1",
     "postcss-selector-parser": "^7.1.7",
     "semver": "^7.8.5",
     "xml-name-validator": "^5.0.0"
@@ -94,7 +94,7 @@
     "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@typescript-eslint/parser": "^8.72.1",
     "@typescript-eslint/types": "^8.72.1",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/coverage-v8": "^5.1.0",
     "assert": "^2.1.0",
     "env-cmd": "^11.0.0",
     "esbuild": "^0.28.1",
@@ -121,7 +121,7 @@
     "typescript": "^6.0.3",
     "vite-plugin-eslint4b": "^0.9.0",
     "vitepress": "^1.6.4",
-    "vitest": "^4.1.9",
+    "vitest": "^5.1.0",
     "vue-eslint-parser": "^10.4.2"
   }
 }
