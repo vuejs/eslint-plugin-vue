@@ -21,7 +21,7 @@ since: v6.0.0
 
 ## :book: Rule Details
 
-This rule reports deprecated `scope` attribute in Vue.js v2.5.0+.
+This rule reports the deprecated `scope` attribute in Vue.js v2.5.0+.
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-scope-attribute': ['error']}">
 

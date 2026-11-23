@@ -23,7 +23,7 @@ since: v4.1.0
 
 ## :book: Rule Details
 
-This rule aims to enforce consistent spacing style before closing brackets `>` of tags.
+This rule enforces consistent spacing before the closing brackets `>` of tags.
 
 <eslint-code-block fix :rules="{'vue/html-closing-bracket-spacing': ['error']}">
 

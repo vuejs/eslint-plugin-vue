@@ -21,7 +21,7 @@ since: v7.0.0
 ## :book: Rule Details
 
 This rule reports lifecycle hooks after an `await` expression.\
-In `setup()` function, `onXXX` lifecycle hooks should be registered synchronously.
+In the `setup()` function, `onXXX` lifecycle hooks should be registered synchronously.
 
 <eslint-code-block :rules="{'vue/no-lifecycle-after-await': ['error']}">
 

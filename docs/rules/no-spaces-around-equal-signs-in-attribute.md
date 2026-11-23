@@ -39,7 +39,7 @@ This rule disallows spaces around equal signs in attributes.
 </eslint-code-block>
 
 ::: tip Info
-HTML5 allows spaces around equal signs. But space-less is easier to read, and groups entities better together.
+HTML5 allows spaces around equal signs, but without spaces it is easier to read and groups entities better together.
 :::
 
 ## :wrench: Options

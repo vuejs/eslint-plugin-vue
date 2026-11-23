@@ -14,7 +14,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule disallows the `<template>` `<script>` `<style>` block to be empty.
+This rule disallows empty `<template>`, `<script>` and `<style>` blocks.
 
 This rule also checks blocks that have a `src` attribute.
 See [Vue Single-File Component (SFC) Spec](https://vue-loader.vuejs.org/spec.html#src-imports).

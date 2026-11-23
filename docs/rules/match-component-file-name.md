@@ -33,7 +33,7 @@ By default this rule will only verify components in a file with a `.jsx` extensi
 
 You can use any combination of `".js"`, `".jsx"`, `".ts"`, `".tsx"`, and `".vue"` extensions.
 
-You can also enforce same case between the component's name and its file name.
+You can also enforce the same case between the component's name and its file name.
 
 If you are defining multiple components within the same file, this rule will be ignored.
 

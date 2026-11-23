@@ -14,7 +14,7 @@ since: v9.5.0
 
 This rule enforces which `defineProps` typing style you should use: `type-based` or `runtime` declaration.
 
-This rule only works in setup script and `lang="ts"`.
+This rule only works in `<script setup>` with `lang="ts"`.
 
 <eslint-code-block :rules="{'vue/define-props-declaration': ['error']}">
 

@@ -12,8 +12,8 @@ since: v6.1.0
 
 ## :book: Rule Details
 
-`vue/no-irregular-whitespace` rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in modern browsers and others will be a debugging issue to spot.
-`vue/no-irregular-whitespace` rule is the similar rule as core [no-irregular-whitespace] rule but it applies to the source code in .vue.
+The `vue/no-irregular-whitespace` rule catches invalid whitespace that is not a normal tab or space. Some of these characters may cause issues in modern browsers, and others are hard to spot when debugging.
+The `vue/no-irregular-whitespace` rule is similar to the core [no-irregular-whitespace] rule, but it applies to the source code in `.vue` files.
 
 <eslint-code-block :rules="{'vue/no-irregular-whitespace': ['error']}">
 

@@ -23,7 +23,7 @@ since: v3.0.0
 
 ## :book: Rule Details
 
-This rule aims to disallow missing end tags.
+This rule reports missing end tags.
 
 <eslint-code-block fix :rules="{'vue/html-end-tags': ['error']}">
 

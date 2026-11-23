@@ -89,7 +89,7 @@ export default {
 </eslint-code-block>
 
 ::: warning Note
-Components registered under `PascalCase` or `camelCase` names have may be called however you like, except using `snake_case`. Otherwise, they will need to be called directly under the specified name.
+Components registered under `PascalCase` or `camelCase` names may be called however you like, except using `snake_case`. Otherwise, they will need to be called directly under the specified name.
 :::
 
 ## :wrench: Options

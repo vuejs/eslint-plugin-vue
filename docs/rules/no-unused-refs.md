@@ -12,7 +12,7 @@ since: v7.9.0
 
 ## :book: Rule Details
 
-This rule is aimed at eliminating unused refs.
+This rule reports unused refs.
 This rule reports refs that are defined using the `ref` attribute in `<template>` but are not used via `$refs`.
 
 ::: warning Note

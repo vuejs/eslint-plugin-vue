@@ -20,7 +20,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports use of deprecated `$listeners`. (in Vue.js 3.0.0+).
+This rule reports use of the deprecated `$listeners` (in Vue.js 3.0.0+).
 
 <eslint-code-block :rules="{'vue/no-deprecated-dollar-listeners-api': ['error']}">
 

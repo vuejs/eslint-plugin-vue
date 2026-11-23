@@ -24,7 +24,7 @@ This rule checks whether `v-model` used on a component does not have custom modi
 
 This rule reports `v-model` directives in the following cases:
 
-- The directive used on the component has custom modifiers. E.g. `<MyComponent v-model.aaa="foo" />`
+- The directive used on a component has custom modifiers. E.g. `<MyComponent v-model.aaa="foo" />`
 
 <eslint-code-block :rules="{'vue/no-custom-modifiers-on-v-model': ['error']}">
 
