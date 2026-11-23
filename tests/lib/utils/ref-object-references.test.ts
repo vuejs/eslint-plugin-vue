@@ -20,7 +20,7 @@ interface LoadedPattern {
   code: string
   name: string
   resultFilePath: string
-  options?: eslint.Linter.FlatConfig
+  options?: eslint.Linter.Config
 }
 
 function loadPatterns(rootDir: string): LoadedPattern[] {
@@ -32,7 +32,7 @@ function loadPatterns(rootDir: string): LoadedPattern[] {
         'result.vue',
         { languageOptions: { parser: vueESLintParser } }
       ]
-    ] satisfies [string, string, eslint.Linter.FlatConfig?][]) {
+    ] satisfies [string, string, eslint.Linter.Config?][]) {
       const sourceFilePath = path.join(rootDir, name, sourceFile)
       if (fs.existsSync(sourceFilePath)) {
         return {
