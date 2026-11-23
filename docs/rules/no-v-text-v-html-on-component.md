@@ -11,18 +11,9 @@ since: v8.4.0
 > disallow v-text / v-html on component
 
 - :gear: This rule is included in the following preset configs:
-  - `*.configs["flat/vue2-essential"]`
   - `*.configs["flat/essential"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/strongly-recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-recommended"`
-  - `"plugin:vue/recommended"`
 
 ## :book: Rule Details
 

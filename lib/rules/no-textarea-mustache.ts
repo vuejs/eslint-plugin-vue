@@ -10,7 +10,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow mustaches in `<textarea>`',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-textarea-mustache.html'
     },
     fixable: null,

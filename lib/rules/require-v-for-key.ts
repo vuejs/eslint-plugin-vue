@@ -10,7 +10,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'require `v-bind:key` with `v-for` directives',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/require-v-for-key.html'
     },
     fixable: null,

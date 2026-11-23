@@ -74,7 +74,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'enforce `v-slot` directive style',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/v-slot-style.html'
     },
     fixable: 'code',

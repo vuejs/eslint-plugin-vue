@@ -62,7 +62,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'enforce props default values to be valid',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/require-valid-default-prop.html'
     },
     fixable: null,

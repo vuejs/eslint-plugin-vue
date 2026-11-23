@@ -24,7 +24,7 @@ export default {
     docs: {
       description:
         'disallow variable declarations from shadowing variables declared in the outer scope',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/no-template-shadow.html'
     },
     fixable: null,

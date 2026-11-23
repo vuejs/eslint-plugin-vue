@@ -10,14 +10,7 @@ since: v7.0.0
 
 > disallow adding an argument to `v-model` used in custom component
 
-- :no_entry_sign: This rule was **deprecated**.
-- :gear: This rule is included in the following preset configs:
-  - `*.configs["flat/vue2-essential"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/vue2-recommended"`
+- :no_entry: This rule was **removed** in eslint-plugin-vue v11.0.0.
 
 This rule checks whether `v-model` used on custom component do not have an argument.
 

@@ -51,7 +51,7 @@ export default {
     docs: {
       description:
         "disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text`",
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-child-content.html'
     },
     fixable: null,

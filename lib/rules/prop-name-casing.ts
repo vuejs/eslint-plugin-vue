@@ -51,7 +51,7 @@ export default {
     docs: {
       description:
         'enforce specific casing for the Prop name in Vue components',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/prop-name-casing.html'
     },
     fixable: null, // null or "code" or "whitespace"

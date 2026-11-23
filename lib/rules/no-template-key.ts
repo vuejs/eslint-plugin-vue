@@ -10,7 +10,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow `key` attribute on `<template>`',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-template-key.html'
     },
     fixable: null,

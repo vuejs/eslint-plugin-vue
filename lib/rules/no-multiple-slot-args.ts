@@ -10,7 +10,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow passing multiple arguments to scoped slots',
-      categories: ['vue3-recommended', 'vue2-recommended'],
+      categories: ['vue3-recommended'],
       url: 'https://eslint.vuejs.org/rules/no-multiple-slot-args.html'
     },
     fixable: null,

@@ -10,17 +10,11 @@ since: v7.0.0
 
 > disallow adding multiple root nodes to the template
 
-- :gear: This rule is included in the following preset configs:
-  - `*.configs["flat/vue2-essential"]`
-  - `*.configs["flat/vue2-strongly-recommended"]`
-  - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/vue2-essential"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/vue2-recommended"`
-
 ## :book: Rule Details
 
-This rule checks whether template contains single root element valid for Vue 2.
+This rule checks whether the template contains a single root element.
+Vue.js 3 supports multiple root nodes, but fallthrough attributes are then no longer applied automatically (see [Attribute Inheritance on Multiple Root Nodes](https://vuejs.org/guide/components/attrs.html#attribute-inheritance-on-multiple-root-nodes)).
+Enable this rule if you want every component to keep a single root element.
 
 <eslint-code-block :rules="{'vue/no-multiple-template-root': ['error']}">
 

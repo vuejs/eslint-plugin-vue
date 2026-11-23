@@ -37,7 +37,6 @@ export default [
   // add more generic rulesets here, such as:
   // js.configs.recommended,
   ...pluginVue.configs['flat/recommended'],
-  // ...pluginVue.configs['flat/vue2-recommended'], // Use this if you are using Vue.js 2.x.
   {
     rules: {
       // override/add rules settings here, such as:
@@ -62,18 +61,13 @@ You can use the following configs by adding them to `eslint.config.js`.
 (All flat configs in this plugin are provided as arrays, so spread syntax is required when combining them with other configs.)
 
 - `*.configs["flat/base"]` ... Settings and rules to enable correct ESLint parsing.
-- Configurations for using Vue.js 3.x:
-  - `*.configs["flat/essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `*.configs["flat/strongly-recommended"]` ... `essential`, plus rules to considerably improve code readability and/or dev experience.
-  - `*.configs["flat/strongly-recommended-error"]` ... Same as `strongly-recommended`, except with all rules configured to error instead of warn.
-  - `*.configs["flat/recommended"]` ... `strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
-  - `*.configs["flat/recommended-error"]` ... Same as `recommended`, except with all rules configured to error instead of warn.
-- Configurations for using Vue.js 2.x:
-  - `*.configs["flat/vue2-essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `*.configs["flat/vue2-strongly-recommended"]` ... `vue2-essential`, plus rules to considerably improve code readability and/or dev experience.
-  - `*.configs["flat/vue2-strongly-recommended-error"]` ... Same as `vue2-strongly-recommended`, except with all rules configured to error instead of warn.
-  - `*.configs["flat/vue2-recommended"]` ... `vue2-strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
-  - `*.configs["flat/vue2-recommended-error"]` ... Same as `vue2-recommended`, except with all rules configured to error instead of warn.
+- `*.configs["flat/essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
+- `*.configs["flat/strongly-recommended"]` ... `essential`, plus rules to considerably improve code readability and/or dev experience.
+- `*.configs["flat/strongly-recommended-error"]` ... Same as `strongly-recommended`, except with all rules configured to error instead of warn.
+- `*.configs["flat/recommended"]` ... `strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
+- `*.configs["flat/recommended-error"]` ... Same as `recommended`, except with all rules configured to error instead of warn.
+
+These configs are for Vue.js 3.x. The configs for Vue.js 2.x (`flat/vue2-*`) have been removed in eslint-plugin-vue v11. Vue.js 2.x projects can keep using eslint-plugin-vue v10.
 
 :::warning Reporting rules
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
@@ -83,11 +77,9 @@ Alternatively, there are versions of the configs with all rules set to error suf
 
 #### Applying the Configs to a Subset of Files (`eslint.config.js`)
 
-Apart from the entries that this plugin restricts to `.vue` files, the configs above apply to every file ESLint visits. To limit them to some directories only — the flat config equivalent of `overrides` in `.eslintrc` — put your patterns in a `files` key and pull the plugin's config in with `extends`. This requires the [`defineConfig()`](https://eslint.org/docs/latest/use/configure/combine-configs) helper:
+Apart from the entries that this plugin restricts to `.vue` files, the configs above apply to every file ESLint visits. To limit them to some directories only, put your patterns in a `files` key and pull the plugin's config in with `extends`. This requires the [`defineConfig()`](https://eslint.org/docs/latest/use/configure/combine-configs) helper:
 
-::: code-group
-
-```js [eslint.config.js]
+```js
 import { defineConfig } from 'eslint/config'
 import pluginVue from 'eslint-plugin-vue'
 import tsParser from '@typescript-eslint/parser'
@@ -107,26 +99,6 @@ export default defineConfig([
   }
 ])
 ```
-
-```js [.eslintrc.js]
-module.exports = {
-  overrides: [
-    {
-      files: ['packages/client/src/components/**/*.vue', 'stories/**/*.vue'],
-      extends: ['plugin:vue/strongly-recommended'],
-      parser: 'vue-eslint-parser',
-      parserOptions: {
-        parser: '@typescript-eslint/parser'
-      },
-      rules: {
-        'max-lines': ['error', { max: 900 }]
-      }
-    }
-  ]
-}
-```
-
-:::
 
 `extends` combines your `files` with the patterns each config in the array already declares, instead of replacing them. The entries this plugin restricts to `.vue` files — [vue-eslint-parser] and the SFC processor — therefore stay restricted to `.vue` files even when your own patterns also match `.ts` or `.js` files.
 
@@ -230,78 +202,6 @@ export default typescriptEslint.config(
 );
 ```
 
-### Configuration (`.eslintrc`)
-
-Use `.eslintrc.*` file to configure rules in ESLint < v9. See also: <https://eslint.org/docs/latest/use/configure/>.
-
-Example **.eslintrc.js**:
-
-```js
-module.exports = {
-  extends: [
-    // add more generic rulesets here, such as:
-    // 'eslint:recommended',
-    'plugin:vue/recommended',
-    // 'plugin:vue/vue2-recommended' // Use this if you are using Vue.js 2.x.
-  ],
-  rules: {
-    // override/add rules settings here, such as:
-    // 'vue/no-unused-vars': 'error'
-  }
-}
-```
-
-See [the rule list](../rules/index.md) to get the `extends` & `rules` that this plugin provides.
-
-#### Bundle Configurations (`.eslintrc`)
-
-This plugin provides some predefined configs.
-You can use the following configs by adding them to `extends`.
-
-- `"plugin:vue/base"` ... Settings and rules to enable correct ESLint parsing.
-- Configurations for using Vue.js 3.x:
-  - `"plugin:vue/essential"` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `"plugin:vue/strongly-recommended"` ... `essential`, plus rules to considerably improve code readability and/or dev experience.
-  - `"plugin:vue/strongly-recommended-error"` ... Same as `strongly-recommended`, except with all rules configured to error instead of warn.
-  - `"plugin:vue/recommended"` ... `strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
-  - `"plugin:vue/recommended-error"` ... Same as `recommended`, except with all rules configured to error instead of warn.
-- Configurations for using Vue.js 2.x:
-  - `"plugin:vue/vue2-essential"` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `"plugin:vue/vue2-strongly-recommended"` ... `vue2-essential`, plus rules to considerably improve code readability and/or dev experience.
-  - `"plugin:vue/vue2-strongly-recommended-error"` ... Same as `vue2-strongly-recommended`, except with all rules configured to error instead of warn.
-  - `"plugin:vue/vue2-recommended"` ... `vue2-strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
-  - `"plugin:vue/vue2-recommended-error"` ... Same as `vue2-recommended`, except with all rules configured to error instead of warn.
-
-:::warning Reporting rules
-By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
-
-Alternatively, there are versions of the configs with all rules set to error suffixed with `-error` that you can use.
-:::
-
-#### Specifying Environments (`.eslintrc`)
-
-Specify environments depending on how you use Vue.js. More information on how to set environments can be found [here](https://eslint.org/docs/latest/use/configure/language-options-deprecated#specifying-environments).
-
-If you're writing an app that will only render on the browser, use `env.browser`.
-
-```json
-{
-  "env": {
-    "browser": true
-  }
-}
-```
-
-If you're writing an app that is rendered both server-side and on the browser, use `env.shared-node-browser`.
-
-```json
-{
-  "env": {
-    "shared-node-browser": true
-  }
-}
-```
-
 ### Running ESLint from the command line
 
 If you want to run `eslint` from the command line, ESLint will automatically check for the `.vue` extension if you use the config provided by the plugin.
@@ -318,38 +218,23 @@ If you installed [@vue/cli-plugin-eslint](https://github.com/vuejs/vue-cli/tree/
 
 ### How to use a custom parser?
 
-If you want to use custom parsers such as [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser) or [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser), you have to use the `parserOptions.parser` option instead of the `parser` option. Because this plugin requires [vue-eslint-parser] to parse `.vue` files, this plugin doesn't work if you overwrite the `parser` option.
+If you want to use custom parsers such as [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser) or [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser), you have to use the `languageOptions.parserOptions.parser` option instead of the `languageOptions.parser` option. Because this plugin requires [vue-eslint-parser] to parse `.vue` files, this plugin doesn't work if you overwrite the `languageOptions.parser` option for `.vue` files.
 
 ```diff
-- "parser": "@typescript-eslint/parser",
-+ "parser": "vue-eslint-parser",
-  "parserOptions": {
-+     "parser": "@typescript-eslint/parser",
-      "sourceType": "module"
+  {
+    files: ['*.vue', '**/*.vue'],
+    languageOptions: {
+-     parser: tsParser
++     parserOptions: {
++       parser: tsParser
++     }
+    }
   }
 ```
 
 Full example:
 
-::: code-group
-
-```json [.eslintrc]
-{
-  "root": true,
-  "plugins": ["@typescript-eslint"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:vue/recommended"
-  ],
-  "parser": "vue-eslint-parser",
-  "parserOptions": {
-    "parser": "@typescript-eslint/parser"
-  }
-}
-```
-
-```js [eslint.config.js]
+```js
 import js from '@eslint/js'
 import eslintPluginVue from 'eslint-plugin-vue'
 import ts from 'typescript-eslint'
@@ -368,8 +253,6 @@ export default ts.config(
   }
 )
 ```
-
-:::
 
 The `parserOptions.parser` option can also specify an object to specify multiple parsers. See [vue-eslint-parser README](https://github.com/vuejs/vue-eslint-parser#readme) for more details.
 
@@ -442,16 +325,21 @@ If you want to disallow `eslint-disable` functionality in `<template>`, disable 
 This plugin uses [vue-eslint-parser].
 For `parserOptions`, you can use the `vueFeatures` options of [vue-eslint-parser].
 
-```json
-{
-  "parser": "vue-eslint-parser",
-  "parserOptions": {
-    "vueFeatures": {
-      "filter": true,
-      "interpolationAsNonHTML": false,
+```js
+export default [
+  // ...
+  {
+    files: ['*.vue', '**/*.vue'],
+    languageOptions: {
+      parserOptions: {
+        vueFeatures: {
+          filter: true,
+          interpolationAsNonHTML: false
+        }
+      }
     }
   }
-}
+]
 ```
 
 See the [`parserOptions.vueFeatures` documentation for `vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser#parseroptionsvuefeatures) for more details.
@@ -513,35 +401,18 @@ read more: [JetBrains - ESLint](https://www.jetbrains.com/help/idea/eslint.html)
 
 Most `eslint-plugin-vue` rules require [vue-eslint-parser] to check `<template>` ASTs.
 
-Make sure you have one of the following settings in your **.eslintrc**:
+Make sure your **eslint.config.js** includes one of the configs provided by this plugin, e.g.:
 
-- `"extends": ["plugin:vue/recommended"]`
-- `"extends": ["plugin:vue/base"]`
+- `...pluginVue.configs['flat/recommended']`
+- `...pluginVue.configs['flat/base']`
 
-If you already use another parser (e.g. `"parser": "@typescript-eslint/parser"`), please move it into `parserOptions`, so it doesn't collide with the [vue-eslint-parser] used by this plugin's configuration:
-
-```diff
-- "parser": "@typescript-eslint/parser",
-+ "parser": "vue-eslint-parser",
-  "parserOptions": {
-+     "parser": "@typescript-eslint/parser",
-      "ecmaVersion": 2020,
-      "sourceType": "module"
-  }
-```
+If you already use another parser (e.g. `parser: tsParser` in `languageOptions`), please move it into `languageOptions.parserOptions`, so it doesn't collide with the [vue-eslint-parser] used by this plugin's configuration.
 
 See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
 
 ### Why doesn't it work on .vue files?
 
 1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extracts the content from `<script>` tags, but `eslint-plugin-vue` requires `<script>` tags and `<template>` tags in order to distinguish template and script in single file components.
-
-  ```diff
-    "plugins": [
-      "vue",
-  -   "html"
-    ]
-  ```
 
 1. Make sure your tool is set to lint `.vue` files.
 
@@ -552,36 +423,34 @@ See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
 
 Use [eslint-config-prettier] for [Prettier] not to conflict with the shareable config provided by this plugin.
 
-Example **.eslintrc.js**:
+Example **eslint.config.js**:
 
 ```js
-module.exports = {
+import eslintConfigPrettier from 'eslint-config-prettier'
+import pluginVue from 'eslint-plugin-vue'
+
+export default [
   // ...
-  extends: [
-    // ...
-    // 'eslint:recommended',
-    // ...
-    'plugin:vue/recommended',
-    // ...
-    'prettier'
-    // Make sure "prettier" is the last element in this list.
-  ],
+  ...pluginVue.configs['flat/recommended'],
   // ...
-}
+  eslintConfigPrettier
+  // Make sure eslintConfigPrettier is the last element in this list.
+]
 ```
 
 If Prettier conflicts with a rule you have set, [turn off that rule][prettier-linters]. For example, if you have [`vue/html-indent`](./../rules/html-indent.md) configured as `error` in `rules`, but it conflicts with Prettier, remove that line:
 
 ```diff
-module.exports = {
+export default [
   // ...
-  rules: {
-    // ...
--    "vue/html-indent": "error",
-    // ...
-  },
-  // ...
-}
+  {
+    rules: {
+      // ...
+-     'vue/html-indent': 'error',
+      // ...
+    }
+  }
+]
 ```
 
 [prettier]: https://prettier.io/
@@ -593,15 +462,16 @@ module.exports = {
 If you are using JSX, you need to enable JSX in your ESLint configuration.
 
 ```diff
-  "parserOptions": {
-      "ecmaVersion": 2020,
-      "ecmaFeatures": {
-+         "jsx": true
+  languageOptions: {
+    parserOptions: {
+      ecmaFeatures: {
++       jsx: true
       }
+    }
   }
 ```
 
-See also [ESLint - Specifying Parser Options](https://eslint.org/docs/user-guide/configuring#specifying-parser-options).
+See also [ESLint - Specifying Parser Options](https://eslint.org/docs/latest/use/configure/language-options#specifying-parser-options).
 
 The same configuration is required when using JSX with TypeScript (TSX) in the `.vue` file.\
 See also [here](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/parser/README.md#parseroptionsecmafeaturesjsx).\
@@ -636,21 +506,7 @@ Previously you had to use the `vue/setup-compiler-macros` environment, this is n
 
 In [Nuxt 3](https://nuxt.com/) or with [`unplugin-auto-import`](https://github.com/unplugin/unplugin-auto-import), Vue APIs can be auto imported. To make rules like [`vue/no-ref-as-operand`](/rules/no-ref-as-operand.html) or [`vue/no-watch-after-await`](/rules/no-watch-after-await.html) work correctly with them, you can specify them in ESLint's [`globals`](https://eslint.org/docs/latest/use/configure/configuration-files-new#configuring-global-variables) options:
 
-::: code-group
-
-```json [.eslintrc]
-{
-  "globals": {
-    "ref": "readonly",
-    "computed": "readonly",
-    "watch": "readonly",
-    "watchEffect": "readonly",
-    // ...more APIs
-  }
-}
-```
-
-```js [eslint.config.js]
+```js
 export default [
   {
     languageOptions: {
@@ -665,7 +521,5 @@ export default [
   }
 ]
 ```
-
-:::
 
 [vue-eslint-parser]: https://github.com/vuejs/vue-eslint-parser

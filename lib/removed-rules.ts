@@ -32,6 +32,7 @@ const removedRules: RemovedRule[] = [
   },
   {
     ruleName: 'no-invalid-model-keys',
+    // `valid-model-definition` was removed in turn in v11.0.0
     replacedBy: ['valid-model-definition'],
     deprecatedInVersion: 'v9.0.0',
     removedInVersion: 'v10.0.0'
@@ -55,6 +56,18 @@ const removedRules: RemovedRule[] = [
     removedInVersion: 'v9.0.0'
   },
   {
+    ruleName: 'no-v-for-template-key',
+    replacedBy: [],
+    deprecatedInVersion: 'v10.0.0',
+    removedInVersion: 'v11.0.0'
+  },
+  {
+    ruleName: 'no-v-model-argument',
+    replacedBy: [],
+    deprecatedInVersion: 'v10.0.0',
+    removedInVersion: 'v11.0.0'
+  },
+  {
     ruleName: 'script-setup-uses-vars',
     replacedBy: [],
     deprecatedInVersion: 'v9.0.0',
@@ -65,6 +78,18 @@ const removedRules: RemovedRule[] = [
     replacedBy: ['v-on-handler-style'],
     deprecatedInVersion: 'v9.7.0',
     removedInVersion: 'v10.0.0'
+  },
+  {
+    ruleName: 'valid-model-definition',
+    replacedBy: [],
+    deprecatedInVersion: 'v10.0.0',
+    removedInVersion: 'v11.0.0'
+  },
+  {
+    ruleName: 'valid-v-bind-sync',
+    replacedBy: [],
+    deprecatedInVersion: 'v10.0.0',
+    removedInVersion: 'v11.0.0'
   }
 ]
 

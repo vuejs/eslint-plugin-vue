@@ -9,7 +9,7 @@ export default {
     type: 'layout',
     docs: {
       description: 'enforce unified spacing in mustache interpolations',
-      categories: ['vue3-strongly-recommended', 'vue2-strongly-recommended'],
+      categories: ['vue3-strongly-recommended'],
       url: 'https://eslint.vuejs.org/rules/mustache-interpolation-spacing.html'
     },
     fixable: 'whitespace',

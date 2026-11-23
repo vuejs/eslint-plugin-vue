@@ -445,7 +445,7 @@ export default {
     type: 'suggestion',
     docs: {
       description: 'enforce order of attributes',
-      categories: ['vue3-recommended', 'vue2-recommended'],
+      categories: ['vue3-recommended'],
       url: 'https://eslint.vuejs.org/rules/attributes-order.html'
     },
     fixable: 'code',

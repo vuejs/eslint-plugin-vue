@@ -11,6 +11,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { ESLint } from 'eslint'
 import rules from './lib/rules.ts'
 import type { RuleInfo } from './lib/rules.ts'
 
@@ -40,3 +41,12 @@ const filePath = path.resolve(
 )
 const content = generateConfig(rulesToDisable)
 fs.writeFileSync(filePath, content)
+
+// Format files.
+async function format() {
+  const linter = new ESLint({ fix: true })
+  const report = await linter.lintFiles([filePath])
+  ESLint.outputFixes(report)
+}
+
+format()

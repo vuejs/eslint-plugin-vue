@@ -85,7 +85,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'enforce valid `v-for` directives',
-      categories: ['vue3-essential', 'vue2-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/valid-v-for.html'
     },
     fixable: null,

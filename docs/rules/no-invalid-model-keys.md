@@ -12,6 +12,12 @@ since: v7.9.0
 
 - :no_entry: This rule was **removed** in eslint-plugin-vue v10.0.0 and replaced by [vue/valid-model-definition](valid-model-definition.md) rule.
 
+::: tip
+
+`vue/valid-model-definition` was removed in turn in eslint-plugin-vue v11.0.0, together with the other Vue.js 2.x-only rules.
+
+:::
+
 ## :book: Rule Details
 
 This rule is aimed at preventing invalid keys in model option.

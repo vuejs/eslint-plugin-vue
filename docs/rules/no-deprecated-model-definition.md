@@ -14,9 +14,6 @@ since: v9.16.0
   - `*.configs["flat/essential"]`
   - `*.configs["flat/strongly-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/recommended"`
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -68,11 +65,6 @@ export default defineComponent({
 ```
 
 </eslint-code-block>
-
-## :couple: Related Rules
-
-- [vue/valid-model-definition](./valid-model-definition.md) (for Vue.js 2.x)
-- [vue/no-v-model-argument](./no-v-model-argument.md) (for Vue.js 2.x)
 
 ## :books: Further Reading
 

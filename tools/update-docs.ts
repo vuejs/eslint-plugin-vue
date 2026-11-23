@@ -11,7 +11,7 @@ For example:
 ```md
 # rule description (vue/rule-name)
 
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in `*.configs["flat/strongly-recommended"]` and `*.configs["flat/recommended"]`.
 - :no_entry_sign: This rule was **deprecated**.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 ```

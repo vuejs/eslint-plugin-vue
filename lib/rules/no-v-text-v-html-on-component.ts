@@ -10,7 +10,7 @@ export default {
     type: 'problem',
     docs: {
       description: 'disallow v-text / v-html on component',
-      categories: ['vue2-essential', 'vue3-essential'],
+      categories: ['vue3-essential'],
       url: 'https://eslint.vuejs.org/rules/no-v-text-v-html-on-component.html'
     },
     fixable: null,
