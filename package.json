@@ -59,7 +59,7 @@
     "node": "^22.19.0 || ^24.11.0 || >=26.0.0"
   },
   "peerDependencies": {
-    "@stylistic/eslint-plugin": "^5.0.0 || ^6.0.0",
+    "@stylistic/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^10.0.0",
     "vue-eslint-parser": "^10.4.2"

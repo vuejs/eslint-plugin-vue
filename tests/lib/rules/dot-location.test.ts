@@ -1,10 +1,9 @@
 /**
  * @author Yosuke Ota
  */
-import semver from 'semver'
 import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/dot-location'
-import { eslintStylisticVersion } from '../../test-utils/eslint-stylistic'
+import { isESLintStylisticInstalled } from '../../test-utils/eslint-stylistic'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
@@ -40,11 +39,9 @@ const expectedDotBeforePropertyError = {
   endColumn: 22
 }
 
-// ESLint Stylistic v6 changed the default option from "object" to "property"
-const isDefaultProperty =
-  eslintStylisticVersion !== undefined &&
-  semver.gte(eslintStylisticVersion, '6.0.0') &&
-  !semver.satisfies(process.version, '<19.0.0 || ^21.0.0')
+// ESLint Stylistic v6 changed the default option from "object" to "property",
+// while the ESLint core rule still defaults to "object"
+const isDefaultProperty = isESLintStylisticInstalled
 
 tester.run('dot-location', rule, {
   valid: [
