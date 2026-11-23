@@ -294,6 +294,7 @@ For example:
 | [vue/require-typed-object-prop] | enforce adding type declarations to object props | :bulb: | :hammer: |
 | [vue/require-typed-ref] | require `ref` and `shallowRef` functions to be strongly typed |  | :hammer: |
 | [vue/restricted-component-names] | enforce using only specific component names |  | :warning: |
+| [vue/return-in-prop-default] | enforce that a return statement is present in prop default factories |  | :warning: |
 | [vue/script-indent] | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
 | [vue/slot-name-casing] | enforce specific casing for slot names |  | :hammer: |
 | [vue/sort-keys] | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
@@ -600,6 +601,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/restricted-component-names]: ./restricted-component-names.md
 [vue/return-in-computed-property]: ./return-in-computed-property.md
 [vue/return-in-emits-validator]: ./return-in-emits-validator.md
+[vue/return-in-prop-default]: ./return-in-prop-default.md
 [vue/script-indent]: ./script-indent.md
 [vue/singleline-html-element-content-newline]: ./singleline-html-element-content-newline.md
 [vue/slot-name-casing]: ./slot-name-casing.md
