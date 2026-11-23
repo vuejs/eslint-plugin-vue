@@ -15,10 +15,6 @@ since: v5.0.0
   - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/recommended"]`
   - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/recommended"`
-  - `"plugin:vue/vue2-recommended"`
 
 `no-template-shadow` should report variable definitions of v-for directives or scope attributes if they shadow the variables in parent scopes.
 

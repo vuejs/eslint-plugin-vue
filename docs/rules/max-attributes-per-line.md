@@ -15,10 +15,6 @@ since: v3.12.0
   - `*.configs["flat/vue2-strongly-recommended"]`
   - `*.configs["flat/recommended"]`
   - `*.configs["flat/vue2-recommended"]`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/vue2-strongly-recommended"`
-  - `"plugin:vue/recommended"`
-  - `"plugin:vue/vue2-recommended"`
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 Limits the maximum number of attributes/properties per line to improve readability.

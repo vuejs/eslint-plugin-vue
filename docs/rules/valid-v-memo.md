@@ -14,9 +14,6 @@ since: v7.16.0
   - `*.configs["flat/essential"]`
   - `*.configs["flat/strongly-recommended"]`
   - `*.configs["flat/recommended"]`
-  - `"plugin:vue/essential"`
-  - `"plugin:vue/strongly-recommended"`
-  - `"plugin:vue/recommended"`
 
 This rule checks whether every `v-memo` directive is valid.
 
