@@ -90,6 +90,10 @@ export default (props) => h('div', props.msg)
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/prefer-define-component](./prefer-define-component.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v5.2.0
