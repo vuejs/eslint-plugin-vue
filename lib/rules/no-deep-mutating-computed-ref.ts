@@ -9,6 +9,15 @@ import utils from '../utils/index.ts'
 type FunctionNode = FunctionExpression | ArrowFunctionExpression
 type LiteralNode = ObjectExpression | ArrayExpression
 
+interface TypeWrapper {
+  type:
+    | 'TSAsExpression'
+    | 'TSSatisfiesExpression'
+    | 'TSTypeAssertion'
+    | 'TSNonNullExpression'
+  expression: Expression
+}
+
 /** `{} as T`, `{} satisfies T`, `<T>{}` and `{}!` */
 const TYPE_WRAPPERS = new Set([
   'TSAsExpression',
@@ -26,10 +35,18 @@ const NESTED_SCOPES = new Set([
   'ClassExpression'
 ])
 
-function skipTypeWrappers(node: ESNode): ESNode {
+function isTypeWrapper(node: ESNode | TypeWrapper): node is TypeWrapper {
+  return TYPE_WRAPPERS.has(node.type)
+}
+
+function isNode(value: unknown): value is ESNode {
+  return typeof value === 'object' && value !== null && 'type' in value
+}
+
+function skipTypeWrappers(node: ESNode | TypeWrapper): ESNode {
   let current = node
-  while (TYPE_WRAPPERS.has(current.type)) {
-    current = (current as unknown as { expression: ESNode }).expression
+  while (isTypeWrapper(current)) {
+    current = current.expression
   }
   return current
 }
@@ -106,15 +123,15 @@ function getReturnedLiterals(
     }
     const keys = visitorKeys[node.type] ?? []
     for (const key of keys) {
-      const child = (node as unknown as Record<string, unknown>)[key]
+      const child: unknown = Reflect.get(node, key)
       if (Array.isArray(child)) {
-        for (const c of child) {
-          if (c && typeof c === 'object' && 'type' in c) {
-            walk(c as ESNode)
+        for (const item of child) {
+          if (isNode(item)) {
+            walk(item)
           }
         }
-      } else if (child && typeof child === 'object' && 'type' in child) {
-        walk(child as ESNode)
+      } else if (isNode(child)) {
+        walk(child)
       }
     }
   }
@@ -145,12 +162,12 @@ function isLiteralAtPath(
     }
     // The last matching property wins, unless a later spread may override it.
     let property: Property | SpreadElement | null = null
-    for (const p of current.properties) {
+    for (const candidate of current.properties) {
       if (
-        p.type === 'SpreadElement' ||
-        utils.getStaticPropertyName(p) === name
+        candidate.type === 'SpreadElement' ||
+        utils.getStaticPropertyName(candidate) === name
       ) {
-        property = p
+        property = candidate
       }
     }
     if (!property || property.type !== 'Property') {
