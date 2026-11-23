@@ -3,10 +3,9 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import type { RuleTester as ESLintRuleTester } from 'eslint'
 import fs from 'node:fs'
 import path from 'node:path'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/html-indent'
 import vueEslintParser from 'vue-eslint-parser'
 
@@ -24,13 +23,13 @@ const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/html-indent/')
  * So `additionalValid` and `additionalInvalid` exist for asymmetry test cases.
  */
 function loadPatterns(
-  additionalValid: ESLintRuleTester.ValidTestCase[],
-  additionalInvalid: ESLintRuleTester.InvalidTestCase[]
+  additionalValid: RuleTester.ValidTestCase[],
+  additionalInvalid: RuleTester.InvalidTestCase[]
 ): {
-  valid: ESLintRuleTester.ValidTestCase[]
-  invalid: ESLintRuleTester.InvalidTestCase[]
+  valid: RuleTester.ValidTestCase[]
+  invalid: RuleTester.InvalidTestCase[]
 } {
-  const valid: ESLintRuleTester.ValidTestCase[] = fs
+  const valid: RuleTester.ValidTestCase[] = fs
     .readdirSync(FIXTURE_ROOT)
     .map((filename) => {
       const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
@@ -46,7 +45,7 @@ function loadPatterns(
       }
       return Object.assign(baseObj, { code, filename })
     })
-  const invalid: ESLintRuleTester.InvalidTestCase[] = valid
+  const invalid: RuleTester.InvalidTestCase[] = valid
     .map((pattern) => {
       const kind =
         (pattern.options && pattern.options[0]) === 'tab' ? 'tab' : 'space'
@@ -59,7 +58,7 @@ function loadPatterns(
       const code = lines
         .map((line) => line.text.replace(/^[\t ]+/, ''))
         .join('\n')
-      const errors: ESLintRuleTester.TestCaseError[] = lines.flatMap((line) =>
+      const errors: RuleTester.TestCaseError[] = lines.flatMap((line) =>
         line.indentSize === 0
           ? []
           : {

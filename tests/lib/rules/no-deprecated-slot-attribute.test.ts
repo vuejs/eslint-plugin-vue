@@ -1,4 +1,4 @@
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-deprecated-slot-attribute'
 import vueEslintParser from 'vue-eslint-parser'
 

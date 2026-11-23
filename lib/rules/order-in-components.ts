@@ -289,7 +289,7 @@ export default {
           .filter(
             (p) => getOrderPosition(p.name) > getOrderPosition(property.name)
           )
-          .sort((p1, p2) =>
+          .toSorted((p1, p2) =>
             getOrderPosition(p1.name) > getOrderPosition(p2.name) ? 1 : -1
           )
 

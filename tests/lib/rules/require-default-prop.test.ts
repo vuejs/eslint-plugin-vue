@@ -4,7 +4,7 @@
  */
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/require-default-prop'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import tsEslintParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
 

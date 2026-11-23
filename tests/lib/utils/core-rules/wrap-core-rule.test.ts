@@ -1,4 +1,4 @@
-import { RuleTester } from '../../../eslint-compat'
+import { RuleTester } from 'eslint'
 import { wrapCoreRule } from '../../../../lib/utils/index'
 import vueEslintParser from 'vue-eslint-parser'
 

@@ -36,7 +36,7 @@ export default {
           (className) => className.trim() !== ''
         )
         const classListSorted = classListNoWhitespace
-          .sort((a, b) => a.localeCompare(b))
+          .toSorted((a, b) => a.localeCompare(b))
           .join(divider)
 
         if (classList !== classListSorted) {

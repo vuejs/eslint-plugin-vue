@@ -8,11 +8,24 @@ import * as VAST from '../eslint-plugin-vue/util-types/ast'
 import * as VNODE from '../eslint-plugin-vue/util-types/node'
 import * as parserServices from '../eslint-plugin-vue/util-types/parser-services'
 
-export class ESLint extends RawESLint {}
+export class ESLint extends RawESLint {
+  constructor(options?: ESLint.Options)
+}
 
 export namespace ESLint {
-  interface Plugin extends Omit<RawESLint.Plugin, 'rules'> {
+  interface Plugin extends Omit<RawESLint.Plugin, 'rules' | 'configs'> {
     rules?: Record<string, Rule.RuleModule>
+    configs?: Record<
+      string,
+      Linter.LegacyConfig | Linter.Config | Linter.Config[]
+    >
+  }
+  interface Options extends Omit<
+    RawESLint.Options,
+    'overrideConfig' | 'plugins'
+  > {
+    overrideConfig?: Linter.Config | Linter.Config[] | null
+    plugins?: Record<string, Plugin> | null
   }
 }
 
@@ -333,36 +346,11 @@ export namespace Rule {
     id: string
     options: ESLintRule.RuleContext['options']
     settings: { [name: string]: any }
-    /** @deprecated removed in ESLint v10 */
-    parserPath?: string
-    /** @deprecated removed in ESLint v10 */
-    parserOptions?: ESLintLinter.ParserOptions
-    /** For flat config  */
-    languageOptions?: ESLintLinter.FlatConfig['languageOptions']
-    /** @deprecated removed in ESLint v9 */
-    parserServices?: parserServices.ParserServices
-
-    /** @deprecated removed in ESLint v9 */
-    getAncestors?(): VAST.ESNode[]
-    /** @deprecated removed in ESLint v9 */
-    getDeclaredVariables?(node: VAST.ESNode): Scope.Variable[]
-    /** @deprecated removed in ESLint v10 */
-    getFilename?(): string
+    languageOptions: ESLintLinter.LanguageOptions
     filename: string
-    /** @deprecated removed in ESLint v10 */
-    getPhysicalFilename?(): string
     physicalFilename: string
-    /** @deprecated removed in ESLint v9 */
-    getScope?(): Scope.Scope
-    /** @deprecated removed in ESLint v10 */
-    getSourceCode?(): SourceCode
     sourceCode: SourceCode
-    /** @deprecated removed in ESLint v9 */
-    markVariableAsUsed?(name: string): boolean
     report(descriptor: ReportDescriptor): void
-
-    /** @deprecated removed in ESLint v10 */
-    getCwd?: () => string
     cwd: string
   }
 
@@ -439,7 +427,6 @@ export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage
   type LintOptions = ESLintLinter.LintOptions
   type LegacyConfig = ESLintLinter.LegacyConfig
-  type FlatConfig = ESLintLinter.FlatConfig
   type LanguageOptions = ESLintLinter.LanguageOptions
   interface Config extends Omit<ESLintLinter.Config, 'plugins'> {
     plugins?: Record<string, ESLint.Plugin>

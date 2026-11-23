@@ -2,11 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import semver from 'semver'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/no-export-in-script-setup'
 import vueEslintParser from 'vue-eslint-parser'
-import typescriptPackageJson from 'typescript/package.json' with { type: 'json' }
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -43,16 +41,9 @@ ruleTester.run('no-export-in-script-setup', rule, {
     },
     {
       filename: 'test.vue',
-      code: semver.satisfies(typescriptPackageJson.version, '>=4.5.0-0')
-        ? `
+      code: `
             <script setup lang="ts">
             export { type Foo } from "foo"
-            export type Bar = {}
-            export interface Bar {}
-            </script>
-          `
-        : `
-            <script setup lang="ts">
             export type Bar = {}
             export interface Bar {}
             </script>

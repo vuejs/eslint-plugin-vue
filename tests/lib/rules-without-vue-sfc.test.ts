@@ -2,8 +2,7 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-import type { Linter as ESLintLinter } from 'eslint'
-import { Linter } from '../eslint-compat'
+import { Linter } from 'eslint'
 import parser from 'vue-eslint-parser'
 import { rules } from '../..'
 
@@ -15,7 +14,7 @@ describe("Don't crash even if without vue SFC.", () => {
 
     it(ruleId, () => {
       const linter = new Linter()
-      const config: ESLintLinter.Config = {
+      const config: Linter.Config = {
         languageOptions: {
           parser,
           ecmaVersion: 2015

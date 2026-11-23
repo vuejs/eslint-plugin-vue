@@ -4,7 +4,7 @@
  * See LICENSE file in root directory for full license.
  */
 import rule from '../../../lib/rules/html-closing-bracket-newline'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

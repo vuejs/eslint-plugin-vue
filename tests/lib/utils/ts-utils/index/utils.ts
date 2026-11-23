@@ -1,11 +1,10 @@
-import type { Linter as ESLintLinter } from 'eslint'
 import type { ScriptSetupVisitor } from 'eslint-plugin-vue/util-types/utils'
 import assert from 'node:assert'
 import fs from 'node:fs'
 import path from 'node:path'
 import tsParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
-import { Linter } from '../../../../eslint-compat'
+import { Linter } from 'eslint'
 import { defineScriptSetupVisitor } from '../../../../../lib/utils/index'
 
 export const FIXTURES_ROOT = path.resolve(
@@ -22,7 +21,7 @@ export function verifyWithTsParser(
   tsFileCode = ''
 ): void {
   const linter = new Linter()
-  const config: ESLintLinter.Config = {
+  const config: Linter.Config = {
     files: ['**/*.vue'],
     languageOptions: {
       parser: vueEslintParser,

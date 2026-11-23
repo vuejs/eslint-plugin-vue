@@ -1,8 +1,7 @@
 /**
  * @author Toru Nagashima
  */
-import semver from 'semver'
-import { RuleTester, ESLint } from '../../eslint-compat'
+import { RuleTester } from 'eslint'
 import rule from '../../../lib/rules/eqeqeq'
 import vueEslintParser from 'vue-eslint-parser'
 
@@ -31,14 +30,12 @@ tester.run('eqeqeq', rule, {
           column: 25,
           endLine: 1,
           endColumn: 27,
-          suggestions: semver.gte(ESLint.version, '9.26.0')
-            ? [
-                {
-                  desc: "Use '===' instead of '=='.",
-                  output: `<template><div :attr="a === 1" /></template>`
-                }
-              ]
-            : []
+          suggestions: [
+            {
+              desc: "Use '===' instead of '=='.",
+              output: `<template><div :attr="a === 1" /></template>`
+            }
+          ]
         }
       ]
     },
@@ -57,19 +54,17 @@ tester.run('eqeqeq', rule, {
           column: 25,
           endLine: 4,
           endColumn: 27,
-          suggestions: semver.gte(ESLint.version, '9.26.0')
-            ? [
-                {
-                  desc: "Use '===' instead of '=='.",
-                  output: `
+          suggestions: [
+            {
+              desc: "Use '===' instead of '=='.",
+              output: `
       <style>
       .text {
         color: v-bind(a === 1 ? 'red' : 'blue')
       }
       </style>`
-                }
-              ]
-            : []
+            }
+          ]
         }
       ]
     }
