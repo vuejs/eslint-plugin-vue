@@ -108,7 +108,7 @@ export default {
     messages: {
       // Vue.js 2.5.0+
       forbiddenSlotScopeAttribute:
-        '`slot-scope` is not supported except Vue.js ">=2.5.0 <3.0.0".',
+        '`slot-scope` is not supported outside Vue.js ">=2.5.0 <3.0.0".',
       // Vue.js 2.6.0+
       forbiddenDynamicDirectiveArguments:
         'Dynamic arguments are not supported until Vue.js "2.6.0".',
