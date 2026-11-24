@@ -88,13 +88,7 @@ async function* extractNamesFromNode(
 }
 
 function* extractNamesFromPattern(
-  node:
-    | TSESTree.Identifier
-    | TSESTree.ArrayPattern
-    | TSESTree.ObjectPattern
-    | TSESTree.AssignmentPattern
-    | TSESTree.MemberExpression
-    | TSESTree.RestElement
+  node: TSESTree.DestructuringPattern
 ): Generator<string> {
   switch (node.type) {
     case 'Identifier': {
@@ -128,6 +122,37 @@ function* extractNamesFromPattern(
     case 'MemberExpression': {
       // ?
       break
+    }
+    case 'TSAsExpression':
+    case 'TSNonNullExpression':
+    case 'TSSatisfiesExpression':
+    case 'TSTypeAssertion': {
+      if (isDestructuringPattern(node.expression)) {
+        yield* extractNamesFromPattern(node.expression)
+      }
+      break
+    }
+  }
+}
+
+function isDestructuringPattern(
+  node: TSESTree.Node
+): node is TSESTree.DestructuringPattern {
+  switch (node.type) {
+    case 'ArrayPattern':
+    case 'AssignmentPattern':
+    case 'Identifier':
+    case 'MemberExpression':
+    case 'ObjectPattern':
+    case 'RestElement':
+    case 'TSAsExpression':
+    case 'TSNonNullExpression':
+    case 'TSSatisfiesExpression':
+    case 'TSTypeAssertion': {
+      return true
+    }
+    default: {
+      return false
     }
   }
 }
