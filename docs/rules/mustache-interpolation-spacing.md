@@ -23,7 +23,7 @@ since: v3.13.0
 
 ## :book: Rule Details
 
-This rule aims at enforcing unified spacing in mustache interpolations.
+This rule enforces consistent spacing in mustache interpolations.
 
 <eslint-code-block fix :rules="{'vue/mustache-interpolation-spacing': ['error']}">
 

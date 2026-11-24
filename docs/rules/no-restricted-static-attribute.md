@@ -16,7 +16,7 @@ This rule allows you to specify attribute names that you don't want to use in yo
 
 ## :wrench: Options
 
-This rule takes a list of strings, where each string is a attribute name or pattern to be restricted:
+This rule takes a list of strings, where each string is an attribute name or pattern to be restricted:
 
 ```json
 {

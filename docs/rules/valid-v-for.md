@@ -30,13 +30,13 @@ This rule checks whether every `v-for` directive is valid.
 
 This rule reports `v-for` directives in the following cases:
 
-- The directive has that argument. E.g. `<div v-for:aaa></div>`
-- The directive has that modifier. E.g. `<div v-for.bbb></div>`
-- The directive does not have that attribute value. E.g. `<div v-for></div>`
-- If the element which has the directive is a custom component, the component does not have `v-bind:key` directive. E.g. `<your-component v-for="item in list"></your-component>`
+- The directive has an argument. E.g. `<div v-for:aaa></div>`
+- The directive has a modifier. E.g. `<div v-for.bbb></div>`
+- The directive does not have an attribute value. E.g. `<div v-for></div>`
+- If the element which has the directive is a custom component, the component does not have a `v-bind:key` directive. E.g. `<your-component v-for="item in list"></your-component>`
 - The `v-bind:key` directive does not use the variables which are defined by the `v-for` directive. E.g. `<div v-for="x in list" :key="foo"></div>`
 
-If the element which has the directive is a reserved element, this rule does not report it even if the element does not have `v-bind:key` directive because it's not fatal error. [vue/require-v-for-key] rule reports it.
+If the element which has the directive is a reserved element, this rule does not report it even if the element does not have a `v-bind:key` directive because it's not a fatal error. [vue/require-v-for-key] rule reports it.
 
 <eslint-code-block :rules="{'vue/valid-v-for': ['error']}">
 

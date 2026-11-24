@@ -29,7 +29,7 @@ If you need async computed properties, consider using the [`computedAsync`] comp
 
 ## :book: Rule Details
 
-This rule is aimed at preventing asynchronous methods from being called in computed properties and functions.
+This rule reports asynchronous methods called in computed properties and functions.
 
 <eslint-code-block :rules="{'vue/no-async-in-computed-properties': ['error']}">
 

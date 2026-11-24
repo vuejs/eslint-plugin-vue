@@ -26,7 +26,7 @@ since: v5.0.0
 
 ## :book: Rule Details
 
-This rule enforce usage of `exact` modifier on `v-on` when there is another `v-on` with modifier.
+This rule enforces the usage of the `exact` modifier on `v-on` when there is another `v-on` with a modifier.
 
 <eslint-code-block :rules="{'vue/use-v-on-exact': ['error']}">
 

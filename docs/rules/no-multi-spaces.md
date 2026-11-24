@@ -23,7 +23,7 @@ since: v3.12.0
 
 ## :book: Rule Details
 
-This rule aims at removing multiple spaces in tags, which are not used for indentation.
+This rule reports multiple consecutive spaces in tags that are not used for indentation.
 
 <eslint-code-block fix :rules="{'vue/no-multi-spaces': ['error']}">
 

@@ -26,7 +26,7 @@ since: v8.4.0
 
 ## :book: Rule Details
 
-This rule disallows the use of v-text / v-html on component.
+This rule disallows the use of v-text / v-html on components.
 
 If you use v-text / v-html on a component, it will overwrite the component's content and may break the component.
 

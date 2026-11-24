@@ -12,7 +12,7 @@ since: v7.15.0
 
 ## :book: Rule Details
 
-This rule disallows the use of languages other than those available in the your application for the lang attribute of block elements.
+This rule enforces that the `lang` attribute of each SFC block uses one of the languages you allow.
 
 ## :wrench: Options
 

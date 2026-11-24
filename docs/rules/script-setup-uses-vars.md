@@ -25,7 +25,7 @@ This rule only has an effect when the `no-unused-vars` rule is enabled.
 
 ## :book: Rule Details
 
-Without this rule this code triggers warning:
+Without this rule, this code triggers a warning:
 
 <eslint-code-block :rules="{'vue/script-setup-uses-vars': ['error'], 'no-unused-vars': ['error']}">
 
@@ -50,7 +50,7 @@ const inc = () => {
 
 </eslint-code-block>
 
-After turning on, `Foo` is being marked as used and `no-unused-vars` rule doesn't report an issue.
+After turning it on, `Foo` is marked as used and the `no-unused-vars` rule doesn't report an issue.
 
 ## :mute: When Not To Use It
 

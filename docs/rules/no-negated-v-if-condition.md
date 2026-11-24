@@ -14,7 +14,7 @@ since: v10.4.0
 
 ## :book: Rule Details
 
-This rule disallows negated conditions in `v-if` and `v-else-if` directives which have an `v-else` branch.
+This rule disallows negated conditions in `v-if` and `v-else-if` directives which have a `v-else` branch.
 
 Negated conditions make the code less readable. When there's an `else` clause, it's better to use a positive condition and switch the branches.
 
