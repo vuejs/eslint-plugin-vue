@@ -21,6 +21,10 @@ function isBooleanProp(prop: ComponentObjectProp): boolean {
   )
 }
 
+function isUndefinedIdentifier(node: Expression) {
+  return node.type === 'Identifier' && node.name === 'undefined'
+}
+
 function getDefaultNode(propDefValue: ObjectExpression) {
   return utils.findProperty(propDefValue, 'default')
 }
@@ -85,6 +89,9 @@ export default {
     }
 
     function verifyDefaultExpression(defaultNode: Expression) {
+      if (isUndefinedIdentifier(defaultNode)) {
+        return
+      }
       switch (booleanType) {
         case 'no-default': {
           context.report({
