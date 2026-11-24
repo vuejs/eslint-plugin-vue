@@ -204,6 +204,29 @@ export default {
       }
     }
 
+    function getConstAlias(
+      id: Identifier,
+      path: string[]
+    ): { pattern: Pattern; path: string[] } | null {
+      const aliasPath = [...path]
+      let node: ASTNode = id
+      while (node.parent.type === 'MemberExpression') {
+        const mem: MemberExpression = node.parent
+        const name = mem.object === node && utils.getStaticPropertyName(mem)
+        if (!name) {
+          return null
+        }
+        aliasPath.push(name)
+        node = mem
+      }
+      const declarator = node.parent
+      return declarator.type === 'VariableDeclarator' &&
+        declarator.init === node &&
+        (declarator.parent as VariableDeclaration).kind === 'const'
+        ? { pattern: declarator.id, path: aliasPath }
+        : null
+    }
+
     function verifyPropVariable(prop: Identifier, path: string[]) {
       const variable = findVariable(utils.getScope(context, prop), prop)
       if (!variable) {
@@ -215,6 +238,18 @@ export default {
           continue
         }
         const id = reference.identifier
+
+        const alias = getConstAlias(id, path)
+        if (alias) {
+          const aliasProperties = iteratePatternProperties(
+            alias.pattern,
+            alias.path
+          )
+          for (const { node: aliasProp, path: aliasPath } of aliasProperties) {
+            verifyPropVariable(aliasProp, aliasPath)
+          }
+          continue
+        }
 
         const invalid = utils.findMutating(id)
         if (!invalid || !isShallowOnlyInvalid(invalid, path.length === 0)) {
