@@ -21,7 +21,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports use of the deprecated `$scopedSlots` (in Vue.js 3.0.0+).
+This rule reports use of the deprecated `$scopedSlots` object (in Vue.js 3.0.0+).
 
 See [Migration Guide - Slots Unification](https://v3-migration.vuejs.org/breaking-changes/slots-unification.html) for more details.
 

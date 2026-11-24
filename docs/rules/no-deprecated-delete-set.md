@@ -20,7 +20,7 @@ since: v9.29.0
 
 ## :book: Rule Details
 
-This rule reports use of the deprecated `$delete` and `$set` (in Vue.js 3.0.0+).
+This rule reports use of the deprecated `$delete` and `$set` functions (in Vue.js 3.0.0+).
 
 <eslint-code-block :rules="{'vue/no-deprecated-delete-set': ['error']}">
 
