@@ -12,7 +12,7 @@ since: v9.19.0
 
 ## :book: Rule Details
 
-This rule is aimed at eliminating unused emit declarations.
+This rule reports unused emit declarations.
 
 <eslint-code-block :rules="{'vue/no-unused-emit-declarations': ['error']}">
 

@@ -23,9 +23,9 @@ since: v3.11.0
 
 ## :book: Rule Details
 
-This rule aims to enforce the self-closing sign as the configured style.
+This rule enforces the configured self-closing style.
 
-In Vue.js template, we can use either two styles for elements which don't have their content.
+In Vue.js templates, elements without content can be written in two styles:
 
 1. `<YourComponent></YourComponent>`
 2. `<YourComponent/>` (self-closing)

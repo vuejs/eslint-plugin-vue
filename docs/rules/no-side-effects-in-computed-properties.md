@@ -26,9 +26,9 @@ since: v3.6.0
 
 ## :book: Rule Details
 
-This rule is aimed at preventing the code which makes side effects in computed properties and functions.
+This rule reports code that causes side effects in computed properties and functions.
 
-It is considered a very bad practice to introduce side effects inside computed properties and functions. It makes the code not predictable and hard to understand.
+It is considered a very bad practice to introduce side effects inside computed properties and functions. It makes the code unpredictable and hard to understand.
 
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
 

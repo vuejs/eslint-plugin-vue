@@ -30,9 +30,9 @@ This rule checks whether every `v-html` directive is valid.
 
 This rule reports `v-html` directives in the following cases:
 
-- The directive has that argument. E.g. `<div v-html:aaa></div>`
-- The directive has that modifier. E.g. `<div v-html.bbb></div>`
-- The directive does not have that attribute value. E.g. `<div v-html></div>`
+- The directive has an argument. E.g. `<div v-html:aaa></div>`
+- The directive has a modifier. E.g. `<div v-html.bbb></div>`
+- The directive does not have an attribute value. E.g. `<div v-html></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-html': ['error']}">
 
@@ -51,7 +51,7 @@ This rule reports `v-html` directives in the following cases:
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
+This rule does not check syntax errors in directives because the [vue/no-parsing-error] rule checks them.
 :::
 
 ## :wrench: Options

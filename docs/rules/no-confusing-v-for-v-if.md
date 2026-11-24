@@ -16,7 +16,7 @@ since: v3.0.0
 
 This rule reports the elements which have both `v-for` and `v-if` directives in the following cases:
 
-- The `v-if` directive does not use the reference which is to the variables which are defined by the `v-for` directives.
+- The `v-if` directive does not reference the variables defined by the `v-for` directive.
 
 In that case, the `v-if` should be written on the wrapper element.
 

@@ -29,7 +29,7 @@ This rule prevents using duplicate key names.
 ## :book: Rule Details
 
 This rule prevents duplicate `props`/`data`/`methods`/etc. key names defined on a component.
-Even if a key name does not conflict in the `<script>` tag itself, it still may lead to a conflict in the `<template>` since Vue allows directly accessing these keys from there.
+Even if a key name does not conflict in the `<script>` tag itself, it may still lead to a conflict in the `<template>` since Vue allows directly accessing these keys from there.
 
 <eslint-code-block :rules="{'vue/no-dupe-keys': ['error']}">
 

@@ -26,9 +26,9 @@ since: v7.13.0
 
 ## :book: Rule Details
 
-This rule warns ES module exports in `<script setup>`.
+This rule warns about ES module exports in `<script setup>`.
 
-The previous version of `<script setup>` RFC used `export` to define variables used in templates, but the new `<script setup>` RFC has been updated to define without using `export`.
+The previous version of the `<script setup>` RFC used `export` to define variables used in templates, but the new `<script setup>` RFC no longer uses `export` for this.
 See [Vue RFCs - 0040-script-setup] for more details.
 
 <eslint-code-block :rules="{'vue/no-export-in-script-setup': ['error']}">

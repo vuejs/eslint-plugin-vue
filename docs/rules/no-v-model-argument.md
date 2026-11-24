@@ -19,13 +19,13 @@ since: v7.0.0
   - `"plugin:vue/vue2-strongly-recommended"`
   - `"plugin:vue/vue2-recommended"`
 
-This rule checks whether `v-model` used on custom component do not have an argument.
+This rule checks that `v-model` used on a custom component does not have an argument.
 
 ## :book: Rule Details
 
 This rule reports `v-model` directives in the following cases:
 
-- The directive used on component has an argument. E.g. `<MyComponent v-model:aaa="foo" />`
+- The directive used on a component has an argument. E.g. `<MyComponent v-model:aaa="foo" />`
 
 <eslint-code-block :rules="{'vue/no-v-model-argument': ['error']}">
 

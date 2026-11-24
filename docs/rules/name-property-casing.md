@@ -14,7 +14,7 @@ since: v3.8.0
 
 ## :book: Rule Details
 
-This rule aims at enforcing the style for the `name` property casing for consistency purposes.
+This rule enforces a consistent casing style for the `name` property.
 
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error']}">
 

@@ -12,8 +12,8 @@ since: v7.4.0
 
 ## :book: Rule Details
 
-This rule reports your restricted calls after the `await` expression.
-In `setup()` function, you need to call your restricted functions synchronously.
+This rule reports your restricted calls after an `await` expression.
+In the `setup()` function, you need to call your restricted functions synchronously.
 
 ## :wrench: Options
 

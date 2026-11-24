@@ -20,8 +20,8 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports the `watch()` after `await` expression.\
-In `setup()` function, `watch()` should be registered synchronously.
+This rule reports `watch()` calls after an `await` expression.\
+In the `setup()` function, `watch()` should be registered synchronously.
 
 <eslint-code-block :rules="{'vue/no-watch-after-await': ['error']}">
 
