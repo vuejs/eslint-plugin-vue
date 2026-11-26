@@ -34,7 +34,6 @@ This rule enforces using the new `useTemplateRef` function instead of `ref`/`sha
   /* ✓ GOOD */
   const submitRef = useTemplateRef('submitRef');
   const submitButton = useTemplateRef('submitRef');
-  const closeButton = useTemplateRef('closeRef');
 
   /* ✗ BAD */
   const closeRef = ref(null);
@@ -44,8 +43,9 @@ This rule enforces using the new `useTemplateRef` function instead of `ref`/`sha
 
 </eslint-code-block>
 
-The autofix replaces the call with `useTemplateRef('name')`, keeping any type arguments, and adds `useTemplateRef` to the `import` from `'vue'` unless it is already imported or declared as a global (e.g. by `unplugin-auto-import`).
-It is not applied when that could change the behavior of the code: when `ref`/`shallowRef` is called without an argument (the value before mount would change from `undefined` to `null`) or with an initial value other than `null`, when the variable has a type annotation, or when the variable or its `.value` is written to (`useTemplateRef` returns a readonly ref).
+The autofix is only applied in `<script setup>`. It replaces the call with `useTemplateRef('name')`, keeping any type arguments, and adds `useTemplateRef` to the `import` from `'vue'` unless it is already imported or declared as a global (e.g. by `unplugin-auto-import`).
+It is not applied when that could change the behavior of the code: when `ref`/`shallowRef` is called without an argument (the value before mount would change from `undefined` to `null`) or with an initial value other than `null`, when the variable has a type annotation, when the variable or its `.value` is written to, also through `this` in `<template>` (`useTemplateRef` returns a readonly ref), when the variable is used in any other way than reading its properties, checking it or passing it to a function (except functions that keep or write it, such as `defineExpose()`, `reactive()`, `provide()`, `Object.assign()` or `list.push()`, and `ref` in render functions), when the template ref is inside `v-for` (`useTemplateRef` makes the array readonly), when the component instance is used through `this` in another `<script>` or `getCurrentInstance()`, when `ref`/`shallowRef` or `useTemplateRef` does not come from `'vue'`, when `useTemplateRef()` is already called with the same key, or when the call contains comments.
+Passing the ref to another function that writes to it is not detected.
 
 This rule skips `ref` template function refs as these should be used to allow custom implementation of storing `ref`. If you prefer
 `useTemplateRef`, you have to change the value of the template `ref` to a string.
