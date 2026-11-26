@@ -23,7 +23,7 @@ since: v8.0.0
 
 ## :book: Rule Details
 
-This rule aims to enforce a consistent location for the first attribute.
+This rule enforces a consistent location for the first attribute.
 
 <eslint-code-block fix :rules="{'vue/first-attribute-linebreak': ['error']}">
 

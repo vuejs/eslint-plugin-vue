@@ -22,7 +22,7 @@ since: v3.13.0
 
 ## :book: Rule Details
 
-This rule requires default value to be set for each props that are not marked as `required` (except `Boolean` props).
+This rule requires a default value to be set for each prop that is not marked as `required` (except `Boolean` props).
 
 <eslint-code-block :rules="{'vue/require-default-prop': ['error']}">
 

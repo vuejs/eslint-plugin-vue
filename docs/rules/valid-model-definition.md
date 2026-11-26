@@ -21,7 +21,7 @@ since: v9.0.0
 
 ## :book: Rule Details
 
-This rule is aimed at preventing invalid keys in model option.
+This rule reports invalid keys in the `model` option.
 
 <eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 

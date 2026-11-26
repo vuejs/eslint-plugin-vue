@@ -14,7 +14,7 @@ Define a style for custom event name casing for consistency purposes.
 
 ## :book: Rule Details
 
-This rule aims to warn the custom event names other than the configured casing. (Default is **camelCase**.)
+This rule reports custom event names that do not match the configured casing. (Default is **camelCase**.)
 
 Vue 2 recommends using kebab-case for custom event names.
 

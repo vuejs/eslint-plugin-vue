@@ -24,7 +24,7 @@ since: v5.0.0
 
 ## :book: Rule Details
 
-This rule aims to eliminate shadowed variable declarations of v-for directives or scope attributes.
+This rule reports shadowed variable declarations of v-for directives or scope attributes.
 
 <eslint-code-block :rules="{'vue/no-template-shadow': ['error']}">
 

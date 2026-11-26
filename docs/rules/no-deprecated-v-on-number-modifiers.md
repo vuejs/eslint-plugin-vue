@@ -21,7 +21,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports use of deprecated `KeyboardEvent.keyCode` modifier on `v-on` directive (in Vue.js 3.0.0+).
+This rule reports use of the deprecated `KeyboardEvent.keyCode` modifiers on `v-on` directives (in Vue.js 3.0.0+).
 
 See [Migration Guide - KeyCode Modifiers](https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html) for more details.
 

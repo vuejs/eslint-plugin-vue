@@ -14,7 +14,7 @@ since: v6.1.0
 
 ## :book: Rule Details
 
-This rule aims to enforce the order of static class names.
+This rule enforces the order of static class names.
 
 <eslint-code-block fix :rules="{'vue/static-class-names-order': ['error']}">
 

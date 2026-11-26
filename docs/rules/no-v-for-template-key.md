@@ -21,9 +21,9 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports the `<template v-for>` elements which have `key` attribute.
+This rule reports `<template v-for>` elements that have a `key` attribute.
 
-In Vue.js 2.x, disallows `key` attribute on `<template>` elements.
+In Vue.js 2.x, the `key` attribute is not allowed on `<template>` elements.
 
 ::: warning Note
 This rule is targeted at Vue.js 2.x.

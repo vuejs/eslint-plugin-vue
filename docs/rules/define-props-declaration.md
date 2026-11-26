@@ -12,9 +12,9 @@ since: v9.5.0
 
 ## :book: Rule Details
 
-This rule enforces whether `defineProps` and `defineModel` should use `type-based` or `runtime` declarations.
+This rule enforces which `defineProps` and `defineModel` declaration style you should use: `type-based` or `runtime`.
 
-This rule only works in setup script and `lang="ts"`.
+This rule only works in `<script setup>` and `<script lang="ts">`.
 
 <eslint-code-block :rules="{'vue/define-props-declaration': ['error']}">
 

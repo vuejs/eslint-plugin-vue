@@ -25,8 +25,8 @@ since: v3.14.0
 
 This rule enforces a consistent indentation style in `<template>`. The default style is 2 spaces.
 
-- This rule checks all tags, also all expressions in directives and mustaches.
-- In the expressions, this rule supports ECMAScript 2022 syntaxes. It ignores unknown AST nodes, but it might be confused by non-standard syntaxes.
+- This rule checks all tags, as well as all expressions in directives and mustaches.
+- In the expressions, this rule supports ECMAScript 2022 syntax. It ignores unknown AST nodes, but it might be confused by non-standard syntax.
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error']}">
 

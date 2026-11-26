@@ -20,7 +20,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports the key of the `<template v-for>` placed on the child elements.
+This rule reports keys of `<template v-for>` that are placed on child elements.
 
 In Vue.js 3.x, with the support for fragments, the `<template v-for>` key can be placed on the `<template>` tag.
 

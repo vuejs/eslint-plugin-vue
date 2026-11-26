@@ -22,7 +22,7 @@ since: v3.9.0
 
 ## :book: Rule Details
 
-This rule enforces that a `props` statement contains type definition.
+This rule enforces that a `props` statement contains a type definition.
 
 In committed code, prop definitions should always be as detailed as possible, specifying at least type(s).
 
