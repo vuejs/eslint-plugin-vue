@@ -47,7 +47,7 @@ export default {
 
 </eslint-code-block>
 
-When `nextTick(() => { ... })` is the last statement of an `async` function and the callback is an arrow function without parameters, declarations, or `return` statements, the autofix replaces it with `await nextTick()` followed by the callback body. Elsewhere in `async` functions, `await` would also delay the code after the call, so the rule only suggests `await nextTick()` and/or `nextTick().then(() => { ... })`. Outside `async` functions, the autofix uses `nextTick().then(() => { ... })`.
+When `nextTick(() => { ... })` is the last statement of an `async` function in strict mode code and the callback is an arrow function without parameters, declarations, or `return` statements, the autofix replaces it with `await nextTick()` followed by the callback body. Elsewhere in `async` functions, `await` would also delay the code after the call, so the rule only suggests `await nextTick()` and/or `nextTick().then(() => { ... })`. Outside `async` functions, the autofix uses `nextTick().then(() => { ... })`. Optional calls such as `this.$nextTick?.(...)` and `function` callbacks of `this.$nextTick()` and `Vue.nextTick()`, which get another `this` or other arguments than with `.then()`, are reported without a fix.
 
 ## :wrench: Options
 

@@ -861,8 +861,13 @@ tester.run('next-tick-style', rule, {
       ['nt(() => foo(), ctx)', 'nt().then(() => foo(), ctx)'],
       ['nt(/* comment */ () => foo())', 'nt().then(/* comment */ () => foo())'],
       [
-        'nt(() => function () {}.call(this))',
-        'nt().then(() => function () {}.call(this))'
+        "nt(() => { 'use strict'; foo() })",
+        "nt().then(() => { 'use strict'; foo() })"
+      ],
+      ['nt(() => { "use strict" })', 'nt().then(() => { "use strict" })'],
+      [
+        "nt(() => { 'use asm'; foo() })",
+        "nt().then(() => { 'use asm'; foo() })"
       ],
       [
         'const promise = nt(() => foo())',
@@ -878,13 +883,14 @@ tester.run('next-tick-style', rule, {
         async mounted() { ${code} }
       }</script>`,
       output: null,
+      languageOptions: { ecmaVersion: 2020 as const },
       errors: [
         {
           messageId: 'usePromise',
           line: 3,
-          column: 27 + code.indexOf('nt('),
+          column: 27 + code.search(/\bnt\b|\$?nextTick/u),
           endLine: 3,
-          endColumn: 29 + code.indexOf('nt('),
+          endColumn: 27 + code.search(/(?<=\bnt|nextTick)\b/u),
           suggestions: [
             {
               messageId: 'useThen',
@@ -904,7 +910,8 @@ tester.run('next-tick-style', rule, {
         methods: {
           sync() { nt(() => foo()) },
           async a() { const fn = () => { nt(() => foo()) } },
-          async b() { class A { static { nt(() => foo()) } } }
+          async b() { class A { static { nt(() => foo()) } } },
+          c() { nt(function () { this.foo(arguments) }) }
         }
       }</script>`,
       output: `<script>import { nextTick as nt } from 'vue';
@@ -912,7 +919,8 @@ tester.run('next-tick-style', rule, {
         methods: {
           sync() { nt().then(() => foo()) },
           async a() { const fn = () => { nt().then(() => foo()) } },
-          async b() { class A { static { nt().then(() => foo()) } } }
+          async b() { class A { static { nt().then(() => foo()) } } },
+          c() { nt().then(function () { this.foo(arguments) }) }
         }
       }</script>`,
       languageOptions: { ecmaVersion: 2022 },
@@ -937,6 +945,13 @@ tester.run('next-tick-style', rule, {
           column: 42,
           endLine: 6,
           endColumn: 44
+        },
+        {
+          messageId: 'usePromise',
+          line: 7,
+          column: 17,
+          endLine: 7,
+          endColumn: 19
         }
       ]
     },
@@ -962,7 +977,7 @@ tester.run('next-tick-style', rule, {
             if (!item) return
             const el = item.el
             el.focus()
-          })
+          });
         }
       }</script>`,
       errors: [
@@ -974,6 +989,331 @@ tester.run('next-tick-style', rule, {
           endColumn: 13
         }
       ]
-    }
+    },
+    ...[
+      ['nt(() => async function () {})', 'await nt(); (async function () {})'],
+      [
+        'nt(() => /* c */ function () {})',
+        'await nt(); (/* c */ function () {})'
+      ],
+      ['nt(() => /* c */ class {})', 'await nt(); (/* c */ class {})'],
+      [
+        'nt(() => function () {}.call(this))',
+        'await nt(); (function () {}.call(this))'
+      ],
+      ['nt(() => class {}.name);', 'await nt(); (class {}.name);'],
+      ['nt(() => async () => {})', 'await nt(); async () => {}'],
+      ['nt(() => (function () {})())', 'await nt(); (function () {})()'],
+      ['nt(() => ({}).a)', 'await nt(); ({}).a'],
+      ['nt(() => async)', 'await nt(); async']
+    ].map(([code, output]) => ({
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() { ${code} }
+      }</script>`,
+      output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() { ${output} }
+      }</script>`,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 29
+        }
+      ]
+    })),
+    ...[
+      'nt?.(() => foo())',
+      'this.$nextTick?.(() => foo())',
+      'this?.$nextTick(() => foo())',
+      'Vue?.nextTick(() => foo())',
+      'this.$nextTick(function () { this.foo() })',
+      'this.$nextTick(async function () { await foo() })',
+      'Vue.nextTick(function () { foo(arguments) })',
+      'Vue.nextTick(function () { this.foo() })'
+    ].flatMap((code) =>
+      ['mounted', 'async mounted'].map((method) => ({
+        filename: 'test.vue',
+        code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        ${method}() { ${code} }
+      }</script>`,
+        output: null,
+        languageOptions: { ecmaVersion: 2020 as const },
+        errors: [
+          {
+            messageId: 'usePromise',
+            line: 3,
+            column: 14 + method.length + code.search(/\bnt\b|\$?nextTick/u),
+            endLine: 3,
+            endColumn:
+              14 + method.length + code.search(/(?<=\bnt|nextTick)\b/u),
+            suggestions: []
+          }
+        ]
+      }))
+    ),
+    ...[
+      'Vue.nextTick(() => { foo() })',
+      'Vue.nextTick(() => { { function f() {} } })',
+      'Vue.nextTick(() => let[0])',
+      "'use strict'; Vue.nextTick(() => { await(x) })",
+      "'use strict'; Vue.nextTick(() => foo(await))",
+      "'use strict'; Vue.nextTick(() => { x = await + 1 })"
+    ].map((code) => ({
+      filename: 'test.js',
+      code: `new Vue({ async mounted() { ${code} } })`,
+      output: null,
+      languageOptions: { sourceType: 'script' as const },
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 1,
+          column: 29 + code.indexOf('nextTick'),
+          endLine: 1,
+          endColumn: 37 + code.indexOf('nextTick'),
+          suggestions: [
+            {
+              messageId: 'useThen',
+              output: `new Vue({ async mounted() { ${code.replace('nextTick', 'nextTick().then')} } })`
+            }
+          ]
+        }
+      ]
+    })),
+    {
+      filename: 'test.js',
+      code: `'use strict'
+      new Vue({
+        async mounted() {
+          Vue.nextTick(() => { foo() })
+        }
+      })`,
+      output: `'use strict'
+      new Vue({
+        async mounted() {
+          await Vue.nextTick();
+          foo()
+        }
+      })`,
+      languageOptions: { sourceType: 'script' },
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 4,
+          column: 15,
+          endLine: 4,
+          endColumn: 23
+        }
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: 'new Vue({\n  async *g() {\n    Vue.nextTick(() => { yield(1) })\n  }\n})',
+      output: null,
+      languageOptions: {
+        ecmaVersion: 2018 as const,
+        sourceType: 'script' as const
+      },
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 17,
+          suggestions: [
+            {
+              messageId: 'useThen',
+              output:
+                'new Vue({\n  async *g() {\n    Vue.nextTick().then(() => { yield(1) })\n  }\n})'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: [
+        "<script>import { nextTick as nt } from 'vue';",
+        'export default {',
+        '  methods: {',
+        '    async a() {',
+        '      nt(() => {',
+        '        foo()',
+        '      })',
+        '    },',
+        '    async b() { nt(() => {',
+        '      foo() // c',
+        '    }) }',
+        '  }',
+        '}</script>'
+      ].join('\r\n'),
+      output: [
+        "<script>import { nextTick as nt } from 'vue';",
+        'export default {',
+        '  methods: {',
+        '    async a() {',
+        '      await nt();',
+        '      foo()',
+        '    },',
+        '    async b() { await nt();',
+        '    foo() // c',
+        '     }',
+        '  }',
+        '}</script>'
+      ].join('\r\n'),
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 9
+        },
+        {
+          messageId: 'usePromise',
+          line: 9,
+          column: 17,
+          endLine: 9,
+          endColumn: 19
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        methods: {
+          async a() { nt(() => {
+            foo() // c
+          }) },
+          async b() { nt(() => { // c
+          }) }
+        }
+      }</script>`,
+      output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        methods: {
+          async a() { await nt();
+          foo() // c
+           },
+          async b() { await nt();
+          // c
+           }
+        }
+      }</script>`,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 25
+        },
+        {
+          messageId: 'usePromise',
+          line: 7,
+          column: 23,
+          endLine: 7,
+          endColumn: 25
+        }
+      ]
+    },
+    ...[
+      [
+        `nt(() => {
+            foo() // c
+          }); bar()`,
+        `await nt();
+          foo(); // c
+           bar()`
+      ],
+      [
+        `nt(() => { foo() });
+          [a, b].forEach(bar)`,
+        `await nt();
+          foo();
+          [a, b].forEach(bar)`
+      ],
+      [
+        'nt(() => { foo() }); (bar || baz)()',
+        `await nt();
+          foo(); (bar || baz)()`
+      ],
+      [
+        'nt(() => { x = () => {} }); (bar || baz)()',
+        `await nt();
+          x = () => {}; (bar || baz)()`
+      ],
+      [
+        'nt(() => { x = {} /* c */ }); (bar || baz)()',
+        `await nt();
+          x = {}; /* c */ (bar || baz)()`
+      ],
+      [
+        `nt(() => { if (a) { foo() } });
+          bar()`,
+        `await nt();
+          if (a) { foo() }
+          bar()`
+      ],
+      [
+        `nt(() => { foo(); });
+          bar()`,
+        `await nt();
+          foo();
+          bar()`
+      ],
+      [
+        `nt(() => { foo() })
+          bar()`,
+        `await nt();
+          foo()
+          bar()`
+      ]
+    ].map(([code, output]) => ({
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          ${code}
+        }
+      }</script>`,
+      output: null,
+      errors: [
+        {
+          messageId: 'usePromise',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 13,
+          suggestions: [
+            {
+              messageId: 'useAwait',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          ${output}
+        }
+      }</script>`
+            },
+            {
+              messageId: 'useThen',
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          ${code.replace('nt(', 'nt().then(')}
+        }
+      }</script>`
+            }
+          ]
+        }
+      ]
+    }))
   ]
 })
