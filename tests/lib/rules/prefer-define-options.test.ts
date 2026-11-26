@@ -34,6 +34,24 @@ tester.run('prefer-define-options', rule, {
     }
   ],
   invalid: [
+    ...[
+      'props: { label: String }',
+      "emits: ['submit']",
+      "expose: ['label']",
+      'slots: {}'
+    ].map((option) => ({
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default { name: 'Foo', ${option} }
+      </script>
+      <script setup>
+      const fallback = 'example'
+      </script>
+      `,
+      output: null,
+      errors: [{ messageId: 'preferDefineOptions' }]
+    })),
     {
       filename: 'test.vue',
       code: `
