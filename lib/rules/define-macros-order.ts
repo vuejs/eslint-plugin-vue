@@ -33,6 +33,14 @@ function isUseStrictStatement(node: ASTNode) {
 }
 
 /**
+ * Check whether a statement starting with the token would continue the
+ * previous statement if that doesn't end with a semicolon
+ */
+function isAsiHazard(token: Token): boolean {
+  return /^[(+\-/[`]/u.test(token.value)
+}
+
+/**
  * Get an index of the first statement after imports and interfaces in order
  * to place defineEmits and defineProps before this statement
  */
@@ -136,6 +144,24 @@ function isTypeOnlyDeclaration(statement: ASTNode): boolean {
   )
 }
 
+/**
+ * Check whether the reference only uses the variable as a type.
+ * `isValueReference` is only set by `@typescript-eslint/scope-manager`, other
+ * scope managers only create value references.
+ */
+function isTypeReference(reference: Reference): boolean {
+  return 'isValueReference' in reference && reference.isValueReference === false
+}
+
+/**
+ * Get the variables declared in the top-level scope.
+ */
+function getTopLevelVariables(sourceCode: SourceCode, program: Program) {
+  return sourceCode.scopeManager.scopes
+    .filter((scope) => scope.block === program)
+    .flatMap((scope) => scope.variables)
+}
+
 interface StatementDependencies {
   /** Statements that declare values or types the statement references */
   all: Set<ASTNode>
@@ -156,11 +182,8 @@ function getStatementDependencies(
   program: Program
 ): Map<ASTNode, StatementDependencies> {
   const dependencies = new Map<ASTNode, StatementDependencies>()
-  const variables = sourceCode.scopeManager.scopes
-    .filter((scope) => scope.block === program)
-    .flatMap((scope) => scope.variables)
 
-  for (const variable of variables) {
+  for (const variable of getTopLevelVariables(sourceCode, program)) {
     for (const def of variable.defs) {
       const declaration = findTopLevelStatement(def.node)
       // Only declarations can be allowed above a macro. This skips imports
@@ -182,12 +205,7 @@ function getStatementDependencies(
           dependencies.set(statement, statementDependencies)
         }
         statementDependencies.all.add(declaration)
-        // `isValueReference` is only set by `@typescript-eslint/scope-manager`,
-        // other scope managers only create value references.
-        const isTypeReference =
-          'isValueReference' in reference &&
-          reference.isValueReference === false
-        if (isRuntimeDeclaration && !isTypeReference) {
+        if (isRuntimeDeclaration && !isTypeReference(reference)) {
           statementDependencies.runtime.add(declaration)
         }
       }
@@ -251,6 +269,131 @@ function canMoveBefore(
       }
     }
     return true
+  })
+}
+
+/** Nodes whose contents are only used as types */
+const TYPE_NODES = new Set([
+  'TSTypeAnnotation',
+  'TSTypeParameterInstantiation',
+  'TSTypeQuery'
+])
+
+/**
+ * Check whether the reference uses the variable at runtime, i.e. not as a
+ * type, e.g. `typeof x`. Uses in functions count, as they may be called
+ * anywhere.
+ */
+function isRuntimeUse(reference: Reference, statement: ASTNode): boolean {
+  if (isTypeReference(reference) || isTypeOnlyDeclaration(statement)) {
+    return false
+  }
+  for (
+    let node: ASTNode | null = reference.identifier.parent;
+    node && node !== statement;
+    node = node.parent
+  ) {
+    if (TYPE_NODES.has(node.type)) {
+      return false
+    }
+  }
+  return true
+}
+
+interface VariableUses {
+  /** The variables each top-level statement declares or uses at runtime */
+  statementVariables: Map<ASTNode, Set<Variable>>
+  /** The top-level statements that declare `let` and `const` variables */
+  lexicalDeclarations: Map<Variable, ASTNode>
+}
+
+/**
+ * Get the top-level `let`, `const` and `var` variables that each top-level
+ * statement declares or uses at runtime. Imports, functions, classes and types
+ * are left out, so that e.g. calling the same function doesn't count.
+ */
+function getVariableUses(
+  sourceCode: SourceCode,
+  program: Program
+): VariableUses {
+  const statementVariables = new Map<ASTNode, Set<Variable>>()
+  const lexicalDeclarations = new Map<Variable, ASTNode>()
+  const addUse = (statement: ASTNode, variable: Variable) => {
+    let variables = statementVariables.get(statement)
+    if (!variables) {
+      variables = new Set()
+      statementVariables.set(statement, variables)
+    }
+    variables.add(variable)
+  }
+
+  for (const variable of getTopLevelVariables(sourceCode, program)) {
+    const defs = variable.defs.filter((def) => def.type === 'Variable')
+    if (defs.length === 0) {
+      continue
+    }
+    // This includes `var`s declared inside other statements
+    for (const def of defs) {
+      const statement = findTopLevelStatement(def.node)
+      if (!statement || isTypeOnlyDeclaration(statement)) {
+        continue
+      }
+      addUse(statement, variable)
+      if (def.parent.kind !== 'var') {
+        lexicalDeclarations.set(variable, statement)
+      }
+    }
+    for (const reference of variable.references) {
+      const statement = findTopLevelStatement(reference.identifier)
+      if (statement && isRuntimeUse(reference, statement)) {
+        addUse(statement, variable)
+      }
+    }
+  }
+
+  return { statementVariables, lexicalDeclarations }
+}
+
+/**
+ * Check that moving `nodes` (in this order) before `target` does not move any
+ * of them above a statement that uses the same variable, which could change
+ * the value they see, e.g. `count++` between `let count = 0` and
+ * `const api = { count }`.
+ */
+function canMoveBeforeVariableUses(
+  nodes: ASTNode[],
+  target: ASTNode,
+  statements: ASTNode[],
+  { statementVariables, lexicalDeclarations }: VariableUses
+): boolean {
+  return nodes.every((node, index) => {
+    const nodeVariables = statementVariables.get(node)
+    if (!nodeVariables) {
+      return true
+    }
+    const movedAbove = new Set(nodes.slice(0, index))
+    return statements.every((statement) => {
+      const isPassedOver =
+        statement.range[0] >= target.range[0] &&
+        statement.range[0] < node.range[0] &&
+        !movedAbove.has(statement)
+      if (!isPassedOver) {
+        return true
+      }
+      const variables = statementVariables.get(statement) ?? []
+      for (const variable of variables) {
+        if (!nodeVariables.has(variable)) {
+          continue
+        }
+        // A statement above a `let` or `const` declaration can only use the
+        // variable in a function called later, so the declaration can be
+        // moved above it.
+        if (lexicalDeclarations.get(variable) !== node) {
+          return false
+        }
+      }
+      return true
+    })
   })
 }
 
@@ -412,8 +555,15 @@ function create(context: RuleContext) {
             }
             movedNodes.push(...referenced, node)
           }
-          // Don't move a macro above a runtime declaration it uses
-          return canMoveBefore(movedNodes, before, getDependencies)
+          // Don't move a macro above a runtime declaration it uses, or above
+          // a statement that uses the same variables
+          return canMoveBefore(movedNodes, before, getDependencies) &&
+            canMoveBeforeVariableUses(
+              movedNodes,
+              before,
+              statements,
+              getVariableUses(sourceCode, program)
+            )
             ? movedNodes
             : null
         }
@@ -554,10 +704,21 @@ function create(context: RuleContext) {
     )
     const insertText = getInsertText(textNode, target)
 
-    return [
+    const fixes = [
       fixer.insertTextBefore(targetComment, insertText),
       fixer.removeRange([cutStart, cutEnd])
     ]
+    // handle case when moving b() out of a()\nb()\n;(c)() would leave
+    // a()\n(c)(), as b() takes the semicolon with it
+    const afterNodeToken = sourceCode.getTokenAfter(node)
+    if (
+      afterNodeToken &&
+      beforeNodeToken.value !== ';' &&
+      isAsiHazard(afterNodeToken)
+    ) {
+      fixes.push(fixer.insertTextBefore(afterNodeToken, ';'))
+    }
+    return fixes
   }
 
   /**
@@ -571,8 +732,12 @@ function create(context: RuleContext) {
       target.range[1],
       afterTargetComment.range[0]
     )
-    // handle case when a();b() -> b()a();
-    const isInvalidResult = !textNode.endsWith(';') && !afterText.includes('\n')
+    // handle case when a();b() -> b()a();, and when moving c() before (b)()
+    // in a\n;(b)() -> a\n;c()\n(b)()
+    const isInvalidResult =
+      !textNode.endsWith(';') &&
+      (!afterText.includes('\n') ||
+        isAsiHazard(sourceCode.getFirstToken(target)))
 
     return textNode + afterText + (isInvalidResult ? ';' : '')
   }

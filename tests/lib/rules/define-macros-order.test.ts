@@ -2117,7 +2117,8 @@ tester.run('define-macros-order', rule, {
     },
     {
       // a `var` declared inside another statement is not a declaration that
-      // is allowed above the macro
+      // is allowed above the macro, and as the macro uses it, no fix is
+      // offered
       filename: 'test.vue',
       code: `
         <script setup>
@@ -2126,13 +2127,7 @@ tester.run('define-macros-order', rule, {
           const model = defineModel({ get: () => last })
         </script>
       `,
-      output: `
-        <script setup>
-          defineProps({ foo: String })
-          const model = defineModel({ get: () => last })
-          if (Math.random()) { var last = 1; console.log(last) }
-        </script>
-      `,
+      output: null,
       options: [{ order: ['defineProps', 'defineModel'] }],
       errors: [
         {
@@ -2145,7 +2140,8 @@ tester.run('define-macros-order', rule, {
       ]
     },
     {
-      // a `var` declared in a loop is not allowed above the macro
+      // a `var` declared in a loop is not allowed above the macro, and as the
+      // macro uses it, no fix is offered
       filename: 'test.vue',
       code: `
         <script setup>
@@ -2154,13 +2150,7 @@ tester.run('define-macros-order', rule, {
           const model = defineModel({ get: () => i })
         </script>
       `,
-      output: `
-        <script setup>
-          defineProps({ foo: String })
-          const model = defineModel({ get: () => i })
-          for (var i = 0; i < 3; i++) console.log(i)
-        </script>
-      `,
+      output: null,
       options: [{ order: ['defineProps', 'defineModel'] }],
       errors: [
         {
@@ -2263,6 +2253,784 @@ tester.run('define-macros-order', rule, {
           column: 11,
           endLine: 5,
           endColumn: 54
+        }
+      ]
+    },
+    {
+      // moving the referenced declaration with the macro would move it above
+      // a statement that changes the value it reads, so no fix is offered
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          let count = 0
+          count++
+          const api = { count }
+          defineCustom(api)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // the same with a reassignment between
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          let options = { size: 1 }
+          options = { size: 2 }
+          const config = { ...options }
+          defineCustom(config)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      // the same with a method call that can change the value between
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const list = []
+          list.push(1)
+          const size = list.length
+          defineCustom(size)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      // moving the macro above a statement that changes the value it reads
+      // would change the code's behavior, so no fix is offered
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          let count = 0
+          count++
+          defineCustom(count)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // the same with `allowReferencedAbove: false`
+      filename: 'test.vue',
+      code: `
+        <script>
+          let count = 0
+        </script>
+        <script setup>
+          defineProps(['a'])
+          count++
+          defineCustom(count)
+        </script>
+      `,
+      output: null,
+      options: [
+        { order: ['defineProps', 'defineCustom'], allowReferencedAbove: false }
+      ],
+      errors: [
+        {
+          message: notAtTopStrictMessage('defineCustom'),
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // a `var` declared in a block is not moved, so no fix is offered when
+      // the macro uses it
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          try { var config = load() } catch {}
+          defineCustom({ config })
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 35
+        }
+      ]
+    },
+    {
+      // the same with a labeled loop
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          outer: for (var i = 0; i < 3; i++) if (i) break outer
+          defineCustom(i)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 26
+        }
+      ]
+    },
+    {
+      // a statement that doesn't use the moved variables doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          let count = 0
+          console.log('ready')
+          const api = { count }
+          defineCustom(api)
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          let count = 0
+          const api = { count }
+          defineCustom(api)
+          console.log('ready')
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // calling the same imported function doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import { ref } from 'vue'
+          defineProps(['a'])
+          const open = ref(false)
+          const size = ref(1)
+          defineCustom(size)
+        </script>
+      `,
+      output: `
+        <script setup>
+          import { ref } from 'vue'
+          defineProps(['a'])
+          const size = ref(1)
+          defineCustom(size)
+          const open = ref(false)
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      // calling the same function declaration doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const title = format(1)
+          const label = format(2)
+          defineCustom(label)
+          function format(value) { return String(value) }
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          const label = format(2)
+          defineCustom(label)
+          const title = format(1)
+          function format(value) { return String(value) }
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // a statement that only uses a moved type doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const props = defineProps<{ foo: string }>()
+          let current: Payload | undefined
+          type Payload = { id: number }
+          defineEmits<{ change: [payload: Payload] }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          const props = defineProps<{ foo: string }>()
+          type Payload = { id: number }
+          defineEmits<{ change: [payload: Payload] }>()
+          let current: Payload | undefined
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 56
+        }
+      ]
+    },
+    {
+      // a function above the macro can use the variable that the macro
+      // declares, so it doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const emit = defineEmits(['change'])
+          const double = computed(() => props.count * 2)
+          const props = defineProps({ count: Number })
+        </script>
+      `,
+      output: `
+        <script setup>
+          const props = defineProps({ count: Number })
+          const emit = defineEmits(['change'])
+          const double = computed(() => props.count * 2)
+        </script>
+      `,
+      errors: [
+        {
+          message: unorderedMessage('defineProps', 'defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 55
+        }
+      ]
+    },
+    {
+      // a `var` in a block that the macro doesn't use doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          try { var config = load() } catch {}
+          defineCustom({ size: 1 })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          defineCustom({ size: 1 })
+          try { var config = load() } catch {}
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      // `typeof` in a type doesn't use the variable at runtime, so it doesn't
+      // block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          type Config = typeof cfg
+          defineCustom(cfg)
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          defineCustom(cfg)
+          type Config = typeof cfg
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // the same in an interface
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          interface Options { config: typeof cfg }
+          defineCustom(cfg)
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          defineCustom(cfg)
+          interface Options { config: typeof cfg }
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // the same in a type annotation
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          let current: typeof cfg | undefined
+          defineCustom(cfg)
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          defineCustom(cfg)
+          let current: typeof cfg | undefined
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a change of the variable next to a type that uses it still blocks the
+      // fix
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          type Config = typeof cfg
+          cfg.a = 2
+          defineCustom(cfg)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a function can be called before the macro, so a function that uses
+      // the variable blocks the fix, even if it isn't called there
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          function read() { return cfg.x }
+          defineCustom(cfg)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // the same with an arrow function
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          const read = () => cfg.x
+          defineCustom(cfg)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a function above a `let` declaration blocks moving a macro that uses
+      // the variable, as the function may be called before the macro
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          watch(source, () => console.log(count))
+          let count = 1
+          defineCustom(count)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // the function changes the variable when it's called before the macro
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          function read() { return cfg.x++ }
+          read()
+          defineCustom(cfg.x)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // the same with an arrow function and a moved declaration
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const counter = { n: 0 }
+          const increment = () => counter.n++
+          increment()
+          const api = { n: counter.n }
+          defineCustom(api)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a moved function that uses the variable may be called by the macro,
+      // so it can't be moved above a change of the variable
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          cfg.x = 5
+          const get = () => cfg.x
+          defineCustom(get)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a function that is called right away still blocks the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          const result = (() => cfg.x++)()
+          defineCustom(cfg)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a semicolon is added when the next statement relies on the one at
+      // the start of its line
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const x = 1
+          ;(() => { log(1) })()
+          defineCustom(x)
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          const x = 1
+          ;defineCustom(x)
+          ;(() => { log(1) })()
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 26
+        }
+      ]
+    },
+    {
+      // the same after an import
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import x from 'y'
+          ;(() => {})()
+          defineProps()
+        </script>
+      `,
+      output: `
+        <script setup>
+          import x from 'y'
+          ;defineProps()
+          ;(() => {})()
+        </script>
+      `,
+      errors: [
+        {
+          message: notAtTopMessage('defineProps'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
+    },
+    {
+      // a semicolon is kept when the moved macro takes the one that the next
+      // statement relies on
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          foo()
+          defineCustom()
+          ;(() => {})()
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          defineCustom()
+          ;
+          foo()
+;(() => {})()
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 5,
+          column: 11,
+          endLine: 6,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      // no semicolons are added when the statements end with them
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineEmits();
+          foo();
+          defineProps();
+          (bar)();
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps();
+          defineEmits();
+          foo();
+          (bar)();
+        </script>
+      `,
+      errors: [
+        {
+          message: unorderedMessage('defineProps', 'defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 25
         }
       ]
     }

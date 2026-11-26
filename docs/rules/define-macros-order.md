@@ -31,7 +31,7 @@ This rule reports compiler macros (like `defineProps` or `defineEmits` but also 
 
 - `order` (`string[]`) ... The order in which the macros should appear. The default is `["defineProps", "defineEmits"]`.
 - `defineExposeLast` (`boolean`) ... Force `defineExpose` at the end.
-- `allowReferencedAbove` (`boolean`) ... Allow declarations that a macro references, directly or through other such declarations, to be placed right above it, below the previous macro: types, interfaces, enums, ambient (`declare`) declarations, variables, functions and classes. Any other statement between the macros is still reported. The autofix moves referenced declarations together with their macro, and offers no fix if a macro would end up above a runtime declaration it uses. The default is `true`.
+- `allowReferencedAbove` (`boolean`) ... Allow declarations that a macro references, directly or through other such declarations, to be placed right above it, below the previous macro: types, interfaces, enums, ambient (`declare`) declarations, variables, functions and classes. Any other statement between the macros is still reported. The autofix moves referenced declarations together with their macro, and offers no fix if a macro would end up above a runtime declaration it uses, or if moving it would change the order of statements that use the same variable. The default is `true`.
 
 ### `{ "order": ["defineProps", "defineEmits"] }` (default)
 
