@@ -12,8 +12,8 @@ since: v7.20.0
 
 ## :book: Rule Details
 
-This rule warns of using undefined properties.\
-This rule can help you locate potential errors resulting from misspellings property names, and implicitly added properties.
+This rule warns about using undefined properties.\
+This rule can help you locate potential errors resulting from misspelled property names, and implicitly added properties.
 
 ::: warning Note
 This rule cannot detect properties defined in other files or components.\

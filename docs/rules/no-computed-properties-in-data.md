@@ -26,8 +26,8 @@ since: v7.20.0
 
 ## :book: Rule Details
 
-This rule disallow accessing computed properties in `data()`.\
-The computed property cannot be accessed in `data()` because is before initialization.
+This rule disallows accessing computed properties in `data()`.\
+Computed properties cannot be accessed in `data()` because it is evaluated before initialization.
 
 <eslint-code-block :rules="{'vue/no-computed-properties-in-data': ['error']}">
 

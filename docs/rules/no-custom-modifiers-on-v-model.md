@@ -18,13 +18,13 @@ since: v7.0.0
   - `"plugin:vue/vue2-strongly-recommended"`
   - `"plugin:vue/vue2-recommended"`
 
-This rule checks whether `v-model` used on the component do not have custom modifiers.
+This rule checks whether `v-model` used on a component does not have custom modifiers.
 
 ## :book: Rule Details
 
 This rule reports `v-model` directives in the following cases:
 
-- The directive used on the component has custom modifiers. E.g. `<MyComponent v-model.aaa="foo" />`
+- The directive used on a component has custom modifiers. E.g. `<MyComponent v-model.aaa="foo" />`
 
 <eslint-code-block :rules="{'vue/no-custom-modifiers-on-v-model': ['error']}">
 

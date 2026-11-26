@@ -36,8 +36,8 @@ This rule reports syntax errors in `<template>`. For example:
 
 ## :book: Rule Details
 
-This rule tries to parse directives/mustaches in `<template>` by the parser which parses `<script>`.
-Then reports syntax errors if exist.
+This rule tries to parse directives/mustaches in `<template>` with the parser that parses `<script>`.
+Then it reports syntax errors, if any.
 
 <eslint-code-block :rules="{'vue/no-parsing-error': ['error']}">
 

@@ -29,7 +29,7 @@ since: v5.0.0
 
 This rule reports prop types that can't be presumed as constructors.
 
-It's impossible to catch every possible case and know whether the prop type is a constructor or not, hence this rule restricts few types of nodes, instead of allowing correct ones.
+It's impossible to catch every possible case and know whether the prop type is a constructor or not, so this rule forbids a few types of nodes instead of allowing only correct ones.
 
 The following types are forbidden and will be reported:
 
@@ -38,7 +38,7 @@ The following types are forbidden and will be reported:
 - BinaryExpression
 - UpdateExpression
 
-It will catch most commonly made mistakes which are using strings instead of constructors.
+It catches the most common mistake, which is using strings instead of constructors.
 
 <eslint-code-block fix :rules="{'vue/require-prop-type-constructor': ['error']}">
 

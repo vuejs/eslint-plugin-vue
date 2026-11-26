@@ -55,6 +55,18 @@ ruleTester.run('require-default-prop', rule, {
             },
             i: Boolean,
             j: [Boolean],
+            k: [Boolean, String],
+            l: {
+              type: [Boolean, String]
+            },
+            m: [Number, Boolean],
+            n: {
+              type: [Number, Boolean]
+            },
+            o: [String, Boolean],
+            p: {
+              type: [String, Boolean]
+            }
           }
         }
       `
@@ -496,7 +508,27 @@ ruleTester.run('require-default-prop', rule, {
       filename: 'test.vue',
       code: `
       <script setup lang="ts">
-      const {foo = 42, bar} = defineProps<{foo?: number; bar: number}>()
+      const {foo = 42, bar, baz} = defineProps<{foo?: number; bar: number; baz?: boolean | string}>()
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps<{
+        foo?: string;
+        bar?: boolean | string;
+        qux?: number | boolean;
+        quux?: string | boolean;
+      }>(), {
+        foo: 'foo'
+      })
       </script>
       `,
       languageOptions: {
@@ -571,10 +603,6 @@ ruleTester.run('require-default-prop', rule, {
             d: {
               type: Number,
               required: false
-            },
-            e: [Boolean, String],
-            f: {
-              type: [Boolean, String],
             }
           }
         }
@@ -606,20 +634,6 @@ ruleTester.run('require-default-prop', rule, {
           line: 9,
           column: 13,
           endLine: 12,
-          endColumn: 14
-        },
-        {
-          message: `Prop 'e' requires default value to be set.`,
-          line: 13,
-          column: 13,
-          endLine: 13,
-          endColumn: 33
-        },
-        {
-          message: `Prop 'f' requires default value to be set.`,
-          line: 14,
-          column: 13,
-          endLine: 16,
           endColumn: 14
         }
       ]

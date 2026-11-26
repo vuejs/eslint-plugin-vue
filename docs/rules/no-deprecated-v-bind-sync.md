@@ -21,7 +21,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+).
+This rule reports use of the deprecated `.sync` modifier on `v-bind` directives (in Vue.js 3.0.0+).
 
 See [Migration Guide - `v-model`](https://v3-migration.vuejs.org/breaking-changes/v-model.html) for more details.
 

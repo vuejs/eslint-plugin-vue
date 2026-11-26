@@ -15,7 +15,7 @@ This is nearly never what is intended, especially in your average one-page appli
 
 ## :book: Rule Details
 
-This rule aims to warn if no type or an invalid type is used on a button type attribute.
+This rule reports `<button>` elements with a missing or invalid `type` attribute.
 
 <eslint-code-block :rules="{'vue/html-button-has-type': ['error']}">
 

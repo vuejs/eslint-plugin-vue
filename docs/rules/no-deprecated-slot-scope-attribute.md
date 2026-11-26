@@ -21,7 +21,7 @@ since: v6.1.0
 
 ## :book: Rule Details
 
-This rule reports deprecated `slot-scope` attribute in Vue.js v2.6.0+.
+This rule reports the deprecated `slot-scope` attribute in Vue.js v2.6.0+.
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-slot-scope-attribute': ['error']}">
 

@@ -14,7 +14,7 @@ since: v7.3.0
 
 ## :book: Rule Details
 
-This rule aims at enforcing new lines between multi-line properties in Vue components to help readability
+This rule enforces empty lines between multi-line properties in Vue components to help readability.
 
 <eslint-code-block fix :rules="{'vue/new-line-between-multi-line-property': ['error']}">
 

@@ -18,9 +18,9 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule aims to eliminate unnecessary and potentially confusing `<template>`.\
-In Vue.js 2.x, the `<template>` elements that have no specific directives have no effect.\
-In Vue.js 3.x, the `<template>` elements that have no specific directives render the `<template>` elements as is, but in most cases this may not be what you intended.
+This rule reports unnecessary and potentially confusing `<template>` elements.\
+In Vue.js 2.x, `<template>` elements without special directives have no effect.\
+In Vue.js 3.x, `<template>` elements without special directives are rendered as is, which is usually not what you intended.
 
 <eslint-code-block :rules="{'vue/no-lone-template': ['error']}">
 

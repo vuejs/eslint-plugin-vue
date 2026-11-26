@@ -14,7 +14,7 @@ since: v5.2.0
 
 ## :book: Rule Details
 
-This rule aims to enforce to bind methods to `v-on` or call methods on `v-on` when without arguments.
+This rule enforces whether methods without arguments are bound to `v-on` or called in `v-on`.
 
 <eslint-code-block fix :rules="{'vue/v-on-function-call': ['error']}">
 

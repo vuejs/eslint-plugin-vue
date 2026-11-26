@@ -12,7 +12,7 @@ since: v5.2.0
 
 ## :book: Rule Details
 
-This rule aims to require that the component object be directly exported.
+This rule requires the component object to be exported directly.
 
 <eslint-code-block :rules="{'vue/require-direct-export': ['error']}">
 
