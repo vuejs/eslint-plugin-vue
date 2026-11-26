@@ -235,6 +235,7 @@ For example:
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
 | [vue/no-content-outside-block] | disallow content outside of the top-level blocks | :bulb: | :warning: |
 | [vue/no-define-model-default] | disallow default values in `defineModel` |  | :warning: |
+| [vue/no-dollar-el] | disallow using `$el` |  | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-duplicate-class-names] | disallow duplication of class names in class attributes | :wrench: | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
@@ -475,6 +476,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-deprecated-v-on-native-modifier]: ./no-deprecated-v-on-native-modifier.md
 [vue/no-deprecated-v-on-number-modifiers]: ./no-deprecated-v-on-number-modifiers.md
 [vue/no-deprecated-vue-config-keycodes]: ./no-deprecated-vue-config-keycodes.md
+[vue/no-dollar-el]: ./no-dollar-el.md
 [vue/no-dupe-keys]: ./no-dupe-keys.md
 [vue/no-dupe-v-else-if]: ./no-dupe-v-else-if.md
 [vue/no-duplicate-attr-inheritance]: ./no-duplicate-attr-inheritance.md
