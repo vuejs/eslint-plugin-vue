@@ -5,19 +5,40 @@
 import utils from '../utils/index.ts'
 import type { ComponentProp, ComponentObjectProp } from '../utils/index.ts'
 
-function isBooleanIdentifier(node: Expression | undefined) {
-  return Boolean(node && node.type === 'Identifier' && node.name === 'Boolean')
+function getValueNodeBooleanType(
+  value: Expression | undefined
+): 'single' | 'multiple' | null {
+  if (!value) {
+    return null
+  }
+  if (value.type === 'Identifier' && value.name === 'Boolean') {
+    return 'single'
+  }
+  if (value.type === 'ArrayExpression') {
+    const elements = value.elements.filter(utils.isDef)
+    if (
+      elements.some(
+        (element) => element.type === 'Identifier' && element.name === 'Boolean'
+      )
+    ) {
+      return elements.length === 1 ? 'single' : 'multiple'
+    }
+  }
+  return null
 }
 
 /**
  * Detects whether given prop node is a Boolean
  */
-function isBooleanProp(prop: ComponentObjectProp): boolean {
+function getBooleanPropType(
+  prop: ComponentObjectProp
+): 'single' | 'multiple' | null {
   const value = utils.skipTSAsExpression(prop.value)
   return (
-    isBooleanIdentifier(value) ||
-    (value.type === 'ObjectExpression' &&
-      isBooleanIdentifier(utils.findProperty(value, 'type')?.value))
+    getValueNodeBooleanType(value) ??
+    (value.type === 'ObjectExpression'
+      ? getValueNodeBooleanType(utils.findProperty(value, 'type')?.value)
+      : null)
   )
 }
 
@@ -52,26 +73,29 @@ export default {
       otherDefaultProvider: (propName: string) => Expression[]
     ) {
       if (prop.type === 'object') {
-        if (!isBooleanProp(prop)) {
+        const propBooleanType = getBooleanPropType(prop)
+        if (!propBooleanType) {
           return
         }
+        const isMultipleTypes = propBooleanType === 'multiple'
         if (prop.value.type === 'ObjectExpression') {
           const defaultNode = getDefaultNode(prop.value)
           if (defaultNode) {
-            verifyDefaultExpression(defaultNode.value)
+            verifyDefaultExpression(defaultNode.value, isMultipleTypes)
           }
         }
         if (prop.propName != null) {
           for (const defaultNode of otherDefaultProvider(prop.propName)) {
-            verifyDefaultExpression(defaultNode)
+            verifyDefaultExpression(defaultNode, isMultipleTypes)
           }
         }
       } else if (prop.type === 'type') {
-        if (prop.types.length !== 1 || prop.types[0] !== 'Boolean') {
+        if (!prop.types.includes('Boolean')) {
           return
         }
+        const isMultipleTypes = prop.types.length > 1
         for (const defaultNode of otherDefaultProvider(prop.propName)) {
-          verifyDefaultExpression(defaultNode)
+          verifyDefaultExpression(defaultNode, isMultipleTypes)
         }
       }
     }
@@ -84,7 +108,17 @@ export default {
       }
     }
 
-    function verifyDefaultExpression(defaultNode: Expression) {
+    function verifyDefaultExpression(
+      defaultNode: Expression,
+      isMultipleTypes: boolean
+    ) {
+      if (
+        isMultipleTypes &&
+        (defaultNode.type !== 'Literal' ||
+          typeof defaultNode.value !== 'boolean')
+      ) {
+        return
+      }
       switch (booleanType) {
         case 'no-default': {
           context.report({
