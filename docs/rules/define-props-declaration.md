@@ -18,7 +18,7 @@ This rule enforces `defineProps` typing style which you should use `type-based` 
 
 This rule only works in setup script and `lang="ts"`.
 
-The autofix converts a runtime declaration to a type-based one only when this does not change how the props behave: each prop must be declared with native constructors (`String`, `Number`, `Boolean`, `Object`, `Array`, `Function`, `Symbol`, `Date`) or a `PropType` cast, and use no options other than `type`, `required` and `default`. Default values are moved to `withDefaults()`.
+The autofix converts a runtime declaration to a type-based one only when this does not change how the props behave: each prop must be declared with native constructors (`String`, `Number`, `Boolean`, `Object`, `Array`, `Function`, `Symbol`, `Date`) or a `PropType` cast whose type uses no imported or local generic types and is inferred by the compiler as the same constructors, and use no options other than `type`, `required` and `default`. Default values are moved to `withDefaults()`.
 
 <eslint-code-block fix :rules="{'vue/define-props-declaration': ['error']}">
 
