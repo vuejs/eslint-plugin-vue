@@ -11,19 +11,21 @@ function getExpectedNames(identifier: Identifier): string[] {
 }
 
 /**
- * Checks whether the registered name (or its PascalCase form) is already
- * declared in the file, e.g. by another import or a type.
+ * Checks whether the registered name would be valid if the component were
+ * imported under its PascalCase form, and that name is already declared in
+ * the file, e.g. by another import or a type.
  */
 function isConflictingName(
   context: RuleContext,
   node: ESNode,
   registeredName: string
 ): boolean {
-  const scope = utils.getScope(context, node)
-  return [registeredName, pascalCase(registeredName)].some((name) => {
-    const variable = findVariable(scope, name)
-    return variable != null && variable.defs.length > 0
-  })
+  const name = pascalCase(registeredName)
+  if (![name, kebabCase(name)].includes(registeredName)) {
+    return false
+  }
+  const variable = findVariable(utils.getScope(context, node), name)
+  return variable != null && variable.defs.length > 0
 }
 
 export default {

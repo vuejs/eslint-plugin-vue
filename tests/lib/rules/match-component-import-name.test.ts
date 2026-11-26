@@ -172,6 +172,25 @@ tester.run('match-component-import-name', rule, {
           endColumn: 68
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import FooBar from './FooBar.vue'
+      export default { components: { fooBar: FooBar } }
+      </script>
+      `,
+      options: [{ ignoreConflictingNames: true }],
+      errors: [
+        {
+          message: 'Component alias fooBar should be one of: FooBar, foo-bar.',
+          line: 4,
+          column: 38,
+          endLine: 4,
+          endColumn: 52
+        }
+      ]
     }
   ]
 })
