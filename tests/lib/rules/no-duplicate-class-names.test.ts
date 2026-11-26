@@ -182,6 +182,15 @@ tester.run('no-duplicate-class-names', rule, {
       // `classList` splits on ASCII whitespace only
       filename: 'class-non-ascii-whitespace.vue',
       code: String.raw`<template><div :class="[${'`'}a\va${'`'}, 'b\u00a0b', ${'`'}c\ufeff${'`'} + 'c']"></div></template>`
+    },
+    {
+      filename: 'class-binary-typescript-glued.vue',
+      code: `<template><div :class="'a a' + (x as string)"></div></template>`,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
   invalid: [
@@ -1151,6 +1160,44 @@ tester.run('no-duplicate-class-names', rule, {
           column: 14,
           endLine: 5,
           endColumn: 5
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-template-literal-typescript.vue',
+      code: '<template><div :class="`${y as any} b b ${z!}`"></div></template>',
+      output: '<template><div :class="`${y as any} b ${z!}`"></div></template>',
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: "Duplicate class name 'b'.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-logical-typescript.vue',
+      code: `<template><div :class="(c! && 'a b') + ' a'"></div></template>`,
+      output: null,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 36
         }
       ]
     }
