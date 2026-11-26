@@ -2,8 +2,9 @@
  * @fileoverview enforce ordering of attributes
  * @author Erin Depew
  */
+import assert from 'node:assert'
 import rule from '../../../lib/rules/attributes-order'
-import { RuleTester } from '../../eslint-compat'
+import { RuleTester, Linter } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
@@ -813,6 +814,57 @@ tester.run('attributes-order', rule, {
       options: [
         { order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING', 'OTHER_ATTR'] }
       ]
+    },
+    {
+      // `_` is not `-`
+      filename: 'test.vue',
+      code: '<template><div bar="bar" data_test="foo"></div></template>',
+      options: [{ order: ['data-test', 'OTHER_ATTR'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" data_test="foo"></MyComp></template>',
+      options: [{ order: ['data-test', 'OTHER_ATTR'] }]
+    },
+    {
+      // on HTML elements `v-bind` does not hyphenate, so this sets `datatestid`
+      filename: 'test.vue',
+      code: '<template><div bar="bar" :dataTestid="foo"></div></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }]
+    },
+    {
+      // props are camelized: `dataTestId` is `data-test-id`, not `data-testid`
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" :dataTestId="foo"></MyComp></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }]
+    },
+    {
+      // props are case-sensitive
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" DATA-TESTID="foo"></MyComp></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }]
+    },
+    {
+      // attribute names of SVG and MathML elements are case-sensitive
+      filename: 'test.vue',
+      code: '<template><svg bar="bar" viewbox="0 0 1 1"></svg></template>',
+      options: [{ order: ['viewBox', 'OTHER_ATTR'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><svg bar="bar" :view-box="box"></svg></template>',
+      options: [{ order: ['viewBox', 'OTHER_ATTR'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><math bar="bar" DISPLAY="block"></math></template>',
+      options: [{ order: ['display', 'OTHER_ATTR'] }]
+    },
+    {
+      // slot props are camelized like component props, so they are case-sensitive
+      filename: 'test.vue',
+      code: '<template><slot bar="bar" ROW-KEY="id"></slot></template>',
+      options: [{ order: ['row-key', 'OTHER_ATTR'] }]
     }
   ],
 
@@ -2922,6 +2974,174 @@ tester.run('attributes-order', rule, {
           ]
         }
       ]
+    },
+    {
+      // attribute names of HTML elements are case-insensitive
+      filename: 'test.vue',
+      code: '<template><div bar="bar" data-testId="foo"></div></template>',
+      output: '<template><div data-testId="foo" bar="bar"></div></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute "data-testId" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div bar="bar" :DATA-TESTID="foo"></div></template>',
+      output: '<template><div :DATA-TESTID="foo" bar="bar"></div></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute ":DATA-TESTID" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div bar="bar" data-testid="foo"></div></template>',
+      output: '<template><div data-testid="foo" bar="bar"></div></template>',
+      options: [{ order: ['DATA-TESTID', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute "data-testid" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      // props are matched like Vue does, camelCase or kebab-case
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" :dataTestid="foo"></MyComp></template>',
+      output:
+        '<template><MyComp :dataTestid="foo" bar="bar"></MyComp></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute ":dataTestid" should go before "bar".',
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" data-test-id="foo"></MyComp></template>',
+      output:
+        '<template><MyComp data-test-id="foo" bar="bar"></MyComp></template>',
+      options: [{ order: ['dataTestId', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute "data-test-id" should go before "bar".',
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 47
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><svg bar="bar" viewBox="0 0 1 1"></svg></template>',
+      output: '<template><svg viewBox="0 0 1 1" bar="bar"></svg></template>',
+      options: [{ order: ['viewBox', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute "viewBox" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      // `.camel` binds the camelized name
+      filename: 'test.vue',
+      code: '<template><svg bar="bar" :view-box.camel="box"></svg></template>',
+      output:
+        '<template><svg :view-box.camel="box" bar="bar"></svg></template>',
+      options: [{ order: ['viewBox', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute ":view-box.camel" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 47
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><slot bar="bar" :rowKey="id"></slot></template>',
+      output: '<template><slot :rowKey="id" bar="bar"></slot></template>',
+      options: [{ order: ['row-key', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute ":rowKey" should go before "bar".',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
     }
   ]
+})
+
+describe('`order` option of `vue/attributes-order`', () => {
+  const linter = new Linter()
+  function verify(order: unknown[]) {
+    return linter.verify(
+      '<template><div></div></template>',
+      {
+        files: ['**/*.vue'],
+        plugins: { vue: { rules: { 'attributes-order': rule } } },
+        languageOptions: { parser: vueEslintParser },
+        rules: { 'vue/attributes-order': ['error', { order }] }
+      },
+      'test.vue'
+    )
+  }
+
+  for (const name of [
+    'v-if',
+    'v-bind:foo',
+    ':foo',
+    '.foo',
+    'v-on:click',
+    '@click',
+    '#default',
+    ' foo',
+    'foo ',
+    'OTHER_ATTRS',
+    'ID'
+  ]) {
+    it(`rejects ${JSON.stringify(name)}`, () => {
+      assert.throws(() => verify([name, 'OTHER_ATTR']))
+      assert.throws(() => verify([[name, 'OTHER_ATTR']]))
+    })
+  }
+
+  for (const name of ['data-test', 'rowKey', 'xlink:href', 'aria-label']) {
+    it(`accepts ${JSON.stringify(name)}`, () => {
+      assert.deepStrictEqual(verify([name, 'OTHER_ATTR']), [])
+      assert.deepStrictEqual(verify([[name, 'OTHER_ATTR']]), [])
+    })
+  }
 })

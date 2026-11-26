@@ -157,7 +157,7 @@ In Vue 3, a binding that comes after `v-bind="object"` overrides the same key in
 }
 ```
 
-Besides the group names, `order` accepts attribute names, on their own or together with group names in an array. A name matches the attribute and its `v-bind` form, regardless of camelCase or kebab-case (`row-key` matches `row-key="id"`, `:row-key="id"` and `:rowKey="id"`), and such an attribute is ordered by its name instead of its group.
+Besides the group names, `order` accepts attribute names, on their own or together with group names in an array. A name matches the attribute and its `v-bind` form (so it is written without `:`, and directives such as `v-if` or `@click` are not accepted), and such an attribute is ordered by its name instead of its group. Names are compared the way Vue treats them: on components and `<slot>` regardless of camelCase or kebab-case, as props are (`row-key` matches `row-key="id"`, `:row-key="id"` and `:rowKey="id"`), on HTML elements regardless of letter case (`data-testid` matches `data-testId="id"`, but not `:dataTestid="id"`), and on SVG and MathML elements exactly (`viewBox` matches `:view-box.camel="box"`, but not `viewbox="0 0 1 1"`). If a name is given more than once, also in another spelling such as `row-key` and `rowKey`, the last position is used. Names written only in capital letters and `_`, such as `ID`, are read as group names and are not allowed.
 
 ### `"alphabetical": true`
 
