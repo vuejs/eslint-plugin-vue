@@ -15,7 +15,7 @@ since: v9.7.0
 
 ## :book: Rule Details
 
-This rule aims to enforce a consistent style in `v-on` event handlers:
+This rule enforces a consistent style in `v-on` event handlers:
 
 ```vue
 <!-- Method handler: -->

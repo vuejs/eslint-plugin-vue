@@ -12,7 +12,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule disallows to pass multiple objects into array to class.
+This rule disallows passing multiple objects in an array to `class`.
 
 <eslint-code-block :rules="{'vue/no-multiple-objects-in-class': ['error']}">
 

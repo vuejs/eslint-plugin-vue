@@ -30,10 +30,10 @@ This rule checks whether every `v-if` directive is valid.
 
 This rule reports `v-if` directives in the following cases:
 
-- The directive has that argument. E.g. `<div v-if:aaa="foo"></div>`
-- The directive has that modifier. E.g. `<div v-if.bbb="foo"></div>`
-- The directive does not have that attribute value. E.g. `<div v-if></div>`
-- The directive is on the elements which have `v-else`/`v-else-if` directives. E.g. `<div v-else v-if="foo"></div>`
+- The directive has an argument. E.g. `<div v-if:aaa="foo"></div>`
+- The directive has a modifier. E.g. `<div v-if.bbb="foo"></div>`
+- The directive does not have an attribute value. E.g. `<div v-if></div>`
+- The directive is on an element that has a `v-else`/`v-else-if` directive. E.g. `<div v-else v-if="foo"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-if': ['error']}">
 
@@ -62,7 +62,7 @@ This rule reports `v-if` directives in the following cases:
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
+This rule does not check syntax errors in directives because the [vue/no-parsing-error] rule checks them.
 :::
 
 ## :wrench: Options

@@ -14,7 +14,7 @@ The rule prevents Boolean props from having a default value.
 
 ## :book: Rule Details
 
-The rule is to enforce the HTML standard of always defaulting boolean attributes to false.
+This rule enforces the HTML standard of always defaulting boolean attributes to false.
 
 <eslint-code-block :rules="{'vue/no-boolean-default': ['error']}">
 

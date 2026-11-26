@@ -18,7 +18,7 @@ since: v4.7.0
 
 ## :book: Rule Details
 
-This rule reports all uses of `v-html` directive in order to reduce the risk of injecting potentially unsafe / unescaped html into the browser leading to Cross-Site Scripting (XSS) attacks.
+This rule reports all uses of `v-html` directive in order to reduce the risk of injecting potentially unsafe / unescaped HTML into the browser leading to Cross-Site Scripting (XSS) attacks.
 
 <eslint-code-block :rules="{'vue/no-v-html': ['error']}">
 

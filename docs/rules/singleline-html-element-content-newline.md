@@ -66,7 +66,8 @@ This rule enforces a line break before and after the contents of a singleline el
     "ignoreWhenNoAttributes": true,
     "ignoreWhenEmpty": true,
     "ignores": ["pre", "textarea", "router-link", "nuxt-link", ...INLINE_ELEMENTS],
-    "externalIgnores": []
+    "externalIgnores": [],
+    "ignoreComments": false
   }]
 }
 ```
@@ -79,6 +80,8 @@ This rule enforces a line break before and after the contents of a singleline el
     default `["pre", "textarea", "router-link", "nuxt-link", ...INLINE_ELEMENTS]`
 - `externalIgnores` ... the configuration for external element names to ignore line breaks style, it allows avoiding overwrite the default value of ignores.
     default `[]`
+- `ignoreComments` ... if `true`, HTML comments right after the opening tag or right before the closing tag are not treated as content, so an element that contains only comments is treated like an empty element.
+    default `false`
 
 ::: info
   All inline non void elements can be found [here](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/inline-non-void-elements.json).
@@ -113,6 +116,22 @@ This rule enforces a line break before and after the contents of a singleline el
   <tr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
 
   <div><!-- comment --></div>
+</template>
+```
+
+</eslint-code-block>
+
+### `"ignoreComments": true`
+
+<eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error', {'ignoreComments': true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div attr><!-- comment --></div>
+
+  <!-- ✗ BAD -->
+  <div attr><!-- comment -->content</div>
 </template>
 ```
 

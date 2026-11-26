@@ -60,7 +60,7 @@ export default {
 
 </eslint-code-block>
 
-Also, destructuring in root scope of `setup()` should error, but ok inside nested callbacks or returned render functions:
+Also, destructuring in the root scope of `setup()` is reported, but destructuring inside nested callbacks or returned render functions is allowed:
 
 <eslint-code-block :rules="{'vue/no-setup-props-destructure': ['error']}">
 

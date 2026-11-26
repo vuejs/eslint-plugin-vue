@@ -18,7 +18,7 @@ since: v9.13.0
   - `"plugin:vue/strongly-recommended"`
   - `"plugin:vue/recommended"`
 
-This rule checks whether `defineOptions` compiler macro is valid.
+This rule checks whether the `defineOptions` compiler macro is valid.
 
 ## :book: Rule Details
 

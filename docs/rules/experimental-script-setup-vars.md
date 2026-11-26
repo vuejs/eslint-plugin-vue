@@ -22,7 +22,7 @@ This rule only has an effect when the `no-undef` rule is enabled.
 
 ## :book: Rule Details
 
-Without this rule this code triggers warning:
+Without this rule, this code triggers a warning:
 
 <eslint-code-block :rules="{'no-undef': ['error'], 'vue/experimental-script-setup-vars': ['error']}">
 
@@ -37,7 +37,7 @@ emit('foo')
 
 </eslint-code-block>
 
-After turning on, `props` and `emit` are being marked as defined and `no-undef` rule doesn't report an issue.
+After turning it on, `props` and `emit` are marked as defined and the `no-undef` rule doesn't report an issue.
 
 ## :rocket: Version
 
