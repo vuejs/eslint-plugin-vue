@@ -25,12 +25,34 @@ const ITERATION_METHODS = new Set([
   'reduceRight'
 ])
 
+/** `foo as T`, `foo satisfies T`, `<T>foo` and `foo!` */
+const TS_WRAPPERS = new Set([
+  'TSAsExpression',
+  'TSNonNullExpression',
+  'TSSatisfiesExpression',
+  'TSTypeAssertion'
+])
+
+/**
+ * Skips TypeScript wrappers and `ChainExpression`, which can be nested in
+ * each other, e.g. `foo?.bar()!`.
+ */
+function skipWrappers(node: ESNode): ESNode {
+  while (TS_WRAPPERS.has(node.type) || node.type === 'ChainExpression') {
+    node = (node as TSAsExpression | ChainExpression).expression
+  }
+  return node
+}
+
 /**
  * Checks whether the value of the given expression is discarded,
  * e.g. `foo()` as a statement, `void foo()` or `a && foo()` as a statement.
  */
 function isResultUnused(node: Expression): boolean {
   const parent = node.parent
+  if (TS_WRAPPERS.has(parent.type)) {
+    return isResultUnused(parent as TSAsExpression)
+  }
   switch (parent.type) {
     case 'ExpressionStatement': {
       return true
@@ -70,6 +92,33 @@ function isIterationCall(node: CallExpression): boolean {
   }
   const name = utils.getStaticPropertyName(callee)
   return Boolean(name && ITERATION_METHODS.has(name))
+}
+
+/**
+ * Checks whether the given call is in a `try` block that has a `catch` clause,
+ * e.g. `try { JSON.parse(text) } catch {}`. Such calls are made to check
+ * whether they throw.
+ */
+function isInTryBlockWithCatch(
+  node: CallExpression,
+  getterBody: BlockStatement | Expression
+): boolean {
+  let child: ASTNode = node
+  while (child !== getterBody) {
+    const parent: ASTNode | null = child.parent
+    if (!parent) {
+      return false
+    }
+    if (
+      parent.type === 'TryStatement' &&
+      parent.block === child &&
+      parent.handler
+    ) {
+      return true
+    }
+    child = parent
+  }
+  return false
 }
 
 export default {
@@ -120,6 +169,68 @@ export default {
     }
 
     /**
+     * Checks whether the given expression is `this` or a value declared
+     * outside the computed getter, or a member of it,
+     * e.g. `this.list`, `store.state` or `emit`.
+     */
+    function isOuterValue(
+      node: ESNode,
+      getterBody: BlockStatement | Expression,
+      checked: Set<Variable>
+    ): boolean {
+      let root = skipWrappers(node)
+      while (root.type === 'MemberExpression') {
+        root = skipWrappers(root.object)
+      }
+      if (root.type === 'ThisExpression') {
+        return true
+      }
+      if (root.type !== 'Identifier') {
+        return false
+      }
+      const variable = findVariable(utils.getScope(context, root), root)
+      return Boolean(
+        variable &&
+        variable.defs.length > 0 &&
+        (variable.defs.every((def) => !utils.isInRange(getterBody, def.node)) ||
+          isAliasOfOuterValue(variable, getterBody, checked))
+      )
+    }
+
+    /**
+     * Checks whether the given variable declared in the computed getter
+     * only refers to `this` or an outer value, e.g. `const vm = this`,
+     * `const { $emit } = this` or `for (const item of this.items)`.
+     * Reassigned variables are not checked.
+     */
+    function isAliasOfOuterValue(
+      variable: Variable,
+      getterBody: BlockStatement | Expression,
+      checked = new Set<Variable>()
+    ): boolean {
+      if (checked.has(variable) || variable.defs.length !== 1) {
+        return false
+      }
+      checked.add(variable)
+      const def = variable.defs[0]
+      if (
+        def.type !== 'Variable' ||
+        variable.references.some(
+          (reference) => reference.isWrite() && !reference.init
+        )
+      ) {
+        return false
+      }
+      const loop = def.parent.parent
+      const value =
+        (loop.type === 'ForOfStatement' || loop.type === 'ForInStatement') &&
+        loop.left === def.parent
+          ? loop.right
+          : def.node.init
+      return Boolean(value && isOuterValue(value, getterBody, checked))
+    }
+
+    /**
      * Checks whether the given call only changes a variable declared inside
      * the computed getter, e.g. `list.push(x)` or `Object.assign(obj, x)`
      * with `const list = []` and `const obj = {}`.
@@ -147,7 +258,8 @@ export default {
       const variable = findVariable(utils.getScope(context, target), target)
       return Boolean(
         variable &&
-        variable.defs.some((def) => utils.isInRange(getterBody, def.node))
+        variable.defs.some((def) => utils.isInRange(getterBody, def.node)) &&
+        !isAliasOfOuterValue(variable, getterBody)
       )
     }
 
@@ -177,7 +289,8 @@ export default {
         )
         if (
           (!computedProperty && !isComputedFunction) ||
-          isCalledOnLocalVariable(node, targetBody)
+          isCalledOnLocalVariable(node, targetBody) ||
+          isInTryBlockWithCatch(node, targetBody)
         ) {
           return
         }

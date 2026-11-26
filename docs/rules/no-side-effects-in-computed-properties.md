@@ -30,7 +30,7 @@ This rule is aimed at preventing the code which makes side effects in computed p
 
 It is considered a very bad practice to introduce side effects inside computed properties and functions. It makes the code not predictable and hard to understand.
 
-Besides mutations, this rule reports function calls whose result is not used, such as `this.$emit()` or `console.log()`, because they are only made for their side effects. Calls on variables declared inside the getter (e.g. `list.push()`) and iteration calls like `forEach()` are allowed.
+Besides mutations, this rule reports function calls whose result is not used, such as `this.$emit()` or `console.log()`, because they are only made for their side effects. Calls on variables declared inside the getter (e.g. `list.push()`), unless the variable just refers to `this` or a value declared outside the getter (e.g. `const vm = this` or `const { $emit } = this`), iteration calls like `forEach()` and calls in a `try` block with a `catch` clause (e.g. `JSON.parse()` to check whether it throws) are allowed.
 
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
 
