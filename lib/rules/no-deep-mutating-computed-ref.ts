@@ -90,6 +90,14 @@ function getGetter(computedCall: CallExpression): FunctionNode | null {
 }
 
 /**
+ * The getter receives the previous value, e.g. `(prev) => ({ ...prev })`,
+ * so writes to the returned object may survive the next evaluation.
+ */
+function hasPreviousValueParam(getter: FunctionNode): boolean {
+  return getter.params.length > 0
+}
+
+/**
  * Collects the object and array literals returned by the getter.
  * Returns `null` if any return value is not such a literal,
  * e.g. `return store.user` or `return reactive({})`.
@@ -160,17 +168,22 @@ function isLiteralAtPath(
     if (name == null) {
       return false
     }
-    // The last matching property wins, unless a later spread may override it.
-    let property: Property | SpreadElement | null = null
+    // The last matching property wins, unless a later spread or computed key
+    // with an unknown name, e.g. `[key]`, may override it.
+    let property: Property | null = null
     for (const candidate of current.properties) {
-      if (
-        candidate.type === 'SpreadElement' ||
-        utils.getStaticPropertyName(candidate) === name
-      ) {
+      if (candidate.type === 'SpreadElement') {
+        property = null
+        continue
+      }
+      const candidateName = utils.getStaticPropertyName(candidate)
+      if (candidateName == null) {
+        property = null
+      } else if (candidateName === name) {
         property = candidate
       }
     }
-    if (!property || property.type !== 'Property') {
+    if (!property) {
       return false
     }
     const next = asLiteral(property.value)
@@ -184,13 +197,29 @@ function isLiteralAtPath(
 
 /**
  * Objects with getters or setters can forward writes to reactive state.
+ * So can objects with `__proto__: proto`, as `proto` may have setters.
  */
 function hasAccessor(literal: LiteralNode): boolean {
   return (
     literal.type === 'ObjectExpression' &&
     literal.properties.some(
-      (property) => property.type === 'Property' && property.kind !== 'init'
+      (property) =>
+        property.type === 'Property' &&
+        (property.kind !== 'init' || isPrototypeSetter(property))
     )
+  )
+}
+
+/**
+ * Checks whether the property sets the prototype, e.g. `{ __proto__: proto }`.
+ * Computed, shorthand and method `__proto__` keys define own properties.
+ */
+function isPrototypeSetter(property: Property): boolean {
+  return (
+    !property.computed &&
+    !property.shorthand &&
+    !property.method &&
+    utils.getStaticPropertyName(property) === '__proto__'
   )
 }
 
@@ -286,7 +315,9 @@ export default {
           }
           const getter = getGetter(node)
           const literals =
-            getter && getReturnedLiterals(getter, sourceCode.visitorKeys)
+            getter &&
+            !hasPreviousValueParam(getter) &&
+            getReturnedLiterals(getter, sourceCode.visitorKeys)
           if (!literals) {
             continue
           }

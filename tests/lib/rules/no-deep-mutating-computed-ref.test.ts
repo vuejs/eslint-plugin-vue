@@ -187,6 +187,104 @@ tester.run('no-deep-mutating-computed-ref', rule, {
       language.value.selected = 'German'
       </script>
       `
+    },
+    // a later computed key with an unknown name may override the property
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { reactive, computed } from 'vue'
+      const props = defineProps(['key'])
+      const state = reactive({ form: { name: '' }, list: [] })
+      const a = computed(() => ({ form: {}, [props.key]: state.form }))
+      const b = computed(() => ({ list: [], [\`\${props.key}\`]: state.list }))
+      const c = computed(() => ({ outer: { form: {}, [props.key]: state.form } }))
+      a.value.form.name = 'x'
+      b.value.list.push(1)
+      c.value.outer.form.name = 'x'
+      </script>
+      `
+    },
+    // a later spread may override the property
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { reactive, computed } from 'vue'
+      const state = reactive({ form: { name: '' } })
+      const options = computed(() => ({ form: {}, ...state }))
+      options.value.form.name = 'x'
+      </script>
+      `
+    },
+    // the last duplicate key wins
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { reactive, computed } from 'vue'
+      const state = reactive({ form: { name: '' } })
+      const options = computed(() => ({ form: {}, form: state.form }))
+      const other = computed(() => ({ form: {}, ['form']: state.form }))
+      options.value.form.name = 'x'
+      other.value.form.name = 'x'
+      </script>
+      `
+    },
+    // elements of returned arrays are not followed
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { reactive, computed } from 'vue'
+      const state = reactive({ list: [{ name: '' }] })
+      const list = computed(() => [{ name: '' }, ...state.list])
+      const holes = computed(() => [, { name: '' }])
+      list.value[0].name = 'x'
+      list.value[1].name = 'x'
+      holes.value[1].name = 'x'
+      </script>
+      `
+    },
+    // the getter may reuse the previous value
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { reactive, computed } from 'vue'
+      const state = reactive({ a: { n: 0 } })
+      const a = computed((prev) => ({ ...prev, c: state.a.n }))
+      const b = computed((prev) => ({ form: { ...prev?.form }, c: state.a.n }))
+      const c = computed({
+        get(prev) {
+          return { ...prev, c: state.a.n }
+        },
+        set() {}
+      })
+      a.value.foo = 1
+      b.value.form.name = 'x'
+      c.value.foo = 1
+      </script>
+      `
+    },
+    // the prototype may have setters that forward writes to reactive state
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { reactive, computed } from 'vue'
+      const state = reactive({ name: '' })
+      const proto = {
+        set name(value) {
+          state.name = value
+        }
+      }
+      const a = computed(() => ({ __proto__: proto }))
+      const b = computed(() => ({ form: { '__proto__': proto } }))
+      a.value.name = 'x'
+      b.value.form.name = 'x'
+      </script>
+      `
     }
   ],
   invalid: [
@@ -458,6 +556,110 @@ tester.run('no-deep-mutating-computed-ref', rule, {
           column: 7,
           endLine: 8,
           endColumn: 30
+        }
+      ]
+    },
+    // overrides by earlier keys and spreads, statically known computed keys
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { reactive, computed } from 'vue'
+      const props = defineProps(['key'])
+      const state = reactive({ form: { name: '' } })
+      const a = computed(() => ({ [props.key]: state.form, form: {} }))
+      const b = computed(() => ({ ...state, form: {} }))
+      const c = computed(() => ({ form: state.form, form: {} }))
+      const d = computed(() => ({ ['form']: {}, [\`list\`]: [] }))
+      const e = computed(() => ({ form: { name: '', [props.key]: state.form } }))
+      a.value.form.name = 'x'
+      b.value.form.name = 'x'
+      c.value.form.name = 'x'
+      d.value.form.name = 'x'
+      d.value.list.push(1)
+      e.value.form.name = 'x'
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'unexpected',
+          data: { name: 'a' },
+          line: 11,
+          column: 7,
+          endLine: 11,
+          endColumn: 30
+        },
+        {
+          messageId: 'unexpected',
+          data: { name: 'b' },
+          line: 12,
+          column: 7,
+          endLine: 12,
+          endColumn: 30
+        },
+        {
+          messageId: 'unexpected',
+          data: { name: 'c' },
+          line: 13,
+          column: 7,
+          endLine: 13,
+          endColumn: 30
+        },
+        {
+          messageId: 'unexpected',
+          data: { name: 'd' },
+          line: 14,
+          column: 7,
+          endLine: 14,
+          endColumn: 30
+        },
+        {
+          messageId: 'unexpected',
+          data: { name: 'd' },
+          line: 15,
+          column: 7,
+          endLine: 15,
+          endColumn: 27
+        },
+        {
+          messageId: 'unexpected',
+          data: { name: 'e' },
+          line: 16,
+          column: 7,
+          endLine: 16,
+          endColumn: 30
+        }
+      ]
+    },
+    // computed and shorthand `__proto__` keys define own properties
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { computed } from 'vue'
+      const __proto__ = { name: '' }
+      const a = computed(() => ({ ['__proto__']: __proto__ }))
+      const b = computed(() => ({ __proto__ }))
+      a.value.name = 'x'
+      b.value.name = 'x'
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'unexpected',
+          data: { name: 'a' },
+          line: 7,
+          column: 7,
+          endLine: 7,
+          endColumn: 25
+        },
+        {
+          messageId: 'unexpected',
+          data: { name: 'b' },
+          line: 8,
+          column: 7,
+          endLine: 8,
+          endColumn: 25
         }
       ]
     }
