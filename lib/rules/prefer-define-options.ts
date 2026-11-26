@@ -59,7 +59,17 @@ export default {
     function buildFix(
       node: ExportDefaultDeclaration,
       scriptSetup: VElement
-    ): (fixer: RuleFixer) => Fix[] {
+    ): ((fixer: RuleFixer) => Fix[]) | null {
+      const declaration = utils.skipTSAsExpression(node.declaration)
+      if (
+        declaration.type === 'ObjectExpression' &&
+        ['props', 'emits', 'expose', 'slots'].some((name) =>
+          utils.findProperty(declaration, name)
+        )
+      ) {
+        return null
+      }
+
       return (fixer) => {
         const sourceCode = context.sourceCode
 
