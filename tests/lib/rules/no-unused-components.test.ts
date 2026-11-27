@@ -485,6 +485,69 @@ tester.run('no-unused-components', rule, {
         }
         </script>
       `
+    },
+
+    // Vue tries the used name, its camelized form and its capitalized camelized form
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <myCoolComponent />
+        </template>
+        <script>
+          export default {
+            components: {
+              MyCoolComponent
+            },
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <my-cool-component />
+        </template>
+        <script>
+          export default {
+            components: {
+              myCoolComponent
+            },
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component is="my-cool-component" />
+        </template>
+        <script>
+          export default {
+            components: {
+              myCoolComponent
+            },
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component :is="null" />
+          <my-comp />
+        </template>
+        <script>
+          export default {
+            components: {
+              MyComp
+            },
+          }
+        </script>
+      `
     }
   ],
   invalid: [
@@ -720,6 +783,130 @@ tester.run('no-unused-components', rule, {
           column: 15,
           endLine: 14,
           endColumn: 18
+        }
+      ]
+    },
+
+    // Vue does not lower the first letter, so these do not resolve to the registered component
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyCoolComponent />
+        </template>
+        <script>
+          export default {
+            components: {
+              myCoolComponent
+            },
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "myCoolComponent" component has been registered but not used.',
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <The-component />
+        </template>
+        <script>
+          export default {
+            components: {
+              theComponent
+            },
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "theComponent" component has been registered but not used.',
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 27
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Foo />
+        </template>
+        <script>
+          export default {
+            components: {
+              foo
+            },
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'The "foo" component has been registered but not used.',
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 18
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component is="Foo" />
+        </template>
+        <script>
+          export default {
+            components: {
+              foo
+            },
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'The "foo" component has been registered but not used.',
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 18
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component :is="1" />
+        </template>
+        <script>
+          export default {
+            components: {
+              MyComp
+            },
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'The "MyComp" component has been registered but not used.',
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 21
         }
       ]
     }
