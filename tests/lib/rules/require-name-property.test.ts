@@ -66,6 +66,18 @@ ruleTester.run('require-name-property', rule, {
         parser: vueEslintParser,
         ...languageOptions
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup>defineOptions({ name: 'IssaName' })</script>`,
+      options: [{ checkScriptSetup: true }],
+      languageOptions: { parser: vueEslintParser, ...languageOptions }
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>export default { name: 'IssaName' }</script><script setup></script>`,
+      options: [{ checkScriptSetup: true }],
+      languageOptions: { parser: vueEslintParser, ...languageOptions }
     }
   ],
 
@@ -294,6 +306,54 @@ ruleTester.run('require-name-property', rule, {
       `
             }
           ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup>defineOptions({ inheritAttrs: false })</script>`,
+      options: [{ checkScriptSetup: true }],
+      languageOptions: { parser: vueEslintParser, ...languageOptions },
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 53
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup>const foo = 1</script>`,
+      options: [{ checkScriptSetup: true }],
+      languageOptions: { parser: vueEslintParser, ...languageOptions },
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 15
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup>
+import { defineComponent } from 'vue'
+const Child = defineComponent({ name: 'Child' })
+</script>`,
+      options: [{ checkScriptSetup: true }],
+      languageOptions: { parser: vueEslintParser, ...languageOptions },
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 15
         }
       ]
     }
