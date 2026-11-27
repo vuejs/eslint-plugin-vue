@@ -82,6 +82,7 @@ import noDeprecatedEventsApi from './rules/no-deprecated-events-api.ts'
 import noDeprecatedFilter from './rules/no-deprecated-filter.ts'
 import noDeprecatedFunctionalTemplate from './rules/no-deprecated-functional-template.ts'
 import noDeprecatedHtmlElementIs from './rules/no-deprecated-html-element-is.ts'
+import noDeprecatedHtmlElements from './rules/no-deprecated-html-elements.ts'
 import noDeprecatedInlineTemplate from './rules/no-deprecated-inline-template.ts'
 import noDeprecatedModelDefinition from './rules/no-deprecated-model-definition.ts'
 import noDeprecatedPropsDefaultThis from './rules/no-deprecated-props-default-this.ts'
@@ -343,6 +344,7 @@ export default {
     'no-deprecated-filter': noDeprecatedFilter,
     'no-deprecated-functional-template': noDeprecatedFunctionalTemplate,
     'no-deprecated-html-element-is': noDeprecatedHtmlElementIs,
+    'no-deprecated-html-elements': noDeprecatedHtmlElements,
     'no-deprecated-inline-template': noDeprecatedInlineTemplate,
     'no-deprecated-model-definition': noDeprecatedModelDefinition,
     'no-deprecated-props-default-this': noDeprecatedPropsDefaultThis,

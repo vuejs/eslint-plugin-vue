@@ -236,6 +236,15 @@ tester.run('singleline-html-element-content-newline', rule, {
           externalIgnores: ['IgnoreTag']
         }
       ]
+    },
+    // ignoreComments
+    {
+      code: `
+        <template>
+          <div attr><!-- comment --></div>
+          <div attr><!-- a --><!-- b --></div>
+        </template>`,
+      options: [{ ignoreComments: true }]
     }
   ],
   invalid: [
@@ -725,6 +734,122 @@ content
           column: 37,
           endLine: 3,
           endColumn: 37
+        }
+      ]
+    },
+
+    // ignoreComments
+    {
+      code: `
+        <template>
+          <div attr><!-- comment --></div>
+        </template>`,
+      output: `
+        <template>
+          <div attr>
+<!-- comment -->
+</div>
+        </template>`,
+      errors: [
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 21
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 3,
+          column: 37,
+          endLine: 3,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div attr><!-- comment -->content</div>
+        </template>`,
+      output: `
+        <template>
+          <div attr><!-- comment -->
+content
+</div>
+        </template>`,
+      options: [{ ignoreComments: true }],
+      errors: [
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 37,
+          endLine: 3,
+          endColumn: 37
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 3,
+          column: 44,
+          endLine: 3,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div attr>content <!-- comment --></div>
+        </template>`,
+      output: `
+        <template>
+          <div attr>
+content
+<!-- comment --></div>
+        </template>`,
+      options: [{ ignoreComments: true }],
+      errors: [
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 21
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div attr> <!-- comment --> </div>
+        </template>`,
+      output: `
+        <template>
+          <div attr> <!-- comment -->
+</div>
+        </template>`,
+      options: [{ ignoreComments: true }],
+      errors: [
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 39
         }
       ]
     }
