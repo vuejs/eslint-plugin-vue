@@ -1864,15 +1864,35 @@ const utils = {
   },
 
   /**
+   * Get the MemberExpression that reads a property of the given node.
+   *
+   * TypeScript wrappers such as `(foo as T).bar` and `foo!.bar` are skipped.
+   */
+  getParentMemberExpression(node: ASTNode): MemberExpression | null {
+    let target = node
+    while (target.parent && TS_WRAPPER_TYPES.has(target.parent.type)) {
+      target = target.parent
+    }
+    const parent = target.parent
+    return parent &&
+      parent.type === 'MemberExpression' &&
+      parent.object === target
+      ? parent
+      : null
+  },
+
+  /**
    * Get the chaining nodes of MemberExpression.
+   *
+   * `ChainExpression` and TypeScript wrappers such as `(foo as T)` and `foo!` are skipped.
    */
   getMemberChaining(node: ESNode): [ESNode, ...MemberExpression[]] {
     const nodes: MemberExpression[] = []
-    let n = skipChainExpression(node)
+    let n = skipChainAndTSWrapperExpression(node)
 
     while (n.type === 'MemberExpression') {
       nodes.push(n)
-      n = skipChainExpression(n.object)
+      n = skipChainAndTSWrapperExpression(n.object)
     }
 
     return [n, ...nodes.reverse()]
@@ -2020,7 +2040,7 @@ const utils = {
     pathNodes: MemberExpression[]
   } | null {
     const pathNodes: MemberExpression[] = []
-    let node: MemberExpression | Identifier | ChainExpression = props
+    let node: MemberExpression | Identifier | ChainOrTSWrapper = props
     let target = node.parent
     while (true) {
       const step = this.findMutatingStep(node, target, pathNodes)
@@ -2036,7 +2056,7 @@ const utils = {
    * Resolve a single step of the parent chain walk in `findMutating`.
    */
   findMutatingStep(
-    node: MemberExpression | Identifier | ChainExpression,
+    node: MemberExpression | Identifier | ChainOrTSWrapper,
     target: ASTNode,
     pathNodes: MemberExpression[]
   ):
@@ -2050,7 +2070,7 @@ const utils = {
       }
     | {
         done: false
-        node: MemberExpression | ChainExpression
+        node: MemberExpression | ChainOrTSWrapper
         target: ASTNode
       } {
     switch (target.type) {
@@ -2114,8 +2134,17 @@ const utils = {
         }
         return { done: true, result: null }
       }
-      case 'ChainExpression': {
-        return { done: false, node: target, target: target.parent }
+      case 'ChainExpression':
+      case 'TSAsExpression':
+      case 'TSSatisfiesExpression':
+      case 'TSNonNullExpression':
+      case 'TSTypeAssertion': {
+        // (this.xxx as T), this.xxx!, ...
+        // Only the wrapped expression is followed. A call result such as `fooBar()`
+        // has already ended the walk in the `CallExpression` case.
+        return target.expression === node
+          ? { done: false, node: target, target: target.parent }
+          : { done: true, result: null }
       }
       default: {
         return { done: true, result: null }
@@ -2460,6 +2489,36 @@ function skipChainExpression<T>(node: T | ChainExpression): T {
       skipChainExpression(node.expression)
     : // @ts-expect-error -- `node` is not narrowed to `T`
       node
+}
+
+const TS_WRAPPER_TYPES = new Set([
+  'TSAsExpression',
+  'TSSatisfiesExpression',
+  'TSNonNullExpression',
+  'TSTypeAssertion'
+])
+const CHAIN_AND_TS_WRAPPER_TYPES = new Set([
+  'ChainExpression',
+  ...TS_WRAPPER_TYPES
+])
+
+type ChainOrTSWrapper =
+  | ChainExpression
+  | TSAsExpression
+  | TSSatisfiesExpression
+  | TSNonNullExpression
+  | TSTypeAssertion
+
+/**
+ * Retrieve the inner expression of `ChainExpression` and TypeScript wrapper nodes
+ * such as `foo as T`, `foo satisfies T`, `foo!` and `<T>foo`. Otherwise, pass through it.
+ */
+function skipChainAndTSWrapperExpression(node: ESNode): ESNode {
+  let n: ASTNode = node
+  while (CHAIN_AND_TS_WRAPPER_TYPES.has(n.type)) {
+    n = (n as ChainOrTSWrapper).expression
+  }
+  return n as ESNode
 }
 
 /**
