@@ -107,7 +107,7 @@ export default {
         "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
       unexpectedArgument: "'v-for' directives require no argument.",
       unexpectedModifier: "'v-for' directives require no modifier.",
-      expectedValue: "'v-for' directives require that attribute value.",
+      expectedValue: "'v-for' directives require an attribute value.",
       unexpectedExpression:
         "'v-for' directives require the special syntax '<alias> in <expression>'.",
       invalidEmptyAlias: 'Invalid empty alias.',

@@ -16,7 +16,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      unexpected: 'The `functional` template are deprecated.'
+      unexpected: 'The `functional` template is deprecated.'
     }
   },
   create(context: RuleContext): RuleListener {

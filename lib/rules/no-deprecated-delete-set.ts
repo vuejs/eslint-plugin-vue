@@ -33,7 +33,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      deprecated: 'The `$delete`, `$set` is deprecated.'
+      deprecated: 'The `$delete` and `$set` methods are deprecated.'
     }
   },
   create(context: RuleContext) {

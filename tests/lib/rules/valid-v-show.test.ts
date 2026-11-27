@@ -64,7 +64,7 @@ tester.run('valid-v-show', rule, {
       code: '<template><div v-show></div></template>',
       errors: [
         {
-          message: "'v-show' directives require that attribute value.",
+          message: "'v-show' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,
@@ -78,7 +78,7 @@ tester.run('valid-v-show', rule, {
       code: '<template><div v-show=""></div></template>',
       errors: [
         {
-          message: "'v-show' directives require that attribute value.",
+          message: "'v-show' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,

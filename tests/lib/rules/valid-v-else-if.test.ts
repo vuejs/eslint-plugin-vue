@@ -184,7 +184,7 @@ tester.run('valid-v-else-if', rule, {
       code: '<template><div><div v-if="foo"></div><div v-else-if></div></div></template>',
       errors: [
         {
-          message: "'v-else-if' directives require that attribute value.",
+          message: "'v-else-if' directives require an attribute value.",
           line: 1,
           column: 43,
           endLine: 1,
@@ -198,7 +198,7 @@ tester.run('valid-v-else-if', rule, {
       code: '<template><div v-if="foo"></div><div v-else-if=""></div></template>',
       errors: [
         {
-          message: "'v-else-if' directives require that attribute value.",
+          message: "'v-else-if' directives require an attribute value.",
           line: 1,
           column: 38,
           endLine: 1,
