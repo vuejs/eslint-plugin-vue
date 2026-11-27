@@ -3,7 +3,7 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const VALID_MODIFIERS = new Set(['lazy', 'number', 'trim'])
 
@@ -126,7 +126,7 @@ export default {
       unexpectedArgument: "'v-model' directives require no argument.",
       unexpectedModifier:
         "'v-model' directives don't support the modifier '{{name}}'.",
-      missingValue: "'v-model' directives require that attribute value.",
+      missingValue: "'v-model' directives require an attribute value.",
       unexpectedOptionalChaining:
         "Optional chaining cannot appear in 'v-model' directives.",
       unexpectedNonLhsExpression:

@@ -2,7 +2,7 @@
  * @fileoverview detect if there is a potential typo in your component property
  * @author IWANABETHATGUY
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import vueComponentOptions from '../utils/vue-component-options.json' with { type: 'json' }
 export default {
   meta: {

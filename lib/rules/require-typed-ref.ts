@@ -4,7 +4,7 @@
  */
 import { findVariable } from '@eslint-community/eslint-utils'
 import { iterateDefineRefs } from '../utils/ref-object-references.ts'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 type FunctionNode =
   FunctionDeclaration | FunctionExpression | ArrowFunctionExpression
@@ -137,7 +137,7 @@ export default {
     schema: [],
     messages: {
       noType:
-        'Specify type parameter for `{{name}}` function, otherwise created variable will not be typechecked.'
+        'Specify type parameter for `{{name}}` function, otherwise the created variable will not be type-checked.'
     }
   },
   create(context: RuleContext) {

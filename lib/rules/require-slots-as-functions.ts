@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
 
 // Parent node types where a `$slots` property is used as a value rather than called.
@@ -24,7 +24,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      unexpected: 'Property in `$slots` should be used as function.'
+      unexpected: 'Property in `$slots` should be used as a function.'
     }
   },
   create(context: RuleContext) {

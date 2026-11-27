@@ -2,7 +2,7 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 type HandlerKind = 'method' | 'inline' | 'inline-function'
 interface ObjectOption {
@@ -40,6 +40,16 @@ function isQuote(token: Token): boolean {
     token.type === 'Punctuator' &&
     (token.value === '"' || token.value === "'")
   )
+}
+/**
+ * Get the number of parameters of the given function. Returns `Infinity` if it has a rest parameter.
+ */
+function getParamCount(
+  node: FunctionDeclaration | FunctionExpression | ArrowFunctionExpression
+): number {
+  return node.params.some((p) => p.type === 'RestElement')
+    ? Infinity
+    : node.params.length
 }
 /**
  * Check whether the given node is an identifier call expression. e.g. `foo()`
@@ -96,6 +106,7 @@ export default {
       url: 'https://eslint.vuejs.org/rules/v-on-handler-style.html'
     },
     fixable: 'code',
+    hasSuggestions: true,
     schema: [
       {
         oneOf: [
@@ -103,7 +114,7 @@ export default {
           {
             type: 'array',
             items: [
-              { const: 'method' },
+              { enum: ['method', 'inline'] },
               { enum: ['inline', 'inline-function'] }
             ],
             uniqueItems: true,
@@ -141,12 +152,20 @@ export default {
       preferInlineFunctionOverMethod:
         'Prefer inline function over method handler in v-on.',
       preferInlineFunctionOverInline:
-        'Prefer inline function over inline handler in v-on.'
+        'Prefer inline function over inline handler in v-on.',
+      replaceWithMethodHandler:
+        'Replace with method handler. Note that the method will receive the event arguments.',
+      preferInlineFunctionOverInlineWithEvent:
+        'Prefer inline function over inline handler in v-on. Note that `$event` must be replaced with a parameter of the inline function.'
     }
   },
   create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const { allows, shouldIgnoreIncludesComment } = parseOptions(context)
+    // With `["inline", "inline-function"]`, inline functions with parameters
+    // are used instead of inline handlers with `$event`.
+    const shouldUseInlineFunctionForPayload =
+      allows[0] === 'inline' && allows.includes('inline-function')
 
     const upperElements = new Set<VElement>()
     const methodParamCountMap = new Map<string, number>()
@@ -208,8 +227,7 @@ export default {
           return verifyCanUseMethodHandlerForInlineFunction(node)
         }
         case 'inline': {
-          reportCanUseInlineHandlerForInlineFunction(node)
-          return true
+          return verifyCanUseInlineHandlerForInlineFunction(node)
         }
       }
       return false
@@ -270,6 +288,26 @@ export default {
       return false
     }
     /**
+     * Get the fix that replaces the handler with the called method.
+     * It is an autofix only if the method is known to take as many parameters as the given arguments,
+     * otherwise it is a suggestion because the method will receive the event arguments.
+     */
+    function getMethodHandlerFix(
+      idCallExpr: CallExpression & { callee: Identifier },
+      rangeWithoutQuotes: Range
+    ): Pick<Rule.ReportDescriptor, 'fix' | 'suggest'> {
+      const fix = (fixer: RuleFixer) =>
+        fixer.replaceTextRange(
+          rangeWithoutQuotes,
+          sourceCode.getText(idCallExpr.callee)
+        )
+      const paramCount = methodParamCountMap.get(idCallExpr.callee.name)
+      return paramCount === idCallExpr.arguments.length
+        ? { fix }
+        : // The method is unknown, or its behavior can change given the arguments.
+          { suggest: [{ messageId: 'replaceWithMethodHandler', fix }] }
+    }
+    /**
      * Check if `v-on:click="foo()"` can be converted to `v-on:click="foo"` and report if it can.
      * Returns `true` if reported.
      */
@@ -298,22 +336,11 @@ export default {
         messageId: idCallExpr
           ? 'preferMethodOverInline'
           : 'preferMethodOverInlineWithoutIdCall',
-        fix: (fixer) => {
-          if (
-            hasComment /* The statement contains comment and cannot be fixed. */ ||
-            !idCallExpr /* The statement is not a simple identifier call and cannot be fixed. */ ||
-            idCallExpr.arguments.length > 0
-          ) {
-            return null
-          }
-          const paramCount = methodParamCountMap.get(idCallExpr.callee.name)
-          return paramCount != null && paramCount > 0
-            ? null // The behavior of target method can change given the arguments.
-            : fixer.replaceTextRange(
-                rangeWithoutQuotes,
-                sourceCode.getText(idCallExpr.callee)
-              )
-        }
+        ...(hasComment /* The statement contains comment and cannot be fixed. */ ||
+        !idCallExpr /* The statement is not a simple identifier call and cannot be fixed. */ ||
+        idCallExpr.arguments.length > 0
+          ? null
+          : getMethodHandlerFix(idCallExpr, rangeWithoutQuotes))
       })
       return true
     }
@@ -351,25 +378,13 @@ export default {
         messageId: idCallExpr
           ? 'preferMethodOverInlineFunction'
           : 'preferMethodOverInlineFunctionWithoutIdCall',
-        fix: (fixer) => {
-          if (
-            hasComment /* The function contains comment and cannot be fixed. */ ||
-            !idCallExpr /* The function is not a simple identifier call and cannot be fixed. */ ||
-            !isSameParamsAndArgs(
-              idCallExpr
-            ) /* It is not a call with the arguments given as is. */
-          ) {
-            return null
-          }
-          const paramCount = methodParamCountMap.get(idCallExpr.callee.name)
-          return paramCount == null ||
-            paramCount === idCallExpr.arguments.length
-            ? fixer.replaceTextRange(
-                rangeWithoutQuotes,
-                sourceCode.getText(idCallExpr.callee)
-              )
-            : null // The behavior of target method can change given the arguments.
-        }
+        ...(hasComment /* The function contains comment and cannot be fixed. */ ||
+        !idCallExpr /* The function is not a simple identifier call and cannot be fixed. */ ||
+        !isSameParamsAndArgs(
+          idCallExpr
+        ) /* It is not a call with the arguments given as is. */
+          ? null
+          : getMethodHandlerFix(idCallExpr, rangeWithoutQuotes))
       })
       return true
 
@@ -394,21 +409,25 @@ export default {
       }
     }
     /**
+     * Checks whether the given inline handler uses `$event`.
+     */
+    function hasEventIdentifier(node: VOnExpression): boolean {
+      return $eventIdentifiers.some((id) => utils.isInRange(node, id))
+    }
+    /**
      * Report `v-on:click="foo()"` can be converted to `v-on:click="()=>foo()"`.
      */
     function reportCanUseInlineFunctionForInlineHandler(
       node: VOnExpression
     ): void {
+      const hasEvent = hasEventIdentifier(node)
       context.report({
         node,
-        messageId: 'preferInlineFunctionOverInline',
+        messageId: hasEvent
+          ? 'preferInlineFunctionOverInlineWithEvent'
+          : 'preferInlineFunctionOverInline',
         *fix(fixer) {
-          // eslint-disable-next-line unicorn/consistent-boolean-name -- `has` prefix is present; the `$` refers to the `$event` argument
-          const has$Event = $eventIdentifiers.some(
-            ({ range }) =>
-              node.range[0] <= range[0] && range[1] <= node.range[1]
-          )
-          if (has$Event) {
+          if (hasEvent) {
             /* The statements contains $event and cannot be fixed. */
             return
           }
@@ -438,11 +457,17 @@ export default {
       })
     }
     /**
-     * Report `v-on:click="() => foo()"` can be converted to `v-on:click="foo()"`.
+     * Check if `v-on:click="() => foo()"` can be converted to `v-on:click="foo()"` and report if it can.
+     * Returns `true` if reported.
      */
-    function reportCanUseInlineHandlerForInlineFunction(
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- reports and returns whether it did
+    function verifyCanUseInlineHandlerForInlineFunction(
       node: ArrowFunctionExpression | FunctionExpression
-    ): void {
+    ): boolean {
+      if (shouldUseInlineFunctionForPayload && node.params.length > 0) {
+        // With `["inline", "inline-function"]`, inline functions with parameters are allowed.
+        return false
+      }
       // If a function has one parameter, you can turn it into an inline handler using $event.
       // If a function has two or more parameters, it cannot be easily converted to an inline handler.
       // However, users can use inline handlers by changing the payload of the component's custom event.
@@ -465,6 +490,7 @@ export default {
                 return fixer.replaceText(node, text)
               }
       })
+      return true
     }
 
     return utils.defineTemplateBodyVisitor(
@@ -487,6 +513,13 @@ export default {
             case 'VOnExpression': {
               // e.g. v-on:click="foo()"
               if (allows[0] === 'inline') {
+                if (
+                  shouldUseInlineFunctionForPayload &&
+                  hasEventIdentifier(expression)
+                ) {
+                  // e.g. v-on:click="foo($event)"
+                  reportCanUseInlineFunctionForInlineHandler(expression)
+                }
                 return
               }
               for (const allow of allows) {
@@ -540,32 +573,50 @@ export default {
         ? // Collect method definition with params information to check for side effects.
           // when converting from `v-on:click="foo()"` to `v-on:click="foo"`, or
           // converting from `v-on:click="() => foo()"` to `v-on:click="foo"`.
-          utils.defineVueVisitor(context, {
-            onVueObjectEnter(node) {
-              const methods = utils.iterateProperties(
-                node,
-                new Set(['methods'])
-              )
-              for (const method of methods) {
-                if (method.type !== 'object') {
-                  // This branch is usually not passed.
-                  continue
+          utils.compositingVisitors(
+            utils.defineVueVisitor(context, {
+              onVueObjectEnter(node) {
+                const methods = utils.iterateProperties(
+                  node,
+                  new Set(['methods'])
+                )
+                for (const method of methods) {
+                  if (method.type !== 'object') {
+                    // This branch is usually not passed.
+                    continue
+                  }
+                  const value = method.property.value
+                  if (
+                    value.type === 'FunctionExpression' ||
+                    value.type === 'ArrowFunctionExpression'
+                  ) {
+                    methodParamCountMap.set(method.name, getParamCount(value))
+                  }
                 }
-                const value = method.property.value
+              }
+            }),
+            utils.defineScriptSetupVisitor(context, {
+              'Program > FunctionDeclaration'(node: FunctionDeclaration) {
+                if (node.id) {
+                  methodParamCountMap.set(node.id.name, getParamCount(node))
+                }
+              },
+              "Program > VariableDeclaration[kind='const'] > VariableDeclarator"(
+                node: VariableDeclarator
+              ) {
                 if (
-                  value.type === 'FunctionExpression' ||
-                  value.type === 'ArrowFunctionExpression'
+                  node.id.type === 'Identifier' &&
+                  (node.init?.type === 'FunctionExpression' ||
+                    node.init?.type === 'ArrowFunctionExpression')
                 ) {
                   methodParamCountMap.set(
-                    method.name,
-                    value.params.some((p) => p.type === 'RestElement')
-                      ? Infinity
-                      : value.params.length
+                    node.id.name,
+                    getParamCount(node.init)
                   )
                 }
               }
-            }
-          })
+            })
+          )
         : {}
     )
   }

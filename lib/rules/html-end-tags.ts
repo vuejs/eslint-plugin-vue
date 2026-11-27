@@ -3,7 +3,7 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -16,7 +16,7 @@ export default {
     fixable: 'code',
     schema: [],
     messages: {
-      missingEndTag: "'<{{name}}>' should have end tag."
+      missingEndTag: "'<{{name}}>' should have an end tag."
     }
   },
   create(context: RuleContext) {

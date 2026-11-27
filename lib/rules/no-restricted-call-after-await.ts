@@ -6,7 +6,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { ReferenceTracker } from '@eslint-community/eslint-utils'
 import type { TYPES } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function safeRequireResolve(id: string) {
   try {

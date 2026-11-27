@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import type { TYPES } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { ReferenceTracker } from '@eslint-community/eslint-utils'
 
 const deletedImportApisMap: TYPES.TraceMap = {
@@ -33,7 +33,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      deprecated: 'The `$delete`, `$set` is deprecated.'
+      deprecated: 'The `$delete` and `$set` methods are deprecated.'
     }
   },
   create(context: RuleContext) {

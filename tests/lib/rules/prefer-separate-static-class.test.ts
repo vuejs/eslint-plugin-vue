@@ -55,9 +55,53 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: `<template><div class="static-class" :class="[dynamicClass, {'dynamic-class': foo}]" /></template>`
+    },
+    // `.attr` and `.prop` bind to `^class` / `.class`, not to the normalized `class`
+    {
+      filename: 'test.vue',
+      code: `<template><div :class.attr="'static-class'" /></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div v-bind:class.attr="'static-class'" /></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><MyComponent :class.attr="['static-class', dynamicClass]" /></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div :class.attr="{'static-class': true, foo}" /></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :class.attr="`static-class ${foo}`" /></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div :class.prop="'static-class'" /></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div .class="'static-class'" /></template>`
     }
   ],
   invalid: [
+    {
+      filename: 'test.vue',
+      code: `<template><div :class.camel="'static-class'" /></template>`,
+      output: `<template><div class="static-class" /></template>`,
+      errors: [
+        {
+          message:
+            'Static class "static-class" should be in a static `class` attribute.',
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 44
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `<template><div v-bind:class="'static-class'" /></template>`,

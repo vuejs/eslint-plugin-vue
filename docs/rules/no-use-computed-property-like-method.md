@@ -26,7 +26,7 @@ since: v7.15.0
 
 ## :book: Rule Details
 
-This rule disallows to use computed property like method.
+This rule disallows using computed properties like methods.
 
 <eslint-code-block :rules="{'vue/no-use-computed-property-like-method': ['error']}">
 
@@ -283,7 +283,7 @@ export default {
 
 </eslint-code-block>
 
-This rule can't check if props is used as array:
+This rule can't check whether props are used as arrays:
 
 <eslint-code-block :rules="{'vue/no-use-computed-property-like-method': ['error']}">
 

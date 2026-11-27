@@ -3,8 +3,8 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
-import type { NameWithLoc } from '../utils/index.js'
-import utils from '../utils/index.js'
+import type { NameWithLoc } from '../utils/index.ts'
+import utils from '../utils/index.ts'
 import { toRegExp } from '../utils/regexp.ts'
 
 interface ParsedOption {

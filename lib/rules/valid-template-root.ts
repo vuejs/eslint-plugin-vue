@@ -3,7 +3,7 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -18,7 +18,7 @@ export default {
     messages: {
       emptySrc:
         "The template root with 'src' attribute is required to be empty.",
-      noChild: 'The template requires child element.'
+      noChild: 'The template requires a child element.'
     }
   },
   create(context: RuleContext) {

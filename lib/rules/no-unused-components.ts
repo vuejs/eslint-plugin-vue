@@ -2,7 +2,7 @@
  * @fileoverview Report used components
  * @author Michał Sajnóg
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import {
   isPascalCase,
   isCamelCase,

@@ -33,7 +33,7 @@ This rule only has an effect when the `no-unused-vars` rule is enabled.
 
 ## :book: Rule Details
 
-Without this rule this code triggers warning:
+Without this rule, this code triggers a warning:
 
 ```jsx
 import HelloWorld from './HelloWorld';
@@ -47,7 +47,7 @@ export default {
 };
 ```
 
-After turning on, `HelloWorld` is being marked as used and `no-unused-vars` rule doesn't report an issue.
+After turning it on, `HelloWorld` is marked as used and the `no-unused-vars` rule doesn't report an issue.
 
 ## :mute: When Not To Use It
 

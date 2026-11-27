@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { pascalCase, kebabCase } from '../utils/casing.ts'
 
 export default {
@@ -34,7 +34,7 @@ export default {
     ],
     messages: {
       disallow:
-        "Using {{directiveName}} on component may break component's content."
+        "Using {{directiveName}} on a component may break the component's content."
     }
   },
   create(context: RuleContext) {

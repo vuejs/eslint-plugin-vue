@@ -2,7 +2,7 @@
  * @fileoverview disallow using deprecated events api
  * @author yoyo930021
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -16,7 +16,7 @@ export default {
     schema: [],
     messages: {
       noDeprecatedEventsApi:
-        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.'
+        'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.'
     }
   },
   create(context: RuleContext) {

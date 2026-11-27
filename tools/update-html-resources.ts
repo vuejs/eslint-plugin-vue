@@ -1,0 +1,142 @@
+import fs from 'node:fs'
+import path from 'node:path'
+// @ts-expect-error -- `@types/jsdom` would add the DOM globals to the whole project
+import jsdom from 'jsdom'
+import { httpGet } from './lib/http.ts'
+
+interface CompatData {
+  __compat: { status: { deprecated: boolean } }
+}
+
+main()
+
+async function main() {
+  const [bcdJson, obsoleteHtml] = await Promise.all([
+    httpGet('https://unpkg.com/@mdn/browser-compat-data/data.json'),
+    httpGet('https://html.spec.whatwg.org/multipage/obsolete.html')
+  ])
+  const bcd: {
+    html: { elements: Record<string, CompatData> }
+    svg: { elements: Record<string, CompatData> }
+  } = JSON.parse(bcdJson)
+
+  updateDeprecatedHTMLElements()
+  updateHTMLElements()
+  updateSVGElements()
+
+  // ------------------------------------------------------------------------------
+  // Update deprecated-html-elements.json
+  // ------------------------------------------------------------------------------
+  function updateDeprecatedHTMLElements() {
+    const DEPRECATED_HTML_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/deprecated-html-elements.json'
+    )
+    const elements = new Set<string>()
+
+    // `:scope` never matches a `DocumentFragment`, so `obsoleteHtml` has to be
+    // parsed as a document rather than with `jsdom.JSDOM.fragment()`.
+    const { document } = new jsdom.JSDOM(obsoleteHtml).window
+    const domDl = document.querySelector(
+      ':scope [id="non-conforming-features"] ~ dl'
+    )
+    if (!domDl) {
+      throw new Error(
+        'Could not find the "Non-conforming features" element list in the HTML Standard'
+      )
+    }
+    for (const code of domDl.querySelectorAll(':scope dt code')) {
+      const name = code.textContent.trim()
+      if (name) elements.add(name)
+    }
+
+    if (elements.size === 0) {
+      throw new Error('No deprecated HTML elements found')
+    }
+
+    fs.writeFileSync(
+      DEPRECATED_HTML_ELEMENTS_PATH,
+      `${JSON.stringify(
+        [...elements].sort((a, b) => a.localeCompare(b)),
+        null,
+        2
+      )}\n`,
+      'utf8'
+    )
+  }
+
+  // ------------------------------------------------------------------------------
+  // Update html-elements.json
+  // ------------------------------------------------------------------------------
+  function updateHTMLElements() {
+    const HTML_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/html-elements.json'
+    )
+    const DEPRECATED_HTML_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/deprecated-html-elements.json'
+    )
+    const elements = new Set<string>()
+    // Read the file only now, after `updateDeprecatedHTMLElements()` has rewritten it.
+    const deprecatedHtmlElements = new Set<string>(
+      JSON.parse(fs.readFileSync(DEPRECATED_HTML_ELEMENTS_PATH, 'utf8'))
+    )
+
+    for (const [name, element] of Object.entries(bcd.html.elements)) {
+      if (
+        deprecatedHtmlElements.has(name) ||
+        element.__compat.status.deprecated
+      ) {
+        continue
+      }
+      elements.add(name)
+    }
+
+    if (elements.size === 0) {
+      throw new Error('No HTML elements found')
+    }
+
+    fs.writeFileSync(
+      HTML_ELEMENTS_PATH,
+      `${JSON.stringify(
+        [...elements].sort((a, b) => a.localeCompare(b)),
+        null,
+        2
+      )}\n`,
+      'utf8'
+    )
+  }
+
+  // ------------------------------------------------------------------------------
+  // Update svg-elements.json
+  // ------------------------------------------------------------------------------
+  function updateSVGElements() {
+    const SVG_ELEMENTS_PATH = path.resolve(
+      import.meta.dirname,
+      '../lib/utils/svg-elements.json'
+    )
+    const elements = new Set<string>()
+
+    for (const [name, element] of Object.entries(bcd.svg.elements)) {
+      if (element.__compat.status.deprecated) {
+        continue
+      }
+      elements.add(name)
+    }
+
+    if (elements.size === 0) {
+      throw new Error('No SVG elements found')
+    }
+
+    fs.writeFileSync(
+      SVG_ELEMENTS_PATH,
+      `${JSON.stringify(
+        [...elements].sort((a, b) => a.localeCompare(b)),
+        null,
+        2
+      )}\n`,
+      'utf8'
+    )
+  }
+}

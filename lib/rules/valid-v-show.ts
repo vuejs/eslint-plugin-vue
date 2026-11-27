@@ -3,7 +3,7 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -18,7 +18,7 @@ export default {
     messages: {
       unexpectedArgument: "'v-show' directives require no argument.",
       unexpectedModifier: "'v-show' directives require no modifier.",
-      expectedValue: "'v-show' directives require that attribute value.",
+      expectedValue: "'v-show' directives require an attribute value.",
       unexpectedTemplate:
         "'v-show' directives cannot be put on <template> tags."
     }

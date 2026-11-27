@@ -2,7 +2,7 @@
  * @fileoverview Enforces component's data property to be a function.
  * @author Armano
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 function isOpenParen(token: Token) {
   return token.type === 'Punctuator' && token.value === '('

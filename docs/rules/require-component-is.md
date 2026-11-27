@@ -26,7 +26,7 @@ since: v3.0.0
 
 ## :book: Rule Details
 
-This rule reports the `<component>` elements which do not have `v-bind:is` attributes.
+This rule reports `<component>` elements that do not have a `v-bind:is` attribute.
 
 <eslint-code-block :rules="{'vue/require-component-is': ['error']}">
 

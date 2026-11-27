@@ -2,9 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import type { NameWithLoc, VueObjectData } from '../utils/index.js'
+import type { NameWithLoc, VueObjectData } from '../utils/index.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { getChecker } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 

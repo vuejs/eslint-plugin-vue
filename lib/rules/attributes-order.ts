@@ -2,7 +2,7 @@
  * @fileoverview enforce ordering of attributes
  * @author Erin Depew
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 type VBindDirective = VDirective & {
   key: VDirectiveKey & { name: VIdentifier & { name: 'bind' } }

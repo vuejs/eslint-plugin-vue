@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -16,7 +16,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      unexpected: 'The `is` attribute on HTML element are deprecated.'
+      unexpected: 'The `is` attribute on HTML elements is deprecated.'
     }
   },
   create(context: RuleContext) {

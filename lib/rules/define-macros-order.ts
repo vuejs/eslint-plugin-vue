@@ -2,7 +2,7 @@
  * @author Eduard Deisling
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const MACROS_EMITS = 'defineEmits'
 const MACROS_PROPS = 'defineProps'

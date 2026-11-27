@@ -2,7 +2,7 @@
  * @fileoverview enforce unified spacing in mustache interpolations.
  * @author Armano
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {

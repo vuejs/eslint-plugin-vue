@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import slotScopeAttribute from './syntaxes/slot-scope-attribute.ts'
 
 export default {
@@ -18,7 +18,7 @@ export default {
     fixable: 'code',
     schema: [],
     messages: {
-      forbiddenSlotScopeAttribute: '`slot-scope` are deprecated.'
+      forbiddenSlotScopeAttribute: '`slot-scope` attributes are deprecated.'
     }
   },
   create(context: RuleContext) {

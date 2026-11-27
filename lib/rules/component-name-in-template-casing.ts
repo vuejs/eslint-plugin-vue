@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * issue https://github.com/vuejs/eslint-plugin-vue/issues/250
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import { getChecker, getExactConverter, pascalCase } from '../utils/casing.ts'
 import { toRegExpGroupMatcher, isRegExp } from '../utils/regexp.ts'
 
@@ -23,6 +23,14 @@ function isTypeOnlyImport(variable: Variable): boolean {
             def.node.importKind === 'type')) // check for `import { type Foo } from './xxx'`
     )
   )
+}
+
+/**
+ * Gets the component name of the given tag name, i.e. the part before the
+ * first dot for a namespaced component (e.g. `Form` of `Form.Input`).
+ */
+function getComponentName(rawName: string): string {
+  return rawName.split('.', 1)[0]
 }
 
 export default {
@@ -128,8 +136,9 @@ export default {
 
       // If the user specifies registeredComponentsOnly as false, it checks all component tags.
       return shouldCheckRegisteredComponentsOnly
-        ? registeredComponents.has(pascalCase(node.rawName)) ||
-            isGlobalPattern(node.rawName)
+        ? registeredComponents.has(
+            pascalCase(getComponentName(node.rawName))
+          ) || isGlobalPattern(node.rawName)
         : true
     }
 
@@ -144,13 +153,18 @@ export default {
           }
 
           const name = node.rawName
-          if (getChecker(caseType)(name)) {
+          // The member part of a namespaced component (e.g. `.Input`) must
+          // match the object key, so only the part before it is checked.
+          const componentName = getComponentName(name)
+          if (getChecker(caseType)(componentName)) {
             return
           }
 
           const startTag = node.startTag
           const open = tokens.getFirstToken(startTag)
-          const casingName = getExactConverter(caseType)(name)
+          const casingName =
+            getExactConverter(caseType)(componentName) +
+            name.slice(componentName.length)
           context.report({
             node: open,
             loc: open.loc,

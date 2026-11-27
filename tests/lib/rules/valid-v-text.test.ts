@@ -68,7 +68,7 @@ tester.run('valid-v-text', rule, {
       code: '<template><div v-text></div></template>',
       errors: [
         {
-          message: "'v-text' directives require that attribute value.",
+          message: "'v-text' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,
@@ -82,7 +82,7 @@ tester.run('valid-v-text', rule, {
       code: '<template><div v-text="" /></template>',
       errors: [
         {
-          message: "'v-text' directives require that attribute value.",
+          message: "'v-text' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,

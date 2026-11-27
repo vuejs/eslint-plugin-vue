@@ -19,7 +19,7 @@ since: v3.13.0
 
 ## :book: Rule Details
 
-This rule aims at preventing usage of `this` in Vue templates.
+By default, this rule reports the usage of `this` in Vue templates.
 
 <eslint-code-block fix :rules="{'vue/this-in-template': ['error']}">
 

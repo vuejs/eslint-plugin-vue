@@ -4,7 +4,7 @@
  */
 import { ReferenceTracker } from '@eslint-community/eslint-utils'
 import type { TYPES } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 const LIFECYCLE_HOOKS = [
   'onBeforeMount',

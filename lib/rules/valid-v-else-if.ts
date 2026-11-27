@@ -3,7 +3,7 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 export default {
   meta: {
@@ -24,7 +24,7 @@ export default {
         "'v-else-if' and 'v-else' directives can't exist on the same element.",
       unexpectedArgument: "'v-else-if' directives require no argument.",
       unexpectedModifier: "'v-else-if' directives require no modifier.",
-      expectedValue: "'v-else-if' directives require that attribute value."
+      expectedValue: "'v-else-if' directives require an attribute value."
     }
   },
   create(context: RuleContext) {

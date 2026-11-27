@@ -17,6 +17,139 @@ const tester = new RuleTester({
 tester.run('padding-line-between-tags', rule, {
   valid: [
     {
+      // betweenConditionalTags: no blank lines inside conditional chains only
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div v-if="foo">Foo</div>
+          <div v-else-if="bar">Bar</div>
+          <div v-else>Baz</div>
+
+          <p>unconditional</p>
+
+          <p>another unconditional</p>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*', next: '*' },
+          {
+            blankLine: 'never',
+            prev: '*',
+            next: '*',
+            betweenConditionalTags: true
+          }
+        ]
+      ]
+    },
+    {
+      // betweenConditionalTags: blank lines inside conditional chains only
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div v-if="foo">Foo</div>
+
+          <div v-else>Bar</div>
+          <p>unconditional</p>
+          <p>another unconditional</p>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'never', prev: '*', next: '*' },
+          {
+            blankLine: 'always',
+            prev: '*',
+            next: '*',
+            betweenConditionalTags: true
+          }
+        ]
+      ]
+    },
+    {
+      // betweenConditionalTags: false behaves like the default
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div v-if="foo">Foo</div>
+
+          <div v-else-if="bar">Bar</div>
+
+          <div v-else>Baz</div>
+
+          <p>unconditional</p>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          {
+            blankLine: 'always',
+            prev: '*',
+            next: '*',
+            betweenConditionalTags: false
+          }
+        ]
+      ]
+    },
+    {
+      // betweenConditionalTags: consistent is tracked separately
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <p />
+
+          <p />
+
+          <div v-if="foo" />
+          <div v-else-if="bar" />
+          <div v-else />
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'consistent', prev: '*', next: '*' },
+          {
+            blankLine: 'consistent',
+            prev: '*',
+            next: '*',
+            betweenConditionalTags: true
+          }
+        ]
+      ]
+    },
+    {
+      // a v-if without a following v-else is not a conditional pair
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div v-if="foo" />
+
+          <div v-if="bar" />
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*', next: '*' },
+          {
+            blankLine: 'never',
+            prev: '*',
+            next: '*',
+            betweenConditionalTags: true
+          }
+        ]
+      ]
+    },
+    {
       filename: 'test.vue',
       code: `
       <template>
@@ -442,6 +575,170 @@ tester.run('padding-line-between-tags', rule, {
     }
   ],
   invalid: [
+    {
+      // betweenConditionalTags: never
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div v-if="foo">Foo</div>
+
+          <div v-else-if="bar">Bar</div>
+
+          <div v-else>Baz</div>
+          <p>unconditional</p>
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <div v-if="foo">Foo</div>
+          <div v-else-if="bar">Bar</div>
+          <div v-else>Baz</div>
+
+          <p>unconditional</p>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*', next: '*' },
+          {
+            blankLine: 'never',
+            prev: '*',
+            next: '*',
+            betweenConditionalTags: true
+          }
+        ]
+      ],
+      errors: [
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 41
+        },
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 32
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      // betweenConditionalTags: always
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div v-if="foo">Foo</div>
+          <div v-else>Bar</div>
+
+          <p>unconditional</p>
+
+          <p>another unconditional</p>
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <div v-if="foo">Foo</div>
+
+          <div v-else>Bar</div>
+          <p>unconditional</p>
+          <p>another unconditional</p>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'never', prev: '*', next: '*' },
+          {
+            blankLine: 'always',
+            prev: '*',
+            next: '*',
+            betweenConditionalTags: true
+          }
+        ]
+      ],
+      errors: [
+        {
+          message: 'Expected blank line before this tag.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 32
+        },
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 31
+        },
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 39
+        }
+      ]
+    },
+    {
+      // betweenConditionalTags: consistent
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div v-if="foo" />
+          <div v-else-if="bar" />
+
+          <div v-else />
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <div v-if="foo" />
+          <div v-else-if="bar" />
+          <div v-else />
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          {
+            blankLine: 'consistent',
+            prev: '*',
+            next: '*',
+            betweenConditionalTags: true
+          }
+        ]
+      ],
+      errors: [
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 25
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `

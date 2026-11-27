@@ -11,10 +11,10 @@ import eslintPluginMarkdownPreferences from 'eslint-plugin-markdown-preferences'
 import eslintPluginTs from '@typescript-eslint/eslint-plugin'
 import tsEslintParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
-import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
-import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
-import requireEslintCommunity from './eslint-internal-rules/require-eslint-community.js'
-import rules from './tools/lib/rules.js'
+import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.ts'
+import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.ts'
+import requireEslintCommunity from './eslint-internal-rules/require-eslint-community.ts'
+import rules from './tools/lib/rules.ts'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -326,7 +326,7 @@ export default typegen([
     }
   },
   {
-    files: ['eslint-internal-rules/*.js'],
+    files: ['eslint-internal-rules/*.ts'],
     rules: {
       'eslint-plugin/require-meta-docs-url': 'off',
       'internal/no-invalid-meta': 'error',

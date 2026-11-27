@@ -2,7 +2,7 @@
  * @fileoverview disallow using deprecated number (keycode) modifiers
  * @author yoyo930021
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 import keyCodeToKey from '../utils/keycode-to-key.ts'
 
 export default {
@@ -18,7 +18,7 @@ export default {
     schema: [],
     messages: {
       numberModifierIsDeprecated:
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead."
     }
   },
   create(context: RuleContext) {

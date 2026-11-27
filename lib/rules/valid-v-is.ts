@@ -2,7 +2,7 @@
  * @fileoverview enforce valid `v-is` directives
  * @author Yosuke Ota
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Check whether the given node is valid or not.
@@ -27,7 +27,7 @@ export default {
     messages: {
       unexpectedArgument: "'v-is' directives require no argument.",
       unexpectedModifier: "'v-is' directives require no modifier.",
-      expectedValue: "'v-is' directives require that attribute value.",
+      expectedValue: "'v-is' directives require an attribute value.",
       ownerMustBeHTMLElement:
         "'v-is' directive must be owned by a native HTML element, but '{{name}}' is not."
     }

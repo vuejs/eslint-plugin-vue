@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * Checks whether if the given property node is a static value.
@@ -96,7 +96,7 @@ export default {
       }
     ],
     messages: {
-      forbiddenStaticInlineStyle: 'Static inline `style` are forbidden.',
+      forbiddenStaticInlineStyle: 'Static inline `style` is forbidden.',
       forbiddenStyleAttr: '`style` attributes are forbidden.'
     }
   },

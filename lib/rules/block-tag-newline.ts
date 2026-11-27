@@ -2,7 +2,7 @@
  * @fileoverview Enforce line breaks style after opening and before closing block-level tags.
  * @author Yosuke Ota
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 type OptionType = 'always' | 'never' | 'consistent' | 'ignore'
 interface ContentsOptions {

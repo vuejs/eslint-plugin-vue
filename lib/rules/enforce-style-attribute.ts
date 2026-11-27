@@ -2,7 +2,7 @@
  * @author Mussin Benarbia
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * check whether a tag has the `scoped` attribute

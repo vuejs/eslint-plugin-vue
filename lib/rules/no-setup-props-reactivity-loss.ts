@@ -4,7 +4,7 @@
  */
 import type { Scope } from 'eslint'
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import utils from '../utils/index.ts'
 
 /**
  * - `'props'`: A node is a container object that has props.

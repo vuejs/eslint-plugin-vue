@@ -12,9 +12,10 @@ const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // eslint-disable-next-line unicorn/no-anonymous-default-export
 export default async () => {
-  const rulesPath = '../../tools/lib/rules.js' // Avoid bundle
+  const rulesPath = '../../tools/lib/rules.ts' // Avoid bundle
   const mod = await import(rulesPath)
-  const rules: typeof import('../../tools/lib/rules.js') = mod.default || mod
+  const rules: typeof import('../../tools/lib/rules.ts').default =
+    mod.default || mod
   const uncategorizedRules = rules.filter(
     (rule) =>
       !rule.meta.docs.categories &&
@@ -75,7 +76,7 @@ export default async () => {
       .filter((rule) => rule.meta.docs.categories && !rule.meta.deprecated)
       .filter((rule) =>
         categoryIds.every((categoryId) =>
-          rule.meta.docs.categories.includes(categoryId)
+          rule.meta.docs.categories!.includes(categoryId)
         )
       )
     const children: DefaultTheme.SidebarItem[] = categoryRules
@@ -159,11 +160,11 @@ export default async () => {
           ),
 
           tslib: path.join(dirname, '../../node_modules/tslib/tslib.es6.js'),
-          globby: path.join(dirname, './build-system/shim/empty.mjs'),
-          'fast-glob': path.join(dirname, './build-system/shim/empty.mjs'),
-          tinyglobby: path.join(dirname, './build-system/shim/empty.mjs'),
-          module: path.join(dirname, './build-system/shim/empty.mjs'),
-          'node:module': path.join(dirname, './build-system/shim/empty.mjs')
+          globby: path.join(dirname, './build-system/shim/empty.ts'),
+          'fast-glob': path.join(dirname, './build-system/shim/empty.ts'),
+          tinyglobby: path.join(dirname, './build-system/shim/empty.ts'),
+          module: path.join(dirname, './build-system/shim/empty.ts'),
+          'node:module': path.join(dirname, './build-system/shim/empty.ts')
         }
       },
       define: {
