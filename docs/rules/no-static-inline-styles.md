@@ -13,7 +13,7 @@ since: v7.0.0
 ## :book: Rule Details
 
 This rule reports static inline `style` bindings and `style` attributes.
-The styles reported in this rule mean that we recommend separating them into `<style>` tag.
+We recommend moving the styles reported by this rule into a `<style>` tag.
 
 <eslint-code-block :rules="{'vue/no-static-inline-styles': ['error']}">
 

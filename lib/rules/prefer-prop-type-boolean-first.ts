@@ -51,7 +51,7 @@ export default {
     hasSuggestions: true,
     schema: [],
     messages: {
-      shouldBeFirst: 'Type `Boolean` should be at first in prop types.',
+      shouldBeFirst: 'Type `Boolean` should be first in prop types.',
       moveToFirst: 'Move `Boolean` to be first in prop types.'
     }
   },

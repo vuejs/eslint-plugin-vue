@@ -14,10 +14,10 @@ since: v7.10.0
 
 ## :book: Rule Details
 
-This rule enforces that a `emits` statement contains type definition.
+This rule enforces that an `emits` statement contains a type definition.
 
-Declaring `emits` with types can bring better maintenance.
-Even if using with TypeScript, this can provide better type inference when annotating parameters with types.
+Declaring `emits` with types makes the code easier to maintain.
+Even when using TypeScript, this can provide better type inference when annotating parameters with types.
 
 <eslint-code-block :rules="{'vue/require-emit-validator': ['error']}">
 

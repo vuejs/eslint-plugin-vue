@@ -26,7 +26,7 @@ since: v7.19.0
 
 ## :book: Rule Details
 
-This rule to prevent any useless attribute on `<template>` tags.
+This rule prevents useless attributes on `<template>` tags.
 
 <eslint-code-block :rules="{'vue/no-useless-template-attributes': ['error']}">
 

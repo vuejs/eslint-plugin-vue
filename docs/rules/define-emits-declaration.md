@@ -12,10 +12,10 @@ since: v9.5.0
 
 ## :book: Rule Details
 
-This rule enforces `defineEmits` typing style which you should use `type-based`, strict `type-literal`
+This rule enforces which `defineEmits` typing style you should use: `type-based`, strict `type-literal`
 (introduced in Vue 3.3), or `runtime` declaration.
 
-This rule only works in setup script and `lang="ts"`.
+This rule only works in `<script setup>` and `<script lang="ts">`.
 
 <eslint-code-block :rules="{'vue/define-emits-declaration': ['error']}">
 

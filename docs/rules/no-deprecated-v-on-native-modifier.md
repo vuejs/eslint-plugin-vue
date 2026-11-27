@@ -20,7 +20,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports use of deprecated `.native` modifier on `v-on` directive (in Vue.js 3.0.0+)
+This rule reports use of the deprecated `.native` modifier on `v-on` directives (in Vue.js 3.0.0+).
 
 <eslint-code-block :rules="{'vue/no-deprecated-v-on-native-modifier': ['error']}">
 

@@ -11,6 +11,7 @@ const GROUP_NAMES: GroupName[] = [
   'data',
   'asyncData',
   'methods',
+  'inject',
   'setup'
 ]
 

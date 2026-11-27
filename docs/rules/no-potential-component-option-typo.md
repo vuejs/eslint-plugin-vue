@@ -14,7 +14,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule disallow a potential typo in your component options
+This rule disallows potential typos in your component options.
 
 ### Here is the config
 
@@ -58,7 +58,7 @@ export default {
 
 </eslint-code-block>
 
-> we use edit distance to compare two string similarity, threshold is an option to control upper bound of edit distance to report
+> We use the edit distance to compare the similarity of two strings. `threshold` is an option to control the upper bound of the edit distance to report.
 
 ### Here is the another example about config option `threshold`
 

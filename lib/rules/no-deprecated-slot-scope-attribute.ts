@@ -18,7 +18,7 @@ export default {
     fixable: 'code',
     schema: [],
     messages: {
-      forbiddenSlotScopeAttribute: '`slot-scope` are deprecated.'
+      forbiddenSlotScopeAttribute: '`slot-scope` attributes are deprecated.'
     }
   },
   create(context: RuleContext) {

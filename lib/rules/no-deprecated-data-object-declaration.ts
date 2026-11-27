@@ -42,7 +42,7 @@ export default {
     schema: [],
     messages: {
       objectDeclarationIsDeprecated:
-        "Object declaration on 'data' property is deprecated. Using function declaration instead."
+        "Object declaration on 'data' property is deprecated. Use a function declaration instead."
     }
   },
   create(context: RuleContext) {

@@ -26,7 +26,7 @@ since: v4.1.0
   - `"plugin:vue/vue2-recommended"`
   - `"plugin:vue/recommended"`
 
-Sole purpose of this rule is to provide `eslint-disable` functionality in the `<template>` and in the block level.
+The sole purpose of this rule is to provide `eslint-disable` functionality in the `<template>` and at the block level.
 It supports usage of the following comments:
 
 - `eslint-disable`
@@ -55,7 +55,7 @@ This rule sends all `eslint-disable`-like comments as errors to the post-process
 
 </eslint-code-block>
 
-The `eslint-disable`-like comments can be used in the `<template>` and in the block level.
+The `eslint-disable`-like comments can be used in the `<template>` and at the block level.
 
 <eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/block-order': ['error'] }">
 
@@ -72,7 +72,7 @@ The `eslint-disable`-like comments can be used in the `<template>` and in the bl
 
 </eslint-code-block>
 
-The `eslint-disable` comments has no effect after one block.
+An `eslint-disable` comment has no effect outside the block it is in.
 
 <eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/block-order': ['error'] }">
 

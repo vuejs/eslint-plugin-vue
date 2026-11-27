@@ -70,7 +70,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 29,
           endLine: 1,
@@ -86,7 +86,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 29,
           endLine: 1,
@@ -102,7 +102,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 37,
           endLine: 1,
@@ -118,7 +118,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 36,
           endLine: 1,
@@ -134,7 +134,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 44,
           endLine: 1,
@@ -150,7 +150,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 36,
           endLine: 1,
@@ -165,7 +165,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 25,
           endLine: 1,
@@ -181,7 +181,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 25,
           endLine: 1,
@@ -197,7 +197,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 33,
           endLine: 1,
@@ -213,7 +213,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 32,
           endLine: 1,
@@ -229,7 +229,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 40,
           endLine: 1,
@@ -245,7 +245,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 32,
           endLine: 1,
@@ -260,7 +260,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 25,
           endLine: 1,
@@ -275,7 +275,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 25,
           endLine: 1,
@@ -290,7 +290,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 33,
           endLine: 1,
@@ -305,7 +305,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 1,
           column: 40,
           endLine: 1,
@@ -329,7 +329,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 3,
           column: 25,
           endLine: 3,
@@ -337,7 +337,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 4,
           column: 25,
           endLine: 4,
@@ -345,7 +345,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 5,
           column: 25,
           endLine: 5,
@@ -353,7 +353,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 6,
           column: 25,
           endLine: 6,
@@ -361,7 +361,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 7,
           column: 25,
           endLine: 7,
@@ -369,7 +369,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 8,
           column: 25,
           endLine: 8,
@@ -377,7 +377,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 9,
           column: 25,
           endLine: 9,
@@ -406,7 +406,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       errors: [
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 3,
           column: 25,
           endLine: 3,
@@ -414,7 +414,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 4,
           column: 25,
           endLine: 4,
@@ -422,7 +422,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 5,
           column: 25,
           endLine: 5,
@@ -430,7 +430,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 6,
           column: 25,
           endLine: 6,
@@ -438,7 +438,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         },
         {
           message:
-            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Use 'KeyboardEvent.key' instead.",
           line: 7,
           column: 25,
           endLine: 7,

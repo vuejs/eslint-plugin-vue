@@ -24,10 +24,10 @@ This rule checks whether every `v-memo` directive is valid.
 
 This rule reports `v-memo` directives in the following cases:
 
-- The directive has that argument. E.g. `<div v-memo:aaa></div>`
-- The directive has that modifier. E.g. `<div v-memo.bbb></div>`
-- The directive does not have that attribute value. E.g. `<div v-memo></div>`
-- The attribute value of the directive is definitely not array. E.g. `<div v-memo="{x}"></div>`
+- The directive has an argument. E.g. `<div v-memo:aaa></div>`
+- The directive has a modifier. E.g. `<div v-memo.bbb></div>`
+- The directive does not have an attribute value. E.g. `<div v-memo></div>`
+- The attribute value of the directive is definitely not an array. E.g. `<div v-memo="{x}"></div>`
 - The directive was used inside v-for. E.g. `<div v-for="i in items"><div v-memo="[i]" /></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-memo': ['error']}">
@@ -51,7 +51,7 @@ This rule reports `v-memo` directives in the following cases:
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
+This rule does not check syntax errors in directives because the [vue/no-parsing-error] rule checks them.
 :::
 
 ## :wrench: Options

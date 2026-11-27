@@ -23,7 +23,7 @@ since: v3.0.0
 
 ## :book: Rule Details
 
-This rule enforces `v-on` directive style which you should use shorthand or long form.
+This rule enforces which `v-on` directive style you should use: shorthand or long form.
 
 <eslint-code-block fix :rules="{'vue/v-on-style': ['error']}">
 

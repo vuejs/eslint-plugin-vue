@@ -21,7 +21,7 @@ since: v8.5.0
 
 ## :book: Rule Details
 
-This rule aims to use imports from `'vue'` instead of imports from `'@vue/*'`.
+This rule enforces importing from `'vue'` instead of from `'@vue/*'`.
 
 Imports from the following modules are almost always wrong. You should import from `vue` instead.
 

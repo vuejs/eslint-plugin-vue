@@ -14,7 +14,7 @@ since: v9.13.0
 
 ## :book: Rule Details
 
-This rule aims to enforce use of `defineOptions` instead of default export in `<script setup>`.
+This rule enforces the use of `defineOptions` instead of a default export in `<script setup>`.
 
 The [`defineOptions()`](https://vuejs.org/api/sfc-script-setup.html#defineoptions) macro was officially introduced in Vue 3.3.
 
