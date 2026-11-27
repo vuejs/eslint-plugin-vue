@@ -4,6 +4,7 @@
  */
 import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/prefer-define-options'
+import tsEslintParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
@@ -52,6 +53,54 @@ tester.run('prefer-define-options', rule, {
       output: null,
       errors: [{ messageId: 'preferDefineOptions' }]
     })),
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts">
+      export default { props: { label: String } } satisfies Record<string, unknown>
+      </script>
+      <script setup lang="ts">
+      const fallback = 'example'
+      </script>
+      <template>{{ label || fallback }}</template>
+      `,
+      output: null,
+      languageOptions: {
+        parserOptions: { parser: tsEslintParser }
+      },
+      errors: [
+        {
+          messageId: 'preferDefineOptions',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 84
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      const props = 'props'
+      export default { [props]: { label: String } }
+      </script>
+      <script setup>
+      const fallback = 'example'
+      </script>
+      <template>{{ label || fallback }}</template>
+      `,
+      output: null,
+      errors: [
+        {
+          messageId: 'preferDefineOptions',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 52
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `
