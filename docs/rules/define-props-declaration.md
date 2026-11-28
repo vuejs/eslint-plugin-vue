@@ -10,13 +10,17 @@ since: v9.5.0
 
 > enforce declaration style of `defineProps` and `defineModel`
 
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
+
 ## :book: Rule Details
 
 This rule enforces which `defineProps` and `defineModel` declaration style you should use: `type-based` or `runtime`.
 
 This rule only works in `<script setup>` and `<script lang="ts">`.
 
-<eslint-code-block :rules="{'vue/define-props-declaration': ['error']}">
+The autofix converts a runtime `defineProps` declaration to a type-based one only when this does not change how the props behave: each prop must be declared with native constructors (`String`, `Number`, `Boolean`, `Object`, `Array`, `Function`, `Symbol`, `Date`) or a `PropType` cast whose type uses no imported or local generic types and is inferred by the compiler as the same constructors, and use no options other than `type`, `required` and `default`. Default values are moved to `withDefaults()`. `defineModel` is not autofixed.
+
+<eslint-code-block fix :rules="{'vue/define-props-declaration': ['error']}">
 
 ```vue
 <script setup lang="ts">
@@ -50,7 +54,7 @@ const untypedModel = defineModel()
 
 ### `"runtime"`
 
-<eslint-code-block :rules="{'vue/define-props-declaration': ['error', 'runtime']}">
+<eslint-code-block fix :rules="{'vue/define-props-declaration': ['error', 'runtime']}">
 
 ```vue
 <script setup lang="ts">
