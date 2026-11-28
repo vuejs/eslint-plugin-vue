@@ -1,5 +1,41 @@
 # eslint-plugin-vue
 
+## 10.13.0
+
+### Minor Changes
+
+- Added `ignoreComments` option to [`vue/multiline-html-element-content-newline`](https://eslint.vuejs.org/rules/multiline-html-element-content-newline.html) and [`vue/singleline-html-element-content-newline`](https://eslint.vuejs.org/rules/singleline-html-element-content-newline.html) ([#3228](https://github.com/vuejs/eslint-plugin-vue/pull/3228))
+
+- Extended [`vue/define-props-declaration`](https://eslint.vuejs.org/rules/define-props-declaration.html) to enforce the declaration style of `defineModel` ([#3281](https://github.com/vuejs/eslint-plugin-vue/pull/3281))
+
+- Added `ignoreConflictingNames` option to [`vue/match-component-import-name`](https://eslint.vuejs.org/rules/match-component-import-name.html) ([#3218](https://github.com/vuejs/eslint-plugin-vue/pull/3218))
+
+- Changed [`vue/no-boolean-default`](https://eslint.vuejs.org/rules/no-boolean-default.html) and [`vue/require-default-prop`](https://eslint.vuejs.org/rules/require-default-prop.html) to match Vue's [Boolean Casting](https://vuejs.org/guide/components/props.html#boolean-casting) behavior (treat multi-type props that include `Boolean` as boolean props) ([#3214](https://github.com/vuejs/eslint-plugin-vue/pull/3214))
+
+- Added new [`vue/no-deprecated-html-elements`](https://eslint.vuejs.org/rules/no-deprecated-html-elements.html) rule ([#3215](https://github.com/vuejs/eslint-plugin-vue/pull/3215))
+
+- Fixed [`vue/no-ref-as-operand`](https://eslint.vuejs.org/rules/no-ref-as-operand.html) false negatives for refs on the right side of a logical expression whose result is used as an operand, e.g. `if (a && ref)` ([#3148](https://github.com/vuejs/eslint-plugin-vue/pull/3148))
+
+- Added `betweenConditionalTags` option to [`vue/padding-line-between-tags`](https://eslint.vuejs.org/rules/padding-line-between-tags.html) ([#3256](https://github.com/vuejs/eslint-plugin-vue/pull/3256))
+
+- Updated the [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) peer dependency from `^10.3.0` to `^10.4.2`, see [vue-eslint-parser release notes](https://github.com/vuejs/vue-eslint-parser/releases) ([#3249](https://github.com/vuejs/eslint-plugin-vue/pull/3249))
+
+- Added `checkScriptSetup` option to [`vue/require-name-property`](https://eslint.vuejs.org/rules/require-name-property.html) to also require a `name` in `<script setup>` components ([#3149](https://github.com/vuejs/eslint-plugin-vue/pull/3149))
+
+- Added support for [ESLint Stylistic](https://eslint.style/) v6, see [its release notes](https://github.com/eslint-stylistic/eslint-stylistic/releases/tag/v6.0.0). Since ESLint Stylistic v6 changed the default option of `dot-location` to `"property"`, [`vue/dot-location`](https://eslint.vuejs.org/rules/dot-location.html) also defaults to `"property"` when ESLint Stylistic v6 is installed. ([#3264](https://github.com/vuejs/eslint-plugin-vue/pull/3264))
+
+- Added support for static template literals in [`vue/component-options-name-casing`](https://eslint.vuejs.org/rules/component-options-name-casing.html), [`vue/multi-word-component-names`](https://eslint.vuejs.org/rules/multi-word-component-names.html), [`vue/no-bare-strings-in-template`](https://eslint.vuejs.org/rules/no-bare-strings-in-template.html), [`vue/no-dupe-keys`](https://eslint.vuejs.org/rules/no-dupe-keys.html), [`vue/no-duplicate-class-names`](https://eslint.vuejs.org/rules/no-duplicate-class-names.html), [`vue/no-restricted-component-names`](https://eslint.vuejs.org/rules/no-restricted-component-names.html), [`vue/no-undef-components`](https://eslint.vuejs.org/rules/no-undef-components.html), and [`vue/no-unused-components`](https://eslint.vuejs.org/rules/no-unused-components.html). ([#3226](https://github.com/vuejs/eslint-plugin-vue/pull/3226))
+
+- Added `["inline", "inline-function"]` option to [`vue/v-on-handler-style`](https://eslint.vuejs.org/rules/v-on-handler-style.html) ([#3234](https://github.com/vuejs/eslint-plugin-vue/pull/3234))
+
+### Patch Changes
+
+- Fixed [`vue/comment-directive`](https://eslint.vuejs.org/rules/comment-directive.html) so that `<!-- eslint-enable -->` re-enables rules disabled by `<!-- eslint-disable rule -->`, and `<!-- eslint-enable rule -->` re-enables that rule after `<!-- eslint-disable -->`, as ESLint does ([#3231](https://github.com/vuejs/eslint-plugin-vue/pull/3231))
+
+- Fixed [`vue/no-template-shadow`](https://eslint.vuejs.org/rules/no-template-shadow.html) false negatives for template variables that shadow `inject` properties ([#3267](https://github.com/vuejs/eslint-plugin-vue/pull/3267))
+
+- Improved grammar and wording in some rule messages ([#3258](https://github.com/vuejs/eslint-plugin-vue/pull/3258))
+
 ## 10.12.1
 
 ### Patch Changes

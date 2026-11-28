@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-html-elements
 description: disallow using deprecated HTML elements
+since: v10.13.0
 ---
 
 # vue/no-deprecated-html-elements
 
 > disallow using deprecated HTML elements
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -76,6 +75,10 @@ The rule goes by the tag name as written in the template, not by component regis
 ## :books: Further Reading
 
 - [HTML Standard - Obsolete features](https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.13.0
 
 ## :mag: Implementation
 
