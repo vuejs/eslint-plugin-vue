@@ -72,6 +72,7 @@ import noConsole from './rules/no-console.ts'
 import noConstantCondition from './rules/no-constant-condition.ts'
 import noContentOutsideBlock from './rules/no-content-outside-block.ts'
 import noCustomModifiersOnVModel from './rules/no-custom-modifiers-on-v-model.ts'
+import noDeepMutatingComputedRef from './rules/no-deep-mutating-computed-ref.ts'
 import noDefineModelDefault from './rules/no-define-model-default.ts'
 import noDeprecatedDataObjectDeclaration from './rules/no-deprecated-data-object-declaration.ts'
 import noDeprecatedDeleteSet from './rules/no-deprecated-delete-set.ts'
@@ -334,6 +335,7 @@ export default {
     'no-constant-condition': noConstantCondition,
     'no-content-outside-block': noContentOutsideBlock,
     'no-custom-modifiers-on-v-model': noCustomModifiersOnVModel,
+    'no-deep-mutating-computed-ref': noDeepMutatingComputedRef,
     'no-define-model-default': noDefineModelDefault,
     'no-deprecated-data-object-declaration': noDeprecatedDataObjectDeclaration,
     'no-deprecated-delete-set': noDeprecatedDeleteSet,
