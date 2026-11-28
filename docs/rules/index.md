@@ -243,6 +243,7 @@ For example:
 | [vue/no-literals-in-template] | disallow object, array, and function literals in template |  | :hammer: |
 | [vue/no-multiple-objects-in-class] | disallow passing multiple objects in an array to class |  | :hammer: |
 | [vue/no-negated-v-if-condition] | disallow negated conditions in v-if/v-else | :wrench: | :hammer: |
+| [vue/no-non-reactive-in-computed-properties] | disallow non-reactive component instance properties in computed properties |  | :warning: |
 | [vue/no-potential-component-option-typo] | disallow a potential typo in your component property | :bulb: | :hammer: |
 | [vue/no-props-shadow] | disallow declarations that shadow props in `<script setup>` |  | :warning: |
 | [vue/no-ref-object-reactivity-loss] | disallow usages of ref objects that can lead to loss of reactivity |  | :warning: |
@@ -501,6 +502,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-mutating-props]: ./no-mutating-props.md
 [vue/no-negated-condition]: ./no-negated-condition.md
 [vue/no-negated-v-if-condition]: ./no-negated-v-if-condition.md
+[vue/no-non-reactive-in-computed-properties]: ./no-non-reactive-in-computed-properties.md
 [vue/no-parsing-error]: ./no-parsing-error.md
 [vue/no-potential-component-option-typo]: ./no-potential-component-option-typo.md
 [vue/no-props-shadow]: ./no-props-shadow.md

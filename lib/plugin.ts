@@ -119,6 +119,7 @@ import noMultipleTemplateRoot from './rules/no-multiple-template-root.ts'
 import noMutatingProps from './rules/no-mutating-props.ts'
 import noNegatedCondition from './rules/no-negated-condition.ts'
 import noNegatedVIfCondition from './rules/no-negated-v-if-condition.ts'
+import noNonReactiveInComputedProperties from './rules/no-non-reactive-in-computed-properties.ts'
 import noParsingError from './rules/no-parsing-error.ts'
 import noPotentialComponentOptionTypo from './rules/no-potential-component-option-typo.ts'
 import noPropsShadow from './rules/no-props-shadow.ts'
@@ -381,6 +382,7 @@ export default {
     'no-mutating-props': noMutatingProps,
     'no-negated-condition': noNegatedCondition,
     'no-negated-v-if-condition': noNegatedVIfCondition,
+    'no-non-reactive-in-computed-properties': noNonReactiveInComputedProperties,
     'no-parsing-error': noParsingError,
     'no-potential-component-option-typo': noPotentialComponentOptionTypo,
     'no-props-shadow': noPropsShadow,
