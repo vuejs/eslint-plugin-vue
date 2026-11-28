@@ -211,12 +211,29 @@ export default {
 
     return utils.defineTemplateBodyVisitor(context, {
       VText(node: VText) {
-        if (getBareString(node.value)) {
-          context.report({
-            node,
-            messageId: 'unexpected'
-          })
+        if (!getBareString(node.value)) {
+          return
         }
+        const text = context.sourceCode.getText(node)
+        const leadingWhitespace = text.slice(0, text.search(/\S/u))
+        const start = { ...node.loc.start }
+        // HTML locations advance lines only after LF, unlike ESLint locations.
+        for (const char of leadingWhitespace) {
+          if (char === '\n') {
+            start.line++
+            start.column = 0
+          } else {
+            start.column++
+          }
+        }
+        context.report({
+          node,
+          loc: {
+            start,
+            end: node.loc.end
+          },
+          messageId: 'unexpected'
+        })
       },
       VElement(node: VElement) {
         elementStack = {

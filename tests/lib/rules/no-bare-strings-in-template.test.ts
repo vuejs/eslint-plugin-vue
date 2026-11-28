@@ -1,7 +1,9 @@
 /**
  * @author Yosuke Ota
  */
-import { RuleTester } from '../../eslint-compat'
+import assert from 'node:assert'
+import { ESLint, RuleTester } from '../../eslint-compat'
+import pluginVue from '../../../dist'
 import rule from '../../../lib/rules/no-bare-strings-in-template'
 import vueEslintParser from 'vue-eslint-parser'
 
@@ -160,6 +162,80 @@ tester.run('no-bare-strings-in-template', rule, {
     }
   ],
   invalid: [
+    ...['\r', '\u{2028}', '\u{2029}'].flatMap((whitespace) => [
+      {
+        code: `<template><div>${whitespace}word</div></template>`,
+        errors: [
+          {
+            messageId: 'unexpected',
+            line: 1,
+            column: 17,
+            endLine: 1,
+            endColumn: 21
+          }
+        ]
+      },
+      {
+        code: `<template>${whitespace}<div>word</div></template>`,
+        errors: [
+          {
+            messageId: 'unexpected',
+            line: 1,
+            column: 17,
+            endLine: 1,
+            endColumn: 21
+          }
+        ]
+      },
+      {
+        code: `<template>${whitespace}<div>\n\t${whitespace}word\n</div></template>`,
+        errors: [
+          {
+            messageId: 'unexpected',
+            line: 2,
+            column: 3,
+            endLine: 3,
+            endColumn: 1
+          }
+        ]
+      }
+    ]),
+    {
+      code: '<template>\n  <div>\n\n    test\n  </div>\n</template>',
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 4,
+          column: 5,
+          endLine: 5,
+          endColumn: 3
+        }
+      ]
+    },
+    {
+      code: '<template><div>\r\n\tfoo &amp; bar\r\n</div></template>',
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 2,
+          column: 2,
+          endLine: 3,
+          endColumn: 1
+        }
+      ]
+    },
+    {
+      code: '<template><div> &NewLine;test</div></template>',
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 17,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
+    },
     {
       code: `
       <template>
@@ -385,4 +461,70 @@ tester.run('no-bare-strings-in-template', rule, {
       ]
     }
   ]
+})
+
+describe('no-bare-strings-in-template with comment directives', () => {
+  const eslint = new ESLint({
+    overrideConfigFile: true,
+    overrideConfig: [
+      ...pluginVue.configs['flat/base'],
+      { rules: { 'vue/no-bare-strings-in-template': 'error' } }
+    ]
+  })
+
+  for (const [name, whitespace] of [
+    ['CR', '\r'],
+    ['line separator', '\u{2028}'],
+    ['paragraph separator', '\u{2029}'],
+    ['LF', '\n'],
+    ['CRLF', '\r\n']
+  ]) {
+    it(`keeps block-disabled text suppressed after ${name}`, async () => {
+      const code = `<template><!-- eslint-disable vue/no-bare-strings-in-template --><div>${whitespace}word</div></template>`
+      const [result] = await eslint.lintText(code, { filePath: 'test.vue' })
+
+      assert.deepStrictEqual(result.messages, [])
+    })
+  }
+
+  it('suppresses indented text on the same line', async () => {
+    const code = `<template>
+  <div>
+    test  <!-- eslint-disable-line vue/no-bare-strings-in-template -->
+    <div>test</div>  <!-- eslint-disable-line vue/no-bare-strings-in-template -->
+  </div>
+</template>`
+    const [result] = await eslint.lintText(code, { filePath: 'test.vue' })
+
+    assert.deepStrictEqual(result.messages, [])
+  })
+
+  it('suppresses indented text on the next line', async () => {
+    const code = `<template>
+  <div>
+    <!-- eslint-disable-next-line vue/no-bare-strings-in-template -->
+    test
+  </div>
+</template>`
+    const [result] = await eslint.lintText(code, { filePath: 'test.vue' })
+
+    assert.deepStrictEqual(result.messages, [])
+  })
+
+  it('does not suppress text after a same-line directive', async () => {
+    const code = `<template>
+  <div> <!-- eslint-disable-line vue/no-bare-strings-in-template -->
+    test
+  </div>
+</template>`
+    const [result] = await eslint.lintText(code, { filePath: 'test.vue' })
+
+    assert.strictEqual(result.messages.length, 1)
+    assert.strictEqual(
+      result.messages[0].ruleId,
+      'vue/no-bare-strings-in-template'
+    )
+    assert.strictEqual(result.messages[0].line, 3)
+    assert.strictEqual(result.messages[0].column, 5)
+  })
 })
