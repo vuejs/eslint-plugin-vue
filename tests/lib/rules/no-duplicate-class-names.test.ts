@@ -67,6 +67,130 @@ tester.run('no-duplicate-class-names', rule, {
     {
       filename: 'class-binary-in-logical-non-intersecting.vue',
       code: `<template><div :class="[isActive1 && ('foo' + ' bar'), isActive2 && 'foo']"></div></template>`
+    },
+    {
+      filename: 'class-template-literal-prefixes.vue',
+      code: '<template><h1 :class="`text-${size} font-weight-${weight} text-${color}`"></h1></template>'
+    },
+    {
+      filename: 'class-template-literal-suffixes.vue',
+      code: '<template><div :class="`${a}-active ${b}-active`"></div></template>'
+    },
+    {
+      filename: 'class-binary-prefixes.vue',
+      code: `<template><div :class="'text-' + size + ' text-' + color"></div></template>`
+    },
+    {
+      filename: 'class-binary-chain-suffix.vue',
+      code: `<template><div :class="'btn ' + type + ' btn' + size"></div></template>`
+    },
+    {
+      filename: 'class-binary-joined-prefix.vue',
+      code: `<template><div :class="'tag' + 'tag tag'"></div></template>`
+    },
+    {
+      filename: 'class-binary-joined-suffix.vue',
+      code: `<template><div :class="'tag tag' + 'tag'"></div></template>`
+    },
+    {
+      filename: 'class-binary-joined-whole.vue',
+      code: `<template><div :class="'tag' + 'tag'"></div></template>`
+    },
+    {
+      filename: 'class-binary-joined-partial.vue',
+      code: `<template><div :class="'a-' + 'b a-'"></div></template>`
+    },
+    {
+      filename: 'class-binary-joined-parenthesized.vue',
+      code: `<template><div :class="'tag' + ('tag tag')"></div></template>`
+    },
+    {
+      filename: 'class-binary-joined-template-literals.vue',
+      code: '<template><div :class="`tag` + `tag tag`"></div></template>'
+    },
+    {
+      filename: 'class-binary-joined-empty-string.vue',
+      code: `<template><div :class="'a b' + '' + 'b'"></div></template>`
+    },
+    {
+      filename: 'class-binary-joined-both-sides.vue',
+      code: `<template><div :class="'b' + 'a a' + 'c'"></div></template>`
+    },
+    {
+      filename: 'class-binary-with-expression-prefix.vue',
+      code: `<template><div :class="'a' + size + ' a'"></div></template>`
+    },
+    {
+      filename: 'class-binary-joined-non-intersecting.vue',
+      code: `<template><div :class="[isActive1 && 'ta' + 'g', isActive2 && 'tag']"></div></template>`
+    },
+    {
+      filename: 'class-binary-template-literal-with-expression-prefix.vue',
+      code: '<template><div :class="size + `b b` + \'ab\'"></div></template>'
+    },
+    {
+      filename: 'class-binary-empty-string-before-expression.vue',
+      code: `<template><div :class="'a a' + '' + size"></div></template>`
+    },
+    {
+      filename: 'class-conditional-glued-in-binary.vue',
+      code: `<template><div :class="'x-' + (c ? 'a a' : 'b')"></div></template>`
+    },
+    {
+      filename: 'class-conditional-glued-to-binary.vue',
+      code: `<template><div :class="'a x' + (c ? 'a' : 'b')"></div></template>`
+    },
+    {
+      filename: 'class-conditional-glued-in-one-branch.vue',
+      code: `<template><div :class="(c ? 'x' : 'y ') + 'a a'"></div></template>`
+    },
+    {
+      filename: 'class-conditional-non-intersecting-in-binary.vue',
+      code: `<template><div :class="(c ? 'a ' : 'b ') + (d ? 'a' : 'b')"></div></template>`
+    },
+    {
+      filename: 'class-conditional-empty-branch-in-binary.vue',
+      code: `<template><div :class="'a' + (c ? '' : ' ') + 'a'"></div></template>`
+    },
+    {
+      filename: 'class-conditional-impossible-combination.vue',
+      code: `<template><div class="ab" :class="(c ? 'a' : 'x ') + (c ? ' y' : 'b')"></div></template>`
+    },
+    {
+      filename: 'class-conditional-impossible-combination-in-array.vue',
+      code: `<template><div :class="['ab', (c ? 'a' : 'x ') + (c ? ' y' : 'b')]"></div></template>`
+    },
+    {
+      filename: 'class-conditional-nested-same-condition.vue',
+      code: `<template><div :class="'' + (c ? 'a ' + (c ? 'b' : 'a') : '')"></div></template>`
+    },
+    {
+      // `icon` may be glued to `dark`, since conditions are not correlated
+      filename: 'class-conditional-correlated-conditions.vue',
+      code: `<template><div :class="'icon' + (dark ? ' ' : '') + (dark ? 'dark' : ' light') + ' icon'"></div></template>`
+    },
+    {
+      // `a` is duplicated in each branch, but with different neighbors
+      filename: 'class-conditional-different-pairs.vue',
+      code: `<template><div :class="'a a' + (c ? 'b ' : ' b') + 'a'"></div></template>`
+    },
+    {
+      filename: 'class-logical-expression-in-template-literal.vue',
+      code: "<template><div :class=\"`x${c && 'ab'} a${'b'}`\"></div></template>"
+    },
+    {
+      // `classList` splits on ASCII whitespace only
+      filename: 'class-non-ascii-whitespace.vue',
+      code: String.raw`<template><div :class="[${'`'}a\va${'`'}, 'b\u00a0b', ${'`'}c\ufeff${'`'} + 'c']"></div></template>`
+    },
+    {
+      filename: 'class-binary-typescript-glued.vue',
+      code: `<template><div :class="'a a' + (x as string)"></div></template>`,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
   invalid: [
@@ -578,6 +702,516 @@ tester.run('no-duplicate-class-names', rule, {
           column: 36,
           endLine: 1,
           endColumn: 52
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-template-literal-with-expression.vue',
+      code: '<template><div :class="`foo ${size} foo`"></div></template>',
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 41
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-with-expression.vue',
+      code: `<template><div :class="'foo ' + size + ' foo'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-chain.vue',
+      code: `<template><div :class="'foo ' + 'bar ' + 'foo'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-with-template-literal.vue',
+      code: '<template><div :class="\'foo\' + ` foo ${size}`"></div></template>',
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-with-prefix.vue',
+      code: `<template><div :class="prefix + 'btn btn shadow shadow'"></div></template>`,
+      output: `<template><div :class="prefix + 'btn btn shadow'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'shadow'.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 56
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-with-suffix.vue',
+      code: `<template><div :class="'shadow shadow btn btn' + suffix"></div></template>`,
+      output: `<template><div :class="'shadow btn btn' + suffix"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'shadow'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 47
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-joined.vue',
+      code: `<template><div :class="'ta' + 'g tag'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'tag'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-joined-hyphen.vue',
+      code: `<template><div :class="'a-' + 'b a-b'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'a-b'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-joined-parenthesized.vue',
+      code: `<template><div :class="('a' + 'b') + ' ab'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'ab'.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 34
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-joined-chain.vue',
+      code: `<template><div :class="'ta' + 'g ta' + 'g'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'tag'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-joined-template-literals.vue',
+      code: '<template><div :class="`ta` + `g tag`"></div></template>',
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'tag'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-joined-in-operand.vue',
+      code: `<template><div :class="'ta' + 'g tag tag'"></div></template>`,
+      output: `<template><div :class="'ta' + 'g tag'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'tag'.",
+          line: 1,
+          column: 31,
+          endLine: 1,
+          endColumn: 42
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-empty-string.vue',
+      code: `<template><div :class="'' + 'foo foo'"></div></template>`,
+      output: `<template><div :class="'' + 'foo'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-separated.vue',
+      code: `<template><div :class="'a b' + ' a'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-separated-by-escapes.vue',
+      code: String.raw`<template><div :class="'a\t' + 'a' + '\na'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 35
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-chain-in-logical-expression.vue',
+      code: `<template><div :class="isActive && 'foo ' + 'bar ' + 'foo'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 51
+        }
+      ]
+    },
+    {
+      filename:
+        'duplicate-class-binary-with-expression-in-logical-expression.vue',
+      code: `<template><div :class="isActive && 'foo ' + size + ' foo'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 49
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-joined-cross-node.vue',
+      code: `<template><div :class="[isActive && 'ta' + 'g', 'tag']"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'tag'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 55
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-in-template-literal.vue',
+      code: "<template><div :class=\"`x ${'a' + ' b'} b`\"></div></template>",
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'b'.",
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-template-literal-last-quasi.vue',
+      code: '<template><div :class="`${a} b b`"></div></template>',
+      output: '<template><div :class="`${a} b`"></div></template>',
+      errors: [
+        {
+          message: "Duplicate class name 'b'.",
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 34
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-template-literal-middle-quasi.vue',
+      code: '<template><div :class="`${a} b b ${c}`"></div></template>',
+      output: '<template><div :class="`${a} b ${c}`"></div></template>',
+      errors: [
+        {
+          message: "Duplicate class name 'b'.",
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-template-literal-first-quasi.vue',
+      code: '<template><div :class="`b b ${c}`"></div></template>',
+      output: '<template><div :class="`b ${c}`"></div></template>',
+      errors: [
+        {
+          message: "Duplicate class name 'b'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-after-conditional.vue',
+      code: `<template><div :class="(c ? 'x ' : 'y ') + 'a a'"></div></template>`,
+      output: `<template><div :class="(c ? 'x ' : 'y ') + 'a'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 44,
+          endLine: 1,
+          endColumn: 49
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-template-literal-after-conditional.vue',
+      code: "<template><div :class=\"`${active ? 'is-active ' : ''}btn btn`\"></div></template>",
+      output:
+        "<template><div :class=\"`${active ? 'is-active ' : ''}btn`\"></div></template>",
+      errors: [
+        {
+          message: "Duplicate class name 'btn'.",
+          line: 1,
+          column: 53,
+          endLine: 1,
+          endColumn: 62
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-chain-after-conditional.vue',
+      code: `<template><div :class="(c ? 'x ' : '') + 'a ' + 'a'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-conditional-in-binary.vue',
+      code: `<template><div :class="'x ' + (c ? 'a a' : 'b')"></div></template>`,
+      output: `<template><div :class="'x ' + (c ? 'a' : 'b')"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 41
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-conditional-and-binary.vue',
+      code: `<template><div :class="(c ? 'a' : 'b') + ' a'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-before-conditional.vue',
+      code: `<template><div :class="'a ' + 'a ' + (c ? 'b' : '')"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 35
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-many-conditionals.vue',
+      code: `<template><div :class="'btn' + (c0 ? ' x0' : ' y0') + (c1 ? ' x1' : ' y1') + (c2 ? ' x2' : ' y2') + (c3 ? ' x3' : ' y3') + (c4 ? ' x4' : ' y4') + (c5 ? ' x5' : ' y5') + ' btn'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'btn'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 52
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-before-escaped-whitespace.vue',
+      code: '<template><div :class="\'b b\' + `\\n`"></div></template>',
+      output: '<template><div :class="\'b\' + `\\n`"></div></template>',
+      errors: [
+        {
+          message: "Duplicate class name 'b'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-with-escape.vue',
+      code: String.raw`<template><div :class="'a\tb a'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 32
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-logical-expression-in-binary.vue',
+      code: `<template><div :class="'foo ' + (isActive && 'foo')"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 52
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-crlf.vue',
+      code: '<template>\r\n<div class="a b\r\na"></div>\r\n<div :class="`a b\r\na ${x}`"></div>\r\n</template>',
+      output:
+        '<template>\r\n<div class="a b"></div>\r\n<div :class="`a b ${x}`"></div>\r\n</template>',
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 2,
+          column: 12,
+          endLine: 3,
+          endColumn: 3
+        },
+        {
+          message: "Duplicate class name 'a'.",
+          line: 4,
+          column: 14,
+          endLine: 5,
+          endColumn: 5
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-template-literal-typescript.vue',
+      code: '<template><div :class="`${y as any} b b ${z!}`"></div></template>',
+      output: '<template><div :class="`${y as any} b ${z!}`"></div></template>',
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: "Duplicate class name 'b'.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-logical-typescript.vue',
+      code: `<template><div :class="(c! && 'a b') + ' a'"></div></template>`,
+      output: null,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: "Duplicate class name 'a'.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 36
         }
       ]
     }
