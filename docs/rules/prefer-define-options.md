@@ -47,6 +47,10 @@ export default { name: 'Foo' }
 
 Nothing.
 
+## :couple: Related Rules
+
+- [vue/prefer-define-component](./prefer-define-component.md)
+
 ## :books: Further Reading
 
 - [API - defineOptions()](https://vuejs.org/api/sfc-script-setup.html#defineoptions)
