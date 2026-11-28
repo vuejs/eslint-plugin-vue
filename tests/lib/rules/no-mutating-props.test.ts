@@ -428,6 +428,37 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `
+    },
+    {
+      // aliases of props without mutation, or not declared with const
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const props = defineProps({ item: Object, list: Array })
+          const { item } = props
+          const list = props.list.slice()
+          let { item: other } = props
+          other = {}
+          other.name = 'x'
+          console.log(item.name, list.push(1))
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(props) {
+              const { foo } = props.deps
+              foo.bar = 1
+              const alias = props
+              alias.a.b = 1
+            }
+          }
+        </script>
+      `,
+      options: [{ shallowOnly: true }]
     }
   ],
 
@@ -1458,6 +1489,127 @@ ruleTester.run('no-mutating-props', rule, {
           column: 24,
           endLine: 7,
           endColumn: 68
+        }
+      ]
+    },
+    {
+      // aliases destructured or assigned from the props variable
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const props = defineProps({ deps: Object, item: Object, list: Array })
+          const { unique } = props.deps
+          unique.value.types.value = 1
+          const { item, list: [first] } = props
+          item.name = 'x'
+          first.name = 'y'
+          const list = props.list
+          list.push(1)
+          const alias = props
+          alias.item.name = 'z'
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "deps" prop.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 39
+        },
+        {
+          message: 'Unexpected mutation of "item" prop.',
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 26
+        },
+        {
+          message: 'Unexpected mutation of "list" prop.',
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 27
+        },
+        {
+          message: 'Unexpected mutation of "list" prop.',
+          line: 10,
+          column: 11,
+          endLine: 10,
+          endColumn: 23
+        },
+        {
+          message: 'Unexpected mutation of "item" prop.',
+          line: 12,
+          column: 11,
+          endLine: 12,
+          endColumn: 32
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const { deps } = defineProps({ deps: Object })
+          const { unique } = deps
+          unique.value = 1
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "deps" prop.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 27
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(props) {
+              const { item } = props
+              item.name = 'x'
+              const alias = props
+              alias.count++
+            }
+          }
+        </script>
+      `,
+      options: [{ shallowOnly: true }],
+      errors: [
+        {
+          message: 'Unexpected mutation of "count" prop.',
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(props) {
+              const { item } = props
+              item.name = 'x'
+            }
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "item" prop.',
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 30
         }
       ]
     }
