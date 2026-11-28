@@ -18,7 +18,7 @@ export default {
     messages: {
       unexpectedArgument: "'v-html' directives require no argument.",
       unexpectedModifier: "'v-html' directives require no modifier.",
-      expectedValue: "'v-html' directives require that attribute value."
+      expectedValue: "'v-html' directives require an attribute value."
     }
   },
   create(context: RuleContext) {

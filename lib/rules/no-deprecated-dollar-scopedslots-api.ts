@@ -16,7 +16,7 @@ export default {
     fixable: 'code',
     schema: [],
     messages: {
-      deprecated: 'The `$scopedSlots` is deprecated.'
+      deprecated: '`$scopedSlots` is deprecated.'
     }
   },
   create(context: RuleContext) {

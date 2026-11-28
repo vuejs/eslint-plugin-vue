@@ -82,8 +82,8 @@ function parseTargetAttrs(options: Record<string, string[]>): TargetAttrs {
  */
 function getStringValue(value: VExpressionContainer): string | null {
   const expression = value.expression
-  return expression?.type === 'Literal' && typeof expression.value === 'string'
-    ? expression.value
+  return expression && utils.isStringLiteral(expression)
+    ? utils.getStringLiteralValue(expression)
     : null
 }
 

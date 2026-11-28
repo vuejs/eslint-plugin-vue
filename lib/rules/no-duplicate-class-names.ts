@@ -317,13 +317,13 @@ function* extractClassNodes(
     }
     case 'ObjectExpression': {
       for (const prop of nodeExpression.properties) {
-        if (
-          prop.type === 'Property' &&
-          prop.key?.type === 'Literal' &&
-          typeof prop.key.value === 'string'
-        ) {
+        if (prop.type === 'Property' && utils.isStringLiteral(prop.key)) {
           yield {
-            node: prop.key,
+            // a static template literal has a single part
+            node:
+              prop.key.type === 'TemplateLiteral'
+                ? prop.key.quasis[0]
+                : prop.key,
             isUnconditional: false,
             parentExpr: nodeExpression
           }

@@ -45,7 +45,7 @@ export default {
       }
     ],
     messages: {
-      requireDirective: '`<template>` require directive.'
+      requireDirective: '`<template>` requires a directive.'
     }
   },
   create(context: RuleContext) {

@@ -70,7 +70,7 @@ tester.run('valid-v-is', rule, {
       code: '<template><div v-is /></template>',
       errors: [
         {
-          message: "'v-is' directives require that attribute value.",
+          message: "'v-is' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,
@@ -83,7 +83,7 @@ tester.run('valid-v-is', rule, {
       code: '<template><div v-is="" /></template>',
       errors: [
         {
-          message: "'v-is' directives require that attribute value.",
+          message: "'v-is' directives require an attribute value.",
           line: 1,
           column: 16,
           endLine: 1,
