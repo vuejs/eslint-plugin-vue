@@ -62,6 +62,13 @@ tester.run('block-attributes-order', rule, {
 </template>
 `
     },
+    // attribute names are case-sensitive, as in `@vue/compiler-sfc`
+    {
+      filename: 'test.vue',
+      code: `
+<script LANG="ts" SETUP></script>
+`
+    },
     {
       filename: 'test.vue',
       code: `
@@ -146,6 +153,11 @@ tester.run('block-attributes-order', rule, {
     {
       filename: 'test.vue',
       code: `<template lang="html" functional><div><!--test</div></template>`
+    },
+    // not a `.vue` file
+    {
+      filename: 'test.js',
+      code: 'const a = 1'
     }
   ],
   invalid: [
