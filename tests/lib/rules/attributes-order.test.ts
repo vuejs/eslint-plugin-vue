@@ -4,7 +4,8 @@
  */
 import assert from 'node:assert'
 import rule from '../../../lib/rules/attributes-order'
-import { RuleTester, Linter } from '../../eslint-compat'
+import { Linter } from 'eslint'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
@@ -3105,7 +3106,10 @@ tester.run('attributes-order', rule, {
 })
 
 describe('`order` option of `vue/attributes-order`', () => {
-  const linter = new Linter()
+  // The flat config mode validates rule options against the schema
+  // (ESLint v8 defaults to the eslintrc mode, which does not).
+  const linter = new Linter({ configType: 'flat' })
+  const invalidOptions = /Key "vue\/attributes-order"/u
   function verify(order: unknown[]) {
     return linter.verify(
       '<template><div></div></template>',
@@ -3133,8 +3137,8 @@ describe('`order` option of `vue/attributes-order`', () => {
     'ID'
   ]) {
     it(`rejects ${JSON.stringify(name)}`, () => {
-      assert.throws(() => verify([name, 'OTHER_ATTR']))
-      assert.throws(() => verify([[name, 'OTHER_ATTR']]))
+      assert.throws(() => verify([name, 'OTHER_ATTR']), invalidOptions)
+      assert.throws(() => verify([[name, 'OTHER_ATTR']]), invalidOptions)
     })
   }
 
