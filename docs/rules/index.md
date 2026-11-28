@@ -200,7 +200,7 @@ For example:
 ```json
 {
   "rules": {
-    "vue/block-lang": "error"
+    "vue/block-attributes-order": "error"
   }
 }
 ```
@@ -209,6 +209,7 @@ For example:
 
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
+| [vue/block-attributes-order] | enforce order of attributes on top-level blocks | :wrench: | :hammer: |
 | [vue/block-lang] | disallow use other than available `lang` |  | :hammer: |
 | [vue/block-tag-newline] | enforce line breaks after opening and before closing block-level tags | :wrench: | :lipstick: |
 | [vue/component-api-style] | enforce component API style |  | :hammer: |
@@ -393,6 +394,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/arrow-spacing]: ./arrow-spacing.md
 [vue/attribute-hyphenation]: ./attribute-hyphenation.md
 [vue/attributes-order]: ./attributes-order.md
+[vue/block-attributes-order]: ./block-attributes-order.md
 [vue/block-lang]: ./block-lang.md
 [vue/block-order]: ./block-order.md
 [vue/block-spacing]: ./block-spacing.md

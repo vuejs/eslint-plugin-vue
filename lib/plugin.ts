@@ -11,6 +11,7 @@ import arrayElementNewline from './rules/array-element-newline.ts'
 import arrowSpacing from './rules/arrow-spacing.ts'
 import attributeHyphenation from './rules/attribute-hyphenation.ts'
 import attributesOrder from './rules/attributes-order.ts'
+import blockAttributesOrder from './rules/block-attributes-order.ts'
 import blockLang from './rules/block-lang.ts'
 import blockOrder from './rules/block-order.ts'
 import blockSpacing from './rules/block-spacing.ts'
@@ -272,6 +273,7 @@ export default {
     'arrow-spacing': arrowSpacing,
     'attribute-hyphenation': attributeHyphenation,
     'attributes-order': attributesOrder,
+    'block-attributes-order': blockAttributesOrder,
     'block-lang': blockLang,
     'block-order': blockOrder,
     'block-spacing': blockSpacing,
