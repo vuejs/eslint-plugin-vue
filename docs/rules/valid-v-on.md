@@ -30,9 +30,9 @@ This rule checks whether every `v-on` directive is valid.
 
 This rule reports `v-on` directives in the following cases:
 
-- The directive does not have that event name. E.g. `<div v-on="foo"></div>`
+- The directive does not have an event name. E.g. `<div v-on="foo"></div>`
 - The directive has invalid modifiers. E.g. `<div v-on:click.bbb="foo"></div>`
-- The directive does not have that attribute value and any verb modifiers. E.g. `<div v-on:click></div>`
+- The directive does not have an attribute value or any verb modifiers. E.g. `<div v-on:click></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-on': ['error']}">
 
@@ -57,7 +57,7 @@ This rule reports `v-on` directives in the following cases:
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
+This rule does not check syntax errors in directives because the [vue/no-parsing-error] rule checks them.
 :::
 
 ## :wrench: Options

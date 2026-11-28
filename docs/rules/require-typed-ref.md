@@ -12,9 +12,9 @@ since: v9.15.0
 
 ## :book: Rule Details
 
-This rule disallows calling `ref()` or `shallowRef()` functions without generic type parameter or an argument when using TypeScript.
+This rule disallows calling `ref()` or `shallowRef()` functions without a generic type parameter or an argument when using TypeScript.
 
-With TypeScript it is easy to prevent usage of `any` by using [`noImplicitAny`](https://www.typescriptlang.org/tsconfig#noImplicitAny). Unfortunately this rule is easily bypassed with Vue `ref()` function. Calling `ref()` function without a generic parameter or an initial value leads to ref having `Ref<any>` type.
+With TypeScript it is easy to prevent usage of `any` by using [`noImplicitAny`](https://www.typescriptlang.org/tsconfig#noImplicitAny). Unfortunately this rule is easily bypassed with Vue `ref()` function. Calling `ref()` function without a generic parameter or an initial value gives the ref the `Ref<any>` type.
 
 <eslint-code-block :rules="{'vue/require-typed-ref': ['error']}">
 

@@ -174,7 +174,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      considerExact: "Consider to use '.exact' modifier."
+      considerExact: "Consider using the '.exact' modifier."
     }
   },
 

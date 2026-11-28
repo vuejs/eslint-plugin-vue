@@ -20,7 +20,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule checks whether template contains single root element valid for Vue 2.
+This rule checks whether the template contains a single root element, which is required in Vue 2.
 
 <eslint-code-block :rules="{'vue/no-multiple-template-root': ['error']}">
 

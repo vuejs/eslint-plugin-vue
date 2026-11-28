@@ -15,7 +15,7 @@ since: v8.2.0
 
 ## :book: Rule Details
 
-This rule aims to enforce casing of the component names in `components` options.
+This rule enforces the casing of component names in the `components` option.
 
 ## :wrench: Options
 

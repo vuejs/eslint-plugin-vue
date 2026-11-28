@@ -20,7 +20,7 @@ since: v7.11.0
 
 ## :book: Rule Details
 
-This rule reports deprecated `v-is` directive in Vue.js v3.1.0+.
+This rule reports the deprecated `v-is` directive in Vue.js v3.1.0+.
 
 Use [`is` attribute with `vue:` prefix](https://vuejs.org/api/built-in-special-attributes.html#is) instead.
 

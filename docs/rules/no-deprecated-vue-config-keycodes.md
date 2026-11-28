@@ -20,7 +20,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports use of deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+).
+This rule reports use of the deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+).
 
 See [Migration Guide - KeyCode Modifiers](https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html) for more details.
 

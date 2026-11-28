@@ -20,7 +20,7 @@ since: v3.2.0
 
 ## :book: Rule Details
 
-This rule makes sure you keep declared order of properties in components.
+This rule makes sure you keep the declared order of properties in components.
 Recommended order of properties can be [found here](https://vuejs.org/style-guide/rules-recommended.html#component-instance-options-order).
 
 <eslint-code-block fix :rules="{'vue/order-in-components': ['error']}">

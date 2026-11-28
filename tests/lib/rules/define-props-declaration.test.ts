@@ -60,6 +60,31 @@ tester.run('define-props-declaration', rule, {
     },
     {
       filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel<string>()
+      const namedModel = defineModel<number>('count', { default: 0 })
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel({ type: String })
+      const namedModel = defineModel('count', { type: Number })
+      const untypedModel = defineModel()
+      </script>
+      `,
+      options: ['runtime']
+    },
+    {
+      filename: 'test.vue',
       // ignore script without lang="ts"
       code: `
       <script setup>
@@ -713,6 +738,136 @@ tester.run('define-props-declaration', rule, {
           column: 21,
           endLine: 5,
           endColumn: 11
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel()
+      </script>
+      `,
+      output: null,
+      errors: [
+        {
+          messageId: 'hasNoTypeArg',
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 34
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const namedModel = defineModel('count')
+      </script>
+      `,
+      output: null,
+      errors: [
+        {
+          messageId: 'hasNoTypeArg',
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 46
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel({ type: String })
+      const namedModel = defineModel('count', { type: Number })
+      </script>
+      `,
+      output: null,
+      errors: [
+        {
+          messageId: 'hasArg',
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 50
+        },
+        {
+          messageId: 'hasArg',
+          line: 4,
+          column: 26,
+          endLine: 4,
+          endColumn: 64
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const model = defineModel<string>()
+      const namedModel = defineModel<number>('count', { default: 0 })
+      </script>
+      `,
+      output: null,
+      options: ['runtime'],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          messageId: 'hasTypeArg',
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 42
+        },
+        {
+          messageId: 'hasTypeArg',
+          line: 4,
+          column: 26,
+          endLine: 4,
+          endColumn: 70
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({ kind: { type: String, default: 'a' } })
+      const model = defineModel({ type: String })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = withDefaults(defineProps<{ kind?: string }>(), { kind: 'a' })
+      const model = defineModel({ type: String })
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          messageId: 'hasArg',
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 74
+        },
+        {
+          messageId: 'hasArg',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 50
         }
       ]
     }

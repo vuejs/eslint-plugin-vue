@@ -62,7 +62,7 @@ export default {
     messages: {
       unexpectedArgument: "'v-memo' directives require no argument.",
       unexpectedModifier: "'v-memo' directives require no modifier.",
-      expectedValue: "'v-memo' directives require that attribute value.",
+      expectedValue: "'v-memo' directives require an attribute value.",
       expectedArray:
         "'v-memo' directives require the attribute value to be an array.",
       insideVFor: "'v-memo' directive does not work inside 'v-for'."

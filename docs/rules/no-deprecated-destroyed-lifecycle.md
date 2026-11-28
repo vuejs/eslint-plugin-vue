@@ -21,7 +21,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports use of deprecated `destroyed` and `beforeDestroy` lifecycle hooks. (in Vue.js 3.0.0+).
+This rule reports use of the deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+).
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-destroyed-lifecycle': ['error']}">
 

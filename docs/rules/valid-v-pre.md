@@ -30,9 +30,9 @@ This rule checks whether every `v-pre` directive is valid.
 
 This rule reports `v-pre` directives in the following cases:
 
-- The directive has that argument. E.g. `<div v-pre:aaa></div>`
-- The directive has that modifier. E.g. `<div v-pre.bbb></div>`
-- The directive has that attribute value. E.g. `<div v-pre="ccc"></div>`
+- The directive has an argument. E.g. `<div v-pre:aaa></div>`
+- The directive has a modifier. E.g. `<div v-pre.bbb></div>`
+- The directive has an attribute value. E.g. `<div v-pre="ccc"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-pre': ['error']}">
 
