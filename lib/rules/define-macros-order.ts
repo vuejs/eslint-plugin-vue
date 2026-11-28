@@ -33,6 +33,14 @@ function isUseStrictStatement(node: ASTNode) {
 }
 
 /**
+ * Check whether a statement starting with the token would continue the
+ * previous statement if that doesn't end with a semicolon
+ */
+function isAsiHazard(token: Token): boolean {
+  return /^[(+\-/[`]/u.test(token.value)
+}
+
+/**
  * Get an index of the first statement after imports and interfaces in order
  * to place defineEmits and defineProps before this statement
  */
@@ -77,6 +85,318 @@ function getDefineMacrosStatement(node: ASTNode): ASTNode {
     : getDefineMacrosStatement(node.parent)
 }
 
+/**
+ * Find the top-level statement that contains the given node.
+ */
+function findTopLevelStatement(node: ASTNode): ASTNode | null {
+  let current = node
+  while (current.parent) {
+    if (current.parent.type === 'Program') {
+      return current
+    }
+    current = current.parent
+  }
+  return null
+}
+
+/** Declarations that are erased by the TypeScript compiler */
+const TYPE_ONLY_DECLARATIONS = new Set([
+  'TSInterfaceDeclaration',
+  'TSTypeAliasDeclaration',
+  'TSDeclareFunction'
+])
+
+/** Declarations that can emit runtime code */
+const RUNTIME_DECLARATIONS = new Set([
+  'VariableDeclaration',
+  'FunctionDeclaration',
+  'ClassDeclaration',
+  'TSEnumDeclaration',
+  'TSModuleDeclaration'
+])
+
+/**
+ * Get the declaration of a top-level statement, looking through `export`,
+ * or `null` if the statement is not a declaration.
+ */
+function getDeclaration(statement: ASTNode): ASTNode | null {
+  const declaration =
+    statement.type === 'ExportNamedDeclaration'
+      ? statement.declaration
+      : statement
+  return declaration &&
+    (TYPE_ONLY_DECLARATIONS.has(declaration.type) ||
+      RUNTIME_DECLARATIONS.has(declaration.type))
+    ? declaration
+    : null
+}
+
+/**
+ * Check whether the given top-level statement only declares types or ambient
+ * values, so its position doesn't matter at runtime.
+ */
+function isTypeOnlyDeclaration(statement: ASTNode): boolean {
+  const declaration = getDeclaration(statement)
+  return (
+    declaration != null &&
+    (TYPE_ONLY_DECLARATIONS.has(declaration.type) ||
+      isDeclareStatement(declaration))
+  )
+}
+
+/**
+ * Check whether the reference only uses the variable as a type.
+ * `isValueReference` is only set by `@typescript-eslint/scope-manager`, other
+ * scope managers only create value references.
+ */
+function isTypeReference(reference: Reference): boolean {
+  return 'isValueReference' in reference && reference.isValueReference === false
+}
+
+/**
+ * Get the variables declared in the top-level scope.
+ */
+function getTopLevelVariables(sourceCode: SourceCode, program: Program) {
+  return sourceCode.scopeManager.scopes
+    .filter((scope) => scope.block === program)
+    .flatMap((scope) => scope.variables)
+}
+
+interface StatementDependencies {
+  /** Statements that declare values or types the statement references */
+  all: Set<ASTNode>
+  /** Statements that declare runtime values the statement references */
+  runtime: Set<ASTNode>
+}
+
+type DependencyGetter = (
+  statement: ASTNode
+) => StatementDependencies | undefined
+
+/**
+ * Map each top-level statement to the top-level statements that declare the
+ * variables and types it references.
+ */
+function getStatementDependencies(
+  sourceCode: SourceCode,
+  program: Program
+): Map<ASTNode, StatementDependencies> {
+  const dependencies = new Map<ASTNode, StatementDependencies>()
+
+  for (const variable of getTopLevelVariables(sourceCode, program)) {
+    for (const def of variable.defs) {
+      const declaration = findTopLevelStatement(def.node)
+      // Only declarations can be allowed above a macro. This skips imports
+      // (they are hoisted and belong at the top anyway), as well as `var`s
+      // declared inside other statements.
+      if (!declaration || !getDeclaration(declaration)) {
+        continue
+      }
+      const isRuntimeDeclaration = !isTypeOnlyDeclaration(declaration)
+
+      for (const reference of variable.references) {
+        const statement = findTopLevelStatement(reference.identifier)
+        if (!statement || statement === declaration) {
+          continue
+        }
+        let statementDependencies = dependencies.get(statement)
+        if (!statementDependencies) {
+          statementDependencies = { all: new Set(), runtime: new Set() }
+          dependencies.set(statement, statementDependencies)
+        }
+        statementDependencies.all.add(declaration)
+        if (isRuntimeDeclaration && !isTypeReference(reference)) {
+          statementDependencies.runtime.add(declaration)
+        }
+      }
+    }
+  }
+
+  return dependencies
+}
+
+/**
+ * Get the statements in `region` that `macro` references, either directly or
+ * through other statements in `region`, in source order.
+ */
+function getReferencedChain(
+  macro: ASTNode,
+  region: ASTNode[],
+  getDependencies: DependencyGetter
+): ASTNode[] {
+  if (region.length === 0) {
+    return []
+  }
+  const regionStatements = new Set(region)
+  const chain = new Set<ASTNode>()
+  const addDependencies = (statement: ASTNode) => {
+    const dependencies = getDependencies(statement)?.all ?? []
+    for (const dependency of dependencies) {
+      if (!regionStatements.has(dependency) || chain.has(dependency)) {
+        continue
+      }
+      chain.add(dependency)
+      addDependencies(dependency)
+    }
+  }
+  addDependencies(macro)
+  return region.filter((node) => chain.has(node))
+}
+
+/**
+ * Check that moving `nodes` (in this order) before `target` does not place
+ * any of them above a runtime declaration it references, which would break
+ * the code.
+ */
+function canMoveBefore(
+  nodes: ASTNode[],
+  target: ASTNode,
+  getDependencies: DependencyGetter
+): boolean {
+  return nodes.every((node, index) => {
+    const dependencies = getDependencies(node)?.runtime ?? []
+    for (const dependency of dependencies) {
+      const dependencyIndex = nodes.indexOf(dependency)
+      const isBrokenDependency =
+        dependencyIndex === -1
+          ? // a declaration that stays between `target` and `node`
+            dependency.range[0] >= target.range[0] &&
+            dependency.range[0] < node.range[0]
+          : // a declaration that is moved below `node`
+            dependencyIndex > index
+      if (isBrokenDependency) {
+        return false
+      }
+    }
+    return true
+  })
+}
+
+/** Nodes whose contents are only used as types */
+const TYPE_NODES = new Set([
+  'TSTypeAnnotation',
+  'TSTypeParameterInstantiation',
+  'TSTypeQuery'
+])
+
+/**
+ * Check whether the reference uses the variable at runtime, i.e. not as a
+ * type, e.g. `typeof x`. Uses in functions count, as they may be called
+ * anywhere.
+ */
+function isRuntimeUse(reference: Reference, statement: ASTNode): boolean {
+  if (isTypeReference(reference) || isTypeOnlyDeclaration(statement)) {
+    return false
+  }
+  for (
+    let node: ASTNode | null = reference.identifier.parent;
+    node && node !== statement;
+    node = node.parent
+  ) {
+    if (TYPE_NODES.has(node.type)) {
+      return false
+    }
+  }
+  return true
+}
+
+interface VariableUses {
+  /** The variables each top-level statement declares or uses at runtime */
+  statementVariables: Map<ASTNode, Set<Variable>>
+  /** The top-level statements that declare `let` and `const` variables */
+  lexicalDeclarations: Map<Variable, ASTNode>
+}
+
+/**
+ * Get the top-level `let`, `const` and `var` variables that each top-level
+ * statement declares or uses at runtime. Imports, functions, classes and types
+ * are left out, so that e.g. calling the same function doesn't count.
+ */
+function getVariableUses(
+  sourceCode: SourceCode,
+  program: Program
+): VariableUses {
+  const statementVariables = new Map<ASTNode, Set<Variable>>()
+  const lexicalDeclarations = new Map<Variable, ASTNode>()
+  const addUse = (statement: ASTNode, variable: Variable) => {
+    let variables = statementVariables.get(statement)
+    if (!variables) {
+      variables = new Set()
+      statementVariables.set(statement, variables)
+    }
+    variables.add(variable)
+  }
+
+  for (const variable of getTopLevelVariables(sourceCode, program)) {
+    const defs = variable.defs.filter((def) => def.type === 'Variable')
+    if (defs.length === 0) {
+      continue
+    }
+    // This includes `var`s declared inside other statements
+    for (const def of defs) {
+      const statement = findTopLevelStatement(def.node)
+      if (!statement || isTypeOnlyDeclaration(statement)) {
+        continue
+      }
+      addUse(statement, variable)
+      if (def.parent.kind !== 'var') {
+        lexicalDeclarations.set(variable, statement)
+      }
+    }
+    for (const reference of variable.references) {
+      const statement = findTopLevelStatement(reference.identifier)
+      if (statement && isRuntimeUse(reference, statement)) {
+        addUse(statement, variable)
+      }
+    }
+  }
+
+  return { statementVariables, lexicalDeclarations }
+}
+
+/**
+ * Check that moving `nodes` (in this order) before `target` does not move any
+ * of them above a statement that uses the same variable, which could change
+ * the value they see, e.g. `count++` between `let count = 0` and
+ * `const api = { count }`.
+ */
+function canMoveBeforeVariableUses(
+  nodes: ASTNode[],
+  target: ASTNode,
+  statements: ASTNode[],
+  { statementVariables, lexicalDeclarations }: VariableUses
+): boolean {
+  return nodes.every((node, index) => {
+    const nodeVariables = statementVariables.get(node)
+    if (!nodeVariables) {
+      return true
+    }
+    const movedAbove = new Set(nodes.slice(0, index))
+    return statements.every((statement) => {
+      const isPassedOver =
+        statement.range[0] >= target.range[0] &&
+        statement.range[0] < node.range[0] &&
+        !movedAbove.has(statement)
+      if (!isPassedOver) {
+        return true
+      }
+      const variables = statementVariables.get(statement) ?? []
+      for (const variable of variables) {
+        if (!nodeVariables.has(variable)) {
+          continue
+        }
+        // A statement above a `let` or `const` declaration can only use the
+        // variable in a function called later, so the declaration can be
+        // moved above it.
+        if (lexicalDeclarations.get(variable) !== node) {
+          return false
+        }
+      }
+      return true
+    })
+  })
+}
+
 function create(context: RuleContext) {
   const scriptSetup = utils.getScriptSetupElement(context)
 
@@ -93,6 +413,11 @@ function create(context: RuleContext) {
       "`defineExpose` macro can't be in the `order` array if `defineExposeLast` is true."
     )
   }
+  const shouldAllowReferencedAbove: boolean =
+    !options[0] || options[0].allowReferencedAbove !== false
+  const notAtTopMessageId = shouldAllowReferencedAbove
+    ? 'macrosNotAtTopOrReferenced'
+    : 'macrosNotAtTop'
 
   const sourceCode = context.sourceCode
   const macrosNodes = new Map<string, ASTNode[]>()
@@ -151,6 +476,98 @@ function create(context: RuleContext) {
           })
           .filter((data): data is OrderedData => utils.isDef(data.node))
 
+        let dependencies: Map<ASTNode, StatementDependencies> | undefined
+        const getDependencies: DependencyGetter = (statement) => {
+          dependencies ??= getStatementDependencies(sourceCode, program)
+          return dependencies.get(statement)
+        }
+
+        const statements =
+          firstStatementIndex === -1
+            ? []
+            : program.body.slice(firstStatementIndex)
+
+        const macroStatements = new Set(orderedList.map(({ node }) => node))
+
+        // With `allowReferencedAbove`, the statements between a macro and the
+        // previous one (or the start) that the macro references, directly or
+        // through each other, are allowed there.
+        const allowedStatements = new Set<ASTNode>()
+        if (shouldAllowReferencedAbove) {
+          let region: ASTNode[] = []
+          for (const statement of statements) {
+            if (!macroStatements.has(statement)) {
+              region.push(statement)
+              continue
+            }
+            for (const referenced of getReferencedChain(
+              statement,
+              region,
+              getDependencies
+            )) {
+              allowedStatements.add(referenced)
+            }
+            region = []
+          }
+        }
+        // The statements the macros are compared against
+        const targetStatements = statements.filter(
+          (statement) => !allowedStatements.has(statement)
+        )
+
+        /**
+         * Get the statements to move before `before` to fix the order of the
+         * given macros, or `null` if that would break the code.
+         */
+        const getNodesToMove = (
+          nodes: ASTNode[],
+          before: ASTNode
+        ): ASTNode[] | null => {
+          const movedNodes: ASTNode[] = []
+          for (const node of nodes) {
+            // Move the declarations that the macro references along with it,
+            // so that they stay above it.
+            let referenced: ASTNode[] = []
+            if (shouldAllowReferencedAbove) {
+              const passedOver = statements.filter(
+                (statement) =>
+                  statement.range[0] >= before.range[0] &&
+                  statement.range[0] < node.range[0] &&
+                  !macroStatements.has(statement) &&
+                  !movedNodes.includes(statement)
+              )
+              referenced = getReferencedChain(node, passedOver, getDependencies)
+            }
+            if (referenced.includes(before)) {
+              if (movedNodes.length > 0) {
+                // Move only the previous macros, this one can stay below the
+                // declaration it references.
+                break
+              }
+              if (!isTypeOnlyDeclaration(before)) {
+                // Don't move the macro above a runtime declaration it uses
+                return null
+              }
+              // Types can be used above their declaration, so leave it
+              referenced = referenced.filter(
+                (statement) => statement !== before
+              )
+            }
+            movedNodes.push(...referenced, node)
+          }
+          // Don't move a macro above a runtime declaration it uses, or above
+          // a statement that uses the same variables
+          return canMoveBefore(movedNodes, before, getDependencies) &&
+            canMoveBeforeVariableUses(
+              movedNodes,
+              before,
+              statements,
+              getVariableUses(sourceCode, program)
+            )
+            ? movedNodes
+            : null
+        }
+
         // check last node
         if (shouldDefineExposeBeLast) {
           const lastNode = program.body.at(-1)
@@ -160,7 +577,7 @@ function create(context: RuleContext) {
         }
 
         for (const [index, should] of orderedList.entries()) {
-          const targetStatement = program.body[firstStatementIndex + index]
+          const targetStatement = targetStatements[index]
 
           if (should.node !== targetStatement) {
             let moveTargetNodes = orderedList
@@ -172,7 +589,12 @@ function create(context: RuleContext) {
             if (targetStatementIndex !== -1) {
               moveTargetNodes = moveTargetNodes.slice(0, targetStatementIndex)
             }
-            reportNotOnTop(should.name, moveTargetNodes, targetStatement)
+            reportNotOnTop(
+              should.name,
+              moveTargetNodes,
+              targetStatement,
+              getNodesToMove(moveTargetNodes, targetStatement)
+            )
             return
           }
         }
@@ -180,14 +602,19 @@ function create(context: RuleContext) {
     }
   )
 
-  function reportNotOnTop(macro: string, nodes: ASTNode[], before: ASTNode) {
+  function reportNotOnTop(
+    macro: string,
+    nodes: ASTNode[],
+    before: ASTNode,
+    movedNodes: ASTNode[] | null
+  ) {
     // Determine if 'before' is a macro from the order list
     const beforeMacro = order.find((macroName) =>
       (macrosNodes.get(macroName) ?? []).includes(before)
     )
 
     // Decide which message to use
-    const messageId = beforeMacro ? 'macrosUnordered' : 'macrosNotAtTop'
+    const messageId = beforeMacro ? 'macrosUnordered' : notAtTopMessageId
     const data = { macro, ...(beforeMacro ? { before: beforeMacro } : {}) }
 
     context.report({
@@ -195,11 +622,13 @@ function create(context: RuleContext) {
       loc: nodes[0].loc,
       messageId,
       data,
-      *fix(fixer) {
-        for (const node of nodes) {
-          yield* moveNodeBefore(fixer, node, before)
-        }
-      }
+      fix: movedNodes
+        ? function* (fixer) {
+            for (const node of movedNodes) {
+              yield* moveNodeBefore(fixer, node, before)
+            }
+          }
+        : null
     })
   }
 
@@ -275,10 +704,21 @@ function create(context: RuleContext) {
     )
     const insertText = getInsertText(textNode, target)
 
-    return [
+    const fixes = [
       fixer.insertTextBefore(targetComment, insertText),
       fixer.removeRange([cutStart, cutEnd])
     ]
+    // handle case when moving b() out of a()\nb()\n;(c)() would leave
+    // a()\n(c)(), as b() takes the semicolon with it
+    const afterNodeToken = sourceCode.getTokenAfter(node)
+    if (
+      afterNodeToken &&
+      beforeNodeToken.value !== ';' &&
+      isAsiHazard(afterNodeToken)
+    ) {
+      fixes.push(fixer.insertTextBefore(afterNodeToken, ';'))
+    }
+    return fixes
   }
 
   /**
@@ -292,8 +732,12 @@ function create(context: RuleContext) {
       target.range[1],
       afterTargetComment.range[0]
     )
-    // handle case when a();b() -> b()a();
-    const isInvalidResult = !textNode.endsWith(';') && !afterText.includes('\n')
+    // handle case when a();b() -> b()a();, and when moving c() before (b)()
+    // in a\n;(b)() -> a\n;c()\n(b)()
+    const isInvalidResult =
+      !textNode.endsWith(';') &&
+      (!afterText.includes('\n') ||
+        isAsiHazard(sourceCode.getFirstToken(target)))
 
     return textNode + afterText + (isInvalidResult ? ';' : '')
   }
@@ -342,6 +786,9 @@ export default {
           },
           defineExposeLast: {
             type: 'boolean'
+          },
+          allowReferencedAbove: {
+            type: 'boolean'
           }
         },
         additionalProperties: false
@@ -350,6 +797,8 @@ export default {
     messages: {
       macrosNotAtTop:
         '{{macro}} should be placed at the top of `<script setup>` (after any potential import statements or type definitions).',
+      macrosNotAtTopOrReferenced:
+        '{{macro}} should be placed at the top of `<script setup>` (after any potential import statements, type definitions or declarations it references).',
       macrosUnordered: '{{macro}} should be above {{before}}.',
       defineExposeNotTheLast:
         '`defineExpose` should be the last statement in `<script setup>`.',

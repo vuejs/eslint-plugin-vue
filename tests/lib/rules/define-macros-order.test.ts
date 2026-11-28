@@ -33,6 +33,11 @@ const optionsExposeLast = [
 ]
 
 function notAtTopMessage(macro: string): string {
+  return `${macro} should be placed at the top of \`<script setup>\` (after any potential import statements, type definitions or declarations it references).`
+}
+
+/** The message with `allowReferencedAbove: false` */
+function notAtTopStrictMessage(macro: string): string {
   return `${macro} should be placed at the top of \`<script setup>\` (after any potential import statements or type definitions).`
 }
 
@@ -336,6 +341,309 @@ tester.run('define-macros-order', rule, {
           order: ['definePage', 'defineModel']
         }
       ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2746
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          import { ref } from 'vue'
+
+          const lastSetModelValue = ref<string>()
+          const [modelValue, modelModifiers] = defineModel<string>({
+            set: (value: string) => {
+              lastSetModelValue.value = value
+              return value
+            },
+            get: (value: string) => lastSetModelValue.value ?? value
+          })
+          defineProps<{ label: string }>()
+        </script>
+      `,
+      options: [
+        {
+          order: [
+            'defineOptions',
+            'defineModel',
+            'defineProps',
+            'defineEmits',
+            'defineSlots'
+          ]
+        }
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2380
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          interface Props {
+            msg: string
+          }
+
+          const props = defineProps<Props>()
+
+          interface Emits {
+            (e: 'update'): void
+          }
+
+          const emit = defineEmits<Emits>()
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2978
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+
+          type Foo = 'bar'
+
+          defineEmits<{ (e: Foo): void }>()
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // referenced enum
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const model = defineModel<string>()
+          enum Size { Small = 'small', Large = 'large' }
+          const props = withDefaults(defineProps<{ size?: Size }>(), {
+            size: Size.Small
+          })
+        </script>
+      `,
+      options: [{ order: ['defineModel', 'defineProps'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // indirectly referenced types
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          interface Item { id: number }
+          interface Emits { (e: 'select', item: Item): void }
+          defineEmits<Emits>()
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // indirectly referenced `declare`d variable
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          declare const brand: unique symbol
+          type Id = string & { [brand]: true }
+          defineEmits<{ (e: 'select', id: Id): void }>()
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // indirectly referenced variables
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const fallback = computed(() => last.value ?? '')
+          const model = defineModel({ get: (value) => value ?? fallback.value })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }]
+    },
+    {
+      // with `allowReferencedAbove: false`, types above all macros are allowed
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          type Foo = 'bar'
+          defineProps<{ foo: string }>()
+          defineEmits<{ (e: Foo): void }>()
+        </script>
+      `,
+      options: [{ allowReferencedAbove: false }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // referenced function declaration
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          function getFallback() {
+            return ''
+          }
+          const model = defineModel({ get: (value) => value ?? getFallback() })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }]
+    },
+    {
+      // referenced class
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          class Item {}
+          const model = defineModel({ default: () => new Item() })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }]
+    },
+    {
+      // referenced exported type
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          export interface Emits {
+            (e: 'update'): void
+          }
+          defineEmits<Emits>()
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // directly referenced `declare`d variable
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          declare const fallback: string
+          const model = defineModel<string>({ default: fallback })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // several `defineModel`s, each with its own variable
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const lastFirst = ref()
+          const first = defineModel('first', {
+            get: (value) => lastFirst.value ?? value
+          })
+          const lastSecond = ref()
+          const second = defineModel('second', {
+            get: (value) => lastSecond.value ?? value
+          })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }]
+    },
+    {
+      // custom macro referencing a variable
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const meta = { title: 'Home' }
+          definePage({ meta })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'definePage'] }]
+    },
+    {
+      // combined with `defineExposeLast`
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+          const count = ref(0)
+          defineExpose({ count })
+        </script>
+      `,
+      options: [
+        { order: ['defineProps', 'defineModel'], defineExposeLast: true }
+      ]
+    },
+    {
+      // variable referenced by `withDefaults`
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const defaultSize = 'medium'
+          interface Props {
+            size?: string
+          }
+          withDefaults(defineProps<Props>(), { size: defaultSize })
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      // enum referenced through a type, between macros
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          interface Item { id: number }
+          enum Reason { Click = 'click', Keyboard = 'keyboard' }
+          type Emits = { select: [item: Item, reason: Reason] }
+          defineEmits<Emits>()
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
   invalid: [
@@ -1300,6 +1608,1429 @@ tester.run('define-macros-order', rule, {
       `
             }
           ]
+        }
+      ]
+    },
+    {
+      // a type that is not referenced by the next macro is still reported
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          type Unused = string
+          defineEmits<{ (e: 'x'): void }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<{ (e: 'x'): void }>()
+          type Unused = string
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      // imports belong at the top, even if they are referenced by the macro
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          import type { Emits } from './emits'
+          defineEmits<Emits>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<Emits>()
+          import type { Emits } from './emits'
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      // an unrelated statement next to a referenced declaration is reported
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          interface Emits { (e: 'x'): void }
+          const foo = 'bar'
+          defineEmits<Emits>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          interface Emits { (e: 'x'): void }
+          defineEmits<Emits>()
+          const foo = 'bar'
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      // the referenced declaration is separated from the macro by an
+      // unrelated statement, so the macro is moved right below it
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          console.log('foo')
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+          console.log('foo')
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineModel'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 77
+        }
+      ]
+    },
+    {
+      // the referenced declaration is moved together with the macro
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          console.log('foo')
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+          console.log('foo')
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineModel'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 77
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2746
+      // with `allowReferencedAbove: false`, the macro is reported, but not
+      // fixed, as moving it above the variable it reads at runtime would
+      // break the code
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          import { ref } from 'vue'
+
+          const lastSetModelValue = ref<string>()
+          const [modelValue, modelModifiers] = defineModel<string>({
+            get: (value: string) => lastSetModelValue.value ?? value
+          })
+        </script>
+      `,
+      output: null,
+      options: [
+        {
+          order: ['defineModel', 'defineProps'],
+          allowReferencedAbove: false
+        }
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopStrictMessage('defineModel'),
+          line: 6,
+          column: 11,
+          endLine: 8,
+          endColumn: 13
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2380
+      // with `allowReferencedAbove: false`, referenced types are reported
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          interface Props {
+            msg: string
+          }
+
+          const props = defineProps<Props>()
+
+          interface Emits {
+            (e: 'update'): void
+          }
+
+          const emit = defineEmits<Emits>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          interface Props {
+            msg: string
+          }
+
+          const props = defineProps<Props>()
+
+          const emit = defineEmits<Emits>()
+
+          interface Emits {
+            (e: 'update'): void
+          }
+
+        </script>
+      `,
+      options: [{ allowReferencedAbove: false }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopStrictMessage('defineEmits'),
+          line: 13,
+          column: 11,
+          endLine: 13,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      // the referenced types are moved together with the macro
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          interface Props {
+            msg: string
+          }
+
+          const props = defineProps<Props>()
+
+          interface Emits {
+            (e: 'update'): void
+          }
+
+          const emit = defineEmits<Emits>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          interface Props {
+            msg: string
+          }
+
+          interface Emits {
+            (e: 'update'): void
+          }
+
+          const emit = defineEmits<Emits>()
+
+          const props = defineProps<Props>()
+
+        </script>
+      `,
+      options: optionsEmitsFirst,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: unorderedMessage('defineEmits', 'defineProps'),
+          line: 13,
+          column: 11,
+          endLine: 13,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      // the referenced variable is moved together with the macro
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      output: `
+        <script setup>
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+          defineProps({ foo: String })
+        </script>
+      `,
+      options: [{ order: ['defineModel', 'defineProps'] }],
+      errors: [
+        {
+          message: unorderedMessage('defineModel', 'defineProps'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 77
+        }
+      ]
+    },
+    {
+      // the referenced variable uses the props, so it can't be moved above
+      // them, and no fix is offered
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const props = defineProps({ foo: String })
+          const last = ref(props.foo)
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineModel', 'defineProps'] }],
+      errors: [
+        {
+          message: unorderedMessage('defineModel', 'defineProps'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 77
+        }
+      ]
+    },
+    {
+      // a type referenced by a later macro is not allowed above an earlier one,
+      // so only the earlier macro is moved, and the type stays above the
+      // macro that references it
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          type Value = string
+          defineEmits<{ (e: 'change'): void }>()
+          const model = defineModel<Value>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<{ (e: 'change'): void }>()
+          type Value = string
+          const model = defineModel<Value>()
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineEmits', 'defineModel'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 49
+        }
+      ]
+    },
+    {
+      // a variable referenced by a later macro is not allowed above an earlier
+      // one, so only the earlier macro is moved
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const last = ref()
+          defineProps({ foo: String })
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineProps'),
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 39
+        }
+      ]
+    },
+    {
+      // types can be used above their declaration, so the macro is moved
+      // above the type it references
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineEmits()
+          type Size = 'small' | 'large'
+          const model = defineModel()
+          defineProps<{ size: Size }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineEmits()
+          defineProps<{ size: Size }>()
+          const model = defineModel()
+          type Size = 'small' | 'large'
+        </script>
+      `,
+      options: [{ order: ['defineEmits', 'defineProps', 'defineModel'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineProps'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 40
+        }
+      ]
+    },
+    {
+      // with `allowReferencedAbove: false`, no fix is offered when the macro
+      // would be moved above a variable it reads at runtime, as that would
+      // break the code
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (value) => last.value ?? value })
+        </script>
+      `,
+      output: null,
+      options: [
+        { order: ['defineModel', 'defineProps'], allowReferencedAbove: false }
+      ],
+      errors: [
+        {
+          message: unorderedMessage('defineModel', 'defineProps'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 77
+        }
+      ]
+    },
+    {
+      // with `allowReferencedAbove: false`, referenced variables are reported
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const defaultSize = 'medium'
+          interface Props { size?: string }
+          withDefaults(defineProps<Props>(), { size: defaultSize })
+        </script>
+      `,
+      output: null,
+      options: [{ allowReferencedAbove: false }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopStrictMessage('defineProps'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 68
+        }
+      ]
+    },
+    {
+      // a `var` declared inside another statement is not a declaration that
+      // is allowed above the macro, and as the macro uses it, no fix is
+      // offered
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          if (Math.random()) { var last = 1; console.log(last) }
+          const model = defineModel({ get: () => last })
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineModel'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 57
+        }
+      ]
+    },
+    {
+      // a `var` declared in a loop is not allowed above the macro, and as the
+      // macro uses it, no fix is offered
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          for (var i = 0; i < 3; i++) console.log(i)
+          const model = defineModel({ get: () => i })
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineModel'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 54
+        }
+      ]
+    },
+    {
+      // `import ... =` belongs at the top, like other imports
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          import Emits = Types.Emits
+          defineEmits<Emits>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<Emits>()
+          import Emits = Types.Emits
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      // the parameter shadows the variable, so the variable is not referenced
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({ foo: String })
+          const last = ref()
+          const model = defineModel({ get: (last) => last })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps({ foo: String })
+          const model = defineModel({ get: (last) => last })
+          const last = ref()
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineModel'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineModel'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 61
+        }
+      ]
+    },
+    {
+      // with `allowReferencedAbove: false`, a referenced enum between macros
+      // is reported
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          enum Reason { Click = 'click', Keyboard = 'keyboard' }
+          defineEmits<{ select: [reason: Reason] }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps<{ foo: string }>()
+          defineEmits<{ select: [reason: Reason] }>()
+          enum Reason { Click = 'click', Keyboard = 'keyboard' }
+        </script>
+      `,
+      options: [{ allowReferencedAbove: false }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopStrictMessage('defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 54
+        }
+      ]
+    },
+    {
+      // moving the referenced declaration with the macro would move it above
+      // a statement that changes the value it reads, so no fix is offered
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          let count = 0
+          count++
+          const api = { count }
+          defineCustom(api)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // the same with a reassignment between
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          let options = { size: 1 }
+          options = { size: 2 }
+          const config = { ...options }
+          defineCustom(config)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      // the same with a method call that can change the value between
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const list = []
+          list.push(1)
+          const size = list.length
+          defineCustom(size)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      // moving the macro above a statement that changes the value it reads
+      // would change the code's behavior, so no fix is offered
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          let count = 0
+          count++
+          defineCustom(count)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // the same with `allowReferencedAbove: false`
+      filename: 'test.vue',
+      code: `
+        <script>
+          let count = 0
+        </script>
+        <script setup>
+          defineProps(['a'])
+          count++
+          defineCustom(count)
+        </script>
+      `,
+      output: null,
+      options: [
+        { order: ['defineProps', 'defineCustom'], allowReferencedAbove: false }
+      ],
+      errors: [
+        {
+          message: notAtTopStrictMessage('defineCustom'),
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // a `var` declared in a block is not moved, so no fix is offered when
+      // the macro uses it
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          try { var config = load() } catch {}
+          defineCustom({ config })
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 35
+        }
+      ]
+    },
+    {
+      // the same with a labeled loop
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          outer: for (var i = 0; i < 3; i++) if (i) break outer
+          defineCustom(i)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 26
+        }
+      ]
+    },
+    {
+      // a statement that doesn't use the moved variables doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          let count = 0
+          console.log('ready')
+          const api = { count }
+          defineCustom(api)
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          let count = 0
+          const api = { count }
+          defineCustom(api)
+          console.log('ready')
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // calling the same imported function doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import { ref } from 'vue'
+          defineProps(['a'])
+          const open = ref(false)
+          const size = ref(1)
+          defineCustom(size)
+        </script>
+      `,
+      output: `
+        <script setup>
+          import { ref } from 'vue'
+          defineProps(['a'])
+          const size = ref(1)
+          defineCustom(size)
+          const open = ref(false)
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 29
+        }
+      ]
+    },
+    {
+      // calling the same function declaration doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const title = format(1)
+          const label = format(2)
+          defineCustom(label)
+          function format(value) { return String(value) }
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          const label = format(2)
+          defineCustom(label)
+          const title = format(1)
+          function format(value) { return String(value) }
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // a statement that only uses a moved type doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const props = defineProps<{ foo: string }>()
+          let current: Payload | undefined
+          type Payload = { id: number }
+          defineEmits<{ change: [payload: Payload] }>()
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          const props = defineProps<{ foo: string }>()
+          type Payload = { id: number }
+          defineEmits<{ change: [payload: Payload] }>()
+          let current: Payload | undefined
+        </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineEmits'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 56
+        }
+      ]
+    },
+    {
+      // a function above the macro can use the variable that the macro
+      // declares, so it doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const emit = defineEmits(['change'])
+          const double = computed(() => props.count * 2)
+          const props = defineProps({ count: Number })
+        </script>
+      `,
+      output: `
+        <script setup>
+          const props = defineProps({ count: Number })
+          const emit = defineEmits(['change'])
+          const double = computed(() => props.count * 2)
+        </script>
+      `,
+      errors: [
+        {
+          message: unorderedMessage('defineProps', 'defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 55
+        }
+      ]
+    },
+    {
+      // a `var` in a block that the macro doesn't use doesn't block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          try { var config = load() } catch {}
+          defineCustom({ size: 1 })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          defineCustom({ size: 1 })
+          try { var config = load() } catch {}
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      // `typeof` in a type doesn't use the variable at runtime, so it doesn't
+      // block the fix
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          type Config = typeof cfg
+          defineCustom(cfg)
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          defineCustom(cfg)
+          type Config = typeof cfg
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // the same in an interface
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          interface Options { config: typeof cfg }
+          defineCustom(cfg)
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          defineCustom(cfg)
+          interface Options { config: typeof cfg }
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // the same in a type annotation
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          let current: typeof cfg | undefined
+          defineCustom(cfg)
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          defineCustom(cfg)
+          let current: typeof cfg | undefined
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a change of the variable next to a type that uses it still blocks the
+      // fix
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps(['a'])
+          const cfg = { a: 1 }
+          type Config = typeof cfg
+          cfg.a = 2
+          defineCustom(cfg)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a function can be called before the macro, so a function that uses
+      // the variable blocks the fix, even if it isn't called there
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          function read() { return cfg.x }
+          defineCustom(cfg)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // the same with an arrow function
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          const read = () => cfg.x
+          defineCustom(cfg)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a function above a `let` declaration blocks moving a macro that uses
+      // the variable, as the function may be called before the macro
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          watch(source, () => console.log(count))
+          let count = 1
+          defineCustom(count)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // the function changes the variable when it's called before the macro
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          function read() { return cfg.x++ }
+          read()
+          defineCustom(cfg.x)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      // the same with an arrow function and a moved declaration
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const counter = { n: 0 }
+          const increment = () => counter.n++
+          increment()
+          const api = { n: counter.n }
+          defineCustom(api)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a moved function that uses the variable may be called by the macro,
+      // so it can't be moved above a change of the variable
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          cfg.x = 5
+          const get = () => cfg.x
+          defineCustom(get)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a function that is called right away still blocks the fix
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const cfg = { x: 1 }
+          const result = (() => cfg.x++)()
+          defineCustom(cfg)
+        </script>
+      `,
+      output: null,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      // a semicolon is added when the next statement relies on the one at
+      // the start of its line
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          const x = 1
+          ;(() => { log(1) })()
+          defineCustom(x)
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          const x = 1
+          ;defineCustom(x)
+          ;(() => { log(1) })()
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 26
+        }
+      ]
+    },
+    {
+      // the same after an import
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import x from 'y'
+          ;(() => {})()
+          defineProps()
+        </script>
+      `,
+      output: `
+        <script setup>
+          import x from 'y'
+          ;defineProps()
+          ;(() => {})()
+        </script>
+      `,
+      errors: [
+        {
+          message: notAtTopMessage('defineProps'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
+    },
+    {
+      // a semicolon is kept when the moved macro takes the one that the next
+      // statement relies on
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps(['a'])
+          foo()
+          defineCustom()
+          ;(() => {})()
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps(['a'])
+          defineCustom()
+          ;
+          foo()
+;(() => {})()
+        </script>
+      `,
+      options: [{ order: ['defineProps', 'defineCustom'] }],
+      errors: [
+        {
+          message: notAtTopMessage('defineCustom'),
+          line: 5,
+          column: 11,
+          endLine: 6,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      // no semicolons are added when the statements end with them
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineEmits();
+          foo();
+          defineProps();
+          (bar)();
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps();
+          defineEmits();
+          foo();
+          (bar)();
+        </script>
+      `,
+      errors: [
+        {
+          message: unorderedMessage('defineProps', 'defineEmits'),
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 25
         }
       ]
     }
