@@ -128,9 +128,17 @@ function inferLiteralType(node: TSESTree.TSLiteralType): string[] | null {
     : null
 }
 
+function getEnumMembers(
+  node: TSESTree.TSEnumDeclaration
+): TSESTree.TSEnumMember[] {
+  // typescript-eslint v7 has no `body`, and v8 deprecates `members`
+  const { body } = node as { body?: TSESTree.TSEnumBody }
+  return body ? body.members : node.members
+}
+
 function inferEnumTypes(node: TSESTree.TSEnumDeclaration): string[] {
   const types = new Set<string>()
-  for (const { initializer } of node.body.members) {
+  for (const { initializer } of getEnumMembers(node)) {
     if (initializer?.type === 'Literal') {
       if (typeof initializer.value === 'string') {
         types.add('String')
