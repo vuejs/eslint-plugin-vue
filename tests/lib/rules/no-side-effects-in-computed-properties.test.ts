@@ -256,12 +256,345 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             class C {}
             C.name = 'D'
           })
-          const test18 = computed(() => (console.log('a'), true))
           const test19 = computed(() => utils.reverse(foo.array))
           const test20 = computed(() => Object.assign({}, foo.data, { extra: 'value' }))
         }
       }
       </script>`
+    },
+    {
+      // calls whose result is used are not side effects
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            return this.$store.getters.foo(this.id)
+          },
+          test2() {
+            const value = this.compute()
+            return format(this.fetch(), value)
+          },
+          test3() {
+            return this.items.map((item) => item.id).filter(Boolean)
+          },
+          test4() {
+            return this.a ? this.b() : this.c()
+          },
+          test5() {
+            return this.a && this.b()
+          },
+          test6() {
+            return (() => this.a)()
+          },
+          test7: {
+            get() {
+              return this.load()
+            },
+            set(value) {
+              this.save(value)
+            }
+          }
+        },
+        methods: {
+          test8() {
+            this.$router.push('/')
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      // calls on variables declared in the getter only change local state
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            const list = []
+            list.push(this.a)
+            const map = new Map()
+            map.set('a', this.b)
+            list.filter(Boolean).forEach((x) => map.set(x, x))
+            return [list, map]
+          },
+          test3() {
+            const style = {}
+            Object.assign(style, this.style, { width: this.width })
+            return style
+          },
+          test2() {
+            const add = (x) => x + this.a
+            add(1)
+            return add
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      // nested functions are not checked, and iteration calls only run their callback
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            return this.items.map((item) => {
+              log(item)
+              return item.id
+            })
+          },
+          test2() {
+            const go = () => {
+              this.$router.push('/')
+            }
+            return go
+          },
+          test3() {
+            const result = {}
+            this.items.forEach((item) => {
+              result[item.id] = item
+            })
+            return result
+          },
+          test4() {
+            const ids = []
+            this.items.map((item) => {
+              ids.push(item.id)
+            })
+            forEach(this.groups, (group) => {
+              ids.push(group.id)
+            })
+            return ids
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { computed } from 'vue'
+      const props = defineProps(['a', 'items'])
+      const emit = defineEmits(['update'])
+      const test1 = computed(() => fetchSomething(props.a))
+      const test2 = computed(() => {
+        const result = []
+        result.push(props.a)
+        return result
+      })
+      const test3 = computed({
+        get: () => props.a,
+        set: (value) => {
+          emit('update', value)
+        }
+      })
+      function onClick() {
+        doSomething()
+      }
+      </script>`
+    },
+    {
+      // `await` is reported by `vue/no-async-in-computed-properties`
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          async test1() {
+            await this.load()
+            return 1
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      // calls on new values created in the getter only change local state
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            const set = new Set()
+            set.add(this.a)
+            return set
+          },
+          test2() {
+            const copy = [...this.list]
+            copy.sort()
+            return copy
+          },
+          test3() {
+            const items = this.list.filter(Boolean)
+            items.sort()
+            const parts = this.text.split(',')
+            parts.reverse()
+            return [items, parts]
+          },
+          test4() {
+            const style = { ...this.style }
+            Object.assign(style, { width: this.width })
+            return style
+          },
+          test5() {
+            let list
+            list = []
+            list.push(this.a)
+            return list
+          },
+          test6() {
+            const data = JSON.parse(JSON.stringify(this.data))
+            data.items.push(1)
+            const copy = Array.from(this.set)
+            copy.pop()
+            const clone = structuredClone(this.data)
+            clone.items?.push(1)
+            return [data, copy, clone]
+          },
+          test7() {
+            function add(x) {
+              return x + 1
+            }
+            add(1)
+            return [...this.list].sort()
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      // variables that are reassigned or hold a call result or another expression are local
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            let classes = this.event.className
+            if (typeof classes === 'string') {
+              classes = [classes]
+            } else {
+              classes = Array.from(classes)
+            }
+            classes.push('event')
+            return classes
+          },
+          test2() {
+            let labels = this.labels || this.defaultLabels
+            if (!this.showLabels) {
+              labels = []
+            }
+            labels.push(this.extraLabel)
+            return labels
+          },
+          test3() {
+            const date = moment(this.date)
+            date.add(1, 'day')
+            return date
+          },
+          test4() {
+            const options = _.cloneDeep(this.options)
+            options.push(this.extra)
+            return options
+          },
+          test5() {
+            const sorted = [...this.items].sort((a, b) => a.order - b.order)
+            sorted.unshift(this.first)
+            return sorted
+          },
+          test6() {
+            const list = this.enabled ? this.items.slice() : []
+            list.push(this.extra)
+            const result = this.format(this.value)
+            result.push('x')
+            return [list, result]
+          },
+          test7() {
+            try {
+              return this.parse()
+            } catch (error) {
+              error.addContext(this.name)
+              return null
+            }
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      // calls inside a \`try\` block with a \`catch\` clause are made to check whether they throw
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            try {
+              JSON.parse(this.text)
+              return true
+            } catch {
+              return false
+            }
+          },
+          test2() {
+            try {
+              if (this.text) {
+                decodeURIComponent(this.text)
+              }
+              return true
+            } catch (error) {
+              return false
+            }
+          },
+          test3() {
+            try {
+              this.validate(this.value)
+            } catch {
+              return false
+            }
+            return true
+          }
+        }
+      }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { computed, ref } from 'vue'
+      const text = ref('')
+      const items = ref<string[]>([])
+      const isValidJson = computed(() => {
+        try {
+          JSON.parse(text.value)
+          return true
+        } catch {
+          return false
+        }
+      })
+      const sorted = computed(() => {
+        const list = [] as string[]
+        list.push(...items.value)
+        const copy = items.value?.slice()!
+        copy.sort()
+        return [list, copy]
+      })
+      const used = computed(() => {
+        const value = load() as string
+        const other = load() satisfies string
+        return [value, other, load()!]
+      })
+      </script>`,
+      languageOptions: {
+        parserOptions: { parser: tsEslintParser }
+      }
     }
   ],
   invalid: [
@@ -935,6 +1268,456 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           column: 15,
           endLine: 14,
           endColumn: 61
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          foo() {
+            this.$store.commit({})
+            this.$store.dispatch('', {})
+            return true
+          },
+          bar() {
+            this.$router.go(-1)
+            this.$router.push({})
+            this.$router.replace({})
+            return true
+          },
+          baz: {
+            get() {
+              console.log(this.a)
+              return this.a
+            }
+          }
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in "foo" computed property.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 35
+        },
+        {
+          message: 'Unexpected side effect in "foo" computed property.',
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 41
+        },
+        {
+          message: 'Unexpected side effect in "bar" computed property.',
+          line: 11,
+          column: 13,
+          endLine: 11,
+          endColumn: 32
+        },
+        {
+          message: 'Unexpected side effect in "bar" computed property.',
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 34
+        },
+        {
+          message: 'Unexpected side effect in "bar" computed property.',
+          line: 13,
+          column: 13,
+          endLine: 13,
+          endColumn: 37
+        },
+        {
+          message: 'Unexpected side effect in "baz" computed property.',
+          line: 18,
+          column: 15,
+          endLine: 18,
+          endColumn: 34
+        }
+      ]
+    },
+    {
+      // the result of the call is discarded
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            this.load?.()
+            void this.load()
+            this.a && this.load()
+            this.a ? this.load() : this.reset()
+            return (this.load(), this.a)
+          },
+          test2() {
+            ;(() => {
+              this.a = 1
+            })()
+            return this.a
+          }
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 26
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 7,
+          column: 18,
+          endLine: 7,
+          endColumn: 29
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 8,
+          column: 23,
+          endLine: 8,
+          endColumn: 34
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 9,
+          column: 22,
+          endLine: 9,
+          endColumn: 33
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 9,
+          column: 36,
+          endLine: 9,
+          endColumn: 48
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 10,
+          column: 21,
+          endLine: 10,
+          endColumn: 32
+        },
+        {
+          message: 'Unexpected side effect in "test2" computed property.',
+          line: 13,
+          column: 14,
+          endLine: 15,
+          endColumn: 17
+        }
+      ]
+    },
+    {
+      // mutating calls are reported once
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            this.list.push(1)
+            this.$set(this.obj, 'a', 1)
+            return this.list
+          }
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 30
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 7,
+          column: 18,
+          endLine: 7,
+          endColumn: 22
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { computed } from 'vue'
+      import { useStore } from 'vuex'
+      const store = useStore()
+      const list = []
+
+      const test1 = computed(() => {
+        callSomething()
+      })
+      const test2 = computed(() => (console.log('a'), true))
+      const test3 = computed({
+        get() {
+          store.dispatch('load')
+          list.push(1)
+          return list
+        }
+      })
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 24
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 11,
+          column: 37,
+          endLine: 11,
+          endColumn: 53
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 14,
+          column: 11,
+          endLine: 14,
+          endColumn: 33
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 15,
+          column: 11,
+          endLine: 15,
+          endColumn: 23
+        }
+      ]
+    },
+    {
+      // variables that point to outer values are not local
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            const vm = this
+            vm.$emit('change')
+            return 1
+          },
+          test2() {
+            const { $emit } = this
+            $emit('change')
+            return 1
+          },
+          test3() {
+            for (const user of this.users) {
+              user.markSeen()
+            }
+            return 1
+          },
+          test4() {
+            const { $store: st } = this
+            st.dispatch('load')
+            let vm = this
+            const { $emit } = vm
+            $emit('change')
+            return 1
+          },
+          test5() {
+            const store = this.$store
+            store.commit('load')
+            for (const { el } of this.items) {
+              el.focus()
+            }
+            return 1
+          }
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 31
+        },
+        {
+          message: 'Unexpected side effect in "test2" computed property.',
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 28
+        },
+        {
+          message: 'Unexpected side effect in "test3" computed property.',
+          line: 17,
+          column: 15,
+          endLine: 17,
+          endColumn: 30
+        },
+        {
+          message: 'Unexpected side effect in "test4" computed property.',
+          line: 23,
+          column: 13,
+          endLine: 23,
+          endColumn: 32
+        },
+        {
+          message: 'Unexpected side effect in "test4" computed property.',
+          line: 26,
+          column: 13,
+          endLine: 26,
+          endColumn: 28
+        },
+        {
+          message: 'Unexpected side effect in "test5" computed property.',
+          line: 31,
+          column: 13,
+          endLine: 31,
+          endColumn: 33
+        },
+        {
+          message: 'Unexpected side effect in "test5" computed property.',
+          line: 33,
+          column: 15,
+          endLine: 33,
+          endColumn: 25
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { computed } from 'vue'
+      import { useStore } from 'vuex'
+      const store = useStore()
+      const emit = defineEmits(['change'])
+      const test1 = computed(() => {
+        const s = store
+        s.dispatch('load')
+        const e = emit
+        e('change')
+        return 1
+      })
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 27
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 11,
+          column: 9,
+          endLine: 11,
+          endColumn: 20
+        }
+      ]
+    },
+    {
+      // only calls in a \`try\` block with a \`catch\` clause are allowed
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        computed: {
+          test1() {
+            try {
+              JSON.parse(this.text)
+              return true
+            } finally {
+              this.$emit('parsed')
+            }
+          },
+          test2() {
+            try {
+              return JSON.parse(this.text)
+            } catch (error) {
+              console.error(error)
+              return null
+            }
+          }
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 36
+        },
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 10,
+          column: 15,
+          endLine: 10,
+          endColumn: 35
+        },
+        {
+          message: 'Unexpected side effect in "test2" computed property.',
+          line: 17,
+          column: 15,
+          endLine: 17,
+          endColumn: 35
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { computed } from 'vue'
+      import { useStore } from 'vuex'
+      const store = useStore()
+      const emit = defineEmits(['change'])
+      const test1 = computed(() => {
+        emit('change') as any
+        emit('change')!
+        const s = store as any
+        s.dispatch('load')
+        return 1
+      })
+      </script>`,
+      languageOptions: {
+        parserOptions: { parser: tsEslintParser }
+      },
+      errors: [
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 23
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 23
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 11,
+          column: 9,
+          endLine: 11,
+          endColumn: 27
         }
       ]
     }
