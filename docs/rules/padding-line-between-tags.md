@@ -53,7 +53,7 @@ This rule requires or disallows newlines between sibling HTML tags.
 
 This rule requires blank lines between each sibling HTML tag by default.
 
-A configuration is an object which has 3 properties; `blankLine`, `prev` and `next`. For example, `{ blankLine: "always", prev: "br", next: "div" }` means “one or more blank lines are required between a `br` tag and a `div` tag.” You can supply any number of configurations. If a tag pair matches multiple configurations, the last matched configuration will be used.
+A configuration is an object which has 3 required properties; `blankLine`, `prev` and `next`, and an optional `betweenConditionalTags` property. For example, `{ blankLine: "always", prev: "br", next: "div" }` means “one or more blank lines are required between a `br` tag and a `div` tag.” You can supply any number of configurations. If a tag pair matches multiple configurations, the last matched configuration will be used.
 
 - `blankLine` is one of the following:
   - `always` requires one or more blank lines.
@@ -63,10 +63,17 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
   - `"*:single-line"` - matches only single-line tags (elements that are entirely on a single line, including self-closing tags).
   - `"*:multi-line"` - matches only multi-line tags (tags that span multiple lines).
   - Tag names work too, e.g., `"div:single-line"` or `"span:multi-line"`.
+- `betweenConditionalTags` (optional, default `false`) restricts the configuration to tags that are part of the same conditional chain, i.e. the `next` tag has `v-else-if` or `v-else` and the `prev` tag has `v-if` or `v-else-if`. Pairs of tags that are not part of a conditional chain are not matched by such a configuration. With `consistent`, conditional tags are compared only with other conditional tags.
 
 ### Disallow blank lines between all tags
 
-`{ blankLine: 'never', prev: '*', next: '*' }`
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "never", "prev": "*", "next": "*" }
+  ]]
+}
+```
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'never', prev: '*', next: '*' }
@@ -87,7 +94,13 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
 
 ### Require newlines after `<br>`
 
-`{ blankLine: 'always', prev: 'br', next: '*' }`
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "always", "prev": "br", "next": "*" }
+  ]]
+}
+```
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'always', prev: 'br', next: '*' }
@@ -112,7 +125,13 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
 
 ### Require newlines between `<br>` and `<img>`
 
-`{ blankLine: 'always', prev: 'br', next: 'img' }`
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "always", "prev": "br", "next": "img" }
+  ]]
+}
+```
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'always', prev: 'br', next: 'img' }
@@ -138,7 +157,13 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
 
 ### Require consistent newlines
 
-`{ blankLine: 'consistent', prev: '*', next: '*' }`
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "consistent", "prev": "*", "next": "*" }
+  ]]
+}
+```
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'consistent', prev: '*', next: '*' }
@@ -203,6 +228,42 @@ You can use the `:single-line` and `:multi-line` pseudo-classes in `prev`/`next`
     <div>
       This is a multi-line tag
     </div>
+  </div>
+</template>
+```
+
+</eslint-code-block>
+
+### Group conditional tags together
+
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "always", "prev": "*", "next": "*" },
+    { "blankLine": "never", "prev": "*", "next": "*", "betweenConditionalTags": true }
+  ]]
+}
+```
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
+  { blankLine: 'always', prev: '*', next: '*' },
+  { blankLine: 'never', prev: '*', next: '*', betweenConditionalTags: true }
+]]}">
+
+```vue
+<template>
+  <div>
+    <!-- ✓ GOOD: -->
+    <div v-if="foo" />
+    <div v-else-if="bar" />
+    <div v-else />
+
+    <div />
+
+    <!-- ✗ BAD: -->
+    <div v-if="foo" />
+
+    <div v-else />
   </div>
 </template>
 ```

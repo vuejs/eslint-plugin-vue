@@ -171,6 +171,36 @@ tester.run('component-options-name-casing', rule, {
       code: `
         export default {
           components: {
+            [\`baz-qux\`]: BazQux
+          }
+        }
+      `,
+      output: `
+        export default {
+          components: {
+            BazQux: BazQux
+          }
+        }
+      `,
+      errors: [
+        {
+          messageId: 'caseNotMatched',
+          data: {
+            component: 'baz-qux',
+            caseType: 'PascalCase'
+          },
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 23
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          components: {
             fooBar
           }
         }
@@ -531,6 +561,7 @@ tester.run('component-options-name-casing', rule, {
         export default {
           components: {
             FooBar,
+            [\`BazQux\`]: BazQux,
             'my-component': MyComponent
           }
         }
@@ -556,7 +587,72 @@ tester.run('component-options-name-casing', rule, {
         export default {
           components: {
             'foo-bar': FooBar,
+            [\`BazQux\`]: BazQux,
             'my-component': MyComponent
+          }
+        }
+      `
+            }
+          ]
+        },
+        {
+          messageId: 'caseNotMatched',
+          data: {
+            component: 'BazQux',
+            caseType: 'kebab-case'
+          },
+          line: 5,
+          column: 14,
+          endLine: 5,
+          endColumn: 22,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'kebab-case' },
+              output: `
+        export default {
+          components: {
+            FooBar,
+            'baz-qux': BazQux,
+            'my-component': MyComponent
+          }
+        }
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          components: {
+            [\`FooBar\`]: FooBar
+          }
+        }
+      `,
+      output: null,
+      options: ['camelCase'],
+      errors: [
+        {
+          messageId: 'caseNotMatched',
+          data: {
+            component: 'FooBar',
+            caseType: 'camelCase'
+          },
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 22,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'camelCase' },
+              output: `
+        export default {
+          components: {
+            fooBar: FooBar
           }
         }
       `

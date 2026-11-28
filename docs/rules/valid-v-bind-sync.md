@@ -25,10 +25,10 @@ This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
 
 This rule reports `.sync` modifier on `v-bind` directives in the following cases:
 
-- The `.sync` modifier does not have the attribute value which is valid as LHS. E.g. `<MyComponent v-bind:aaa.sync="foo() + bar()" />`, `<MyComponent v-bind:aaa.sync="a?.b" />`
+- The `.sync` modifier does not have an attribute value that is valid as LHS. E.g. `<MyComponent v-bind:aaa.sync="foo() + bar()" />`, `<MyComponent v-bind:aaa.sync="a?.b" />`
 - The `.sync` modifier has potential null object property access. E.g. `<MyComponent v-bind:aaa.sync="(a?.b).c" />`
-- The `.sync` modifier is on non Vue-components. E.g. `<input v-bind:aaa.sync="foo"></div>`
-- The `.sync` modifier's reference is iteration variables. E.g. `<div v-for="x in list"><MyComponent v-bind:aaa.sync="x" /></div>`
+- The `.sync` modifier is on a non-Vue component. E.g. `<input v-bind:aaa.sync="foo"></div>`
+- The `.sync` modifier references an iteration variable. E.g. `<div v-for="x in list"><MyComponent v-bind:aaa.sync="x" /></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-bind-sync': ['error']}">
 
@@ -63,7 +63,7 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
+This rule does not check syntax errors in directives because the [vue/no-parsing-error] rule checks them.
 :::
 
 ## :wrench: Options

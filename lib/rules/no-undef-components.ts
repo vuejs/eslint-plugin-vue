@@ -295,9 +295,13 @@ export default {
         )
           return
 
-        if (node.value.expression.type === 'Literal') {
-          verifyName(String(node.value.expression.value), node)
-        }
+        const expression = node.value.expression
+        if (!utils.isStringLiteral(expression)) return
+
+        const name = utils.getStringLiteralValue(expression)
+        if (name === null) return
+
+        verifyName(name, node)
       }
     }
 

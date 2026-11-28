@@ -20,7 +20,7 @@ since: v4.3.0
 
 ## :book: Rule Details
 
-This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue.js Style Guide](https://vuejs.org/style-guide/rules-recommended.html#element-attribute-order) and is:
+This rule enforces the order of component attributes. The default order is specified in the [Vue.js Style Guide](https://vuejs.org/style-guide/rules-recommended.html#element-attribute-order) and is:
 
 - `DEFINITION`
   e.g. 'is', 'v-is'

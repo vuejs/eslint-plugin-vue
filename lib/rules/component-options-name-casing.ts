@@ -13,10 +13,28 @@ function getOptionsComponentName(node: Expression): string | null {
   if (node.type === 'Identifier') {
     return node.name
   }
-  if (node.type === 'Literal') {
-    return typeof node.value === 'string' ? node.value : null
+  return utils.isStringLiteral(node) ? utils.getStringLiteralValue(node) : null
+}
+
+function replaceProperty(
+  fixer: RuleFixer,
+  sourceCode: SourceCode,
+  property: Property,
+  text: string,
+  name: string
+) {
+  if (property.shorthand) {
+    return fixer.replaceText(property, `${text}: ${name}`)
   }
-  return null
+
+  const fixes = [fixer.replaceText(property.key, text)]
+  if (property.computed && utils.isStringLiteral(property.key)) {
+    fixes.push(
+      fixer.remove(sourceCode.getTokenBefore(property.key)!),
+      fixer.remove(sourceCode.getTokenAfter(property.key)!)
+    )
+  }
+  return fixes
 }
 
 export default {
@@ -38,6 +56,7 @@ export default {
   },
   create(context: RuleContext) {
     const caseType = context.options[0] || 'PascalCase'
+    const sourceCode = context.sourceCode
 
     const canAutoFix = caseType === 'PascalCase'
     const checkCase = getChecker(caseType)
@@ -69,9 +88,13 @@ export default {
           fix: canAutoFix
             ? (fixer) => {
                 const converted = convert(name)
-                return property.shorthand
-                  ? fixer.replaceText(property, `${converted}: ${name}`)
-                  : fixer.replaceText(property.key, converted)
+                return replaceProperty(
+                  fixer,
+                  sourceCode,
+                  property,
+                  converted,
+                  name
+                )
               }
             : undefined,
           suggest: canAutoFix
@@ -82,14 +105,13 @@ export default {
                   data: { caseType },
                   fix: (fixer) => {
                     const converted = convert(name)
-                    if (caseType === 'kebab-case') {
-                      return property.shorthand
-                        ? fixer.replaceText(property, `'${converted}': ${name}`)
-                        : fixer.replaceText(property.key, `'${converted}'`)
-                    }
-                    return property.shorthand
-                      ? fixer.replaceText(property, `${converted}: ${name}`)
-                      : fixer.replaceText(property.key, converted)
+                    return replaceProperty(
+                      fixer,
+                      sourceCode,
+                      property,
+                      caseType === 'kebab-case' ? `'${converted}'` : converted,
+                      name
+                    )
                   }
                 }
               ]

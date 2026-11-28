@@ -14,7 +14,7 @@ since: v7.3.0
 
 ## :book: Rule Details
 
-This rule allows you to specify custom event that you don't want to use in your application.
+This rule allows you to specify custom events that you don't want to use in your application.
 
 ## :wrench: Options
 

@@ -16,7 +16,7 @@ export default {
     schema: [],
     messages: {
       noDeprecatedEventsApi:
-        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.'
+        'The events API (`$on`, `$off` and `$once`) is deprecated. Use an external library instead, for example mitt.'
     }
   },
   create(context: RuleContext) {

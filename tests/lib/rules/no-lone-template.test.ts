@@ -119,7 +119,7 @@ tester.run('no-lone-template', rule, {
       `,
       errors: [
         {
-          message: '`<template>` require directive.',
+          message: '`<template>` requires a directive.',
           line: 3,
           column: 9,
           endLine: 3,
@@ -136,7 +136,7 @@ tester.run('no-lone-template', rule, {
       `,
       errors: [
         {
-          message: '`<template>` require directive.',
+          message: '`<template>` requires a directive.',
           line: 3,
           column: 9,
           endLine: 3,
@@ -154,7 +154,7 @@ tester.run('no-lone-template', rule, {
       options: [{ ignoreAccessible: true }],
       errors: [
         {
-          message: '`<template>` require directive.',
+          message: '`<template>` requires a directive.',
           line: 3,
           column: 9,
           endLine: 3,
@@ -172,7 +172,7 @@ tester.run('no-lone-template', rule, {
       options: [{ ignoreAccessible: true }],
       errors: [
         {
-          message: '`<template>` require directive.',
+          message: '`<template>` requires a directive.',
           line: 3,
           column: 9,
           endLine: 3,
@@ -190,7 +190,7 @@ tester.run('no-lone-template', rule, {
       options: [{ ignoreAccessible: true }],
       errors: [
         {
-          message: '`<template>` require directive.',
+          message: '`<template>` requires a directive.',
           line: 3,
           column: 9,
           endLine: 3,
@@ -208,7 +208,7 @@ tester.run('no-lone-template', rule, {
       options: [{ ignoreAccessible: true }],
       errors: [
         {
-          message: '`<template>` require directive.',
+          message: '`<template>` requires a directive.',
           line: 3,
           column: 9,
           endLine: 3,

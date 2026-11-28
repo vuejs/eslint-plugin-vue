@@ -25,7 +25,7 @@ Define a style for component definition name casing for consistency purposes.
 
 ## :book: Rule Details
 
-This rule aims to warn the component definition names other than the configured casing.
+This rule reports component definition names that do not match the configured casing.
 
 ## :wrench: Options
 

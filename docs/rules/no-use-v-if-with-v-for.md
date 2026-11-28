@@ -26,7 +26,7 @@ since: v4.6.0
 
 ## :book: Rule Details
 
-This rule is aimed at preventing the use of `v-for` directives together with `v-if` directives on the same element.
+This rule reports the use of `v-for` directives together with `v-if` directives on the same element.
 
 There are two common cases where this can be tempting:
 

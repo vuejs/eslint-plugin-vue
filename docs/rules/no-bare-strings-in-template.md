@@ -50,7 +50,7 @@ This rule was inspired by [no-bare-strings rule in ember-template-lint](https://
 </eslint-code-block>
 
 :::tip
-This rule does not check for string literals, in bindings and mustaches interpolation. This is because it looks like a conscious decision.
+This rule does not check string literals in bindings and mustache interpolations, because using them looks like a conscious decision.
 If you want to report these string literals, enable the [vue/no-useless-v-bind] and [vue/no-useless-mustaches] rules and fix the useless string literals.
 :::
 

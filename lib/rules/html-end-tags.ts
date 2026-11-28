@@ -16,7 +16,7 @@ export default {
     fixable: 'code',
     schema: [],
     messages: {
-      missingEndTag: "'<{{name}}>' should have end tag."
+      missingEndTag: "'<{{name}}>' should have an end tag."
     }
   },
   create(context: RuleContext) {

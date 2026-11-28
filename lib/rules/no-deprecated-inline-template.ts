@@ -16,7 +16,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      unexpected: '`inline-template` are deprecated.'
+      unexpected: '`inline-template` is deprecated.'
     }
   },
   create(context: RuleContext) {

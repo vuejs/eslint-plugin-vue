@@ -141,6 +141,20 @@ tester.run('no-duplicate-class-names', rule, {
       ]
     },
     {
+      filename: 'duplicate-class-directive-object-template-key.vue',
+      code: '<template><div :class="{ [`foo foo`]: true }"></div></template>',
+      output: '<template><div :class="{ [`foo`]: true }"></div></template>',
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
+    },
+    {
       filename: 'multiple-duplicate-class-directive-object-keys.vue',
       code: `<template><div :class="{ 'foo foo bar': true, 'bar bar baz': true }"></div></template>`,
       output: `<template><div :class="{ 'foo bar': true, 'bar baz': true }"></div></template>`,

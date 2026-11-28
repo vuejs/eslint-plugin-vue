@@ -64,14 +64,14 @@ ruleTester.run('require-slots-as-functions', rule, {
       `,
       errors: [
         {
-          message: 'Property in `$slots` should be used as function.',
+          message: 'Property in `$slots` should be used as a function.',
           line: 5,
           column: 38,
           endLine: 5,
           endColumn: 45
         },
         {
-          message: 'Property in `$slots` should be used as function.',
+          message: 'Property in `$slots` should be used as a function.',
           line: 6,
           column: 38,
           endLine: 6,

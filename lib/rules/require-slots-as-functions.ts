@@ -24,7 +24,7 @@ export default {
     fixable: null,
     schema: [],
     messages: {
-      unexpected: 'Property in `$slots` should be used as function.'
+      unexpected: 'Property in `$slots` should be used as a function.'
     }
   },
   create(context: RuleContext) {
