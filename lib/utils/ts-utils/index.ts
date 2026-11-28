@@ -26,7 +26,11 @@ import {
 } from './ts-types.ts'
 
 export { isTypeNode } from './ts-ast.ts'
-export { isExhaustiveSwitch, isRefObjectType } from './ts-types.ts'
+export {
+  isExhaustiveSwitch,
+  isRefObjectType,
+  isRefObjectTypeInTemplate
+} from './ts-types.ts'
 
 /**
  * Get all props by looking at all component's properties

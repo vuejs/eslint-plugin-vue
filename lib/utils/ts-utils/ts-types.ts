@@ -334,12 +334,43 @@ export function isRefObjectType(context: RuleContext, node: ESNode): boolean {
 
   const { checker } = services
   const type = checker.getTypeAtLocation(tsNode)
+  return isRefType(checker, type)
+}
+
+function isRefType(checker: TypeChecker, type: Type): boolean {
   // Every ref type inherits the `[RefSymbol]` marker declared by `Ref`
   return checker
     .getPropertiesOfType(type)
     .some((property) =>
       String(property.escapedName).startsWith('__@RefSymbol@')
     )
+}
+
+/**
+ * Resolve a static template member path from its script setup binding's type.
+ * Only the root binding is unwrapped by the template render context.
+ */
+export function isRefObjectTypeInTemplate(
+  context: RuleContext,
+  binding: ESNode,
+  properties: string[]
+): boolean {
+  const services = getTSParserServices(context)
+  const tsNode = services && services.tsNodeMap.get(binding)
+  if (!tsNode) return false
+  const { checker } = services
+  let type = checker.getTypeAtLocation(tsNode)
+  if (isRefType(checker, type)) {
+    const value = checker.getPropertyOfType(type, 'value')
+    if (!value) return false
+    type = checker.getTypeOfSymbolAtLocation(value, tsNode)
+  }
+  for (const name of properties) {
+    const property = checker.getPropertyOfType(type, name)
+    if (!property) return false
+    type = checker.getTypeOfSymbolAtLocation(property, tsNode)
+  }
+  return isRefType(checker, type)
 }
 
 /**
