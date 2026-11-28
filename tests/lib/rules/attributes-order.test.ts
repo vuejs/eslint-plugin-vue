@@ -2,7 +2,9 @@
  * @fileoverview enforce ordering of attributes
  * @author Erin Depew
  */
+import assert from 'node:assert'
 import rule from '../../../lib/rules/attributes-order'
+import { Linter } from 'eslint'
 import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
@@ -706,6 +708,164 @@ tester.run('attributes-order', rule, {
           @input="handleInput"/>
       </template>`,
       options: [{ ignoreVBindObject: true }]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2324
+      filename: 'test.vue',
+      code: `
+      <template>
+        <UFormGroup
+          :label="label"
+          name="password"
+          data-test="form-group"
+          :data-testid="testId"
+          @click="handleClick"
+        ></UFormGroup>
+      </template>`,
+      options: [
+        {
+          order: [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            ['UNIQUE', 'SLOT'],
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            ['data-test', 'data-testid'],
+            'EVENTS',
+            'CONTENT'
+          ]
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2514
+      filename: 'test.vue',
+      code: '<template><q-table row-key="id" v-model="row"></q-table></template>',
+      options: [
+        {
+          order: [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            ['UNIQUE', 'row-key'],
+            'SLOT',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT'
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table key="k" :row-key="rowKey" v-model="row"></q-table></template>',
+      options: [{ order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table v-bind:row-key="rowKey" v-model="row"></q-table></template>',
+      options: [{ order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table :rowKey="rowKey" v-model="row"></q-table></template>',
+      options: [{ order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table row-key="id" v-model="row"></q-table></template>',
+      options: [{ order: [['UNIQUE', 'rowKey'], 'TWO_WAY_BINDING'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-text="text" data-test="foo"></div></template>',
+      options: [{ order: ['OTHER_ATTR', 'EVENTS', 'CONTENT', 'data-test'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :foo="foo" data-test="foo" bar="bar"></div></template>',
+      options: [{ order: ['ATTR_DYNAMIC', 'data-test', 'ATTR_STATIC'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div class="foo" id="bar"></div></template>',
+      options: [{ order: ['GLOBAL', 'OTHER_ATTR', 'id'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div data-test="foo" data-testid="bar" @click="fn"></div></template>',
+      options: [
+        {
+          order: ['OTHER_ATTR', ['data-test', 'data-testid'], 'EVENTS'],
+          alphabetical: true
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table v-model="row" foo="bar"></q-table></template>',
+      options: [
+        { order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING', 'OTHER_ATTR'] }
+      ]
+    },
+    {
+      // `_` is not `-`
+      filename: 'test.vue',
+      code: '<template><div bar="bar" data_test="foo"></div></template>',
+      options: [{ order: ['data-test', 'OTHER_ATTR'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" data_test="foo"></MyComp></template>',
+      options: [{ order: ['data-test', 'OTHER_ATTR'] }]
+    },
+    {
+      // on HTML elements `v-bind` does not hyphenate, so this sets `datatestid`
+      filename: 'test.vue',
+      code: '<template><div bar="bar" :dataTestid="foo"></div></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }]
+    },
+    {
+      // props are camelized: `dataTestId` is `data-test-id`, not `data-testid`
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" :dataTestId="foo"></MyComp></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }]
+    },
+    {
+      // props are case-sensitive
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" DATA-TESTID="foo"></MyComp></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }]
+    },
+    {
+      // attribute names of SVG and MathML elements are case-sensitive
+      filename: 'test.vue',
+      code: '<template><svg bar="bar" viewbox="0 0 1 1"></svg></template>',
+      options: [{ order: ['viewBox', 'OTHER_ATTR'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><svg bar="bar" :view-box="box"></svg></template>',
+      options: [{ order: ['viewBox', 'OTHER_ATTR'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><math bar="bar" DISPLAY="block"></math></template>',
+      options: [{ order: ['display', 'OTHER_ATTR'] }]
+    },
+    {
+      // slot props are camelized like component props, so they are case-sensitive
+      filename: 'test.vue',
+      code: '<template><slot bar="bar" ROW-KEY="id"></slot></template>',
+      options: [{ order: ['row-key', 'OTHER_ATTR'] }]
     }
   ],
 
@@ -2544,6 +2704,448 @@ tester.run('attributes-order', rule, {
           endColumn: 22
         }
       ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2324
+      filename: 'test.vue',
+      code: '<template><UFormGroup data-test="form-group" name="password" @click="fn"></UFormGroup></template>',
+      output:
+        '<template><UFormGroup name="password" data-test="form-group" @click="fn"></UFormGroup></template>',
+      options: [
+        {
+          order: [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            ['UNIQUE', 'SLOT'],
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            ['data-test', 'data-testid'],
+            'EVENTS',
+            'CONTENT'
+          ]
+        }
+      ],
+      errors: [
+        {
+          message: 'Attribute "name" should go before "data-test".',
+          line: 1,
+          column: 46,
+          endLine: 1,
+          endColumn: 61
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2514
+      filename: 'test.vue',
+      code: '<template><q-table v-model="row" row-key="id"></q-table></template>',
+      output:
+        '<template><q-table row-key="id" v-model="row"></q-table></template>',
+      options: [
+        {
+          order: [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            ['UNIQUE', 'row-key'],
+            'SLOT',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT'
+          ]
+        }
+      ],
+      errors: [
+        {
+          message: 'Attribute "row-key" should go before "v-model".',
+          line: 1,
+          column: 34,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table v-model="row" :row-key="rowKey"></q-table></template>',
+      output:
+        '<template><q-table :row-key="rowKey" v-model="row"></q-table></template>',
+      options: [{ order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING'] }],
+      errors: [
+        {
+          message: 'Attribute ":row-key" should go before "v-model".',
+          line: 1,
+          column: 34,
+          endLine: 1,
+          endColumn: 51
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table v-model="row" :rowKey="rowKey"></q-table></template>',
+      output:
+        '<template><q-table :rowKey="rowKey" v-model="row"></q-table></template>',
+      options: [{ order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING'] }],
+      errors: [
+        {
+          message: 'Attribute ":rowKey" should go before "v-model".',
+          line: 1,
+          column: 34,
+          endLine: 1,
+          endColumn: 50
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table v-model:row-key="key" row-key="id"></q-table></template>',
+      output:
+        '<template><q-table row-key="id" v-model:row-key="key"></q-table></template>',
+      options: [{ order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING'] }],
+      errors: [
+        {
+          message: 'Attribute "row-key" should go before "v-model:row-key".',
+          line: 1,
+          column: 42,
+          endLine: 1,
+          endColumn: 54
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table @row-key="fn" row-key="id"></q-table></template>',
+      output:
+        '<template><q-table row-key="id" @row-key="fn"></q-table></template>',
+      options: [{ order: ['row-key', 'EVENTS'] }],
+      errors: [
+        {
+          message: 'Attribute "row-key" should go before "@row-key".',
+          line: 1,
+          column: 34,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :[name]="value" data-test="foo"></div></template>',
+      output:
+        '<template><div data-test="foo" :[name]="value"></div></template>',
+      options: [{ order: ['data-test', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute "data-test" should go before ":[name]".',
+          line: 1,
+          column: 32,
+          endLine: 1,
+          endColumn: 47
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div data-test="foo" @click="fn"></div></template>',
+      output: '<template><div @click="fn" data-test="foo"></div></template>',
+      options: [{ order: ['OTHER_ATTR', 'EVENTS', 'CONTENT', 'data-test'] }],
+      errors: [
+        {
+          message: 'Attribute "@click" should go before "data-test".',
+          line: 1,
+          column: 32,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div bar="bar" data-test="foo"></div></template>',
+      output: '<template><div data-test="foo" bar="bar"></div></template>',
+      options: [{ order: ['ATTR_DYNAMIC', 'data-test', 'ATTR_STATIC'] }],
+      errors: [
+        {
+          message: 'Attribute "data-test" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 41
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :foo="foo" :data-test="foo"></div></template>',
+      output: '<template><div :data-test="foo" :foo="foo"></div></template>',
+      options: [{ order: ['ATTR_STATIC', 'data-test', 'ATTR_DYNAMIC'] }],
+      errors: [
+        {
+          message: 'Attribute ":data-test" should go before ":foo".',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div id="bar" class="foo"></div></template>',
+      output: '<template><div class="foo" id="bar"></div></template>',
+      options: [{ order: ['GLOBAL', 'OTHER_ATTR', 'id'] }],
+      errors: [
+        {
+          message: 'Attribute "class" should go before "id".',
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div data-testid="bar" data-test="foo"></div></template>',
+      output:
+        '<template><div data-test="foo" data-testid="bar"></div></template>',
+      options: [
+        {
+          order: ['OTHER_ATTR', ['data-test', 'data-testid']],
+          alphabetical: true
+        }
+      ],
+      errors: [
+        {
+          message: 'Attribute "data-test" should go before "data-testid".',
+          line: 1,
+          column: 34,
+          endLine: 1,
+          endColumn: 49
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table row-key="id" key="k"></q-table></template>',
+      output: '<template><q-table key="k" row-key="id"></q-table></template>',
+      options: [
+        {
+          order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING'],
+          alphabetical: true
+        }
+      ],
+      errors: [
+        {
+          message: 'Attribute "key" should go before "row-key".',
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 40
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><q-table v-model="row" v-bind="obj" row-key="id"></q-table></template>',
+      output: null,
+      options: [{ order: [['UNIQUE', 'row-key'], 'TWO_WAY_BINDING'] }],
+      errors: [
+        {
+          message: 'Attribute "row-key" should go before "v-model".',
+          line: 1,
+          column: 47,
+          endLine: 1,
+          endColumn: 59,
+          suggestions: [
+            {
+              desc: 'Move "row-key" before "v-model", which changes what `v-bind="..."` overrides.',
+              output:
+                '<template><q-table v-bind="obj" row-key="id" v-model="row"></q-table></template>'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      // attribute names of HTML elements are case-insensitive
+      filename: 'test.vue',
+      code: '<template><div bar="bar" data-testId="foo"></div></template>',
+      output: '<template><div data-testId="foo" bar="bar"></div></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute "data-testId" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div bar="bar" :DATA-TESTID="foo"></div></template>',
+      output: '<template><div :DATA-TESTID="foo" bar="bar"></div></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute ":DATA-TESTID" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div bar="bar" data-testid="foo"></div></template>',
+      output: '<template><div data-testid="foo" bar="bar"></div></template>',
+      options: [{ order: ['DATA-TESTID', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute "data-testid" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      // props are matched like Vue does, camelCase or kebab-case
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" :dataTestid="foo"></MyComp></template>',
+      output:
+        '<template><MyComp :dataTestid="foo" bar="bar"></MyComp></template>',
+      options: [{ order: ['data-testid', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute ":dataTestid" should go before "bar".',
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComp bar="bar" data-test-id="foo"></MyComp></template>',
+      output:
+        '<template><MyComp data-test-id="foo" bar="bar"></MyComp></template>',
+      options: [{ order: ['dataTestId', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute "data-test-id" should go before "bar".',
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 47
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><svg bar="bar" viewBox="0 0 1 1"></svg></template>',
+      output: '<template><svg viewBox="0 0 1 1" bar="bar"></svg></template>',
+      options: [{ order: ['viewBox', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute "viewBox" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      // `.camel` binds the camelized name
+      filename: 'test.vue',
+      code: '<template><svg bar="bar" :view-box.camel="box"></svg></template>',
+      output:
+        '<template><svg :view-box.camel="box" bar="bar"></svg></template>',
+      options: [{ order: ['viewBox', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute ":view-box.camel" should go before "bar".',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 47
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><slot bar="bar" :rowKey="id"></slot></template>',
+      output: '<template><slot :rowKey="id" bar="bar"></slot></template>',
+      options: [{ order: ['row-key', 'OTHER_ATTR'] }],
+      errors: [
+        {
+          message: 'Attribute ":rowKey" should go before "bar".',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
     }
   ]
+})
+
+describe('`order` option of `vue/attributes-order`', () => {
+  // The flat config mode validates rule options against the schema
+  // (ESLint v8 defaults to the eslintrc mode, which does not).
+  const linter = new Linter({ configType: 'flat' })
+  const invalidOptions = /Key "vue\/attributes-order"/u
+  function verify(order: unknown[]) {
+    return linter.verify(
+      '<template><div></div></template>',
+      {
+        files: ['**/*.vue'],
+        plugins: { vue: { rules: { 'attributes-order': rule } } },
+        languageOptions: { parser: vueEslintParser },
+        rules: { 'vue/attributes-order': ['error', { order }] }
+      },
+      'test.vue'
+    )
+  }
+
+  for (const name of [
+    'v-if',
+    'v-bind:foo',
+    ':foo',
+    '.foo',
+    'v-on:click',
+    '@click',
+    '#default',
+    ' foo',
+    'foo ',
+    'OTHER_ATTRS',
+    'ID'
+  ]) {
+    it(`rejects ${JSON.stringify(name)}`, () => {
+      assert.throws(() => verify([name, 'OTHER_ATTR']), invalidOptions)
+      assert.throws(() => verify([[name, 'OTHER_ATTR']]), invalidOptions)
+    })
+  }
+
+  for (const name of ['data-test', 'rowKey', 'xlink:href', 'aria-label']) {
+    it(`accepts ${JSON.stringify(name)}`, () => {
+      assert.deepStrictEqual(verify([name, 'OTHER_ATTR']), [])
+      assert.deepStrictEqual(verify([[name, 'OTHER_ATTR']]), [])
+    })
+  }
 })

@@ -26,6 +26,15 @@ const ATTRS = {
   CONTENT: 'CONTENT'
 }
 
+// An attribute name in `order`. Strings spelled like a group name are not allowed,
+// so that a typo such as `OTHER_ATTRS` is still reported, and neither are
+// directives, `v-bind` shorthands and whitespace, which never match an attribute name.
+const ATTRIBUTE_NAME_SCHEMA = {
+  type: 'string',
+  pattern: '[^A-Z_]',
+  not: { pattern: String.raw`^(?:v-|[:.@#])|\s` }
+}
+
 /**
  * Check whether the given attribute is `v-bind` directive.
  */
@@ -202,12 +211,78 @@ function getAttributeType(attribute: VAttribute | VDirective) {
 }
 
 /**
+ * Convert a name to camelCase the way Vue does for props and `.camel`:
+ * only `-` is a separator, `_` and the case of other letters are kept.
+ */
+function camelize(str: string): string {
+  return str.replaceAll(/-(\w)/gu, (_, c: string) => c.toUpperCase())
+}
+
+/**
+ * Get the name that is matched against the attribute names in `order`:
+ * the name of a plain attribute or the static argument of `v-bind`,
+ * camelized if `v-bind` has the `.camel` modifier.
+ */
+function getAttributeNameForOrder(
+  attribute: VAttribute | VDirective
+): string | null {
+  if (isVAttribute(attribute)) {
+    return attribute.key.rawName
+  }
+  if (!isVBind(attribute) || attribute.key.argument?.type !== 'VIdentifier') {
+    return null
+  }
+  const name = attribute.key.argument.rawName
+  return attribute.key.modifiers.some((modifier) => modifier.name === 'camel')
+    ? camelize(name)
+    : name
+}
+
+/**
+ * Positions of the attribute names given in `order`, keyed the way the names
+ * are compared: lowercased for HTML elements, whose attribute names are
+ * case-insensitive; unchanged for SVG and MathML elements, whose attribute
+ * names are case-sensitive; camelized for components and `<slot>`, whose
+ * props match in camelCase or kebab-case.
+ */
+interface AttributeNamePosition {
+  html: Map<string, number>
+  foreign: Map<string, number>
+  component: Map<string, number>
+}
+
+/**
+ * Get the position of the attribute by its name in `order`, if it is given there.
+ */
+function getNamePosition(
+  attribute: VAttribute | VDirective,
+  attributeNamePosition: AttributeNamePosition
+): number | undefined {
+  const name = getAttributeNameForOrder(attribute)
+  if (name == null) {
+    return undefined
+  }
+  const element = attribute.parent.parent
+  if (utils.isCustomComponent(element) || element.name === 'slot') {
+    return attributeNamePosition.component.get(camelize(name))
+  }
+  return utils.isHtmlElementNode(element)
+    ? attributeNamePosition.html.get(name.toLowerCase())
+    : attributeNamePosition.foreign.get(name)
+}
+
+/**
  * Returns `null` if the order of the attribute is omitted, so it is not enforced.
  */
 function getPosition(
   attribute: VAttribute | VDirective,
-  attributePosition: { [key: string]: number }
+  attributePosition: { [key: string]: number },
+  attributeNamePosition: AttributeNamePosition
 ): number | null {
+  const namePosition = getNamePosition(attribute, attributeNamePosition)
+  if (namePosition != null) {
+    return namePosition
+  }
   const attributeType = getAttributeType(attribute)
   return attributePosition[attributeType] ?? null
 }
@@ -285,12 +360,22 @@ function create(context: RuleContext): RuleListener {
   )
 
   const attributePosition: { [key: string]: number } = {}
+  const attributeNamePosition: AttributeNamePosition = {
+    html: new Map(),
+    foreign: new Map(),
+    component: new Map()
+  }
   for (const [i, item] of attributeOrder.entries()) {
-    if (Array.isArray(item)) {
-      for (const attr of item) {
+    const attrs = Array.isArray(item) ? item : [item]
+    for (const attr of attrs) {
+      if (Object.values(ATTRS).includes(attr)) {
         attributePosition[attr] = i
+      } else {
+        attributeNamePosition.html.set(attr.toLowerCase(), i)
+        attributeNamePosition.foreign.set(attr, i)
+        attributeNamePosition.component.set(camelize(attr), i)
       }
-    } else attributePosition[item] = i
+    }
   }
 
   function reportIssue(
@@ -435,7 +520,7 @@ function create(context: RuleContext): RuleListener {
           }
         }
       }
-      return getPosition(node, attributePosition)
+      return getPosition(node, attributePosition, attributeNamePosition)
     }
   }
 }
@@ -459,10 +544,14 @@ export default {
             items: {
               oneOf: [
                 { enum: Object.values(ATTRS) },
+                ATTRIBUTE_NAME_SCHEMA,
                 {
                   type: 'array',
                   items: {
-                    enum: Object.values(ATTRS),
+                    oneOf: [
+                      { enum: Object.values(ATTRS) },
+                      ATTRIBUTE_NAME_SCHEMA
+                    ],
                     uniqueItems: true,
                     additionalItems: false
                   }
