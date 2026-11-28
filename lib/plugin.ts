@@ -100,6 +100,7 @@ import noDupeVElseIf from './rules/no-dupe-v-else-if.ts'
 import noDuplicateAttrInheritance from './rules/no-duplicate-attr-inheritance.ts'
 import noDuplicateAttributes from './rules/no-duplicate-attributes.ts'
 import noDuplicateClassNames from './rules/no-duplicate-class-names.ts'
+import noEarlyReturn from './rules/no-early-return.ts'
 import noEmptyComponentBlock from './rules/no-empty-component-block.ts'
 import noEmptyPattern from './rules/no-empty-pattern.ts'
 import noExportInScriptSetup from './rules/no-export-in-script-setup.ts'
@@ -362,6 +363,7 @@ export default {
     'no-duplicate-attr-inheritance': noDuplicateAttrInheritance,
     'no-duplicate-attributes': noDuplicateAttributes,
     'no-duplicate-class-names': noDuplicateClassNames,
+    'no-early-return': noEarlyReturn,
     'no-empty-component-block': noEmptyComponentBlock,
     'no-empty-pattern': noEmptyPattern,
     'no-export-in-script-setup': noExportInScriptSetup,
