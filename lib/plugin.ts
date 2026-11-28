@@ -220,6 +220,7 @@ import requireValidDefaultProp from './rules/require-valid-default-prop.ts'
 import restrictedComponentNames from './rules/restricted-component-names.ts'
 import returnInComputedProperty from './rules/return-in-computed-property.ts'
 import returnInEmitsValidator from './rules/return-in-emits-validator.ts'
+import returnInPropDefault from './rules/return-in-prop-default.ts'
 import scriptIndent from './rules/script-indent.ts'
 import singlelineHtmlElementContentNewline from './rules/singleline-html-element-content-newline.ts'
 import slotNameCasing from './rules/slot-name-casing.ts'
@@ -483,6 +484,7 @@ export default {
     'restricted-component-names': restrictedComponentNames,
     'return-in-computed-property': returnInComputedProperty,
     'return-in-emits-validator': returnInEmitsValidator,
+    'return-in-prop-default': returnInPropDefault,
     'script-indent': scriptIndent,
     'singleline-html-element-content-newline':
       singlelineHtmlElementContentNewline,
