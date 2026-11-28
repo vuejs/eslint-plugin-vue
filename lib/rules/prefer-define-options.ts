@@ -4,6 +4,16 @@
  */
 import utils from '../utils/index.ts'
 
+// Vue unwraps these TypeScript nodes before checking the defineOptions argument.
+const TS_WRAPPER_TYPES = new Set([
+  'TSAsExpression',
+  'TSTypeAssertion',
+  'TSNonNullExpression',
+  'TSInstantiationExpression',
+  'TSSatisfiesExpression'
+])
+const UNSUPPORTED_OPTIONS = new Set(['props', 'emits', 'expose', 'slots'])
+
 export default {
   meta: {
     type: 'suggestion',
@@ -59,7 +69,28 @@ export default {
     function buildFix(
       node: ExportDefaultDeclaration,
       scriptSetup: VElement
-    ): (fixer: RuleFixer) => Fix[] {
+    ): ((fixer: RuleFixer) => Fix[]) | null {
+      let declaration = node.declaration
+      while (TS_WRAPPER_TYPES.has(declaration.type)) {
+        declaration = (declaration as { expression: Expression }).expression
+      }
+      if (
+        declaration.type === 'ObjectExpression' &&
+        declaration.properties.some((property) => {
+          if (!utils.isProperty(property)) {
+            return false
+          }
+          // Vue checks identifier keys even for computed properties.
+          const name =
+            property.key.type === 'Identifier'
+              ? property.key.name
+              : utils.getStaticPropertyName(property)
+          return name != null && UNSUPPORTED_OPTIONS.has(name)
+        })
+      ) {
+        return null
+      }
+
       return (fixer) => {
         const sourceCode = context.sourceCode
 
